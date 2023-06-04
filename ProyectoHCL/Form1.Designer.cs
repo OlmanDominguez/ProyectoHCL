@@ -29,126 +29,188 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FORMULARIO));
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.UsuarioBox1 = new System.Windows.Forms.TextBox();
-            this.ContraseñaBox2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            label1 = new Label();
+            label2 = new Label();
+            UsuarioBox1 = new TextBox();
+            ContraseñaBox2 = new TextBox();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            button1 = new Button();
+            label6 = new Label();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            label7 = new Label();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(407, 256);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(249, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Ingresa tu nombre de Usuario";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = SystemColors.Control;
+            label1.Location = new Point(396, 221);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(55, 17);
+            label1.TabIndex = 0;
+            label1.Text = "Usuario";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(407, 343);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(182, 25);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Ingresa tu contraseña";
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = SystemColors.Control;
+            label2.Location = new Point(395, 273);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(77, 17);
+            label2.TabIndex = 1;
+            label2.Text = "Contraseña";
             // 
             // UsuarioBox1
             // 
-            this.UsuarioBox1.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.UsuarioBox1.Location = new System.Drawing.Point(407, 298);
-            this.UsuarioBox1.Name = "UsuarioBox1";
-            this.UsuarioBox1.PasswordChar = '*';
-            this.UsuarioBox1.Size = new System.Drawing.Size(319, 31);
-            this.UsuarioBox1.TabIndex = 2;
-            this.UsuarioBox1.TextChanged += new System.EventHandler(this.UsuarioBox1_TextChanged);
+            UsuarioBox1.BackColor = Color.DeepSkyBlue;
+            UsuarioBox1.Location = new Point(397, 246);
+            UsuarioBox1.Margin = new Padding(2);
+            UsuarioBox1.Name = "UsuarioBox1";
+            UsuarioBox1.Size = new Size(224, 23);
+            UsuarioBox1.TabIndex = 2;
+            UsuarioBox1.TextChanged += UsuarioBox1_TextChanged;
             // 
             // ContraseñaBox2
             // 
-            this.ContraseñaBox2.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.ContraseñaBox2.Location = new System.Drawing.Point(404, 371);
-            this.ContraseñaBox2.Name = "ContraseñaBox2";
-            this.ContraseñaBox2.PasswordChar = '*';
-            this.ContraseñaBox2.Size = new System.Drawing.Size(322, 31);
-            this.ContraseñaBox2.TabIndex = 3;
+            ContraseñaBox2.BackColor = Color.DeepSkyBlue;
+            ContraseñaBox2.Location = new Point(396, 300);
+            ContraseñaBox2.Margin = new Padding(2);
+            ContraseñaBox2.Name = "ContraseñaBox2";
+            ContraseñaBox2.PasswordChar = '*';
+            ContraseñaBox2.Size = new Size(227, 23);
+            ContraseñaBox2.TabIndex = 3;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(404, 476);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(309, 25);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "¿Olvidaste tu usuario y/o contraseña?";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = SystemColors.Control;
+            label3.Location = new Point(397, 382);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(212, 15);
+            label3.TabIndex = 4;
+            label3.Text = "¿Olvidaste tu usuario y/o contraseña?";
+            label3.Click += label3_Click;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(589, 21);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 25);
-            this.label4.TabIndex = 5;
+            label4.AutoSize = true;
+            label4.Location = new Point(412, 13);
+            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(0, 15);
+            label4.TabIndex = 5;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(726, 17);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 25);
-            this.label5.TabIndex = 6;
-            this.label5.Click += new System.EventHandler(this.label5_Click);
+            label5.AutoSize = true;
+            label5.Location = new Point(508, 10);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(0, 15);
+            label5.TabIndex = 6;
+            label5.Click += label5_Click;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(404, 418);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(322, 34);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Ingresar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.ForeColor = SystemColors.ActiveCaptionText;
+            button1.Location = new Point(396, 336);
+            button1.Margin = new Padding(2);
+            button1.Name = "button1";
+            button1.Size = new Size(225, 33);
+            button1.TabIndex = 7;
+            button1.Text = "Ingresar";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Lucida Bright", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(12, 59);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(862, 50);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "BIENVENIDOS A HOTEL CASA LOMAS";
-            this.label6.Click += new System.EventHandler(this.label6_Click_1);
+            label6.AutoSize = true;
+            label6.Font = new Font("Lucida Bright", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.ForeColor = SystemColors.Control;
+            label6.Location = new Point(424, 144);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(164, 24);
+            label6.TabIndex = 8;
+            label6.Text = "BIENVENIDOS ";
+            label6.Click += label6_Click_1;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(-1, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(369, 422);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 9;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(424, 13);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(158, 118);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 10;
+            pictureBox2.TabStop = false;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Lucida Bright", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.ForeColor = SystemColors.Control;
+            label7.Location = new Point(373, 181);
+            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(260, 24);
+            label7.TabIndex = 11;
+            label7.Text = "A HOTEL CASA LOMAS";
             // 
             // FORMULARIO
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(910, 617);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.ContraseñaBox2);
-            this.Controls.Add(this.UsuarioBox1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.DoubleBuffered = true;
-            this.Name = "FORMULARIO";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            AutoValidate = AutoValidate.EnablePreventFocusChange;
+            BackColor = SystemColors.ActiveCaptionText;
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(644, 423);
+            Controls.Add(label7);
+            Controls.Add(pictureBox2);
+            Controls.Add(label6);
+            Controls.Add(pictureBox1);
+            Controls.Add(button1);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(ContraseñaBox2);
+            Controls.Add(UsuarioBox1);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            DoubleBuffered = true;
+            Margin = new Padding(2);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "FORMULARIO";
+            Text = "HOTEL CASA LOMAS";
+            Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -162,5 +224,8 @@
         private Label label5;
         private Button button1;
         private Label label6;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
+        private Label label7;
     }
 }
