@@ -41,5 +41,22 @@ namespace ProyectoHCL
         {
 
         }
+
+        private void ContraseñaBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MostrarBox3_Click(object sender, EventArgs e)
+        {
+            OcultarBox4.BringToFront();
+            ContraseñaBox2.PasswordChar = '\0';
+        }
+
+        private void OcultarBox4_Click(object sender, EventArgs e)
+        {
+            MostrarBox3.BringToFront();
+            ContraseñaBox2.PasswordChar = '*';
+        }
     }
 }
