@@ -17,10 +17,11 @@ namespace ProyectoHCL
 
         }
 
-
+        //LLamada de form para recuperar contraseña
         private void label3_Click(object sender, EventArgs e)
         {
-
+            Form formulario = new RecuContra();
+            formulario.Show();
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -70,6 +71,19 @@ namespace ProyectoHCL
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        //Cambio de color para label de olvide contrasena
+        private void label3_MouseHover(object sender, EventArgs e)
+        {
+            label3.BackColor = Color.White;
+            label3.ForeColor = Color.Black;
+        }
+
+        private void label3_MouseLeave(object sender, EventArgs e)
+        {
+            label3.ForeColor = Color.White;
+            label3.BackColor = Color.Black;
         }
     }
 }
