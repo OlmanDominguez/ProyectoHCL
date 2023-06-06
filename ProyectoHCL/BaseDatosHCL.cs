@@ -14,7 +14,7 @@ namespace ProyectoHCL
             public static MySqlConnection ObtenerConexion()
             {
 
-                MySqlConnection conectar = new MySqlConnection("server=containers-us-west-155.railway.app;port=7193; database = railway; Uid = root; pwd = poDemB1QgtQKfsAAFSPh;");
+                MySqlConnection conectar = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
 
                 conectar.Open();
 
