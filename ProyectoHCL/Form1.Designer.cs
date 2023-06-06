@@ -33,7 +33,7 @@
             Contraseñalabel2 = new Label();
             UsuarioBox1 = new TextBox();
             ContraseñaBox2 = new TextBox();
-            RecuContra = new Label();
+            label3 = new Label();
             label4 = new Label();
             label5 = new Label();
             Ingresarbutton1 = new Button();
@@ -101,19 +101,19 @@
             ContraseñaBox2.TextChanged += ContraseñaBox2_TextChanged;
             ContraseñaBox2.DoubleClick += UsuarioBox1_TextChanged;
             // 
-            // RecuContra
+            // label3
             // 
-            RecuContra.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            RecuContra.AutoSize = true;
-            RecuContra.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            RecuContra.ForeColor = SystemColors.Control;
-            RecuContra.Location = new Point(691, 496);
-            RecuContra.Margin = new Padding(2, 0, 2, 0);
-            RecuContra.Name = "RecuContra";
-            RecuContra.Size = new Size(295, 21);
-            RecuContra.TabIndex = 4;
-            RecuContra.Text = "¿Olvidaste tu usuario y/o contraseña?";
-            RecuContra.Click += label3_Click;
+            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = SystemColors.Control;
+            label3.Location = new Point(691, 496);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(295, 21);
+            label3.TabIndex = 4;
+            label3.Text = "¿Olvidaste tu usuario y/o contraseña?";
+            label3.Click += label3_Click;
             // 
             // label4
             // 
@@ -244,7 +244,7 @@
             Controls.Add(Ingresarbutton1);
             Controls.Add(label5);
             Controls.Add(label4);
-            Controls.Add(RecuContra);
+            Controls.Add(label3);
             Controls.Add(ContraseñaBox2);
             Controls.Add(UsuarioBox1);
             Controls.Add(Contraseñalabel2);
@@ -271,7 +271,7 @@
         private Label Contraseñalabel2;
         private TextBox UsuarioBox1;
         private TextBox ContraseñaBox2;
-        private Label RecuContra;
+        private Label label3;
         private Label label4;
         private Label label5;
         private Button Ingresarbutton1;
