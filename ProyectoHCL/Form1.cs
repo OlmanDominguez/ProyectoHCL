@@ -38,35 +38,40 @@ namespace ProyectoHCL
             BaseDatosHCL.ObtenerConexion();
             MessageBox.Show("Conectado");
         }
-            
 
-            private void label6_Click_1(object sender, EventArgs e)
-            {
 
-            }
+        private void label6_Click_1(object sender, EventArgs e)
+        {
 
-            private void UsuarioBox1_TextChanged(object sender, EventArgs e)
-            {
+        }
 
-            }
+        private void UsuarioBox1_TextChanged(object sender, EventArgs e)
+        {
 
-            private void ContraseñaBox2_TextChanged(object sender, EventArgs e)
-            {
+        }
 
-            }
+        private void ContraseñaBox2_TextChanged(object sender, EventArgs e)
+        {
 
-            private void MostrarBox3_Click(object sender, EventArgs e)
-            {
-                OcultarBox4.BringToFront();
-                ContraseñaBox2.PasswordChar = '\0';
-            }
+        }
 
-            private void OcultarBox4_Click(object sender, EventArgs e)
-            {
-                MostrarBox3.BringToFront();
-                ContraseñaBox2.PasswordChar = '*';
-            }
+        private void MostrarBox3_Click(object sender, EventArgs e)
+        {
+            OcultarBox4.BringToFront();
+            ContraseñaBox2.PasswordChar = '\0';
+        }
+
+        private void OcultarBox4_Click(object sender, EventArgs e)
+        {
+            MostrarBox3.BringToFront();
+            ContraseñaBox2.PasswordChar = '*';
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
+}
 
 
