@@ -11,7 +11,7 @@ namespace ProyectoHCL
         {
             InitializeComponent();
 
-            //Botones de cerrar y minimizar
+            //Borrado de barra
             this.Text = string.Empty;
             this.ControlBox = false;
             this.DoubleBuffered = true;
@@ -28,7 +28,7 @@ namespace ProyectoHCL
         private void label3_Click(object sender, EventArgs e)
         {
             Form formulario = new RecuContra();
-            formulario.Show();
+            formulario.ShowDialog(); //Bloquea el form nuevo
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -93,7 +93,7 @@ namespace ProyectoHCL
             label3.BackColor = Color.Black;
         }
 
-        //Drag Form
+        //Drag Form y botenes de cerrar y minimizar
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
 

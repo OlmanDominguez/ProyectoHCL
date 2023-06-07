@@ -12,9 +12,20 @@ namespace ProyectoHCL
 {
     public partial class RecuContra : Form
     {
+
+
         public RecuContra()
         {
             InitializeComponent();
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            this.DoubleBuffered = true;
+        }
+
+        //Boton cerrar
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

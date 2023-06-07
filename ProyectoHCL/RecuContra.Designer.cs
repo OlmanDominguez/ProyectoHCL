@@ -28,7 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RecuContra));
+            btnExit = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
             SuspendLayout();
+            // 
+            // btnExit
+            // 
+            btnExit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnExit.BackgroundImageLayout = ImageLayout.Stretch;
+            btnExit.Image = (Image)resources.GetObject("btnExit.Image");
+            btnExit.Location = new Point(775, 2);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(20, 18);
+            btnExit.SizeMode = PictureBoxSizeMode.StretchImage;
+            btnExit.TabIndex = 1;
+            btnExit.TabStop = false;
+            btnExit.Click += btnExit_Click;
             // 
             // RecuContra
             // 
@@ -36,12 +52,20 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnExit);
+            DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.None;
             Name = "RecuContra";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "RecuContra";
+            ((System.ComponentModel.ISupportInitialize)btnExit).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
+
+        private PictureBox btnExit;
     }
 }
