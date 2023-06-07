@@ -38,15 +38,21 @@
             label5 = new Label();
             Ingresarbutton1 = new Button();
             label6 = new Label();
-            pictureBox1 = new PictureBox();
             label7 = new Label();
             MostrarBox3 = new PictureBox();
             OcultarBox4 = new PictureBox();
             pictureBox2 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            BarraSuperior = new Panel();
+            pictureBox1 = new PictureBox();
+            btnMax = new PictureBox();
+            btnExit = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)MostrarBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)OcultarBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            BarraSuperior.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnMax).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
             SuspendLayout();
             // 
             // Usuariolabel1
@@ -164,18 +170,6 @@
             label6.Text = "BIENVENIDOS ";
             label6.Click += label6_Click_1;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(-1, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1087, 560);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 9;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
-            // 
             // label7
             // 
             label7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
@@ -194,7 +188,7 @@
             MostrarBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             MostrarBox3.BackColor = Color.DeepSkyBlue;
             MostrarBox3.Image = (Image)resources.GetObject("MostrarBox3.Image");
-            MostrarBox3.Location = new Point(917, 371);
+            MostrarBox3.Location = new Point(917, 374);
             MostrarBox3.Margin = new Padding(2);
             MostrarBox3.Name = "MostrarBox3";
             MostrarBox3.Size = new Size(31, 19);
@@ -208,7 +202,7 @@
             OcultarBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             OcultarBox4.BackColor = Color.DeepSkyBlue;
             OcultarBox4.Image = (Image)resources.GetObject("OcultarBox4.Image");
-            OcultarBox4.Location = new Point(917, 371);
+            OcultarBox4.Location = new Point(917, 375);
             OcultarBox4.Margin = new Padding(2);
             OcultarBox4.Name = "OcultarBox4";
             OcultarBox4.Size = new Size(31, 19);
@@ -228,6 +222,57 @@
             pictureBox2.TabIndex = 14;
             pictureBox2.TabStop = false;
             // 
+            // BarraSuperior
+            // 
+            BarraSuperior.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            BarraSuperior.BackColor = Color.Transparent;
+            BarraSuperior.Controls.Add(pictureBox1);
+            BarraSuperior.Controls.Add(btnMax);
+            BarraSuperior.Controls.Add(btnExit);
+            BarraSuperior.Location = new Point(0, 0);
+            BarraSuperior.Name = "BarraSuperior";
+            BarraSuperior.Size = new Size(1085, 25);
+            BarraSuperior.TabIndex = 15;
+            BarraSuperior.MouseDown += BarraSuperior_MouseDown;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(987, 1);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(31, 34);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 2;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click_1;
+            // 
+            // btnMax
+            // 
+            btnMax.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnMax.BackgroundImageLayout = ImageLayout.Center;
+            btnMax.Image = (Image)resources.GetObject("btnMax.Image");
+            btnMax.Location = new Point(1027, 4);
+            btnMax.Name = "btnMax";
+            btnMax.Size = new Size(22, 20);
+            btnMax.SizeMode = PictureBoxSizeMode.StretchImage;
+            btnMax.TabIndex = 1;
+            btnMax.TabStop = false;
+            btnMax.Click += btnMax_Click;
+            // 
+            // btnExit
+            // 
+            btnExit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnExit.BackgroundImageLayout = ImageLayout.Stretch;
+            btnExit.Image = (Image)resources.GetObject("btnExit.Image");
+            btnExit.Location = new Point(1058, 4);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(20, 18);
+            btnExit.SizeMode = PictureBoxSizeMode.StretchImage;
+            btnExit.TabIndex = 0;
+            btnExit.TabStop = false;
+            btnExit.Click += btnExit_Click;
+            // 
             // FORMULARIO
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -236,8 +281,10 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             BackColor = SystemColors.ActiveCaptionText;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1084, 556);
+            Controls.Add(BarraSuperior);
             Controls.Add(pictureBox2);
             Controls.Add(MostrarBox3);
             Controls.Add(OcultarBox4);
@@ -251,18 +298,21 @@
             Controls.Add(UsuarioBox1);
             Controls.Add(Contraseñalabel2);
             Controls.Add(Usuariolabel1);
-            Controls.Add(pictureBox1);
             DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(2);
             Name = "FORMULARIO";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "HOTEL CASA LOMAS";
             Load += Form1_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)MostrarBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)OcultarBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            BarraSuperior.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnMax).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnExit).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -278,10 +328,13 @@
         private Label label5;
         private Button Ingresarbutton1;
         private Label label6;
-        private PictureBox pictureBox1;
         private Label label7;
         private PictureBox MostrarBox3;
         private PictureBox OcultarBox4;
         private PictureBox pictureBox2;
+        private Panel BarraSuperior;
+        private PictureBox btnExit;
+        private PictureBox pictureBox1;
+        private PictureBox btnMax;
     }
 }

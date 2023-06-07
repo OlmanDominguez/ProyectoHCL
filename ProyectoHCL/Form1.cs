@@ -1,6 +1,7 @@
 
 using System.Text;
 using System;
+using System.Runtime.InteropServices;
 
 namespace ProyectoHCL
 {
@@ -9,6 +10,12 @@ namespace ProyectoHCL
         public FORMULARIO()
         {
             InitializeComponent();
+
+            //Botones de cerrar y minimizar
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            this.DoubleBuffered = true;
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -84,6 +91,36 @@ namespace ProyectoHCL
         {
             label3.ForeColor = Color.White;
             label3.BackColor = Color.Black;
+        }
+
+        //Drag Form
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+        private void BarraSuperior_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnMax_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Normal)
+                WindowState = FormWindowState.Maximized;
+            else
+                WindowState = FormWindowState.Normal;
+        }
+
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
         }
     }
 }
