@@ -1,6 +1,7 @@
 
 using System.Text;
 using System;
+using System.Windows.Forms;
 
 namespace ProyectoHCL
 {
@@ -35,8 +36,35 @@ namespace ProyectoHCL
 
         private void button1_Click(object sender, EventArgs e)
         {
-            BaseDatosHCL.ObtenerConexion();
-            MessageBox.Show("Conectado");
+           // BaseDatosHCL.ObtenerConexion();
+            //MessageBox.Show("Conectado");
+            if (UsuarioBox1.Text == String.Empty)
+            {
+                errorProvider1.SetError(UsuarioBox1, "Ingrese un Usuario");
+                UsuarioBox1.Focus();
+                return;
+            }
+            errorProvider1.Clear();
+            if (string.IsNullOrEmpty(ContraseñaBox2.Text))
+            {
+                errorProvider1.SetError(ContraseñaBox2, "Ingrese una clave");
+                ContraseñaBox2.Focus();
+                return;
+            }
+            errorProvider1.Clear();
+            UsuarioDatos usuarioDatos = new UsuarioDatos();
+            bool usuarioValido = await usuarioDatos.ValidarUsuarioAsync(UsuarioBox1.Text, ContraseñaBox2.Text);
+
+            if (usuarioValido == true)
+            {
+                PrincipalForm principalForm = new PrincipalForm();
+                this.Hide();
+                principalForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Datos de usuario incorrectos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
 
