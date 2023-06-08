@@ -23,9 +23,15 @@ namespace ProyectoHCL
         }
 
         //Boton cerrar
-        private void btnExit_Click(object sender, EventArgs e)
+
+        private void BTN_Cancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void RBTN_Pregu_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
