@@ -4,6 +4,8 @@ using System;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using ProyectoHCL.clases;
+using MySql.Data.MySqlClient;
+using static ProyectoHCL.RecuContra;
 
 namespace ProyectoHCL
 {
@@ -45,35 +47,43 @@ namespace ProyectoHCL
 
         private void button1_Click(object sender, EventArgs e)
         {
-            BaseDatosHCL.ObtenerConexion();
-            MessageBox.Show("Conectado");
-            /*if (UsuarioBox1.Text == String.Empty)
-             {
-                 errorProvider1.SetError(UsuarioBox1, "Ingrese un Usuario");
-                 UsuarioBox1.Focus();
-                 return;
-             }
-             errorProvider1.Clear();
-             if (string.IsNullOrEmpty(ContraseñaBox2.Text))
-             {
-                 errorProvider1.SetError(ContraseñaBox2, "Ingrese una clave");
-                 ContraseñaBox2.Focus();
-                 return;
-             }
-             errorProvider1.Clear();
-             UsuarioDatos usuarioDatos = new UsuarioDatos();
-             bool usuarioValido = await usuarioDatos.ValidarUsuarioAsync(UsuarioBox1.Text, ContraseñaBox2.Text);
+            try
+            {
 
-             if (usuarioValido == true)
-             {
-                 PrincipalForm principalForm = new PrincipalForm();
-                 this.Hide();
-                 principalForm.Show();
-             }
-             else
-             {
-                 MessageBox.Show("Datos de usuario incorrectos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-             }*/
+                using (BaseDatosHCL.ObtenerConexion())
+                {
+                    //Consulta
+                    MySqlCommand comando = new MySqlCommand();
+                    comando.Connection = BaseDatosHCL.ObtenerConexion();
+                    comando.CommandText = ("Select * From TBL_USUARIO where USUARIO = '"
+                        + UsuarioBox1.Text + "' AND CONTRASENA = '" + ContraseñaBox2.Text +"' ");
+
+                    MySqlDataReader leer = comando.ExecuteReader();
+
+                    //Validación de la data obtenida
+                    if (leer.Read() == true)
+                    {
+                        string usuario = (string)leer["USUARIO"];
+                        string contrasena = (string)leer["CONTRASENA"];
+                        if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text)
+                        {
+                            MessageBox.Show("Datos Correctos");
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("USUARIO NO EXISTE");
+                    }
+                    comando.Connection.Close();
+                }
+
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show(a.Message + a.StackTrace);
+            }
+
         }
 
 

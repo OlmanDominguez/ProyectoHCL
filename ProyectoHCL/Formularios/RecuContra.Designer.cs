@@ -122,6 +122,7 @@
             BTN_Aceptar.TabIndex = 8;
             BTN_Aceptar.Text = "Aceptar";
             BTN_Aceptar.UseVisualStyleBackColor = false;
+            BTN_Aceptar.Click += BTN_Aceptar_Click;
             // 
             // BTN_Cancelar
             // 

@@ -16,7 +16,14 @@ namespace ProyectoHCL.clases
 
             MySqlConnection conectar = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
 
-            conectar.Open();
+            try
+            {
+                conectar.Open();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
             return conectar;
         }
