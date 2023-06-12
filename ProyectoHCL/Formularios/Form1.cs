@@ -6,11 +6,14 @@ using System.Runtime.InteropServices;
 using ProyectoHCL.clases;
 using MySql.Data.MySqlClient;
 using static ProyectoHCL.RecuContra;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Drawing.Drawing2D;
 
 namespace ProyectoHCL
 {
     public partial class FORMULARIO : Form
     {
+        
         public FORMULARIO()
         {
             InitializeComponent();
@@ -44,40 +47,67 @@ namespace ProyectoHCL
         {
 
         }
-
+       
         private void button1_Click(object sender, EventArgs e)
         {
+
             try
+
             {
 
                 using (BaseDatosHCL.ObtenerConexion())
+
                 {
                     //Consulta
+
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
                     comando.CommandText = ("Select * From TBL_USUARIO where USUARIO = '"
-                        + UsuarioBox1.Text + "' AND CONTRASENA = '" + ContraseñaBox2.Text +"' ");
+                        + UsuarioBox1.Text + "' AND CONTRASENA = '" + ContraseñaBox2.Text + "' ");
 
                     MySqlDataReader leer = comando.ExecuteReader();
 
                     //Validación de la data obtenida
+                    if (UsuarioBox1.Text == String.Empty)
+                    {
+                        errorProvider1.SetError(UsuarioBox1, "Ingrese un Usuario");
+                        UsuarioBox1.Focus();
+                        return;
+                    }
+                    errorProvider1.Clear();
+                    if (string.IsNullOrEmpty(ContraseñaBox2.Text))
+                    {
+                        errorProvider1.SetError(ContraseñaBox2, "Ingrese una clave");
+                        ContraseñaBox2.Focus();
+                        return;
+                    }
                     if (leer.Read() == true)
                     {
+
+
                         string usuario = (string)leer["USUARIO"];
+
                         string contrasena = (string)leer["CONTRASENA"];
+
+
                         if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text)
+
+
                         {
+
                             MessageBox.Show("Datos Correctos");
                         }
 
                     }
+
                     else
                     {
                         MessageBox.Show("USUARIO NO EXISTE");
                     }
-                    comando.Connection.Close();
+                    
+               comando.Connection.Close();
                 }
-
+              
             }
             catch (Exception a)
             {
@@ -94,11 +124,21 @@ namespace ProyectoHCL
 
         private void UsuarioBox1_TextChanged(object sender, EventArgs e)
         {
+            if (UsuarioBox1.Text.Contains(" "))
+            {
+                MessageBox.Show("No se permite espacios.");
+                return;  //Sale
+            }
 
         }
 
         private void ContraseñaBox2_TextChanged(object sender, EventArgs e)
         {
+            if (ContraseñaBox2.Text.Contains(" "))
+            {
+                MessageBox.Show("No se permite espacios.");
+                return;  //Sale
+            }
 
         }
 
