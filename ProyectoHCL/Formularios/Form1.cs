@@ -8,6 +8,7 @@ using MySql.Data.MySqlClient;
 using static ProyectoHCL.RecuContra;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Drawing.Drawing2D;
+using ProyectoHCL.Formularios;
 
 namespace ProyectoHCL
 {
@@ -94,8 +95,14 @@ namespace ProyectoHCL
 
 
                         {
-
-                            MessageBox.Show("Datos Correctos");
+                          
+                            Form formulario = new Formularios.GestionUsuario();
+                            formulario. Show();
+                           
+                            // MessageBox.Show("Datos Correctos");
+                            /* this.Hide();
+                             GestionUsuario gestionUsuario= new GestionUsuario();
+                            GestionUsuario.show();*/
                         }
 
                     }
