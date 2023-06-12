@@ -44,44 +44,70 @@ namespace ProyectoHCL
 
         private async void BTN_Aceptar_Click(object sender, EventArgs e)
         {
-            clasecompartida.user = TXT_Usuario.Text;
-
-            try
+            if (TXT_Usuario.Text != "")
             {
+                errorProvider1.SetError(TXT_Usuario, "");
+                clasecompartida.user = TXT_Usuario.Text;
 
-                using (BaseDatosHCL.ObtenerConexion())
+                try
                 {
-                    //Consulta
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("Select * From TBL_USUARIO where USUARIO = '"
-                        + clasecompartida.user + "' ");
 
-                    MySqlDataReader leer = comando.ExecuteReader();
-
-                    //Validación de la data obtenida
-                    if (leer.Read() == true)
+                    using (BaseDatosHCL.ObtenerConexion())
                     {
-                        this.Close();
-                        Form formulario = new Formularios.PreguntasRecuContra();
-                        formulario.ShowDialog();
+                        //Consulta
+                        MySqlCommand comando = new MySqlCommand();
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("Select * From TBL_USUARIO where USUARIO = '"
+                            + clasecompartida.user + "' ");
 
+                        MySqlDataReader leer = comando.ExecuteReader();
+
+                        //Validación de la data obtenida
+                        if (leer.Read() == true)
+                        {
+                            string usuario = (string)leer["USUARIO"];
+                            if (usuario == clasecompartida.user & RBTN_Pregu.Checked == true)
+                            {
+                                Form formulario = new Formularios.PreguntasRecuContra();
+                                formulario.ShowDialog();
+                                this.Close();
+                            }
+                            else if (usuario == clasecompartida.user & RBTN_Email.Checked == true)
+                            {
+                                MessageBox.Show("Se envio un correo de recuperación a tu email registrado");
+                                this.Close();
+                            }
+
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("USUARIO NO EXISTE");
+                        }
+                        comando.Connection.Close();
                     }
-                    else
-                    {
-                        MessageBox.Show("USUARIO NO EXISTE");
-                    }
-                    comando.Connection.Close(); 
+
                 }
 
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message + a.StackTrace);
+                }
             }
-            catch (Exception a)
+            else
             {
-                MessageBox.Show(a.Message+a.StackTrace);
+                errorProvider1.SetError(TXT_Usuario, "Ingrese un nombre de Usuario");
             }
-            
+        }
 
+        private void TXT_Usuario_TextChanged(object sender, EventArgs e)
+        {
+            TXT_Usuario.CharacterCasing = CharacterCasing.Upper; //Bloquea minusculas
+        }
 
+        private void TXT_Usuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = char.IsWhiteSpace(e.KeyChar); //Bloquea espacio
         }
     }
 }
