@@ -29,6 +29,7 @@ namespace ProyectoHCL.Formularios
             foreach (Permisos p in permisos)
             {
                /* int rowIndex = Roles_Permisos_DG.Rows.Add();
+                * 
                 DataGridViewRow row = Roles_Permisos_DG.Rows[rowIndex];
                 Row.Cells[0].Value = p.ID_ROL;
                 Row.Cells[1].Value = p.NOMBRE;
