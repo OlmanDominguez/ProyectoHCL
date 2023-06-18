@@ -49,6 +49,7 @@ namespace ProyectoHCL
 
         }
 
+        int intentos = 3; 
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -67,6 +68,7 @@ namespace ProyectoHCL
                         + UsuarioBox1.Text + "' AND CONTRASENA = '" + ContraseñaBox2.Text + "' ");
 
                     MySqlDataReader leer = comando.ExecuteReader();
+                    
 
                     //Validación de la data obtenida
                     if (UsuarioBox1.Text == String.Empty)
@@ -82,13 +84,13 @@ namespace ProyectoHCL
                         ContraseñaBox2.Focus();
                         return;
                     }
-                    if (leer.Read() == true)
+                    if (leer.Read() == true)    
                     {
 
 
                         string usuario = (string)leer["USUARIO"];
 
-                        string contrasena = (string)leer["CONTRASENA"];
+                        string contrasena =  (string)leer["CONTRASENA"];
 
 
                         if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text)
@@ -104,8 +106,8 @@ namespace ProyectoHCL
 
                             // MessageBox.Show("Datos Correctos");
                             /* this.Hide();
-                             GestionUsuario gestionUsuario= new GestionUsuario();
-                            GestionUsuario.show();*/
+                             GestionUsuario gestionUsuario= new Formulario.GestionUsuario();
+                            Formulario.Show();*/
                         }
 
                     }
@@ -136,9 +138,10 @@ namespace ProyectoHCL
         {
             if (UsuarioBox1.Text.Contains(" "))
             {
-                MessageBox.Show("No se permite espacios.");
-                return;  //Sale
-            }
+               MessageBox.Show("No se permite espacios.");
+              return;  //Sale
+              
+          }
 
         }
 
@@ -147,7 +150,7 @@ namespace ProyectoHCL
             if (ContraseñaBox2.Text.Contains(" "))
             {
                 MessageBox.Show("No se permite espacios.");
-                return;  //Sale
+                return;  //Salekk
             }
 
         }

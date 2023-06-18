@@ -1,3 +1,5 @@
+using ProyectoHCL.Formularios;
+
 namespace ProyectoHCL
 {
     internal static class Program
@@ -11,7 +13,7 @@ namespace ProyectoHCL
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new FORMULARIO());
+            Application.Run(new CtrlUsuarios());
         }
     }
 }

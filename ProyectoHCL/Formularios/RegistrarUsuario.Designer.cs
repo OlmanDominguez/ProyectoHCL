@@ -1,6 +1,6 @@
 ﻿namespace ProyectoHCL.Formularios
 {
-    partial class GestionUsuario
+    partial class RegistrarUsuario
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GestionUsuario));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistrarUsuario));
             panel1 = new Panel();
             button1 = new Button();
             panel2 = new Panel();
@@ -70,7 +70,7 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(60, 529);
+            panel1.Size = new Size(60, 523);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
             // 
@@ -96,7 +96,7 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(60, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(767, 70);
+            panel2.Size = new Size(816, 70);
             panel2.TabIndex = 1;
             // 
             // label1
@@ -142,7 +142,7 @@
             panel3.Controls.Add(label4);
             panel3.Controls.Add(label3);
             panel3.Controls.Add(label2);
-            panel3.Location = new Point(150, 117);
+            panel3.Location = new Point(175, 117);
             panel3.Name = "panel3";
             panel3.Size = new Size(583, 334);
             panel3.TabIndex = 2;
@@ -350,11 +350,11 @@
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(348, 82);
+            label11.Location = new Point(373, 82);
             label11.Name = "label11";
-            label11.Size = new Size(194, 32);
+            label11.Size = new Size(208, 32);
             label11.TabIndex = 9;
-            label11.Text = "Gestión usuarios";
+            label11.Text = "Registrar usuarios";
             // 
             // button2
             // 
@@ -364,7 +364,7 @@
             button2.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            button2.Location = new Point(277, 470);
+            button2.Location = new Point(302, 470);
             button2.Name = "button2";
             button2.Size = new Size(82, 32);
             button2.TabIndex = 10;
@@ -380,7 +380,7 @@
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCancelar.Location = new Point(492, 470);
+            btnCancelar.Location = new Point(517, 470);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(80, 32);
             btnCancelar.TabIndex = 11;
@@ -392,20 +392,20 @@
             // 
             errorT.ContainerControl = this;
             // 
-            // GestionUsuario
+            // RegistrarUsuario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(827, 529);
+            ClientSize = new Size(876, 523);
             Controls.Add(btnCancelar);
             Controls.Add(button2);
             Controls.Add(label11);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Name = "GestionUsuario";
+            Name = "RegistrarUsuario";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "GestionUsuario";
             WindowState = FormWindowState.Maximized;
