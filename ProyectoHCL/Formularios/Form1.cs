@@ -98,7 +98,7 @@ namespace ProyectoHCL
 
                         {
                           
-                            Form formulario = new Formularios.GestionUsuario();
+                            Form formulario = new Formularios.RegistrarUsuario();
                             formulario. Show();
                            
                             // MessageBox.Show("Datos Correctos");

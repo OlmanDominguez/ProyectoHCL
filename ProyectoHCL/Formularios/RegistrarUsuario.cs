@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace ProyectoHCL.Formularios
 {
-    public partial class GestionUsuario : Form
+    public partial class RegistrarUsuario : Form
     {
-        public GestionUsuario()
+        public RegistrarUsuario()
         {
             InitializeComponent();
 
@@ -33,6 +33,16 @@ namespace ProyectoHCL.Formularios
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        public void limpiarCampos()
+        {
+            txtNombre.Clear();
+            txtContraseña.Clear();
+            txtUsuario.Clear();
+            txtCorreo.Clear();
+            cmbRol.Text = string.Empty;
+            cmbEstado.Text = string.Empty;
         }
 
         private static bool CorreoValido(String correo)
@@ -95,6 +105,7 @@ namespace ProyectoHCL.Formularios
                     else
                     {
                         MessageBox.Show("Usuario creado con éxito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        limpiarCampos();
                     }
 
                 }
