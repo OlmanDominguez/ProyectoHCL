@@ -14,7 +14,8 @@ namespace ProyectoHCL
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new PermisosRoLes());
-            // Application.Run(new FORMULARIO());
+             //Application.Run(new FORMULARIO());
+           // Application.Run(new Dashboard());
         }
     }
 }
