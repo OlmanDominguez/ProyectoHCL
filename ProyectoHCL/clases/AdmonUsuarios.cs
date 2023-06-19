@@ -37,7 +37,6 @@ namespace ProyectoHCL.clases
 
         }
 
-        
         public void BuscarUsuarios( string buscarU)
         {
             try
@@ -62,13 +61,49 @@ namespace ProyectoHCL.clases
             finally { conn.Close(); }
         }
 
-        public bool EliminarUsuario(string idUsuario)
+        public bool EditarUsuario(Usuarios usuario)
         {
-            bool elimino = false;
+            bool edito = false;
 
             try
             {
-                string sql = "DELETE FROM TBL_USUARIOS WHERE ID_USUARIO = @ID_USUARIO;";
+                string sql = "UPDATE TBL_USUARIO SET ID_ESTADO = @ID_ESTADO, ID_ROL = @ID_ROL, USUARIO = @USUARIO, " +
+                    "NOMBRE_USUARIO = @NOMBRE_USUARIO, PRIMERINGRESO = @PRIMERINGRESO, " +
+                    "FECHAVENCIMIENTO = @FECHAVENCIMIENTO, EMAIL = @EMAIL WHERE USUARIO = @USUARIO;";
+
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
+
+                cmd = new MySqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@ID_ESTADO", usuario.ESTADO_USUARIO1);
+                cmd.Parameters.AddWithValue("@ID_ROL", usuario.ROL_USUARIO1);
+                cmd.Parameters.AddWithValue("@USUARIO", usuario.USUARIO1);
+                cmd.Parameters.AddWithValue("@NOMBRE_USUARIO", usuario.NOMBRE1);
+                cmd.Parameters.AddWithValue("@PRIMERINGRESO", usuario.FECHA_CREACION1);
+                cmd.Parameters.AddWithValue("@FECHAVENCIMIENTO", usuario.FECHA_VENCIMIENTO1);
+                cmd.Parameters.AddWithValue("@EMAIL", usuario.EMAIL1);
+
+                cmd.ExecuteNonQuery();
+                edito = true;
+                conn.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return edito;
+        }
+
+        public bool EliminarUsuario(string idUsuario)
+        {
+            bool elimino = false;   
+
+            try
+            {
+                string sql = "DELETE FROM TBL_USUARIO WHERE ID_USUARIO = @ID_USUARIO;";
 
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                 conn.Open();
@@ -83,6 +118,7 @@ namespace ProyectoHCL.clases
             }
             catch (Exception)
             {
+                throw;
             }
 
             return elimino;

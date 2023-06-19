@@ -234,9 +234,9 @@
             panel3.Controls.Add(panel4);
             panel3.Controls.Add(dgvUsuarios);
             panel3.Dock = DockStyle.Bottom;
-            panel3.Location = new Point(60, 187);
+            panel3.Location = new Point(60, 137);
             panel3.Name = "panel3";
-            panel3.Size = new Size(827, 307);
+            panel3.Size = new Size(827, 357);
             panel3.TabIndex = 28;
             // 
             // panel4
@@ -272,11 +272,12 @@
             dgvUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvUsuarios.Dock = DockStyle.Bottom;
             dgvUsuarios.EnableHeadersVisualStyles = false;
-            dgvUsuarios.Location = new Point(0, 60);
+            dgvUsuarios.Location = new Point(0, 56);
             dgvUsuarios.Name = "dgvUsuarios";
             dgvUsuarios.RowTemplate.Height = 25;
-            dgvUsuarios.Size = new Size(827, 247);
+            dgvUsuarios.Size = new Size(827, 301);
             dgvUsuarios.TabIndex = 20;
+            dgvUsuarios.CellClick += dgvUsuarios_CellClick;
             dgvUsuarios.CellPainting += dgvUsuarios_CellPainting;
             // 
             // label11
@@ -337,7 +338,7 @@
         private TextBox txtBuscar;
         private Panel panel3;
         private Panel panel4;
-        private DataGridView dgvUsuarios;
         private Label label11;
+        public DataGridView dgvUsuarios;
     }
 }

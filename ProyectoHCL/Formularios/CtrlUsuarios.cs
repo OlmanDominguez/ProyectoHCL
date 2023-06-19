@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.VisualBasic;
+using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ namespace ProyectoHCL.Formularios
         }
 
         AdmonUsuarios admonUsuario = new AdmonUsuarios();
+        Usuarios usuario = new Usuarios();
 
         private void CtrlUsuarios_Load(object sender, EventArgs e)
         {
@@ -46,7 +48,7 @@ namespace ProyectoHCL.Formularios
             dgvUsuarios.Columns.Add(btnDelete);
         }
 
-        private void MostrarUsuarios()
+        public void MostrarUsuarios()
         {
             dgvUsuarios.DataSource = admonUsuario.MostrarUsuarios();
         }
@@ -87,8 +89,6 @@ namespace ProyectoHCL.Formularios
             {
                 MostrarUsuarios();
             }
-            
-            
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -131,11 +131,50 @@ namespace ProyectoHCL.Formularios
         }
 
 
-
         private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
             if (this.dgvUsuarios.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
+                bool elimino = admonUsuario.EliminarUsuario(dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString());
+
+                DialogResult dialogResult = MessageBox.Show("¿Está seguro que desea eliminar el usuario?",
+                    "", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    if (elimino)
+                    {
+                        MessageBox.Show("Usuario eliminado");
+                        MostrarUsuarios();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Usuario no eliminado");
+                    }
+
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+
+                }
+            }
+
+            if (this.dgvUsuarios.Columns[e.ColumnIndex].Name == "EDITAR")
+            {
+                EditarUsuario editarUsuarios = new EditarUsuario();
+                editarUsuarios.txtUsuario.Text = dgvUsuarios.CurrentRow.Cells["USUARIO"].Value.ToString();
+                editarUsuarios.txtNombre.Text = dgvUsuarios.CurrentRow.Cells["NOMBRE"].Value.ToString();
+                editarUsuarios.txtCorreo.Text = dgvUsuarios.CurrentRow.Cells["EMAIL"].Value.ToString();
+                editarUsuarios.cmbEstado.Text = dgvUsuarios.CurrentRow.Cells["ESTADO"].Value.ToString();
+                editarUsuarios.cmbRol.Text = dgvUsuarios.CurrentRow.Cells["ROL"].Value.ToString();
+                editarUsuarios.dtpCreacion.Text = dgvUsuarios.CurrentRow.Cells["CREACION"].Value.ToString();
+                editarUsuarios.dtpVencimiento.Text = dgvUsuarios.CurrentRow.Cells["VENCIMIENTO"].Value.ToString();
+                this.Visible = false;
+                editarUsuarios.ShowDialog();
+                this.Visible = true;
+                MostrarUsuarios();
 
             }
         }
