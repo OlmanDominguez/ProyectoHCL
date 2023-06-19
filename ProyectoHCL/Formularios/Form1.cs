@@ -14,7 +14,7 @@ namespace ProyectoHCL
 {
     public partial class FORMULARIO : Form
     {
-        
+
         public FORMULARIO()
         {
             InitializeComponent();
@@ -97,10 +97,13 @@ namespace ProyectoHCL
 
 
                         {
-                          
-                            Form formulario = new Formularios.RegistrarUsuario();
-                            formulario. Show();
-                           
+
+                            Form formulario = new Dashboard();
+                            formulario.Show();
+
+                            this.Hide();
+
+
                             // MessageBox.Show("Datos Correctos");
                             /* this.Hide();
                              GestionUsuario gestionUsuario= new Formulario.GestionUsuario();
@@ -113,12 +116,10 @@ namespace ProyectoHCL
                     {
                         MessageBox.Show("USUARIO NO EXISTE");
                     }
-                    ///
-                   
-                    //
-               comando.Connection.Close();
+
+                    comando.Connection.Close();
                 }
-              
+
             }
             catch (Exception a)
             {
@@ -213,6 +214,7 @@ namespace ProyectoHCL
         {
             WindowState = FormWindowState.Minimized;
         }
+
     }
 }
 
