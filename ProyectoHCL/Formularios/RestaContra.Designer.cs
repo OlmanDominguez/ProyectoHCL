@@ -113,7 +113,7 @@
             BTN_Cancelar.BackColor = SystemColors.ButtonFace;
             BTN_Cancelar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             BTN_Cancelar.ForeColor = SystemColors.ActiveCaptionText;
-            BTN_Cancelar.Location = new Point(36, 290);
+            BTN_Cancelar.Location = new Point(269, 290);
             BTN_Cancelar.Margin = new Padding(2);
             BTN_Cancelar.Name = "BTN_Cancelar";
             BTN_Cancelar.Size = new Size(185, 33);
@@ -128,7 +128,7 @@
             BTN_Aceptar.BackColor = SystemColors.GradientActiveCaption;
             BTN_Aceptar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             BTN_Aceptar.ForeColor = SystemColors.ActiveCaptionText;
-            BTN_Aceptar.Location = new Point(269, 290);
+            BTN_Aceptar.Location = new Point(31, 290);
             BTN_Aceptar.Margin = new Padding(2);
             BTN_Aceptar.Name = "BTN_Aceptar";
             BTN_Aceptar.Size = new Size(185, 33);

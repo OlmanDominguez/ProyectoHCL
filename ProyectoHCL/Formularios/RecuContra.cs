@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace ProyectoHCL
 {
     public partial class RecuContra : Form
     {
+        const string correo = "sistemahcasalomas@gmail.com";
+        const string pass = "wvldqmeolycahxwd";
         private object sec;
 
         public RecuContra()
@@ -74,11 +77,13 @@ namespace ProyectoHCL
                             }
                             else if (usuario == clasecompartida.user & RBTN_Email.Checked == true)
                             {
-                                MessageBox.Show("Se envio un correo de recuperación a tu email registrado");
+                                string Error = "";
+                                String mensaje = "Hola "+ clasecompartida.user + "\n\nTu contraseña es " + (string)leer["CONTRASENA"] + "\n\n";
+                                StringBuilder mensajebuilder = new StringBuilder();
+                                mensajebuilder.Append(mensaje);
+                                sendemail(mensajebuilder, DateTime.Now, "sistemahcasalomas@gmail.com", (string)leer["EMAIL"], out Error);
                                 this.Close();
                             }
-
-
                         }
                         else
                         {
@@ -109,5 +114,39 @@ namespace ProyectoHCL
         {
             e.Handled = char.IsWhiteSpace(e.KeyChar); //Bloquea espacio
         }
+
+        public static void sendemail(StringBuilder mensaje, DateTime fechaenvio, string de, string para, out string Error)
+        {
+            Error = "";
+            try
+            {
+                mensaje.Append(Environment.NewLine);
+                mensaje.Append(string.Format("Este correo ha sido enviado el día {0:dd/MM/yyyy} a las {0:H:mm:ss} Hrs: \n\n", fechaenvio));
+                mensaje.Append(Environment.NewLine);
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress(de);
+                mail.To.Add(para);
+                mail.Subject = "Recuperación Contraseña Hotel Casa Lomas: Usuario " + clasecompartida.user;
+                mail.Body = mensaje.ToString();
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential(correo, pass);
+                smtp.EnableSsl = true;
+                smtp.Send(mail);
+
+                Error = "Se envio un correo de recuperación a tu email registrado";
+                MessageBox.Show(Error);
+
+
+            }
+            catch (Exception ex)
+            { 
+                Error = "Error: " + ex.Message;
+                MessageBox.Show(Error);
+                return;
+            }
+        }
+
     }
 }

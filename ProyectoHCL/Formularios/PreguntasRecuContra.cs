@@ -107,7 +107,7 @@ namespace ProyectoHCL.Formularios
                 {
 
                     MessageBox.Show(a.Message + a.StackTrace);
-                } 
+                }
             }
             else if (COBPREG.SelectedIndex.Equals(0) & TXT_Respuesta.Text == "")
             {
