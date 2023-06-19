@@ -6,30 +6,24 @@ using System.Threading.Tasks;
 
 namespace ProyectoHCL.clases
 {
-    internal class Permisos
+    public class Permisos
     {
-      
-        public string ID_ROL { get; set; }
-        public string NOMBRE { get; set; }
-        public string ESTADO_ROL{ get; set; }
-        public DateTime PRIMER_INGRESO1 { get; set; }
-        public DateTime FECHA_VENCIMIENTO1 { get; set; }
-        public string EDITAR{ get; set; }
-        public string ELIMINAR { get; set; }
+        public int ID_ROL;
+        public string NOMBRE;
+        public string ESTADO_ROL;
+        public DateTime PRIMER_INGRESO;
+        public DateTime FECHA_VENCIMIENTO;
+        public string EDITAR;
+        public string ELIMINAR;
 
-        public Permisos(string id_rol, string nombre, string estado_rol,DateTime primer_ingreso, DateTime fecha_vencimineto, string Editar, string Eliminar)
-        {
-            this.ID_ROL = id_rol;
-            this.NOMBRE = nombre;   
-            this.ESTADO_ROL = estado_rol;
-            this.PRIMER_INGRESO1 = primer_ingreso;
-            this.FECHA_VENCIMIENTO1 = fecha_vencimineto;    
-            this.EDITAR = Editar;
-            this.ELIMINAR = Eliminar;
-        }
-        
+        public int ID_ROL1 { get => ID_ROL; set => ID_ROL = value; }
+        public string NOMBRE1 { get => NOMBRE; set => NOMBRE = value; }
+      public string ESTADO_ROL1 { get => ESTADO_ROL; set => ESTADO_ROL = value; }
+        public DateTime PRIMER_INGRESO1 { get => PRIMER_INGRESO; set => PRIMER_INGRESO = value; }
+        public DateTime FECHA_VENCIMIENTO1 { get => FECHA_VENCIMIENTO; set => FECHA_VENCIMIENTO = value; }
+        public string EDITAR1 { get => EDITAR; set => EDITAR = value; }
+        public string ELIMINAR1 { get => ELIMINAR; set => ELIMINAR = value; }
     }
-
-
 }
-
+        
+    

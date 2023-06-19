@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PermisosRoLes));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             panel1 = new Panel();
             button1 = new Button();
             Roles_Permisos_DG = new DataGridView();
@@ -76,7 +76,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(86, 599);
+            panel1.Size = new Size(86, 646);
             panel1.TabIndex = 1;
             // 
             // button1
@@ -97,14 +97,14 @@
             // Roles_Permisos_DG
             // 
             Roles_Permisos_DG.BackgroundColor = Color.White;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.DeepSkyBlue;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            Roles_Permisos_DG.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.DeepSkyBlue;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            Roles_Permisos_DG.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             Roles_Permisos_DG.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Roles_Permisos_DG.Columns.AddRange(new DataGridViewColumn[] { Roles, Nombre_Rol, Estado_Rol, Primer_Ingreso, Fecha_Vencimiento, Editar, Eliminar });
             Roles_Permisos_DG.EnableHeadersVisualStyles = false;
@@ -116,11 +116,12 @@
             Roles_Permisos_DG.RowTemplate.Height = 33;
             Roles_Permisos_DG.Size = new Size(1203, 276);
             Roles_Permisos_DG.TabIndex = 2;
+            Roles_Permisos_DG.CellContentClick += Roles_Permisos_DG_CellContentClick;
             // 
             // Roles
             // 
-            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(255, 255, 192);
-            Roles.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(255, 255, 192);
+            Roles.DefaultCellStyle = dataGridViewCellStyle4;
             Roles.HeaderText = "Codigo";
             Roles.MinimumWidth = 25;
             Roles.Name = "Roles";
@@ -207,6 +208,7 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 6;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // pictureBox2
             // 
@@ -237,6 +239,7 @@
             pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox4.TabIndex = 9;
             pictureBox4.TabStop = false;
+            pictureBox4.Click += pictureBox4_Click;
             // 
             // RegistroBox1
             // 
@@ -245,6 +248,7 @@
             RegistroBox1.Name = "RegistroBox1";
             RegistroBox1.Size = new Size(182, 33);
             RegistroBox1.TabIndex = 10;
+            RegistroBox1.SelectedIndexChanged += RegistroBox1_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -332,6 +336,7 @@
             Excel.TabIndex = 15;
             Excel.Text = "Excel ";
             Excel.UseVisualStyleBackColor = false;
+            Excel.Click += Excel_Click;
             // 
             // button2
             // 
@@ -343,6 +348,7 @@
             button2.TabIndex = 14;
             button2.Text = "Imprimir";
             button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // PermisosRoLes
             // 
@@ -350,7 +356,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1295, 599);
+            ClientSize = new Size(1295, 646);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(pictureBox3);
@@ -363,6 +369,7 @@
             DoubleBuffered = true;
             Name = "PermisosRoLes";
             Text = "PermisosRoLes";
+            Load += PermisosRoLes_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)Roles_Permisos_DG).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
