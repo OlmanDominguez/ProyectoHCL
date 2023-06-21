@@ -82,24 +82,24 @@ namespace ProyectoHCL
         {
             rjDropdownMenu1.IsMainMenu = true;
             rjDropdownMenu2.IsMainMenu = true;
-/*
-            try
-            {
-                using (BaseDatosHCL.ObtenerConexion())
-                {
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("Select * From TBL_USUARIO where USUARIO = ");
+            /*
+                        try
+                        {
+                            using (BaseDatosHCL.ObtenerConexion())
+                            {
+                                MySqlCommand comando = new MySqlCommand();
+                                comando.Connection = BaseDatosHCL.ObtenerConexion();
+                                comando.CommandText = ("Select * From TBL_USUARIO where USUARIO = ");
 
-                    MySqlDataReader leer = comando.ExecuteReader();
-                }
+                                MySqlDataReader leer = comando.ExecuteReader();
+                            }
 
-            }
-            catch
-            {
+                        }
+                        catch
+                        {
 
-            }
-*/
+                        }
+            */
 
         }
     }
