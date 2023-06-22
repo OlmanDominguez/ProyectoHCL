@@ -25,7 +25,7 @@ namespace ProyectoHCL.Formularios
         public PermisosRoLes()
         {
             InitializeComponent();
-          //  RellenarGrid() ;
+            //  RellenarGrid() ;
         }
 
         public int RellenarGrid(Permisos permisos)
@@ -70,7 +70,7 @@ namespace ProyectoHCL.Formularios
 
         private void Excel_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void RegistroBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -92,7 +92,7 @@ namespace ProyectoHCL.Formularios
             doc.PrinterSettings.PrinterName = "Microsoft Print to PDF";
 
             PrintPreviewDialog ppd = new PrintPreviewDialog { Document = doc };
-            ((Form) ppd).WindowState = FormWindowState.Maximized;
+            ((Form)ppd).WindowState = FormWindowState.Maximized;
 
             doc.PrintPage += delegate (object ev, PrintPageEventArgs ep)
             {
@@ -103,7 +103,7 @@ namespace ProyectoHCL.Formularios
                 foreach (DataGridViewColumn col in Roles_Permisos_DG.Columns)
                 {
                     ep.Graphics.DrawString(col.HeaderText, new Font("Segoe UI", 16, FontStyle.Bold), Brushes.DeepSkyBlue, Left, top);
-                     left += col.Width;
+                    left += col.Width;
 
                 }
                 left = ep.MarginBounds.Left;

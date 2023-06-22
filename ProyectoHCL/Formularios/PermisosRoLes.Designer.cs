@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PermisosRoLes));
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
             button1 = new Button();
             Roles_Permisos_DG = new DataGridView();
@@ -97,31 +97,31 @@
             // Roles_Permisos_DG
             // 
             Roles_Permisos_DG.BackgroundColor = Color.White;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.DeepSkyBlue;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            Roles_Permisos_DG.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.DeepSkyBlue;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            Roles_Permisos_DG.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             Roles_Permisos_DG.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Roles_Permisos_DG.Columns.AddRange(new DataGridViewColumn[] { Roles, Nombre_Rol, Estado_Rol, Primer_Ingreso, Fecha_Vencimiento, Editar, Eliminar });
             Roles_Permisos_DG.EnableHeadersVisualStyles = false;
             Roles_Permisos_DG.GridColor = Color.Black;
-            Roles_Permisos_DG.Location = new Point(86, 320);
+            Roles_Permisos_DG.Location = new Point(85, 367);
             Roles_Permisos_DG.Name = "Roles_Permisos_DG";
             Roles_Permisos_DG.RowHeadersVisible = false;
             Roles_Permisos_DG.RowHeadersWidth = 62;
             Roles_Permisos_DG.RowTemplate.Height = 33;
-            Roles_Permisos_DG.Size = new Size(1203, 276);
+            Roles_Permisos_DG.Size = new Size(1204, 276);
             Roles_Permisos_DG.TabIndex = 2;
             Roles_Permisos_DG.CellContentClick += Roles_Permisos_DG_CellContentClick;
             // 
             // Roles
             // 
-            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(255, 255, 192);
-            Roles.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(255, 255, 192);
+            Roles.DefaultCellStyle = dataGridViewCellStyle2;
             Roles.HeaderText = "Codigo";
             Roles.MinimumWidth = 25;
             Roles.Name = "Roles";
@@ -213,7 +213,7 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(1040, 349);
+            pictureBox2.Location = new Point(1046, 397);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(43, 32);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -223,7 +223,7 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(1171, 350);
+            pictureBox3.Location = new Point(1177, 397);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(47, 32);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -321,7 +321,7 @@
             panel3.Controls.Add(label4);
             panel3.Controls.Add(Buscar);
             panel3.Controls.Add(BuscadorBox1);
-            panel3.Location = new Point(86, 247);
+            panel3.Location = new Point(86, 294);
             panel3.Name = "panel3";
             panel3.Size = new Size(1203, 74);
             panel3.TabIndex = 15;
