@@ -1,4 +1,5 @@
-﻿using ProyectoHCL.clases;
+﻿using MySql.Data.MySqlClient;
+using ProyectoHCL.clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -66,19 +67,12 @@ namespace ProyectoHCL.Formularios
             }
         }
 
+
         private void button2_Click(object sender, EventArgs e)
         {
+            Modelo modelo = new Modelo();
 
-            Usuarios usuario = new Usuarios();
-            usuario.USUARIO1 = txtUsuario.Text;
-            usuario.NOMBRE1 = txtNombre.Text;
-            usuario.CONTRASEÑA1 = txtContraseña.Text;
-            //usuario.ROL_USUARIO1 = cmbRol.Text;
-            usuario.EMAIL1 = txtCorreo.Text;
-            usuario.FECHA_CREACION1 = Convert.ToDateTime(txtFechaC.Text);
-            usuario.FECHA_VENCIMIENTO1 = Convert.ToDateTime(txtFechaV.Text);
-            //usuario.ESTADO_USUARIO1 = cmbEstado.Text;
-
+            VCamposVacios();
 
             if (CorreoValido(txtCorreo.Text) == false)
             {
@@ -94,18 +88,33 @@ namespace ProyectoHCL.Formularios
             {
                 try
                 {
-
-                    Control control = new Control();
-                    string res = control.ctrlRegistro(usuario);
-
-                    if (res.Length > 0)
+                    if (modelo.existeUsuario(txtUsuario.Text))
                     {
-                        MessageBox.Show(res, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("El usuario ya existe", "Aviso",
+                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                     else
                     {
+                        MySqlConnection conn;
+                        MySqlCommand cmd;
+                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                        conn.Open();
+
+                        cmd = new MySqlCommand("InsertarUsuarios", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
+                        cmd.Parameters.AddWithValue("@rol", cmbRol.Text);
+                        cmd.Parameters.AddWithValue("@usuario", txtUsuario.Text);
+                        cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
+                        cmd.Parameters.AddWithValue("@contrasena", txtContraseña.Text);
+                        cmd.Parameters.AddWithValue("@primerIngreso", Convert.ToDateTime(txtFechaC.Text));
+                        cmd.Parameters.AddWithValue("@vencimiento", Convert.ToDateTime(txtFechaV.Text));
+                        cmd.Parameters.AddWithValue("@email", txtCorreo.Text);
+
+                        cmd.ExecuteNonQuery();
                         MessageBox.Show("Usuario creado con éxito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         limpiarCampos();
+                        conn.Close();
                     }
 
                 }
@@ -127,87 +136,87 @@ namespace ProyectoHCL.Formularios
             this.Close();
         }
 
-        private void txtNombre_Validated(object sender, EventArgs e)
+        private bool VCamposVacios()
         {
+            bool ok = true;
+
             if (txtNombre.Text.Trim() == "")
             {
+                ok = false;
                 errorT.SetError(txtNombre, "Introduzca un nombre");
-                txtNombre.Focus();
             }
             else
             {
                 errorT.Clear();
             }
-        }
 
-        private void txtUsuario_Validated(object sender, EventArgs e)
-        {
             if (txtUsuario.Text.Trim() == "")
             {
+                ok = false;
                 errorT.SetError(txtUsuario, "Introduzca un usuario");
-                txtUsuario.Focus();
             }
             else
             {
                 errorT.Clear();
             }
-        }
 
-        private void txtContraseña_Validated(object sender, EventArgs e)
-        {
             if (txtContraseña.Text.Trim() == "")
             {
+                ok = false;
                 errorT.SetError(txtContraseña, "Introduzca una contraseña");
-                txtContraseña.Focus();
             }
             else
             {
                 errorT.Clear();
             }
-        }
 
-        private void cmbRol_Validated(object sender, EventArgs e)
-        {
             if (cmbRol.Text.Trim() == "")
             {
+                ok = false;
                 errorT.SetError(cmbRol, "Seleccione un rol");
-                cmbRol.Focus();
             }
             else
             {
                 errorT.Clear();
             }
-        }
 
-        private void txtCorreo_Validated(object sender, EventArgs e)
-        {
             if (txtCorreo.Text.Trim() == "")
             {
+                ok = false;
                 errorT.SetError(txtCorreo, "Introduzca un correo");
-                txtCorreo.Focus();
             }
             else
             {
                 errorT.Clear();
             }
-        }
 
-        private void cmbEstado_Validated(object sender, EventArgs e)
-        {
             if (cmbEstado.Text.Trim() == "")
             {
+                ok = false;
                 errorT.SetError(cmbEstado, "Seleccione un estado");
-                cmbEstado.Focus();
             }
             else
             {
                 errorT.Clear();
             }
+
+            return ok;
+
         }
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidarTxt.TxtLetras(e);
+        }
+
+        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("No se permiten espacios", "Aviso",
+                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }

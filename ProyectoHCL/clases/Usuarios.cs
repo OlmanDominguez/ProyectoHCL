@@ -19,7 +19,6 @@ namespace ProyectoHCL.clases
         private string ESTADO_USUARIO;
         private DateTime FECHA_ULT_CONEX;
         private int PREGUNTAS_CONTESTADAS;
-        private int PRIMER_INGRESO;
 
 
         public int ID_USUARIO1 { get => ID_USUARIO; set => ID_USUARIO = value; }
@@ -28,7 +27,6 @@ namespace ProyectoHCL.clases
         public string CONTRASEÑA1 { get => CONTRASEÑA; set => CONTRASEÑA = value; }
         public DateTime FECHA_ULT_CONEX1 { get => FECHA_ULT_CONEX; set => FECHA_ULT_CONEX = value; }
         public int PREGUNTAS_CONTESTADAS1 { get => PREGUNTAS_CONTESTADAS; set => PREGUNTAS_CONTESTADAS = value; }
-        public int PRIMER_INGRESO1 { get => PRIMER_INGRESO; set => PRIMER_INGRESO = value; }
         public DateTime FECHA_VENCIMIENTO1 { get => FECHA_VENCIMIENTO; set => FECHA_VENCIMIENTO = value; }
         public string EMAIL1 { get => EMAIL; set => EMAIL = value; }
         public string ROL_USUARIO1 { get => ROL_USUARIO; set => ROL_USUARIO = value; }

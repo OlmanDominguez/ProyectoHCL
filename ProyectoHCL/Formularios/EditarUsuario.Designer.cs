@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarUsuario));
             panel2 = new Panel();
             label3 = new Label();
@@ -36,8 +37,8 @@
             button1 = new Button();
             label11 = new Label();
             panel3 = new Panel();
+            txtFechaC = new TextBox();
             dtpVencimiento = new DateTimePicker();
-            dtpCreacion = new DateTimePicker();
             cmbEstado = new ComboBox();
             cmbRol = new ComboBox();
             txtCorreo = new TextBox();
@@ -52,10 +53,12 @@
             label2 = new Label();
             btnCancelar = new Button();
             btnGuardar = new Button();
+            errorT = new ErrorProvider(components);
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorT).BeginInit();
             SuspendLayout();
             // 
             // panel2
@@ -133,8 +136,8 @@
             // 
             panel3.Anchor = AnchorStyles.Top;
             panel3.BackColor = Color.Transparent;
+            panel3.Controls.Add(txtFechaC);
             panel3.Controls.Add(dtpVencimiento);
-            panel3.Controls.Add(dtpCreacion);
             panel3.Controls.Add(cmbEstado);
             panel3.Controls.Add(cmbRol);
             panel3.Controls.Add(txtCorreo);
@@ -152,6 +155,19 @@
             panel3.Size = new Size(583, 292);
             panel3.TabIndex = 20;
             // 
+            // txtFechaC
+            // 
+            txtFechaC.BackColor = SystemColors.MenuHighlight;
+            txtFechaC.BorderStyle = BorderStyle.FixedSingle;
+            txtFechaC.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtFechaC.Location = new Point(222, 168);
+            txtFechaC.MaxLength = 50;
+            txtFechaC.Name = "txtFechaC";
+            txtFechaC.ReadOnly = true;
+            txtFechaC.ShortcutsEnabled = false;
+            txtFechaC.Size = new Size(333, 27);
+            txtFechaC.TabIndex = 19;
+            // 
             // dtpVencimiento
             // 
             dtpVencimiento.Anchor = AnchorStyles.Top;
@@ -161,16 +177,6 @@
             dtpVencimiento.Name = "dtpVencimiento";
             dtpVencimiento.Size = new Size(333, 27);
             dtpVencimiento.TabIndex = 18;
-            // 
-            // dtpCreacion
-            // 
-            dtpCreacion.Anchor = AnchorStyles.Top;
-            dtpCreacion.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dtpCreacion.Format = DateTimePickerFormat.Short;
-            dtpCreacion.Location = new Point(222, 168);
-            dtpCreacion.Name = "dtpCreacion";
-            dtpCreacion.Size = new Size(333, 27);
-            dtpCreacion.TabIndex = 17;
             // 
             // cmbEstado
             // 
@@ -190,7 +196,7 @@
             cmbRol.FlatStyle = FlatStyle.Flat;
             cmbRol.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             cmbRol.FormattingEnabled = true;
-            cmbRol.Items.AddRange(new object[] { "Administrador", "Usuario" });
+            cmbRol.Items.AddRange(new object[] { "ADMINISTRADOR", "COLABORADOR" });
             cmbRol.Location = new Point(222, 97);
             cmbRol.Name = "cmbRol";
             cmbRol.Size = new Size(333, 28);
@@ -220,6 +226,7 @@
             txtNombre.ShortcutsEnabled = false;
             txtNombre.Size = new Size(333, 27);
             txtNombre.TabIndex = 10;
+            txtNombre.KeyPress += txtNombre_KeyPress;
             // 
             // txtUsuario
             // 
@@ -342,6 +349,10 @@
             btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
+            // errorT
+            // 
+            errorT.ContainerControl = this;
+            // 
             // EditarUsuario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -364,6 +375,7 @@
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorT).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -392,6 +404,7 @@
         public TextBox txtNombre;
         public TextBox txtUsuario;
         public DateTimePicker dtpVencimiento;
-        public DateTimePicker dtpCreacion;
+        public TextBox txtFechaC;
+        private ErrorProvider errorT;
     }
 }

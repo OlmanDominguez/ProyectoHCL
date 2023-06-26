@@ -1,4 +1,5 @@
-﻿using ProyectoHCL.clases;
+﻿using MySql.Data.MySqlClient;
+using ProyectoHCL.clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,48 +24,136 @@ namespace ProyectoHCL.Formularios
             panel3.BackColor = Color.FromArgb(120, Color.Black);
         }
 
+        public string idUs = null;
         AdmonUsuarios admonUsuario = new AdmonUsuarios();
-        Usuarios usuario = new Usuarios();
         CtrlUsuarios ctrlUsuario = new CtrlUsuarios();
-        RegistrarUsuario regUsuario = new RegistrarUsuario();
+        Control control = new Control();
+
         private void EditarUsuario_Load(object sender, EventArgs e)
         {
 
         }
 
-        public void limpiarCampos()
+        private static bool CorreoValido(String correo)
         {
-            txtNombre.Clear();
-            txtUsuario.Clear();
-            txtCorreo.Clear();
-            dtpCreacion.Text = string.Empty;
-            dtpVencimiento.Text = string.Empty;
-            cmbRol.Text = string.Empty;
-            cmbEstado.Text = string.Empty;
+            String expresion;
+            expresion = "\\w+([-+.’]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+            if (Regex.IsMatch(correo, expresion))
+            {
+                if (Regex.Replace(correo, expresion, String.Empty).Length == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            usuario.USUARIO1 = txtUsuario.Text;
-            usuario.NOMBRE1 = txtNombre.Text;
-            //usuario.ROL_USUARIO1 = cmbRol.Text;
-            usuario.EMAIL1 = txtCorreo.Text;
-            usuario.FECHA_CREACION1 = Convert.ToDateTime(dtpCreacion.Text);
-            usuario.FECHA_VENCIMIENTO1 = Convert.ToDateTime(dtpVencimiento.Text);
-            //usuario.ESTADO_USUARIO1 = cmbEstado.Text;
+            VCamposVacios();
 
-
-            bool edito = admonUsuario.EditarUsuario(usuario);
-
-            if (edito)
+            if (CorreoValido(txtCorreo.Text) == false)
             {
-                MessageBox.Show("Usuario modificado");
-                this.Close();
+                MessageBox.Show("Dirección de correo no válida", "Aviso",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
-                MessageBox.Show("Usuario no modificado");
+                try
+                {
+
+                    control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
+                        dtpVencimiento.Text, txtCorreo.Text);
+
+                    MessageBox.Show("Usuario modificado");
+                    this.Close();
+                    admonUsuario.MostrarUsuarios();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
+        }
+
+        private bool VCamposVacios()
+        {
+            bool ok = true;
+
+            if (txtNombre.Text.Trim() == "")
+            {
+                ok = false;
+                errorT.SetError(txtNombre, "Introduzca un nombre");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+
+            if (txtUsuario.Text.Trim() == "")
+            {
+                ok = false;
+                errorT.SetError(txtUsuario, "Introduzca un usuario");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+
+            if (cmbRol.Text.Trim() == "")
+            {
+                ok = false;
+                errorT.SetError(cmbRol, "Seleccione un rol");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+
+            if (txtCorreo.Text.Trim() == "")
+            {
+                ok = false;
+                errorT.SetError(txtCorreo, "Introduzca un correo");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+
+            if (cmbEstado.Text.Trim() == "")
+            {
+                ok = false;
+                errorT.SetError(cmbEstado, "Seleccione un estado");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+
+            //if (dtpVencimiento.Text.Trim() == "")  *VALIDAR FECHA
+            //{
+            //    ok = false;
+            //    errorT.SetError(dtpVencimiento, "Seleccione una fecha");
+            //}
+            //else
+            //{
+            //    errorT.Clear();
+            //}
+            return ok;
+
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtLetras(e);
         }
     }
 }

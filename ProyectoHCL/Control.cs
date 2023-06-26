@@ -10,21 +10,20 @@ namespace ProyectoHCL
 {
     public class Control
     {
-        public string ctrlRegistro(Usuarios usuario)
+
+        AdmonObjetos admonObjeto = new AdmonObjetos();
+        AdmonUsuarios admonUsuario = new AdmonUsuarios();
+
+        public void editarUs(string id, string estado, string rol, string usuario, string nombre,
+            string vencimiento, string email)
         {
-            Modelo modelo = new Modelo();
-            string mensaje = "";
-           
-                if (modelo.existeUsuario(usuario.USUARIO1))
-                {
-                    mensaje = "El usuario ya existe";
-                }
-                else
-                {
-                    modelo.registro(usuario);
-                }
-            
-            return mensaje;
+            admonUsuario.modificarUsuario(Convert.ToInt32(id), estado, rol, usuario, nombre,
+                Convert.ToDateTime(vencimiento), email);
+        }
+
+        public void editarObj(string id, string nombreObj, string descObj, string estadoObj)
+        {
+            admonObjeto.modificarObjeto(Convert.ToInt32(id), nombreObj, descObj, estadoObj);
         }
     }
 }

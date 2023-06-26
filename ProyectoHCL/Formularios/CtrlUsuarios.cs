@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +19,9 @@ namespace ProyectoHCL.Formularios
         public CtrlUsuarios()
         {
             InitializeComponent();
-            panel1.BackColor = Color.FromArgb(125, Color.DeepSkyBlue);
-            panel2.BackColor = Color.FromArgb(120, Color.DimGray);
-            BuscarUsuarios("");
+            panel1.BackColor = Color.FromArgb(125, Color.DeepSkyBlue); //colocar transaparente el panel izquierdo al ejecutar
+            panel2.BackColor = Color.FromArgb(120, Color.DimGray);//colocar transaparente el panel superior al ejecutar
+            BuscarUsuarios(""); //Inicializar el metodo buscar usuario con string vacío
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -32,16 +33,16 @@ namespace ProyectoHCL.Formularios
         {
         }
 
-        AdmonUsuarios admonUsuario = new AdmonUsuarios();
-        Usuarios usuario = new Usuarios();
+        AdmonUsuarios admonUsuario = new AdmonUsuarios(); //crear objeto admonUsuario para acceder a sus metodos
+        Usuarios usuario = new Usuarios(); //crear objeto Usuario para acceder a sus parametros
 
         private void CtrlUsuarios_Load(object sender, EventArgs e)
         {
-            MostrarUsuarios();
+            MostrarUsuarios(); //se muestran los usuarios registrados en el dataGrid
 
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
-            btnUpdate.Name = "EDITAR";
-            dgvUsuarios.Columns.Add(btnUpdate);
+            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
+            btnUpdate.Name = "EDITAR"; //Nombre del boton 
+            dgvUsuarios.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
 
             DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
             btnDelete.Name = "ELIMINAR";
@@ -50,10 +51,10 @@ namespace ProyectoHCL.Formularios
 
         public void MostrarUsuarios()
         {
-            dgvUsuarios.DataSource = admonUsuario.MostrarUsuarios();
+            dgvUsuarios.DataSource = admonUsuario.MostrarUsuarios(); //Llamar metodo mostrar usuarios en dataGrid
         }
 
-        public void BuscarUsuarios(string buscarU)
+        public void BuscarUsuarios(string buscarU) //Recibe string para buscar usuarios
         {
             try
             {
@@ -62,14 +63,14 @@ namespace ProyectoHCL.Formularios
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                 conn.Open();
 
-                cmd = new MySqlCommand("buscarUsuarios", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@nombreU", MySqlDbType.VarChar, 50).Value = buscarU;
+                cmd = new MySqlCommand("buscarUsuarios", conn); //recibe proc almacenado
+                cmd.CommandType = CommandType.StoredProcedure; //se especifica que es un proc almacenado
+                cmd.Parameters.Add("@nombreU", MySqlDbType.VarChar, 50).Value = buscarU; //recibe el parametro nombreU definido en el parametro almacenado
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dgvUsuarios.DataSource = dt;
+                DataTable dt = new DataTable(); //Se crea tabla
+                da.Fill(dt); //Se devuelven los registros en la tabla
+                dgvUsuarios.DataSource = dt; //se define la tabla en la que se devuelven los registros
 
             }
             catch (Exception)
@@ -81,25 +82,25 @@ namespace ProyectoHCL.Formularios
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-            if (txtBuscar.Text != "")
+            if (txtBuscar.Text != "") //si el textbox no está vacío devuelve el metodo buscar usuarios
             {
-                BuscarUsuarios(txtBuscar.Text);
+                BuscarUsuarios(txtBuscar.Text); //El metodo recibe el string desde el textbox
             }
             else
             {
-                MostrarUsuarios();
+                MostrarUsuarios(); //Si el textbox está vacio devuelve el metodo mostrar usuarios 
             }
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            RegistrarUsuario reglUsuarios = new RegistrarUsuario();
+            RegistrarUsuario reglUsuarios = new RegistrarUsuario(); //Se crea un objeto del form RegistrarUsuarios
             this.Visible = false;
-            reglUsuarios.ShowDialog();
+            reglUsuarios.ShowDialog(); //Se oculta el form principal y solo muestra el form RegistrarUsuarios
             this.Visible = true;
         }
 
-        private void dgvUsuarios_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void dgvUsuarios_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) //Codigo para agregar las columnas de botones
         {
 
             if (e.ColumnIndex >= 0 && this.dgvUsuarios.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
@@ -107,7 +108,7 @@ namespace ProyectoHCL.Formularios
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
                 DataGridViewButtonCell celBoton = this.dgvUsuarios.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico");
+                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico"); //Se define la carpeta en la que está guardado el ícono del boton
                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
                 this.dgvUsuarios.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
@@ -131,12 +132,12 @@ namespace ProyectoHCL.Formularios
         }
 
 
-        private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e) //Codigo para definir lo que hará el boton del dataGRid al darle click 
         {
 
             if (this.dgvUsuarios.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
-                bool elimino = admonUsuario.EliminarUsuario(dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString());
+                bool elimino = admonUsuario.EliminarUsuario(dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString()); //EL metodo eliminar recibe como string el id del DataGrid
 
                 DialogResult dialogResult = MessageBox.Show("¿Está seguro que desea eliminar el usuario?",
                     "", MessageBoxButtons.YesNo,
@@ -163,18 +164,20 @@ namespace ProyectoHCL.Formularios
 
             if (this.dgvUsuarios.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                EditarUsuario editarUsuarios = new EditarUsuario();
-                editarUsuarios.txtUsuario.Text = dgvUsuarios.CurrentRow.Cells["USUARIO"].Value.ToString();
+                EditarUsuario editarUsuarios = new EditarUsuario(); //Crear objeto del form EditarUsuario
+
+                editarUsuarios.idUs = dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString();
+                editarUsuarios.txtUsuario.Text = dgvUsuarios.CurrentRow.Cells["USUARIO"].Value.ToString(); //Traer los datos del dataGrid al form para editar
                 editarUsuarios.txtNombre.Text = dgvUsuarios.CurrentRow.Cells["NOMBRE"].Value.ToString();
                 editarUsuarios.txtCorreo.Text = dgvUsuarios.CurrentRow.Cells["EMAIL"].Value.ToString();
                 editarUsuarios.cmbEstado.Text = dgvUsuarios.CurrentRow.Cells["ESTADO"].Value.ToString();
                 editarUsuarios.cmbRol.Text = dgvUsuarios.CurrentRow.Cells["ROL"].Value.ToString();
-                editarUsuarios.dtpCreacion.Text = dgvUsuarios.CurrentRow.Cells["CREACION"].Value.ToString();
+                editarUsuarios.txtFechaC.Text = dgvUsuarios.CurrentRow.Cells["CREACION"].Value.ToString();
                 editarUsuarios.dtpVencimiento.Text = dgvUsuarios.CurrentRow.Cells["VENCIMIENTO"].Value.ToString();
                 this.Visible = false;
-                editarUsuarios.ShowDialog();
+                editarUsuarios.ShowDialog(); //Se oculta el form principal y solo muestra el form editarUsuarios 
                 this.Visible = true;
-                MostrarUsuarios();
+                MostrarUsuarios(); //Se llama el metodo Mostrar usuarios para actualizar el DataGrid al editar 
 
             }
         }

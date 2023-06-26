@@ -184,7 +184,6 @@
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(333, 28);
             cmbEstado.TabIndex = 16;
-            cmbEstado.Validated += cmbEstado_Validated;
             // 
             // cmbRol
             // 
@@ -192,12 +191,11 @@
             cmbRol.FlatStyle = FlatStyle.Flat;
             cmbRol.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             cmbRol.FormattingEnabled = true;
-            cmbRol.Items.AddRange(new object[] { "Administrador", "Usuario" });
+            cmbRol.Items.AddRange(new object[] { "Administrador", "Colaborador" });
             cmbRol.Location = new Point(215, 136);
             cmbRol.Name = "cmbRol";
             cmbRol.Size = new Size(333, 28);
             cmbRol.TabIndex = 15;
-            cmbRol.Validated += cmbRol_Validated;
             // 
             // txtCorreo
             // 
@@ -210,7 +208,6 @@
             txtCorreo.ShortcutsEnabled = false;
             txtCorreo.Size = new Size(333, 27);
             txtCorreo.TabIndex = 12;
-            txtCorreo.Validated += txtCorreo_Validated;
             // 
             // txtContraseña
             // 
@@ -223,7 +220,7 @@
             txtContraseña.ShortcutsEnabled = false;
             txtContraseña.Size = new Size(333, 27);
             txtContraseña.TabIndex = 11;
-            txtContraseña.Validated += txtContraseña_Validated;
+            txtContraseña.KeyPress += txtContraseña_KeyPress;
             // 
             // txtNombre
             // 
@@ -238,7 +235,6 @@
             txtNombre.Size = new Size(333, 27);
             txtNombre.TabIndex = 10;
             txtNombre.KeyPress += txtNombre_KeyPress;
-            txtNombre.Validated += txtNombre_Validated;
             // 
             // txtUsuario
             // 
@@ -252,7 +248,6 @@
             txtUsuario.ShortcutsEnabled = false;
             txtUsuario.Size = new Size(333, 27);
             txtUsuario.TabIndex = 9;
-            txtUsuario.Validated += txtUsuario_Validated;
             // 
             // label9
             // 
@@ -297,7 +292,6 @@
             label6.Size = new Size(175, 25);
             label6.TabIndex = 5;
             label6.Text = "Correo electrónico:";
-            label6.Click += label6_Click;
             // 
             // label5
             // 

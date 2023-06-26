@@ -1,4 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DocumentFormat.OpenXml.Presentation;
+using MySql.Data.MySqlClient;
+using ProyectoHCL.Formularios;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,8 +12,8 @@ namespace ProyectoHCL.clases
 {
     public class AdmonUsuarios
     {
-        MySqlConnection conn;
-        MySqlCommand cmd;
+        MySqlConnection conn; 
+        MySqlCommand cmd; 
 
         public DataTable MostrarUsuarios()
         {
@@ -37,88 +39,59 @@ namespace ProyectoHCL.clases
 
         }
 
-        public void BuscarUsuarios( string buscarU)
+        public void modificarUsuario(int id, string estado, string rol, string usuario, string nombre,
+            DateTime vencimiento, string email)
         {
+
             try
             {
+                MySqlConnection conn;
+                MySqlCommand cmd;
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                 conn.Open();
 
-                cmd = new MySqlCommand("buscarUsuarios", conn);
+                cmd = new MySqlCommand("EditarUsuarios", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally { conn.Close(); }
-        }
-
-        public bool EditarUsuario(Usuarios usuario)
-        {
-            bool edito = false;
-
-            try
-            {
-                string sql = "UPDATE TBL_USUARIO SET ID_ESTADO = @ID_ESTADO, ID_ROL = @ID_ROL, USUARIO = @USUARIO, " +
-                    "NOMBRE_USUARIO = @NOMBRE_USUARIO, PRIMERINGRESO = @PRIMERINGRESO, " +
-                    "FECHAVENCIMIENTO = @FECHAVENCIMIENTO, EMAIL = @EMAIL WHERE USUARIO = @USUARIO;";
-
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
-
-                cmd = new MySqlCommand(sql, conn);
-
-                cmd.Parameters.AddWithValue("@ID_ESTADO", usuario.ESTADO_USUARIO1);
-                cmd.Parameters.AddWithValue("@ID_ROL", usuario.ROL_USUARIO1);
-                cmd.Parameters.AddWithValue("@USUARIO", usuario.USUARIO1);
-                cmd.Parameters.AddWithValue("@NOMBRE_USUARIO", usuario.NOMBRE1);
-                cmd.Parameters.AddWithValue("@PRIMERINGRESO", usuario.FECHA_CREACION1);
-                cmd.Parameters.AddWithValue("@FECHAVENCIMIENTO", usuario.FECHA_VENCIMIENTO1);
-                cmd.Parameters.AddWithValue("@EMAIL", usuario.EMAIL1);
+                cmd.Parameters.AddWithValue("@idUsuario", id);
+                cmd.Parameters.AddWithValue("@estado", estado);
+                cmd.Parameters.AddWithValue("@rol", rol);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.Parameters.AddWithValue("@vencimiento", vencimiento);
+                cmd.Parameters.AddWithValue("@email", email);
 
                 cmd.ExecuteNonQuery();
-                edito = true;
                 conn.Close();
-            }
-            catch (Exception)
+
+            }catch (Exception e)
             {
-
-                throw;
+                MessageBox.Show(e.Message);
             }
 
-            return edito;
         }
 
-        public bool EliminarUsuario(string idUsuario)
+        public bool EliminarUsuario(string idUsuario) //Recibe un string (el id del usuario)
         {
             bool elimino = false;   
 
             try
             {
-                string sql = "DELETE FROM TBL_USUARIO WHERE ID_USUARIO = @ID_USUARIO;";
+                string sql = "DELETE FROM TBL_USUARIO WHERE ID_USUARIO = @ID_USUARIO;"; //sentencia sql para eliminar el usuario
 
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                 conn.Open();
 
-                cmd = new MySqlCommand(sql, conn);
+                cmd = new MySqlCommand(sql, conn); //comando que recibe la sentencia sql y la conexion
 
-                cmd.Parameters.AddWithValue("@ID_USUARIO", idUsuario);
+                cmd.Parameters.AddWithValue("@ID_USUARIO", idUsuario); //obtener valor del parametro id del usuario
 
                 cmd.ExecuteNonQuery();
                 elimino = true;
                 conn.Close();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                MessageBox.Show(e.Message);
             }
 
             return elimino;

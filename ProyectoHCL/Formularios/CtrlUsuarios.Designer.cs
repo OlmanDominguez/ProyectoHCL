@@ -260,6 +260,7 @@
             dataGridViewCellStyle1.BackColor = Color.FromArgb(45, 66, 91);
             dataGridViewCellStyle1.ForeColor = Color.White;
             dgvUsuarios.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dgvUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvUsuarios.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
