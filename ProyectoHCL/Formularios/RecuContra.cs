@@ -14,6 +14,7 @@ using ProyectoHCL.clases;
 
 namespace ProyectoHCL
 {
+    
     public partial class RecuContra : Form
     {
         const string correo = "sistemahcasalomas@gmail.com";
