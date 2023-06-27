@@ -27,50 +27,8 @@ namespace ProyectoHCL
 
         private void button_menu1_Click(object sender, EventArgs e)
         {
+            rjDropdownMenu1.Show(button_menu1, button_menu1.Width, 0);
 
-            if (a == 0)
-            {
-                pbx_1.Visible = true;
-                pbx_2.Visible = true;
-                pbx_3.Visible = true;
-                pbx_4.Visible = true;
-                pictureBox_menu.Visible = true; pictureBox_menu.Show();
-                a = a + 1;
-            }
-            else
-            {
-                pbx_1.Visible = false;
-                pbx_2.Visible = false;
-                pbx_3.Visible = false;
-                pbx_4.Visible = false;
-                pictureBox_menu.Visible = false;
-                a = a - 1;
-            }
-        }
-
-        private void pbx_1_Click(object sender, EventArgs e)
-        {
-            rjDropdownMenu1.Show(pbx_1, pbx_1.Width, 0);
-        }
-
-        private void pbx_2_Click(object sender, EventArgs e)
-        {
-            rjDropdownMenu2.Show(pbx_2, pbx_2.Width, 0);
-        }
-
-        private void pbx_3_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("listo 3");
-        }
-
-        private void pbx_4_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("listo 4");
-        }
-
-        private void pictureBox_menu_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("listo 5");
         }
 
         private void administracionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -81,25 +39,43 @@ namespace ProyectoHCL
         private void Dashboard_Load(object sender, EventArgs e)
         {
             rjDropdownMenu1.IsMainMenu = true;
-            rjDropdownMenu2.IsMainMenu = true;
-            /*
-                        try
-                        {
-                            using (BaseDatosHCL.ObtenerConexion())
-                            {
-                                MySqlCommand comando = new MySqlCommand();
-                                comando.Connection = BaseDatosHCL.ObtenerConexion();
-                                comando.CommandText = ("Select * From TBL_USUARIO where USUARIO = ");
+            
 
-                                MySqlDataReader leer = comando.ExecuteReader();
-                            }
+            try
+            {
+                using (BaseDatosHCL.ObtenerConexion())
+                {
+                    MySqlCommand comando = new MySqlCommand();
+                    comando.Connection = BaseDatosHCL.ObtenerConexion();
+                    comando.CommandText = ("call estado_reserva(1,2,3,'RESERVADO','DISPONIBLE')");
 
-                        }
-                        catch
-                        {
+                    MySqlDataReader leer = comando.ExecuteReader();
+                    if (leer.Read() == true)
+                    {
+                        lbl_pendientes.Text = leer["canti1"].ToString();
+                        lbl_reservadas.Text = leer["canti4"].ToString();
+                        lbl_disponible.Text= leer["canti5"].ToString();
+                        lbl_confirmadas.Text = leer["canti2"].ToString();
+                        lbl_anuladas.Text = leer["canti3"].ToString();
 
-                        }
-            */
+                    }
+                    else
+                    {
+                        MessageBox.Show("error al cargar");
+                    }
+                }
+
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show(a.Message);
+            }
+
+
+        }
+
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
         }
     }

@@ -17,8 +17,9 @@ namespace ProyectoHCL
             //Application.Run(new PermisosRoLes());
             // Application.Run(new FORMULARIO());
             //  Application.Run(new RegistrarUsuario());
-            //Application.Run(new Dashboard());
-            Application.Run(new Cliente());
+            Application.Run(new Dashboard());
+            //Application.Run(new CtrlObjetos());
+            //Application.Run(new Cliente());
         }
     }
 }

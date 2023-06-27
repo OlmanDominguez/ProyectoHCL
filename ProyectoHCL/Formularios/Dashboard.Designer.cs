@@ -35,47 +35,40 @@
             pictureBox2 = new PictureBox();
             panel2 = new Panel();
             label1 = new Label();
-            pictureBox_menu = new PictureBox();
-            pbx_1 = new PictureBox();
-            pbx_2 = new PictureBox();
-            pbx_3 = new PictureBox();
-            pbx_4 = new PictureBox();
             rjDropdownMenu1 = new RJDropdownMenu(components);
             usuariosToolStripMenuItem = new ToolStripMenuItem();
             administracionToolStripMenuItem = new ToolStripMenuItem();
+            usuariosToolStripMenuItem1 = new ToolStripMenuItem();
+            habitacionesToolStripMenuItem = new ToolStripMenuItem();
+            serviciosToolStripMenuItem = new ToolStripMenuItem();
+            descuentosToolStripMenuItem1 = new ToolStripMenuItem();
+            mantenimientosToolStripMenuItem = new ToolStripMenuItem();
             pruebaToolStripMenuItem = new ToolStripMenuItem();
+            reservacionesToolStripMenuItem1 = new ToolStripMenuItem();
+            clientesToolStripMenuItem1 = new ToolStripMenuItem();
             descuentosToolStripMenuItem = new ToolStripMenuItem();
             mantenimientoToolStripMenuItem = new ToolStripMenuItem();
-            rjDropdownMenu2 = new RJDropdownMenu(components);
-            reservacionesToolStripMenuItem = new ToolStripMenuItem();
-            clientesToolStripMenuItem = new ToolStripMenuItem();
             monthCalendar1 = new MonthCalendar();
             label2 = new Label();
             pictureBox1 = new PictureBox();
             pictureBox3 = new PictureBox();
             pictureBox4 = new PictureBox();
             label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
+            lbl_reserva = new Label();
+            lbl_disp = new Label();
+            lbl_disponible = new Label();
+            lbl_reservadas = new Label();
             label8 = new Label();
-            label9 = new Label();
-            label10 = new Label();
-            label11 = new Label();
-            label12 = new Label();
-            label13 = new Label();
-            label14 = new Label();
+            lbl_confirmadas = new Label();
+            lbl_pendientes = new Label();
+            lbl_confirma = new Label();
+            lbl_confir = new Label();
+            lbl_anuladas = new Label();
+            lbl_anu = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox_menu).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbx_1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbx_2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbx_3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbx_4).BeginInit();
             rjDropdownMenu1.SuspendLayout();
-            rjDropdownMenu2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -140,61 +133,6 @@
             label1.TabIndex = 16;
             label1.Text = "HOTEL CASA LOMAS";
             // 
-            // pictureBox_menu
-            // 
-            pictureBox_menu.BackgroundImage = Properties.Resources.menu;
-            pictureBox_menu.Location = new Point(60, 0);
-            pictureBox_menu.Name = "pictureBox_menu";
-            pictureBox_menu.Size = new Size(221, 337);
-            pictureBox_menu.TabIndex = 3;
-            pictureBox_menu.TabStop = false;
-            pictureBox_menu.Visible = false;
-            pictureBox_menu.Click += pictureBox_menu_Click;
-            // 
-            // pbx_1
-            // 
-            pbx_1.BackgroundImage = Properties.Resources._1;
-            pbx_1.Location = new Point(66, 73);
-            pbx_1.Name = "pbx_1";
-            pbx_1.Size = new Size(201, 64);
-            pbx_1.TabIndex = 4;
-            pbx_1.TabStop = false;
-            pbx_1.Visible = false;
-            pbx_1.Click += pbx_1_Click;
-            // 
-            // pbx_2
-            // 
-            pbx_2.BackgroundImage = Properties.Resources._2;
-            pbx_2.Location = new Point(66, 139);
-            pbx_2.Name = "pbx_2";
-            pbx_2.Size = new Size(201, 64);
-            pbx_2.TabIndex = 5;
-            pbx_2.TabStop = false;
-            pbx_2.Visible = false;
-            pbx_2.Click += pbx_2_Click;
-            // 
-            // pbx_3
-            // 
-            pbx_3.BackgroundImage = Properties.Resources._3;
-            pbx_3.Location = new Point(66, 204);
-            pbx_3.Name = "pbx_3";
-            pbx_3.Size = new Size(201, 64);
-            pbx_3.TabIndex = 6;
-            pbx_3.TabStop = false;
-            pbx_3.Visible = false;
-            pbx_3.Click += pbx_3_Click;
-            // 
-            // pbx_4
-            // 
-            pbx_4.BackgroundImage = Properties.Resources._4;
-            pbx_4.Location = new Point(66, 269);
-            pbx_4.Name = "pbx_4";
-            pbx_4.Size = new Size(201, 64);
-            pbx_4.TabIndex = 7;
-            pbx_4.TabStop = false;
-            pbx_4.Visible = false;
-            pbx_4.Click += pbx_4_Click;
-            // 
             // rjDropdownMenu1
             // 
             rjDropdownMenu1.IsMainMenu = false;
@@ -209,54 +147,77 @@
             // 
             usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
             usuariosToolStripMenuItem.Size = new Size(156, 22);
-            usuariosToolStripMenuItem.Text = "Usuarios";
+            usuariosToolStripMenuItem.Text = "Mi perfil";
+            usuariosToolStripMenuItem.Click += usuariosToolStripMenuItem_Click;
             // 
             // administracionToolStripMenuItem
             // 
+            administracionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { usuariosToolStripMenuItem1, habitacionesToolStripMenuItem, serviciosToolStripMenuItem, descuentosToolStripMenuItem1, mantenimientosToolStripMenuItem });
             administracionToolStripMenuItem.Name = "administracionToolStripMenuItem";
             administracionToolStripMenuItem.Size = new Size(156, 22);
-            administracionToolStripMenuItem.Text = "Habitaciones";
+            administracionToolStripMenuItem.Text = "Administracion";
             administracionToolStripMenuItem.Click += administracionToolStripMenuItem_Click;
+            // 
+            // usuariosToolStripMenuItem1
+            // 
+            usuariosToolStripMenuItem1.Name = "usuariosToolStripMenuItem1";
+            usuariosToolStripMenuItem1.Size = new Size(161, 22);
+            usuariosToolStripMenuItem1.Text = "Usuarios";
+            // 
+            // habitacionesToolStripMenuItem
+            // 
+            habitacionesToolStripMenuItem.Name = "habitacionesToolStripMenuItem";
+            habitacionesToolStripMenuItem.Size = new Size(161, 22);
+            habitacionesToolStripMenuItem.Text = "Habitaciones";
+            // 
+            // serviciosToolStripMenuItem
+            // 
+            serviciosToolStripMenuItem.Name = "serviciosToolStripMenuItem";
+            serviciosToolStripMenuItem.Size = new Size(161, 22);
+            serviciosToolStripMenuItem.Text = "Servicios";
+            // 
+            // descuentosToolStripMenuItem1
+            // 
+            descuentosToolStripMenuItem1.Name = "descuentosToolStripMenuItem1";
+            descuentosToolStripMenuItem1.Size = new Size(161, 22);
+            descuentosToolStripMenuItem1.Text = "Descuentos";
+            // 
+            // mantenimientosToolStripMenuItem
+            // 
+            mantenimientosToolStripMenuItem.Name = "mantenimientosToolStripMenuItem";
+            mantenimientosToolStripMenuItem.Size = new Size(161, 22);
+            mantenimientosToolStripMenuItem.Text = "Mantenimientos";
             // 
             // pruebaToolStripMenuItem
             // 
+            pruebaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { reservacionesToolStripMenuItem1, clientesToolStripMenuItem1 });
             pruebaToolStripMenuItem.Name = "pruebaToolStripMenuItem";
             pruebaToolStripMenuItem.Size = new Size(156, 22);
-            pruebaToolStripMenuItem.Text = "Servicios";
+            pruebaToolStripMenuItem.Text = "Reservacion";
+            // 
+            // reservacionesToolStripMenuItem1
+            // 
+            reservacionesToolStripMenuItem1.Name = "reservacionesToolStripMenuItem1";
+            reservacionesToolStripMenuItem1.Size = new Size(148, 22);
+            reservacionesToolStripMenuItem1.Text = "Reservaciones";
+            // 
+            // clientesToolStripMenuItem1
+            // 
+            clientesToolStripMenuItem1.Name = "clientesToolStripMenuItem1";
+            clientesToolStripMenuItem1.Size = new Size(148, 22);
+            clientesToolStripMenuItem1.Text = "Clientes";
             // 
             // descuentosToolStripMenuItem
             // 
             descuentosToolStripMenuItem.Name = "descuentosToolStripMenuItem";
             descuentosToolStripMenuItem.Size = new Size(156, 22);
-            descuentosToolStripMenuItem.Text = "Descuentos";
+            descuentosToolStripMenuItem.Text = "Facturacion";
             // 
             // mantenimientoToolStripMenuItem
             // 
             mantenimientoToolStripMenuItem.Name = "mantenimientoToolStripMenuItem";
             mantenimientoToolStripMenuItem.Size = new Size(156, 22);
             mantenimientoToolStripMenuItem.Text = "Mantenimiento";
-            // 
-            // rjDropdownMenu2
-            // 
-            rjDropdownMenu2.IsMainMenu = false;
-            rjDropdownMenu2.Items.AddRange(new ToolStripItem[] { reservacionesToolStripMenuItem, clientesToolStripMenuItem });
-            rjDropdownMenu2.MenuItemHeight = 25;
-            rjDropdownMenu2.MenuItemTextColor = Color.Empty;
-            rjDropdownMenu2.Name = "rjDropdownMenu2";
-            rjDropdownMenu2.PrimaryColor = Color.Empty;
-            rjDropdownMenu2.Size = new Size(149, 48);
-            // 
-            // reservacionesToolStripMenuItem
-            // 
-            reservacionesToolStripMenuItem.Name = "reservacionesToolStripMenuItem";
-            reservacionesToolStripMenuItem.Size = new Size(148, 22);
-            reservacionesToolStripMenuItem.Text = "Reservaciones";
-            // 
-            // clientesToolStripMenuItem
-            // 
-            clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            clientesToolStripMenuItem.Size = new Size(148, 22);
-            clientesToolStripMenuItem.Text = "Clientes";
             // 
             // monthCalendar1
             // 
@@ -322,57 +283,57 @@
             label3.TabIndex = 13;
             label3.Text = "Habitaciones";
             // 
-            // label4
+            // lbl_reserva
             // 
-            label4.Anchor = AnchorStyles.Top;
-            label4.AutoSize = true;
-            label4.BackColor = Color.FromArgb(60, 150, 249);
-            label4.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.ForeColor = SystemColors.ButtonFace;
-            label4.Location = new Point(657, 236);
-            label4.Name = "label4";
-            label4.Size = new Size(81, 17);
-            label4.TabIndex = 14;
-            label4.Text = "Reservadas:";
+            lbl_reserva.Anchor = AnchorStyles.Top;
+            lbl_reserva.AutoSize = true;
+            lbl_reserva.BackColor = Color.FromArgb(60, 150, 249);
+            lbl_reserva.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_reserva.ForeColor = SystemColors.ButtonFace;
+            lbl_reserva.Location = new Point(657, 236);
+            lbl_reserva.Name = "lbl_reserva";
+            lbl_reserva.Size = new Size(81, 17);
+            lbl_reserva.TabIndex = 14;
+            lbl_reserva.Text = "Reservadas:";
             // 
-            // label5
+            // lbl_disp
             // 
-            label5.Anchor = AnchorStyles.Top;
-            label5.AutoSize = true;
-            label5.BackColor = Color.FromArgb(60, 150, 249);
-            label5.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.ForeColor = SystemColors.ButtonFace;
-            label5.Location = new Point(657, 261);
-            label5.Name = "label5";
-            label5.Size = new Size(85, 17);
-            label5.TabIndex = 15;
-            label5.Text = "Disponibles:";
+            lbl_disp.Anchor = AnchorStyles.Top;
+            lbl_disp.AutoSize = true;
+            lbl_disp.BackColor = Color.FromArgb(60, 150, 249);
+            lbl_disp.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_disp.ForeColor = SystemColors.ButtonFace;
+            lbl_disp.Location = new Point(657, 261);
+            lbl_disp.Name = "lbl_disp";
+            lbl_disp.Size = new Size(85, 17);
+            lbl_disp.TabIndex = 15;
+            lbl_disp.Text = "Disponibles:";
             // 
-            // label6
+            // lbl_disponible
             // 
-            label6.Anchor = AnchorStyles.Top;
-            label6.AutoSize = true;
-            label6.BackColor = Color.FromArgb(60, 150, 249);
-            label6.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.ForeColor = SystemColors.ButtonFace;
-            label6.Location = new Point(744, 262);
-            label6.Name = "label6";
-            label6.Size = new Size(15, 17);
-            label6.TabIndex = 17;
-            label6.Text = "3";
+            lbl_disponible.Anchor = AnchorStyles.Top;
+            lbl_disponible.AutoSize = true;
+            lbl_disponible.BackColor = Color.FromArgb(60, 150, 249);
+            lbl_disponible.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_disponible.ForeColor = SystemColors.ButtonFace;
+            lbl_disponible.Location = new Point(744, 262);
+            lbl_disponible.Name = "lbl_disponible";
+            lbl_disponible.Size = new Size(13, 17);
+            lbl_disponible.TabIndex = 17;
+            lbl_disponible.Text = "-";
             // 
-            // label7
+            // lbl_reservadas
             // 
-            label7.Anchor = AnchorStyles.Top;
-            label7.AutoSize = true;
-            label7.BackColor = Color.FromArgb(60, 150, 249);
-            label7.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.ForeColor = SystemColors.ButtonFace;
-            label7.Location = new Point(744, 237);
-            label7.Name = "label7";
-            label7.Size = new Size(15, 17);
-            label7.TabIndex = 16;
-            label7.Text = "3";
+            lbl_reservadas.Anchor = AnchorStyles.Top;
+            lbl_reservadas.AutoSize = true;
+            lbl_reservadas.BackColor = Color.FromArgb(60, 150, 249);
+            lbl_reservadas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_reservadas.ForeColor = SystemColors.ButtonFace;
+            lbl_reservadas.Location = new Point(744, 237);
+            lbl_reservadas.Name = "lbl_reservadas";
+            lbl_reservadas.Size = new Size(13, 17);
+            lbl_reservadas.TabIndex = 16;
+            lbl_reservadas.Text = "-";
             // 
             // label8
             // 
@@ -387,83 +348,83 @@
             label8.TabIndex = 18;
             label8.Text = "Reservaciones";
             // 
-            // label9
+            // lbl_confirmadas
             // 
-            label9.Anchor = AnchorStyles.Top;
-            label9.AutoSize = true;
-            label9.BackColor = Color.FromArgb(60, 150, 249);
-            label9.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.ForeColor = SystemColors.ButtonFace;
-            label9.Location = new Point(748, 361);
-            label9.Name = "label9";
-            label9.Size = new Size(15, 17);
-            label9.TabIndex = 22;
-            label9.Text = "3";
+            lbl_confirmadas.Anchor = AnchorStyles.Top;
+            lbl_confirmadas.AutoSize = true;
+            lbl_confirmadas.BackColor = Color.FromArgb(60, 150, 249);
+            lbl_confirmadas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_confirmadas.ForeColor = SystemColors.ButtonFace;
+            lbl_confirmadas.Location = new Point(748, 361);
+            lbl_confirmadas.Name = "lbl_confirmadas";
+            lbl_confirmadas.Size = new Size(13, 17);
+            lbl_confirmadas.TabIndex = 22;
+            lbl_confirmadas.Text = "-";
             // 
-            // label10
+            // lbl_pendientes
             // 
-            label10.Anchor = AnchorStyles.Top;
-            label10.AutoSize = true;
-            label10.BackColor = Color.FromArgb(60, 150, 249);
-            label10.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.ForeColor = SystemColors.ButtonFace;
-            label10.Location = new Point(748, 336);
-            label10.Name = "label10";
-            label10.Size = new Size(15, 17);
-            label10.TabIndex = 21;
-            label10.Text = "3";
+            lbl_pendientes.Anchor = AnchorStyles.Top;
+            lbl_pendientes.AutoSize = true;
+            lbl_pendientes.BackColor = Color.FromArgb(60, 150, 249);
+            lbl_pendientes.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_pendientes.ForeColor = SystemColors.ButtonFace;
+            lbl_pendientes.Location = new Point(748, 336);
+            lbl_pendientes.Name = "lbl_pendientes";
+            lbl_pendientes.Size = new Size(13, 17);
+            lbl_pendientes.TabIndex = 21;
+            lbl_pendientes.Text = "-";
             // 
-            // label11
+            // lbl_confirma
             // 
-            label11.Anchor = AnchorStyles.Top;
-            label11.AutoSize = true;
-            label11.BackColor = Color.FromArgb(60, 150, 249);
-            label11.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.ForeColor = SystemColors.ButtonFace;
-            label11.Location = new Point(661, 359);
-            label11.Name = "label11";
-            label11.Size = new Size(90, 17);
-            label11.TabIndex = 20;
-            label11.Text = "Confirmadas:";
+            lbl_confirma.Anchor = AnchorStyles.Top;
+            lbl_confirma.AutoSize = true;
+            lbl_confirma.BackColor = Color.FromArgb(60, 150, 249);
+            lbl_confirma.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_confirma.ForeColor = SystemColors.ButtonFace;
+            lbl_confirma.Location = new Point(661, 359);
+            lbl_confirma.Name = "lbl_confirma";
+            lbl_confirma.Size = new Size(90, 17);
+            lbl_confirma.TabIndex = 20;
+            lbl_confirma.Text = "Confirmadas:";
             // 
-            // label12
+            // lbl_confir
             // 
-            label12.Anchor = AnchorStyles.Top;
-            label12.AutoSize = true;
-            label12.BackColor = Color.FromArgb(60, 150, 249);
-            label12.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label12.ForeColor = SystemColors.ButtonFace;
-            label12.Location = new Point(661, 335);
-            label12.Name = "label12";
-            label12.Size = new Size(81, 17);
-            label12.TabIndex = 19;
-            label12.Text = "Reservadas:";
+            lbl_confir.Anchor = AnchorStyles.Top;
+            lbl_confir.AutoSize = true;
+            lbl_confir.BackColor = Color.FromArgb(60, 150, 249);
+            lbl_confir.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_confir.ForeColor = SystemColors.ButtonFace;
+            lbl_confir.Location = new Point(661, 335);
+            lbl_confir.Name = "lbl_confir";
+            lbl_confir.Size = new Size(80, 17);
+            lbl_confir.TabIndex = 19;
+            lbl_confir.Text = "Pendientes:";
             // 
-            // label13
+            // lbl_anuladas
             // 
-            label13.Anchor = AnchorStyles.Top;
-            label13.AutoSize = true;
-            label13.BackColor = Color.FromArgb(60, 150, 249);
-            label13.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label13.ForeColor = SystemColors.ButtonFace;
-            label13.Location = new Point(748, 385);
-            label13.Name = "label13";
-            label13.Size = new Size(15, 17);
-            label13.TabIndex = 24;
-            label13.Text = "3";
+            lbl_anuladas.Anchor = AnchorStyles.Top;
+            lbl_anuladas.AutoSize = true;
+            lbl_anuladas.BackColor = Color.FromArgb(60, 150, 249);
+            lbl_anuladas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_anuladas.ForeColor = SystemColors.ButtonFace;
+            lbl_anuladas.Location = new Point(748, 385);
+            lbl_anuladas.Name = "lbl_anuladas";
+            lbl_anuladas.Size = new Size(13, 17);
+            lbl_anuladas.TabIndex = 24;
+            lbl_anuladas.Text = "-";
             // 
-            // label14
+            // lbl_anu
             // 
-            label14.Anchor = AnchorStyles.Top;
-            label14.AutoSize = true;
-            label14.BackColor = Color.FromArgb(60, 150, 249);
-            label14.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label14.ForeColor = SystemColors.ButtonFace;
-            label14.Location = new Point(662, 384);
-            label14.Name = "label14";
-            label14.Size = new Size(85, 17);
-            label14.TabIndex = 23;
-            label14.Text = "Disponibles:";
+            lbl_anu.Anchor = AnchorStyles.Top;
+            lbl_anu.AutoSize = true;
+            lbl_anu.BackColor = Color.FromArgb(60, 150, 249);
+            lbl_anu.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_anu.ForeColor = SystemColors.ButtonFace;
+            lbl_anu.Location = new Point(662, 384);
+            lbl_anu.Name = "lbl_anu";
+            lbl_anu.Size = new Size(69, 17);
+            lbl_anu.TabIndex = 23;
+            lbl_anu.Text = "Anuladas:";
             // 
             // Dashboard
             // 
@@ -472,22 +433,17 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(902, 573);
-            Controls.Add(pbx_4);
-            Controls.Add(pbx_3);
-            Controls.Add(pbx_2);
-            Controls.Add(pbx_1);
-            Controls.Add(pictureBox_menu);
-            Controls.Add(label13);
-            Controls.Add(label14);
-            Controls.Add(label9);
-            Controls.Add(label10);
-            Controls.Add(label11);
-            Controls.Add(label12);
+            Controls.Add(lbl_anuladas);
+            Controls.Add(lbl_anu);
+            Controls.Add(lbl_confirmadas);
+            Controls.Add(lbl_pendientes);
+            Controls.Add(lbl_confirma);
+            Controls.Add(lbl_confir);
             Controls.Add(label8);
-            Controls.Add(label6);
-            Controls.Add(label7);
-            Controls.Add(label5);
-            Controls.Add(label4);
+            Controls.Add(lbl_disponible);
+            Controls.Add(lbl_reservadas);
+            Controls.Add(lbl_disp);
+            Controls.Add(lbl_reserva);
             Controls.Add(label3);
             Controls.Add(pictureBox4);
             Controls.Add(pictureBox3);
@@ -504,13 +460,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox_menu).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbx_1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbx_2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbx_3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbx_4).EndInit();
             rjDropdownMenu1.ResumeLayout(false);
-            rjDropdownMenu2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
@@ -525,36 +475,35 @@
         private PictureBox pictureBox2;
         private Panel panel2;
         private Label label1;
-        private PictureBox pictureBox_menu;
-        private PictureBox pbx_1;
-        private PictureBox pbx_2;
-        private PictureBox pbx_3;
-        private PictureBox pbx_4;
         private RJDropdownMenu rjDropdownMenu1;
         private ToolStripMenuItem usuariosToolStripMenuItem;
         private ToolStripMenuItem administracionToolStripMenuItem;
         private ToolStripMenuItem pruebaToolStripMenuItem;
         private ToolStripMenuItem descuentosToolStripMenuItem;
         private ToolStripMenuItem mantenimientoToolStripMenuItem;
-        private RJDropdownMenu rjDropdownMenu2;
-        private ToolStripMenuItem reservacionesToolStripMenuItem;
-        private ToolStripMenuItem clientesToolStripMenuItem;
         private MonthCalendar monthCalendar1;
         private Label label2;
         private PictureBox pictureBox1;
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
         private Label label3;
-        private Label label4;
-        private Label label5;
-        private Label label6;
-        private Label label7;
+        private Label lbl_reserva;
+        private Label lbl_disp;
+        private Label lbl_disponible;
+        private Label lbl_reservadas;
         private Label label8;
-        private Label label9;
-        private Label label10;
-        private Label label11;
-        private Label label12;
-        private Label label13;
-        private Label label14;
+        private Label lbl_confirmadas;
+        private Label lbl_pendientes;
+        private Label lbl_confirma;
+        private Label lbl_confir;
+        private Label lbl_anuladas;
+        private Label lbl_anu;
+        private ToolStripMenuItem usuariosToolStripMenuItem1;
+        private ToolStripMenuItem habitacionesToolStripMenuItem;
+        private ToolStripMenuItem serviciosToolStripMenuItem;
+        private ToolStripMenuItem descuentosToolStripMenuItem1;
+        private ToolStripMenuItem mantenimientosToolStripMenuItem;
+        private ToolStripMenuItem reservacionesToolStripMenuItem1;
+        private ToolStripMenuItem clientesToolStripMenuItem1;
     }
 }
