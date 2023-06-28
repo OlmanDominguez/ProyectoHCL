@@ -16,42 +16,42 @@ namespace ProyectoHCL.Formularios
         public ABC()
         {
             InitializeComponent();
-            this.SetStyle(ControlStyles.ResizeRedraw, true);
-            this.DoubleBuffered = true;
+            //this.SetStyle(ControlStyles.ResizeRedraw, true);
+            //this.DoubleBuffered = true;
         }
 
         AdmonObjetos admonObjeto = new AdmonObjetos();
 
-        private int tolerance = 15;
-        private const int WM_NCHITTEST = 132;
-        private const int HTBOTTOMRIGHT = 17;
-        private Rectangle sizeGripRectangle;
+        //private int tolerance = 15;
+        //private const int WM_NCHITTEST = 132;
+        //private const int HTBOTTOMRIGHT = 17;
+        //private Rectangle sizeGripRectangle;
 
-        protected override void WndProc(ref Message m)
-        {
-            switch (m.Msg)
-            {
-                case WM_NCHITTEST:
-                    base.WndProc(ref m);
-                    var hitPoint = this.PointToClient(new Point(m.LParam.ToInt32() & 0xffff, m.LParam.ToInt32() >> 16));
-                    if (sizeGripRectangle.Contains(hitPoint))
-                        m.Result = new IntPtr(HTBOTTOMRIGHT);
-                    break;
-                default:
-                    base.WndProc(ref m);
-                    break;
-            }
-        }
+        //protected override void WndProc(ref Message m)
+        //{
+        //    switch (m.Msg)
+        //    {
+        //        case WM_NCHITTEST:
+        //            base.WndProc(ref m);
+        //            var hitPoint = this.PointToClient(new Point(m.LParam.ToInt32() & 0xffff, m.LParam.ToInt32() >> 16));
+        //            if (sizeGripRectangle.Contains(hitPoint))
+        //                m.Result = new IntPtr(HTBOTTOMRIGHT);
+        //            break;
+        //        default:
+        //            base.WndProc(ref m);
+        //            break;
+        //    }
+        //}
 
         private void ABC_Load(object sender, EventArgs e)
         {
             MostrarObjetos();
 
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
+            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //Agregar boton editar en datagrid
             btnUpdate.Name = "EDITAR";
             dgvABC.Columns.Add(btnUpdate);
 
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();//Agregar boton eliminar en datagrid
             btnDelete.Name = "ELIMINAR";
             dgvABC.Columns.Add(btnDelete);
         }
@@ -61,14 +61,14 @@ namespace ProyectoHCL.Formularios
             dgvABC.DataSource = admonObjeto.MostrarObjetos();
         }
 
-        private void dgvABC_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void dgvABC_CellPainting_1(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.ColumnIndex >= 0 && this.dgvABC.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
+            if (e.ColumnIndex >= 0 && this.dgvABC.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0) //Agregar boton editar en datagrid
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
                 DataGridViewButtonCell celBoton = this.dgvABC.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico"); //Se define la carpeta en la que está guardado el ícono del boton
+                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico");
                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
                 this.dgvABC.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
@@ -76,7 +76,7 @@ namespace ProyectoHCL.Formularios
 
                 e.Handled = true;
             }
-            if (e.ColumnIndex >= 0 && this.dgvABC.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
+            if (e.ColumnIndex >= 0 && this.dgvABC.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0) //Agregar boton eliminar en datagrid
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 

@@ -46,12 +46,12 @@
             label5 = new Label();
             label6 = new Label();
             panel1 = new Panel();
+            btnPerfil = new Button();
+            btnCerrarSesion = new Button();
             btnNuevo = new Button();
             label11 = new Label();
             panelMenu = new Panel();
             button1 = new Button();
-            btnPerfil = new Button();
-            btnCerrarSesion = new Button();
             panelPrincipal.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvABC).BeginInit();
@@ -130,6 +130,7 @@
             dgvABC.RowTemplate.Height = 25;
             dgvABC.Size = new Size(1005, 354);
             dgvABC.TabIndex = 0;
+            dgvABC.CellPainting += dgvABC_CellPainting_1;
             // 
             // panel2
             // 
@@ -267,6 +268,34 @@
             panel1.Size = new Size(1005, 125);
             panel1.TabIndex = 2;
             // 
+            // btnPerfil
+            // 
+            btnPerfil.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnPerfil.BackColor = Color.Transparent;
+            btnPerfil.BackgroundImage = (Image)resources.GetObject("btnPerfil.BackgroundImage");
+            btnPerfil.BackgroundImageLayout = ImageLayout.Stretch;
+            btnPerfil.FlatAppearance.BorderSize = 0;
+            btnPerfil.FlatStyle = FlatStyle.Flat;
+            btnPerfil.Location = new Point(810, 73);
+            btnPerfil.Name = "btnPerfil";
+            btnPerfil.Size = new Size(30, 29);
+            btnPerfil.TabIndex = 34;
+            btnPerfil.UseVisualStyleBackColor = false;
+            // 
+            // btnCerrarSesion
+            // 
+            btnCerrarSesion.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCerrarSesion.BackColor = Color.Transparent;
+            btnCerrarSesion.BackgroundImage = (Image)resources.GetObject("btnCerrarSesion.BackgroundImage");
+            btnCerrarSesion.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCerrarSesion.FlatAppearance.BorderSize = 0;
+            btnCerrarSesion.FlatStyle = FlatStyle.Flat;
+            btnCerrarSesion.Location = new Point(857, 71);
+            btnCerrarSesion.Name = "btnCerrarSesion";
+            btnCerrarSesion.Size = new Size(35, 33);
+            btnCerrarSesion.TabIndex = 35;
+            btnCerrarSesion.UseVisualStyleBackColor = false;
+            // 
             // btnNuevo
             // 
             btnNuevo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -322,34 +351,6 @@
             button1.Size = new Size(54, 36);
             button1.TabIndex = 2;
             button1.UseVisualStyleBackColor = false;
-            // 
-            // btnPerfil
-            // 
-            btnPerfil.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnPerfil.BackColor = Color.Transparent;
-            btnPerfil.BackgroundImage = (Image)resources.GetObject("btnPerfil.BackgroundImage");
-            btnPerfil.BackgroundImageLayout = ImageLayout.Stretch;
-            btnPerfil.FlatAppearance.BorderSize = 0;
-            btnPerfil.FlatStyle = FlatStyle.Flat;
-            btnPerfil.Location = new Point(810, 73);
-            btnPerfil.Name = "btnPerfil";
-            btnPerfil.Size = new Size(30, 29);
-            btnPerfil.TabIndex = 34;
-            btnPerfil.UseVisualStyleBackColor = false;
-            // 
-            // btnCerrarSesion
-            // 
-            btnCerrarSesion.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCerrarSesion.BackColor = Color.Transparent;
-            btnCerrarSesion.BackgroundImage = (Image)resources.GetObject("btnCerrarSesion.BackgroundImage");
-            btnCerrarSesion.BackgroundImageLayout = ImageLayout.Stretch;
-            btnCerrarSesion.FlatAppearance.BorderSize = 0;
-            btnCerrarSesion.FlatStyle = FlatStyle.Flat;
-            btnCerrarSesion.Location = new Point(857, 71);
-            btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Size = new Size(35, 33);
-            btnCerrarSesion.TabIndex = 35;
-            btnCerrarSesion.UseVisualStyleBackColor = false;
             // 
             // ABC
             // 
