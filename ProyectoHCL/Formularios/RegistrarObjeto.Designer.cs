@@ -30,11 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistrarObjeto));
-            panel2 = new Panel();
-            label3 = new Label();
-            pictureBox5 = new PictureBox();
-            panel1 = new Panel();
-            button1 = new Button();
             label11 = new Label();
             txtDescripcion = new TextBox();
             txtObjeto = new TextBox();
@@ -43,90 +38,37 @@
             btnCancelar = new Button();
             btnGuardar = new Button();
             errorT = new ErrorProvider(components);
-            panel2.SuspendLayout();
+            pictureBox5 = new PictureBox();
+            panel1 = new Panel();
+            btnCerrar = new Button();
+            btnMin = new Button();
+            panel2 = new Panel();
+            ((System.ComponentModel.ISupportInitialize)errorT).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)errorT).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.DimGray;
-            panel2.Controls.Add(label3);
-            panel2.Controls.Add(pictureBox5);
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(60, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(740, 70);
-            panel2.TabIndex = 20;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Lucida Bright", 24F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(106, 20);
-            label3.Name = "label3";
-            label3.Size = new Size(362, 36);
-            label3.TabIndex = 16;
-            label3.Text = "HOTEL CASA LOMAS";
-            // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(19, 3);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(66, 64);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 15;
-            pictureBox5.TabStop = false;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.DeepSkyBlue;
-            panel1.Controls.Add(button1);
-            panel1.Dock = DockStyle.Left;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(60, 450);
-            panel1.TabIndex = 19;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.Transparent;
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.BackgroundImageLayout = ImageLayout.Stretch;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(5, 20);
-            button1.Name = "button1";
-            button1.Size = new Size(49, 36);
-            button1.TabIndex = 1;
-            button1.UseVisualStyleBackColor = false;
             // 
             // label11
             // 
             label11.Anchor = AnchorStyles.Top;
             label11.AutoSize = true;
             label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
+            label11.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(320, 84);
+            label11.Location = new Point(277, 21);
             label11.Name = "label11";
-            label11.Size = new Size(198, 32);
+            label11.Size = new Size(181, 30);
             label11.TabIndex = 21;
             label11.Text = "Registrar objetos";
             // 
             // txtDescripcion
             // 
             txtDescripcion.Anchor = AnchorStyles.Top;
-            txtDescripcion.BackColor = SystemColors.MenuHighlight;
+            txtDescripcion.BackColor = SystemColors.ControlDark;
             txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
             txtDescripcion.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtDescripcion.Location = new Point(143, 260);
+            txtDescripcion.Location = new Point(202, 154);
             txtDescripcion.MaxLength = 100;
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.ShortcutsEnabled = false;
@@ -137,11 +79,11 @@
             // txtObjeto
             // 
             txtObjeto.Anchor = AnchorStyles.Top;
-            txtObjeto.BackColor = SystemColors.MenuHighlight;
+            txtObjeto.BackColor = SystemColors.ControlDark;
             txtObjeto.BorderStyle = BorderStyle.FixedSingle;
             txtObjeto.CharacterCasing = CharacterCasing.Upper;
             txtObjeto.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtObjeto.Location = new Point(143, 176);
+            txtObjeto.Location = new Point(202, 70);
             txtObjeto.MaxLength = 15;
             txtObjeto.Name = "txtObjeto";
             txtObjeto.ShortcutsEnabled = false;
@@ -154,11 +96,11 @@
             label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(143, 232);
+            label1.Location = new Point(202, 126);
             label1.Name = "label1";
-            label1.Size = new Size(208, 25);
+            label1.Size = new Size(186, 19);
             label1.TabIndex = 23;
             label1.Text = "Descripción del objeto:";
             // 
@@ -167,23 +109,24 @@
             label2.Anchor = AnchorStyles.Top;
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(143, 148);
+            label2.Location = new Point(202, 42);
             label2.Name = "label2";
-            label2.Size = new Size(179, 25);
+            label2.Size = new Size(159, 19);
             label2.TabIndex = 22;
             label2.Text = "Nombre del objeto:";
             // 
             // btnCancelar
             // 
             btnCancelar.Anchor = AnchorStyles.Top;
-            btnCancelar.BackColor = SystemColors.ActiveCaption;
+            btnCancelar.BackColor = Color.Red;
             btnCancelar.FlatAppearance.BorderSize = 0;
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
             btnCancelar.FlatStyle = FlatStyle.Flat;
-            btnCancelar.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCancelar.Location = new Point(494, 338);
+            btnCancelar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btnCancelar.ForeColor = Color.White;
+            btnCancelar.Location = new Point(417, 213);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(80, 32);
             btnCancelar.TabIndex = 27;
@@ -194,12 +137,13 @@
             // btnGuardar
             // 
             btnGuardar.Anchor = AnchorStyles.Top;
-            btnGuardar.BackColor = SystemColors.ActiveCaption;
+            btnGuardar.BackColor = Color.ForestGreen;
             btnGuardar.FlatAppearance.BorderSize = 0;
             btnGuardar.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
             btnGuardar.FlatStyle = FlatStyle.Flat;
-            btnGuardar.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnGuardar.Location = new Point(281, 338);
+            btnGuardar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btnGuardar.ForeColor = Color.White;
+            btnGuardar.Location = new Point(238, 213);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(82, 32);
             btnGuardar.TabIndex = 26;
@@ -211,40 +155,101 @@
             // 
             errorT.ContainerControl = this;
             // 
+            // pictureBox5
+            // 
+            pictureBox5.BackColor = Color.Transparent;
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(12, 12);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(50, 48);
+            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox5.TabIndex = 15;
+            pictureBox5.TabStop = false;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.Black;
+            panel1.Controls.Add(btnCerrar);
+            panel1.Controls.Add(pictureBox5);
+            panel1.Controls.Add(btnMin);
+            panel1.Controls.Add(label11);
+            panel1.Dock = DockStyle.Top;
+            panel1.ForeColor = Color.Lime;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(737, 73);
+            panel1.TabIndex = 28;
+            panel1.MouseMove += panel1_MouseMove;
+            // 
+            // btnCerrar
+            // 
+            btnCerrar.BackColor = Color.Transparent;
+            btnCerrar.BackgroundImage = (Image)resources.GetObject("btnCerrar.BackgroundImage");
+            btnCerrar.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCerrar.FlatAppearance.BorderSize = 0;
+            btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            btnCerrar.FlatStyle = FlatStyle.Flat;
+            btnCerrar.Location = new Point(711, 12);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(14, 17);
+            btnCerrar.TabIndex = 29;
+            btnCerrar.UseVisualStyleBackColor = false;
+            btnCerrar.Click += btnCerrar_Click;
+            // 
+            // btnMin
+            // 
+            btnMin.BackColor = Color.Transparent;
+            btnMin.BackgroundImage = (Image)resources.GetObject("btnMin.BackgroundImage");
+            btnMin.BackgroundImageLayout = ImageLayout.Stretch;
+            btnMin.FlatAppearance.BorderSize = 0;
+            btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            btnMin.FlatStyle = FlatStyle.Flat;
+            btnMin.Location = new Point(676, 10);
+            btnMin.Name = "btnMin";
+            btnMin.Size = new Size(19, 20);
+            btnMin.TabIndex = 28;
+            btnMin.UseVisualStyleBackColor = false;
+            btnMin.Click += btnMin_Click;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.FromArgb(43, 42, 65);
+            panel2.Controls.Add(txtDescripcion);
+            panel2.Controls.Add(txtObjeto);
+            panel2.Controls.Add(btnCancelar);
+            panel2.Controls.Add(btnGuardar);
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(label2);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(0, 73);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(737, 335);
+            panel2.TabIndex = 29;
+            // 
             // RegistrarObjeto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackColor = Color.FromArgb(43, 42, 65);
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(800, 450);
-            Controls.Add(btnCancelar);
-            Controls.Add(btnGuardar);
-            Controls.Add(txtDescripcion);
-            Controls.Add(txtObjeto);
-            Controls.Add(label1);
-            Controls.Add(label2);
-            Controls.Add(label11);
+            ClientSize = new Size(737, 408);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "RegistrarObjeto";
+            Opacity = 0.95D;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "RegistrarObjeto";
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorT).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)errorT).EndInit();
+            panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Panel panel2;
-        private Label label3;
-        private PictureBox pictureBox5;
-        private Panel panel1;
-        private Button button1;
         private Label label11;
         private TextBox txtDescripcion;
         private TextBox txtObjeto;
@@ -253,5 +258,10 @@
         private Button btnCancelar;
         private Button btnGuardar;
         private ErrorProvider errorT;
+        private Panel panel2;
+        private Panel panel1;
+        private PictureBox pictureBox5;
+        private Button btnCerrar;
+        private Button btnMin;
     }
 }

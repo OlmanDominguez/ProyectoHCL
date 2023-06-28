@@ -18,7 +18,6 @@ namespace ProyectoHCL.Formularios
         {
             InitializeComponent();
             panel1.BackColor = Color.FromArgb(125, Color.DeepSkyBlue);
-            panel2.BackColor = Color.FromArgb(120, Color.DimGray);
             BuscarObjetos("");
         }
 
@@ -70,40 +69,29 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void dgvObjetos_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-            if (e.ColumnIndex >= 0 && this.dgvObjetos.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
-                DataGridViewButtonCell celBoton = this.dgvObjetos.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico"); //Se define la carpeta en la que está guardado el ícono del boton
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvObjetos.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvObjetos.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
-            if (e.ColumnIndex >= 0 && this.dgvObjetos.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvObjetos.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvObjetos.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvObjetos.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
         }
 
-
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnNuevo_Click_1(object sender, EventArgs e)
+        {
+            RegistrarObjeto regObjeto = new RegistrarObjeto();
+            regObjeto.ShowDialog();
+            MostrarObjetos();
+        }
+
+        private void txtBuscar_TextChanged_1(object sender, EventArgs e)
+        {
             if (txtBuscar.Text != "")
             {
                 BuscarObjetos(txtBuscar.Text);
@@ -114,9 +102,8 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void dgvObjetos_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvObjetos_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
-
             if (this.dgvObjetos.Columns[e.ColumnIndex].Name == "EDITAR")
             {
                 EditarObjeto editarObjeto = new EditarObjeto();
@@ -158,27 +145,34 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnNuevo_Click(object sender, EventArgs e)
+        private void dgvObjetos_CellPainting_1(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            RegistrarObjeto regObjeto = new RegistrarObjeto();
-            this.Visible = false;
-            regObjeto.ShowDialog();
-            this.Visible = true;
-            MostrarObjetos();
-        }
+            if (e.ColumnIndex >= 0 && this.dgvObjetos.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
+            {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
-        private void btnCerrarSesion_Click(object sender, EventArgs e)
-        {
+                DataGridViewButtonCell celBoton = this.dgvObjetos.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
+                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico"); //Se define la carpeta en la que está guardado el ícono del boton
+                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
-        }
+                this.dgvObjetos.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
+                this.dgvObjetos.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
+                e.Handled = true;
+            }
+            if (e.ColumnIndex >= 0 && this.dgvObjetos.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
+            {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
-        }
+                DataGridViewButtonCell celBoton = this.dgvObjetos.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
+                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
+                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
-        private void button1_Click(object sender, EventArgs e)
-        {
+                this.dgvObjetos.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
+                this.dgvObjetos.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
+
+                e.Handled = true;
+            }
         }
     }
 }

@@ -9,18 +9,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace ProyectoHCL.Formularios
 {
     public partial class RegistrarObjeto : Form
     {
+
         public RegistrarObjeto()
         {
             InitializeComponent();
-            panel1.BackColor = Color.FromArgb(125, Color.DeepSkyBlue);
-            panel2.BackColor = Color.FromArgb(120, Color.DimGray);
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+            this.DoubleBuffered = true;
         }
-
 
         private void txtObjeto_Validated(object sender, EventArgs e)
         {
@@ -54,6 +55,7 @@ namespace ProyectoHCL.Formularios
 
             try
             {
+
                 if (modelo.existeObjeto(txtObjeto.Text))
                 {
                     MessageBox.Show("El objeto ya existe", "Aviso",
@@ -118,6 +120,39 @@ namespace ProyectoHCL.Formularios
             }
 
             return ok;
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        int posY = 0;
+        int posX = 0;
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+            {
+                posX = e.X;
+                posY = e.Y;
+            }
+            else
+            {
+                Left = Left + (e.X - posX);
+                Top = Top + (e.Y - posY);
+            }
 
         }
     }
