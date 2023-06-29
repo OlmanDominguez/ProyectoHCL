@@ -16,8 +16,6 @@ namespace ProyectoHCL.Formularios
         public EditarObjeto()
         {
             InitializeComponent();
-            panel1.BackColor = Color.FromArgb(125, Color.DeepSkyBlue);
-            panel2.BackColor = Color.FromArgb(120, Color.DimGray);
         }
 
         public string idObj = null;
@@ -70,6 +68,38 @@ namespace ProyectoHCL.Formularios
         private void txtDescripcion_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidarTxt.TxtLetras(e);
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        int posY = 0;
+        int posX = 0;
+
+        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+            {
+                posX = e.X;
+                posY = e.Y;
+            }
+            else
+            {
+                Left = Left + (e.X - posX);
+                Top = Top + (e.Y - posY);
+            }
         }
     }
 }

@@ -111,9 +111,7 @@ namespace ProyectoHCL.Formularios
                 editarObjeto.txtObjeto.Text = dgvObjetos.CurrentRow.Cells["NOMBRE"].Value.ToString();
                 editarObjeto.txtDescripcion.Text = dgvObjetos.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
                 editarObjeto.cmbEstado.Text = dgvObjetos.CurrentRow.Cells["ESTADO"].Value.ToString();
-                this.Visible = false;
                 editarObjeto.ShowDialog();
-                this.Visible = true;
                 MostrarObjetos();
             }
 

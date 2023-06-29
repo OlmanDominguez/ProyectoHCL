@@ -43,9 +43,9 @@
             btnPerfil = new Button();
             btnCerrarSesion = new Button();
             panel4 = new Panel();
+            button6 = new Button();
             button4 = new Button();
             button5 = new Button();
-            pictureBox1 = new PictureBox();
             label2 = new Label();
             comboBox1 = new ComboBox();
             txtBuscar = new TextBox();
@@ -53,12 +53,17 @@
             label1 = new Label();
             panel3 = new Panel();
             dgvObjetos = new DataGridView();
+            panel5 = new Panel();
+            label4 = new Label();
+            label3 = new Label();
+            textBox1 = new TextBox();
+            comboBox2 = new ComboBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvObjetos).BeginInit();
+            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // button1
@@ -192,9 +197,9 @@
             // panel4
             // 
             panel4.BackColor = Color.Silver;
+            panel4.Controls.Add(button6);
             panel4.Controls.Add(button4);
             panel4.Controls.Add(button5);
-            panel4.Controls.Add(pictureBox1);
             panel4.Controls.Add(label2);
             panel4.Controls.Add(comboBox1);
             panel4.Controls.Add(txtBuscar);
@@ -206,14 +211,31 @@
             panel4.Size = new Size(1024, 85);
             panel4.TabIndex = 33;
             // 
+            // button6
+            // 
+            button6.Anchor = AnchorStyles.Bottom;
+            button6.BackColor = Color.Red;
+            button6.FlatAppearance.BorderSize = 0;
+            button6.FlatStyle = FlatStyle.Flat;
+            button6.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button6.ForeColor = SystemColors.ButtonHighlight;
+            button6.Location = new Point(595, 31);
+            button6.Margin = new Padding(2);
+            button6.Name = "button6";
+            button6.Size = new Size(78, 25);
+            button6.TabIndex = 43;
+            button6.Text = "PDF";
+            button6.UseVisualStyleBackColor = false;
+            // 
             // button4
             // 
             button4.Anchor = AnchorStyles.Bottom;
             button4.BackColor = Color.DarkOrange;
             button4.FlatAppearance.BorderSize = 0;
             button4.FlatStyle = FlatStyle.Flat;
+            button4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button4.ForeColor = SystemColors.ButtonHighlight;
-            button4.Location = new Point(427, 31);
+            button4.Location = new Point(412, 31);
             button4.Margin = new Padding(2);
             button4.Name = "button4";
             button4.Size = new Size(78, 25);
@@ -227,8 +249,9 @@
             button5.BackColor = Color.FromArgb(0, 192, 0);
             button5.FlatAppearance.BorderSize = 0;
             button5.FlatStyle = FlatStyle.Flat;
+            button5.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button5.ForeColor = SystemColors.ButtonHighlight;
-            button5.Location = new Point(519, 31);
+            button5.Location = new Point(504, 31);
             button5.Margin = new Padding(2);
             button5.Name = "button5";
             button5.Size = new Size(78, 25);
@@ -236,29 +259,17 @@
             button5.Text = "Excel ";
             button5.UseVisualStyleBackColor = false;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Anchor = AnchorStyles.Bottom;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(611, 31);
-            pictureBox1.Margin = new Padding(2);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(41, 25);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 43;
-            pictureBox1.TabStop = false;
-            // 
             // label2
             // 
             label2.Anchor = AnchorStyles.Bottom;
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(146, 31);
+            label2.Location = new Point(152, 31);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(65, 21);
+            label2.Size = new Size(60, 20);
             label2.TabIndex = 39;
             label2.Text = "Mostrar";
             // 
@@ -289,12 +300,12 @@
             label5.Anchor = AnchorStyles.Bottom;
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label5.ForeColor = SystemColors.ActiveCaptionText;
             label5.Location = new Point(296, 31);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(71, 21);
+            label5.Size = new Size(66, 20);
             label5.TabIndex = 40;
             label5.Text = "registros";
             label5.TextAlign = ContentAlignment.MiddleCenter;
@@ -304,17 +315,18 @@
             label1.Anchor = AnchorStyles.Bottom;
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ActiveCaptionText;
             label1.Location = new Point(712, 31);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(59, 21);
+            label1.Size = new Size(55, 20);
             label1.TabIndex = 37;
             label1.Text = "Buscar:";
             // 
             // panel3
             // 
+            panel3.AutoSize = true;
             panel3.Controls.Add(dgvObjetos);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(60, 210);
@@ -324,6 +336,8 @@
             // 
             // dgvObjetos
             // 
+            dgvObjetos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvObjetos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvObjetos.BackgroundColor = Color.FromArgb(45, 66, 91);
             dgvObjetos.BorderStyle = BorderStyle.None;
             dgvObjetos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -345,7 +359,6 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvObjetos.DefaultCellStyle = dataGridViewCellStyle2;
-            dgvObjetos.Dock = DockStyle.Fill;
             dgvObjetos.EnableHeadersVisualStyles = false;
             dgvObjetos.GridColor = Color.SteelBlue;
             dgvObjetos.Location = new Point(0, 0);
@@ -367,10 +380,62 @@
             dataGridViewCellStyle4.SelectionForeColor = Color.White;
             dgvObjetos.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dgvObjetos.RowTemplate.Height = 25;
-            dgvObjetos.Size = new Size(1024, 351);
+            dgvObjetos.Size = new Size(1024, 304);
             dgvObjetos.TabIndex = 1;
             dgvObjetos.CellClick += dgvObjetos_CellClick_1;
             dgvObjetos.CellPainting += dgvObjetos_CellPainting_1;
+            // 
+            // panel5
+            // 
+            panel5.BackColor = Color.Silver;
+            panel5.Controls.Add(label4);
+            panel5.Controls.Add(label3);
+            panel5.Controls.Add(textBox1);
+            panel5.Controls.Add(comboBox2);
+            panel5.Dock = DockStyle.Bottom;
+            panel5.Location = new Point(60, 514);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(1024, 47);
+            panel5.TabIndex = 35;
+            // 
+            // label4
+            // 
+            label4.Anchor = AnchorStyles.Right;
+            label4.AutoSize = true;
+            label4.Location = new Point(900, 14);
+            label4.Name = "label4";
+            label4.Size = new Size(21, 15);
+            label4.TabIndex = 47;
+            label4.Text = "De";
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Right;
+            label3.AutoSize = true;
+            label3.Location = new Point(772, 14);
+            label3.Name = "label3";
+            label3.Size = new Size(43, 15);
+            label3.TabIndex = 46;
+            label3.Text = "Página";
+            // 
+            // textBox1
+            // 
+            textBox1.Anchor = AnchorStyles.Right;
+            textBox1.Location = new Point(927, 11);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(65, 23);
+            textBox1.TabIndex = 45;
+            // 
+            // comboBox2
+            // 
+            comboBox2.Anchor = AnchorStyles.Right;
+            comboBox2.BackColor = SystemColors.Info;
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(820, 11);
+            comboBox2.Margin = new Padding(2);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(65, 23);
+            comboBox2.TabIndex = 44;
             // 
             // CtrlObjetos
             // 
@@ -379,6 +444,7 @@
             BackColor = Color.SlateGray;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1084, 561);
+            Controls.Add(panel5);
             Controls.Add(panel3);
             Controls.Add(panel4);
             Controls.Add(panel2);
@@ -392,10 +458,12 @@
             panel2.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvObjetos).EndInit();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -412,12 +480,17 @@
         private Button button3;
         private Button button4;
         private Button button5;
-        private PictureBox pictureBox1;
         private Label label2;
         private ComboBox comboBox1;
         private TextBox txtBuscar;
         private Label label5;
         private Label label1;
         private DataGridView dgvObjetos;
+        private Button button6;
+        private Panel panel5;
+        private Label label4;
+        private Label label3;
+        private TextBox textBox1;
+        private ComboBox comboBox2;
     }
 }
