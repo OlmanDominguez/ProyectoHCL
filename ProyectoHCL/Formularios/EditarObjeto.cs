@@ -38,26 +38,6 @@ namespace ProyectoHCL.Formularios
             {
                 MessageBox.Show(ex.Message);
             }
-
-
-
-            //objeto.NOMBRE_OBJETO1 = txtObjeto.Text;
-            //objeto.DESCRIPCION1 = txtDescripcion.Text;
-            //objeto.ESTADO_OBJETO1 = cmbEstado.Text;
-
-
-
-            //bool edito = admonObjeto.EditarObjeto(objeto);
-
-            //if (edito)
-            //{
-            //    MessageBox.Show("Objeto modificado");
-            //    this.Close();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Objeto no modificado");
-            //}
         }
 
         private void txtObjeto_KeyPress(object sender, KeyPressEventArgs e)

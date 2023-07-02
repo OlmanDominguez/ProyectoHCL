@@ -51,10 +51,9 @@ namespace ProyectoHCL.Formularios
         {
             Modelo modelo = new Modelo();
 
-            //VCamposVacios();
             if (VCamposVacios() == false)
             {
-                MessageBox.Show("Por favor llene los campos", "Aviso",
+                MessageBox.Show("Por favor llene todos los campos", "Aviso",
                      MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else

@@ -47,7 +47,7 @@
             button4 = new Button();
             button5 = new Button();
             label2 = new Label();
-            comboBox1 = new ComboBox();
+            cmbMostrar = new ComboBox();
             txtBuscar = new TextBox();
             label5 = new Label();
             label1 = new Label();
@@ -56,8 +56,8 @@
             panel5 = new Panel();
             label4 = new Label();
             label3 = new Label();
-            textBox1 = new TextBox();
-            comboBox2 = new ComboBox();
+            txtPag = new TextBox();
+            cmbPag = new ComboBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
@@ -147,9 +147,9 @@
             btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
             btnNuevo.Location = new Point(25, 66);
             btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(143, 39);
+            btnNuevo.Size = new Size(100, 39);
             btnNuevo.TabIndex = 36;
-            btnNuevo.Text = "Agregar objeto";
+            btnNuevo.Text = "Agregar";
             btnNuevo.TextAlign = ContentAlignment.MiddleRight;
             btnNuevo.UseVisualStyleBackColor = false;
             btnNuevo.Click += btnNuevo_Click_1;
@@ -201,7 +201,7 @@
             panel4.Controls.Add(button4);
             panel4.Controls.Add(button5);
             panel4.Controls.Add(label2);
-            panel4.Controls.Add(comboBox1);
+            panel4.Controls.Add(cmbMostrar);
             panel4.Controls.Add(txtBuscar);
             panel4.Controls.Add(label5);
             panel4.Controls.Add(label1);
@@ -219,7 +219,7 @@
             button6.FlatStyle = FlatStyle.Flat;
             button6.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button6.ForeColor = SystemColors.ButtonHighlight;
-            button6.Location = new Point(595, 31);
+            button6.Location = new Point(548, 31);
             button6.Margin = new Padding(2);
             button6.Name = "button6";
             button6.Size = new Size(78, 25);
@@ -235,7 +235,7 @@
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button4.ForeColor = SystemColors.ButtonHighlight;
-            button4.Location = new Point(412, 31);
+            button4.Location = new Point(366, 31);
             button4.Margin = new Padding(2);
             button4.Name = "button4";
             button4.Size = new Size(78, 25);
@@ -251,7 +251,7 @@
             button5.FlatStyle = FlatStyle.Flat;
             button5.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button5.ForeColor = SystemColors.ButtonHighlight;
-            button5.Location = new Point(504, 31);
+            button5.Location = new Point(457, 31);
             button5.Margin = new Padding(2);
             button5.Name = "button5";
             button5.Size = new Size(78, 25);
@@ -266,32 +266,34 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(152, 31);
+            label2.Location = new Point(112, 31);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Size = new Size(60, 20);
             label2.TabIndex = 39;
             label2.Text = "Mostrar";
             // 
-            // comboBox1
+            // cmbMostrar
             // 
-            comboBox1.Anchor = AnchorStyles.Bottom;
-            comboBox1.BackColor = SystemColors.Info;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(215, 33);
-            comboBox1.Margin = new Padding(2);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(77, 23);
-            comboBox1.TabIndex = 38;
+            cmbMostrar.Anchor = AnchorStyles.Bottom;
+            cmbMostrar.BackColor = SystemColors.Info;
+            cmbMostrar.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbMostrar.FormattingEnabled = true;
+            cmbMostrar.Items.AddRange(new object[] { "3", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100" });
+            cmbMostrar.Location = new Point(175, 28);
+            cmbMostrar.Margin = new Padding(2);
+            cmbMostrar.Name = "cmbMostrar";
+            cmbMostrar.Size = new Size(77, 23);
+            cmbMostrar.TabIndex = 38;
             // 
             // txtBuscar
             // 
             txtBuscar.Anchor = AnchorStyles.Bottom;
             txtBuscar.BackColor = SystemColors.Info;
-            txtBuscar.Location = new Point(772, 29);
+            txtBuscar.Location = new Point(732, 29);
             txtBuscar.Margin = new Padding(2);
             txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new Size(106, 23);
+            txtBuscar.Size = new Size(172, 23);
             txtBuscar.TabIndex = 36;
             txtBuscar.TextChanged += txtBuscar_TextChanged_1;
             // 
@@ -302,7 +304,7 @@
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label5.ForeColor = SystemColors.ActiveCaptionText;
-            label5.Location = new Point(296, 31);
+            label5.Location = new Point(256, 31);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
             label5.Size = new Size(66, 20);
@@ -317,7 +319,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(712, 31);
+            label1.Location = new Point(672, 31);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(55, 20);
@@ -336,6 +338,8 @@
             // 
             // dgvObjetos
             // 
+            dgvObjetos.AllowUserToAddRows = false;
+            dgvObjetos.AllowUserToDeleteRows = false;
             dgvObjetos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvObjetos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvObjetos.BackgroundColor = Color.FromArgb(45, 66, 91);
@@ -380,7 +384,7 @@
             dataGridViewCellStyle4.SelectionForeColor = Color.White;
             dgvObjetos.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dgvObjetos.RowTemplate.Height = 25;
-            dgvObjetos.Size = new Size(1024, 304);
+            dgvObjetos.Size = new Size(1024, 278);
             dgvObjetos.TabIndex = 1;
             dgvObjetos.CellClick += dgvObjetos_CellClick_1;
             dgvObjetos.CellPainting += dgvObjetos_CellPainting_1;
@@ -390,19 +394,19 @@
             panel5.BackColor = Color.Silver;
             panel5.Controls.Add(label4);
             panel5.Controls.Add(label3);
-            panel5.Controls.Add(textBox1);
-            panel5.Controls.Add(comboBox2);
+            panel5.Controls.Add(txtPag);
+            panel5.Controls.Add(cmbPag);
             panel5.Dock = DockStyle.Bottom;
-            panel5.Location = new Point(60, 514);
+            panel5.Location = new Point(60, 485);
             panel5.Name = "panel5";
-            panel5.Size = new Size(1024, 47);
+            panel5.Size = new Size(1024, 76);
             panel5.TabIndex = 35;
             // 
             // label4
             // 
             label4.Anchor = AnchorStyles.Right;
             label4.AutoSize = true;
-            label4.Location = new Point(900, 14);
+            label4.Location = new Point(898, 19);
             label4.Name = "label4";
             label4.Size = new Size(21, 15);
             label4.TabIndex = 47;
@@ -412,30 +416,32 @@
             // 
             label3.Anchor = AnchorStyles.Right;
             label3.AutoSize = true;
-            label3.Location = new Point(772, 14);
+            label3.Location = new Point(770, 19);
             label3.Name = "label3";
             label3.Size = new Size(43, 15);
             label3.TabIndex = 46;
             label3.Text = "Página";
             // 
-            // textBox1
+            // txtPag
             // 
-            textBox1.Anchor = AnchorStyles.Right;
-            textBox1.Location = new Point(927, 11);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(65, 23);
-            textBox1.TabIndex = 45;
+            txtPag.Anchor = AnchorStyles.Right;
+            txtPag.Location = new Point(925, 16);
+            txtPag.Name = "txtPag";
+            txtPag.Size = new Size(65, 23);
+            txtPag.TabIndex = 45;
             // 
-            // comboBox2
+            // cmbPag
             // 
-            comboBox2.Anchor = AnchorStyles.Right;
-            comboBox2.BackColor = SystemColors.Info;
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(820, 11);
-            comboBox2.Margin = new Padding(2);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(65, 23);
-            comboBox2.TabIndex = 44;
+            cmbPag.Anchor = AnchorStyles.Right;
+            cmbPag.BackColor = SystemColors.Info;
+            cmbPag.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPag.FormattingEnabled = true;
+            cmbPag.Location = new Point(818, 16);
+            cmbPag.Margin = new Padding(2);
+            cmbPag.Name = "cmbPag";
+            cmbPag.Size = new Size(65, 23);
+            cmbPag.TabIndex = 44;
+            cmbPag.SelectionChangeCommitted += cmbPag_SelectionChangeCommitted;
             // 
             // CtrlObjetos
             // 
@@ -452,6 +458,7 @@
             MinimumSize = new Size(680, 500);
             Name = "CtrlObjetos";
             Text = "CtrlObjetos";
+            WindowState = FormWindowState.Maximized;
             Load += CtrlObjetos_Load;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
@@ -481,7 +488,7 @@
         private Button button4;
         private Button button5;
         private Label label2;
-        private ComboBox comboBox1;
+        private ComboBox cmbMostrar;
         private TextBox txtBuscar;
         private Label label5;
         private Label label1;
@@ -490,7 +497,7 @@
         private Panel panel5;
         private Label label4;
         private Label label3;
-        private TextBox textBox1;
-        private ComboBox comboBox2;
+        private TextBox txtPag;
+        private ComboBox cmbPag;
     }
 }

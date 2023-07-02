@@ -67,12 +67,12 @@
             txtDescripcion.Anchor = AnchorStyles.Top;
             txtDescripcion.BackColor = Color.DarkGray;
             txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
-            txtDescripcion.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            txtDescripcion.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtDescripcion.Location = new Point(202, 154);
             txtDescripcion.MaxLength = 100;
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.ShortcutsEnabled = false;
-            txtDescripcion.Size = new Size(333, 25);
+            txtDescripcion.Size = new Size(333, 27);
             txtDescripcion.TabIndex = 25;
             txtDescripcion.KeyPress += txtDescripcion_KeyPress;
             // 
@@ -82,12 +82,12 @@
             txtObjeto.BackColor = Color.DarkGray;
             txtObjeto.BorderStyle = BorderStyle.FixedSingle;
             txtObjeto.CharacterCasing = CharacterCasing.Upper;
-            txtObjeto.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            txtObjeto.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtObjeto.Location = new Point(202, 70);
             txtObjeto.MaxLength = 15;
             txtObjeto.Name = "txtObjeto";
             txtObjeto.ShortcutsEnabled = false;
-            txtObjeto.Size = new Size(333, 25);
+            txtObjeto.Size = new Size(333, 27);
             txtObjeto.TabIndex = 24;
             txtObjeto.KeyPress += txtObjeto_KeyPress;
             // 

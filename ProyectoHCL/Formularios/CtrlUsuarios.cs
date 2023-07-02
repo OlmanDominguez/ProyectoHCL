@@ -19,8 +19,6 @@ namespace ProyectoHCL.Formularios
         public CtrlUsuarios()
         {
             InitializeComponent();
-            panel1.BackColor = Color.FromArgb(125, Color.DeepSkyBlue); //colocar transaparente el panel izquierdo al ejecutar
-            panel2.BackColor = Color.FromArgb(120, Color.DimGray);//colocar transaparente el panel superior al ejecutar
             BuscarUsuarios(""); //Inicializar el metodo buscar usuario con string vacío
         }
 
@@ -80,7 +78,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        private void txtBuscar_TextChanged_1(object sender, EventArgs e)
         {
             if (txtBuscar.Text != "") //si el textbox no está vacío devuelve el metodo buscar usuarios
             {
@@ -92,17 +90,15 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnNuevo_Click(object sender, EventArgs e)
+        private void btnNuevo_Click_1(object sender, EventArgs e)
         {
             RegistrarUsuario reglUsuarios = new RegistrarUsuario(); //Se crea un objeto del form RegistrarUsuarios
-            this.Visible = false;
-            reglUsuarios.ShowDialog(); //Se oculta el form principal y solo muestra el form RegistrarUsuarios
-            this.Visible = true;
+            reglUsuarios.ShowDialog();
+            MostrarUsuarios();
         }
 
-        private void dgvUsuarios_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) //Codigo para agregar las columnas de botones
+        private void dgvUsuarios_CellPainting_1(object sender, DataGridViewCellPaintingEventArgs e)
         {
-
             if (e.ColumnIndex >= 0 && this.dgvUsuarios.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
@@ -131,10 +127,8 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-
-        private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e) //Codigo para definir lo que hará el boton del dataGRid al darle click 
+        private void dgvUsuarios_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
-
             if (this.dgvUsuarios.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
                 bool elimino = admonUsuario.EliminarUsuario(dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString()); //EL metodo eliminar recibe como string el id del DataGrid
@@ -174,9 +168,7 @@ namespace ProyectoHCL.Formularios
                 editarUsuarios.cmbRol.Text = dgvUsuarios.CurrentRow.Cells["ROL"].Value.ToString();
                 editarUsuarios.txtFechaC.Text = dgvUsuarios.CurrentRow.Cells["CREACION"].Value.ToString();
                 editarUsuarios.dtpVencimiento.Text = dgvUsuarios.CurrentRow.Cells["VENCIMIENTO"].Value.ToString();
-                this.Visible = false;
                 editarUsuarios.ShowDialog(); //Se oculta el form principal y solo muestra el form editarUsuarios 
-                this.Visible = true;
                 MostrarUsuarios(); //Se llama el metodo Mostrar usuarios para actualizar el DataGrid al editar 
 
             }

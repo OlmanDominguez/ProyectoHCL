@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DocumentFormat.OpenXml.Office2013.Excel;
+using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
 using System.Collections.Generic;
@@ -14,18 +15,44 @@ namespace ProyectoHCL.Formularios
 {
     public partial class CtrlObjetos : Form
     {
+        Objetos obj = new Objetos();
+        DataSet ds = new DataSet();
+        int pagInicio = 1, indice = 0, numFilas = 3, pagFinal;
+
+
         public CtrlObjetos()
         {
             InitializeComponent();
-            panel1.BackColor = Color.FromArgb(125, Color.DeepSkyBlue);
-            BuscarObjetos("");
+            pagFinal = numFilas;
+            CargarDG();
+            //BuscarObjetos("");
         }
 
         AdmonObjetos admonObjeto = new AdmonObjetos();
 
+        private void CargarDG()
+        {
+            obj.Inicio1 = pagInicio;
+            obj.Final1 = pagFinal;
+            ds = obj.PaginacionObjetos();
+            dgvObjetos.DataSource = ds.Tables[1];
+
+            int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;
+
+            if (Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) % numFilas > 0) cantidad++;
+
+            txtPag.Text = cantidad.ToString();
+
+            cmbPag.Items.Clear();
+
+            for (int x = 1; x <= cantidad; x++)
+                cmbPag.Items.Add(x.ToString());
+
+            cmbPag.SelectedIndex = indice;
+        }
+
         private void CtrlObjetos_Load(object sender, EventArgs e)
         {
-            MostrarObjetos();
 
             DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
             btnUpdate.Name = "EDITAR";
@@ -36,10 +63,10 @@ namespace ProyectoHCL.Formularios
             dgvObjetos.Columns.Add(btnDelete);
         }
 
-        public void MostrarObjetos()
-        {
-            dgvObjetos.DataSource = admonObjeto.MostrarObjetos();
-        }
+        //public void MostrarObjetos()
+        //{
+        //    dgvObjetos.DataSource = admonObjeto.MostrarObjetos();
+        //}
 
         public void BuscarObjetos(string buscarOb)
         {
@@ -87,7 +114,7 @@ namespace ProyectoHCL.Formularios
         {
             RegistrarObjeto regObjeto = new RegistrarObjeto();
             regObjeto.ShowDialog();
-            MostrarObjetos();
+            CargarDG();
         }
 
         private void txtBuscar_TextChanged_1(object sender, EventArgs e)
@@ -98,7 +125,7 @@ namespace ProyectoHCL.Formularios
             }
             else
             {
-                MostrarObjetos();
+                CargarDG();
             }
         }
 
@@ -112,7 +139,7 @@ namespace ProyectoHCL.Formularios
                 editarObjeto.txtDescripcion.Text = dgvObjetos.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
                 editarObjeto.cmbEstado.Text = dgvObjetos.CurrentRow.Cells["ESTADO"].Value.ToString();
                 editarObjeto.ShowDialog();
-                MostrarObjetos();
+                CargarDG();
             }
 
             if (this.dgvObjetos.Columns[e.ColumnIndex].Name == "ELIMINAR")
@@ -128,7 +155,7 @@ namespace ProyectoHCL.Formularios
                     if (elimino)
                     {
                         MessageBox.Show("Objeto eliminado");
-                        MostrarObjetos();
+                        CargarDG();
                     }
                     else
                     {
@@ -171,6 +198,15 @@ namespace ProyectoHCL.Formularios
 
                 e.Handled = true;
             }
+        }
+
+        private void cmbPag_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPag.Text);
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
         }
     }
 }
