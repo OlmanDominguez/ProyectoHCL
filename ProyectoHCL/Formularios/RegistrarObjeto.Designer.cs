@@ -65,7 +65,7 @@
             // txtDescripcion
             // 
             txtDescripcion.Anchor = AnchorStyles.Top;
-            txtDescripcion.BackColor = SystemColors.ControlDark;
+            txtDescripcion.BackColor = Color.DarkGray;
             txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
             txtDescripcion.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtDescripcion.Location = new Point(202, 154);
@@ -79,7 +79,7 @@
             // txtObjeto
             // 
             txtObjeto.Anchor = AnchorStyles.Top;
-            txtObjeto.BackColor = SystemColors.ControlDark;
+            txtObjeto.BackColor = Color.DarkGray;
             txtObjeto.BorderStyle = BorderStyle.FixedSingle;
             txtObjeto.CharacterCasing = CharacterCasing.Upper;
             txtObjeto.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
@@ -122,7 +122,7 @@
             btnCancelar.Anchor = AnchorStyles.Top;
             btnCancelar.BackColor = Color.Red;
             btnCancelar.FlatAppearance.BorderSize = 0;
-            btnCancelar.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
+            btnCancelar.FlatAppearance.MouseOverBackColor = Color.DarkRed;
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnCancelar.ForeColor = Color.White;
@@ -139,7 +139,7 @@
             btnGuardar.Anchor = AnchorStyles.Top;
             btnGuardar.BackColor = Color.ForestGreen;
             btnGuardar.FlatAppearance.BorderSize = 0;
-            btnGuardar.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
+            btnGuardar.FlatAppearance.MouseOverBackColor = Color.Green;
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnGuardar.ForeColor = Color.White;

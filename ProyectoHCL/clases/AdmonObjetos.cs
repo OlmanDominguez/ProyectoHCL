@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -67,38 +68,6 @@ namespace ProyectoHCL.clases
             }
 
         }
-
-
-        //public bool EditarObjeto(Objetos objeto)
-        //{
-        //    bool edito = false;
-
-        //    try
-        //    {
-        //        string sql = "UPDATE TBL_OBJETO SET OBJETO = @OBJETO, DESCRIPCION = @DESCRIPCION, ESTADO_OBJETO = @ESTADO_OBJETO" +
-        //             " WHERE OBJETO = @OBJETO;"; 
-
-        //        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-        //        conn.Open();
-
-        //        cmd = new MySqlCommand(sql, conn); 
-
-        //        cmd.Parameters.AddWithValue("@OBJETO", objeto.NOMBRE_OBJETO1); 
-        //        cmd.Parameters.AddWithValue("@DESCRIPCION", objeto.DESCRIPCION1);
-        //        cmd.Parameters.AddWithValue("@ESTADO_OBJETO", objeto.ESTADO_OBJETO1);
-
-        //        cmd.ExecuteNonQuery();
-        //        edito = true;
-        //        conn.Close();
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-
-        //    return edito;
-        //}
 
         public bool EliminarObjeto(string idObjeto) 
         {

@@ -51,38 +51,43 @@ namespace ProyectoHCL.Formularios
         {
             Modelo modelo = new Modelo();
 
-            VCamposVacios();
-
-            try
+            if (VCamposVacios() == false)
             {
-
-                if (modelo.existeObjeto(txtObjeto.Text))
-                {
-                    MessageBox.Show("El objeto ya existe", "Aviso",
-                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-                else
-                {
-                    MySqlConnection conn;
-                    MySqlCommand cmd;
-                    conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                    conn.Open();
-
-                    cmd = new MySqlCommand("insertarObjeto", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@nombreObj", txtObjeto.Text);
-                    cmd.Parameters.AddWithValue("@descObj", txtDescripcion.Text);
-
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Objeto creado con éxito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    limpiarCampos();
-                    conn.Close();
-                }
-
+                MessageBox.Show("Por favor llene todos los campos", "Aviso",
+                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                try
+                {
+                    if (modelo.existeObjeto(txtObjeto.Text))
+                    {
+                        MessageBox.Show("El objeto ya existe", "Aviso",
+                             MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                    else
+                    {
+                        MySqlConnection conn;
+                        MySqlCommand cmd;
+                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                        conn.Open();
+
+                        cmd = new MySqlCommand("insertarObjeto", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@nombreObj", txtObjeto.Text);
+                        cmd.Parameters.AddWithValue("@descObj", txtDescripcion.Text);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Objeto creado con éxito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        limpiarCampos();
+                        conn.Close();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
