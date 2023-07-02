@@ -1,5 +1,4 @@
 using ProyectoHCL.Formularios;
-using ProyectoHCL.Formularios.Clientes;
 
 namespace ProyectoHCL
 {
@@ -17,9 +16,9 @@ namespace ProyectoHCL
             //Application.Run(new PermisosRoLes());
             // Application.Run(new FORMULARIO());
             //  Application.Run(new RegistrarUsuario());
-            Application.Run(new Dashboard());
+            //Application.Run(new Dashboard());
             //Application.Run(new CtrlObjetos());
-            //Application.Run(new Cliente());
+            Application.Run(new CtrlClientes());
         }
     }
 }
