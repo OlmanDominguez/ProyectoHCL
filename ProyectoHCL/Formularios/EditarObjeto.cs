@@ -25,18 +25,25 @@ namespace ProyectoHCL.Formularios
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            try
+            if (VCamposVacios() == false)
             {
-                control.editarObj(idObj, txtObjeto.Text, txtDescripcion.Text, cmbEstado.Text);
-
-                MessageBox.Show("Objeto modificado");
-                this.Close();
-                admonObjeto.MostrarObjetos();
-
+                MessageBox.Show("Por favor llene todos los campos", "Aviso",
+                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                try
+                {
+                    control.editarObj(idObj, txtObjeto.Text, txtDescripcion.Text, cmbEstado.Text);
+
+                    MessageBox.Show("Objeto modificado");
+                    this.Close();
+                    //admonObjeto.MostrarObjetos();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -80,6 +87,44 @@ namespace ProyectoHCL.Formularios
                 Left = Left + (e.X - posX);
                 Top = Top + (e.Y - posY);
             }
+        }
+
+        private bool VCamposVacios()
+        {
+            bool ok = true;
+
+            if (txtObjeto.Text.Trim() == "")
+            {
+                ok = false;
+                errorT.SetError(txtObjeto, "Introduzca el nombre del objeto");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+
+            if (txtDescripcion.Text.Trim() == "")
+            {
+                ok = false;
+                errorT.SetError(txtDescripcion, "Introduzca una descripción del objeto");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+
+            if (cmbEstado.Text.Trim() == "")
+            {
+                ok = false;
+                errorT.SetError(cmbEstado, "Seleccione un estado");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+
+            return ok;
+
         }
     }
 }

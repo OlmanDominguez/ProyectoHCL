@@ -208,6 +208,7 @@
             dtpVencimiento.Name = "dtpVencimiento";
             dtpVencimiento.Size = new Size(316, 27);
             dtpVencimiento.TabIndex = 18;
+            dtpVencimiento.ValueChanged += dtpVencimiento_ValueChanged;
             // 
             // cmbEstado
             // 

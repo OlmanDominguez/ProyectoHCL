@@ -68,9 +68,13 @@ namespace ProyectoHCL.Formularios
         {
             Modelo modelo = new Modelo();
 
-            VCamposVacios();
 
-            if (CorreoValido(txtCorreo.Text) == false)
+            if (VCamposVacios() == false)
+            {
+                MessageBox.Show("Por favor llene todos los campos", "Aviso",
+                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else if (CorreoValido(txtCorreo.Text) == false)
             {
                 MessageBox.Show("Dirección de correo no válida", "Aviso",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

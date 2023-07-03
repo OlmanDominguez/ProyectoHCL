@@ -17,7 +17,7 @@ namespace ProyectoHCL.Formularios
     {
         Objetos obj = new Objetos();
         DataSet ds = new DataSet();
-        int pagInicio = 1, indice = 0, numFilas = 3, pagFinal;
+        int pagInicio = 1, indice = 0, numFilas = 3, pagFinal, cmbIndice = 0;
 
 
         public CtrlObjetos()
@@ -206,6 +206,31 @@ namespace ProyectoHCL.Formularios
             indice = pagina - 1;
             pagInicio = (pagina - 1) * numFilas + 1;
             pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbIndice = cmbMostrar.SelectedIndex;
+            switch (cmbIndice)
+            {
+                case 0:
+                    numFilas = 2;
+                    break;
+                case 1:
+                    numFilas = 3;
+                    break;
+                case 2:
+                    numFilas = 4;
+                    break;
+                case 3:
+                    numFilas = 5;
+                    break;
+                case 4:
+                    numFilas = 6;
+                    break;
+            }
+            pagFinal = numFilas;
             CargarDG();
         }
     }

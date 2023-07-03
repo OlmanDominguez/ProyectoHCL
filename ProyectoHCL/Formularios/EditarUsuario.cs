@@ -54,9 +54,12 @@ namespace ProyectoHCL.Formularios
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            VCamposVacios();
-
-            if (CorreoValido(txtCorreo.Text) == false)
+            if (VCamposVacios() == false)
+            {
+                MessageBox.Show("Por favor llene todos los campos", "Aviso",
+                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else if (CorreoValido(txtCorreo.Text) == false)
             {
                 MessageBox.Show("Dirección de correo no válida", "Aviso",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -65,14 +68,12 @@ namespace ProyectoHCL.Formularios
             {
                 try
                 {
-
                     control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
                         dtpVencimiento.Text, txtCorreo.Text);
 
                     MessageBox.Show("Usuario modificado");
                     this.Close();
-                    admonUsuario.MostrarUsuarios();
-
+                    //admonUsuario.MostrarUsuarios();
                 }
                 catch (Exception ex)
                 {
@@ -134,16 +135,6 @@ namespace ProyectoHCL.Formularios
             {
                 errorT.Clear();
             }
-
-            //if (dtpVencimiento.Text.Trim() == "")  *VALIDAR FECHA
-            //{
-            //    ok = false;
-            //    errorT.SetError(dtpVencimiento, "Seleccione una fecha");
-            //}
-            //else
-            //{
-            //    errorT.Clear();
-            //}
             return ok;
 
         }
@@ -183,6 +174,14 @@ namespace ProyectoHCL.Formularios
                 Left = Left + (e.X - posX);
                 Top = Top + (e.Y - posY);
             }
+        }
+
+        private void dtpVencimiento_ValueChanged(object sender, EventArgs e)  //****
+        {
+            //if (DateTime.Today > dtpVencimiento.Value)
+            //{
+            //    MessageBox.Show("La fecha seleccionada no es válida", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //}
         }
     }
 }

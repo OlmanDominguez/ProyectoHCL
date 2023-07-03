@@ -52,9 +52,9 @@
             label3 = new Label();
             label4 = new Label();
             panel3 = new Panel();
+            txtPaginacion = new TextBox();
             label6 = new Label();
             label7 = new Label();
-            txtPaginacion = new TextBox();
             cmbPaginacion = new ComboBox();
             label2 = new Label();
             label5 = new Label();
@@ -283,12 +283,13 @@
             cmbMostrar.BackColor = SystemColors.Info;
             cmbMostrar.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbMostrar.FormattingEnabled = true;
-            cmbMostrar.Items.AddRange(new object[] { "3", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100" });
+            cmbMostrar.Items.AddRange(new object[] { "2", "3", "4", "5", "6" });
             cmbMostrar.Location = new Point(179, 28);
             cmbMostrar.Margin = new Padding(2);
             cmbMostrar.Name = "cmbMostrar";
             cmbMostrar.Size = new Size(77, 23);
             cmbMostrar.TabIndex = 46;
+            cmbMostrar.SelectedIndexChanged += cmbMostrar_SelectedIndexChanged;
             // 
             // txtBuscar
             // 
@@ -333,9 +334,9 @@
             // panel3
             // 
             panel3.BackColor = Color.Silver;
+            panel3.Controls.Add(txtPaginacion);
             panel3.Controls.Add(label6);
             panel3.Controls.Add(label7);
-            panel3.Controls.Add(txtPaginacion);
             panel3.Controls.Add(cmbPaginacion);
             panel3.Controls.Add(label2);
             panel3.Controls.Add(label5);
@@ -346,6 +347,16 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(1024, 76);
             panel3.TabIndex = 36;
+            // 
+            // txtPaginacion
+            // 
+            txtPaginacion.Anchor = AnchorStyles.Right;
+            txtPaginacion.BorderStyle = BorderStyle.FixedSingle;
+            txtPaginacion.Location = new Point(925, 16);
+            txtPaginacion.Name = "txtPaginacion";
+            txtPaginacion.ReadOnly = true;
+            txtPaginacion.Size = new Size(63, 23);
+            txtPaginacion.TabIndex = 52;
             // 
             // label6
             // 
@@ -367,14 +378,6 @@
             label7.TabIndex = 50;
             label7.Text = "Página";
             // 
-            // txtPaginacion
-            // 
-            txtPaginacion.Anchor = AnchorStyles.Right;
-            txtPaginacion.Location = new Point(925, 16);
-            txtPaginacion.Name = "txtPaginacion";
-            txtPaginacion.Size = new Size(65, 23);
-            txtPaginacion.TabIndex = 49;
-            // 
             // cmbPaginacion
             // 
             cmbPaginacion.Anchor = AnchorStyles.Right;
@@ -386,6 +389,7 @@
             cmbPaginacion.Name = "cmbPaginacion";
             cmbPaginacion.Size = new Size(65, 23);
             cmbPaginacion.TabIndex = 48;
+            cmbPaginacion.SelectionChangeCommitted += cmbPaginacion_SelectionChangeCommitted;
             // 
             // label2
             // 
@@ -546,7 +550,7 @@
         private DataGridView dgvUsuarios;
         private Label label6;
         private Label label7;
-        private TextBox txtPaginacion;
         private ComboBox cmbPaginacion;
+        private TextBox txtPaginacion;
     }
 }

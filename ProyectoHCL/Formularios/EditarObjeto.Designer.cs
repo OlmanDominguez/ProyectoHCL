@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarObjeto));
             panel2 = new Panel();
             btnCerrar = new Button();
@@ -43,9 +44,11 @@
             label4 = new Label();
             cmbEstado = new ComboBox();
             panel1 = new Panel();
+            errorT = new ErrorProvider(components);
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorT).BeginInit();
             SuspendLayout();
             // 
             // panel2
@@ -246,6 +249,10 @@
             panel1.Size = new Size(737, 335);
             panel1.TabIndex = 21;
             // 
+            // errorT
+            // 
+            errorT.ContainerControl = this;
+            // 
             // EditarObjeto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -265,6 +272,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorT).EndInit();
             ResumeLayout(false);
         }
 
@@ -284,5 +292,6 @@
         private PictureBox pictureBox5;
         private Button btnCerrar;
         private Button btnMin;
+        private ErrorProvider errorT;
     }
 }
