@@ -19,6 +19,7 @@ namespace ProyectoHCL
             //  Application.Run(new RegistrarUsuario());
             Application.Run(new Dashboard());
             //Application.Run(new CtrlObjetos());
+            //Application.Run(new CtrlObjetos());
             //Application.Run(new Cliente());
         }
     }
