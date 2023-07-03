@@ -96,7 +96,6 @@ namespace ProyectoHCL.Formularios
                 DataTable dt = new DataTable(); //Se crea tabla
                 da.Fill(dt); //Se devuelven los registros en la tabla
                 dgvUsuarios.DataSource = dt; //se define la tabla en la que se devuelven los registros
-
             }
             catch (Exception)
             {
@@ -177,7 +176,7 @@ namespace ProyectoHCL.Formularios
                     }
 
                 }
-                else if (dialogResult == DialogResult.No)
+                else /*if (dialogResult == DialogResult.No)*/
                 {
 
                 }
@@ -190,7 +189,7 @@ namespace ProyectoHCL.Formularios
                 editarUsuarios.idUs = dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString();
                 editarUsuarios.txtUsuario.Text = dgvUsuarios.CurrentRow.Cells["USUARIO"].Value.ToString(); //Traer los datos del dataGrid al form para editar
                 editarUsuarios.txtNombre.Text = dgvUsuarios.CurrentRow.Cells["NOMBRE"].Value.ToString();
-                editarUsuarios.txtCorreo.Text = dgvUsuarios.CurrentRow.Cells["EMAIL"].Value.ToString();
+                editarUsuarios.txtCorreo.Text = dgvUsuarios.CurrentRow.Cells["CORREO"].Value.ToString();
                 editarUsuarios.cmbEstado.Text = dgvUsuarios.CurrentRow.Cells["ESTADO"].Value.ToString();
                 editarUsuarios.cmbRol.Text = dgvUsuarios.CurrentRow.Cells["ROL"].Value.ToString();
                 editarUsuarios.txtFechaC.Text = dgvUsuarios.CurrentRow.Cells["CREACION"].Value.ToString();

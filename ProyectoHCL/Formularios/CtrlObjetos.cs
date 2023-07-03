@@ -163,9 +163,9 @@ namespace ProyectoHCL.Formularios
                     }
 
                 }
-                else if (dialogResult == DialogResult.No)
+                else /*(dialogResult == DialogResult.No)*/
                 {
-
+                    //
                 }
             }
         }
