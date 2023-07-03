@@ -29,43 +29,33 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PermisosRoLes));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel1 = new Panel();
             button1 = new Button();
             Roles_Permisos_DG = new DataGridView();
-            Roles = new DataGridViewTextBoxColumn();
-            Nombre_Rol = new DataGridViewTextBoxColumn();
-            Estado_Rol = new DataGridViewTextBoxColumn();
-            Primer_Ingreso = new DataGridViewTextBoxColumn();
-            Fecha_Vencimiento = new DataGridViewTextBoxColumn();
-            Editar = new DataGridViewTextBoxColumn();
-            Eliminar = new DataGridViewTextBoxColumn();
-            BuscadorBox1 = new TextBox();
-            Buscar = new Label();
             label2 = new Label();
-            pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
-            pictureBox3 = new PictureBox();
-            pictureBox4 = new PictureBox();
-            RegistroBox1 = new ComboBox();
-            label1 = new Label();
-            label4 = new Label();
             panel2 = new Panel();
-            label3 = new Label();
-            pictureBox5 = new PictureBox();
-            panel3 = new Panel();
-            Excel = new Button();
+            button8 = new Button();
+            button4 = new Button();
+            button5 = new Button();
             button2 = new Button();
+            label1 = new Label();
+            button3 = new Button();
+            panel3 = new Panel();
+            button6 = new Button();
+            button7 = new Button();
+            pictureBox2 = new PictureBox();
+            label9 = new Label();
+            comboBox2 = new ComboBox();
+            textBox1 = new TextBox();
+            label10 = new Label();
+            label12 = new Label();
+            txtBuscar = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Roles_Permisos_DG).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -76,7 +66,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(86, 646);
+            panel1.Size = new Size(113, 935);
             panel1.TabIndex = 1;
             // 
             // button1
@@ -87,106 +77,35 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(7, 33);
+            button1.Location = new Point(17, 20);
             button1.Margin = new Padding(4, 5, 4, 5);
             button1.Name = "button1";
-            button1.Size = new Size(70, 60);
-            button1.TabIndex = 1;
+            button1.Size = new Size(77, 60);
+            button1.TabIndex = 2;
             button1.UseVisualStyleBackColor = false;
             // 
             // Roles_Permisos_DG
             // 
-            Roles_Permisos_DG.BackgroundColor = Color.White;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.DeepSkyBlue;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            Roles_Permisos_DG.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            Roles_Permisos_DG.BackgroundColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.DeepSkyBlue;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            Roles_Permisos_DG.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             Roles_Permisos_DG.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Roles_Permisos_DG.Columns.AddRange(new DataGridViewColumn[] { Roles, Nombre_Rol, Estado_Rol, Primer_Ingreso, Fecha_Vencimiento, Editar, Eliminar });
             Roles_Permisos_DG.EnableHeadersVisualStyles = false;
             Roles_Permisos_DG.GridColor = Color.Black;
-            Roles_Permisos_DG.Location = new Point(85, 367);
+            Roles_Permisos_DG.Location = new Point(113, 208);
             Roles_Permisos_DG.Name = "Roles_Permisos_DG";
             Roles_Permisos_DG.RowHeadersVisible = false;
             Roles_Permisos_DG.RowHeadersWidth = 62;
             Roles_Permisos_DG.RowTemplate.Height = 33;
-            Roles_Permisos_DG.Size = new Size(1204, 276);
+            Roles_Permisos_DG.Size = new Size(1571, 991);
             Roles_Permisos_DG.TabIndex = 2;
             Roles_Permisos_DG.CellContentClick += Roles_Permisos_DG_CellContentClick;
-            // 
-            // Roles
-            // 
-            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(255, 255, 192);
-            Roles.DefaultCellStyle = dataGridViewCellStyle2;
-            Roles.HeaderText = "Codigo";
-            Roles.MinimumWidth = 25;
-            Roles.Name = "Roles";
-            Roles.Width = 300;
-            // 
-            // Nombre_Rol
-            // 
-            Nombre_Rol.HeaderText = "Nombre_Rol";
-            Nombre_Rol.MinimumWidth = 8;
-            Nombre_Rol.Name = "Nombre_Rol";
-            Nombre_Rol.Width = 150;
-            // 
-            // Estado_Rol
-            // 
-            Estado_Rol.HeaderText = "Estado_Rol";
-            Estado_Rol.MinimumWidth = 8;
-            Estado_Rol.Name = "Estado_Rol";
-            Estado_Rol.Width = 150;
-            // 
-            // Primer_Ingreso
-            // 
-            Primer_Ingreso.HeaderText = "Primer_Ingreso";
-            Primer_Ingreso.MinimumWidth = 8;
-            Primer_Ingreso.Name = "Primer_Ingreso";
-            Primer_Ingreso.Width = 150;
-            // 
-            // Fecha_Vencimiento
-            // 
-            Fecha_Vencimiento.HeaderText = "Fecha_Vencimiento";
-            Fecha_Vencimiento.MinimumWidth = 8;
-            Fecha_Vencimiento.Name = "Fecha_Vencimiento";
-            Fecha_Vencimiento.Width = 150;
-            // 
-            // Editar
-            // 
-            Editar.HeaderText = "Editar";
-            Editar.MinimumWidth = 8;
-            Editar.Name = "Editar";
-            Editar.Width = 150;
-            // 
-            // Eliminar
-            // 
-            Eliminar.HeaderText = "Eliminar";
-            Eliminar.MinimumWidth = 8;
-            Eliminar.Name = "Eliminar";
-            Eliminar.Width = 150;
-            // 
-            // BuscadorBox1
-            // 
-            BuscadorBox1.Location = new Point(974, 35);
-            BuscadorBox1.Name = "BuscadorBox1";
-            BuscadorBox1.Size = new Size(150, 31);
-            BuscadorBox1.TabIndex = 3;
-            // 
-            // Buscar
-            // 
-            Buscar.AutoSize = true;
-            Buscar.BackColor = Color.Transparent;
-            Buscar.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            Buscar.ForeColor = Color.Black;
-            Buscar.Location = new Point(868, 29);
-            Buscar.Name = "Buscar";
-            Buscar.Size = new Size(100, 38);
-            Buscar.TabIndex = 4;
-            Buscar.Text = "Buscar";
             // 
             // label2
             // 
@@ -199,188 +118,265 @@
             label2.Size = new Size(0, 38);
             label2.TabIndex = 5;
             // 
-            // pictureBox1
+            // panel2
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(93, 185);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(52, 56);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 6;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            panel2.BackColor = Color.WhiteSmoke;
+            panel2.Controls.Add(button8);
+            panel2.Controls.Add(button4);
+            panel2.Controls.Add(button5);
+            panel2.Controls.Add(button2);
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(button3);
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(113, 0);
+            panel2.Margin = new Padding(4, 5, 4, 5);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1346, 208);
+            panel2.TabIndex = 38;
+            panel2.Paint += panel2_Paint;
             // 
-            // pictureBox2
+            // button8
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(1046, 397);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(43, 32);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 7;
-            pictureBox2.TabStop = false;
+            button8.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            button8.BackColor = Color.RoyalBlue;
+            button8.BackgroundImageLayout = ImageLayout.Stretch;
+            button8.FlatAppearance.BorderSize = 0;
+            button8.FlatAppearance.MouseOverBackColor = Color.MidnightBlue;
+            button8.FlatStyle = FlatStyle.Flat;
+            button8.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            button8.ForeColor = SystemColors.ButtonFace;
+            button8.Image = (Image)resources.GetObject("button8.Image");
+            button8.ImageAlign = ContentAlignment.MiddleLeft;
+            button8.Location = new Point(36, 118);
+            button8.Margin = new Padding(4, 5, 4, 5);
+            button8.Name = "button8";
+            button8.Size = new Size(179, 65);
+            button8.TabIndex = 39;
+            button8.Text = "Agregar";
+            button8.UseVisualStyleBackColor = false;
+            button8.Click += button8_Click;
             // 
-            // pictureBox3
+            // button4
             // 
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(1177, 397);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(47, 32);
-            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox3.TabIndex = 8;
-            pictureBox3.TabStop = false;
+            button4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button4.BackColor = Color.Transparent;
+            button4.BackgroundImage = (Image)resources.GetObject("button4.BackgroundImage");
+            button4.BackgroundImageLayout = ImageLayout.Stretch;
+            button4.FlatAppearance.BorderSize = 0;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Location = new Point(1005, 122);
+            button4.Margin = new Padding(4, 5, 4, 5);
+            button4.Name = "button4";
+            button4.Size = new Size(43, 48);
+            button4.TabIndex = 38;
+            button4.UseVisualStyleBackColor = false;
             // 
-            // pictureBox4
+            // button5
             // 
-            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(699, 185);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(59, 41);
-            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox4.TabIndex = 9;
-            pictureBox4.TabStop = false;
-            pictureBox4.Click += pictureBox4_Click;
+            button5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button5.BackColor = Color.Transparent;
+            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
+            button5.BackgroundImageLayout = ImageLayout.Stretch;
+            button5.FlatAppearance.BorderSize = 0;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Location = new Point(1072, 118);
+            button5.Margin = new Padding(4, 5, 4, 5);
+            button5.Name = "button5";
+            button5.Size = new Size(50, 55);
+            button5.TabIndex = 35;
+            button5.UseVisualStyleBackColor = false;
             // 
-            // RegistroBox1
+            // button2
             // 
-            RegistroBox1.FormattingEnabled = true;
-            RegistroBox1.Location = new Point(126, 32);
-            RegistroBox1.Name = "RegistroBox1";
-            RegistroBox1.Size = new Size(182, 33);
-            RegistroBox1.TabIndex = 10;
-            RegistroBox1.SelectedIndexChanged += RegistroBox1_SelectedIndexChanged;
+            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button2.BackColor = Color.Transparent;
+            button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
+            button2.BackgroundImageLayout = ImageLayout.Stretch;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Location = new Point(2303, 122);
+            button2.Margin = new Padding(4, 5, 4, 5);
+            button2.Name = "button2";
+            button2.Size = new Size(43, 48);
+            button2.TabIndex = 34;
+            button2.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(4, 29);
+            label1.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(36, 30);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(117, 38);
-            label1.TabIndex = 11;
-            label1.Text = "Mostrar";
+            label1.Size = new Size(301, 48);
+            label1.TabIndex = 31;
+            label1.Text = "Roles registrados";
             // 
-            // label4
+            // button3
             // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(314, 29);
-            label4.Name = "label4";
-            label4.Size = new Size(121, 38);
-            label4.TabIndex = 13;
-            label4.Text = "Registro";
-            label4.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.DimGray;
-            panel2.Controls.Add(label3);
-            panel2.Controls.Add(pictureBox5);
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(86, 0);
-            panel2.Margin = new Padding(4, 5, 4, 5);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1209, 117);
-            panel2.TabIndex = 14;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Lucida Bright", 24F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(151, 33);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(540, 55);
-            label3.TabIndex = 16;
-            label3.Text = "HOTEL CASA LOMAS";
-            // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(27, 5);
-            pictureBox5.Margin = new Padding(4, 5, 4, 5);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(94, 107);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 15;
-            pictureBox5.TabStop = false;
+            button3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button3.BackColor = Color.Transparent;
+            button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
+            button3.BackgroundImageLayout = ImageLayout.Stretch;
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Location = new Point(2370, 118);
+            button3.Margin = new Padding(4, 5, 4, 5);
+            button3.Name = "button3";
+            button3.Size = new Size(50, 55);
+            button3.TabIndex = 35;
+            button3.UseVisualStyleBackColor = false;
             // 
             // panel3
             // 
-            panel3.Controls.Add(Excel);
-            panel3.Controls.Add(button2);
-            panel3.Controls.Add(label1);
-            panel3.Controls.Add(RegistroBox1);
-            panel3.Controls.Add(label4);
-            panel3.Controls.Add(Buscar);
-            panel3.Controls.Add(BuscadorBox1);
-            panel3.Location = new Point(86, 294);
+            panel3.BackColor = Color.Silver;
+            panel3.Controls.Add(button6);
+            panel3.Controls.Add(button7);
+            panel3.Controls.Add(pictureBox2);
+            panel3.Controls.Add(label9);
+            panel3.Controls.Add(comboBox2);
+            panel3.Controls.Add(textBox1);
+            panel3.Controls.Add(label10);
+            panel3.Controls.Add(label12);
+            panel3.Controls.Add(txtBuscar);
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(113, 208);
+            panel3.Margin = new Padding(4, 5, 4, 5);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1203, 74);
-            panel3.TabIndex = 15;
+            panel3.Size = new Size(1346, 137);
+            panel3.TabIndex = 39;
             // 
-            // Excel
+            // button6
             // 
-            Excel.BackColor = Color.FromArgb(0, 192, 0);
-            Excel.ForeColor = SystemColors.ButtonHighlight;
-            Excel.Location = new Point(660, 32);
-            Excel.Name = "Excel";
-            Excel.Size = new Size(112, 34);
-            Excel.TabIndex = 15;
-            Excel.Text = "Excel ";
-            Excel.UseVisualStyleBackColor = false;
-            Excel.Click += Excel_Click;
+            button6.Anchor = AnchorStyles.Bottom;
+            button6.BackColor = Color.DarkOrange;
+            button6.FlatAppearance.BorderSize = 0;
+            button6.FlatStyle = FlatStyle.Flat;
+            button6.ForeColor = SystemColors.ButtonHighlight;
+            button6.Location = new Point(553, 49);
+            button6.Name = "button6";
+            button6.Size = new Size(111, 42);
+            button6.TabIndex = 41;
+            button6.Text = "Imprimir";
+            button6.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // button7
             // 
-            button2.BackColor = SystemColors.ButtonShadow;
-            button2.ForeColor = SystemColors.ButtonHighlight;
-            button2.Location = new Point(542, 31);
-            button2.Name = "button2";
-            button2.Size = new Size(112, 34);
-            button2.TabIndex = 14;
-            button2.Text = "Imprimir";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            button7.Anchor = AnchorStyles.Bottom;
+            button7.BackColor = Color.FromArgb(0, 192, 0);
+            button7.FlatAppearance.BorderSize = 0;
+            button7.FlatStyle = FlatStyle.Flat;
+            button7.ForeColor = SystemColors.ButtonHighlight;
+            button7.Location = new Point(684, 49);
+            button7.Name = "button7";
+            button7.Size = new Size(111, 42);
+            button7.TabIndex = 42;
+            button7.Text = "Excel ";
+            button7.UseVisualStyleBackColor = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Anchor = AnchorStyles.Bottom;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(815, 49);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(59, 42);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 43;
+            pictureBox2.TabStop = false;
+            // 
+            // label9
+            // 
+            label9.Anchor = AnchorStyles.Bottom;
+            label9.AutoSize = true;
+            label9.BackColor = Color.Transparent;
+            label9.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.ForeColor = SystemColors.ActiveCaptionText;
+            label9.Location = new Point(151, 49);
+            label9.Name = "label9";
+            label9.Size = new Size(96, 32);
+            label9.TabIndex = 39;
+            label9.Text = "Mostrar";
+            // 
+            // comboBox2
+            // 
+            comboBox2.Anchor = AnchorStyles.Bottom;
+            comboBox2.BackColor = SystemColors.Info;
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(250, 52);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(108, 33);
+            comboBox2.TabIndex = 38;
+            // 
+            // textBox1
+            // 
+            textBox1.Anchor = AnchorStyles.Bottom;
+            textBox1.BackColor = SystemColors.Info;
+            textBox1.Location = new Point(1045, 46);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(150, 31);
+            textBox1.TabIndex = 36;
+            // 
+            // label10
+            // 
+            label10.Anchor = AnchorStyles.Bottom;
+            label10.AutoSize = true;
+            label10.BackColor = Color.Transparent;
+            label10.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.ForeColor = SystemColors.ActiveCaptionText;
+            label10.Location = new Point(365, 49);
+            label10.Name = "label10";
+            label10.Size = new Size(105, 32);
+            label10.TabIndex = 40;
+            label10.Text = "registros";
+            label10.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label12
+            // 
+            label12.Anchor = AnchorStyles.Bottom;
+            label12.AutoSize = true;
+            label12.BackColor = Color.Transparent;
+            label12.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.ForeColor = SystemColors.ActiveCaptionText;
+            label12.Location = new Point(960, 49);
+            label12.Name = "label12";
+            label12.Size = new Size(88, 32);
+            label12.TabIndex = 37;
+            label12.Text = "Buscar:";
+            // 
+            // txtBuscar
+            // 
+            txtBuscar.Anchor = AnchorStyles.Bottom;
+            txtBuscar.BackColor = SystemColors.Info;
+            txtBuscar.Location = new Point(1594, 84);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.Size = new Size(150, 31);
+            txtBuscar.TabIndex = 28;
             // 
             // PermisosRoLes
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1295, 646);
+            BackColor = SystemColors.ActiveCaption;
+            ClientSize = new Size(1459, 935);
             Controls.Add(panel3);
             Controls.Add(panel2);
-            Controls.Add(pictureBox3);
-            Controls.Add(pictureBox4);
-            Controls.Add(pictureBox2);
-            Controls.Add(pictureBox1);
             Controls.Add(label2);
             Controls.Add(Roles_Permisos_DG);
             Controls.Add(panel1);
-            DoubleBuffered = true;
+            MinimumSize = new Size(962, 796);
             Name = "PermisosRoLes";
             Text = "PermisosRoLes";
             Load += PermisosRoLes_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)Roles_Permisos_DG).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -390,28 +386,23 @@
         private Panel panel1;
         private Button button1;
         private DataGridView Roles_Permisos_DG;
-        private TextBox BuscadorBox1;
-        private Label Buscar;
         private Label label2;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox3;
-        private PictureBox pictureBox4;
-        private ComboBox RegistroBox1;
-        private Label label1;
-        private Label label4;
         private Panel panel2;
-        private Label label3;
-        private PictureBox pictureBox5;
-        private Panel panel3;
-        private DataGridViewTextBoxColumn Roles;
-        private DataGridViewTextBoxColumn Nombre_Rol;
-        private DataGridViewTextBoxColumn Estado_Rol;
-        private DataGridViewTextBoxColumn Primer_Ingreso;
-        private DataGridViewTextBoxColumn Fecha_Vencimiento;
-        private DataGridViewTextBoxColumn Editar;
-        private DataGridViewTextBoxColumn Eliminar;
-        private Button Excel;
         private Button button2;
+        private Button button3;
+        private Panel panel3;
+        private TextBox txtBuscar;
+        private Label label1;
+        private Button button6;
+        private Button button7;
+        private PictureBox pictureBox2;
+        private Label label9;
+        private ComboBox comboBox2;
+        private TextBox textBox1;
+        private Label label10;
+        private Label label12;
+        private Button button4;
+        private Button button5;
+        private Button button8;
     }
 }

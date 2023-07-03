@@ -1,21 +1,18 @@
-﻿using MySql.Data.MySqlClient;
-//using MySqlX.XDevAPI.Relational;
+﻿using Microsoft.VisualBasic;
+using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
-using SpreadsheetLight;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.Drawing.Printing;//estas librerias se instalaron para imprimir un documento pdf
-using System.Drawing;         //estas librerias se instalaron para imprimir un documento pdf
-using DocumentFormat.OpenXml.Drawing.Charts;
 
 namespace ProyectoHCL.Formularios
 {
@@ -25,33 +22,33 @@ namespace ProyectoHCL.Formularios
         public PermisosRoLes()
         {
             InitializeComponent();
-            //  RellenarGrid() ;
+            // RellenarGrid() ;
+            panel1.BackColor = Color.FromArgb(125, Color.DeepSkyBlue); //colocar transaparente el panel izquierdo al ejecutar
+            panel2.BackColor = Color.FromArgb(120, Color.DimGray);//colocar transaparente el panel superior al ejecutar
         }
+        RgtRoles rgtRoles = new RgtRoles(); //crear objeto admonUsuario para acceder a sus metodos
+        Roles roles = new Roles();
 
-        public int RellenarGrid(Permisos permisos)
+        private void PermisosRoLes_Load(object sender, EventArgs e)
         {
-            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+            RellenarGrid(); //se muestran los usuarios registrados en el dataGrid
 
-            if (conectar.State == ConnectionState.Closed)
-            {
-                conectar.Open();
-            }
-            string sql = "INSERT INTO TBL_PERMISOS(ID_ROL, ID_OBJETO, INSERCION, ELIMINACION, ACTUALIZACION, CONSULTA" +
-               "PRIMERINGRESO, FECHAVENCIMIENTO, EDITAR, ELIMINAR) VALUES(@ID_ROL, @ID_OBJETO, @INSERCION, @ELIMINACION," +
-                "@PRIMERINGRESO, @FECHAVENCIMIENTO )";
-            MySqlCommand comando = new MySqlCommand(sql, conectar);
-            comando.Parameters.AddWithValue("@ID_ROL", permisos.ID_ROL);
-            comando.Parameters.AddWithValue("@ID_OBJETO", permisos.NOMBRE1);
-            comando.Parameters.AddWithValue("@INSERCION", permisos.EDITAR1);
-            comando.Parameters.AddWithValue("@ELIMINACION", permisos.ELIMINAR1);
-            comando.Parameters.AddWithValue("@PRIMERINGRESO", permisos.PRIMER_INGRESO1);
-            comando.Parameters.AddWithValue("@FECHAVENCIMIENTO", permisos.FECHA_VENCIMIENTO1);
+            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
+            btnUpdate.Name = "EDITAR"; //Nombre del boton 
+            Roles_Permisos_DG.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
 
-            int resultado = comando.ExecuteNonQuery();
-            return resultado;
-
+            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+            btnDelete.Name = "ELIMINAR";
+            Roles_Permisos_DG.Columns.Add(btnDelete);
 
         }
+        public void RellenarGrid()
+        {
+            Roles_Permisos_DG.DataSource = rgtRoles.RellenarGrid(); //Llamar metodo mostrar Roles en dataGrid
+        }
+
+
+
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             Form formulario = new Nuevo_Registro_Rol();
@@ -80,10 +77,7 @@ namespace ProyectoHCL.Formularios
             //   Console.WriteLine("  "+codigo.GetCelValuesAsString(Codigo,3));
         }
 
-        private void PermisosRoLes_Load(object sender, EventArgs e)
-        {
 
-        }
 
         private void pictureBox4_Click(object sender, EventArgs e)
         {
@@ -126,6 +120,28 @@ namespace ProyectoHCL.Formularios
             ppd.ShowDialog();
 
         }
+
+        private void txtBuscarRol_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
     }
 }
 
