@@ -13,6 +13,7 @@ namespace ProyectoHCL
 
         AdmonObjetos admonObjeto = new AdmonObjetos();
         AdmonUsuarios admonUsuario = new AdmonUsuarios();
+        AdmonClientes admonClientes = new AdmonClientes();
 
         public void editarUs(string id, string estado, string rol, string usuario, string nombre,
             string vencimiento, string email)

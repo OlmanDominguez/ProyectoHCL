@@ -1,27 +1,27 @@
-﻿using DocumentFormat.OpenXml.Office2010.Excel;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ProyectoHCL.RecuContra;
 
 namespace ProyectoHCL.clases
 {
-    public class AdmonObjetos
+    internal class AdmonClientes
     {
         MySqlConnection conn;
         MySqlCommand cmd;
 
-        public DataTable MostrarObjetos()
+        public DataTable MostrarClientes()
         {
-            DataTable mostrarObjetosDT = new DataTable();
+            DataTable mostrarClientesDT = new DataTable();
 
             try
             {
-                string sql = "SELECT ID_OBJETO AS ID, OBJETO AS NOMBRE, DESCRIPCION, ESTADO_OBJETO AS ESTADO, " +
-                    "FECHA_CREACION AS CREACIÓN, FECHA_ACTUALIZACION AS ACTUALIZACIÓN FROM TBL_OBJETO;";
+                string sql = "SELECT CODIGO AS CODIGO, NOMBRE AS NOMBRES, APELLIDO AS APELLIDOS, DNI_PASAPORTE " + 
+                    "AS IDENTIFICACIÓN, TELEFONO FROM TBL_CLIENTE";
 
 
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
@@ -30,17 +30,18 @@ namespace ProyectoHCL.clases
                 cmd = new MySqlCommand(sql, conn);
 
                 MySqlDataReader reader = cmd.ExecuteReader();
-                mostrarObjetosDT.Load(reader);
+                mostrarClientesDT.Load(reader);
 
             }
             catch (Exception)
             {
                 MessageBox.Show("Se produjo un error");
             }
-            return mostrarObjetosDT;
+            return mostrarClientesDT;
 
         }
 
+        
         public void modificarObjeto(int id, string nombreObj, string descObj, string estadoObj)
         {
 
@@ -69,20 +70,21 @@ namespace ProyectoHCL.clases
 
         }
 
-        public bool EliminarObjeto(string idObjeto) 
+
+        public bool EliminarCliente(string Codigo)
         {
             bool elimino = false;
 
             try
             {
-                string sql = "DELETE FROM TBL_OBJETO WHERE ID_OBJETO = @ID_OBJETO;"; 
+                string sql = "DELETE FROM TBL_CLIENTE WHERE CODIGO = @CODIGO;";
 
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                 conn.Open();
 
-                cmd = new MySqlCommand(sql, conn); 
+                cmd = new MySqlCommand(sql, conn);
 
-                cmd.Parameters.AddWithValue("@ID_OBJETO", idObjeto); 
+                cmd.Parameters.AddWithValue("@CODIGO", Codigo);
 
                 cmd.ExecuteNonQuery();
                 elimino = true;
@@ -95,5 +97,11 @@ namespace ProyectoHCL.clases
 
             return elimino;
         }
+
+
+
+
+
+
     }
 }

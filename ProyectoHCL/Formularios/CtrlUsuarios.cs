@@ -16,12 +16,37 @@ namespace ProyectoHCL.Formularios
 {
     public partial class CtrlUsuarios : Form
     {
+        Usuarios user = new Usuarios();
+        DataSet ds = new DataSet();
+        int pagInicio = 1, indice = 0, numFilas = 3, pagFinal, cmbIndice = 0;
+
         public CtrlUsuarios()
         {
             InitializeComponent();
-            panel1.BackColor = Color.FromArgb(125, Color.DeepSkyBlue); //colocar transaparente el panel izquierdo al ejecutar
-            panel2.BackColor = Color.FromArgb(120, Color.DimGray);//colocar transaparente el panel superior al ejecutar
-            BuscarUsuarios(""); //Inicializar el metodo buscar usuario con string vacío
+            pagFinal = numFilas;
+            CargarDG();
+
+        }
+
+        private void CargarDG()
+        {
+            user.Inicio1 = pagInicio;
+            user.Final1 = pagFinal;
+            ds = user.PaginacionUsuarios();
+            dgvUsuarios.DataSource = ds.Tables[1];
+
+            int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;
+
+            if (Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) % numFilas > 0) cantidad++;
+
+            txtPaginacion.Text = cantidad.ToString();
+
+            cmbPaginacion.Items.Clear();
+
+            for (int x = 1; x <= cantidad; x++)
+                cmbPaginacion.Items.Add(x.ToString());
+
+            cmbPaginacion.SelectedIndex = indice;
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -38,7 +63,7 @@ namespace ProyectoHCL.Formularios
 
         private void CtrlUsuarios_Load(object sender, EventArgs e)
         {
-            MostrarUsuarios(); //se muestran los usuarios registrados en el dataGrid
+            //MostrarUsuarios(); 
 
             DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
             btnUpdate.Name = "EDITAR"; //Nombre del boton 
@@ -49,10 +74,10 @@ namespace ProyectoHCL.Formularios
             dgvUsuarios.Columns.Add(btnDelete);
         }
 
-        public void MostrarUsuarios()
-        {
-            dgvUsuarios.DataSource = admonUsuario.MostrarUsuarios(); //Llamar metodo mostrar usuarios en dataGrid
-        }
+        //public void MostrarUsuarios()
+        //{
+        //    dgvUsuarios.DataSource = admonUsuario.MostrarUsuarios(); //Llamar metodo mostrar usuarios en dataGrid
+        //}
 
         public void BuscarUsuarios(string buscarU) //Recibe string para buscar usuarios
         {
@@ -80,7 +105,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        private void txtBuscar_TextChanged_1(object sender, EventArgs e)
         {
             if (txtBuscar.Text != "") //si el textbox no está vacío devuelve el metodo buscar usuarios
             {
@@ -88,21 +113,19 @@ namespace ProyectoHCL.Formularios
             }
             else
             {
-                MostrarUsuarios(); //Si el textbox está vacio devuelve el metodo mostrar usuarios 
+                CargarDG();  /*MostrarUsuarios();*/ //Si el textbox está vacio devuelve el metodo mostrar usuarios 
             }
         }
 
-        private void btnNuevo_Click(object sender, EventArgs e)
+        private void btnNuevo_Click_1(object sender, EventArgs e)
         {
             RegistrarUsuario reglUsuarios = new RegistrarUsuario(); //Se crea un objeto del form RegistrarUsuarios
-            this.Visible = false;
-            reglUsuarios.ShowDialog(); //Se oculta el form principal y solo muestra el form RegistrarUsuarios
-            this.Visible = true;
+            reglUsuarios.ShowDialog();
+            CargarDG();
         }
 
-        private void dgvUsuarios_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) //Codigo para agregar las columnas de botones
+        private void dgvUsuarios_CellPainting_1(object sender, DataGridViewCellPaintingEventArgs e)
         {
-
             if (e.ColumnIndex >= 0 && this.dgvUsuarios.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
@@ -131,10 +154,8 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-
-        private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e) //Codigo para definir lo que hará el boton del dataGRid al darle click 
+        private void dgvUsuarios_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
-
             if (this.dgvUsuarios.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
                 bool elimino = admonUsuario.EliminarUsuario(dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString()); //EL metodo eliminar recibe como string el id del DataGrid
@@ -148,7 +169,7 @@ namespace ProyectoHCL.Formularios
                     if (elimino)
                     {
                         MessageBox.Show("Usuario eliminado");
-                        MostrarUsuarios();
+                        CargarDG();
                     }
                     else
                     {
@@ -174,12 +195,43 @@ namespace ProyectoHCL.Formularios
                 editarUsuarios.cmbRol.Text = dgvUsuarios.CurrentRow.Cells["ROL"].Value.ToString();
                 editarUsuarios.txtFechaC.Text = dgvUsuarios.CurrentRow.Cells["CREACION"].Value.ToString();
                 editarUsuarios.dtpVencimiento.Text = dgvUsuarios.CurrentRow.Cells["VENCIMIENTO"].Value.ToString();
-                this.Visible = false;
                 editarUsuarios.ShowDialog(); //Se oculta el form principal y solo muestra el form editarUsuarios 
-                this.Visible = true;
-                MostrarUsuarios(); //Se llama el metodo Mostrar usuarios para actualizar el DataGrid al editar 
-
+                CargarDG(); //Se llama el metodo Mostrar usuarios para actualizar el DataGrid al editar 
             }
+        }
+
+        private void cmbPaginacion_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPaginacion.Text);
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbIndice = cmbMostrar.SelectedIndex;
+            switch (cmbIndice)
+            {
+                case 0:
+                    numFilas = 2;
+                    break;
+                case 1:
+                    numFilas = 3;
+                    break;
+                case 2:
+                    numFilas = 4;
+                    break;
+                case 3:
+                    numFilas = 5;
+                    break;
+                case 4:
+                    numFilas = 6;
+                    break;
+            }
+            pagFinal = numFilas;
+            CargarDG();
         }
     }
 }

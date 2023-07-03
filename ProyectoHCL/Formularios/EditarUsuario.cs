@@ -19,9 +19,6 @@ namespace ProyectoHCL.Formularios
         public EditarUsuario()
         {
             InitializeComponent();
-            panel1.BackColor = Color.FromArgb(125, Color.DeepSkyBlue);
-            panel2.BackColor = Color.FromArgb(120, Color.DimGray);
-            panel3.BackColor = Color.FromArgb(120, Color.Black);
         }
 
         public string idUs = null;
@@ -57,9 +54,12 @@ namespace ProyectoHCL.Formularios
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            VCamposVacios();
-
-            if (CorreoValido(txtCorreo.Text) == false)
+            if (VCamposVacios() == false)
+            {
+                MessageBox.Show("Por favor llene todos los campos", "Aviso",
+                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else if (CorreoValido(txtCorreo.Text) == false)
             {
                 MessageBox.Show("Dirección de correo no válida", "Aviso",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -68,14 +68,12 @@ namespace ProyectoHCL.Formularios
             {
                 try
                 {
-
                     control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
                         dtpVencimiento.Text, txtCorreo.Text);
 
                     MessageBox.Show("Usuario modificado");
                     this.Close();
-                    admonUsuario.MostrarUsuarios();
-
+                    //admonUsuario.MostrarUsuarios();
                 }
                 catch (Exception ex)
                 {
@@ -137,16 +135,6 @@ namespace ProyectoHCL.Formularios
             {
                 errorT.Clear();
             }
-
-            //if (dtpVencimiento.Text.Trim() == "")  *VALIDAR FECHA
-            //{
-            //    ok = false;
-            //    errorT.SetError(dtpVencimiento, "Seleccione una fecha");
-            //}
-            //else
-            //{
-            //    errorT.Clear();
-            //}
             return ok;
 
         }
@@ -154,6 +142,46 @@ namespace ProyectoHCL.Formularios
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidarTxt.TxtLetras(e);
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        int posY = 0;
+        int posX = 0;
+
+        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+            {
+                posX = e.X;
+                posY = e.Y;
+            }
+            else
+            {
+                Left = Left + (e.X - posX);
+                Top = Top + (e.Y - posY);
+            }
+        }
+
+        private void dtpVencimiento_ValueChanged(object sender, EventArgs e)  //****
+        {
+            //if (DateTime.Today > dtpVencimiento.Value)
+            //{
+            //    MessageBox.Show("La fecha seleccionada no es válida", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //}
         }
     }
 }

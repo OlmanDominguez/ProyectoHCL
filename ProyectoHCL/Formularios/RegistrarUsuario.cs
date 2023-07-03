@@ -18,10 +18,6 @@ namespace ProyectoHCL.Formularios
         public RegistrarUsuario()
         {
             InitializeComponent();
-
-            panel1.BackColor = Color.FromArgb(125, Color.DeepSkyBlue);
-            panel2.BackColor = Color.FromArgb(120, Color.DimGray);
-            panel3.BackColor = Color.FromArgb(120, Color.Black);
             txtFechaC.Text = DateTime.Now.ToShortDateString();
             txtFechaV.Text = DateTime.Now.AddDays(360).ToShortDateString();
         }
@@ -72,9 +68,13 @@ namespace ProyectoHCL.Formularios
         {
             Modelo modelo = new Modelo();
 
-            VCamposVacios();
 
-            if (CorreoValido(txtCorreo.Text) == false)
+            if (VCamposVacios() == false)
+            {
+                MessageBox.Show("Por favor llene todos los campos", "Aviso",
+                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else if (CorreoValido(txtCorreo.Text) == false)
             {
                 MessageBox.Show("Dirección de correo no válida", "Aviso",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -216,6 +216,33 @@ namespace ProyectoHCL.Formularios
                 e.Handled = true;
                 MessageBox.Show("No se permiten espacios", "Aviso",
                 MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        int posY = 0;
+        int posX = 0;
+
+        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+            {
+                posX = e.X;
+                posY = e.Y;
+            }
+            else
+            {
+                Left = Left + (e.X - posX);
+                Top = Top + (e.Y - posY);
             }
         }
     }

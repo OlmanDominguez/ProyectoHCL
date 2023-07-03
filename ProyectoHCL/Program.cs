@@ -1,5 +1,4 @@
 using ProyectoHCL.Formularios;
-using ProyectoHCL.Formularios.Clientes;
 
 namespace ProyectoHCL
 {
