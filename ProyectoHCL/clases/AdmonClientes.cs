@@ -71,20 +71,20 @@ namespace ProyectoHCL.clases
         }
 
 
-        public bool EliminarObjeto(string idObjeto)
+        public bool EliminarCliente(string Codigo)
         {
             bool elimino = false;
 
             try
             {
-                string sql = "DELETE FROM TBL_OBJETO WHERE ID_OBJETO = @ID_OBJETO;";
+                string sql = "DELETE FROM TBL_CLIENTE WHERE CODIGO = @CODIGO;";
 
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                 conn.Open();
 
                 cmd = new MySqlCommand(sql, conn);
 
-                cmd.Parameters.AddWithValue("@ID_OBJETO", idObjeto);
+                cmd.Parameters.AddWithValue("@CODIGO", Codigo);
 
                 cmd.ExecuteNonQuery();
                 elimino = true;

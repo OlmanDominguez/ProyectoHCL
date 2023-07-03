@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using ProyectoHCL.Properties;
 using System;
@@ -16,48 +17,69 @@ namespace ProyectoHCL.Formularios
 {
     public partial class CtrlClientes : Form
     {
+        Clientes clien = new Clientes();
+        DataSet ds = new DataSet();
+        int pagInicio = 1, indice = 0, numFilas = 10, pagFinal;
+
         public CtrlClientes()
         {
             InitializeComponent();
-            panel1.BackColor = Color.FromArgb(125, Color.DeepSkyBlue);
-            BuscarClientes("");
+            pagFinal = numFilas;
+            CargarDGCl();
+            //BuscarClientes("");
         }
 
         AdmonClientes admonClientes = new AdmonClientes();
 
+        private void CargarDGCl()
+        {
+            clien.Inicio1 = pagInicio;
+            clien.Final1 = pagFinal;
+            ds = clien.PaginacionClientes();
+            dgvClientes.DataSource = ds.Tables[1];
+
+            int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;
+
+            if (Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) % numFilas > 0) cantidad++;
+
+            txtPagCl.Text = cantidad.ToString();
+
+            cmbPagCl.Items.Clear();
+
+            for (int x = 1; x <= cantidad; x++)
+                cmbPagCl.Items.Add(x.ToString());
+
+            cmbPagCl.SelectedIndex = indice;
+
+           
+        }
+
         private void CtrlClientes_Load(object sender, EventArgs e)
         {
-            MostrarClientes();
-
-            DataGridViewImageColumn btnShow = new DataGridViewImageColumn();
+            DataGridViewButtonColumn btnShow = new DataGridViewButtonColumn();
             btnShow.Name = "VER";
-            btnShow.Image = Resources.ver;
-            btnShow.ImageLayout = DataGridViewImageCellLayout.Zoom;
             dgvClientes.Columns.Add(btnShow);
 
-            DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn();
+            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
             btnUpdate.Name = "EDITAR";
-            btnUpdate.Image = Resources.editar;
-            btnUpdate.ImageLayout = DataGridViewImageCellLayout.Zoom;
             dgvClientes.Columns.Add(btnUpdate);
 
-            DataGridViewImageColumn btnDelete = new DataGridViewImageColumn();
-            btnDelete.Name = "Eliminar";
-            btnDelete.Image = Resources.eliminar;
-            btnDelete.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+            btnDelete.Name = "ELIMINAR";
             dgvClientes.Columns.Add(btnDelete);
         }
 
-        public void MostrarClientes()
+        /*public void MostrarClientes()
         {
             dgvClientes.DataSource = admonClientes.MostrarClientes();
-        }
+        }*/
 
         public void BuscarClientes(string buscarCl)
         {
+            dgvClientes.Columns.Clear();
             try
             {
-
+                
                 MySqlConnection conn;
                 MySqlCommand cmd;
 
@@ -73,12 +95,24 @@ namespace ProyectoHCL.Formularios
                 da.Fill(dt);
                 dgvClientes.DataSource = dt;
 
+                DataGridViewButtonColumn btnShow = new DataGridViewButtonColumn();
+                btnShow.Name = "VER";
+                dgvClientes.Columns.Add(btnShow);
+
+                DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
+                btnUpdate.Name = "EDITAR";
+                dgvClientes.Columns.Add(btnUpdate);
+
+                DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+                btnDelete.Name = "ELIMINAR";
+                dgvClientes.Columns.Add(btnDelete);
             }
             catch (Exception)
             {
 
                 throw;
             }
+
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
@@ -99,33 +133,27 @@ namespace ProyectoHCL.Formularios
         {
             RegistrarObjeto regObjeto = new RegistrarObjeto();
             regObjeto.ShowDialog();
-            MostrarClientes();
+            CargarDGCl();
         }
 
-        private void txtBuscar_TextChanged_1(object sender, EventArgs e)
+        public static class claseCod
         {
-            if (txtBuscar.Text != "")
-            {
-                BuscarClientes(txtBuscar.Text);
-            }
-            else
-            {
-                MostrarClientes();
-            }
+            public static string codigo;
         }
 
-        private void dgvObjetos_CellClick_1(object sender, DataGridViewCellEventArgs e)
+
+        private void dgvClientes_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
             if (this.dgvClientes.Columns[e.ColumnIndex].Name == "VER")
             {
                 try
                 {
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("Select * From TBL_CLIENTE WHERE CODIGO = " + codigo + ";");
+                    claseCod.codigo = dgvClientes.CurrentRow.Cells["CODIGO"].Value.ToString();
+                    //MessageBox.Show(claseCod.codigo);
+                    Form formulario = new Formularios.ShowCliente();
+                    formulario.ShowDialog();
 
-                    MySqlDataReader leer = comando.ExecuteReader();
                 }
                 catch (Exception)
                 {
@@ -135,22 +163,25 @@ namespace ProyectoHCL.Formularios
 
             if (this.dgvClientes.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                EditarObjeto editarObjeto = new EditarObjeto();
-                editarObjeto.idObj = dgvClientes.CurrentRow.Cells["ID"].Value.ToString();
-                editarObjeto.txtObjeto.Text = dgvClientes.CurrentRow.Cells["NOMBRE"].Value.ToString();
-                editarObjeto.txtDescripcion.Text = dgvClientes.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
-                editarObjeto.cmbEstado.Text = dgvClientes.CurrentRow.Cells["ESTADO"].Value.ToString();
-                this.Visible = false;
-                editarObjeto.ShowDialog();
-                this.Visible = true;
-                MostrarClientes();
+                try
+                {
+                    claseCod.codigo = dgvClientes.CurrentRow.Cells["CODIGO"].Value.ToString();
+                    //MessageBox.Show(claseCod.codigo);
+                    Form formulario = new Formularios.EditarCliente();
+                    formulario.ShowDialog();
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Se produjo un error");
+                }
             }
 
             if (this.dgvClientes.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
-                bool elimino = admonClientes.EliminarObjeto(dgvClientes.CurrentRow.Cells["ID"].Value.ToString());
+                bool elimino = admonClientes.EliminarCliente(dgvClientes.CurrentRow.Cells["CODIGO"].Value.ToString());
 
-                DialogResult dialogResult = MessageBox.Show("¿Está seguro que desea eliminar el objeto?",
+                DialogResult dialogResult = MessageBox.Show("¿Está seguro que desea eliminar el Cliente?",
                     "", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
@@ -158,12 +189,12 @@ namespace ProyectoHCL.Formularios
                 {
                     if (elimino)
                     {
-                        MessageBox.Show("Objeto eliminado");
-                        MostrarClientes();
+                        MessageBox.Show("Cliente Eliminado");
+                        CargarDGCl();
                     }
                     else
                     {
-                        MessageBox.Show("Objeto no eliminado");
+                        MessageBox.Show("Cliente NO eliminado");
                     }
 
                 }
@@ -172,7 +203,83 @@ namespace ProyectoHCL.Formularios
 
                 }
             }
+
+
+
         }
 
+
+
+        private void dgvClientes_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            /*if (e.ColumnIndex >= 0 && this.dgvClientes.Columns[e.ColumnIndex].Name == "VER" && e.RowIndex >= 0)
+            {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+                DataGridViewButtonCell celBoton = this.dgvClientes.Rows[e.RowIndex].Cells["VER"] as DataGridViewButtonCell;
+                Icon icoVer = new Icon(Environment.CurrentDirectory + "\\ver.ico"); //Se define la carpeta en la que está guardado el ícono del boton
+                e.Graphics.DrawIcon(icoVer, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
+
+                this.dgvClientes.Rows[e.RowIndex].Height = icoVer.Height + 8;
+                this.dgvClientes.Columns[e.ColumnIndex].Width = icoVer.Width + 58;
+
+                e.Handled = true;
+            }*/
+            if (e.ColumnIndex >= 0 && this.dgvClientes.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
+            {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+                DataGridViewButtonCell celBoton = this.dgvClientes.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
+                Icon icoEditar = new Icon(Environment.CurrentDirectory + "\\editar.ico"); //Se define la carpeta en la que está guardado el ícono del boton
+                e.Graphics.DrawIcon(icoEditar, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
+
+                this.dgvClientes.Rows[e.RowIndex].Height = icoEditar.Height + 8;
+                this.dgvClientes.Columns[e.ColumnIndex].Width = icoEditar.Width + 58;
+
+                e.Handled = true;
+            }
+            if (e.ColumnIndex >= 0 && this.dgvClientes.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
+            {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+                DataGridViewButtonCell celBoton = this.dgvClientes.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
+                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
+                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
+
+                this.dgvClientes.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
+                this.dgvClientes.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
+
+                e.Handled = true;
+            }
+        }
+
+        private void cmbPagCl_SelectionChangeCommitted_1(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPagCl.Text);
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDGCl();
+        }
+
+        private void cmbMostrarCl_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            numFilas = int.Parse(cmbMostrarCl.Text);
+            pagFinal = numFilas;
+            CargarDGCl();
+        }
+
+        private void txtBuscarCl_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscarCl.Text != "")
+            {
+                BuscarClientes(txtBuscarCl.Text);
+            }
+            else
+            {
+                dgvClientes.Columns.Clear();
+                CargarDGCl();
+            }
+        }
     }
 }
