@@ -56,38 +56,41 @@
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(277, 21);
+            label11.Location = new Point(396, 35);
+            label11.Margin = new Padding(4, 0, 4, 0);
             label11.Name = "label11";
-            label11.Size = new Size(181, 30);
+            label11.Size = new Size(267, 45);
             label11.TabIndex = 21;
             label11.Text = "Registrar objetos";
             // 
             // txtDescripcion
             // 
             txtDescripcion.Anchor = AnchorStyles.Top;
-            txtDescripcion.BackColor = Color.DarkGray;
+            txtDescripcion.BackColor = Color.White;
             txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
             txtDescripcion.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtDescripcion.Location = new Point(202, 154);
+            txtDescripcion.Location = new Point(289, 257);
+            txtDescripcion.Margin = new Padding(4, 5, 4, 5);
             txtDescripcion.MaxLength = 100;
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.ShortcutsEnabled = false;
-            txtDescripcion.Size = new Size(333, 27);
+            txtDescripcion.Size = new Size(475, 37);
             txtDescripcion.TabIndex = 25;
             txtDescripcion.KeyPress += txtDescripcion_KeyPress;
             // 
             // txtObjeto
             // 
             txtObjeto.Anchor = AnchorStyles.Top;
-            txtObjeto.BackColor = Color.DarkGray;
+            txtObjeto.BackColor = Color.White;
             txtObjeto.BorderStyle = BorderStyle.FixedSingle;
             txtObjeto.CharacterCasing = CharacterCasing.Upper;
             txtObjeto.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtObjeto.Location = new Point(202, 70);
+            txtObjeto.Location = new Point(289, 117);
+            txtObjeto.Margin = new Padding(4, 5, 4, 5);
             txtObjeto.MaxLength = 15;
             txtObjeto.Name = "txtObjeto";
             txtObjeto.ShortcutsEnabled = false;
-            txtObjeto.Size = new Size(333, 27);
+            txtObjeto.Size = new Size(475, 37);
             txtObjeto.TabIndex = 24;
             txtObjeto.KeyPress += txtObjeto_KeyPress;
             // 
@@ -97,10 +100,11 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(202, 126);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(289, 210);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(186, 19);
+            label1.Size = new Size(282, 28);
             label1.TabIndex = 23;
             label1.Text = "Descripción del objeto:";
             // 
@@ -110,10 +114,11 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(202, 42);
+            label2.ForeColor = Color.Black;
+            label2.Location = new Point(289, 70);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(159, 19);
+            label2.Size = new Size(239, 28);
             label2.TabIndex = 22;
             label2.Text = "Nombre del objeto:";
             // 
@@ -126,9 +131,10 @@
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(417, 213);
+            btnCancelar.Location = new Point(596, 355);
+            btnCancelar.Margin = new Padding(4, 5, 4, 5);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(80, 32);
+            btnCancelar.Size = new Size(114, 53);
             btnCancelar.TabIndex = 27;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
@@ -143,9 +149,10 @@
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(238, 213);
+            btnGuardar.Location = new Point(340, 355);
+            btnGuardar.Margin = new Padding(4, 5, 4, 5);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(82, 32);
+            btnGuardar.Size = new Size(117, 53);
             btnGuardar.TabIndex = 26;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
@@ -159,16 +166,17 @@
             // 
             pictureBox5.BackColor = Color.Transparent;
             pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(12, 12);
+            pictureBox5.Location = new Point(17, 20);
+            pictureBox5.Margin = new Padding(4, 5, 4, 5);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(50, 48);
+            pictureBox5.Size = new Size(71, 80);
             pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox5.TabIndex = 15;
             pictureBox5.TabStop = false;
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Black;
+            panel1.BackColor = Color.SteelBlue;
             panel1.Controls.Add(btnCerrar);
             panel1.Controls.Add(pictureBox5);
             panel1.Controls.Add(btnMin);
@@ -176,8 +184,9 @@
             panel1.Dock = DockStyle.Top;
             panel1.ForeColor = Color.Lime;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(737, 73);
+            panel1.Size = new Size(1053, 122);
             panel1.TabIndex = 28;
             panel1.MouseMove += panel1_MouseMove;
             // 
@@ -189,9 +198,10 @@
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnCerrar.FlatStyle = FlatStyle.Flat;
-            btnCerrar.Location = new Point(711, 12);
+            btnCerrar.Location = new Point(1016, 20);
+            btnCerrar.Margin = new Padding(4, 5, 4, 5);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(14, 17);
+            btnCerrar.Size = new Size(20, 28);
             btnCerrar.TabIndex = 29;
             btnCerrar.UseVisualStyleBackColor = false;
             btnCerrar.Click += btnCerrar_Click;
@@ -204,16 +214,17 @@
             btnMin.FlatAppearance.BorderSize = 0;
             btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnMin.FlatStyle = FlatStyle.Flat;
-            btnMin.Location = new Point(676, 10);
+            btnMin.Location = new Point(966, 17);
+            btnMin.Margin = new Padding(4, 5, 4, 5);
             btnMin.Name = "btnMin";
-            btnMin.Size = new Size(19, 20);
+            btnMin.Size = new Size(27, 33);
             btnMin.TabIndex = 28;
             btnMin.UseVisualStyleBackColor = false;
             btnMin.Click += btnMin_Click;
             // 
             // panel2
             // 
-            panel2.BackColor = Color.FromArgb(43, 42, 65);
+            panel2.BackColor = Color.LightGray;
             panel2.Controls.Add(txtDescripcion);
             panel2.Controls.Add(txtObjeto);
             panel2.Controls.Add(btnCancelar);
@@ -221,21 +232,23 @@
             panel2.Controls.Add(label1);
             panel2.Controls.Add(label2);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(0, 73);
+            panel2.Location = new Point(0, 122);
+            panel2.Margin = new Padding(4, 5, 4, 5);
             panel2.Name = "panel2";
-            panel2.Size = new Size(737, 335);
+            panel2.Size = new Size(1053, 558);
             panel2.TabIndex = 29;
             // 
             // RegistrarObjeto
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(43, 42, 65);
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(737, 408);
+            ClientSize = new Size(1053, 680);
             Controls.Add(panel2);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(4, 5, 4, 5);
             Name = "RegistrarObjeto";
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;

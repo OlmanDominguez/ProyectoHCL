@@ -59,6 +59,31 @@ namespace ProyectoHCL.Formularios
         {
 
         }
+        public void BuscarRoles(string buscarU) //Recibe string para buscar usuarios
+        {
+            try
+            {
+                MySqlConnection conn;
+                MySqlCommand cmd;
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
+
+                cmd = new MySqlCommand("buscarrol", conn); //recibe proc almacenado
+                cmd.CommandType = CommandType.StoredProcedure; //se especifica que es un proc almacenado
+                cmd.Parameters.Add("@ID_ROL", MySqlDbType.VarChar, 30).Value = buscarU; //recibe el parametro nombreU definido en el parametro almacenado
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable(); //Se crea tabla
+                da.Fill(dt); //Se devuelven los registros en la tabla
+                Roles_Permisos_DG.DataSource = dt; //se define la tabla en la que se devuelven los registros
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -141,7 +166,10 @@ namespace ProyectoHCL.Formularios
 
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }
 
