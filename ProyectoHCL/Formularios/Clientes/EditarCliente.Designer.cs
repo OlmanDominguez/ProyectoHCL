@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarCliente));
             panel2 = new Panel();
             btnCerrar = new Button();
@@ -37,7 +38,7 @@
             btnCancelar = new Button();
             btnGuardar = new Button();
             gb_juridico = new GroupBox();
-            textBox1 = new TextBox();
+            txtEmpresa = new TextBox();
             txtRTN = new TextBox();
             label8 = new Label();
             label9 = new Label();
@@ -56,9 +57,11 @@
             label4 = new Label();
             label3 = new Label();
             label1 = new Label();
+            errorT = new ErrorProvider(components);
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             gb_juridico.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorT).BeginInit();
             SuspendLayout();
             // 
             // panel2
@@ -173,10 +176,11 @@
             btnGuardar.TabIndex = 58;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // gb_juridico
             // 
-            gb_juridico.Controls.Add(textBox1);
+            gb_juridico.Controls.Add(txtEmpresa);
             gb_juridico.Controls.Add(txtRTN);
             gb_juridico.Controls.Add(label8);
             gb_juridico.Controls.Add(label9);
@@ -186,19 +190,19 @@
             gb_juridico.TabIndex = 57;
             gb_juridico.TabStop = false;
             // 
-            // textBox1
+            // txtEmpresa
             // 
-            textBox1.Anchor = AnchorStyles.Top;
-            textBox1.BackColor = Color.DarkGray;
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.CharacterCasing = CharacterCasing.Upper;
-            textBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(462, 26);
-            textBox1.MaxLength = 15;
-            textBox1.Name = "textBox1";
-            textBox1.ShortcutsEnabled = false;
-            textBox1.Size = new Size(238, 27);
-            textBox1.TabIndex = 59;
+            txtEmpresa.Anchor = AnchorStyles.Top;
+            txtEmpresa.BackColor = Color.DarkGray;
+            txtEmpresa.BorderStyle = BorderStyle.FixedSingle;
+            txtEmpresa.CharacterCasing = CharacterCasing.Upper;
+            txtEmpresa.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtEmpresa.Location = new Point(462, 26);
+            txtEmpresa.MaxLength = 15;
+            txtEmpresa.Name = "txtEmpresa";
+            txtEmpresa.ShortcutsEnabled = false;
+            txtEmpresa.Size = new Size(238, 27);
+            txtEmpresa.TabIndex = 59;
             // 
             // txtRTN
             // 
@@ -243,12 +247,14 @@
             // cbTipo
             // 
             cbTipo.BackColor = Color.DarkGray;
+            cbTipo.DropDownStyle = ComboBoxStyle.DropDownList;
             cbTipo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             cbTipo.FormattingEnabled = true;
             cbTipo.Location = new Point(457, 168);
             cbTipo.Name = "cbTipo";
             cbTipo.Size = new Size(268, 28);
             cbTipo.TabIndex = 56;
+            cbTipo.SelectedValueChanged += cbTipo_SelectedValueChanged;
             // 
             // label10
             // 
@@ -439,6 +445,10 @@
             label1.TabIndex = 32;
             label1.Text = "Apellidos:";
             // 
+            // errorT
+            // 
+            errorT.ContainerControl = this;
+            // 
             // EditarCliente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -460,6 +470,7 @@
             panel1.PerformLayout();
             gb_juridico.ResumeLayout(false);
             gb_juridico.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorT).EndInit();
             ResumeLayout(false);
         }
 
@@ -490,9 +501,10 @@
         public TextBox txtTele1;
         public TextBox txtID;
         private GroupBox gb_juridico;
-        public TextBox textBox1;
+        public TextBox txtEmpresa;
         public TextBox txtRTN;
         private Button btnCancelar;
         private Button btnGuardar;
+        private ErrorProvider errorT;
     }
 }

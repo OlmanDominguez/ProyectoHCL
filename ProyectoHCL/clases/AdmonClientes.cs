@@ -42,7 +42,7 @@ namespace ProyectoHCL.clases
         }
 
         
-        public void modificarObjeto(int id, string nombreObj, string descObj, string estadoObj)
+        public void modificarCliente(int id, string nombreObj, string descObj, string estadoObj)
         {
 
             try

@@ -26,5 +26,10 @@ namespace ProyectoHCL
         {
             admonObjeto.modificarObjeto(Convert.ToInt32(id), nombreObj, descObj, estadoObj);
         }
+
+        public void editarClie(string id, string nombreObj, string descObj, string estadoObj)
+        {
+            admonClientes.modificarCliente(Convert.ToInt32(id), nombreObj, descObj, estadoObj);
+        }
     }
 }

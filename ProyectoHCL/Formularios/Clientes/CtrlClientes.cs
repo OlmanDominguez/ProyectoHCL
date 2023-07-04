@@ -51,7 +51,7 @@ namespace ProyectoHCL.Formularios
 
             cmbPagCl.SelectedIndex = indice;
 
-           
+
         }
 
         private void CtrlClientes_Load(object sender, EventArgs e)
@@ -76,10 +76,10 @@ namespace ProyectoHCL.Formularios
 
         public void BuscarClientes(string buscarCl)
         {
-            dgvClientes.Columns.Clear();
+
             try
             {
-                
+
                 MySqlConnection conn;
                 MySqlCommand cmd;
 
@@ -95,17 +95,7 @@ namespace ProyectoHCL.Formularios
                 da.Fill(dt);
                 dgvClientes.DataSource = dt;
 
-                DataGridViewButtonColumn btnShow = new DataGridViewButtonColumn();
-                btnShow.Name = "VER";
-                dgvClientes.Columns.Add(btnShow);
 
-                DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
-                btnUpdate.Name = "EDITAR";
-                dgvClientes.Columns.Add(btnUpdate);
-
-                DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
-                btnDelete.Name = "ELIMINAR";
-                dgvClientes.Columns.Add(btnDelete);
             }
             catch (Exception)
             {
@@ -212,19 +202,19 @@ namespace ProyectoHCL.Formularios
 
         private void dgvClientes_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            /*if (e.ColumnIndex >= 0 && this.dgvClientes.Columns[e.ColumnIndex].Name == "VER" && e.RowIndex >= 0)
+            if (e.ColumnIndex >= 0 && this.dgvClientes.Columns[e.ColumnIndex].Name == "VER" && e.RowIndex >= 0)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
                 DataGridViewButtonCell celBoton = this.dgvClientes.Rows[e.RowIndex].Cells["VER"] as DataGridViewButtonCell;
                 Icon icoVer = new Icon(Environment.CurrentDirectory + "\\ver.ico"); //Se define la carpeta en la que está guardado el ícono del boton
-                e.Graphics.DrawIcon(icoVer, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
+                e.Graphics.DrawIcon(icoVer, e.CellBounds.Left + 29, e.CellBounds.Top + 0);
 
                 this.dgvClientes.Rows[e.RowIndex].Height = icoVer.Height + 8;
                 this.dgvClientes.Columns[e.ColumnIndex].Width = icoVer.Width + 58;
 
                 e.Handled = true;
-            }*/
+            }
             if (e.ColumnIndex >= 0 && this.dgvClientes.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
@@ -277,7 +267,6 @@ namespace ProyectoHCL.Formularios
             }
             else
             {
-                dgvClientes.Columns.Clear();
                 CargarDGCl();
             }
         }

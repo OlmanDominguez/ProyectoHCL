@@ -70,9 +70,23 @@ namespace ProyectoHCL.Formularios
                         txtEmail2.Text = (string)leer["EMAIL2"];
                         txtTele1.Text = (string)leer["TELEFONO"];
                         txtTele2.Text = (string)leer["TELEFONO2"];
-                        cbTipo.Text = (string)leer["DESCRIPCION"];
-                        //txtEmpresa.Text = (string)leer["NOMBRE_RTN"];
-                        //lb_RTN.Text = (string)leer["RTN"];
+                        string tipoCl = (string)leer["DESCRIPCION"];
+                        txtEmpresa.Text = (string)leer["NOMBRE_RTN"];
+                        txtRTN.Text = (string)leer["RTN"];
+                        comando.Connection.Close();
+
+                        cbTipo.Items.Add(tipoCl);
+                        cbTipo.SelectedIndex = 0;
+                        if (tipoCl == "Natural")
+                        {
+                            cbTipo.Items.Add("Juridico");
+                        }
+                        else
+                        {
+                            cbTipo.Items.Add("Natural");
+                        }
+
+
                     }
 
 
@@ -89,5 +103,100 @@ namespace ProyectoHCL.Formularios
         {
             this.Close();
         }
+
+        private void cbTipo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (cbTipo.SelectedItem.ToString() == "Natural")
+            {
+                gb_juridico.Visible = false;
+            }
+            else if (cbTipo.SelectedItem.ToString() == "Juridico")
+            {
+                gb_juridico.Visible = true;
+            }
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (VCamposVacios() == false)
+            {
+                MessageBox.Show("Por favor llene todos los campos", "Aviso",
+                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                try
+                {
+                    //control.editarObj(idObj, txtObjeto.Text, txtDescripcion.Text, cmbEstado.Text);
+
+                    MessageBox.Show("Objeto modificado");
+                    this.Close();
+                    //admonObjeto.MostrarObjetos();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+
+        private bool VCamposVacios()
+        {
+            bool ok = true;
+
+            if (txtNombre.Text.Trim() == "")
+            {
+                ok = false;
+                errorT.SetError(txtNombre, "Introduzca el nombre del cliente");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+
+            if (txtApellido.Text.Trim() == "")
+            {
+                ok = false;
+                errorT.SetError(txtApellido, "Introduzca el apellido del cliente");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+
+            if (txtID.Text.Trim() == "")
+            {
+                ok = false;
+                errorT.SetError(txtID, "Indroduzca el numero de identificación");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+            if (txtEmail1.Text.Trim() == "")
+            {
+                ok = false;
+                errorT.SetError(txtEmail1, "Indroduzca correo electronico");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+            if (txtTele1.Text.Trim() == "")
+            {
+                ok = false;
+                errorT.SetError(txtTele1, "Indroduzca numero telefonico");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+
+            return ok;
+
+        }
+
+
     }
 }
