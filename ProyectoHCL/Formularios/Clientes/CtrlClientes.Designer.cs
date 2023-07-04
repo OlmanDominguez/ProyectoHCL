@@ -256,7 +256,7 @@
             cmbMostrarCl.BackColor = SystemColors.Info;
             cmbMostrarCl.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbMostrarCl.FormattingEnabled = true;
-            cmbMostrarCl.Items.AddRange(new object[] { "1", "3", "10", "20", "30", "40" });
+            cmbMostrarCl.Items.AddRange(new object[] { "1", "5", "10", "15" });
             cmbMostrarCl.Location = new Point(209, 28);
             cmbMostrarCl.Margin = new Padding(2);
             cmbMostrarCl.Name = "cmbMostrarCl";
