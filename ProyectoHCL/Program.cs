@@ -22,10 +22,10 @@ namespace ProyectoHCL
 
             Application.Run(new CtrlClientes());
             
-=======
+
             //Application.Run(new CtrlObjetos());
             //Application.Run(new Cliente());
->>>>>>> fa4ca14db8c55c9cb551675c6164e4c288bceec0
+
         }
     }
 }

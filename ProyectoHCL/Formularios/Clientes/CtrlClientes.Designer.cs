@@ -67,6 +67,7 @@
             // panel2
             // 
             panel2.BackColor = Color.WhiteSmoke;
+            panel2.Controls.Add(btnNuevo);
             panel2.Controls.Add(label11);
             panel2.Controls.Add(btnPerfil);
             panel2.Controls.Add(btnCerrarSesion);
@@ -82,7 +83,7 @@
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = Color.Black;
-            label11.Location = new Point(12, 47);
+            label11.Location = new Point(15, 24);
             label11.Name = "label11";
             label11.Size = new Size(233, 32);
             label11.TabIndex = 37;
@@ -128,11 +129,11 @@
             btnNuevo.ForeColor = SystemColors.ButtonFace;
             btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
             btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNuevo.Location = new Point(15, 24);
+            btnNuevo.Location = new Point(15, 68);
             btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(43, 39);
+            btnNuevo.Size = new Size(98, 39);
             btnNuevo.TabIndex = 36;
-            btnNuevo.Text = "\r\n";
+            btnNuevo.Text = "Agregar";
             btnNuevo.TextAlign = ContentAlignment.MiddleRight;
             btnNuevo.UseVisualStyleBackColor = false;
             btnNuevo.Click += btnNuevo_Click_1;
@@ -140,7 +141,6 @@
             // panel4
             // 
             panel4.BackColor = Color.Silver;
-            panel4.Controls.Add(btnNuevo);
             panel4.Controls.Add(button6);
             panel4.Controls.Add(button5);
             panel4.Controls.Add(txtBuscarCl);
@@ -187,7 +187,7 @@
             // 
             txtBuscarCl.Anchor = AnchorStyles.Bottom;
             txtBuscarCl.BackColor = SystemColors.Info;
-            txtBuscarCl.Location = new Point(416, 35);
+            txtBuscarCl.Location = new Point(78, 34);
             txtBuscarCl.Margin = new Padding(2);
             txtBuscarCl.Name = "txtBuscarCl";
             txtBuscarCl.Size = new Size(247, 23);
@@ -201,7 +201,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(356, 37);
+            label1.Location = new Point(18, 36);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(55, 20);

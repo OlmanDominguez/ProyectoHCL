@@ -66,5 +66,32 @@ namespace ProyectoHCL.clases
                 return false;
             }
         }
+
+        public bool existeCliente(string identi)
+        {
+            MySqlDataReader reader;
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            if (conectar.State == ConnectionState.Closed)
+            {
+                conectar.Open();
+            }
+
+            String sql = "SELECT CODIGO FROM TBL_CLIENTE WHERE DNI_PASAPORTE LIKE @ID";
+            MySqlCommand comando = new MySqlCommand(sql, conectar);
+            comando.Parameters.AddWithValue("@ID", identi);
+            reader = comando.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -69,7 +69,7 @@ namespace ProyectoHCL.Formularios
             dgvClientes.Columns.Add(btnDelete);
         }
 
-       
+
         public void BuscarClientes(string buscarCl)
         {
 
@@ -117,8 +117,8 @@ namespace ProyectoHCL.Formularios
 
         private void btnNuevo_Click_1(object sender, EventArgs e)
         {
-            RegistrarObjeto regObjeto = new RegistrarObjeto();
-            regObjeto.ShowDialog();
+            AgregarCliente aggCliente = new AgregarCliente();
+            aggCliente.ShowDialog();
             CargarDGCl();
         }
 

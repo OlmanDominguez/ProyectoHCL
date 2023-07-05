@@ -14,9 +14,9 @@ using ProyectoHCL.Formularios;
 
 namespace ProyectoHCL.Formularios
 {
-    public partial class EditarCliente : Form
+    public partial class AgregarCliente : Form
     {
-        public EditarCliente()
+        public AgregarCliente()
         {
             InitializeComponent();
         }
@@ -47,58 +47,6 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void EditarCliente_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                using (BaseDatosHCL.ObtenerConexion())
-                {
-                    //Consulta
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("SELECT C.NOMBRE, C.APELLIDO, C.DNI_PASAPORTE, C.TELEFONO," +
-                        " C.TELEFONO2, C.EMAIL, C.EMAIL2, C.RTN, C.NOMBRE_RTN, T.DESCRIPCION " +
-                        "FROM TBL_CLIENTE C INNER JOIN TBL_TIPOCLIENTE T ON C.ID_TIPOCLIENTE = " +
-                        "T.ID_TIPOCLIENTE WHERE C.CODIGO = " + claseCod.codigo);
-
-                    MySqlDataReader leer = comando.ExecuteReader();
-                    if (leer.Read())
-                    {
-                        txtNombre.Text = (string)leer["NOMBRE"];
-                        txtApellido.Text = (string)leer["APELLIDO"];
-                        txtID.Text = (string)leer["DNI_PASAPORTE"];
-                        txtEmail1.Text = (string)leer["EMAIL"];
-                        txtEmail2.Text = (string)leer["EMAIL2"];
-                        txtTele1.Text = (string)leer["TELEFONO"];
-                        txtTele2.Text = (string)leer["TELEFONO2"];
-                        string tipoCl = (string)leer["DESCRIPCION"];
-                        txtEmpresa.Text = (string)leer["NOMBRE_RTN"];
-                        txtRTN.Text = (string)leer["RTN"];
-                        comando.Connection.Close();
-
-                        cbTipo.Items.Add(tipoCl);
-                        cbTipo.SelectedIndex = 0;
-                        if (tipoCl == "Natural")
-                        {
-                            cbTipo.Items.Add("Juridico");
-                        }
-                        else
-                        {
-                            cbTipo.Items.Add("Natural");
-                        }
-
-
-                    }
-
-
-                }
-
-            }
-            catch (Exception a)
-            {
-                MessageBox.Show(a.Message + a.StackTrace);
-            }
-        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -120,6 +68,7 @@ namespace ProyectoHCL.Formularios
         Control control = new Control();
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            Modelo modelo = new Modelo();
             if (VCamposVacios() == false)
             {
                 MessageBox.Show("Por favor llene todos los campos", "Aviso",
@@ -129,6 +78,11 @@ namespace ProyectoHCL.Formularios
             {
                 try
                 {
+                    if (modelo.existeCliente(txtID.Text))
+                    {
+                        MessageBox.Show("El cliente ya existe", "Aviso",
+                             MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
                     int tip = 0;
                     string nombre;
                     if (txtEmpresa.Text.Trim() == "") { txtEmpresa.Text = "N/A"; }
@@ -136,12 +90,23 @@ namespace ProyectoHCL.Formularios
                     if (txtTele2.Text.Trim() == "") { txtTele2.Text = "N/A"; }
                     if (txtEmail2.Text.Trim() == "") { txtEmail2.Text = "N/A"; }
                     if (cbTipo.SelectedItem.ToString() == "Juridico") { tip = 2; } else { tip = 1; }
-                    control.editarClie(txtNombre.Text, tip, txtApellido.Text, txtEmpresa.Text,
-                        txtRTN.Text, txtTele1.Text, txtEmail1.Text, Convert.ToInt32(claseCod.codigo),
-                        txtID.Text, txtTele2.Text, txtEmail2.Text);
-                    MessageBox.Show("Cliente modificado");
+
+                    MySqlConnection conn;
+                    MySqlCommand cmd;
+                    conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                    conn.Open();
+
+                    cmd = new MySqlCommand("insert into TBL_CLIENTE (NOMBRE, APELLIDO, DNI_PASAPORTE, " +
+                        "ID_TIPOCLIENTE, NOMBRE_RTN, RTN, TELEFONO, EMAIL, TELEFONO2, EMAIL2)" +
+                        "values ('" + txtNombre.Text + "', '" + txtApellido.Text + "', '" + txtID.Text + "', " +
+                        tip + ", '" + txtEmpresa.Text + "', '" + txtRTN.Text + "', '" + txtTele1.Text + "', '" +
+                        txtEmail1.Text + "', '" + txtTele2.Text + "', '" + txtEmail2.Text + "');", conn);
+
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Objeto creado con éxito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
-                    //admonObjeto.MostrarObjetos();
+                    conn.Close();
+
                 }
                 catch (Exception ex)
                 {
@@ -229,6 +194,12 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        
+        private void AgregarCliente_Load(object sender, EventArgs e)
+        {
+            cbTipo.Items.Add("--Seleccione--");
+            cbTipo.SelectedIndex = 0;
+            cbTipo.Items.Add("Juridico");
+            cbTipo.Items.Add("Natural");
+        }
     }
 }
