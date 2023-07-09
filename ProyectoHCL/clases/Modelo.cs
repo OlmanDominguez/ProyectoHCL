@@ -57,9 +57,82 @@ namespace ProyectoHCL.clases
 
             if (reader.HasRows)
             {
-
                 return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
+        public bool existeTipHab(string tipo)
+        {
+            MySqlDataReader reader;
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            if (conectar.State == ConnectionState.Closed)
+            {
+                conectar.Open();
+            }
+
+            String sql = "SELECT ID_TIPOHABITACION FROM TBL_TIPOHABITACION WHERE TIPO LIKE @TIPO";
+            MySqlCommand comando = new MySqlCommand(sql, conectar);
+            comando.Parameters.AddWithValue("@TIPO", tipo);
+            reader = comando.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool existeHabitacion(string hab)
+        {
+            MySqlDataReader reader;
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            if (conectar.State == ConnectionState.Closed)
+            {
+                conectar.Open();
+            }
+
+            String sql = "SELECT ID_HABITACION FROM TBL_HABITACION WHERE NUMEROHABITACION LIKE @NUMEROHABITACION";
+            MySqlCommand comando = new MySqlCommand(sql, conectar);
+            comando.Parameters.AddWithValue("@NUMEROHABITACION", hab);
+            reader = comando.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool existeServicio(string desc)
+        {
+            MySqlDataReader reader;
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            if (conectar.State == ConnectionState.Closed)
+            {
+                conectar.Open();
+            }
+
+            String sql = "SELECT ID_SERVICIO FROM TBL_SERVICIO WHERE DESCRIPCION LIKE @DESCRIPCION";
+            MySqlCommand comando = new MySqlCommand(sql, conectar);
+            comando.Parameters.AddWithValue("@DESCRIPCION", desc);
+            reader = comando.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                return true;
             }
             else
             {
