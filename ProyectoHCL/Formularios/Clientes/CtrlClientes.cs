@@ -69,10 +69,6 @@ namespace ProyectoHCL.Formularios
             dgvClientes.Columns.Add(btnDelete);
         }
 
-        /*public void MostrarClientes()
-        {
-            dgvClientes.DataSource = admonClientes.MostrarClientes();
-        }*/
 
         public void BuscarClientes(string buscarCl)
         {
@@ -121,8 +117,8 @@ namespace ProyectoHCL.Formularios
 
         private void btnNuevo_Click_1(object sender, EventArgs e)
         {
-            RegistrarObjeto regObjeto = new RegistrarObjeto();
-            regObjeto.ShowDialog();
+            AgregarCliente aggCliente = new AgregarCliente();
+            aggCliente.ShowDialog();
             CargarDGCl();
         }
 
@@ -159,6 +155,7 @@ namespace ProyectoHCL.Formularios
                     //MessageBox.Show(claseCod.codigo);
                     Form formulario = new Formularios.EditarCliente();
                     formulario.ShowDialog();
+                    CargarDGCl();
 
                 }
                 catch (Exception)
@@ -208,7 +205,7 @@ namespace ProyectoHCL.Formularios
 
                 DataGridViewButtonCell celBoton = this.dgvClientes.Rows[e.RowIndex].Cells["VER"] as DataGridViewButtonCell;
                 Icon icoVer = new Icon(Environment.CurrentDirectory + "\\ver.ico"); //Se define la carpeta en la que está guardado el ícono del boton
-                e.Graphics.DrawIcon(icoVer, e.CellBounds.Left + 29, e.CellBounds.Top + 0);
+                e.Graphics.DrawIcon(icoVer, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
                 this.dgvClientes.Rows[e.RowIndex].Height = icoVer.Height + 8;
                 this.dgvClientes.Columns[e.ColumnIndex].Width = icoVer.Width + 58;

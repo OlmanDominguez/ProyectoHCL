@@ -17,14 +17,14 @@ namespace ProyectoHCL
             // Application.Run(new FORMULARIO());
           //Application.Run(new CtrlUsuarios());
             
-            //Application.Run(new Dashboard());
+            Application.Run(new Dashboard());
             //Application.Run(new CtrlObjetos());
 
-          //Application.Run(new CtrlClientes());
+            Application.Run(new CtrlClientes());
             
 
             //Application.Run(new CtrlObjetos());
-            
+            //Application.Run(new Cliente());
 
         }
     }

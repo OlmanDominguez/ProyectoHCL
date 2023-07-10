@@ -81,5 +81,7 @@ namespace ProyectoHCL.Formularios
                 MessageBox.Show(a.Message + a.StackTrace);
             }
         }
+
+
     }
 }

@@ -33,6 +33,7 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             panel1 = new Panel();
             button1 = new Button();
             panel2 = new Panel();
@@ -44,13 +45,12 @@
             btnCerrarSesion = new Button();
             panel5 = new Panel();
             button7 = new Button();
-            button8 = new Button();
             button9 = new Button();
+            txtBuscar = new TextBox();
+            label4 = new Label();
             label1 = new Label();
             cmbMostrar = new ComboBox();
-            txtBuscar = new TextBox();
             label3 = new Label();
-            label4 = new Label();
             panel3 = new Panel();
             txtPaginacion = new TextBox();
             label6 = new Label();
@@ -200,14 +200,10 @@
             // 
             // panel5
             // 
-            panel5.BackColor = Color.Silver;
+            panel5.BackColor = Color.Gainsboro;
             panel5.Controls.Add(button7);
-            panel5.Controls.Add(button8);
             panel5.Controls.Add(button9);
-            panel5.Controls.Add(label1);
-            panel5.Controls.Add(cmbMostrar);
             panel5.Controls.Add(txtBuscar);
-            panel5.Controls.Add(label3);
             panel5.Controls.Add(label4);
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(60, 125);
@@ -217,13 +213,13 @@
             // 
             // button7
             // 
-            button7.Anchor = AnchorStyles.Bottom;
+            button7.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button7.BackColor = Color.Red;
             button7.FlatAppearance.BorderSize = 0;
             button7.FlatStyle = FlatStyle.Flat;
             button7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button7.ForeColor = SystemColors.ButtonHighlight;
-            button7.Location = new Point(552, 31);
+            button7.Location = new Point(910, 28);
             button7.Margin = new Padding(2);
             button7.Name = "button7";
             button7.Size = new Size(78, 25);
@@ -231,31 +227,15 @@
             button7.Text = "PDF";
             button7.UseVisualStyleBackColor = false;
             // 
-            // button8
-            // 
-            button8.Anchor = AnchorStyles.Bottom;
-            button8.BackColor = Color.DarkOrange;
-            button8.FlatAppearance.BorderSize = 0;
-            button8.FlatStyle = FlatStyle.Flat;
-            button8.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button8.ForeColor = SystemColors.ButtonHighlight;
-            button8.Location = new Point(370, 31);
-            button8.Margin = new Padding(2);
-            button8.Name = "button8";
-            button8.Size = new Size(78, 25);
-            button8.TabIndex = 49;
-            button8.Text = "Imprimir";
-            button8.UseVisualStyleBackColor = false;
-            // 
             // button9
             // 
-            button9.Anchor = AnchorStyles.Bottom;
+            button9.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             button9.BackColor = Color.FromArgb(0, 192, 0);
             button9.FlatAppearance.BorderSize = 0;
             button9.FlatStyle = FlatStyle.Flat;
             button9.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button9.ForeColor = SystemColors.ButtonHighlight;
-            button9.Location = new Point(461, 31);
+            button9.Location = new Point(819, 28);
             button9.Margin = new Padding(2);
             button9.Name = "button9";
             button9.Size = new Size(78, 25);
@@ -263,82 +243,85 @@
             button9.Text = "Excel ";
             button9.UseVisualStyleBackColor = false;
             // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Bottom;
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(116, 31);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(60, 20);
-            label1.TabIndex = 47;
-            label1.Text = "Mostrar";
-            // 
-            // cmbMostrar
-            // 
-            cmbMostrar.Anchor = AnchorStyles.Bottom;
-            cmbMostrar.BackColor = SystemColors.Info;
-            cmbMostrar.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbMostrar.FormattingEnabled = true;
-            cmbMostrar.Items.AddRange(new object[] { "2", "3", "4", "5", "6" });
-            cmbMostrar.Location = new Point(179, 28);
-            cmbMostrar.Margin = new Padding(2);
-            cmbMostrar.Name = "cmbMostrar";
-            cmbMostrar.Size = new Size(77, 23);
-            cmbMostrar.TabIndex = 46;
-            cmbMostrar.SelectedIndexChanged += cmbMostrar_SelectedIndexChanged;
-            // 
             // txtBuscar
             // 
-            txtBuscar.Anchor = AnchorStyles.Bottom;
+            txtBuscar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             txtBuscar.BackColor = SystemColors.Info;
-            txtBuscar.Location = new Point(736, 29);
+            txtBuscar.Location = new Point(92, 31);
             txtBuscar.Margin = new Padding(2);
             txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new Size(172, 23);
+            txtBuscar.Size = new Size(252, 23);
             txtBuscar.TabIndex = 44;
             txtBuscar.TextChanged += txtBuscar_TextChanged_1;
             // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.Bottom;
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.ForeColor = SystemColors.ActiveCaptionText;
-            label3.Location = new Point(260, 31);
-            label3.Margin = new Padding(2, 0, 2, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(66, 20);
-            label3.TabIndex = 48;
-            label3.Text = "registros";
-            label3.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // label4
             // 
-            label4.Anchor = AnchorStyles.Bottom;
+            label4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(676, 31);
+            label4.Location = new Point(32, 33);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(55, 20);
             label4.TabIndex = 45;
             label4.Text = "Buscar:";
             // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = SystemColors.ControlLightLight;
+            label1.Location = new Point(29, 19);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(55, 17);
+            label1.TabIndex = 47;
+            label1.Text = "Mostrar";
+            // 
+            // cmbMostrar
+            // 
+            cmbMostrar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            cmbMostrar.BackColor = SystemColors.Info;
+            cmbMostrar.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbMostrar.FormattingEnabled = true;
+            cmbMostrar.Items.AddRange(new object[] { "2", "3", "4", "5", "6" });
+            cmbMostrar.Location = new Point(92, 16);
+            cmbMostrar.Margin = new Padding(2);
+            cmbMostrar.Name = "cmbMostrar";
+            cmbMostrar.Size = new Size(77, 23);
+            cmbMostrar.TabIndex = 46;
+            cmbMostrar.SelectedIndexChanged += cmbMostrar_SelectedIndexChanged;
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = SystemColors.ControlLightLight;
+            label3.Location = new Point(173, 19);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(60, 17);
+            label3.TabIndex = 48;
+            label3.Text = "registros";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // panel3
             // 
-            panel3.BackColor = Color.Silver;
+            panel3.BackColor = Color.FromArgb(45, 66, 91);
             panel3.Controls.Add(txtPaginacion);
             panel3.Controls.Add(label6);
             panel3.Controls.Add(label7);
+            panel3.Controls.Add(label1);
+            panel3.Controls.Add(cmbMostrar);
             panel3.Controls.Add(cmbPaginacion);
             panel3.Controls.Add(label2);
+            panel3.Controls.Add(label3);
             panel3.Controls.Add(label5);
             panel3.Controls.Add(txtPag);
             panel3.Controls.Add(cmbPag);
@@ -351,7 +334,6 @@
             // txtPaginacion
             // 
             txtPaginacion.Anchor = AnchorStyles.Right;
-            txtPaginacion.BorderStyle = BorderStyle.FixedSingle;
             txtPaginacion.Location = new Point(925, 16);
             txtPaginacion.Name = "txtPaginacion";
             txtPaginacion.ReadOnly = true;
@@ -362,9 +344,11 @@
             // 
             label6.Anchor = AnchorStyles.Right;
             label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.ForeColor = SystemColors.ControlLightLight;
             label6.Location = new Point(898, 19);
             label6.Name = "label6";
-            label6.Size = new Size(21, 15);
+            label6.Size = new Size(24, 17);
             label6.TabIndex = 51;
             label6.Text = "De";
             // 
@@ -372,9 +356,11 @@
             // 
             label7.Anchor = AnchorStyles.Right;
             label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.ForeColor = SystemColors.ControlLightLight;
             label7.Location = new Point(770, 19);
             label7.Name = "label7";
-            label7.Size = new Size(43, 15);
+            label7.Size = new Size(47, 17);
             label7.TabIndex = 50;
             label7.Text = "Página";
             // 
@@ -444,49 +430,55 @@
             // 
             dgvUsuarios.AllowUserToAddRows = false;
             dgvUsuarios.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = Color.SlateGray;
+            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+            dgvUsuarios.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvUsuarios.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvUsuarios.BackgroundColor = Color.FromArgb(45, 66, 91);
+            dgvUsuarios.BackgroundColor = Color.WhiteSmoke;
             dgvUsuarios.BorderStyle = BorderStyle.None;
             dgvUsuarios.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(252, 222, 73);
-            dataGridViewCellStyle1.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.MenuText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvUsuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Teal;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvUsuarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvUsuarios.ColumnHeadersHeight = 30;
             dgvUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.MenuHighlight;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvUsuarios.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.MenuHighlight;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgvUsuarios.DefaultCellStyle = dataGridViewCellStyle3;
             dgvUsuarios.EnableHeadersVisualStyles = false;
-            dgvUsuarios.GridColor = Color.SteelBlue;
+            dgvUsuarios.GridColor = Color.FromArgb(45, 66, 91);
             dgvUsuarios.Location = new Point(0, -2);
             dgvUsuarios.Name = "dgvUsuarios";
             dgvUsuarios.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle3.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgvUsuarios.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle4.SelectionBackColor = Color.CadetBlue;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgvUsuarios.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dgvUsuarios.RowHeadersVisible = false;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle4.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle4.SelectionForeColor = Color.White;
-            dgvUsuarios.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle5.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = Color.LightGray;
+            dataGridViewCellStyle5.SelectionForeColor = Color.Black;
+            dgvUsuarios.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvUsuarios.RowTemplate.Height = 25;
             dgvUsuarios.Size = new Size(1024, 278);
             dgvUsuarios.TabIndex = 2;
@@ -534,7 +526,6 @@
         private Label label11;
         private Panel panel5;
         private Button button7;
-        private Button button8;
         private Button button9;
         private Label label1;
         private ComboBox cmbMostrar;

@@ -61,7 +61,7 @@
             // 
             // panel2
             // 
-            panel2.BackColor = Color.Black;
+            panel2.BackColor = Color.SteelBlue;
             panel2.Controls.Add(pictureBox5);
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(btnMin);
@@ -129,7 +129,7 @@
             // 
             // panel3
             // 
-            panel3.BackColor = Color.FromArgb(43, 42, 65);
+            panel3.BackColor = Color.Gainsboro;
             panel3.Controls.Add(btnCancelar);
             panel3.Controls.Add(txtFechaC);
             panel3.Controls.Add(btnGuardar);
@@ -171,7 +171,7 @@
             // 
             // txtFechaC
             // 
-            txtFechaC.BackColor = Color.DarkGray;
+            txtFechaC.BackColor = Color.White;
             txtFechaC.BorderStyle = BorderStyle.FixedSingle;
             txtFechaC.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtFechaC.Location = new Point(454, 144);
@@ -212,8 +212,7 @@
             // 
             // cmbEstado
             // 
-            cmbEstado.BackColor = Color.DarkGray;
-            cmbEstado.FlatStyle = FlatStyle.Flat;
+            cmbEstado.BackColor = Color.White;
             cmbEstado.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             cmbEstado.FormattingEnabled = true;
             cmbEstado.Items.AddRange(new object[] { "Bloqueado", "Activo", "Inactivo", "Nuevo" });
@@ -224,8 +223,7 @@
             // 
             // cmbRol
             // 
-            cmbRol.BackColor = Color.DarkGray;
-            cmbRol.FlatStyle = FlatStyle.Flat;
+            cmbRol.BackColor = Color.White;
             cmbRol.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             cmbRol.FormattingEnabled = true;
             cmbRol.Items.AddRange(new object[] { "ADMINISTRADOR", "COLABORADOR" });
@@ -236,7 +234,7 @@
             // 
             // txtCorreo
             // 
-            txtCorreo.BackColor = Color.DarkGray;
+            txtCorreo.BackColor = Color.White;
             txtCorreo.BorderStyle = BorderStyle.FixedSingle;
             txtCorreo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtCorreo.Location = new Point(454, 69);
@@ -248,7 +246,7 @@
             // 
             // txtNombre
             // 
-            txtNombre.BackColor = Color.DarkGray;
+            txtNombre.BackColor = Color.White;
             txtNombre.BorderStyle = BorderStyle.FixedSingle;
             txtNombre.CharacterCasing = CharacterCasing.Upper;
             txtNombre.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
@@ -262,7 +260,7 @@
             // 
             // txtUsuario
             // 
-            txtUsuario.BackColor = Color.DarkGray;
+            txtUsuario.BackColor = Color.White;
             txtUsuario.BorderStyle = BorderStyle.FixedSingle;
             txtUsuario.CharacterCasing = CharacterCasing.Upper;
             txtUsuario.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
@@ -277,7 +275,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.ForeColor = Color.White;
+            label9.ForeColor = Color.Black;
             label9.Location = new Point(91, 268);
             label9.Name = "label9";
             label9.Size = new Size(123, 19);
@@ -288,7 +286,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.ForeColor = Color.White;
+            label8.ForeColor = Color.Black;
             label8.Location = new Point(454, 116);
             label8.Name = "label8";
             label8.Size = new Size(136, 19);
@@ -299,7 +297,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.ForeColor = Color.White;
+            label7.ForeColor = Color.Black;
             label7.Location = new Point(454, 193);
             label7.Name = "label7";
             label7.Size = new Size(163, 19);
@@ -310,7 +308,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.ForeColor = Color.White;
+            label6.ForeColor = Color.Black;
             label6.Location = new Point(454, 41);
             label6.Name = "label6";
             label6.Size = new Size(156, 19);
@@ -321,7 +319,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.ForeColor = Color.White;
+            label5.ForeColor = Color.Black;
             label5.Location = new Point(91, 193);
             label5.Name = "label5";
             label5.Size = new Size(96, 19);
@@ -332,7 +330,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
+            label1.ForeColor = Color.Black;
             label1.Location = new Point(91, 116);
             label1.Name = "label1";
             label1.Size = new Size(77, 19);
@@ -343,7 +341,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = Color.White;
+            label2.ForeColor = Color.Black;
             label2.Location = new Point(91, 41);
             label2.Name = "label2";
             label2.Size = new Size(69, 19);

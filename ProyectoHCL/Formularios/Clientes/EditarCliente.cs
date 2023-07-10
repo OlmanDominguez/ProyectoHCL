@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static ProyectoHCL.Formularios.CtrlClientes;
+using ProyectoHCL.Formularios;
 
 namespace ProyectoHCL.Formularios
 {
@@ -116,6 +117,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
+        Control control = new Control();
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (VCamposVacios() == false)
@@ -127,9 +129,17 @@ namespace ProyectoHCL.Formularios
             {
                 try
                 {
-                    //control.editarObj(idObj, txtObjeto.Text, txtDescripcion.Text, cmbEstado.Text);
-
-                    MessageBox.Show("Objeto modificado");
+                    int tip = 0;
+                    string nombre;
+                    if (txtEmpresa.Text.Trim() == "") { txtEmpresa.Text = "N/A"; }
+                    if (txtRTN.Text.Trim() == "") { txtRTN.Text = "N/A"; }
+                    if (txtTele2.Text.Trim() == "") { txtTele2.Text = "N/A"; }
+                    if (txtEmail2.Text.Trim() == "") { txtEmail2.Text = "N/A"; }
+                    if (cbTipo.SelectedItem.ToString() == "Juridico") { tip = 2; } else { tip = 1; }
+                    control.editarClie(txtNombre.Text, tip, txtApellido.Text, txtEmpresa.Text,
+                        txtRTN.Text, txtTele1.Text, txtEmail1.Text, Convert.ToInt32(claseCod.codigo),
+                        txtID.Text, txtTele2.Text, txtEmail2.Text);
+                    MessageBox.Show("Cliente modificado");
                     this.Close();
                     //admonObjeto.MostrarObjetos();
                 }
@@ -192,11 +202,33 @@ namespace ProyectoHCL.Formularios
             {
                 errorT.Clear();
             }
+            if (cbTipo.SelectedItem.ToString() == "Juridico")
+            {
+                if (txtRTN.Text.Trim() == "")
+                {
+                    ok = false;
+                    errorT.SetError(txtRTN, "Indroduzca RTN");
+                }
+                else
+                {
+                    errorT.Clear();
+                }
+                if (txtEmpresa.Text.Trim() == "")
+                {
+                    ok = false;
+                    errorT.SetError(txtEmpresa, "Indroduzca el nombre de la empresa");
+                }
+                else
+                {
+                    errorT.Clear();
+                }
+
+            }
 
             return ok;
 
         }
 
-
+        
     }
 }

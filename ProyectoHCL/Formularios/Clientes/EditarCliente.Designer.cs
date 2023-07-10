@@ -58,15 +58,18 @@
             label3 = new Label();
             label1 = new Label();
             errorT = new ErrorProvider(components);
+            pictureBox5 = new PictureBox();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             gb_juridico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorT).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             SuspendLayout();
             // 
             // panel2
             // 
-            panel2.BackColor = Color.Black;
+            panel2.BackColor = Color.SteelBlue;
+            panel2.Controls.Add(pictureBox5);
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(label11);
             panel2.Dock = DockStyle.Top;
@@ -110,7 +113,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = Color.White;
+            label2.ForeColor = Color.Black;
             label2.Location = new Point(38, 51);
             label2.Name = "label2";
             label2.Size = new Size(83, 19);
@@ -119,6 +122,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.LightGray;
             panel1.Controls.Add(btnCancelar);
             panel1.Controls.Add(btnGuardar);
             panel1.Controls.Add(gb_juridico);
@@ -139,6 +143,7 @@
             panel1.Controls.Add(label1);
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Fill;
+            panel1.ForeColor = Color.Black;
             panel1.Location = new Point(0, 73);
             panel1.Name = "panel1";
             panel1.Size = new Size(775, 401);
@@ -224,7 +229,7 @@
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.ForeColor = Color.White;
+            label8.ForeColor = Color.Black;
             label8.Location = new Point(13, 31);
             label8.Name = "label8";
             label8.Size = new Size(41, 19);
@@ -237,7 +242,7 @@
             label9.AutoSize = true;
             label9.BackColor = Color.Transparent;
             label9.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.ForeColor = Color.White;
+            label9.ForeColor = Color.Black;
             label9.Location = new Point(381, 31);
             label9.Name = "label9";
             label9.Size = new Size(84, 19);
@@ -262,13 +267,13 @@
             label10.AutoSize = true;
             label10.BackColor = Color.Transparent;
             label10.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.ForeColor = Color.White;
+            label10.ForeColor = Color.Black;
             label10.Location = new Point(406, 172);
             label10.Name = "label10";
             label10.Size = new Size(45, 19);
             label10.TabIndex = 55;
             label10.Text = "Tipo:";
-            // 
+             // 
             // txtEmail2
             // 
             txtEmail2.Anchor = AnchorStyles.Top;
@@ -373,7 +378,7 @@
             label7.AutoSize = true;
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.ForeColor = Color.White;
+            label7.ForeColor = Color.Black;
             label7.Location = new Point(38, 175);
             label7.Name = "label7";
             label7.Size = new Size(74, 19);
@@ -386,7 +391,7 @@
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.ForeColor = Color.White;
+            label5.ForeColor = Color.Black;
             label5.Location = new Point(38, 130);
             label5.Name = "label5";
             label5.Size = new Size(74, 19);
@@ -399,7 +404,7 @@
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.ForeColor = Color.White;
+            label6.ForeColor = Color.Black;
             label6.Location = new Point(406, 130);
             label6.Name = "label6";
             label6.Size = new Size(91, 19);
@@ -412,7 +417,7 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.ForeColor = Color.White;
+            label4.ForeColor = Color.Black;
             label4.Location = new Point(406, 91);
             label4.Name = "label4";
             label4.Size = new Size(91, 19);
@@ -425,7 +430,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.ForeColor = Color.White;
+            label3.ForeColor = Color.Black;
             label3.Location = new Point(38, 91);
             label3.Name = "label3";
             label3.Size = new Size(119, 19);
@@ -438,7 +443,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
+            label1.ForeColor = Color.Black;
             label1.Location = new Point(406, 51);
             label1.Name = "label1";
             label1.Size = new Size(85, 19);
@@ -448,6 +453,17 @@
             // errorT
             // 
             errorT.ContainerControl = this;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.BackColor = Color.Transparent;
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(12, 12);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(50, 48);
+            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox5.TabIndex = 60;
+            pictureBox5.TabStop = false;
             // 
             // EditarCliente
             // 
@@ -471,6 +487,7 @@
             gb_juridico.ResumeLayout(false);
             gb_juridico.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)errorT).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ResumeLayout(false);
         }
 
@@ -506,5 +523,6 @@
         private Button btnCancelar;
         private Button btnGuardar;
         private ErrorProvider errorT;
+        private PictureBox pictureBox5;
     }
 }
