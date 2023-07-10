@@ -63,6 +63,16 @@ namespace ProyectoHCL.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap disponible_ {
+            get {
+                object obj = ResourceManager.GetObject("disponible_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap editar {
             get {
                 object obj = ResourceManager.GetObject("editar", resourceCulture);
@@ -106,6 +116,26 @@ namespace ProyectoHCL.Properties {
         internal static System.Drawing.Bitmap Load1 {
             get {
                 object obj = ResourceManager.GetObject("Load1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ocupado_ {
+            get {
+                object obj = ResourceManager.GetObject("ocupado_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Reservada_ {
+            get {
+                object obj = ResourceManager.GetObject("Reservada_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
