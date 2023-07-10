@@ -17,6 +17,7 @@ namespace ProyectoHCL
         AdmonTipHab admonTipHab = new AdmonTipHab();
         AdmonHabitaciones admonHabitaciones = new AdmonHabitaciones();
         AdmonServicios admonServicios = new AdmonServicios();
+        AdmonDescuento admonDescuento = new AdmonDescuento();   
 
         public void editarUs(string id, string estado, string rol, string usuario, string nombre,
             string vencimiento, string email)
@@ -44,6 +45,11 @@ namespace ProyectoHCL
         public void editarServ(string id, string descripcion, string precio)
         {
             admonServicios.modificarServicio(Convert.ToInt32(id), descripcion, Convert.ToDecimal(precio));
+        }
+
+        public void editarDesc(string id, string descripcion, string porcentaje)
+        {
+            admonDescuento.modificarDescuento(Convert.ToInt32(id), descripcion, Convert.ToDecimal(porcentaje));
         }
 
         public void editarClie(string NOMBRECL, int ID_TIPOCLIENTECL, string APELLIDOCL,

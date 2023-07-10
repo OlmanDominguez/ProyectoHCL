@@ -140,6 +140,31 @@ namespace ProyectoHCL.clases
             }
         }
 
+        public bool existeDescuento(string descuento)
+        {
+            MySqlDataReader reader;
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            if (conectar.State == ConnectionState.Closed)
+            {
+                conectar.Open();
+            }
+
+            String sql = "SELECT ID_DESCUENTO FROM TBL_DESCUENTO WHERE DESCRIPCION LIKE @DESCRIPCION";
+            MySqlCommand comando = new MySqlCommand(sql, conectar);
+            comando.Parameters.AddWithValue("@DESCRIPCION", descuento);
+            reader = comando.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool existeCliente(string identi)
         {
             MySqlDataReader reader;
