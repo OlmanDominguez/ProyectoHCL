@@ -1,6 +1,6 @@
 ﻿namespace ProyectoHCL.Formularios
 {
-    partial class EditarCliente
+    partial class AgregarCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarCliente));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarCliente));
             panel2 = new Panel();
+            pictureBox5 = new PictureBox();
             btnCerrar = new Button();
             label11 = new Label();
             label2 = new Label();
@@ -58,12 +59,11 @@
             label3 = new Label();
             label1 = new Label();
             errorT = new ErrorProvider(components);
-            pictureBox5 = new PictureBox();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel1.SuspendLayout();
             gb_juridico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorT).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             SuspendLayout();
             // 
             // panel2
@@ -78,6 +78,17 @@
             panel2.Size = new Size(775, 73);
             panel2.TabIndex = 20;
             panel2.MouseMove += panel2_MouseMove;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.BackColor = Color.Transparent;
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(25, 12);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(50, 48);
+            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox5.TabIndex = 60;
+            pictureBox5.TabStop = false;
             // 
             // btnCerrar
             // 
@@ -194,6 +205,7 @@
             gb_juridico.Size = new Size(720, 74);
             gb_juridico.TabIndex = 57;
             gb_juridico.TabStop = false;
+            gb_juridico.Visible = false;
             // 
             // txtEmpresa
             // 
@@ -273,7 +285,7 @@
             label10.Size = new Size(45, 19);
             label10.TabIndex = 55;
             label10.Text = "Tipo:";
-             // 
+            // 
             // txtEmail2
             // 
             txtEmail2.Anchor = AnchorStyles.Top;
@@ -454,18 +466,7 @@
             // 
             errorT.ContainerControl = this;
             // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(12, 12);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(50, 48);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 60;
-            pictureBox5.TabStop = false;
-            // 
-            // EditarCliente
+            // AgregarCliente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -475,19 +476,19 @@
             Controls.Add(panel1);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "EditarCliente";
+            Name = "AgregarCliente";
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "EditarObjeto";
-            Load += EditarCliente_Load;
+            Load += AgregarCliente_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             gb_juridico.ResumeLayout(false);
             gb_juridico.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)errorT).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ResumeLayout(false);
         }
 

@@ -24,7 +24,7 @@ namespace ProyectoHCL
             
 
             //Application.Run(new CtrlObjetos());
-            
+            //Application.Run(new Cliente());
 
         }
     }

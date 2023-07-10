@@ -42,7 +42,9 @@ namespace ProyectoHCL.clases
         }
 
         
-        public void modificarCliente(int id, string nombreObj, string descObj, string estadoObj)
+        public void modificarCliente( string NOMBRECL, int ID_TIPOCLIENTECL, string APELLIDOCL,
+             string NOMBRE_RTNCL, string RTNCL, string TELEFONOCL, string EMAILCL, int CODIGOCL, 
+             string DNI_PASAPORTECL, string TELEFONO2CL, string EMAIL2CL)
         {
 
             try
@@ -52,12 +54,19 @@ namespace ProyectoHCL.clases
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                 conn.Open();
 
-                cmd = new MySqlCommand("editarObjeto", conn);
+                cmd = new MySqlCommand("EditarCliente", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@idObjeto", id);
-                cmd.Parameters.AddWithValue("@nombreObj", nombreObj);
-                cmd.Parameters.AddWithValue("@descObj", descObj);
-                cmd.Parameters.AddWithValue("@estadoObj", estadoObj);
+                cmd.Parameters.AddWithValue("@NOMBRECL", NOMBRECL);
+                cmd.Parameters.AddWithValue("@ID_TIPOCLIENTECL", ID_TIPOCLIENTECL);
+                cmd.Parameters.AddWithValue("@APELLIDOCL", APELLIDOCL);
+                cmd.Parameters.AddWithValue("@NOMBRE_RTNCL", NOMBRE_RTNCL);
+                cmd.Parameters.AddWithValue("@RTNCL", RTNCL);
+                cmd.Parameters.AddWithValue("@TELEFONOCL", TELEFONOCL);
+                cmd.Parameters.AddWithValue("@EMAILCL", EMAILCL);
+                cmd.Parameters.AddWithValue("@CODIGOCL", CODIGOCL);
+                cmd.Parameters.AddWithValue("@DNI_PASAPORTECL", DNI_PASAPORTECL);
+                cmd.Parameters.AddWithValue("@TELEFONO2CL", TELEFONO2CL);
+                cmd.Parameters.AddWithValue("@EMAIL2CL", EMAIL2CL);
 
                 cmd.ExecuteNonQuery();
                 conn.Close();

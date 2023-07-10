@@ -59,7 +59,6 @@ namespace ProyectoHCL.Formularios
         }
 
         AdmonUsuarios admonUsuario = new AdmonUsuarios(); //crear objeto admonUsuario para acceder a sus metodos
-        Usuarios usuario = new Usuarios(); //crear objeto Usuario para acceder a sus parametros
 
         private void CtrlUsuarios_Load(object sender, EventArgs e)
         {
