@@ -251,7 +251,7 @@ namespace ProyectoHCL.Formularios
 
         private void cmbMostrarCl_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            numFilas = int.Parse(cmbMostrarCl.Text);
+           numFilas = int.Parse(cmbMostrarCl.Text);
             pagFinal = numFilas;
             CargarDGCl();
         }

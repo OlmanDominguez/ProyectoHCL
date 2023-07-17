@@ -48,9 +48,9 @@ namespace ProyectoHCL.clases
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                 conn.Open();
 
-                cmd = new MySqlCommand("EditarUsuarios", conn);
+                cmd = new MySqlCommand("EditarRoles", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@id_Rol", id);
+                cmd.Parameters.AddWithValue("@ID_rol", id);
                 cmd.Parameters.AddWithValue("@Rol", rol);
                 cmd.Parameters.AddWithValue("@estado_Rol", estado_rol);
                 cmd.Parameters.AddWithValue("@pantalla", pantalla);
@@ -81,7 +81,7 @@ namespace ProyectoHCL.clases
 
                 cmd = new MySqlCommand(sql, conn); //comando que recibe la sentencia sql y la conexion
 
-                cmd.Parameters.AddWithValue("@ID_ROL", id); //obtener valor del parametro id del ROL 
+                cmd.Parameters.AddWithValue("@Id", id); //obtener valor del parametro id del ROL 
 
                 cmd.ExecuteNonQuery();
                 elimino = true;

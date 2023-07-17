@@ -14,9 +14,11 @@ namespace ProyectoHCL.Formularios
 {
     public partial class CtrlHabitaciones : Form
     {
+        R_E_Habitacion R_E_hab = new R_E_Habitacion();
         AdmonHabitaciones admonHab = new AdmonHabitaciones();
         Habitaciones habitacion = new Habitaciones();
         DataSet ds = new DataSet();
+        MsgB msgB = new MsgB();
         int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
 
         public CtrlHabitaciones()
@@ -45,6 +47,8 @@ namespace ProyectoHCL.Formularios
                 cmbPagH.Items.Add(x.ToString());
 
             cmbPagH.SelectedIndex = indice;
+
+            HabilitarBotones();
         }
 
         private void CtrlHabitaciones_Load(object sender, EventArgs e)
@@ -78,15 +82,14 @@ namespace ProyectoHCL.Formularios
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            RegistrarHabitacion registrarHab = new RegistrarHabitacion();
-            registrarHab.ShowDialog();
+            R_E_hab.lblTitulo.Text = "Registrar Habitación";
+            R_E_hab.ShowDialog();
             CargarDG();
         }
 
@@ -158,26 +161,27 @@ namespace ProyectoHCL.Formularios
         {
             if (this.dgvHab.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
-                bool elimino = admonHab.EliminarHabitacion(dgvHab.CurrentRow.Cells["ID"].Value.ToString());
+                MsgB m = new MsgB("pregunta", "¿Está seguro que desea eliminar el registro?");
+                DialogResult dg = m.ShowDialog();
 
-                DialogResult dialogResult = MessageBox.Show("¿Está seguro que desea eliminar el registro?",
-                    "", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (dialogResult == DialogResult.Yes)
+                if (dg == DialogResult.OK)
                 {
+                    bool elimino = admonHab.EliminarHabitacion(dgvHab.CurrentRow.Cells["ID"].Value.ToString());
+
                     if (elimino)
                     {
-                        MessageBox.Show("Habitación eliminada");
+                        MsgB mbox = new MsgB("informacion", "Registro eliminado");
+                        DialogResult dR = mbox.ShowDialog();
                         CargarDG();
                     }
                     else
                     {
-                        MessageBox.Show("Habitación no eliminada");
+                        MsgB mbox = new MsgB("informacion", "Registro no eliminado");
+                        DialogResult dR = mbox.ShowDialog();
                     }
 
                 }
-                else /*if (dialogResult == DialogResult.No)*/
+                else if (dg == DialogResult.Cancel)
                 {
 
                 }
@@ -185,18 +189,57 @@ namespace ProyectoHCL.Formularios
 
             if (this.dgvHab.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                EditarHabitacion editarHab = new EditarHabitacion();
-
-                editarHab.idH = dgvHab.CurrentRow.Cells["ID"].Value.ToString();
-                editarHab.cmbTipo.Text = dgvHab.CurrentRow.Cells["TIPO"].Value.ToString();
-                editarHab.txtNumero.Text = dgvHab.CurrentRow.Cells["NUMERO"].Value.ToString();
-                editarHab.cmbEstado.Text = dgvHab.CurrentRow.Cells["ESTADO"].Value.ToString();
-                editarHab.ShowDialog();
+                R_E_hab.lblTitulo.Text = "Editar Habitación";
+                R_E_hab.idH = dgvHab.CurrentRow.Cells["ID"].Value.ToString();
+                R_E_hab.cmbTipo.Text = dgvHab.CurrentRow.Cells["TIPO"].Value.ToString();
+                R_E_hab.txtNumero.Text = dgvHab.CurrentRow.Cells["NUMERO"].Value.ToString();
+                R_E_hab.cmbEstado.Text = dgvHab.CurrentRow.Cells["ESTADO"].Value.ToString();
+                R_E_hab.ShowDialog();
+                R_E_hab.limpiarCampos();
                 CargarDG();
             }
         }
 
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPagH.Text) - 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPagH.Text) + 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void HabilitarBotones()
+        {
+            if (pagInicio == 1)
+            {
+                btnAnterior.Enabled = false;
+            }
+            else
+            {
+                btnAnterior.Enabled = true;
+            }
+
+            if (indice == (Convert.ToInt32(txtPagH.Text) - 1))
+            {
+                btnSiguiente.Enabled = false;
+            }
+            else
+            {
+                btnSiguiente.Enabled = true;
+            }
+        }
+
+        private void txtBuscar_TextChanged_1(object sender, EventArgs e)
         {
             if (txtBuscar.Text != "")
             {
