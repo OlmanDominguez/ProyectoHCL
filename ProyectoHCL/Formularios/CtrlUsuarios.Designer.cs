@@ -37,12 +37,12 @@
             panel1 = new Panel();
             button1 = new Button();
             panel2 = new Panel();
-            btnNuevo = new Button();
             label11 = new Label();
             button2 = new Button();
             button5 = new Button();
             btnPerfil = new Button();
             btnCerrarSesion = new Button();
+            btnNuevo = new Button();
             panel5 = new Panel();
             button7 = new Button();
             button9 = new Button();
@@ -52,6 +52,8 @@
             cmbMostrar = new ComboBox();
             label3 = new Label();
             panel3 = new Panel();
+            btnSiguiente = new Button();
+            btnAnterior = new Button();
             txtPaginacion = new TextBox();
             label6 = new Label();
             label7 = new Label();
@@ -97,7 +99,6 @@
             // panel2
             // 
             panel2.BackColor = Color.WhiteSmoke;
-            panel2.Controls.Add(btnNuevo);
             panel2.Controls.Add(label11);
             panel2.Controls.Add(button2);
             panel2.Controls.Add(button5);
@@ -106,29 +107,8 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(60, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1024, 125);
+            panel2.Size = new Size(1024, 65);
             panel2.TabIndex = 33;
-            // 
-            // btnNuevo
-            // 
-            btnNuevo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnNuevo.BackColor = Color.RoyalBlue;
-            btnNuevo.BackgroundImageLayout = ImageLayout.Stretch;
-            btnNuevo.FlatAppearance.BorderSize = 0;
-            btnNuevo.FlatAppearance.MouseOverBackColor = Color.MidnightBlue;
-            btnNuevo.FlatStyle = FlatStyle.Flat;
-            btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            btnNuevo.ForeColor = SystemColors.ButtonFace;
-            btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNuevo.Location = new Point(29, 68);
-            btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(100, 39);
-            btnNuevo.TabIndex = 40;
-            btnNuevo.Text = "Agregar";
-            btnNuevo.TextAlign = ContentAlignment.MiddleRight;
-            btnNuevo.UseVisualStyleBackColor = false;
-            btnNuevo.Click += btnNuevo_Click_1;
             // 
             // label11
             // 
@@ -198,17 +178,39 @@
             btnCerrarSesion.TabIndex = 35;
             btnCerrarSesion.UseVisualStyleBackColor = false;
             // 
+            // btnNuevo
+            // 
+            btnNuevo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnNuevo.BackColor = Color.RoyalBlue;
+            btnNuevo.BackgroundImageLayout = ImageLayout.Stretch;
+            btnNuevo.FlatAppearance.BorderSize = 0;
+            btnNuevo.FlatAppearance.MouseOverBackColor = Color.MidnightBlue;
+            btnNuevo.FlatStyle = FlatStyle.Flat;
+            btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnNuevo.ForeColor = SystemColors.ButtonFace;
+            btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
+            btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
+            btnNuevo.Location = new Point(29, 15);
+            btnNuevo.Name = "btnNuevo";
+            btnNuevo.Size = new Size(100, 39);
+            btnNuevo.TabIndex = 40;
+            btnNuevo.Text = "Agregar";
+            btnNuevo.TextAlign = ContentAlignment.MiddleRight;
+            btnNuevo.UseVisualStyleBackColor = false;
+            btnNuevo.Click += btnNuevo_Click_1;
+            // 
             // panel5
             // 
             panel5.BackColor = Color.Gainsboro;
+            panel5.Controls.Add(btnNuevo);
             panel5.Controls.Add(button7);
             panel5.Controls.Add(button9);
             panel5.Controls.Add(txtBuscar);
             panel5.Controls.Add(label4);
             panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(60, 125);
+            panel5.Location = new Point(60, 65);
             panel5.Name = "panel5";
-            panel5.Size = new Size(1024, 85);
+            panel5.Size = new Size(1024, 67);
             panel5.TabIndex = 34;
             // 
             // button7
@@ -219,7 +221,7 @@
             button7.FlatStyle = FlatStyle.Flat;
             button7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button7.ForeColor = SystemColors.ButtonHighlight;
-            button7.Location = new Point(910, 28);
+            button7.Location = new Point(910, 22);
             button7.Margin = new Padding(2);
             button7.Name = "button7";
             button7.Size = new Size(78, 25);
@@ -235,7 +237,7 @@
             button9.FlatStyle = FlatStyle.Flat;
             button9.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button9.ForeColor = SystemColors.ButtonHighlight;
-            button9.Location = new Point(819, 28);
+            button9.Location = new Point(819, 22);
             button9.Margin = new Padding(2);
             button9.Name = "button9";
             button9.Size = new Size(78, 25);
@@ -247,7 +249,7 @@
             // 
             txtBuscar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             txtBuscar.BackColor = SystemColors.Info;
-            txtBuscar.Location = new Point(92, 31);
+            txtBuscar.Location = new Point(233, 24);
             txtBuscar.Margin = new Padding(2);
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(252, 23);
@@ -261,12 +263,13 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(32, 33);
+            label4.Location = new Point(173, 26);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(55, 20);
             label4.TabIndex = 45;
             label4.Text = "Buscar:";
+            label4.Click += label4_Click;
             // 
             // label1
             // 
@@ -275,7 +278,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(29, 19);
+            label1.Location = new Point(29, 22);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(55, 17);
@@ -288,8 +291,8 @@
             cmbMostrar.BackColor = SystemColors.Info;
             cmbMostrar.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbMostrar.FormattingEnabled = true;
-            cmbMostrar.Items.AddRange(new object[] { "2", "3", "4", "5", "6" });
-            cmbMostrar.Location = new Point(92, 16);
+            cmbMostrar.Items.AddRange(new object[] { "5", "10", "20", "30", "40" });
+            cmbMostrar.Location = new Point(92, 19);
             cmbMostrar.Margin = new Padding(2);
             cmbMostrar.Name = "cmbMostrar";
             cmbMostrar.Size = new Size(77, 23);
@@ -303,7 +306,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.ControlLightLight;
-            label3.Location = new Point(173, 19);
+            label3.Location = new Point(173, 22);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
             label3.Size = new Size(60, 17);
@@ -314,6 +317,8 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(45, 66, 91);
+            panel3.Controls.Add(btnSiguiente);
+            panel3.Controls.Add(btnAnterior);
             panel3.Controls.Add(txtPaginacion);
             panel3.Controls.Add(label6);
             panel3.Controls.Add(label7);
@@ -331,10 +336,42 @@
             panel3.Size = new Size(1024, 76);
             panel3.TabIndex = 36;
             // 
+            // btnSiguiente
+            // 
+            btnSiguiente.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSiguiente.BackColor = Color.Transparent;
+            btnSiguiente.BackgroundImage = (Image)resources.GetObject("btnSiguiente.BackgroundImage");
+            btnSiguiente.BackgroundImageLayout = ImageLayout.Stretch;
+            btnSiguiente.FlatAppearance.BorderSize = 0;
+            btnSiguiente.FlatAppearance.MouseOverBackColor = Color.Silver;
+            btnSiguiente.FlatStyle = FlatStyle.Flat;
+            btnSiguiente.Location = new Point(735, 16);
+            btnSiguiente.Name = "btnSiguiente";
+            btnSiguiente.Size = new Size(30, 31);
+            btnSiguiente.TabIndex = 64;
+            btnSiguiente.UseVisualStyleBackColor = false;
+            btnSiguiente.Click += btnSiguiente_Click;
+            // 
+            // btnAnterior
+            // 
+            btnAnterior.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAnterior.BackColor = Color.Transparent;
+            btnAnterior.BackgroundImage = (Image)resources.GetObject("btnAnterior.BackgroundImage");
+            btnAnterior.BackgroundImageLayout = ImageLayout.Stretch;
+            btnAnterior.FlatAppearance.BorderSize = 0;
+            btnAnterior.FlatAppearance.MouseOverBackColor = Color.Silver;
+            btnAnterior.FlatStyle = FlatStyle.Flat;
+            btnAnterior.Location = new Point(699, 16);
+            btnAnterior.Name = "btnAnterior";
+            btnAnterior.Size = new Size(30, 31);
+            btnAnterior.TabIndex = 63;
+            btnAnterior.UseVisualStyleBackColor = false;
+            btnAnterior.Click += btnAnterior_Click;
+            // 
             // txtPaginacion
             // 
             txtPaginacion.Anchor = AnchorStyles.Right;
-            txtPaginacion.Location = new Point(925, 16);
+            txtPaginacion.Location = new Point(926, 19);
             txtPaginacion.Name = "txtPaginacion";
             txtPaginacion.ReadOnly = true;
             txtPaginacion.Size = new Size(63, 23);
@@ -346,7 +383,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label6.ForeColor = SystemColors.ControlLightLight;
-            label6.Location = new Point(898, 19);
+            label6.Location = new Point(899, 22);
             label6.Name = "label6";
             label6.Size = new Size(24, 17);
             label6.TabIndex = 51;
@@ -358,7 +395,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label7.ForeColor = SystemColors.ControlLightLight;
-            label7.Location = new Point(770, 19);
+            label7.Location = new Point(771, 22);
             label7.Name = "label7";
             label7.Size = new Size(47, 17);
             label7.TabIndex = 50;
@@ -370,7 +407,7 @@
             cmbPaginacion.BackColor = SystemColors.Info;
             cmbPaginacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPaginacion.FormattingEnabled = true;
-            cmbPaginacion.Location = new Point(818, 16);
+            cmbPaginacion.Location = new Point(819, 19);
             cmbPaginacion.Margin = new Padding(2);
             cmbPaginacion.Name = "cmbPaginacion";
             cmbPaginacion.Size = new Size(65, 23);
@@ -421,9 +458,9 @@
             // 
             panel4.Controls.Add(dgvUsuarios);
             panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(60, 210);
+            panel4.Location = new Point(60, 132);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1024, 275);
+            panel4.Size = new Size(1024, 353);
             panel4.TabIndex = 37;
             // 
             // dgvUsuarios
@@ -461,7 +498,7 @@
             dgvUsuarios.DefaultCellStyle = dataGridViewCellStyle3;
             dgvUsuarios.EnableHeadersVisualStyles = false;
             dgvUsuarios.GridColor = Color.FromArgb(45, 66, 91);
-            dgvUsuarios.Location = new Point(0, -2);
+            dgvUsuarios.Location = new Point(0, 0);
             dgvUsuarios.Name = "dgvUsuarios";
             dgvUsuarios.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -480,7 +517,7 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
             dgvUsuarios.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvUsuarios.RowTemplate.Height = 25;
-            dgvUsuarios.Size = new Size(1024, 278);
+            dgvUsuarios.Size = new Size(1024, 353);
             dgvUsuarios.TabIndex = 2;
             dgvUsuarios.CellClick += dgvUsuarios_CellClick_1;
             dgvUsuarios.CellPainting += dgvUsuarios_CellPainting_1;
@@ -543,5 +580,7 @@
         private Label label7;
         private ComboBox cmbPaginacion;
         private TextBox txtPaginacion;
+        private Button btnSiguiente;
+        private Button btnAnterior;
     }
 }
