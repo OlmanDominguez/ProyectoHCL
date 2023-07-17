@@ -1,6 +1,6 @@
 ﻿namespace ProyectoHCL.Formularios
 {
-    partial class RegistrarHabitacion
+    partial class R_E_Habitacion
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistrarHabitacion));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(R_E_Habitacion));
             panel2 = new Panel();
             pictureBox5 = new PictureBox();
-            label11 = new Label();
+            lblTitulo = new Label();
             btnCerrar = new Button();
             btnMin = new Button();
             panel3 = new Panel();
@@ -55,14 +55,14 @@
             // 
             panel2.BackColor = Color.SteelBlue;
             panel2.Controls.Add(pictureBox5);
-            panel2.Controls.Add(label11);
+            panel2.Controls.Add(lblTitulo);
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(btnMin);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
             panel2.Size = new Size(800, 73);
-            panel2.TabIndex = 21;
+            panel2.TabIndex = 22;
             panel2.MouseMove += panel2_MouseMove;
             // 
             // pictureBox5
@@ -76,18 +76,20 @@
             pictureBox5.TabIndex = 34;
             pictureBox5.TabStop = false;
             // 
-            // label11
+            // lblTitulo
             // 
-            label11.Anchor = AnchorStyles.Top;
-            label11.AutoSize = true;
-            label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.ForeColor = Color.White;
-            label11.Location = new Point(297, 21);
-            label11.Name = "label11";
-            label11.Size = new Size(211, 30);
-            label11.TabIndex = 19;
-            label11.Text = "Registrar habitación";
+            lblTitulo.Anchor = AnchorStyles.Top;
+            lblTitulo.AutoSize = true;
+            lblTitulo.BackColor = Color.Transparent;
+            lblTitulo.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTitulo.ForeColor = Color.White;
+            lblTitulo.Location = new Point(302, 21);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.RightToLeft = RightToLeft.No;
+            lblTitulo.Size = new Size(38, 30);
+            lblTitulo.TabIndex = 19;
+            lblTitulo.Text = "lbl";
+            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnCerrar
             // 
@@ -134,7 +136,7 @@
             panel3.Location = new Point(0, 73);
             panel3.Name = "panel3";
             panel3.Size = new Size(800, 377);
-            panel3.TabIndex = 23;
+            panel3.TabIndex = 24;
             // 
             // cmbTipo
             // 
@@ -145,6 +147,7 @@
             cmbTipo.Name = "cmbTipo";
             cmbTipo.Size = new Size(316, 28);
             cmbTipo.TabIndex = 24;
+            cmbTipo.Leave += cmbTipo_Leave;
             // 
             // cmbEstado
             // 
@@ -156,17 +159,19 @@
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(316, 28);
             cmbEstado.TabIndex = 23;
+            cmbEstado.Leave += cmbEstado_Leave;
             // 
             // btnCancelar
             // 
             btnCancelar.Anchor = AnchorStyles.Top;
             btnCancelar.BackColor = Color.Red;
             btnCancelar.FlatAppearance.BorderSize = 0;
-            btnCancelar.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
+            btnCancelar.FlatAppearance.MouseDownBackColor = Color.Firebrick;
+            btnCancelar.FlatAppearance.MouseOverBackColor = Color.Firebrick;
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(467, 282);
+            btnCancelar.Location = new Point(468, 279);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(80, 32);
             btnCancelar.TabIndex = 22;
@@ -179,11 +184,12 @@
             btnGuardar.Anchor = AnchorStyles.Top;
             btnGuardar.BackColor = Color.Green;
             btnGuardar.FlatAppearance.BorderSize = 0;
-            btnGuardar.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
+            btnGuardar.FlatAppearance.MouseDownBackColor = Color.DarkGreen;
+            btnGuardar.FlatAppearance.MouseOverBackColor = Color.DarkGreen;
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(257, 282);
+            btnGuardar.Location = new Point(258, 279);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(82, 32);
             btnGuardar.TabIndex = 21;
@@ -202,6 +208,8 @@
             txtNumero.ShortcutsEnabled = false;
             txtNumero.Size = new Size(316, 27);
             txtNumero.TabIndex = 12;
+            txtNumero.KeyPress += txtNumero_KeyPress;
+            txtNumero.Leave += txtNumero_Leave;
             // 
             // label6
             // 
@@ -240,7 +248,7 @@
             // 
             errorT.ContainerControl = this;
             // 
-            // RegistrarHabitacion
+            // R_E_Habitacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -248,10 +256,10 @@
             Controls.Add(panel3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "RegistrarHabitacion";
+            Name = "R_E_Habitacion";
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "RegistrarHabitacion";
+            Text = "R_E_Habitacion";
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
@@ -267,7 +275,6 @@
         private PictureBox pictureBox5;
         private Button btnCerrar;
         private Button btnMin;
-        private Label label11;
         public Panel panel3;
         public Button btnCancelar;
         public Button btnGuardar;
@@ -275,8 +282,9 @@
         private Label label6;
         private Label label1;
         private Label label2;
-        private ComboBox cmbTipo;
-        private ComboBox cmbEstado;
         private ErrorProvider errorT;
+        public Label lblTitulo;
+        public ComboBox cmbTipo;
+        public ComboBox cmbEstado;
     }
 }
