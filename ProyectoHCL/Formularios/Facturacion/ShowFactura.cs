@@ -48,98 +48,282 @@ namespace ProyectoHCL.Formularios
             }
         }
 
+        private DataTable consulta(string param, int op)
+        {
+            DataTable dt = new DataTable();
+            if (op == 1)
+            {
+                try
+                {
+                    string stri = "select c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, s.FECHACOTI, s.INGRESO, " +
+                                  "s.SALIDA, s.NHUESPEDES FROM TBL_SOLICITUDRESERVA s " +
+                                  "INNER JOIN TBL_CLIENTE c ON s.COD_CLIENTE = c.CODIGO " +
+                                  "WHERE s.ID_SOLICITUDRESERVA = " + param + ";";
 
+
+                    MySqlConnection conn;
+                    MySqlCommand cmd;
+                    conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                    conn.Open();
+
+                    cmd = new MySqlCommand(stri, conn);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    conn.Close();
+                    return dt;
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message + a.StackTrace);
+                    return dt;
+                }
+            }
+            else if (op == 2)
+            {
+                try
+                {
+                    string stri = "SELECT h.NUMEROHABITACION, th.TIPO, th.PRECIO " +
+                          "FROM TBL_DETALLERESERVA ds " +
+                          "INNER JOIN TBL_HABITACION h ON ds.ID_HABITACION = h.ID_HABITACION " +
+                          "INNER JOIN TBL_TIPOHABITACION th ON h.ID_TIPOHABITACION = th.ID_TIPOHABITACION " +
+                          "where ds.ID_SOLICITUDRESERVA = " + param + ";";
+
+
+                    MySqlConnection conn;
+                    MySqlCommand cmd;
+                    conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                    conn.Open();
+
+                    cmd = new MySqlCommand(stri, conn);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    conn.Close();
+                    return dt;
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message + a.StackTrace);
+                    return dt;
+                }
+            }
+            else if (op == 3)
+            {
+                try
+                {
+                    string stri = "SELECT s.DESCRIPCION, ds.CANTIDAD, s.PRECIO " +
+                                  "FROM TBL_DETALLESERVICIO ds " +
+                                  "INNER JOIN TBL_SERVICIO s ON ds.ID_SERVICIO = s.ID_SERVICIO " +
+                                  "where ds.ID_SOLICITUDRESERVA = " + param + ";";
+
+
+                    MySqlConnection conn;
+                    MySqlCommand cmd;
+                    conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                    conn.Open();
+
+                    cmd = new MySqlCommand(stri, conn);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    conn.Close();
+                    return dt;
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message + a.StackTrace);
+                    return dt;
+                }
+            }
+
+
+            return dt;
+
+
+
+        }
 
         private void ShowFactura_Load(object sender, EventArgs e)
         {
-            try
+            if (info.factura == "0") //Factura nueva desde reserva
             {
-                string stri = "SELECT f.NFACTURA, c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, f.FECHA, s.INGRESO, " +
-                       "s.SALIDA, s.NHUESPEDES, h.NUMEROHABITACION, th.TIPO, f.TOTAL FROM TBL_FACTURA f " +
-                       "INNER JOIN TBL_SOLICITUDRESERVA s ON f.ID_SOLICITUDRESERVA = s.ID_SOLICITUDRESERVA " +
-                       "INNER JOIN TBL_CLIENTE c ON s.COD_CLIENTE = c.CODIGO " +
-                       "INNER JOIN TBL_DETALLERESERVA dr ON s.ID_SOLICITUDRESERVA = dr.ID_SOLICITUDRESERVA " +
-                       "INNER JOIN TBL_HABITACION h on dr.ID_HABITACION = h.ID_HABITACION " +
-                       "INNER JOIN TBL_TIPOHABITACION th on h.ID_TIPOHABITACION = th.ID_TIPOHABITACION " +
-                       "WHERE f.NFACTURA = " + numFact.factura + ";";
-
-
-                MySqlConnection conn;
-                MySqlCommand cmd;
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
-
-                cmd = new MySqlCommand(stri, conn);
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                lb_nombres.Text = dt.Rows[0]["NOMBRE"].ToString();
-                lb_apellidos.Text = dt.Rows[0]["APELLIDO"].ToString();
-                lb_ID.Text = dt.Rows[0]["DNI_PASAPORTE"].ToString();
-                lb_fecha.Text = numFact.fecha;
-                lb_ingreso.Text = numFact.ingreso;
-                lb_Salida.Text = numFact.salida;
-                lb_huespedes.Text = dt.Rows[0]["NHUESPEDES"].ToString();
-                int n = dt.Rows.Count;
-                if (n== 1)
+                try
                 {
-                    lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
-                    lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
+                    DataTable dt = new DataTable();
+                    dt = consulta(info.reserva, 1);
+
+                    int n = dt.Rows.Count;
+
+
+                    if (n != 0)
+                    {
+                        lb_nombres.Text = dt.Rows[0]["NOMBRE"].ToString();
+                        lb_apellidos.Text = dt.Rows[0]["APELLIDO"].ToString();
+                        lb_ID.Text = dt.Rows[0]["DNI_PASAPORTE"].ToString();
+                        DateTime hoy = DateTime.Today;
+                        lb_fecha.Text = Convert.ToString(hoy.Date);
+                        lb_ingreso.Text = info.ingreso;
+                        lb_Salida.Text = info.salida;
+                        lb_huespedes.Text = dt.Rows[0]["NHUESPEDES"].ToString();
+                        var noches = Convert.ToDateTime(info.salida) - Convert.ToDateTime(info.ingreso);
+                        lb_noches.Text = Convert.ToString(noches.Days);
+
+
+                        dt = consulta(info.reserva, 2);
+                        n = dt.Rows.Count;
+                        //DetalleHabitaciones
+                        if (n == 0)
+                        {
+                            lb_Habi1.Text = "N/A";
+                            lb_Tipo1.Text = "N/A";
+                            lb_pre1.Text = "N/A";
+                            lb_sbt1.Text = "N/A";
+                            lb_Habi2.Text = "N/A";
+                            lb_Tipo2.Text = "N/A";
+                            lb_pre2.Text = "N/A";
+                            lb_sbt2.Text = "N/A";
+                            lb_Habi3.Text = "N/A";
+                            lb_Tipo3.Text = "N/A";
+                            lb_pre3.Text = "N/A";
+                            lb_sbt3.Text = "N/A";
+                        }
+                        else if (n == 1)
+                        {
+                            lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
+                            lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
+                            lb_pre1.Text = dt.Rows[0]["PRECIO"].ToString();
+                            lb_sbt1.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]));
+                            lb_Habi2.Text = "N/A";
+                            lb_Tipo2.Text = "N/A";
+                            lb_pre2.Text = "N/A";
+                            lb_sbt2.Text = "N/A";
+                            lb_Habi3.Text = "N/A";
+                            lb_Tipo3.Text = "N/A";
+                            lb_pre3.Text = "N/A";
+                            lb_sbt3.Text = "N/A";
+                        }
+                        else if (n == 2)
+                        {
+                            lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
+                            lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
+                            lb_pre1.Text = dt.Rows[0]["PRECIO"].ToString();
+                            lb_sbt1.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]));
+                            lb_Habi2.Text = dt.Rows[1]["NUMEROHABITACION"].ToString();
+                            lb_Tipo2.Text = dt.Rows[1]["TIPO"].ToString();
+                            lb_pre2.Text = dt.Rows[1]["PRECIO"].ToString();
+                            lb_sbt2.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[1]["PRECIO"]));
+                            lb_Habi3.Text = "N/A";
+                            lb_Tipo3.Text = "N/A";
+                            lb_pre3.Text = "N/A";
+                            lb_sbt3.Text = "N/A";
+                        }
+                        else if (n == 3)
+                        {
+                            lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
+                            lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
+                            lb_pre1.Text = dt.Rows[0]["PRECIO"].ToString();
+                            lb_sbt1.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]));
+                            lb_Habi2.Text = dt.Rows[1]["NUMEROHABITACION"].ToString();
+                            lb_Tipo2.Text = dt.Rows[1]["TIPO"].ToString();
+                            lb_pre2.Text = dt.Rows[1]["PRECIO"].ToString();
+                            lb_sbt2.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[1]["PRECIO"]));
+                            lb_Habi3.Text = dt.Rows[2]["NUMEROHABITACION"].ToString();
+                            lb_Tipo3.Text = dt.Rows[2]["TIPO"].ToString();
+                            lb_pre3.Text = dt.Rows[2]["PRECIO"].ToString();
+                            lb_sbt3.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[2]["PRECIO"]));
+                        }
+
+                        //DetalleServicios
+                       /* dt = consulta(info.reserva, 3);
+                        n = dt.Rows.Count;
+                        if (n == 0)
+                        {
+                            lb_Ser1.Text = "N/A";
+                            lb_Tipo1.Text = "N/A";
+                            lb_pre1.Text = "N/A";
+                            lb_sbt1.Text = "N/A";
+                            lb_Ser2.Text = "N/A";
+                            lb_Tipo2.Text = "N/A";
+                            lb_pre2.Text = "N/A";
+                            lb_sbt2.Text = "N/A";
+                            lb_Habi3.Text = "N/A";
+                            lb_Tipo3.Text = "N/A";
+                            lb_pre3.Text = "N/A";
+                            lb_sbt3.Text = "N/A";
+                        }
+                        else if (n == 1)
+                        {
+                            lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
+                            lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
+                            lb_pre1.Text = dt.Rows[0]["PRECIO"].ToString();
+                            lb_sbt1.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]));
+                            lb_Habi2.Text = "N/A";
+                            lb_Tipo2.Text = "N/A";
+                            lb_pre2.Text = "N/A";
+                            lb_sbt2.Text = "N/A";
+                            lb_Habi3.Text = "N/A";
+                            lb_Tipo3.Text = "N/A";
+                            lb_pre3.Text = "N/A";
+                            lb_sbt3.Text = "N/A";
+                        }
+                        else if (n == 2)
+                        {
+                            lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
+                            lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
+                            lb_pre1.Text = dt.Rows[0]["PRECIO"].ToString();
+                            lb_sbt1.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]));
+                            lb_Habi2.Text = dt.Rows[1]["NUMEROHABITACION"].ToString();
+                            lb_Tipo2.Text = dt.Rows[1]["TIPO"].ToString();
+                            lb_pre2.Text = dt.Rows[1]["PRECIO"].ToString();
+                            lb_sbt2.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[1]["PRECIO"]));
+                            lb_Habi3.Text = "N/A";
+                            lb_Tipo3.Text = "N/A";
+                            lb_pre3.Text = "N/A";
+                            lb_sbt3.Text = "N/A";
+                        }
+                        else if (n == 3)
+                        {
+                            lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
+                            lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
+                            lb_pre1.Text = dt.Rows[0]["PRECIO"].ToString();
+                            lb_sbt1.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]));
+                            lb_Habi2.Text = dt.Rows[1]["NUMEROHABITACION"].ToString();
+                            lb_Tipo2.Text = dt.Rows[1]["TIPO"].ToString();
+                            lb_pre2.Text = dt.Rows[1]["PRECIO"].ToString();
+                            lb_sbt2.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[1]["PRECIO"]));
+                            lb_Habi3.Text = dt.Rows[2]["NUMEROHABITACION"].ToString();
+                            lb_Tipo3.Text = dt.Rows[2]["TIPO"].ToString();
+                            lb_pre3.Text = dt.Rows[2]["PRECIO"].ToString();
+                            lb_sbt3.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[2]["PRECIO"]));
+                        }
+                       */
+
+
+                    }
+
+
+
+
+
                 }
-                else if (n == 2)
+                catch (Exception a)
                 {
-                    lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
-                    lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
-                    lb_Habi2.Text = dt.Rows[1]["NUMEROHABITACION"].ToString();
-                    lb_Tipo2.Text = dt.Rows[1]["TIPO"].ToString();
+                    MessageBox.Show(a.Message + a.StackTrace);
                 }
-
-
-                //Consulta
-                /* MySqlCommand comando = new MySqlCommand();
-                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                     comando.CommandText = ("SELECT f.NFACTURA, c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, f.FECHA, s.INGRESO, " +
-                        "s.SALIDA, s.NHUESPEDES, h.NUMEROHABITACION, th.TIPO, f.TOTAL FROM TBL_FACTURA f " +
-                        "INNER JOIN TBL_SOLICITUDRESERVA s ON f.ID_SOLICITUDRESERVA = s.ID_SOLICITUDRESERVA " +
-                        "INNER JOIN TBL_CLIENTE c ON s.COD_CLIENTE = c.CODIGO " +
-                        "INNER JOIN TBL_DETALLERESERVA dr ON s.ID_SOLICITUDRESERVA = dr.ID_SOLICITUDRESERVA " +
-                        "INNER JOIN TBL_HABITACION h on dr.ID_HABITACION = h.ID_HABITACION " +
-                        "INNER JOIN TBL_TIPOHABITACION th on h.ID_TIPOHABITACION = th.ID_TIPOHABITACION " +
-                        "WHERE f.NFACTURA = " + numFact.factura + ";");
-
-                     MySqlDataReader leer = comando.ExecuteReader();
-                     if (leer.Read())
-                     {
-                         lb_nombres.Text = (string)leer["NOMBRE"];
-                         lb_apellidos.Text = (string)leer["APELLIDO"];
-                         lb_ID.Text = (string)leer["DNI_PASAPORTE"];
-                         lb_fecha.Text = numFact.fecha;
-                         lb_ingreso.Text = numFact.ingreso;
-                         lb_Salida.Text = numFact.salida;
-                         lb_huespedes.Text = leer["NHUESPEDES"].ToString();
-
-                         List<string> habi = new List<String>();
-
-                         while (leer.Read())
-                         {
-
-
-                         }
-
-
-                     }*/
-
-
-
 
             }
-            catch (Exception a)
+            else if (info.reserva == "0") //Factura solo para modificar metodo de pago
             {
-                MessageBox.Show(a.Message + a.StackTrace);
+
             }
+            else if (info.factura == "0" & info.reserva == "0") //Factura nueva de 0
+            {
+
+            }
+
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
 
+        }
     }
 }
