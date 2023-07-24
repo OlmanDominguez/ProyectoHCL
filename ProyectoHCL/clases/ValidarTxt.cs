@@ -80,6 +80,18 @@ namespace ProyectoHCL.clases
             }
         }
 
+        public static bool RtxtVacio(RichTextBox Richtxt)
+        {
+            if (Richtxt.Text == string.Empty)
+            {
+                Richtxt.Focus();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
     }
 }

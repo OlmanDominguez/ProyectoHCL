@@ -1,6 +1,6 @@
 ﻿namespace ProyectoHCL.Formularios
 {
-    partial class EditarTipHab
+    partial class R_E_Descuento
     {
         /// <summary>
         /// Required designer variable.
@@ -29,20 +29,18 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarTipHab));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(R_E_Descuento));
             panel2 = new Panel();
-            pictureBox5 = new PictureBox();
             btnCerrar = new Button();
             btnMin = new Button();
-            label11 = new Label();
+            pictureBox5 = new PictureBox();
+            lblTitulo = new Label();
             panel3 = new Panel();
             btnCancelar = new Button();
             btnGuardar = new Button();
-            txtCapacidad = new TextBox();
-            txtPrecio = new TextBox();
-            txtTipo = new TextBox();
-            label6 = new Label();
-            label1 = new Label();
+            txtPorcentaje = new TextBox();
+            txtDesc = new TextBox();
+            label3 = new Label();
             label2 = new Label();
             errorT = new ErrorProvider(components);
             panel2.SuspendLayout();
@@ -54,27 +52,16 @@
             // panel2
             // 
             panel2.BackColor = Color.SteelBlue;
-            panel2.Controls.Add(pictureBox5);
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(btnMin);
-            panel2.Controls.Add(label11);
+            panel2.Controls.Add(pictureBox5);
+            panel2.Controls.Add(lblTitulo);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(798, 73);
-            panel2.TabIndex = 19;
+            panel2.Size = new Size(800, 73);
+            panel2.TabIndex = 3;
             panel2.MouseMove += panel2_MouseMove;
-            // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(12, 12);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(50, 48);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 34;
-            pictureBox5.TabStop = false;
             // 
             // btnCerrar
             // 
@@ -84,10 +71,10 @@
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnCerrar.FlatStyle = FlatStyle.Flat;
-            btnCerrar.Location = new Point(773, 14);
+            btnCerrar.Location = new Point(774, 12);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(14, 17);
-            btnCerrar.TabIndex = 33;
+            btnCerrar.TabIndex = 31;
             btnCerrar.UseVisualStyleBackColor = false;
             btnCerrar.Click += btnCerrar_Click;
             // 
@@ -99,56 +86,65 @@
             btnMin.FlatAppearance.BorderSize = 0;
             btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnMin.FlatStyle = FlatStyle.Flat;
-            btnMin.Location = new Point(738, 12);
+            btnMin.Location = new Point(739, 10);
             btnMin.Name = "btnMin";
             btnMin.Size = new Size(19, 20);
-            btnMin.TabIndex = 32;
+            btnMin.TabIndex = 30;
             btnMin.UseVisualStyleBackColor = false;
             btnMin.Click += btnMin_Click;
             // 
-            // label11
+            // pictureBox5
             // 
-            label11.Anchor = AnchorStyles.Top;
-            label11.AutoSize = true;
-            label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.ForeColor = Color.White;
-            label11.Location = new Point(279, 21);
-            label11.Name = "label11";
-            label11.Size = new Size(257, 30);
-            label11.TabIndex = 19;
-            label11.Text = "Editar tipo de habitación";
+            pictureBox5.BackColor = Color.Transparent;
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(12, 12);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(50, 48);
+            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox5.TabIndex = 19;
+            pictureBox5.TabStop = false;
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.AutoSize = true;
+            lblTitulo.BackColor = Color.Transparent;
+            lblTitulo.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTitulo.ForeColor = Color.White;
+            lblTitulo.Location = new Point(295, 21);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(38, 30);
+            lblTitulo.TabIndex = 9;
+            lblTitulo.Text = "lbl";
+            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
             panel3.Controls.Add(btnCancelar);
             panel3.Controls.Add(btnGuardar);
-            panel3.Controls.Add(txtCapacidad);
-            panel3.Controls.Add(txtPrecio);
-            panel3.Controls.Add(txtTipo);
-            panel3.Controls.Add(label6);
-            panel3.Controls.Add(label1);
+            panel3.Controls.Add(txtPorcentaje);
+            panel3.Controls.Add(txtDesc);
+            panel3.Controls.Add(label3);
             panel3.Controls.Add(label2);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 73);
             panel3.Name = "panel3";
-            panel3.Size = new Size(798, 375);
-            panel3.TabIndex = 21;
+            panel3.Size = new Size(800, 332);
+            panel3.TabIndex = 4;
             // 
             // btnCancelar
             // 
             btnCancelar.Anchor = AnchorStyles.Top;
             btnCancelar.BackColor = Color.Red;
             btnCancelar.FlatAppearance.BorderSize = 0;
-            btnCancelar.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
+            btnCancelar.FlatAppearance.MouseOverBackColor = Color.Firebrick;
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(467, 296);
+            btnCancelar.Location = new Point(468, 209);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(80, 32);
-            btnCancelar.TabIndex = 22;
+            btnCancelar.TabIndex = 11;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
@@ -158,105 +154,85 @@
             btnGuardar.Anchor = AnchorStyles.Top;
             btnGuardar.BackColor = Color.Green;
             btnGuardar.FlatAppearance.BorderSize = 0;
-            btnGuardar.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
+            btnGuardar.FlatAppearance.MouseOverBackColor = Color.DarkGreen;
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(257, 296);
+            btnGuardar.Location = new Point(256, 209);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(82, 32);
-            btnGuardar.TabIndex = 21;
+            btnGuardar.TabIndex = 10;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
-            // txtCapacidad
+            // txtPorcentaje
             // 
-            txtCapacidad.BackColor = Color.White;
-            txtCapacidad.BorderStyle = BorderStyle.FixedSingle;
-            txtCapacidad.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtCapacidad.Location = new Point(243, 138);
-            txtCapacidad.MaxLength = 50;
-            txtCapacidad.Name = "txtCapacidad";
-            txtCapacidad.ShortcutsEnabled = false;
-            txtCapacidad.Size = new Size(316, 27);
-            txtCapacidad.TabIndex = 12;
+            txtPorcentaje.BackColor = Color.White;
+            txtPorcentaje.BorderStyle = BorderStyle.FixedSingle;
+            txtPorcentaje.CharacterCasing = CharacterCasing.Upper;
+            txtPorcentaje.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtPorcentaje.Location = new Point(242, 140);
+            txtPorcentaje.MaxLength = 100;
+            txtPorcentaje.Name = "txtPorcentaje";
+            txtPorcentaje.ShortcutsEnabled = false;
+            txtPorcentaje.Size = new Size(316, 27);
+            txtPorcentaje.TabIndex = 10;
+            txtPorcentaje.KeyPress += txtPorcentaje_KeyPress;
+            txtPorcentaje.Leave += txtPorcentaje_Leave;
             // 
-            // txtPrecio
+            // txtDesc
             // 
-            txtPrecio.BackColor = Color.White;
-            txtPrecio.BorderStyle = BorderStyle.FixedSingle;
-            txtPrecio.CharacterCasing = CharacterCasing.Upper;
-            txtPrecio.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtPrecio.Location = new Point(243, 216);
-            txtPrecio.MaxLength = 100;
-            txtPrecio.Name = "txtPrecio";
-            txtPrecio.ShortcutsEnabled = false;
-            txtPrecio.Size = new Size(316, 27);
-            txtPrecio.TabIndex = 10;
+            txtDesc.BackColor = Color.White;
+            txtDesc.BorderStyle = BorderStyle.FixedSingle;
+            txtDesc.CharacterCasing = CharacterCasing.Upper;
+            txtDesc.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtDesc.Location = new Point(242, 68);
+            txtDesc.MaxLength = 15;
+            txtDesc.Name = "txtDesc";
+            txtDesc.ShortcutsEnabled = false;
+            txtDesc.Size = new Size(316, 27);
+            txtDesc.TabIndex = 9;
+            txtDesc.Leave += txtNombre_Leave;
             // 
-            // txtTipo
+            // label3
             // 
-            txtTipo.BackColor = Color.White;
-            txtTipo.BorderStyle = BorderStyle.FixedSingle;
-            txtTipo.CharacterCasing = CharacterCasing.Upper;
-            txtTipo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTipo.Location = new Point(243, 60);
-            txtTipo.MaxLength = 15;
-            txtTipo.Name = "txtTipo";
-            txtTipo.ShortcutsEnabled = false;
-            txtTipo.Size = new Size(316, 27);
-            txtTipo.TabIndex = 9;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.ForeColor = Color.Black;
-            label6.Location = new Point(243, 110);
-            label6.Name = "label6";
-            label6.Size = new Size(105, 19);
-            label6.TabIndex = 5;
-            label6.Text = "Capacidad:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.Black;
-            label1.Location = new Point(243, 188);
-            label1.Name = "label1";
-            label1.Size = new Size(61, 19);
-            label1.TabIndex = 2;
-            label1.Text = "Precio:";
+            label3.AutoSize = true;
+            label3.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.Black;
+            label3.Location = new Point(242, 112);
+            label3.Name = "label3";
+            label3.Size = new Size(96, 19);
+            label3.TabIndex = 2;
+            label3.Text = "Porcentaje:";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(243, 32);
+            label2.Location = new Point(242, 40);
             label2.Name = "label2";
-            label2.Size = new Size(45, 19);
+            label2.Size = new Size(77, 19);
             label2.TabIndex = 1;
-            label2.Text = "Tipo:";
+            label2.Text = "Nombre:";
             // 
             // errorT
             // 
             errorT.ContainerControl = this;
             // 
-            // EditarTipHab
+            // R_E_Descuento
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(798, 448);
+            ClientSize = new Size(800, 405);
             Controls.Add(panel3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "EditarTipHab";
+            Name = "R_E_Descuento";
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "EditarTipHab";
+            Text = "R_E_Descuento";
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
@@ -269,18 +245,16 @@
         #endregion
 
         private Panel panel2;
-        private PictureBox pictureBox5;
         private Button btnCerrar;
         private Button btnMin;
-        private Label label11;
-        public Panel panel3;
-        public Button btnCancelar;
-        public Button btnGuardar;
-        public TextBox txtCapacidad;
-        public TextBox txtPrecio;
-        public TextBox txtTipo;
-        private Label label6;
-        private Label label1;
+        private PictureBox pictureBox5;
+        public Label lblTitulo;
+        private Panel panel3;
+        private Button btnCancelar;
+        private Button btnGuardar;
+        public TextBox txtPorcentaje;
+        public TextBox txtDesc;
+        private Label label3;
         private Label label2;
         private ErrorProvider errorT;
     }

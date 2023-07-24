@@ -14,33 +14,6 @@ namespace ProyectoHCL.clases
         MySqlConnection conn;
         MySqlCommand cmd;
 
-        public DataTable MostrarObjetos()
-        {
-            DataTable mostrarObjetosDT = new DataTable();
-
-            try
-            {
-                string sql = "SELECT ID_OBJETO AS ID, OBJETO AS NOMBRE, DESCRIPCION, ESTADO_OBJETO AS ESTADO, " +
-                    "FECHA_CREACION AS CREACIÓN, FECHA_ACTUALIZACION AS ACTUALIZACIÓN FROM TBL_OBJETO;";
-
-
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
-
-                cmd = new MySqlCommand(sql, conn);
-
-                MySqlDataReader reader = cmd.ExecuteReader();
-                mostrarObjetosDT.Load(reader);
-
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Se produjo un error");
-            }
-            return mostrarObjetosDT;
-
-        }
-
         public void modificarObjeto(int id, string nombreObj, string descObj, string estadoObj)
         {
 

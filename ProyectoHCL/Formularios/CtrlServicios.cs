@@ -14,9 +14,11 @@ namespace ProyectoHCL.Formularios
 {
     public partial class CtrlServicios : Form
     {
+        R_E_Servicio R_E_serv = new R_E_Servicio();
         AdmonServicios admonServ = new AdmonServicios();
         Servicio servicio = new Servicio();
         DataSet ds = new DataSet();
+        MsgB msgB = new MsgB();
         int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
 
         public CtrlServicios()
@@ -45,6 +47,8 @@ namespace ProyectoHCL.Formularios
                 cmbServ.Items.Add(x.ToString());
 
             cmbServ.SelectedIndex = indice;
+
+            HabilitarBotones();
         }
 
         private void CtrlServicios_Load(object sender, EventArgs e)
@@ -85,8 +89,8 @@ namespace ProyectoHCL.Formularios
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            RegistrarServicio registrarServ = new RegistrarServicio();
-            registrarServ.ShowDialog();
+            R_E_serv.lblTitulo.Text = "Registrar Servicio";
+            R_E_serv.ShowDialog();
             CargarDG();
         }
 
@@ -158,26 +162,27 @@ namespace ProyectoHCL.Formularios
         {
             if (this.dgvServ.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
-                bool elimino = admonServ.EliminarServicio(dgvServ.CurrentRow.Cells["ID"].Value.ToString());
+                MsgB m = new MsgB("pregunta", "¿Está seguro que desea eliminar el registro?");
+                DialogResult dg = m.ShowDialog();
 
-                DialogResult dialogResult = MessageBox.Show("¿Está seguro que desea eliminar el registro?",
-                    "", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (dialogResult == DialogResult.Yes)
+                if (dg == DialogResult.OK)
                 {
+                    bool elimino = admonServ.EliminarServicio(dgvServ.CurrentRow.Cells["ID"].Value.ToString());
+
                     if (elimino)
                     {
-                        MessageBox.Show("Servicio eliminado");
+                        MsgB mbox = new MsgB("informacion", "Registro eliminado");
+                        DialogResult dR = mbox.ShowDialog();
                         CargarDG();
                     }
                     else
                     {
-                        MessageBox.Show("Servicio no eliminado");
+                        MsgB mbox = new MsgB("informacion", "Registro no eliminado");
+                        DialogResult dR = mbox.ShowDialog();
                     }
 
                 }
-                else /*if (dialogResult == DialogResult.No)*/
+                else if (dg == DialogResult.Cancel)
                 {
 
                 }
@@ -185,12 +190,13 @@ namespace ProyectoHCL.Formularios
 
             if (this.dgvServ.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                EditarServicio editarServ = new EditarServicio();
+                R_E_serv.lblTitulo.Text = "Editar Servicio";
 
-                editarServ.idS = dgvServ.CurrentRow.Cells["ID"].Value.ToString();
-                editarServ.txtDesc.Text = dgvServ.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
-                editarServ.txtPrecio.Text = dgvServ.CurrentRow.Cells["PRECIO"].Value.ToString();
-                editarServ.ShowDialog();
+                R_E_serv.idS = dgvServ.CurrentRow.Cells["ID"].Value.ToString();
+                R_E_serv.txtServ.Text = dgvServ.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
+                R_E_serv.txtPrecio.Text = dgvServ.CurrentRow.Cells["PRECIO"].Value.ToString();
+                R_E_serv.ShowDialog();
+                R_E_serv.limpiarCampos();
                 CargarDG();
             }
         }
@@ -204,6 +210,45 @@ namespace ProyectoHCL.Formularios
             else
             {
                 CargarDG();
+            }
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbServ.Text) - 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbServ.Text) + 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void HabilitarBotones()
+        {
+            if (pagInicio == 1)
+            {
+                btnAnterior.Enabled = false;
+            }
+            else
+            {
+                btnAnterior.Enabled = true;
+            }
+
+            if (indice == (Convert.ToInt32(txtServ.Text) - 1))
+            {
+                btnSiguiente.Enabled = false;
+            }
+            else
+            {
+                btnSiguiente.Enabled = true;
             }
         }
     }

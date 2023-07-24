@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
+﻿using DocumentFormat.OpenXml.Vml;
+using Microsoft.VisualBasic.ApplicationServices;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
@@ -15,10 +16,12 @@ namespace ProyectoHCL.Formularios
 {
     public partial class CtrlTipoHabitacion : Form
     {
+        //R_E_TipHabitacion R_E_tip = new R_E_TipHabitacion();
         AdmonTipHab admonTipHab = new AdmonTipHab();
         TipoHabitacion tipHab = new TipoHabitacion();
         DataSet ds = new DataSet();
-        int pagInicio = 1, indice = 0, numFilas = 3, pagFinal, cmbIndice = 0;
+        MsgB msgB = new MsgB();
+        int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
 
         public CtrlTipoHabitacion()
         {
@@ -46,6 +49,8 @@ namespace ProyectoHCL.Formularios
                 cboxPag.Items.Add(x.ToString());
 
             cboxPag.SelectedIndex = indice;
+
+            //HabilitarBotones();
         }
 
         private void CtrlTipoHabitacion_Load(object sender, EventArgs e)
@@ -86,8 +91,8 @@ namespace ProyectoHCL.Formularios
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            RegistrarTipHab registrarTipHab = new RegistrarTipHab(); 
-            registrarTipHab.ShowDialog();
+            //R_E_tip.lblTitulo.Text = "Registrar Tipo de Habitación";
+            //R_E_tip.ShowDialog();
             CargarDG();
         }
 
@@ -136,19 +141,19 @@ namespace ProyectoHCL.Formularios
             switch (cmbIndice)
             {
                 case 0:
-                    numFilas = 2;
-                    break;
-                case 1:
-                    numFilas = 3;
-                    break;
-                case 2:
-                    numFilas = 4;
-                    break;
-                case 3:
                     numFilas = 5;
                     break;
+                case 1:
+                    numFilas = 10;
+                    break;
+                case 2:
+                    numFilas = 20;
+                    break;
+                case 3:
+                    numFilas = 30;
+                    break;
                 case 4:
-                    numFilas = 6;
+                    numFilas = 40;
                     break;
             }
             pagFinal = numFilas;
@@ -159,26 +164,27 @@ namespace ProyectoHCL.Formularios
         {
             if (this.dgvTH.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
-                bool elimino = admonTipHab.EliminarTipHab(dgvTH.CurrentRow.Cells["ID"].Value.ToString());
+                MsgB m = new MsgB("pregunta", "¿Está seguro que desea eliminar el registro?");
+                DialogResult dg = m.ShowDialog();
 
-                DialogResult dialogResult = MessageBox.Show("¿Está seguro que desea eliminar el registro?",
-                    "", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (dialogResult == DialogResult.Yes)
+                if (dg == DialogResult.OK)
                 {
+                    bool elimino = admonTipHab.EliminarTipHab(dgvTH.CurrentRow.Cells["ID"].Value.ToString());
+
                     if (elimino)
                     {
-                        MessageBox.Show("Tipo de habitación eliminado");
+                        MsgB mbox = new MsgB("informacion", "Registro eliminado");
+                        DialogResult dR = mbox.ShowDialog();
                         CargarDG();
                     }
                     else
                     {
-                        MessageBox.Show("Tipo de habitación no eliminado");
+                        MsgB mbox = new MsgB("informacion", "Registro no eliminado");
+                        DialogResult dR = mbox.ShowDialog();
                     }
 
                 }
-                else /*if (dialogResult == DialogResult.No)*/
+                else if (dg == DialogResult.Cancel)
                 {
 
                 }
@@ -186,26 +192,66 @@ namespace ProyectoHCL.Formularios
 
             if (this.dgvTH.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                EditarTipHab editarTipHab = new EditarTipHab();
+                // R_E_tip.lblTitulo.Text = "Editar Tipo de Habitación";
 
-                editarTipHab.idTH = dgvTH.CurrentRow.Cells["ID"].Value.ToString();
-                editarTipHab.txtTipo.Text = dgvTH.CurrentRow.Cells["TIPO"].Value.ToString(); 
-                editarTipHab.txtCapacidad.Text = dgvTH.CurrentRow.Cells["CAPACIDAD"].Value.ToString();
-                editarTipHab.txtPrecio.Text = dgvTH.CurrentRow.Cells["PRECIO"].Value.ToString();
-                editarTipHab.ShowDialog();  
+                //R_E_tip.idTH = dgvTH.CurrentRow.Cells["ID"].Value.ToString();
+                //R_E_tip.txtTipo.Text = dgvTH.CurrentRow.Cells["TIPO"].Value.ToString();
+                //R_E_tip.txtCapacidad.Text = dgvTH.CurrentRow.Cells["CAPACIDAD"].Value.ToString();
+                //R_E_tip.txtPrecio.Text = dgvTH.CurrentRow.Cells["PRECIO"].Value.ToString();
+                //R_E_tip.ShowDialog();
+                //R_E_tip.limpiarCampos();
                 CargarDG();
             }
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-            if (txtBuscar.Text != "") 
+            if (txtBuscar.Text != "")
             {
-                BuscarTipHab(txtBuscar.Text); 
+                BuscarTipHab(txtBuscar.Text);
             }
             else
             {
-                CargarDG();  
+                CargarDG();
+            }
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cboxPag.Text) - 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cboxPag.Text) + 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void HabilitarBotones()
+        {
+            if (pagInicio == 1)
+            {
+                btnAnterior.Enabled = false;
+            }
+            else
+            {
+                btnAnterior.Enabled = true;
+            }
+
+            if (indice == (Convert.ToInt32(txtPagTH.Text) - 1))
+            {
+                btnSiguiente.Enabled = false;
+            }
+            else
+            {
+                btnSiguiente.Enabled = true;
             }
         }
     }

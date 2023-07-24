@@ -14,8 +14,10 @@ namespace ProyectoHCL.Formularios
 {
     public partial class CtrlDescuentos : Form
     {
+        R_E_Descuento R_E_desc = new R_E_Descuento();
         AdmonDescuento admonDesc = new AdmonDescuento();
         Descuentos descuento = new Descuentos();
+        MsgB msgB = new MsgB();
         DataSet ds = new DataSet();
         int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
 
@@ -45,6 +47,8 @@ namespace ProyectoHCL.Formularios
                 cmbDesc.Items.Add(x.ToString());
 
             cmbDesc.SelectedIndex = indice;
+
+            HabilitarBotones();
         }
 
         private void CtrlDescuentos_Load(object sender, EventArgs e)
@@ -85,8 +89,8 @@ namespace ProyectoHCL.Formularios
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            //RegistrarServicio registrarServ = new RegistrarServicio();
-            //registrarServ.ShowDialog();
+            R_E_desc.lblTitulo.Text = "Registrar Descuento";
+            R_E_desc.ShowDialog();
             CargarDG();
         }
 
@@ -158,26 +162,27 @@ namespace ProyectoHCL.Formularios
         {
             if (this.dgvDesc.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
-                bool elimino = admonDesc.EliminarDescuento(dgvDesc.CurrentRow.Cells["ID"].Value.ToString());
+                MsgB m = new MsgB("pregunta", "¿Está seguro que desea eliminar el registro?");
+                DialogResult dg = m.ShowDialog();
 
-                DialogResult dialogResult = MessageBox.Show("¿Está seguro que desea eliminar el registro?",
-                    "", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (dialogResult == DialogResult.Yes)
+                if (dg == DialogResult.OK)
                 {
+                    bool elimino = admonDesc.EliminarDescuento(dgvDesc.CurrentRow.Cells["ID"].Value.ToString());
+
                     if (elimino)
                     {
-                        MessageBox.Show("Descuento eliminado");
+                        MsgB mbox = new MsgB("informacion", "Registro eliminado");
+                        DialogResult dR = mbox.ShowDialog();
                         CargarDG();
                     }
                     else
                     {
-                        MessageBox.Show("Descuento no eliminado");
+                        MsgB mbox = new MsgB("informacion", "Registro no eliminado");
+                        DialogResult dR = mbox.ShowDialog();
                     }
 
                 }
-                else /*if (dialogResult == DialogResult.No)*/
+                else if (dg == DialogResult.Cancel)
                 {
 
                 }
@@ -185,12 +190,12 @@ namespace ProyectoHCL.Formularios
 
             if (this.dgvDesc.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                EditarDescuento editarDesc = new EditarDescuento();
-
-                editarDesc.idDesc = dgvDesc.CurrentRow.Cells["ID"].Value.ToString();
-                editarDesc.txtDesc.Text = dgvDesc.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
-                editarDesc.txtPorcentaje.Text = dgvDesc.CurrentRow.Cells["PORCENTAJE"].Value.ToString();
-                editarDesc.ShowDialog();
+                R_E_desc.lblTitulo.Text = "Editar Descuento";
+                R_E_desc.idDesc = dgvDesc.CurrentRow.Cells["ID"].Value.ToString();
+                R_E_desc.txtDesc.Text = dgvDesc.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
+                R_E_desc.txtPorcentaje.Text = dgvDesc.CurrentRow.Cells["PORCENTAJE"].Value.ToString();
+                R_E_desc.ShowDialog();
+                R_E_desc.limpiarCampos();
                 CargarDG();
             }
         }
@@ -205,6 +210,51 @@ namespace ProyectoHCL.Formularios
             {
                 CargarDG();
             }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbDesc.Text) - 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbDesc.Text) + 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void HabilitarBotones()
+        {
+            if (pagInicio == 1)
+            {
+                btnAnterior.Enabled = false;
+            }
+            else
+            {
+                btnAnterior.Enabled = true;
+            }
+
+            if (indice == (Convert.ToInt32(txtDesc.Text) - 1))
+            {
+                btnSiguiente.Enabled = false;
+            }
+            else
+            {
+                btnSiguiente.Enabled = true;
+            }
+
         }
     }
 }

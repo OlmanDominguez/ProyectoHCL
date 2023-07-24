@@ -36,28 +36,28 @@
             pictureBox5 = new PictureBox();
             lblTitulo = new Label();
             panel3 = new Panel();
-            dtpVencimiento = new DateTimePicker();
-            cmbEstado2 = new ComboBox();
-            lblEstado2 = new Label();
             btnCancelar = new Button();
-            txtFechaV = new TextBox();
             btnGuardar = new Button();
-            txtFechaC = new TextBox();
-            cmbEstado = new ComboBox();
-            cmbRol = new ComboBox();
-            txtCorreo = new TextBox();
-            txtContraseña = new TextBox();
             txtNombre = new TextBox();
             txtUsuario = new TextBox();
-            lblEstado = new Label();
-            label8 = new Label();
-            label7 = new Label();
-            label6 = new Label();
-            label5 = new Label();
-            lblContraseña = new Label();
             label3 = new Label();
             label2 = new Label();
             errorT = new ErrorProvider(components);
+            label6 = new Label();
+            label8 = new Label();
+            txtFechaC = new TextBox();
+            txtCorreo = new TextBox();
+            lblContraseña = new Label();
+            label5 = new Label();
+            label7 = new Label();
+            lblEstado = new Label();
+            txtContraseña = new TextBox();
+            cmbRol = new ComboBox();
+            dtpVencimiento = new DateTimePicker();
+            txtFechaV = new TextBox();
+            lblEstado2 = new Label();
+            cmbEstado2 = new ComboBox();
+            cmbEstado = new ComboBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
@@ -162,43 +162,6 @@
             panel3.Size = new Size(886, 418);
             panel3.TabIndex = 3;
             // 
-            // dtpVencimiento
-            // 
-            dtpVencimiento.Anchor = AnchorStyles.Top;
-            dtpVencimiento.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dtpVencimiento.Format = DateTimePickerFormat.Short;
-            dtpVencimiento.Location = new Point(463, 205);
-            dtpVencimiento.Name = "dtpVencimiento";
-            dtpVencimiento.Size = new Size(316, 27);
-            dtpVencimiento.TabIndex = 21;
-            dtpVencimiento.Visible = false;
-            // 
-            // cmbEstado2
-            // 
-            cmbEstado2.BackColor = Color.White;
-            cmbEstado2.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbEstado2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            cmbEstado2.FormattingEnabled = true;
-            cmbEstado2.Items.AddRange(new object[] { "BLOQUEADO", "ACTIVO", "INACTIVO", "NUEVO" });
-            cmbEstado2.Location = new Point(98, 205);
-            cmbEstado2.Name = "cmbEstado2";
-            cmbEstado2.Size = new Size(316, 28);
-            cmbEstado2.TabIndex = 20;
-            cmbEstado2.Visible = false;
-            cmbEstado2.Leave += cmbEstado2_Leave;
-            // 
-            // lblEstado2
-            // 
-            lblEstado2.AutoSize = true;
-            lblEstado2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblEstado2.ForeColor = Color.Black;
-            lblEstado2.Location = new Point(98, 177);
-            lblEstado2.Name = "lblEstado2";
-            lblEstado2.Size = new Size(123, 19);
-            lblEstado2.TabIndex = 19;
-            lblEstado2.Text = "Estado usuario:";
-            lblEstado2.Visible = false;
-            // 
             // btnCancelar
             // 
             btnCancelar.Anchor = AnchorStyles.Top;
@@ -216,20 +179,6 @@
             btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
-            // txtFechaV
-            // 
-            txtFechaV.BackColor = Color.White;
-            txtFechaV.BorderStyle = BorderStyle.FixedSingle;
-            txtFechaV.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtFechaV.Location = new Point(463, 205);
-            txtFechaV.MaxLength = 50;
-            txtFechaV.Name = "txtFechaV";
-            txtFechaV.ReadOnly = true;
-            txtFechaV.ShortcutsEnabled = false;
-            txtFechaV.Size = new Size(316, 27);
-            txtFechaV.TabIndex = 18;
-            txtFechaV.Visible = false;
-            // 
             // btnGuardar
             // 
             btnGuardar.Anchor = AnchorStyles.Top;
@@ -246,74 +195,6 @@
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
-            // 
-            // txtFechaC
-            // 
-            txtFechaC.BackColor = Color.White;
-            txtFechaC.BorderStyle = BorderStyle.FixedSingle;
-            txtFechaC.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtFechaC.Location = new Point(463, 134);
-            txtFechaC.MaxLength = 50;
-            txtFechaC.Name = "txtFechaC";
-            txtFechaC.ReadOnly = true;
-            txtFechaC.ShortcutsEnabled = false;
-            txtFechaC.Size = new Size(316, 27);
-            txtFechaC.TabIndex = 17;
-            // 
-            // cmbEstado
-            // 
-            cmbEstado.BackColor = Color.White;
-            cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbEstado.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            cmbEstado.FormattingEnabled = true;
-            cmbEstado.Items.AddRange(new object[] { "BLOQUEADO", "ACTIVO", "INACTIVO", "NUEVO" });
-            cmbEstado.Location = new Point(463, 277);
-            cmbEstado.Name = "cmbEstado";
-            cmbEstado.Size = new Size(316, 28);
-            cmbEstado.TabIndex = 16;
-            cmbEstado.Visible = false;
-            cmbEstado.Leave += cmbEstado_Leave;
-            // 
-            // cmbRol
-            // 
-            cmbRol.BackColor = Color.White;
-            cmbRol.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbRol.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            cmbRol.FormattingEnabled = true;
-            cmbRol.Items.AddRange(new object[] { "ADMINISTRADOR", "COLABORADOR" });
-            cmbRol.Location = new Point(98, 277);
-            cmbRol.Name = "cmbRol";
-            cmbRol.Size = new Size(316, 28);
-            cmbRol.TabIndex = 15;
-            cmbRol.Leave += cmbRol_Leave;
-            // 
-            // txtCorreo
-            // 
-            txtCorreo.BackColor = Color.White;
-            txtCorreo.BorderStyle = BorderStyle.FixedSingle;
-            txtCorreo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtCorreo.Location = new Point(463, 62);
-            txtCorreo.MaxLength = 50;
-            txtCorreo.Name = "txtCorreo";
-            txtCorreo.ShortcutsEnabled = false;
-            txtCorreo.Size = new Size(316, 27);
-            txtCorreo.TabIndex = 12;
-            txtCorreo.Leave += txtCorreo_Leave;
-            // 
-            // txtContraseña
-            // 
-            txtContraseña.BackColor = Color.White;
-            txtContraseña.BorderStyle = BorderStyle.FixedSingle;
-            txtContraseña.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtContraseña.Location = new Point(98, 205);
-            txtContraseña.MaxLength = 10;
-            txtContraseña.Name = "txtContraseña";
-            txtContraseña.ShortcutsEnabled = false;
-            txtContraseña.Size = new Size(316, 27);
-            txtContraseña.TabIndex = 11;
-            txtContraseña.Visible = false;
-            txtContraseña.KeyPress += txtContraseña_KeyPress;
-            txtContraseña.Leave += txtContraseña_Leave;
             // 
             // txtNombre
             // 
@@ -344,74 +225,6 @@
             txtUsuario.TabIndex = 9;
             txtUsuario.Leave += txtUsuario_Leave;
             // 
-            // lblEstado
-            // 
-            lblEstado.AutoSize = true;
-            lblEstado.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblEstado.ForeColor = Color.Black;
-            lblEstado.Location = new Point(463, 250);
-            lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(123, 19);
-            lblEstado.TabIndex = 8;
-            lblEstado.Text = "Estado usuario:";
-            lblEstado.Visible = false;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.ForeColor = Color.Black;
-            label8.Location = new Point(463, 106);
-            label8.Name = "label8";
-            label8.Size = new Size(136, 19);
-            label8.TabIndex = 7;
-            label8.Text = "Fecha creación:";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.ForeColor = Color.Black;
-            label7.Location = new Point(463, 177);
-            label7.Name = "label7";
-            label7.Size = new Size(163, 19);
-            label7.TabIndex = 6;
-            label7.Text = "Fecha vencimiento:";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.ForeColor = Color.Black;
-            label6.Location = new Point(463, 34);
-            label6.Name = "label6";
-            label6.Size = new Size(156, 19);
-            label6.TabIndex = 5;
-            label6.Text = "Correo electrónico:";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.ForeColor = Color.Black;
-            label5.Location = new Point(98, 250);
-            label5.Name = "label5";
-            label5.Size = new Size(96, 19);
-            label5.TabIndex = 4;
-            label5.Text = "Rol usuario:";
-            // 
-            // lblContraseña
-            // 
-            lblContraseña.AutoSize = true;
-            lblContraseña.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblContraseña.ForeColor = Color.Black;
-            lblContraseña.Location = new Point(98, 177);
-            lblContraseña.Name = "lblContraseña";
-            lblContraseña.Size = new Size(102, 19);
-            lblContraseña.TabIndex = 3;
-            lblContraseña.Text = "Contraseña:";
-            lblContraseña.Visible = false;
-            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -437,6 +250,193 @@
             // errorT
             // 
             errorT.ContainerControl = this;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.ForeColor = Color.Black;
+            label6.Location = new Point(463, 34);
+            label6.Name = "label6";
+            label6.Size = new Size(156, 19);
+            label6.TabIndex = 5;
+            label6.Text = "Correo electrónico:";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.ForeColor = Color.Black;
+            label8.Location = new Point(463, 106);
+            label8.Name = "label8";
+            label8.Size = new Size(136, 19);
+            label8.TabIndex = 7;
+            label8.Text = "Fecha creación:";
+            // 
+            // txtFechaC
+            // 
+            txtFechaC.BackColor = Color.White;
+            txtFechaC.BorderStyle = BorderStyle.FixedSingle;
+            txtFechaC.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtFechaC.Location = new Point(463, 134);
+            txtFechaC.MaxLength = 50;
+            txtFechaC.Name = "txtFechaC";
+            txtFechaC.ReadOnly = true;
+            txtFechaC.ShortcutsEnabled = false;
+            txtFechaC.Size = new Size(316, 27);
+            txtFechaC.TabIndex = 17;
+            // 
+            // txtCorreo
+            // 
+            txtCorreo.BackColor = Color.White;
+            txtCorreo.BorderStyle = BorderStyle.FixedSingle;
+            txtCorreo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtCorreo.Location = new Point(463, 62);
+            txtCorreo.MaxLength = 50;
+            txtCorreo.Name = "txtCorreo";
+            txtCorreo.ShortcutsEnabled = false;
+            txtCorreo.Size = new Size(316, 27);
+            txtCorreo.TabIndex = 12;
+            txtCorreo.Leave += txtCorreo_Leave;
+            // 
+            // lblContraseña
+            // 
+            lblContraseña.AutoSize = true;
+            lblContraseña.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblContraseña.ForeColor = Color.Black;
+            lblContraseña.Location = new Point(98, 177);
+            lblContraseña.Name = "lblContraseña";
+            lblContraseña.Size = new Size(102, 19);
+            lblContraseña.TabIndex = 3;
+            lblContraseña.Text = "Contraseña:";
+            lblContraseña.Visible = false;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.ForeColor = Color.Black;
+            label5.Location = new Point(98, 250);
+            label5.Name = "label5";
+            label5.Size = new Size(96, 19);
+            label5.TabIndex = 4;
+            label5.Text = "Rol usuario:";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.ForeColor = Color.Black;
+            label7.Location = new Point(463, 177);
+            label7.Name = "label7";
+            label7.Size = new Size(163, 19);
+            label7.TabIndex = 6;
+            label7.Text = "Fecha vencimiento:";
+            // 
+            // lblEstado
+            // 
+            lblEstado.AutoSize = true;
+            lblEstado.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEstado.ForeColor = Color.Black;
+            lblEstado.Location = new Point(463, 250);
+            lblEstado.Name = "lblEstado";
+            lblEstado.Size = new Size(123, 19);
+            lblEstado.TabIndex = 8;
+            lblEstado.Text = "Estado usuario:";
+            lblEstado.Visible = false;
+            // 
+            // txtContraseña
+            // 
+            txtContraseña.BackColor = Color.White;
+            txtContraseña.BorderStyle = BorderStyle.FixedSingle;
+            txtContraseña.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtContraseña.Location = new Point(98, 205);
+            txtContraseña.MaxLength = 10;
+            txtContraseña.Name = "txtContraseña";
+            txtContraseña.ShortcutsEnabled = false;
+            txtContraseña.Size = new Size(316, 27);
+            txtContraseña.TabIndex = 11;
+            txtContraseña.Visible = false;
+            txtContraseña.KeyPress += txtContraseña_KeyPress;
+            txtContraseña.Leave += txtContraseña_Leave;
+            // 
+            // cmbRol
+            // 
+            cmbRol.BackColor = Color.White;
+            cmbRol.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbRol.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbRol.FormattingEnabled = true;
+            cmbRol.Items.AddRange(new object[] { "ADMINISTRADOR", "COLABORADOR" });
+            cmbRol.Location = new Point(98, 277);
+            cmbRol.Name = "cmbRol";
+            cmbRol.Size = new Size(316, 28);
+            cmbRol.TabIndex = 15;
+            cmbRol.Leave += cmbRol_Leave;
+            // 
+            // dtpVencimiento
+            // 
+            dtpVencimiento.Anchor = AnchorStyles.Top;
+            dtpVencimiento.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dtpVencimiento.Format = DateTimePickerFormat.Short;
+            dtpVencimiento.Location = new Point(463, 205);
+            dtpVencimiento.Name = "dtpVencimiento";
+            dtpVencimiento.Size = new Size(316, 27);
+            dtpVencimiento.TabIndex = 21;
+            dtpVencimiento.Visible = false;
+            // 
+            // txtFechaV
+            // 
+            txtFechaV.BackColor = Color.White;
+            txtFechaV.BorderStyle = BorderStyle.FixedSingle;
+            txtFechaV.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtFechaV.Location = new Point(463, 205);
+            txtFechaV.MaxLength = 50;
+            txtFechaV.Name = "txtFechaV";
+            txtFechaV.ReadOnly = true;
+            txtFechaV.ShortcutsEnabled = false;
+            txtFechaV.Size = new Size(316, 27);
+            txtFechaV.TabIndex = 18;
+            txtFechaV.Visible = false;
+            // 
+            // lblEstado2
+            // 
+            lblEstado2.AutoSize = true;
+            lblEstado2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEstado2.ForeColor = Color.Black;
+            lblEstado2.Location = new Point(98, 177);
+            lblEstado2.Name = "lblEstado2";
+            lblEstado2.Size = new Size(123, 19);
+            lblEstado2.TabIndex = 19;
+            lblEstado2.Text = "Estado usuario:";
+            lblEstado2.Visible = false;
+            // 
+            // cmbEstado2
+            // 
+            cmbEstado2.BackColor = Color.White;
+            cmbEstado2.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbEstado2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbEstado2.FormattingEnabled = true;
+            cmbEstado2.Items.AddRange(new object[] { "BLOQUEADO", "ACTIVO", "INACTIVO", "NUEVO" });
+            cmbEstado2.Location = new Point(98, 205);
+            cmbEstado2.Name = "cmbEstado2";
+            cmbEstado2.Size = new Size(316, 28);
+            cmbEstado2.TabIndex = 20;
+            cmbEstado2.Visible = false;
+            cmbEstado2.Leave += cmbEstado2_Leave;
+            // 
+            // cmbEstado
+            // 
+            cmbEstado.BackColor = Color.White;
+            cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbEstado.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbEstado.FormattingEnabled = true;
+            cmbEstado.Items.AddRange(new object[] { "BLOQUEADO", "ACTIVO", "INACTIVO", "NUEVO" });
+            cmbEstado.Location = new Point(463, 277);
+            cmbEstado.Name = "cmbEstado";
+            cmbEstado.Size = new Size(316, 28);
+            cmbEstado.TabIndex = 16;
+            cmbEstado.Visible = false;
+            cmbEstado.Leave += cmbEstado_Leave;
             // 
             // R_E_Usuario
             // 
@@ -468,26 +468,26 @@
         private Panel panel3;
         private Button btnCancelar;
         private Button btnGuardar;
-        private Label label8;
-        private Label label7;
-        private Label label6;
-        private Label label5;
         private Label label3;
         private Label label2;
         private ErrorProvider errorT;
         public Label lblTitulo;
-        public TextBox txtFechaV;
-        public TextBox txtFechaC;
+        public TextBox txtNombre;
+        public TextBox txtUsuario;
         public DateTimePicker dtpVencimiento;
         public ComboBox cmbEstado2;
+        public Label lblEstado2;
+        public TextBox txtFechaV;
+        public TextBox txtFechaC;
         public ComboBox cmbEstado;
         public ComboBox cmbRol;
         public TextBox txtCorreo;
         public TextBox txtContraseña;
-        public TextBox txtNombre;
-        public TextBox txtUsuario;
-        public Label lblEstado2;
         public Label lblEstado;
+        private Label label8;
+        private Label label7;
+        private Label label6;
+        private Label label5;
         public Label lblContraseña;
     }
 }

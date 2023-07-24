@@ -1,6 +1,6 @@
 ﻿namespace ProyectoHCL.Formularios
 {
-    partial class RegistrarDescuento
+    partial class R_E_TipHab
     {
         /// <summary>
         /// Required designer variable.
@@ -29,18 +29,20 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistrarDescuento));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(R_E_TipHab));
             panel2 = new Panel();
             pictureBox5 = new PictureBox();
+            lblTitulo = new Label();
             btnCerrar = new Button();
             btnMin = new Button();
-            label11 = new Label();
             panel3 = new Panel();
+            txtPrecio = new TextBox();
+            label1 = new Label();
+            txtCapacidad = new TextBox();
+            label6 = new Label();
+            txtTipo = new TextBox();
             btnCancelar = new Button();
             btnGuardar = new Button();
-            txtPorcentaje = new TextBox();
-            txtDesc = new TextBox();
-            label1 = new Label();
             label2 = new Label();
             errorT = new ErrorProvider(components);
             panel2.SuspendLayout();
@@ -53,14 +55,14 @@
             // 
             panel2.BackColor = Color.SteelBlue;
             panel2.Controls.Add(pictureBox5);
+            panel2.Controls.Add(lblTitulo);
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(btnMin);
-            panel2.Controls.Add(label11);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
             panel2.Size = new Size(800, 73);
-            panel2.TabIndex = 22;
+            panel2.TabIndex = 23;
             panel2.MouseMove += panel2_MouseMove;
             // 
             // pictureBox5
@@ -73,6 +75,21 @@
             pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox5.TabIndex = 34;
             pictureBox5.TabStop = false;
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.Anchor = AnchorStyles.Top;
+            lblTitulo.AutoSize = true;
+            lblTitulo.BackColor = Color.Transparent;
+            lblTitulo.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTitulo.ForeColor = Color.White;
+            lblTitulo.Location = new Point(254, 21);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.RightToLeft = RightToLeft.No;
+            lblTitulo.Size = new Size(38, 30);
+            lblTitulo.TabIndex = 19;
+            lblTitulo.Text = "lbl";
+            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnCerrar
             // 
@@ -104,46 +121,101 @@
             btnMin.UseVisualStyleBackColor = false;
             btnMin.Click += btnMin_Click;
             // 
-            // label11
-            // 
-            label11.Anchor = AnchorStyles.Top;
-            label11.AutoSize = true;
-            label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.ForeColor = Color.White;
-            label11.Location = new Point(300, 21);
-            label11.Name = "label11";
-            label11.Size = new Size(210, 30);
-            label11.TabIndex = 19;
-            label11.Text = "Registrar descuento";
-            // 
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
+            panel3.Controls.Add(txtPrecio);
+            panel3.Controls.Add(label1);
+            panel3.Controls.Add(txtCapacidad);
+            panel3.Controls.Add(label6);
+            panel3.Controls.Add(txtTipo);
             panel3.Controls.Add(btnCancelar);
             panel3.Controls.Add(btnGuardar);
-            panel3.Controls.Add(txtPorcentaje);
-            panel3.Controls.Add(txtDesc);
-            panel3.Controls.Add(label1);
             panel3.Controls.Add(label2);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 73);
             panel3.Name = "panel3";
-            panel3.Size = new Size(800, 330);
-            panel3.TabIndex = 24;
+            panel3.Size = new Size(800, 377);
+            panel3.TabIndex = 25;
+            // 
+            // txtPrecio
+            // 
+            txtPrecio.BackColor = Color.White;
+            txtPrecio.BorderStyle = BorderStyle.FixedSingle;
+            txtPrecio.CharacterCasing = CharacterCasing.Upper;
+            txtPrecio.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtPrecio.Location = new Point(243, 221);
+            txtPrecio.MaxLength = 100;
+            txtPrecio.Name = "txtPrecio";
+            txtPrecio.ShortcutsEnabled = false;
+            txtPrecio.Size = new Size(316, 27);
+            txtPrecio.TabIndex = 28;
+            txtPrecio.KeyPress += txtPrecio_KeyPress;
+            txtPrecio.Leave += txtPrecio_Leave;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(243, 193);
+            label1.Name = "label1";
+            label1.Size = new Size(61, 19);
+            label1.TabIndex = 27;
+            label1.Text = "Precio:";
+            // 
+            // txtCapacidad
+            // 
+            txtCapacidad.BackColor = Color.White;
+            txtCapacidad.BorderStyle = BorderStyle.FixedSingle;
+            txtCapacidad.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtCapacidad.Location = new Point(243, 142);
+            txtCapacidad.MaxLength = 50;
+            txtCapacidad.Name = "txtCapacidad";
+            txtCapacidad.ShortcutsEnabled = false;
+            txtCapacidad.Size = new Size(316, 27);
+            txtCapacidad.TabIndex = 26;
+            txtCapacidad.KeyPress += txtCapacidad_KeyPress;
+            txtCapacidad.Leave += txtCapacidad_Leave;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.ForeColor = Color.Black;
+            label6.Location = new Point(243, 114);
+            label6.Name = "label6";
+            label6.Size = new Size(105, 19);
+            label6.TabIndex = 25;
+            label6.Text = "Capacidad:";
+            // 
+            // txtTipo
+            // 
+            txtTipo.BackColor = Color.White;
+            txtTipo.BorderStyle = BorderStyle.FixedSingle;
+            txtTipo.CharacterCasing = CharacterCasing.Upper;
+            txtTipo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtTipo.Location = new Point(243, 64);
+            txtTipo.MaxLength = 15;
+            txtTipo.Name = "txtTipo";
+            txtTipo.ShortcutsEnabled = false;
+            txtTipo.Size = new Size(316, 27);
+            txtTipo.TabIndex = 24;
+            txtTipo.Leave += txtTipo_Leave;
             // 
             // btnCancelar
             // 
             btnCancelar.Anchor = AnchorStyles.Top;
             btnCancelar.BackColor = Color.Red;
             btnCancelar.FlatAppearance.BorderSize = 0;
-            btnCancelar.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
+            btnCancelar.FlatAppearance.MouseDownBackColor = Color.Firebrick;
+            btnCancelar.FlatAppearance.MouseOverBackColor = Color.Firebrick;
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(468, 214);
+            btnCancelar.Location = new Point(467, 280);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(80, 32);
+            btnCancelar.Size = new Size(82, 32);
             btnCancelar.TabIndex = 22;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
@@ -154,11 +226,12 @@
             btnGuardar.Anchor = AnchorStyles.Top;
             btnGuardar.BackColor = Color.Green;
             btnGuardar.FlatAppearance.BorderSize = 0;
-            btnGuardar.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
+            btnGuardar.FlatAppearance.MouseDownBackColor = Color.DarkGreen;
+            btnGuardar.FlatAppearance.MouseOverBackColor = Color.DarkGreen;
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(258, 214);
+            btnGuardar.Location = new Point(257, 280);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(82, 32);
             btnGuardar.TabIndex = 21;
@@ -166,69 +239,33 @@
             btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
-            // txtPorcentaje
-            // 
-            txtPorcentaje.BackColor = Color.White;
-            txtPorcentaje.BorderStyle = BorderStyle.FixedSingle;
-            txtPorcentaje.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtPorcentaje.Location = new Point(242, 151);
-            txtPorcentaje.MaxLength = 100;
-            txtPorcentaje.Name = "txtPorcentaje";
-            txtPorcentaje.ShortcutsEnabled = false;
-            txtPorcentaje.Size = new Size(316, 27);
-            txtPorcentaje.TabIndex = 10;
-            // 
-            // txtDesc
-            // 
-            txtDesc.BackColor = Color.White;
-            txtDesc.BorderStyle = BorderStyle.FixedSingle;
-            txtDesc.CharacterCasing = CharacterCasing.Upper;
-            txtDesc.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtDesc.Location = new Point(242, 74);
-            txtDesc.MaxLength = 15;
-            txtDesc.Name = "txtDesc";
-            txtDesc.ShortcutsEnabled = false;
-            txtDesc.Size = new Size(316, 27);
-            txtDesc.TabIndex = 9;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.Black;
-            label1.Location = new Point(242, 123);
-            label1.Name = "label1";
-            label1.Size = new Size(96, 19);
-            label1.TabIndex = 2;
-            label1.Text = "Porcentaje:";
-            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(242, 46);
+            label2.Location = new Point(243, 32);
             label2.Name = "label2";
-            label2.Size = new Size(104, 19);
+            label2.Size = new Size(45, 19);
             label2.TabIndex = 1;
-            label2.Text = "Descripción:";
+            label2.Text = "Tipo:";
             // 
             // errorT
             // 
             errorT.ContainerControl = this;
             // 
-            // RegistrarDescuento
+            // R_E_TipHab
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 403);
+            ClientSize = new Size(800, 450);
             Controls.Add(panel3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "RegistrarDescuento";
+            Name = "R_E_TipHab";
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "RegistrarDescuento";
+            Text = "R_E_TipHab";
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
@@ -242,16 +279,18 @@
 
         private Panel panel2;
         private PictureBox pictureBox5;
+        public Label lblTitulo;
         private Button btnCerrar;
         private Button btnMin;
-        private Label label11;
         public Panel panel3;
         public Button btnCancelar;
         public Button btnGuardar;
-        public TextBox txtPorcentaje;
-        public TextBox txtDesc;
-        private Label label1;
         private Label label2;
+        public TextBox txtTipo;
+        public TextBox txtCapacidad;
+        private Label label6;
+        public TextBox txtPrecio;
+        private Label label1;
         private ErrorProvider errorT;
     }
 }

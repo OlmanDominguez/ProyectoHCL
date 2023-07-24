@@ -45,7 +45,7 @@ namespace ProyectoHCL.Formularios
 
         private void ABC_Load(object sender, EventArgs e)
         {
-            MostrarObjetos();
+            //MostrarObjetos();
 
             DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //Agregar boton editar en datagrid
             btnUpdate.Name = "EDITAR";
@@ -56,10 +56,10 @@ namespace ProyectoHCL.Formularios
             dgvABC.Columns.Add(btnDelete);
         }
 
-        public void MostrarObjetos()
-        {
-            dgvABC.DataSource = admonObjeto.MostrarObjetos();
-        }
+        //public void MostrarObjetos()
+        //{
+        //    dgvABC.DataSource = admonObjeto.MostrarObjetos();
+        //}
 
         private void dgvABC_CellPainting_1(object sender, DataGridViewCellPaintingEventArgs e)
         {

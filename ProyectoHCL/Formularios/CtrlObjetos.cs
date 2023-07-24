@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Office2013.Excel;
+using DocumentFormat.OpenXml.Vml;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
@@ -15,9 +16,12 @@ namespace ProyectoHCL.Formularios
 {
     public partial class CtrlObjetos : Form
     {
+        R_E_Objeto R_E_obj = new R_E_Objeto();
+        AdmonObjetos admonObjeto = new AdmonObjetos();
         Objetos obj = new Objetos();
         DataSet ds = new DataSet();
-        int pagInicio = 1, indice = 0, numFilas = 3, pagFinal, cmbIndice = 0;
+        MsgB msgB = new MsgB();
+        int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
 
 
         public CtrlObjetos()
@@ -25,10 +29,7 @@ namespace ProyectoHCL.Formularios
             InitializeComponent();
             pagFinal = numFilas;
             CargarDG();
-            //BuscarObjetos("");
         }
-
-        AdmonObjetos admonObjeto = new AdmonObjetos();
 
         private void CargarDG()
         {
@@ -49,6 +50,8 @@ namespace ProyectoHCL.Formularios
                 cmbPag.Items.Add(x.ToString());
 
             cmbPag.SelectedIndex = indice;
+
+            HabilitarBotones();
         }
 
         private void CtrlObjetos_Load(object sender, EventArgs e)
@@ -63,16 +66,10 @@ namespace ProyectoHCL.Formularios
             dgvObjetos.Columns.Add(btnDelete);
         }
 
-        //public void MostrarObjetos()
-        //{
-        //    dgvObjetos.DataSource = admonObjeto.MostrarObjetos();
-        //}
-
         public void BuscarObjetos(string buscarOb)
         {
             try
             {
-
                 MySqlConnection conn;
                 MySqlCommand cmd;
 
@@ -112,8 +109,17 @@ namespace ProyectoHCL.Formularios
 
         private void btnNuevo_Click_1(object sender, EventArgs e)
         {
-            RegistrarObjeto regObjeto = new RegistrarObjeto();
-            regObjeto.ShowDialog();
+            R_E_obj.lblTitulo.Text = "Registrar Objeto";
+            R_E_obj.Size = new System.Drawing.Size(800, 431);
+            R_E_obj.btnGuardar.Location = new Point(256, 282);
+            R_E_obj.btnCancelar.Location = new Point(466, 282);
+            R_E_obj.label2.Location = new Point(243, 34);
+            R_E_obj.txtObj.Location = new Point(243, 65);
+            R_E_obj.label1.Visible = false;
+            R_E_obj.cmbEstado.Visible = false;
+            R_E_obj.label6.Location = new Point(243, 107);
+            R_E_obj.rTxtDesc.Location = new Point(243, 138);
+            R_E_obj.ShowDialog();
             CargarDG();
         }
 
@@ -133,39 +139,52 @@ namespace ProyectoHCL.Formularios
         {
             if (this.dgvObjetos.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                EditarObjeto editarObjeto = new EditarObjeto();
-                editarObjeto.idObj = dgvObjetos.CurrentRow.Cells["ID"].Value.ToString();
-                editarObjeto.txtObjeto.Text = dgvObjetos.CurrentRow.Cells["NOMBRE"].Value.ToString();
-                editarObjeto.txtDescripcion.Text = dgvObjetos.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
-                editarObjeto.cmbEstado.Text = dgvObjetos.CurrentRow.Cells["ESTADO"].Value.ToString();
-                editarObjeto.ShowDialog();
+                R_E_obj.lblTitulo.Text = "Editar Objeto";
+                R_E_obj.Size = new System.Drawing.Size(800, 371);
+                R_E_obj.btnGuardar.Location = new Point(256, 213);
+                R_E_obj.btnCancelar.Location = new Point(466, 213);
+                R_E_obj.label2.Location = new Point(59, 34);
+                R_E_obj.txtObj.Location = new Point(59, 67);
+                R_E_obj.label1.Location = new Point(59, 115);
+                R_E_obj.cmbEstado.Location = new Point(59, 146);
+                R_E_obj.label1.Visible = true;
+                R_E_obj.cmbEstado.Visible = true;
+                R_E_obj.label6.Location = new Point(421, 34);
+                R_E_obj.rTxtDesc.Location = new Point(421, 65);
+                R_E_obj.idObj = dgvObjetos.CurrentRow.Cells["ID"].Value.ToString();
+                R_E_obj.txtObj.Text = dgvObjetos.CurrentRow.Cells["NOMBRE"].Value.ToString();
+                R_E_obj.rTxtDesc.Text = dgvObjetos.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
+                R_E_obj.cmbEstado.Text = dgvObjetos.CurrentRow.Cells["ESTADO"].Value.ToString();
+                R_E_obj.ShowDialog();
+                R_E_obj.limpiarCampos();
                 CargarDG();
             }
 
             if (this.dgvObjetos.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
-                bool elimino = admonObjeto.EliminarObjeto(dgvObjetos.CurrentRow.Cells["ID"].Value.ToString());
+                MsgB m = new MsgB("pregunta", "¿Está seguro que desea eliminar el registro?");
+                DialogResult dg = m.ShowDialog();
 
-                DialogResult dialogResult = MessageBox.Show("¿Está seguro que desea eliminar el objeto?",
-                    "", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (dialogResult == DialogResult.Yes)
+                if (dg == DialogResult.OK)
                 {
+                    bool elimino = admonObjeto.EliminarObjeto(dgvObjetos.CurrentRow.Cells["ID"].Value.ToString());
+
                     if (elimino)
                     {
-                        MessageBox.Show("Objeto eliminado");
+                        MsgB mbox = new MsgB("informacion", "Registro eliminado");
+                        DialogResult dR = mbox.ShowDialog();
                         CargarDG();
                     }
                     else
                     {
-                        MessageBox.Show("Objeto no eliminado");
+                        MsgB mbox = new MsgB("informacion", "Registro no eliminado");
+                        DialogResult dR = mbox.ShowDialog();
                     }
 
                 }
-                else /*(dialogResult == DialogResult.No)*/
+                else if (dg == DialogResult.Cancel)
                 {
-                    //
+
                 }
             }
         }
@@ -215,23 +234,62 @@ namespace ProyectoHCL.Formularios
             switch (cmbIndice)
             {
                 case 0:
-                    numFilas = 2;
-                    break;
-                case 1:
-                    numFilas = 3;
-                    break;
-                case 2:
-                    numFilas = 4;
-                    break;
-                case 3:
                     numFilas = 5;
                     break;
+                case 1:
+                    numFilas = 10;
+                    break;
+                case 2:
+                    numFilas = 20;
+                    break;
+                case 3:
+                    numFilas = 30;
+                    break;
                 case 4:
-                    numFilas = 6;
+                    numFilas = 40;
                     break;
             }
             pagFinal = numFilas;
             CargarDG();
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPag.Text) - 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPag.Text) + 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void HabilitarBotones()
+        {
+            if (pagInicio == 1)
+            {
+                btnAnterior.Enabled = false;
+            }
+            else
+            {
+                btnAnterior.Enabled = true;
+            }
+
+            if (indice == (Convert.ToInt32(txtPag.Text) - 1))
+            {
+                btnSiguiente.Enabled = false;
+            }
+            else
+            {
+                btnSiguiente.Enabled = true;
+            }
         }
     }
 }
