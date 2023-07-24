@@ -167,8 +167,7 @@ namespace ProyectoHCL.Formularios
                     info.fecha = dgvFacturas.CurrentRow.Cells["FECHA"].Value.ToString();
                     info.ingreso = dgvFacturas.CurrentRow.Cells["INGRESO"].Value.ToString();
                     info.salida = dgvFacturas.CurrentRow.Cells["SALIDA"].Value.ToString();
-                    info.reserva = "0";
-                    //MessageBox.Show(claseCod.codigo);
+                    info.reserva = dgvFacturas.CurrentRow.Cells["RESERVA"].Value.ToString();
                     Form form = new Formularios.ShowFactura();
                     form.ShowDialog();
 
@@ -183,7 +182,7 @@ namespace ProyectoHCL.Formularios
 
             if (this.dgvFacturas.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                
+
             }
         }
 

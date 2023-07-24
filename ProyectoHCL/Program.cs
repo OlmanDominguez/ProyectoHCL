@@ -14,7 +14,7 @@ namespace ProyectoHCL
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
                      
-            Application.Run(new NuevaFact());
+            Application.Run(new CtrlFacturacion());
             
 
 

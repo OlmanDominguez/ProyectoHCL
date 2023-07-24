@@ -159,6 +159,7 @@ namespace ProyectoHCL.Formularios
                     info.salida = dgvReservas.CurrentRow.Cells["SALIDA"].Value.ToString();
                     Form formulario = new Formularios.ShowFactura();
                     formulario.ShowDialog();
+                    CargarDGFact();
                 }
                 catch (Exception)
                 {
