@@ -28,6 +28,7 @@ namespace ProyectoHCL.Formularios
         AdmonParametros admonParametros = new AdmonParametros();
         private void CtrlParametros_Load(object sender, EventArgs e)
         {
+           // RellenarGrid();
             DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
             btnUpdate.Name = "EDITAR";
             dgvParametro.Columns.Add(btnUpdate);
@@ -67,6 +68,10 @@ namespace ProyectoHCL.Formularios
                 //  CargarDG();
             }
         }
+       /* public void MostrarParametro()
+        {
+           dgvParametro.DataSource = AdmonParametros.MostrarParametro(); //Llamar metodo mostrar Roles en dataGrid
+        }*/
 
         private void btnAgregarParametro_Click(object sender, EventArgs e)
         {

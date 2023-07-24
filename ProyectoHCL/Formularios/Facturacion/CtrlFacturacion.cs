@@ -114,8 +114,8 @@ namespace ProyectoHCL.Formularios
 
         private void btnNuevo_Click_1(object sender, EventArgs e)
         {
-            RegistrarUsuario reglUsuarios = new RegistrarUsuario(); //Se crea un objeto del form RegistrarUsuarios
-            reglUsuarios.ShowDialog();
+          //  RegistrarUsuario reglUsuarios = new RegistrarUsuario(); //Se crea un objeto del form RegistrarUsuarios
+           // reglUsuarios.ShowDialog();
             CargarDG();
         }
 
@@ -182,9 +182,9 @@ namespace ProyectoHCL.Formularios
 
             }
 
-            if (this.dgvFacturas.Columns[e.ColumnIndex].Name == "EDITAR")
+          /*  if (this.dgvFacturas.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                EditarUsuario editarUsuarios = new EditarUsuario(); //Crear objeto del form EditarUsuario
+             EditarUsuario editarUsuarios = new EditarUsuario(); //Crear objeto del form EditarUsuario
 
                 editarUsuarios.idUs = dgvFacturas.CurrentRow.Cells["ID"].Value.ToString();
                 editarUsuarios.txtUsuario.Text = dgvFacturas.CurrentRow.Cells["USUARIO"].Value.ToString(); //Traer los datos del dataGrid al form para editar
@@ -196,7 +196,7 @@ namespace ProyectoHCL.Formularios
                 editarUsuarios.dtpVencimiento.Text = dgvFacturas.CurrentRow.Cells["VENCIMIENTO"].Value.ToString();
                 editarUsuarios.ShowDialog(); //Se oculta el form principal y solo muestra el form editarUsuarios 
                 CargarDG(); //Se llama el metodo Mostrar usuarios para actualizar el DataGrid al editar 
-            }
+            }*/
         }
 
         private void cmbPaginacion_SelectionChangeCommitted(object sender, EventArgs e)
