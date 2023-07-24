@@ -59,8 +59,6 @@ namespace ProyectoHCL.Formularios
         {
         }
 
-        AdmonUsuarios admonUsuario = new AdmonUsuarios(); //crear objeto admonUsuario para acceder a sus metodos
-
         private void CtrlFacturacion_Load(object sender, EventArgs e)
         {
             //MostrarUsuarios(); 
@@ -114,8 +112,8 @@ namespace ProyectoHCL.Formularios
 
         private void btnNuevo_Click_1(object sender, EventArgs e)
         {
-          //  RegistrarUsuario reglUsuarios = new RegistrarUsuario(); //Se crea un objeto del form RegistrarUsuarios
-           // reglUsuarios.ShowDialog();
+            Form formulario = new Formularios.NuevaFact();
+            formulario.ShowDialog();
             CargarDG();
         }
 
@@ -149,12 +147,13 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        public static class numFact
+        public static class info
         {
             public static string factura;
             public static string fecha;
             public static string ingreso;
             public static string salida;
+            public static string reserva;
         }
 
 
@@ -164,12 +163,11 @@ namespace ProyectoHCL.Formularios
             {
                 try
                 {
-                    numFact.factura = dgvFacturas.CurrentRow.Cells["FACTURA"].Value.ToString();
-                    numFact.fecha = dgvFacturas.CurrentRow.Cells["FECHA"].Value.ToString();
-                    numFact.ingreso = dgvFacturas.CurrentRow.Cells["INGRESO"].Value.ToString();
-                    numFact.salida = dgvFacturas.CurrentRow.Cells["SALIDA"].Value.ToString();
-
-                    //MessageBox.Show(claseCod.codigo);
+                    info.factura = dgvFacturas.CurrentRow.Cells["FACTURA"].Value.ToString();
+                    info.fecha = dgvFacturas.CurrentRow.Cells["FECHA"].Value.ToString();
+                    info.ingreso = dgvFacturas.CurrentRow.Cells["INGRESO"].Value.ToString();
+                    info.salida = dgvFacturas.CurrentRow.Cells["SALIDA"].Value.ToString();
+                    info.reserva = dgvFacturas.CurrentRow.Cells["RESERVA"].Value.ToString();
                     Form form = new Formularios.ShowFactura();
                     form.ShowDialog();
 
@@ -184,19 +182,8 @@ namespace ProyectoHCL.Formularios
 
           /*  if (this.dgvFacturas.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-             EditarUsuario editarUsuarios = new EditarUsuario(); //Crear objeto del form EditarUsuario
 
-                editarUsuarios.idUs = dgvFacturas.CurrentRow.Cells["ID"].Value.ToString();
-                editarUsuarios.txtUsuario.Text = dgvFacturas.CurrentRow.Cells["USUARIO"].Value.ToString(); //Traer los datos del dataGrid al form para editar
-                editarUsuarios.txtNombre.Text = dgvFacturas.CurrentRow.Cells["NOMBRE"].Value.ToString();
-                editarUsuarios.txtCorreo.Text = dgvFacturas.CurrentRow.Cells["CORREO"].Value.ToString();
-                editarUsuarios.cmbEstado.Text = dgvFacturas.CurrentRow.Cells["ESTADO"].Value.ToString();
-                editarUsuarios.cmbRol.Text = dgvFacturas.CurrentRow.Cells["ROL"].Value.ToString();
-                editarUsuarios.txtFechaC.Text = dgvFacturas.CurrentRow.Cells["CREACION"].Value.ToString();
-                editarUsuarios.dtpVencimiento.Text = dgvFacturas.CurrentRow.Cells["VENCIMIENTO"].Value.ToString();
-                editarUsuarios.ShowDialog(); //Se oculta el form principal y solo muestra el form editarUsuarios 
-                CargarDG(); //Se llama el metodo Mostrar usuarios para actualizar el DataGrid al editar 
-            }*/
+            }
         }
 
         private void cmbPaginacion_SelectionChangeCommitted(object sender, EventArgs e)
