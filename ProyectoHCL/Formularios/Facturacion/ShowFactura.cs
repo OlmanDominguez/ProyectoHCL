@@ -35,7 +35,7 @@ namespace ProyectoHCL.Formularios
             this.Close();
         }
 
-        DateTime hoy = DateTime.Today;
+        DateTime today = DateTime.Today;
         Decimal st1, st2, st3, sth = 0;
         Decimal St1, St2, St3, StS = 0;
         Decimal isv, it, subt, total;
@@ -177,9 +177,11 @@ namespace ProyectoHCL.Formularios
                 MessageBox.Show(a.Message + a.StackTrace);
             }
 
+            string hoy = today.ToString("dd/MM/yyyy");
+
             if (info.reserva != "0" & info.factura == "0") //Factura desde reserva
             {
-                
+
 
                 try
                 {
@@ -191,10 +193,9 @@ namespace ProyectoHCL.Formularios
 
                     if (n != 0)
                     {
-                        lb_nombres.Text = dt.Rows[0]["NOMBRE"].ToString();
-                        lb_apellidos.Text = dt.Rows[0]["APELLIDO"].ToString();
+                        lb_nombres.Text = dt.Rows[0]["NOMBRE"].ToString() + " " + dt.Rows[0]["APELLIDO"].ToString();
                         lb_ID.Text = dt.Rows[0]["DNI_PASAPORTE"].ToString();
-                        lb_fecha.Text = Convert.ToString(hoy.Date);
+                        lb_fecha.Text = hoy;
                         lb_ingreso.Text = info.ingreso;
                         lb_Salida.Text = info.salida;
                         lb_huespedes.Text = dt.Rows[0]["NHUESPEDES"].ToString();
@@ -205,7 +206,7 @@ namespace ProyectoHCL.Formularios
                         dt = consulta(info.reserva, 2);
                         n = dt.Rows.Count;
                         //DetalleHabitaciones
-                        
+
                         if (n == 0)
                         {
                             lb_Habi1.Text = "N/A";
@@ -280,7 +281,7 @@ namespace ProyectoHCL.Formularios
                         }
 
                         //DetalleServicios
-                       
+
                         dt = consulta(info.reserva, 3);
                         n = dt.Rows.Count;
                         if (n == 0)
@@ -358,7 +359,7 @@ namespace ProyectoHCL.Formularios
                         }
 
                         //Datos de impuestos y totales
-                        
+
                         if (sth != 0.00m & StS != 0.00m)
                         {
                             isv = Decimal.Round(((sth / 1.19m) * 0.15m) + ((StS / 1.15m) * 0.15m), 2);
@@ -402,7 +403,7 @@ namespace ProyectoHCL.Formularios
                             "WHERE ID_SOLICITUDRESERVA = " + info.reserva + ";");
 
                         MySqlDataReader leer = comando.ExecuteReader();
-                        
+
                         while (leer.Read())
                         {
                             cb_MPago.SelectedIndex = Convert.ToInt32(leer["ID_TIPOPAGO"]);
@@ -429,10 +430,9 @@ namespace ProyectoHCL.Formularios
 
                     if (n != 0)
                     {
-                        lb_nombres.Text = dt.Rows[0]["NOMBRE"].ToString();
-                        lb_apellidos.Text = dt.Rows[0]["APELLIDO"].ToString();
+                        lb_nombres.Text = dt.Rows[0]["NOMBRE"].ToString() + " " + dt.Rows[0]["APELLIDO"].ToString();
                         lb_ID.Text = dt.Rows[0]["DNI_PASAPORTE"].ToString();
-                        lb_fecha.Text = Convert.ToString(hoy.Date);
+                        lb_fecha.Text = hoy;
                         lb_ingreso.Text = info.ingreso;
                         lb_Salida.Text = info.salida;
                         lb_huespedes.Text = dt.Rows[0]["NHUESPEDES"].ToString();
@@ -647,7 +647,7 @@ namespace ProyectoHCL.Formularios
                         "ID_USUARIO, FECHA, N_OCEXCENTA, NCONSTANCIAEXONERADO, NREGISTROSAR, SUBTOTAL, " +
                         "IMPOREXONERADO, IMPOREXCENTO, IMPORTEISV, IMPORTEALCOHOL, IMPORTETURISMO, " +
                         "IMPUESISV, IMPUESALCOHOL, IMPUESTURIMOS, TOTAL) VALUES (" + info.reserva + ", " +
-                        cb_MPago.SelectedIndex + ", 1, '" + hoy.ToString("yyyy-MM-dd HH:mm:ss") + "', " + txt_OCExenta.Text + ", " +
+                        cb_MPago.SelectedIndex + ", 1, '" + today.ToString("yyyy-MM-dd HH:mm:ss") + "', " + txt_OCExenta.Text + ", " +
                         txt_ConsExone.Text + ", " + txt_RegSar.Text + ", " + subt + ", 0, 0, " +
                         subt + ", 0, " + sth + ", " + isv + ", 0, " + it + ", " + total + ")");
 
@@ -663,7 +663,7 @@ namespace ProyectoHCL.Formularios
                     MessageBox.Show("Factura Creada", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
 
-                    
+
                 }
 
             }
@@ -676,6 +676,11 @@ namespace ProyectoHCL.Formularios
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
