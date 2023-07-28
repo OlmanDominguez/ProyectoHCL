@@ -155,8 +155,12 @@ namespace ProyectoHCL.Formularios
                 {
                     info.factura = "0";
                     info.reserva = dgvReservas.CurrentRow.Cells["CODIGO"].Value.ToString();
-                    info.ingreso = dgvReservas.CurrentRow.Cells["INGRESO"].Value.ToString();
-                    info.salida = dgvReservas.CurrentRow.Cells["SALIDA"].Value.ToString();
+                    DateTime ingreso = Convert.ToDateTime(dgvReservas.CurrentRow.Cells["INGRESO"].Value.ToString());
+                    string ingreso1 = ingreso.ToString("dd/MM/yyyy");
+                    info.ingreso = ingreso1;
+                    DateTime salida = Convert.ToDateTime(dgvReservas.CurrentRow.Cells["SALIDA"].Value.ToString());
+                    string salida1 = salida.ToString("dd/MM/yyyy");
+                    info.salida = salida1;
                     Form formulario = new Formularios.ShowFactura();
                     formulario.ShowDialog();
                     CargarDGFact();

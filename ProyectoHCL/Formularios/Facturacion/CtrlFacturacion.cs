@@ -164,9 +164,12 @@ namespace ProyectoHCL.Formularios
                 try
                 {
                     info.factura = dgvFacturas.CurrentRow.Cells["FACTURA"].Value.ToString();
-                    info.fecha = dgvFacturas.CurrentRow.Cells["FECHA"].Value.ToString();
-                    info.ingreso = dgvFacturas.CurrentRow.Cells["INGRESO"].Value.ToString();
-                    info.salida = dgvFacturas.CurrentRow.Cells["SALIDA"].Value.ToString();
+                    DateTime ingreso = Convert.ToDateTime(dgvFacturas.CurrentRow.Cells["INGRESO"].Value.ToString());
+                    string ingreso1 = ingreso.ToString("dd/MM/yyyy");
+                    info.ingreso = ingreso1;
+                    DateTime salida = Convert.ToDateTime(dgvFacturas.CurrentRow.Cells["SALIDA"].Value.ToString());
+                    string salida1 = salida.ToString("dd/MM/yyyy");
+                    info.salida = salida1;
                     info.reserva = dgvFacturas.CurrentRow.Cells["RESERVA"].Value.ToString();
                     Form form = new Formularios.ShowFactura();
                     form.ShowDialog();

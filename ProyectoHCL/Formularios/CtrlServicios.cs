@@ -73,7 +73,7 @@ namespace ProyectoHCL.Formularios
 
                 cmd = new MySqlCommand("buscarServicio", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@nombreS", MySqlDbType.VarChar, 200).Value = buscarS;
+                cmd.Parameters.Add("@nombreS", MySqlDbType.VarChar, 50).Value = buscarS;
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -82,7 +82,6 @@ namespace ProyectoHCL.Formularios
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -122,6 +121,8 @@ namespace ProyectoHCL.Formularios
 
                 e.Handled = true;
             }
+
+
         }
 
         private void cmbServ_SelectionChangeCommitted(object sender, EventArgs e)
@@ -191,13 +192,52 @@ namespace ProyectoHCL.Formularios
             if (this.dgvServ.Columns[e.ColumnIndex].Name == "EDITAR")
             {
                 R_E_serv.lblTitulo.Text = "Editar Servicio";
-
                 R_E_serv.idS = dgvServ.CurrentRow.Cells["ID"].Value.ToString();
                 R_E_serv.txtServ.Text = dgvServ.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
                 R_E_serv.txtPrecio.Text = dgvServ.CurrentRow.Cells["PRECIO"].Value.ToString();
                 R_E_serv.ShowDialog();
                 R_E_serv.limpiarCampos();
                 CargarDG();
+            }
+
+
+        }
+
+        private void btnAnt_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbServ.Text) - 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void btnSig_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbServ.Text) + 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+        private void HabilitarBotones()
+        {
+            if (pagInicio == 1)
+            {
+                btnAnt.Enabled = false;
+            }
+            else
+            {
+                btnAnt.Enabled = true;
+            }
+
+            if (indice == (Convert.ToInt32(txtServ.Text) - 1))
+            {
+                btnSig.Enabled = false;
+            }
+            else
+            {
+                btnSig.Enabled = true;
             }
         }
 
@@ -210,44 +250,6 @@ namespace ProyectoHCL.Formularios
             else
             {
                 CargarDG();
-            }
-        }
-
-        private void btnAnterior_Click(object sender, EventArgs e)
-        {
-            int pagina = Convert.ToInt32(cmbServ.Text) - 1;
-            indice = pagina - 1;
-            pagInicio = (pagina - 1) * numFilas + 1;
-            pagFinal = pagina * numFilas;
-            CargarDG();
-        }
-
-        private void btnSiguiente_Click(object sender, EventArgs e)
-        {
-            int pagina = Convert.ToInt32(cmbServ.Text) + 1;
-            indice = pagina - 1;
-            pagInicio = (pagina - 1) * numFilas + 1;
-            pagFinal = pagina * numFilas;
-            CargarDG();
-        }
-        private void HabilitarBotones()
-        {
-            if (pagInicio == 1)
-            {
-                btnAnterior.Enabled = false;
-            }
-            else
-            {
-                btnAnterior.Enabled = true;
-            }
-
-            if (indice == (Convert.ToInt32(txtServ.Text) - 1))
-            {
-                btnSiguiente.Enabled = false;
-            }
-            else
-            {
-                btnSiguiente.Enabled = true;
             }
         }
     }
