@@ -53,8 +53,8 @@
             txtBuscar = new TextBox();
             label4 = new Label();
             panel3 = new Panel();
-            btnSiguiente = new Button();
-            btnAnterior = new Button();
+           btnSiguiente = new Button(); 
+           btnAnterior = new Button();
             txtServ = new TextBox();
             label13 = new Label();
             label14 = new Label();
@@ -388,8 +388,8 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(45, 66, 91);
-            panel3.Controls.Add(btnSiguiente);
-            panel3.Controls.Add(btnAnterior);
+          panel3.Controls.Add(btnSiguiente);
+           panel3.Controls.Add(btnAnterior);
             panel3.Controls.Add(txtServ);
             panel3.Controls.Add(label13);
             panel3.Controls.Add(label14);
@@ -422,6 +422,7 @@
             // 
             // btnSiguiente
             // 
+           
             btnSiguiente.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnSiguiente.BackColor = Color.Transparent;
             btnSiguiente.BackgroundImage = (Image)resources.GetObject("btnSiguiente.BackgroundImage");
@@ -436,6 +437,7 @@
             btnSiguiente.UseVisualStyleBackColor = false;
             btnSiguiente.Click += btnSiguiente_Click;
             // 
+           
             // btnAnterior
             // 
             btnAnterior.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -451,7 +453,7 @@
             btnAnterior.TabIndex = 65;
             btnAnterior.UseVisualStyleBackColor = false;
             btnAnterior.Click += btnAnterior_Click;
-            // 
+            
             // txtServ
             // 
             txtServ.Anchor = AnchorStyles.Right;
@@ -735,7 +737,8 @@
             panel4.TabIndex = 40;
             // 
             // dgvServ
-            // 
+            
+            
             dgvServ.AllowUserToAddRows = false;
             dgvServ.AllowUserToDeleteRows = false;
             dataGridViewCellStyle6.BackColor = Color.WhiteSmoke;
@@ -794,7 +797,8 @@
             dgvServ.TabIndex = 5;
             dgvServ.CellClick += dgvServ_CellClick;
             dgvServ.CellPainting += dgvServ_CellPainting;
-            // 
+            
+            
             // button1
             // 
             button1.BackColor = Color.Transparent;

@@ -180,7 +180,7 @@ namespace ProyectoHCL.Formularios
 
             }
 
-          /*  if (this.dgvFacturas.Columns[e.ColumnIndex].Name == "EDITAR")
+            if (this.dgvFacturas.Columns[e.ColumnIndex].Name == "EDITAR")
             {
 
             }
