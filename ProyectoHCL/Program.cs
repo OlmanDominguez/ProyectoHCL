@@ -1,5 +1,4 @@
 using ProyectoHCL.Formularios;
-using ProyectoHCL.Formularios.Clientes;
 
 namespace ProyectoHCL
 {
@@ -13,13 +12,23 @@ namespace ProyectoHCL
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            //Application.Run(new PermisosRoLes());
-            // Application.Run(new FORMULARIO());
+            //ApplicationConfiguration.Initialize();
+            // Application.Run(new PermisosRoLes());
+            // Application.Run(new FORMULARIO()); HEAD
             //  Application.Run(new RegistrarUsuario());
-            //Application.Run(new Dashboard());
-            //  Application.Run(new Cliente()); 
-            //Application.Run(new EditarPerfil());
+
+
+            Application.Run(new Dashboard());
+            //Application.Run(new NuevaReservacion());
+            //Application.Run(new CtrlObjetos());
+
+            //Application.Run(new CtrlClientes());
+            //Application.Run(new CtrlUsuarios());
+            //Application.Run(new CtrlUsuarios());
+            //Application.Run(new CtrlParametros()); 
+           // Application.Run(new CtrlFacturacion());
+
+
         }
     }
 }
