@@ -750,7 +750,7 @@ namespace ProyectoHCL.Formularios
                 guardar.FileName = "Factura.pdf";
 
 
-                string paginahtml_texto = Properties.Resources.Plantilla.ToString();
+                //string paginahtml_texto = Properties.Resources.Plantilla.ToString();
                 
 
                 if (guardar.ShowDialog() == DialogResult.OK)
@@ -767,10 +767,10 @@ namespace ProyectoHCL.Formularios
 
 
 
-                        using (StringReader sr = new StringReader(Properties.Resources.Plantilla.ToString())){
+                        /*using (StringReader sr = new StringReader(Properties.Resources.Plantilla.ToString())){
                             
                             XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                        }
+                        }*/
 
                         pdfDoc.Close();
 
