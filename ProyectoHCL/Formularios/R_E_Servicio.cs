@@ -28,6 +28,12 @@ namespace ProyectoHCL.Formularios
             txtPrecio.Clear();
         }
 
+        public void limpiarError()
+        {
+            errorT.SetError(txtServ, "");
+            errorT.SetError(txtPrecio, "");
+        }
+
         private void btnMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -37,6 +43,7 @@ namespace ProyectoHCL.Formularios
         {
             this.Close();
             limpiarCampos();
+            limpiarError();
         }
 
         int posY = 0;
@@ -60,6 +67,7 @@ namespace ProyectoHCL.Formularios
         {
             this.Close();
             limpiarCampos();
+            limpiarError();
         }
 
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)

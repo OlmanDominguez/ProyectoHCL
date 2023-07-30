@@ -34,9 +34,8 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            button1 = new Button();
-            panel1 = new Panel();
             panel2 = new Panel();
+            btnCerrar = new Button();
             label11 = new Label();
             btnPerfil = new Button();
             btnCerrarSesion = new Button();
@@ -58,7 +57,6 @@
             label3 = new Label();
             txtPag = new TextBox();
             cmbPag = new ComboBox();
-            panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
@@ -66,41 +64,34 @@
             panel5.SuspendLayout();
             SuspendLayout();
             // 
-            // button1
-            // 
-            button1.BackColor = Color.Transparent;
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.BackgroundImageLayout = ImageLayout.Stretch;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(5, 20);
-            button1.Name = "button1";
-            button1.Size = new Size(49, 36);
-            button1.TabIndex = 1;
-            button1.UseVisualStyleBackColor = false;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.DodgerBlue;
-            panel1.Controls.Add(button1);
-            panel1.Dock = DockStyle.Left;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(60, 561);
-            panel1.TabIndex = 17;
-            // 
             // panel2
             // 
             panel2.BackColor = Color.WhiteSmoke;
+            panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(label11);
             panel2.Controls.Add(btnPerfil);
             panel2.Controls.Add(btnCerrarSesion);
             panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(60, 0);
+            panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1024, 65);
+            panel2.Size = new Size(1084, 65);
             panel2.TabIndex = 32;
+            // 
+            // btnCerrar
+            // 
+            btnCerrar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCerrar.BackColor = Color.Transparent;
+            btnCerrar.BackgroundImage = (Image)resources.GetObject("btnCerrar.BackgroundImage");
+            btnCerrar.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCerrar.FlatAppearance.BorderSize = 0;
+            btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            btnCerrar.FlatStyle = FlatStyle.Flat;
+            btnCerrar.Location = new Point(1058, 12);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(14, 17);
+            btnCerrar.TabIndex = 38;
+            btnCerrar.UseVisualStyleBackColor = false;
+            btnCerrar.Click += btnCerrar_Click;
             // 
             // label11
             // 
@@ -122,7 +113,7 @@
             btnPerfil.BackgroundImageLayout = ImageLayout.Stretch;
             btnPerfil.FlatAppearance.BorderSize = 0;
             btnPerfil.FlatStyle = FlatStyle.Flat;
-            btnPerfil.Location = new Point(1634, 73);
+            btnPerfil.Location = new Point(1694, 73);
             btnPerfil.Name = "btnPerfil";
             btnPerfil.Size = new Size(30, 29);
             btnPerfil.TabIndex = 34;
@@ -136,7 +127,7 @@
             btnCerrarSesion.BackgroundImageLayout = ImageLayout.Stretch;
             btnCerrarSesion.FlatAppearance.BorderSize = 0;
             btnCerrarSesion.FlatStyle = FlatStyle.Flat;
-            btnCerrarSesion.Location = new Point(1681, 71);
+            btnCerrarSesion.Location = new Point(1741, 71);
             btnCerrarSesion.Name = "btnCerrarSesion";
             btnCerrarSesion.Size = new Size(35, 33);
             btnCerrarSesion.TabIndex = 35;
@@ -172,9 +163,9 @@
             panel4.Controls.Add(txtBuscar);
             panel4.Controls.Add(label1);
             panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(60, 65);
+            panel4.Location = new Point(0, 65);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1024, 67);
+            panel4.Size = new Size(1084, 67);
             panel4.TabIndex = 33;
             // 
             // button6
@@ -185,7 +176,7 @@
             button6.FlatStyle = FlatStyle.Flat;
             button6.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button6.ForeColor = SystemColors.ButtonHighlight;
-            button6.Location = new Point(912, 20);
+            button6.Location = new Point(972, 20);
             button6.Margin = new Padding(2);
             button6.Name = "button6";
             button6.Size = new Size(78, 25);
@@ -201,7 +192,7 @@
             button5.FlatStyle = FlatStyle.Flat;
             button5.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button5.ForeColor = SystemColors.ButtonHighlight;
-            button5.Location = new Point(821, 20);
+            button5.Location = new Point(881, 20);
             button5.Margin = new Padding(2);
             button5.Name = "button5";
             button5.Size = new Size(78, 25);
@@ -282,9 +273,9 @@
             panel3.AutoSize = true;
             panel3.Controls.Add(dgvObjetos);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(60, 132);
+            panel3.Location = new Point(0, 132);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1024, 429);
+            panel3.Size = new Size(1084, 429);
             panel3.TabIndex = 34;
             // 
             // dgvObjetos
@@ -341,7 +332,7 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
             dgvObjetos.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvObjetos.RowTemplate.Height = 25;
-            dgvObjetos.Size = new Size(1024, 354);
+            dgvObjetos.Size = new Size(1084, 354);
             dgvObjetos.TabIndex = 1;
             dgvObjetos.CellClick += dgvObjetos_CellClick_1;
             dgvObjetos.CellPainting += dgvObjetos_CellPainting_1;
@@ -359,9 +350,9 @@
             panel5.Controls.Add(cmbMostrar);
             panel5.Controls.Add(label5);
             panel5.Dock = DockStyle.Bottom;
-            panel5.Location = new Point(60, 485);
+            panel5.Location = new Point(0, 485);
             panel5.Name = "panel5";
-            panel5.Size = new Size(1024, 76);
+            panel5.Size = new Size(1084, 76);
             panel5.TabIndex = 35;
             // 
             // btnSiguiente
@@ -373,7 +364,7 @@
             btnSiguiente.FlatAppearance.BorderSize = 0;
             btnSiguiente.FlatAppearance.MouseOverBackColor = Color.Silver;
             btnSiguiente.FlatStyle = FlatStyle.Flat;
-            btnSiguiente.Location = new Point(727, 16);
+            btnSiguiente.Location = new Point(787, 16);
             btnSiguiente.Name = "btnSiguiente";
             btnSiguiente.Size = new Size(30, 31);
             btnSiguiente.TabIndex = 64;
@@ -389,7 +380,7 @@
             btnAnterior.FlatAppearance.BorderSize = 0;
             btnAnterior.FlatAppearance.MouseOverBackColor = Color.Silver;
             btnAnterior.FlatStyle = FlatStyle.Flat;
-            btnAnterior.Location = new Point(691, 16);
+            btnAnterior.Location = new Point(751, 16);
             btnAnterior.Name = "btnAnterior";
             btnAnterior.Size = new Size(30, 31);
             btnAnterior.TabIndex = 63;
@@ -402,7 +393,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(895, 23);
+            label4.Location = new Point(955, 23);
             label4.Name = "label4";
             label4.Size = new Size(24, 17);
             label4.TabIndex = 47;
@@ -414,7 +405,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(763, 23);
+            label3.Location = new Point(823, 23);
             label3.Name = "label3";
             label3.Size = new Size(47, 17);
             label3.TabIndex = 46;
@@ -424,7 +415,7 @@
             // 
             txtPag.Anchor = AnchorStyles.Right;
             txtPag.BorderStyle = BorderStyle.FixedSingle;
-            txtPag.Location = new Point(922, 20);
+            txtPag.Location = new Point(982, 20);
             txtPag.Name = "txtPag";
             txtPag.ReadOnly = true;
             txtPag.Size = new Size(65, 23);
@@ -436,7 +427,7 @@
             cmbPag.BackColor = SystemColors.Info;
             cmbPag.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPag.FormattingEnabled = true;
-            cmbPag.Location = new Point(815, 20);
+            cmbPag.Location = new Point(875, 20);
             cmbPag.Margin = new Padding(2);
             cmbPag.Name = "cmbPag";
             cmbPag.Size = new Size(65, 23);
@@ -454,13 +445,12 @@
             Controls.Add(panel3);
             Controls.Add(panel4);
             Controls.Add(panel2);
-            Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.None;
             MinimumSize = new Size(680, 500);
             Name = "CtrlObjetos";
             Text = "CtrlObjetos";
             WindowState = FormWindowState.Maximized;
             Load += CtrlObjetos_Load;
-            panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel4.ResumeLayout(false);
@@ -474,8 +464,6 @@
         }
 
         #endregion
-        private Button button1;
-        private Panel panel1;
         private Panel panel2;
         private Button btnPerfil;
         private Button btnCerrarSesion;
@@ -498,5 +486,6 @@
         private ComboBox cmbPag;
         private Button btnSiguiente;
         private Button btnAnterior;
+        private Button btnCerrar;
     }
 }

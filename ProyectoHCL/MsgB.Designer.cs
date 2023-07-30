@@ -223,7 +223,7 @@
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "MsgB";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)pbPregunta).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbAdvertencia).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbError).EndInit();

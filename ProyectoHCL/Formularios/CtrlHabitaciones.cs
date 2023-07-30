@@ -250,5 +250,10 @@ namespace ProyectoHCL.Formularios
                 CargarDG();
             }
         }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

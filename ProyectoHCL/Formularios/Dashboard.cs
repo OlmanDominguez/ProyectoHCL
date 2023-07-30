@@ -17,7 +17,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.VisualBasic.ApplicationServices;
 using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Spreadsheet;
-
+using ProyectoHCL.Formularios;
 
 namespace ProyectoHCL
 {
@@ -119,25 +119,33 @@ namespace ProyectoHCL
         private void Ibtn_habitaciones_Click(object sender, EventArgs e)
         {
             //codigo para el formilario 
-            hideSubMenu2();
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlHabitaciones());
+            //hideSubMenu2();
         }
 
         private void Ibtn_servicios_Click(object sender, EventArgs e)
         {
             //codigo para el formilario 
-            hideSubMenu2();
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlServicios());
+            //hideSubMenu2();
         }
 
         private void Ibtn_descuentos_Click(object sender, EventArgs e)
         {
-            //codigo para el formilario 
-            hideSubMenu2();
+            //codigo para el formilario
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlDescuentos());
+            //hideSubMenu2();
         }
 
         private void Ibtn_usuarios_Click(object sender, EventArgs e)
         {
             //codigo para el formilario 
-            hideSubMenu2();
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlUsuarios());
+            //hideSubMenu2();
         }
 
         private void Ibtn_mantenimiento_Click(object sender, EventArgs e)
@@ -150,12 +158,6 @@ namespace ProyectoHCL
             showSubMenu(panelmanteSubMenu);
         }
 
-        private void Ibtn_clientes_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario 
-            hideSubMenu2();
-        }
-
         private void Ibtn_roles_Click(object sender, EventArgs e)
         {
             //codigo para el formilario 
@@ -164,8 +166,10 @@ namespace ProyectoHCL
 
         private void Ibtn_objetos_Click(object sender, EventArgs e)
         {
-            //codigo para el formilario 
-            hideSubMenu2();
+            //codigo para el formilario
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlObjetos());
+            //hideSubMenu2();
         }
 
         private void Ibtn_permisos_Click(object sender, EventArgs e)
@@ -176,8 +180,10 @@ namespace ProyectoHCL
 
         private void Ibtn_parametros_Click(object sender, EventArgs e)
         {
-            //codigo para el formilario 
-            hideSubMenu2();
+            //codigo para el formilario
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlParametros());
+            //hideSubMenu2();
         }
 
         private void Ibtn_reservacion_Click_1(object sender, EventArgs e)
@@ -1059,7 +1065,9 @@ namespace ProyectoHCL
         private void Ibtn_clientes_Click_1(object sender, EventArgs e)
         {
             //codigo para el formilario 
-            hideSubMenu2();
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlClientes());
+            //hideSubMenu2();
         }
 
         private void lbl_cerrar_Click(object sender, EventArgs e)

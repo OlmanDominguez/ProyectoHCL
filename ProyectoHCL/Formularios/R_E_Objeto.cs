@@ -29,6 +29,13 @@ namespace ProyectoHCL.Formularios
             cmbEstado.SelectedIndex = -1;
         }
 
+        public void limpiarError()
+        {
+            errorT.SetError(txtObj, "");
+            errorT.SetError(rTxtDesc, "");
+            errorT.SetError(cmbEstado, "");
+        }
+
         private void btnMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -38,12 +45,14 @@ namespace ProyectoHCL.Formularios
         {
             this.Close();
             limpiarCampos();
+            limpiarError();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
             limpiarCampos();
+            limpiarError();
         }
 
         int posY = 0;
