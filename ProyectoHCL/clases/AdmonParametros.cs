@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Office.Word;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -14,60 +15,29 @@ namespace ProyectoHCL.clases
         MySqlConnection conn;
         MySqlCommand cmd;
 
-        public DataTable MostrarParametro()
+       /* public DataTable ModificarParametro (int idP, string nombreparametro, string valor)
         {
-            DataTable mostrarParametrosDT = new DataTable();
-
             try
             {
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                 conn.Open();
 
-                cmd = new MySqlCommand("listarParametro", conn);
+                cmd = new MySqlCommand("EditarHabitacion", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-
-                MySqlDataReader reader = cmd.ExecuteReader();
-                mostrarParametrosDT.Load(reader);
+                cmd.Parameters.AddWithValue("@idP",idP);
+                cmd.Parameters.AddWithValue("@nombreparametro", nombreparametro);
+                cmd.Parameters.AddWithValue("@valor",valor );
+                //cmd.Parameters.AddWithValue("@fechacreacion", fechacreacion);
+                //cmd.Parameters.AddWithValue("@fechaactualizacion", fechaactualizacion);
+                cmd.ExecuteNonQuery();
+                conn.Close();
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                MessageBox.Show("Se produjo un error");
+                MessageBox.Show(e.Message);
             }
-            return mostrarParametrosDT;
-
-        }
+        }*/
     }
-    /*public void modificarParametro(int id, string estado, string rol, string usuario, string nombre,
-           DateTime vencimiento, string email)
-    {
-
-        try
-        {
-            MySqlConnection conn;
-            MySqlCommand cmd;
-            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-            conn.Open();
-
-            cmd = new MySqlCommand("EditarUsuarios", conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@idUs", id_p);
-            cmd.Parameters.AddWithValue("@estado", estado);
-            cmd.Parameters.AddWithValue("@rol", rol);
-            cmd.Parameters.AddWithValue("@usuario", usuario);
-            cmd.Parameters.AddWithValue("@nombre", nombre);
-            cmd.Parameters.AddWithValue("@vencimiento", vencimiento);
-            cmd.Parameters.AddWithValue("@email", email);
-
-            cmd.ExecuteNonQuery();
-            conn.Close();
-
-        }
-        catch (Exception e)
-        {
-            MessageBox.Show(e.Message);
-        }
-
-    }*/
 
 }
