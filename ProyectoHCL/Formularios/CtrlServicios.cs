@@ -48,7 +48,7 @@ namespace ProyectoHCL.Formularios
 
             cmbServ.SelectedIndex = indice;
 
-            HabilitarBotones();
+           HabilitarBotones();
         }
 
         private void CtrlServicios_Load(object sender, EventArgs e)
@@ -220,7 +220,6 @@ namespace ProyectoHCL.Formularios
             pagFinal = pagina * numFilas;
             CargarDG();
         }
-
         private void HabilitarBotones()
         {
             if (pagInicio == 1)
