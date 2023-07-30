@@ -1,4 +1,4 @@
-﻿namespace ProyectoHCL.Formularios.Preguntas
+﻿namespace ProyectoHCL.Formularios
 {
     partial class ShowPregunta
     {

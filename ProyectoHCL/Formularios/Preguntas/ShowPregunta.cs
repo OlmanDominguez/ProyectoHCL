@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,9 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ProyectoHCL.Formularios.Preguntas.CtrlPreguntas;
+using ProyectoHCL.Formularios;
+using DocumentFormat.OpenXml.EMMA;
 
-namespace ProyectoHCL.Formularios.Preguntas
+
+namespace ProyectoHCL.Formularios
 {
     public partial class ShowPregunta : Form
     {
@@ -32,7 +35,10 @@ namespace ProyectoHCL.Formularios.Preguntas
 
         private void ShowPregunta_Load(object sender, EventArgs e)
         {
-            
+            if (CtrlPreguntas.preg.op == 1)
+            {
+
+            }
         }
     }
 }

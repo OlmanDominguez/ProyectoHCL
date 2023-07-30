@@ -1,4 +1,7 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using MySql.Data.MySqlClient;
+using ProyectoHCL.clases;
+using ProyectoHCL.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -156,9 +159,9 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        public static class preg 
-        { 
-            public static string detalle; 
+        public static class preg
+        {
+            public static string detalle;
             public static int op;
         }
 
@@ -195,8 +198,8 @@ namespace ProyectoHCL.Formularios
             if (this.dgvPreguntas.Columns[e.ColumnIndex].Name == "EDITAR")
             {
                 preg.detalle = dgvPreguntas.CurrentRow.Cells["PREGUNTA"].Value.ToString();
-                Form formulario = new Formularios.Preguntas.ShowPregunta();
                 preg.op = 1;
+                Form formulario = new Formularios.ShowPregunta();
                 formulario.ShowDialog();
                 CargarDG();
             }
