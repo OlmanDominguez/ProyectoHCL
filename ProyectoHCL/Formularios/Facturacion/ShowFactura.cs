@@ -15,7 +15,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static ProyectoHCL.Formularios.CtrlFacturacion;
+
+using iTextSharp.text;
+using System.IO;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+
 
 namespace ProyectoHCL.Formularios
 {
@@ -142,7 +149,32 @@ namespace ProyectoHCL.Formularios
                     return dt;
                 }
             }
+            else if (op == 4)
+            {
+                try
+                {
+                    string stri = "SELECT N_OCEXCENTA, NCONSTANCIAEXONERADO, NREGISTROSAR " +
+                                  "FROM TBL_FACTURA " +
+                                  "where ID_SOLICITUDRESERVA = " + param + ";";
 
+
+                    MySqlConnection conn;
+                    MySqlCommand cmd;
+                    conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                    conn.Open();
+
+                    cmd = new MySqlCommand(stri, conn);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    conn.Close();
+                    return dt;
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message + a.StackTrace);
+                    return dt;
+                }
+            }
 
             return dt;
 
@@ -179,7 +211,8 @@ namespace ProyectoHCL.Formularios
 
             string hoy = today.ToString("dd/MM/yyyy");
 
-            if (info.reserva != "0" & info.factura == "0") //Factura desde reserva
+            //Factura desde reserva
+            if (info.reserva != "0" & info.factura == "0") 
             {
 
 
@@ -392,6 +425,7 @@ namespace ProyectoHCL.Formularios
             }
             else if (info.reserva != "0" & info.factura != "0") //Factura solo para modificar metodo de pago
             {
+                DataTable dt = new DataTable();
                 try
                 {
                     using (BaseDatosHCL.ObtenerConexion())
@@ -418,11 +452,46 @@ namespace ProyectoHCL.Formularios
                     MessageBox.Show(a.Message + a.StackTrace);
                 }
 
+                
 
+                dt = consulta(info.reserva, 4);
+                txt_OCExenta.Text = dt.Rows[0]["N_OCEXCENTA"].ToString();
+                txt_ConsExone.Text = dt.Rows[0]["NCONSTANCIAEXONERADO"].ToString();
+                txt_RegSar.Text = dt.Rows[0]["NREGISTROSAR"].ToString();
+                
+
+                if ( info.est == 1)
+                {
+                    txt_ConsExone.Enabled = false;
+                    txt_OCExenta.Enabled = false;
+                    txt_RegSar.Enabled = false;
+                    cb_MPago.Enabled = false;
+                    btnFacturar.Visible = true;
+                    btnFacturar.Text = "Generar";
+                }
+                else if (info.est == 0)
+                {
+                    txt_ConsExone.Enabled = true;
+                    txt_OCExenta.Enabled = true;
+                    txt_RegSar.Enabled = true;
+                    cb_MPago.Enabled = true;
+                    btnFacturar.Visible = true;
+                    btnFacturar.Text = "Guardar";
+
+                }
+                else if (info.est == 2)
+                {
+                    txt_ConsExone.Enabled = true;
+                    txt_OCExenta.Enabled = true;
+                    txt_RegSar.Enabled = true;
+                    cb_MPago.Enabled = true;
+                    btnFacturar.Visible = true;
+                    btnFacturar.Text = "Facturar";
+                }
 
                 try
                 {
-                    DataTable dt = new DataTable();
+                    
                     dt = consulta(info.reserva, 1);
 
                     int n = dt.Rows.Count;
@@ -439,6 +508,7 @@ namespace ProyectoHCL.Formularios
                         var noches = Convert.ToDateTime(info.salida) - Convert.ToDateTime(info.ingreso);
                         lb_noches.Text = Convert.ToString(noches.Days);
 
+                        
 
                         dt = consulta(info.reserva, 2);
                         n = dt.Rows.Count;
@@ -636,41 +706,83 @@ namespace ProyectoHCL.Formularios
 
         private void btnFacturar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                using (BaseDatosHCL.ObtenerConexion())
+            if (info.est == 2) {
+
+                try
                 {
-                    //Consulta
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("insert into TBL_FACTURA(ID_SOLICITUDRESERVA, ID_TIPOPAGO, " +
-                        "ID_USUARIO, FECHA, N_OCEXCENTA, NCONSTANCIAEXONERADO, NREGISTROSAR, SUBTOTAL, " +
-                        "IMPOREXONERADO, IMPOREXCENTO, IMPORTEISV, IMPORTEALCOHOL, IMPORTETURISMO, " +
-                        "IMPUESISV, IMPUESALCOHOL, IMPUESTURIMOS, TOTAL) VALUES (" + info.reserva + ", " +
-                        cb_MPago.SelectedIndex + ", 1, '" + today.ToString("yyyy-MM-dd HH:mm:ss") + "', " + txt_OCExenta.Text + ", " +
-                        txt_ConsExone.Text + ", " + txt_RegSar.Text + ", " + subt + ", 0, 0, " +
-                        subt + ", 0, " + sth + ", " + isv + ", 0, " + it + ", " + total + ")");
+                    using (BaseDatosHCL.ObtenerConexion())
+                    {
+                        //Consulta
+                        MySqlCommand comando = new MySqlCommand();
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("insert into TBL_FACTURA(ID_SOLICITUDRESERVA, ID_TIPOPAGO, " +
+                            "ID_USUARIO, FECHA, N_OCEXCENTA, NCONSTANCIAEXONERADO, NREGISTROSAR, SUBTOTAL, " +
+                            "IMPOREXONERADO, IMPOREXCENTO, IMPORTEISV, IMPORTEALCOHOL, IMPORTETURISMO, " +
+                            "IMPUESISV, IMPUESALCOHOL, IMPUESTURIMOS, TOTAL) VALUES (" + info.reserva + ", " +
+                            cb_MPago.SelectedIndex + ", 1, '" + today.ToString("yyyy-MM-dd HH:mm:ss") + "', " + txt_OCExenta.Text + ", " +
+                            txt_ConsExone.Text + ", " + txt_RegSar.Text + ", " + subt + ", 0, 0, " +
+                            subt + ", 0, " + sth + ", " + isv + ", 0, " + it + ", " + total + ")");
 
-                    comando.ExecuteNonQuery();
-                    comando.Connection.Close();
+                        comando.ExecuteNonQuery();
+                        comando.Connection.Close();
 
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("UPDATE TBL_SOLICITUDRESERVA SET ID_ESTADORESERVA = 4 " +
-                        "WHERE ID_SOLICITUDRESERVA = " + info.reserva + ";");
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("UPDATE TBL_SOLICITUDRESERVA SET ID_ESTADORESERVA = 4 " +
+                            "WHERE ID_SOLICITUDRESERVA = " + info.reserva + ";");
 
-                    comando.ExecuteNonQuery();
-                    comando.Connection.Close();
-                    MessageBox.Show("Factura Creada", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
+                        comando.ExecuteNonQuery();
+                        comando.Connection.Close();
+                        MessageBox.Show("Factura Creada", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
 
+                    }
 
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message + a.StackTrace);
                 }
 
             }
-            catch (Exception a)
+            else if (info.est == 1)
             {
-                MessageBox.Show(a.Message + a.StackTrace);
+                SaveFileDialog guardar = new SaveFileDialog();
+                guardar.FileName = "Factura.pdf";
+
+
+                string paginahtml_texto = Properties.Resources.Plantilla.ToString();
+                
+
+                if (guardar.ShowDialog() == DialogResult.OK)
+                {
+                    using (FileStream stream = new FileStream(guardar.FileName, FileMode.Create))
+                    {
+                        Document pdfDoc = new Document(PageSize.A4, 25,25,25,25);
+
+                        PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+
+                        pdfDoc.Open();
+
+                        pdfDoc.Add(new Phrase(""));
+
+
+
+                        using (StringReader sr = new StringReader(Properties.Resources.Plantilla.ToString())){
+                            
+                            XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                        }
+
+                        pdfDoc.Close();
+
+                        stream.Close();
+
+                    }
+                }
+
+
+
             }
+            
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
