@@ -70,7 +70,7 @@ namespace ProyectoHCL.Formularios.Clientes
         private void Btn_Guardar_Click(object sender, EventArgs e)
         {
 
-            VCamposVacios();
+            //VCamposVacios();
 
             if (CorreoValido(txt_dir_correo.Text) == false)
             {
@@ -82,12 +82,12 @@ namespace ProyectoHCL.Formularios.Clientes
                 try
                 {
 
-                    control.EditarPerfil(txt_nombre, txt_dir_correo, txt_ciudad, txt_descripcion, txt_imagen,
+                    /*control.EditarPerfil(txt_nombre, txt_dir_correo, txt_ciudad, txt_descripcion, txt_imagen,
                         txt_apellido, txt_cod, txt_pais);
 
                     MessageBox.Show("Perfil Editado");
                     this.Close();
-                    admonUsuario.MostrarUsuarios();
+                    admonUsuario.MostrarUsuarios();*/
 
                 }
                 catch (Exception ex)
@@ -97,7 +97,7 @@ namespace ProyectoHCL.Formularios.Clientes
             }
         }
 
-        private bool VCamposVacios()
+        /*private bool VCamposVacios()
         {
             bool ok = true;
 
@@ -165,6 +165,6 @@ namespace ProyectoHCL.Formularios.Clientes
             {
                 errorT.Clear();
             }
-        }
+        }*/
     }
 }

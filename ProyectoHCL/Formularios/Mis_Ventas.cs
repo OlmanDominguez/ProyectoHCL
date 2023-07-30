@@ -19,9 +19,9 @@ namespace Perfiles
 
         private void Btn_regresar_Click(object sender, EventArgs e)
         {
-            Form Frm_Perfiles = new Frm_Perfiles();
+            /*Form Frm_Perfiles = new Frm_Perfiles();
             Frm_Perfiles.Show();
-            this.Close();
+            this.Close();*/
         }
     }
 }

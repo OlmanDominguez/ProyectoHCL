@@ -24,9 +24,9 @@ namespace Perfiles
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form Frm_Perfiles = new Frm_Perfiles();
+            /*Form Frm_Perfiles = new Frm_Perfiles();
             Frm_Perfiles.Show();
-            this.Close();
+            this.Close();*/
         }
 
         private void Preguntas_de_Seguridad_Load(object sender, EventArgs e)

@@ -17,7 +17,7 @@ namespace ProyectoHCL.Formularios
 {
     public partial class CtrlClientes : Form
     {
-        Clientes clien = new Clientes();
+        clases.Clientes clien = new clases.Clientes();
         DataSet ds = new DataSet();
         int pagInicio = 1, indice = 0, numFilas = 10, pagFinal;
 
