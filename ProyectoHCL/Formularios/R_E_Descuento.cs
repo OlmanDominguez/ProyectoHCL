@@ -28,6 +28,12 @@ namespace ProyectoHCL.Formularios
             txtDesc.Clear();
         }
 
+        public void limpiarError()
+        {
+            errorT.SetError(txtPorcentaje, "");
+            errorT.SetError(txtDesc, "");
+        }
+
         private void btnMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -37,12 +43,14 @@ namespace ProyectoHCL.Formularios
         {
             this.Close();
             limpiarCampos();
+            limpiarError();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
             limpiarCampos();
+            limpiarError();
         }
 
 

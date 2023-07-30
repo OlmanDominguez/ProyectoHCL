@@ -48,7 +48,7 @@ namespace ProyectoHCL.Formularios
 
             cmbServ.SelectedIndex = indice;
 
-           HabilitarBotones();
+            HabilitarBotones();
         }
 
         private void CtrlServicios_Load(object sender, EventArgs e)
@@ -251,6 +251,11 @@ namespace ProyectoHCL.Formularios
             {
                 CargarDG();
             }
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -308,7 +308,7 @@
             cb_MPago.FormattingEnabled = true;
             cb_MPago.Location = new Point(341, 88);
             cb_MPago.Name = "cb_MPago";
-            cb_MPago.Size = new Size(121, 26);
+            cb_MPago.Size = new Size(162, 26);
             cb_MPago.TabIndex = 122;
             // 
             // label39

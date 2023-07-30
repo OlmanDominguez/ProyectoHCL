@@ -50,6 +50,8 @@
             cmbMostrar = new ComboBox();
             label3 = new Label();
             panel3 = new Panel();
+            btnSig = new Button();
+            btnAnt = new Button();
             txtPaginacion = new TextBox();
             label6 = new Label();
             label7 = new Label();
@@ -287,6 +289,8 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(45, 66, 91);
+            panel3.Controls.Add(btnSig);
+            panel3.Controls.Add(btnAnt);
             panel3.Controls.Add(txtPaginacion);
             panel3.Controls.Add(label6);
             panel3.Controls.Add(label7);
@@ -303,6 +307,38 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(1084, 76);
             panel3.TabIndex = 36;
+            // 
+            // btnSig
+            // 
+            btnSig.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSig.BackColor = Color.Transparent;
+            btnSig.BackgroundImage = (Image)resources.GetObject("btnSig.BackgroundImage");
+            btnSig.BackgroundImageLayout = ImageLayout.Stretch;
+            btnSig.FlatAppearance.BorderSize = 0;
+            btnSig.FlatAppearance.MouseOverBackColor = Color.Silver;
+            btnSig.FlatStyle = FlatStyle.Flat;
+            btnSig.Location = new Point(727, 15);
+            btnSig.Name = "btnSig";
+            btnSig.Size = new Size(30, 31);
+            btnSig.TabIndex = 70;
+            btnSig.UseVisualStyleBackColor = false;
+            btnSig.Click += btnSig_Click;
+            // 
+            // btnAnt
+            // 
+            btnAnt.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAnt.BackColor = Color.Transparent;
+            btnAnt.BackgroundImage = (Image)resources.GetObject("btnAnt.BackgroundImage");
+            btnAnt.BackgroundImageLayout = ImageLayout.Stretch;
+            btnAnt.FlatAppearance.BorderSize = 0;
+            btnAnt.FlatAppearance.MouseOverBackColor = Color.Silver;
+            btnAnt.FlatStyle = FlatStyle.Flat;
+            btnAnt.Location = new Point(691, 15);
+            btnAnt.Name = "btnAnt";
+            btnAnt.Size = new Size(30, 31);
+            btnAnt.TabIndex = 69;
+            btnAnt.UseVisualStyleBackColor = false;
+            btnAnt.Click += btnAnt_Click;
             // 
             // txtPaginacion
             // 
@@ -512,5 +548,7 @@
         private Label label7;
         private ComboBox cmbPaginacion;
         private TextBox txtPaginacion;
+        private Button btnSig;
+        private Button btnAnt;
     }
 }

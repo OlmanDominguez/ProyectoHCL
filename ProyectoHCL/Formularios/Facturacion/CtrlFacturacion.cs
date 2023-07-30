@@ -48,6 +48,7 @@ namespace ProyectoHCL.Formularios
                 cmbPaginacion.Items.Add(x.ToString());
 
             cmbPaginacion.SelectedIndex = indice;
+            HabilitarBotones();
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -154,6 +155,7 @@ namespace ProyectoHCL.Formularios
             public static string ingreso;
             public static string salida;
             public static string reserva;
+            public static int est = 0;
         }
 
 
@@ -171,6 +173,7 @@ namespace ProyectoHCL.Formularios
                     string salida1 = salida.ToString("dd/MM/yyyy");
                     info.salida = salida1;
                     info.reserva = dgvFacturas.CurrentRow.Cells["RESERVA"].Value.ToString();
+                    info.est = 1;
                     Form form = new Formularios.ShowFactura();
                     form.ShowDialog();
 
@@ -180,12 +183,29 @@ namespace ProyectoHCL.Formularios
                     MessageBox.Show("Se produjo un error");
                 }
 
-
             }
 
             if (this.dgvFacturas.Columns[e.ColumnIndex].Name == "EDITAR")
             {
+                try
+                {
+                    info.factura = dgvFacturas.CurrentRow.Cells["FACTURA"].Value.ToString();
+                    DateTime ingreso = Convert.ToDateTime(dgvFacturas.CurrentRow.Cells["INGRESO"].Value.ToString());
+                    string ingreso1 = ingreso.ToString("dd/MM/yyyy");
+                    info.ingreso = ingreso1;
+                    DateTime salida = Convert.ToDateTime(dgvFacturas.CurrentRow.Cells["SALIDA"].Value.ToString());
+                    string salida1 = salida.ToString("dd/MM/yyyy");
+                    info.salida = salida1;
+                    info.reserva = dgvFacturas.CurrentRow.Cells["RESERVA"].Value.ToString();
+                    info.est = 0;
+                    Form form = new Formularios.ShowFactura();
+                    form.ShowDialog();
 
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Se produjo un error");
+                }
             }
         }
 
@@ -222,5 +242,46 @@ namespace ProyectoHCL.Formularios
             pagFinal = numFilas;
             CargarDG();
         }
+
+        private void btnAnt_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPaginacion.Text) - 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void btnSig_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPaginacion.Text) + 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+        }
+
+        private void HabilitarBotones()
+        {
+            if (pagInicio == 1)
+            {
+                btnAnt.Enabled = false;
+            }
+            else
+            {
+                btnAnt.Enabled = true;
+            }
+
+            if (indice == (Convert.ToInt32(txtPaginacion.Text) - 1))
+            {
+                btnSig.Enabled = false;
+            }
+            else
+            {
+                btnSig.Enabled = true;
+            }
+        }
+
+
     }
 }

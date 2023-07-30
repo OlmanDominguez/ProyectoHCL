@@ -17,7 +17,7 @@ namespace ProyectoHCL.Formularios
 {
     public partial class CtrlClientes : Form
     {
-        Clientes clien = new Clientes();
+        clases.Clientes clien = new clases.Clientes();
         DataSet ds = new DataSet();
         int pagInicio = 1, indice = 0, numFilas = 10, pagFinal;
 
@@ -50,7 +50,7 @@ namespace ProyectoHCL.Formularios
                 cmbPagCl.Items.Add(x.ToString());
 
             cmbPagCl.SelectedIndex = indice;
-
+            HabilitarBotones();
 
         }
 
@@ -240,21 +240,6 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void cmbPagCl_SelectionChangeCommitted_1(object sender, EventArgs e)
-        {
-            int pagina = Convert.ToInt32(cmbPagCl.Text);
-            indice = pagina - 1;
-            pagInicio = (pagina - 1) * numFilas + 1;
-            pagFinal = pagina * numFilas;
-            CargarDGCl();
-        }
-
-        private void cmbMostrarCl_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-           numFilas = int.Parse(cmbMostrarCl.Text);
-            pagFinal = numFilas;
-            CargarDGCl();
-        }
 
         private void txtBuscarCl_TextChanged(object sender, EventArgs e)
         {
@@ -266,6 +251,61 @@ namespace ProyectoHCL.Formularios
             {
                 CargarDGCl();
             }
+        }
+
+        private void btnAnt_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPagCl.Text) - 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDGCl();
+        }
+
+        private void btnSig_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPagCl.Text) + 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDGCl();
+        }
+
+        private void HabilitarBotones()
+        {
+            if (pagInicio == 1)
+            {
+                btnAnt.Enabled = false;
+            }
+            else
+            {
+                btnAnt.Enabled = true;
+            }
+
+            if (indice == (Convert.ToInt32(txtPagCl.Text) - 1))
+            {
+                btnSig.Enabled = false;
+            }
+            else
+            {
+                btnSig.Enabled = true;
+            }
+        }
+
+        private void cmbMostrarCl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            numFilas = int.Parse(cmbMostrarCl.Text);
+            pagFinal = numFilas;
+            CargarDGCl();
+        }
+
+        private void cmbPagCl_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPagCl.Text);
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDGCl();
         }
     }
 }

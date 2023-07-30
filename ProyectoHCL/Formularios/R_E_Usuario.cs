@@ -35,6 +35,18 @@ namespace ProyectoHCL.Formularios
             cmbEstado2.SelectedIndex = -1;
         }
 
+        public void limpiarError()
+        {
+            errorT.SetError(txtNombre, "");
+            errorT.SetError(txtContraseña, "");
+            errorT.SetError(txtUsuario, "");
+            errorT.SetError(txtCorreo, "");
+            errorT.SetError(cmbRol, "");
+            errorT.SetError(cmbEstado, "");
+            errorT.SetError(cmbEstado2, "");
+            errorT.SetError(dtpVencimiento, "");
+        }
+
         private void btnMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -44,12 +56,14 @@ namespace ProyectoHCL.Formularios
         {
             this.Close();
             limpiarCampos();
+            limpiarError();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
             limpiarCampos();
+            limpiarError();
         }
 
         int posY = 0;
@@ -84,18 +98,12 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        //private void dtpVencimiento_ValueChanged(object sender, EventArgs e)  //****
-        //{
-        //    if (DateTime.Today > dtpVencimiento.Value)
-        //    {
-        //        MessageBox.Show("La fecha seleccionada no es válida", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        //    }
-        //}
+
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (lblTitulo.Text == "Registrar Usuario")
-            {                
+            {
                 Modelo modelo = new Modelo();
 
                 if (txtNombre.Text.Trim() == "" || txtUsuario.Text.Trim() == "" || txtContraseña.Text.Trim() == "" ||
@@ -104,7 +112,8 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
 
-                }else if (modelo.existeUsuario(txtUsuario.Text))
+                }
+                else if (modelo.existeUsuario(txtUsuario.Text))
                 {
                     MsgB m = new MsgB("advertencia", "El usuario ya existe");
                     DialogResult dR = m.ShowDialog();
@@ -146,10 +155,15 @@ namespace ProyectoHCL.Formularios
             {
                 Control control = new Control();
 
-                if (txtNombre.Text.Trim() == "" || txtUsuario.Text.Trim() == "" || cmbRol.Text.Trim() == "" || 
+                if (txtNombre.Text.Trim() == "" || txtUsuario.Text.Trim() == "" || cmbRol.Text.Trim() == "" ||
                     txtCorreo.Text.Trim() == "" || cmbEstado2.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (DateTime.Today > dtpVencimiento.Value)
+                {
+                    MsgB m = new MsgB("advertencia", "La fecha de vencimiento seleccionada no es válida");
                     DialogResult dR = m.ShowDialog();
                 }
                 else
@@ -181,7 +195,7 @@ namespace ProyectoHCL.Formularios
             else
             {
                 errorT.Clear();
-                
+
             }
         }
 
@@ -250,6 +264,23 @@ namespace ProyectoHCL.Formularios
             if (ValidarTxt.cmbVacio(cmbEstado))
             {
                 errorT.SetError(cmbEstado, "Seleccione un estado");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+        }
+
+        private void dtpVencimiento_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpVencimiento_CloseUp(object sender, EventArgs e)
+        {
+            if (DateTime.Today > dtpVencimiento.Value)
+            {
+                errorT.SetError(dtpVencimiento, "Fecha no válida, seleccione una fecha futura");
             }
             else
             {

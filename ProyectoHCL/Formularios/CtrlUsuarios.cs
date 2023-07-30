@@ -110,8 +110,34 @@ namespace ProyectoHCL.Formularios
             }
         }
 
+        public string ParametroDias()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            string sql = "SELECT VALOR FROM TBL_PARAMETRO WHERE ID_PARAMETRO = 2;";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["VALOR"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+
+            conn.Close();
+        }
+
         private void btnNuevo_Click_1(object sender, EventArgs e)
         {
+            int diasV = Convert.ToInt32(ParametroDias());
             R_E_user.lblTitulo.Text = "Registrar Usuario";
             R_E_user.txtContraseña.Visible = true;
             R_E_user.lblContraseña.Visible = true;
@@ -122,7 +148,7 @@ namespace ProyectoHCL.Formularios
             R_E_user.lblEstado2.Visible = false;
             R_E_user.dtpVencimiento.Visible = false;
             R_E_user.txtFechaC.Text = DateTime.Now.ToShortDateString();
-            R_E_user.txtFechaV.Text = DateTime.Now.AddDays(360).ToShortDateString();
+            R_E_user.txtFechaV.Text = DateTime.Now.AddDays(diasV).ToShortDateString();
             R_E_user.ShowDialog();
             CargarDG();
         }
@@ -285,6 +311,11 @@ namespace ProyectoHCL.Formularios
             {
                 btnSiguiente.Enabled = true;
             }
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

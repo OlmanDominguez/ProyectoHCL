@@ -291,5 +291,10 @@ namespace ProyectoHCL.Formularios
                 btnSiguiente.Enabled = true;
             }
         }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

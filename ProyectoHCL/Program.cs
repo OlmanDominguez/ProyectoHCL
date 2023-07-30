@@ -18,17 +18,16 @@ namespace ProyectoHCL
            //  Application.Run(new CtrlUsuarios());
 
 
-            // Application.Run(new Dashboard());
+            //Application.Run(new Dashboard());
             //Application.Run(new NuevaReservacion());
             //Application.Run(new CtrlObjetos());
 
             //Application.Run(new CtrlClientes());
             //Application.Run(new CtrlUsuarios());
-          //  Application.Run(new CtrlServicios());
-            //Application.Run(new CtrlParametros());
-            //  Application.Run(new CtrlFacturacion());
-            // Application.Run(new Form1());
-           // Application.Run(new Backup());
+            //Application.Run(new CtrlUsuarios());
+            //Application.Run(new CtrlParametros()); 
+           Application.Run(new CtrlPreguntas());
+
 
         }
     }
