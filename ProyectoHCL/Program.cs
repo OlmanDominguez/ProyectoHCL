@@ -14,8 +14,8 @@ namespace ProyectoHCL
             // see https://aka.ms/applicationconfiguration.
             //ApplicationConfiguration.Initialize();
             // Application.Run(new PermisosRoLes());
-            // Application.Run(new FORMULARIO()); HEAD
-            //  Application.Run(new RegistrarUsuario());
+         // Application.Run(new FORMULARIO()); 
+           //  Application.Run(new CtrlUsuarios());
 
 
             // Application.Run(new Dashboard());
@@ -24,10 +24,11 @@ namespace ProyectoHCL
 
             //Application.Run(new CtrlClientes());
             //Application.Run(new CtrlUsuarios());
-            //Application.Run(new CtrlUsuarios());
-            //Application.Run(new CtrlParametros()); 
-           // Application.Run(new CtrlFacturacion());
-
+          //  Application.Run(new CtrlServicios());
+            //Application.Run(new CtrlParametros());
+            //  Application.Run(new CtrlFacturacion());
+            // Application.Run(new Form1());
+           // Application.Run(new Backup());
 
         }
     }
