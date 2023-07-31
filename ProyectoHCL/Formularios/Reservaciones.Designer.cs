@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reservaciones));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             btnExit = new PictureBox();
             dgv_reservaciones = new DataGridView();
             panel3 = new Panel();
@@ -86,7 +86,7 @@
             btnExit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnExit.BackgroundImageLayout = ImageLayout.Stretch;
             btnExit.Image = (Image)resources.GetObject("btnExit.Image");
-            btnExit.Location = new Point(826, -2);
+            btnExit.Location = new Point(867, -2);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(28, 29);
             btnExit.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -98,57 +98,57 @@
             // 
             dgv_reservaciones.AllowUserToAddRows = false;
             dgv_reservaciones.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = Color.SlateGray;
-            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            dgv_reservaciones.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = Color.SlateGray;
+            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
+            dgv_reservaciones.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             dgv_reservaciones.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_reservaciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_reservaciones.BackgroundColor = Color.WhiteSmoke;
             dgv_reservaciones.BorderStyle = BorderStyle.None;
             dgv_reservaciones.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.Teal;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgv_reservaciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle7.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = Color.Teal;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            dgv_reservaciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dgv_reservaciones.ColumnHeadersHeight = 30;
             dgv_reservaciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.MenuHighlight;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgv_reservaciones.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = SystemColors.MenuHighlight;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            dgv_reservaciones.DefaultCellStyle = dataGridViewCellStyle8;
             dgv_reservaciones.EnableHeadersVisualStyles = false;
             dgv_reservaciones.GridColor = Color.FromArgb(45, 66, 91);
             dgv_reservaciones.Location = new Point(2, 213);
             dgv_reservaciones.Name = "dgv_reservaciones";
             dgv_reservaciones.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.Gainsboro;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = SystemColors.InfoText;
-            dataGridViewCellStyle4.SelectionBackColor = Color.CadetBlue;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.InfoText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgv_reservaciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle9.ForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle9.SelectionBackColor = Color.CadetBlue;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            dgv_reservaciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             dgv_reservaciones.RowHeadersVisible = false;
-            dataGridViewCellStyle5.BackColor = Color.Gainsboro;
-            dataGridViewCellStyle5.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = Color.LightGray;
-            dataGridViewCellStyle5.SelectionForeColor = Color.Black;
-            dgv_reservaciones.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle10.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle10.ForeColor = Color.Black;
+            dataGridViewCellStyle10.SelectionBackColor = Color.LightGray;
+            dataGridViewCellStyle10.SelectionForeColor = Color.Black;
+            dgv_reservaciones.RowsDefaultCellStyle = dataGridViewCellStyle10;
             dgv_reservaciones.RowTemplate.Height = 25;
-            dgv_reservaciones.Size = new Size(855, 201);
+            dgv_reservaciones.Size = new Size(896, 226);
             dgv_reservaciones.TabIndex = 37;
             dgv_reservaciones.CellContentClick += dgv_reservaciones_CellContentClick;
             // 
@@ -175,15 +175,15 @@
             panel3.Controls.Add(txtPag);
             panel3.Controls.Add(cmbPag);
             panel3.Dock = DockStyle.Bottom;
-            panel3.Location = new Point(0, 512);
+            panel3.Location = new Point(0, 537);
             panel3.Name = "panel3";
-            panel3.Size = new Size(855, 76);
+            panel3.Size = new Size(896, 76);
             panel3.TabIndex = 38;
             // 
             // textBox1
             // 
             textBox1.Anchor = AnchorStyles.Right;
-            textBox1.Location = new Point(784, 24);
+            textBox1.Location = new Point(825, 24);
             textBox1.Name = "textBox1";
             textBox1.ReadOnly = true;
             textBox1.Size = new Size(63, 23);
@@ -195,7 +195,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(754, 25);
+            label1.Location = new Point(795, 25);
             label1.Name = "label1";
             label1.Size = new Size(24, 17);
             label1.TabIndex = 62;
@@ -207,7 +207,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.ControlLightLight;
-            label3.Location = new Point(626, 25);
+            label3.Location = new Point(667, 25);
             label3.Name = "label3";
             label3.Size = new Size(47, 17);
             label3.TabIndex = 61;
@@ -219,7 +219,7 @@
             comboBox1.BackColor = SystemColors.Info;
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(674, 22);
+            comboBox1.Location = new Point(715, 22);
             comboBox1.Margin = new Padding(2);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(65, 23);
@@ -270,7 +270,7 @@
             // txtPagTH
             // 
             txtPagTH.Anchor = AnchorStyles.Right;
-            txtPagTH.Location = new Point(1574, 5);
+            txtPagTH.Location = new Point(1615, 5);
             txtPagTH.Name = "txtPagTH";
             txtPagTH.ReadOnly = true;
             txtPagTH.Size = new Size(63, 23);
@@ -282,7 +282,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label8.ForeColor = SystemColors.ControlLightLight;
-            label8.Location = new Point(1547, 8);
+            label8.Location = new Point(1588, 8);
             label8.Name = "label8";
             label8.Size = new Size(24, 17);
             label8.TabIndex = 55;
@@ -294,7 +294,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label9.ForeColor = SystemColors.ControlLightLight;
-            label9.Location = new Point(1419, 8);
+            label9.Location = new Point(1460, 8);
             label9.Name = "label9";
             label9.Size = new Size(47, 17);
             label9.TabIndex = 54;
@@ -306,7 +306,7 @@
             cboxPag.BackColor = SystemColors.Info;
             cboxPag.DropDownStyle = ComboBoxStyle.DropDownList;
             cboxPag.FormattingEnabled = true;
-            cboxPag.Location = new Point(1467, 5);
+            cboxPag.Location = new Point(1508, 5);
             cboxPag.Margin = new Padding(2);
             cboxPag.Name = "cboxPag";
             cboxPag.Size = new Size(65, 23);
@@ -315,7 +315,7 @@
             // txtPaginacion
             // 
             txtPaginacion.Anchor = AnchorStyles.Right;
-            txtPaginacion.Location = new Point(2404, -8);
+            txtPaginacion.Location = new Point(2445, -8);
             txtPaginacion.Name = "txtPaginacion";
             txtPaginacion.ReadOnly = true;
             txtPaginacion.Size = new Size(63, 23);
@@ -327,7 +327,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label6.ForeColor = SystemColors.ControlLightLight;
-            label6.Location = new Point(2377, -5);
+            label6.Location = new Point(2418, -5);
             label6.Name = "label6";
             label6.Size = new Size(24, 17);
             label6.TabIndex = 51;
@@ -339,7 +339,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label7.ForeColor = SystemColors.ControlLightLight;
-            label7.Location = new Point(2249, -5);
+            label7.Location = new Point(2290, -5);
             label7.Name = "label7";
             label7.Size = new Size(47, 17);
             label7.TabIndex = 50;
@@ -351,7 +351,7 @@
             cmbPaginacion.BackColor = SystemColors.Info;
             cmbPaginacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPaginacion.FormattingEnabled = true;
-            cmbPaginacion.Location = new Point(2297, -8);
+            cmbPaginacion.Location = new Point(2338, -8);
             cmbPaginacion.Margin = new Padding(2);
             cmbPaginacion.Name = "cmbPaginacion";
             cmbPaginacion.Size = new Size(65, 23);
@@ -361,7 +361,7 @@
             // 
             label2.Anchor = AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new Point(3201, -17);
+            label2.Location = new Point(3242, -17);
             label2.Name = "label2";
             label2.Size = new Size(21, 15);
             label2.TabIndex = 47;
@@ -371,7 +371,7 @@
             // 
             label5.Anchor = AnchorStyles.Right;
             label5.AutoSize = true;
-            label5.Location = new Point(3073, -17);
+            label5.Location = new Point(3114, -17);
             label5.Name = "label5";
             label5.Size = new Size(43, 15);
             label5.TabIndex = 46;
@@ -380,7 +380,7 @@
             // txtPag
             // 
             txtPag.Anchor = AnchorStyles.Right;
-            txtPag.Location = new Point(3228, -20);
+            txtPag.Location = new Point(3269, -20);
             txtPag.Name = "txtPag";
             txtPag.Size = new Size(65, 23);
             txtPag.TabIndex = 45;
@@ -391,7 +391,7 @@
             cmbPag.BackColor = SystemColors.Info;
             cmbPag.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPag.FormattingEnabled = true;
-            cmbPag.Location = new Point(3121, -20);
+            cmbPag.Location = new Point(3162, -20);
             cmbPag.Margin = new Padding(2);
             cmbPag.Name = "cmbPag";
             cmbPag.Size = new Size(65, 23);
@@ -409,7 +409,7 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(855, 125);
+            panel2.Size = new Size(896, 125);
             panel2.TabIndex = 35;
             // 
             // button2
@@ -420,7 +420,7 @@
             button2.BackgroundImageLayout = ImageLayout.Stretch;
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(3508, 74);
+            button2.Location = new Point(3549, 74);
             button2.Name = "button2";
             button2.Size = new Size(30, 29);
             button2.TabIndex = 38;
@@ -434,7 +434,7 @@
             button5.BackgroundImageLayout = ImageLayout.Stretch;
             button5.FlatAppearance.BorderSize = 0;
             button5.FlatStyle = FlatStyle.Flat;
-            button5.Location = new Point(3555, 72);
+            button5.Location = new Point(3596, 72);
             button5.Name = "button5";
             button5.Size = new Size(35, 33);
             button5.TabIndex = 39;
@@ -448,7 +448,7 @@
             btnPerfil.BackgroundImageLayout = ImageLayout.Stretch;
             btnPerfil.FlatAppearance.BorderSize = 0;
             btnPerfil.FlatStyle = FlatStyle.Flat;
-            btnPerfil.Location = new Point(4223, 73);
+            btnPerfil.Location = new Point(4264, 73);
             btnPerfil.Name = "btnPerfil";
             btnPerfil.Size = new Size(30, 29);
             btnPerfil.TabIndex = 34;
@@ -462,7 +462,7 @@
             btnCerrarSesion.BackgroundImageLayout = ImageLayout.Stretch;
             btnCerrarSesion.FlatAppearance.BorderSize = 0;
             btnCerrarSesion.FlatStyle = FlatStyle.Flat;
-            btnCerrarSesion.Location = new Point(4270, 71);
+            btnCerrarSesion.Location = new Point(4311, 71);
             btnCerrarSesion.Name = "btnCerrarSesion";
             btnCerrarSesion.Size = new Size(35, 33);
             btnCerrarSesion.TabIndex = 35;
@@ -515,7 +515,7 @@
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 125);
             panel5.Name = "panel5";
-            panel5.Size = new Size(855, 85);
+            panel5.Size = new Size(896, 85);
             panel5.TabIndex = 36;
             // 
             // button3
@@ -526,7 +526,7 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button3.ForeColor = SystemColors.ButtonHighlight;
-            button3.Location = new Point(1558, 12);
+            button3.Location = new Point(1599, 12);
             button3.Margin = new Padding(2);
             button3.Name = "button3";
             button3.Size = new Size(78, 25);
@@ -542,7 +542,7 @@
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button4.ForeColor = SystemColors.ButtonHighlight;
-            button4.Location = new Point(1467, 12);
+            button4.Location = new Point(1508, 12);
             button4.Margin = new Padding(2);
             button4.Name = "button4";
             button4.Size = new Size(78, 25);
@@ -558,7 +558,7 @@
             button7.FlatStyle = FlatStyle.Flat;
             button7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button7.ForeColor = SystemColors.ButtonHighlight;
-            button7.Location = new Point(2389, -2);
+            button7.Location = new Point(2430, -2);
             button7.Margin = new Padding(2);
             button7.Name = "button7";
             button7.Size = new Size(78, 25);
@@ -574,7 +574,7 @@
             button9.FlatStyle = FlatStyle.Flat;
             button9.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button9.ForeColor = SystemColors.ButtonHighlight;
-            button9.Location = new Point(2298, -2);
+            button9.Location = new Point(2339, -2);
             button9.Margin = new Padding(2);
             button9.Name = "button9";
             button9.Size = new Size(78, 25);
@@ -590,7 +590,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = SystemColors.ButtonHighlight;
-            button1.Location = new Point(765, 34);
+            button1.Location = new Point(806, 34);
             button1.Margin = new Padding(2);
             button1.Name = "button1";
             button1.Size = new Size(78, 25);
@@ -606,7 +606,7 @@
             button6.FlatStyle = FlatStyle.Flat;
             button6.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button6.ForeColor = SystemColors.ButtonHighlight;
-            button6.Location = new Point(674, 34);
+            button6.Location = new Point(715, 34);
             button6.Margin = new Padding(2);
             button6.Name = "button6";
             button6.Size = new Size(78, 25);
@@ -646,7 +646,7 @@
             panelChildForm.Dock = DockStyle.Top;
             panelChildForm.Location = new Point(0, 0);
             panelChildForm.Name = "panelChildForm";
-            panelChildForm.Size = new Size(855, 588);
+            panelChildForm.Size = new Size(896, 488);
             panelChildForm.TabIndex = 2;
             panelChildForm.Paint += panelChildForm_Paint;
             // 
@@ -654,7 +654,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(855, 588);
+            ClientSize = new Size(896, 613);
             Controls.Add(panel3);
             Controls.Add(dgv_reservaciones);
             Controls.Add(btnExit);

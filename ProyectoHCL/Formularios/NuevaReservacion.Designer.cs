@@ -40,14 +40,19 @@
             txt_huespedes = new TextBox();
             label5 = new Label();
             label6 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            dateTimePicker2 = new DateTimePicker();
             panel2 = new Panel();
             pictureBox5 = new PictureBox();
             label7 = new Label();
             btnCerrar = new Button();
             btnMin = new Button();
             panel3 = new Panel();
+            label15 = new Label();
+            txt_fecha_coti = new TextBox();
+            label14 = new Label();
+            txt_fecha_salida = new TextBox();
+            txt_fecha_entrada = new TextBox();
+            txt_metodo_reserva = new TextBox();
+            txt_estado = new TextBox();
             cb_estado = new ComboBox();
             label13 = new Label();
             cb_numero = new ComboBox();
@@ -62,6 +67,8 @@
             label8 = new Label();
             btnCancelar = new Button();
             btnGuardar = new Button();
+            txt_tipo_habitacion = new TextBox();
+            txt_id = new TextBox();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
@@ -85,7 +92,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Gainsboro;
             label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(81, 210);
+            label1.Location = new Point(81, 193);
             label1.Name = "label1";
             label1.Size = new Size(51, 17);
             label1.TabIndex = 39;
@@ -94,7 +101,7 @@
             // cb_cliente
             // 
             cb_cliente.FormattingEnabled = true;
-            cb_cliente.Location = new Point(255, 202);
+            cb_cliente.Location = new Point(255, 185);
             cb_cliente.Name = "cb_cliente";
             cb_cliente.Size = new Size(241, 23);
             cb_cliente.TabIndex = 40;
@@ -105,7 +112,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Gainsboro;
             label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(81, 245);
+            label2.Location = new Point(83, 234);
             label2.Name = "label2";
             label2.Size = new Size(97, 17);
             label2.TabIndex = 41;
@@ -113,7 +120,7 @@
             // 
             // txt_cod_cliente
             // 
-            txt_cod_cliente.Location = new Point(255, 239);
+            txt_cod_cliente.Location = new Point(257, 228);
             txt_cod_cliente.Name = "txt_cod_cliente";
             txt_cod_cliente.ReadOnly = true;
             txt_cod_cliente.Size = new Size(47, 23);
@@ -124,7 +131,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Gainsboro;
             label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(81, 286);
+            label3.Location = new Point(83, 282);
             label3.Name = "label3";
             label3.Size = new Size(150, 17);
             label3.TabIndex = 43;
@@ -133,9 +140,9 @@
             // cb_metodo
             // 
             cb_metodo.FormattingEnabled = true;
-            cb_metodo.Location = new Point(255, 278);
+            cb_metodo.Location = new Point(257, 274);
             cb_metodo.Name = "cb_metodo";
-            cb_metodo.Size = new Size(121, 23);
+            cb_metodo.Size = new Size(163, 23);
             cb_metodo.TabIndex = 44;
             cb_metodo.SelectedIndexChanged += cb_metodo_SelectedIndexChanged_1;
             // 
@@ -152,7 +159,7 @@
             // 
             // txt_huespedes
             // 
-            txt_huespedes.Location = new Point(257, 367);
+            txt_huespedes.Location = new Point(257, 365);
             txt_huespedes.Name = "txt_huespedes";
             txt_huespedes.Size = new Size(47, 23);
             txt_huespedes.TabIndex = 46;
@@ -162,7 +169,7 @@
             label5.AutoSize = true;
             label5.BackColor = Color.Gainsboro;
             label5.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(518, 208);
+            label5.Location = new Point(518, 216);
             label5.Name = "label5";
             label5.Size = new Size(117, 17);
             label5.TabIndex = 47;
@@ -173,27 +180,11 @@
             label6.AutoSize = true;
             label6.BackColor = Color.Gainsboro;
             label6.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(518, 240);
+            label6.Location = new Point(518, 250);
             label6.Name = "label6";
             label6.Size = new Size(102, 17);
             label6.TabIndex = 48;
             label6.Text = "Fecha de salida";
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(684, 212);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(121, 23);
-            dateTimePicker1.TabIndex = 49;
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Format = DateTimePickerFormat.Short;
-            dateTimePicker2.Location = new Point(684, 245);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(121, 23);
-            dateTimePicker2.TabIndex = 50;
             // 
             // panel2
             // 
@@ -264,6 +255,15 @@
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
+            panel3.Controls.Add(txt_id);
+            panel3.Controls.Add(label15);
+            panel3.Controls.Add(txt_fecha_coti);
+            panel3.Controls.Add(label14);
+            panel3.Controls.Add(txt_fecha_salida);
+            panel3.Controls.Add(txt_fecha_entrada);
+            panel3.Controls.Add(txt_tipo_habitacion);
+            panel3.Controls.Add(txt_metodo_reserva);
+            panel3.Controls.Add(txt_estado);
             panel3.Controls.Add(cb_estado);
             panel3.Controls.Add(label13);
             panel3.Controls.Add(cb_numero);
@@ -280,10 +280,8 @@
             panel3.Controls.Add(cb_tipo);
             panel3.Controls.Add(label3);
             panel3.Controls.Add(label8);
-            panel3.Controls.Add(dateTimePicker2);
             panel3.Controls.Add(btnCancelar);
             panel3.Controls.Add(label6);
-            panel3.Controls.Add(dateTimePicker1);
             panel3.Controls.Add(btnGuardar);
             panel3.Controls.Add(cb_cliente);
             panel3.Controls.Add(label5);
@@ -296,20 +294,80 @@
             panel3.Size = new Size(949, 531);
             panel3.TabIndex = 52;
             // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.BackColor = Color.Gainsboro;
+            label15.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label15.Location = new Point(693, 159);
+            label15.Name = "label15";
+            label15.Size = new Size(87, 13);
+            label15.TabIndex = 72;
+            label15.Text = "AAAA/MM/DD";
+            // 
+            // txt_fecha_coti
+            // 
+            txt_fecha_coti.Location = new Point(684, 179);
+            txt_fecha_coti.Name = "txt_fecha_coti";
+            txt_fecha_coti.Size = new Size(121, 23);
+            txt_fecha_coti.TabIndex = 71;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.BackColor = Color.Gainsboro;
+            label14.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label14.Location = new Point(518, 185);
+            label14.Name = "label14";
+            label14.Size = new Size(130, 17);
+            label14.TabIndex = 70;
+            label14.Text = "Fecha de Cotizacion";
+            // 
+            // txt_fecha_salida
+            // 
+            txt_fecha_salida.Location = new Point(684, 250);
+            txt_fecha_salida.Name = "txt_fecha_salida";
+            txt_fecha_salida.Size = new Size(121, 23);
+            txt_fecha_salida.TabIndex = 69;
+            // 
+            // txt_fecha_entrada
+            // 
+            txt_fecha_entrada.Location = new Point(684, 215);
+            txt_fecha_entrada.Name = "txt_fecha_entrada";
+            txt_fecha_entrada.Size = new Size(121, 23);
+            txt_fecha_entrada.TabIndex = 68;
+            // 
+            // txt_metodo_reserva
+            // 
+            txt_metodo_reserva.Location = new Point(426, 274);
+            txt_metodo_reserva.Name = "txt_metodo_reserva";
+            txt_metodo_reserva.ReadOnly = true;
+            txt_metodo_reserva.Size = new Size(47, 23);
+            txt_metodo_reserva.TabIndex = 66;
+            // 
+            // txt_estado
+            // 
+            txt_estado.Location = new Point(424, 322);
+            txt_estado.Name = "txt_estado";
+            txt_estado.ReadOnly = true;
+            txt_estado.Size = new Size(47, 23);
+            txt_estado.TabIndex = 65;
+            // 
             // cb_estado
             // 
             cb_estado.FormattingEnabled = true;
-            cb_estado.Location = new Point(257, 324);
+            cb_estado.Location = new Point(257, 322);
             cb_estado.Name = "cb_estado";
-            cb_estado.Size = new Size(121, 23);
+            cb_estado.Size = new Size(163, 23);
             cb_estado.TabIndex = 63;
+            cb_estado.SelectedIndexChanged += cb_estado_SelectedIndexChanged;
             // 
             // label13
             // 
             label13.AutoSize = true;
             label13.BackColor = Color.Gainsboro;
             label13.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label13.Location = new Point(83, 332);
+            label13.Location = new Point(83, 330);
             label13.Name = "label13";
             label13.Size = new Size(158, 17);
             label13.TabIndex = 62;
@@ -320,8 +378,9 @@
             cb_numero.FormattingEnabled = true;
             cb_numero.Location = new Point(684, 324);
             cb_numero.Name = "cb_numero";
-            cb_numero.Size = new Size(121, 23);
+            cb_numero.Size = new Size(163, 23);
             cb_numero.TabIndex = 61;
+            cb_numero.SelectedIndexChanged += cb_numero_SelectedIndexChanged;
             // 
             // label12
             // 
@@ -336,7 +395,7 @@
             // 
             // txt_monto
             // 
-            txt_monto.Location = new Point(684, 163);
+            txt_monto.Location = new Point(684, 133);
             txt_monto.Name = "txt_monto";
             txt_monto.Size = new Size(121, 23);
             txt_monto.TabIndex = 59;
@@ -346,7 +405,7 @@
             label11.AutoSize = true;
             label11.BackColor = Color.Gainsboro;
             label11.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.Location = new Point(518, 163);
+            label11.Location = new Point(518, 133);
             label11.Name = "label11";
             label11.Size = new Size(117, 17);
             label11.TabIndex = 58;
@@ -354,7 +413,7 @@
             // 
             // txt_codigo
             // 
-            txt_codigo.Location = new Point(255, 157);
+            txt_codigo.Location = new Point(255, 127);
             txt_codigo.Name = "txt_codigo";
             txt_codigo.Size = new Size(91, 23);
             txt_codigo.TabIndex = 57;
@@ -364,7 +423,7 @@
             label10.AutoSize = true;
             label10.BackColor = Color.Gainsboro;
             label10.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.Location = new Point(81, 163);
+            label10.Location = new Point(81, 133);
             label10.Name = "label10";
             label10.Size = new Size(117, 17);
             label10.TabIndex = 56;
@@ -393,8 +452,9 @@
             cb_tipo.FormattingEnabled = true;
             cb_tipo.Location = new Point(684, 288);
             cb_tipo.Name = "cb_tipo";
-            cb_tipo.Size = new Size(121, 23);
+            cb_tipo.Size = new Size(163, 23);
             cb_tipo.TabIndex = 53;
+            cb_tipo.SelectedIndexChanged += cb_tipo_SelectedIndexChanged;
             // 
             // label8
             // 
@@ -422,6 +482,7 @@
             btnCancelar.TabIndex = 22;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGuardar
             // 
@@ -438,6 +499,23 @@
             btnGuardar.TabIndex = 21;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
+            // 
+            // txt_tipo_habitacion
+            // 
+            txt_tipo_habitacion.Location = new Point(853, 288);
+            txt_tipo_habitacion.Name = "txt_tipo_habitacion";
+            txt_tipo_habitacion.ReadOnly = true;
+            txt_tipo_habitacion.Size = new Size(47, 23);
+            txt_tipo_habitacion.TabIndex = 67;
+            // 
+            // txt_id
+            // 
+            txt_id.Location = new Point(853, 324);
+            txt_id.Name = "txt_id";
+            txt_id.ReadOnly = true;
+            txt_id.Size = new Size(47, 23);
+            txt_id.TabIndex = 73;
             // 
             // NuevaReservacion
             // 
@@ -474,8 +552,6 @@
         private TextBox txt_huespedes;
         private Label label5;
         private Label label6;
-        private DateTimePicker dateTimePicker1;
-        private DateTimePicker dateTimePicker2;
         private Panel panel2;
         private PictureBox pictureBox5;
         private Label label7;
@@ -496,5 +572,14 @@
         private Label label12;
         private ComboBox cb_estado;
         private Label label13;
+        private TextBox txt_estado;
+        private TextBox txt_metodo_reserva;
+        private TextBox txt_fecha_coti;
+        private Label label14;
+        private TextBox txt_fecha_salida;
+        private TextBox txt_fecha_entrada;
+        private Label label15;
+        private TextBox txt_id;
+        private TextBox txt_tipo_habitacion;
     }
 }
