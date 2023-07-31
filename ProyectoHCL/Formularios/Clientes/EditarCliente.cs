@@ -16,6 +16,7 @@ namespace ProyectoHCL.Formularios
 {
     public partial class EditarCliente : Form
     {
+        MsgB msgB = new MsgB();
         public EditarCliente()
         {
             InitializeComponent();
@@ -59,7 +60,7 @@ namespace ProyectoHCL.Formularios
                     comando.CommandText = ("SELECT C.NOMBRE, C.APELLIDO, C.DNI_PASAPORTE, C.TELEFONO," +
                         " C.TELEFONO2, C.EMAIL, C.EMAIL2, C.RTN, C.NOMBRE_RTN, T.DESCRIPCION " +
                         "FROM TBL_CLIENTE C INNER JOIN TBL_TIPOCLIENTE T ON C.ID_TIPOCLIENTE = " +
-                        "T.ID_TIPOCLIENTE WHERE C.CODIGO = " + claseCod.codigo);
+                        "T.ID_TIPOCLIENTE WHERE C.CODIGO = " + claseCod.id);
 
                     MySqlDataReader leer = comando.ExecuteReader();
                     if (leer.Read())
@@ -122,8 +123,8 @@ namespace ProyectoHCL.Formularios
         {
             if (VCamposVacios() == false)
             {
-                MessageBox.Show("Por favor llene todos los campos", "Aviso",
-                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MsgB mbox1 = new MsgB("advertencia", "Favor llene todos los campos");
+                        DialogResult dR1 = mbox1.ShowDialog();
             }
             else
             {
@@ -139,9 +140,10 @@ namespace ProyectoHCL.Formularios
                     control.editarClie(txtNombre.Text, tip, txtApellido.Text, txtEmpresa.Text,
                         txtRTN.Text, txtTele1.Text, txtEmail1.Text, Convert.ToInt32(claseCod.codigo),
                         txtID.Text, txtTele2.Text, txtEmail2.Text);
-                    MessageBox.Show("Cliente modificado");
+                    MsgB mbox = new MsgB("informacion", "Cliente Agregado");
+                    DialogResult dR = mbox.ShowDialog();
                     this.Close();
-                    //admonObjeto.MostrarObjetos();
+                    
                 }
                 catch (Exception ex)
                 {
@@ -229,6 +231,9 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

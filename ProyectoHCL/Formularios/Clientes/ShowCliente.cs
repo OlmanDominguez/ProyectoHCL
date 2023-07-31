@@ -55,7 +55,7 @@ namespace ProyectoHCL.Formularios
                     //Consulta
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("select * from TBL_CLIENTE WHERE CODIGO = " + claseCod.codigo +
+                    comando.CommandText = ("select * from TBL_CLIENTE WHERE CODIGO = " + claseCod.id +
                         "");
 
                     MySqlDataReader leer = comando.ExecuteReader();

@@ -1,5 +1,10 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Office.Word;
+﻿using iText.IO.Font.Constants;
+using iText.Kernel.Font;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
@@ -17,12 +22,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static ProyectoHCL.Formularios.CtrlFacturacion;
-
-using iTextSharp.text;
-using System.IO;
-using iTextSharp.text.pdf;
-using iTextSharp.tool.xml;
-
+using Paragraph = iText.Layout.Element.Paragraph;
 
 namespace ProyectoHCL.Formularios
 {
@@ -180,6 +180,8 @@ namespace ProyectoHCL.Formularios
 
         }
 
+        int h, s;
+
         private void ShowFactura_Load(object sender, EventArgs e)
         {
             try
@@ -237,10 +239,10 @@ namespace ProyectoHCL.Formularios
 
 
                         dt = consulta(info.reserva, 2);
-                        n = dt.Rows.Count;
+                        h = dt.Rows.Count;
                         //DetalleHabitaciones
 
-                        if (n == 0)
+                        if (h == 0)
                         {
                             lb_Habi1.Text = "N/A";
                             lb_Tipo1.Text = "N/A";
@@ -256,7 +258,7 @@ namespace ProyectoHCL.Formularios
                             lb_sbt3.Text = "N/A";
                             lb_StH.Text = "0.00";
                         }
-                        else if (n == 1)
+                        else if (h == 1)
                         {
                             lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
                             lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
@@ -273,7 +275,7 @@ namespace ProyectoHCL.Formularios
                             sth = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]);
                             lb_StH.Text = Convert.ToString(sth);
                         }
-                        else if (n == 2)
+                        else if (h == 2)
                         {
                             lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
                             lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
@@ -292,7 +294,7 @@ namespace ProyectoHCL.Formularios
                             sth = st1 + st2;
                             lb_StH.Text = Convert.ToString(sth);
                         }
-                        else if (n == 3)
+                        else if (h == 3)
                         {
                             lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
                             lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
@@ -316,8 +318,8 @@ namespace ProyectoHCL.Formularios
                         //DetalleServicios
 
                         dt = consulta(info.reserva, 3);
-                        n = dt.Rows.Count;
-                        if (n == 0)
+                        s = dt.Rows.Count;
+                        if (s  == 0)
                         {
                             lb_Ser1.Text = "N/A";
                             lb_Ca1.Text = "N/A";
@@ -333,7 +335,7 @@ namespace ProyectoHCL.Formularios
                             lb_St3.Text = "N/A";
                             lb_StS.Text = "0.00";
                         }
-                        else if (n == 1)
+                        else if (s == 1)
                         {
                             lb_Ser1.Text = dt.Rows[0]["DESCRIPCION"].ToString();
                             lb_Ca1.Text = dt.Rows[0]["CANTIDAD"].ToString();
@@ -351,7 +353,7 @@ namespace ProyectoHCL.Formularios
                             StS = St1;
                             lb_StS.Text = Convert.ToString(StS);
                         }
-                        else if (n == 2)
+                        else if (s == 2)
                         {
                             lb_Ser1.Text = dt.Rows[0]["DESCRIPCION"].ToString();
                             lb_Ca1.Text = dt.Rows[0]["CANTIDAD"].ToString();
@@ -370,7 +372,7 @@ namespace ProyectoHCL.Formularios
                             StS = St1 + St2;
                             lb_StS.Text = Convert.ToString(StS);
                         }
-                        else if (n == 3)
+                        else if (s == 3)
                         {
                             lb_Ser1.Text = dt.Rows[0]["DESCRIPCION"].ToString();
                             lb_Ca1.Text = dt.Rows[0]["CANTIDAD"].ToString();
@@ -511,10 +513,10 @@ namespace ProyectoHCL.Formularios
                         
 
                         dt = consulta(info.reserva, 2);
-                        n = dt.Rows.Count;
+                        h = dt.Rows.Count;
                         //DetalleHabitaciones
 
-                        if (n == 0)
+                        if (h == 0)
                         {
                             lb_Habi1.Text = "N/A";
                             lb_Tipo1.Text = "N/A";
@@ -530,7 +532,7 @@ namespace ProyectoHCL.Formularios
                             lb_sbt3.Text = "N/A";
                             lb_StH.Text = "0.00";
                         }
-                        else if (n == 1)
+                        else if (h == 1)
                         {
                             lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
                             lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
@@ -547,7 +549,7 @@ namespace ProyectoHCL.Formularios
                             sth = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]);
                             lb_StH.Text = Convert.ToString(sth);
                         }
-                        else if (n == 2)
+                        else if (h == 2)
                         {
                             lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
                             lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
@@ -566,7 +568,7 @@ namespace ProyectoHCL.Formularios
                             sth = st1 + st2;
                             lb_StH.Text = Convert.ToString(sth);
                         }
-                        else if (n == 3)
+                        else if (h == 3)
                         {
                             lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
                             lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
@@ -590,8 +592,8 @@ namespace ProyectoHCL.Formularios
                         //DetalleServicios
 
                         dt = consulta(info.reserva, 3);
-                        n = dt.Rows.Count;
-                        if (n == 0)
+                        s = dt.Rows.Count;
+                        if (s == 0)
                         {
                             lb_Ser1.Text = "N/A";
                             lb_Ca1.Text = "N/A";
@@ -607,7 +609,7 @@ namespace ProyectoHCL.Formularios
                             lb_St3.Text = "N/A";
                             lb_StS.Text = "0.00";
                         }
-                        else if (n == 1)
+                        else if (s == 1)
                         {
                             lb_Ser1.Text = dt.Rows[0]["DESCRIPCION"].ToString();
                             lb_Ca1.Text = dt.Rows[0]["CANTIDAD"].ToString();
@@ -625,7 +627,7 @@ namespace ProyectoHCL.Formularios
                             StS = St1;
                             lb_StS.Text = Convert.ToString(StS);
                         }
-                        else if (n == 2)
+                        else if (s == 2)
                         {
                             lb_Ser1.Text = dt.Rows[0]["DESCRIPCION"].ToString();
                             lb_Ca1.Text = dt.Rows[0]["CANTIDAD"].ToString();
@@ -644,7 +646,7 @@ namespace ProyectoHCL.Formularios
                             StS = St1 + St2;
                             lb_StS.Text = Convert.ToString(StS);
                         }
-                        else if (n == 3)
+                        else if (s == 3)
                         {
                             lb_Ser1.Text = dt.Rows[0]["DESCRIPCION"].ToString();
                             lb_Ca1.Text = dt.Rows[0]["CANTIDAD"].ToString();
@@ -732,7 +734,8 @@ namespace ProyectoHCL.Formularios
 
                         comando.ExecuteNonQuery();
                         comando.Connection.Close();
-                        MessageBox.Show("Factura Creada", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MsgB mbox = new MsgB("informacion", "Registro Agregado");
+                        DialogResult dR = mbox.ShowDialog();
                         this.Close();
 
                     }
@@ -746,43 +749,58 @@ namespace ProyectoHCL.Formularios
             }
             else if (info.est == 1)
             {
-                SaveFileDialog guardar = new SaveFileDialog();
-                guardar.FileName = "Factura.pdf";
-
-
-                //string paginahtml_texto = Properties.Resources.Plantilla.ToString();
-                
-
-                if (guardar.ShowDialog() == DialogResult.OK)
-                {
-                    using (FileStream stream = new FileStream(guardar.FileName, FileMode.Create))
-                    {
-                        Document pdfDoc = new Document(PageSize.A4, 25,25,25,25);
-
-                        PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-
-                        pdfDoc.Open();
-
-                        pdfDoc.Add(new Phrase(""));
-
-
-
-                        /*using (StringReader sr = new StringReader(Properties.Resources.Plantilla.ToString())){
-                            
-                            XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                        }*/
-
-                        pdfDoc.Close();
-
-                        stream.Close();
-
-                    }
-                }
-
+                crearPDF();
 
 
             }
             
+        }
+
+        
+        private void crearPDF()
+        {
+            PdfWriter pdfWriter = new PdfWriter("Factura.pdf");
+            PdfDocument pdf = new PdfDocument (pdfWriter);
+            Document documento = new Document(pdf, PageSize.LETTER);
+
+            documento.SetMargins(60, 20, 55, 20);
+
+            PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+            PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+
+            string[] columnas = { "Cantidad", "Descripción", "Precio Unidad", "SubTotal" };
+            float[] tamanios = {2,4,2,2,4};
+            Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
+            tabla.SetWidth(UnitValue.CreatePercentValue(100));
+
+            foreach (string columna in columnas)
+            {
+                tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+            }
+
+            if (h == 1)
+            {
+                tabla.AddCell(new Cell().Add(new Paragraph("1").SetFont(fontContenido)));
+                tabla.AddCell(new Cell().Add(new Paragraph((lb_Habi1.Text + " " + lb_Tipo1.Text)).SetFont(fontContenido)));
+                tabla.AddCell(new Cell().Add(new Paragraph(lb_pre1.Text).SetFont(fontContenido)));
+            }
+            if (h == 2)
+            {
+                tabla.AddCell(new Cell().Add(new Paragraph("1").SetFont(fontContenido)));
+                tabla.AddCell(new Cell().Add(new Paragraph((lb_Habi1.Text + " " + lb_Tipo1.Text)).SetFont(fontContenido)));
+                tabla.AddCell(new Cell().Add(new Paragraph(lb_pre1.Text).SetFont(fontContenido)));
+
+                tabla.AddCell(new Cell().Add(new Paragraph("1").SetFont(fontContenido)));
+                tabla.AddCell(new Cell().Add(new Paragraph((lb_Habi2.Text + " " + lb_Tipo2.Text)).SetFont(fontContenido)));
+                tabla.AddCell(new Cell().Add(new Paragraph(lb_pre2.Text).SetFont(fontContenido)));
+            }
+
+
+
+            documento.Add(tabla);
+            documento.Close();
+
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

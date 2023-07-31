@@ -1,4 +1,4 @@
-﻿namespace ProyectoHCL.Formularios.Preguntas
+﻿namespace ProyectoHCL.Formularios
 {
     partial class ShowPregunta
     {
@@ -34,9 +34,10 @@
             btnCerrar = new Button();
             label11 = new Label();
             panel1 = new Panel();
+            label1 = new Label();
+            txtPregunta = new TextBox();
             btnCancelar = new Button();
             btnGuardar = new Button();
-            txtPregunta = new TextBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel1.SuspendLayout();
@@ -51,7 +52,7 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(775, 73);
+            panel2.Size = new Size(653, 73);
             panel2.TabIndex = 21;
             // 
             // pictureBox5
@@ -73,7 +74,7 @@
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnCerrar.FlatStyle = FlatStyle.Flat;
-            btnCerrar.Location = new Point(739, 12);
+            btnCerrar.Location = new Point(624, 12);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(14, 17);
             btnCerrar.TabIndex = 31;
@@ -87,7 +88,7 @@
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(293, 18);
+            label11.Location = new Point(232, 18);
             label11.Name = "label11";
             label11.Size = new Size(181, 30);
             label11.TabIndex = 28;
@@ -96,15 +97,37 @@
             // panel1
             // 
             panel1.BackColor = Color.LightGray;
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(txtPregunta);
             panel1.Controls.Add(btnCancelar);
             panel1.Controls.Add(btnGuardar);
-            panel1.Controls.Add(txtPregunta);
             panel1.Dock = DockStyle.Fill;
             panel1.ForeColor = Color.Black;
             panel1.Location = new Point(0, 73);
             panel1.Name = "panel1";
-            panel1.Size = new Size(775, 281);
+            panel1.Size = new Size(653, 218);
             panel1.TabIndex = 22;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(102, 49);
+            label1.Name = "label1";
+            label1.Size = new Size(75, 20);
+            label1.TabIndex = 61;
+            label1.Text = "Pregunta: ";
+            // 
+            // txtPregunta
+            // 
+            txtPregunta.Anchor = AnchorStyles.Bottom;
+            txtPregunta.BackColor = SystemColors.Info;
+            txtPregunta.CharacterCasing = CharacterCasing.Upper;
+            txtPregunta.Location = new Point(99, 75);
+            txtPregunta.Margin = new Padding(2);
+            txtPregunta.Name = "txtPregunta";
+            txtPregunta.Size = new Size(440, 23);
+            txtPregunta.TabIndex = 60;
             // 
             // btnCancelar
             // 
@@ -115,7 +138,7 @@
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(447, 182);
+            btnCancelar.Location = new Point(386, 130);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(80, 32);
             btnCancelar.TabIndex = 59;
@@ -132,32 +155,19 @@
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(235, 182);
+            btnGuardar.Location = new Point(174, 130);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(82, 32);
             btnGuardar.TabIndex = 58;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
-            // 
-            // txtPregunta
-            // 
-            txtPregunta.Anchor = AnchorStyles.Top;
-            txtPregunta.BackColor = Color.DarkGray;
-            txtPregunta.BorderStyle = BorderStyle.FixedSingle;
-            txtPregunta.CharacterCasing = CharacterCasing.Upper;
-            txtPregunta.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtPregunta.Location = new Point(154, 92);
-            txtPregunta.MaxLength = 15;
-            txtPregunta.Name = "txtPregunta";
-            txtPregunta.ShortcutsEnabled = false;
-            txtPregunta.Size = new Size(446, 27);
-            txtPregunta.TabIndex = 52;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // ShowPregunta
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(775, 354);
+            ClientSize = new Size(653, 291);
             Controls.Add(panel1);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
@@ -182,6 +192,7 @@
         private Panel panel1;
         private Button btnCancelar;
         private Button btnGuardar;
-        public TextBox txtPregunta;
+        private Label label1;
+        private TextBox txtPregunta;
     }
 }

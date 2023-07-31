@@ -1,5 +1,7 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
+using ProyectoHCL.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +19,7 @@ namespace ProyectoHCL.Formularios
     {
         clases.Preguntas servicio = new clases.Preguntas();
         DataSet ds = new DataSet();
-        //MsgB msgB = new MsgB();
+        MsgB msgB = new MsgB();
         int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
 
         public CtrlPreguntas()
@@ -50,16 +52,6 @@ namespace ProyectoHCL.Formularios
             HabilitarBotones();
         }
 
-        private void CtrlPreguntas_Load(object sender, EventArgs e)
-        {
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
-            btnUpdate.Name = "EDITAR";
-            dgvPreguntas.Columns.Add(btnUpdate);
-
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
-            btnDelete.Name = "ELIMINAR";
-            dgvPreguntas.Columns.Add(btnDelete);
-        }
 
         public void BuscarServicio(string buscarS)
         {
@@ -85,11 +77,6 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
-
-            CargarDG();
-        }
 
         private void dgvPreguntas_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -123,7 +110,7 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        private void cmbServ_SelectionChangeCommitted(object sender, EventArgs e)
+        private void cmbPreg_SelectionChangeCommitted_1(object sender, EventArgs e)
         {
             int pagina = Convert.ToInt32(cmbPreg.Text);
             indice = pagina - 1;
@@ -132,7 +119,7 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbMostrar_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             cmbIndice = cmbMostrar.SelectedIndex;
             switch (cmbIndice)
@@ -157,13 +144,14 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        public static class preg 
-        { 
-            public static string detalle; 
+        public static class preg
+        {
+            public static string detalle;
             public static int op;
+            public static int id;
         }
 
-        private void dgvPreguntas_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvPreguntas_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dgvPreguntas.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
@@ -172,19 +160,21 @@ namespace ProyectoHCL.Formularios
 
                 if (dg == DialogResult.OK)
                 {
-                    /*bool elimino = admonServ.EliminarServicio(dgvServ.CurrentRow.Cells["ID"].Value.ToString());
-
-                    if (elimino)
+                    preg.detalle = dgvPreguntas.CurrentRow.Cells["PREGUNTA"].Value.ToString();
+                    using (BaseDatosHCL.ObtenerConexion())
                     {
+                        //Consulta
+                        MySqlCommand comando = new MySqlCommand();
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("UPDATE TBL_PREGUNTA SET ID_ESTADO = 2 WHERE PREGUNTA lIKE '%" + 
+                            preg.detalle + "%';");
+
+                        comando.ExecuteNonQuery();
+                        comando.Connection.Close();
                         MsgB mbox = new MsgB("informacion", "Registro eliminado");
                         DialogResult dR = mbox.ShowDialog();
                         CargarDG();
                     }
-                    else
-                    {
-                        MsgB mbox = new MsgB("informacion", "Registro no eliminado");
-                        DialogResult dR = mbox.ShowDialog();
-                    }*/
 
                 }
                 else if (dg == DialogResult.Cancel)
@@ -196,8 +186,24 @@ namespace ProyectoHCL.Formularios
             if (this.dgvPreguntas.Columns[e.ColumnIndex].Name == "EDITAR")
             {
                 preg.detalle = dgvPreguntas.CurrentRow.Cells["PREGUNTA"].Value.ToString();
-                Form formulario = new Formularios.Preguntas.ShowPregunta();
                 preg.op = 1;
+                using (BaseDatosHCL.ObtenerConexion())
+                {
+                    //Consulta
+                    MySqlCommand comando = new MySqlCommand();
+                    comando.Connection = BaseDatosHCL.ObtenerConexion();
+                    comando.CommandText = ("SELECT * FROM TBL_PREGUNTA WHERE PREGUNTA LIKE  '%" + 
+                        preg.detalle + "%';");
+                    MySqlDataReader leer = comando.ExecuteReader();
+                    while (leer.Read())
+                    {
+                        preg.id = Convert.ToInt32(leer["ID_PREGUNTA"]);
+                    }
+
+                    comando.Connection.Close();
+
+                }
+                Form formulario = new Formularios.ShowPregunta();
                 formulario.ShowDialog();
                 CargarDG();
             }
@@ -205,7 +211,7 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        private void btnAnt_Click(object sender, EventArgs e)
+        private void btnAnt_Click_1(object sender, EventArgs e)
         {
             int pagina = Convert.ToInt32(cmbPreg.Text) - 1;
             indice = pagina - 1;
@@ -214,7 +220,7 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        private void btnSig_Click(object sender, EventArgs e)
+        private void btnSig_Click_1(object sender, EventArgs e)
         {
             int pagina = Convert.ToInt32(cmbPreg.Text) + 1;
             indice = pagina - 1;
@@ -243,7 +249,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        private void txtBuscar_TextChanged_1(object sender, EventArgs e)
         {
             if (txtBuscar.Text != "")
             {
@@ -254,5 +260,26 @@ namespace ProyectoHCL.Formularios
                 CargarDG();
             }
         }
+
+        private void CtrlPreguntas_Load_1(object sender, EventArgs e)
+        {
+            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
+            btnUpdate.Name = "EDITAR";
+            dgvPreguntas.Columns.Add(btnUpdate);
+
+            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+            btnDelete.Name = "ELIMINAR";
+            dgvPreguntas.Columns.Add(btnDelete);
+        }
+
+        private void btnNuevo_Click_1(object sender, EventArgs e)
+        {
+            preg.op = 2;
+            Form formulario = new Formularios.ShowPregunta();
+            formulario.ShowDialog();
+            CargarDG();
+        }
+
+        
     }
 }

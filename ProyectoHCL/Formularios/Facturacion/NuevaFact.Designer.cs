@@ -42,6 +42,7 @@
             label1 = new Label();
             panel3 = new Panel();
             dgvReservas = new DataGridView();
+            btnNuevo = new Button();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel1.SuspendLayout();
@@ -104,6 +105,7 @@
             // panel1
             // 
             panel1.BackColor = Color.LightGray;
+            panel1.Controls.Add(btnNuevo);
             panel1.Controls.Add(txtBuscarRe);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(panel3);
@@ -202,6 +204,27 @@
             dgvReservas.CellClick += dgvReservas_CellClick;
             dgvReservas.CellPainting += dgvReservas_CellPainting;
             // 
+            // btnNuevo
+            // 
+            btnNuevo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnNuevo.BackColor = Color.RoyalBlue;
+            btnNuevo.BackgroundImageLayout = ImageLayout.Stretch;
+            btnNuevo.FlatAppearance.BorderSize = 0;
+            btnNuevo.FlatAppearance.MouseOverBackColor = Color.MidnightBlue;
+            btnNuevo.FlatStyle = FlatStyle.Flat;
+            btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnNuevo.ForeColor = SystemColors.ButtonFace;
+            btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
+            btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
+            btnNuevo.Location = new Point(868, 12);
+            btnNuevo.Name = "btnNuevo";
+            btnNuevo.Size = new Size(100, 39);
+            btnNuevo.TabIndex = 41;
+            btnNuevo.Text = "Agregar";
+            btnNuevo.TextAlign = ContentAlignment.MiddleRight;
+            btnNuevo.UseVisualStyleBackColor = false;
+            btnNuevo.Click += btnNuevo_Click;
+            // 
             // NuevaFact
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -240,5 +263,6 @@
         private DataGridView dgvReservas;
         private TextBox txtBuscarRe;
         private Label label1;
+        private Button btnNuevo;
     }
 }

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProyectoHCL.Formularios;
 
+
 namespace ProyectoHCL.Formularios
 {
     public partial class CtrlFacturacion : Form

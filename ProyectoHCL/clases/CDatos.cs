@@ -22,7 +22,7 @@ namespace ProyectoHCL.clases
                 conn.Open();
 
                 int ultimoRegistro = 0;
-                cmd = new MySqlCommand("spInsertRol", conn);
+                cmd = new MySqlCommand("spInsertRol", conn); 
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 MySqlParameter IdRol = new MySqlParameter("@IdRol", MySqlDbType.Int32);
@@ -60,7 +60,7 @@ namespace ProyectoHCL.clases
 
                 cmd.Parameters.Add(new MySqlParameter("@idRol", permisoR.IdRol));
                 cmd.Parameters.Add(new MySqlParameter("@idPermiso", permisoR.IdPermiso));
-                cmd.Parameters.Add(new MySqlParameter("@idObjeto", permisoR.IdObjeto));
+                cmd.Parameters.Add(new MySqlParameter("@objeto", permisoR.IdObjeto));
                 cmd.Parameters.Add(new MySqlParameter("@permitido", permisoR.Permitido));
 
                 cmd.ExecuteNonQuery();

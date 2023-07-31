@@ -21,7 +21,7 @@ namespace ProyectoHCL.Formularios
             InitializeComponent();
         }
 
-
+        MsgB msgB = new MsgB();
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
@@ -71,8 +71,8 @@ namespace ProyectoHCL.Formularios
             Modelo modelo = new Modelo();
             if (VCamposVacios() == false)
             {
-                MessageBox.Show("Por favor llene todos los campos", "Aviso",
-                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MsgB mbox = new MsgB("advertencia", "Favor llene todos los campos");
+                DialogResult dR = mbox.ShowDialog();
             }
             else
             {
@@ -80,8 +80,8 @@ namespace ProyectoHCL.Formularios
                 {
                     if (modelo.existeCliente(txtID.Text))
                     {
-                        MessageBox.Show("El cliente ya existe", "Aviso",
-                             MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MsgB mbox1 = new MsgB("advertencia", "El cliente ya existe");
+                        DialogResult dR1 = mbox1.ShowDialog();
                     }
                     int tip = 0;
                     string nombre;
@@ -103,9 +103,11 @@ namespace ProyectoHCL.Formularios
                         txtEmail1.Text + "', '" + txtTele2.Text + "', '" + txtEmail2.Text + "');", conn);
 
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Objeto creado con éxito", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
+                    MsgB mbox = new MsgB("informacion", "Cliente Agregado");
+                    DialogResult dR = mbox.ShowDialog();
                     conn.Close();
+                    this.Close();
+                    
 
                 }
                 catch (Exception ex)
