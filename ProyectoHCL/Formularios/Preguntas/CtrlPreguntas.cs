@@ -1,5 +1,7 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
+using ProyectoHCL.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,8 +17,7 @@ namespace ProyectoHCL.Formularios
 {
     public partial class CtrlPreguntas : Form
     {
-        AdmonServicios admonServ = new AdmonServicios();
-        Servicio servicio = new Servicio();
+        clases.Preguntas servicio = new clases.Preguntas();
         DataSet ds = new DataSet();
         MsgB msgB = new MsgB();
         int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
@@ -32,35 +33,25 @@ namespace ProyectoHCL.Formularios
         {
             servicio.Inicio1 = pagInicio;
             servicio.Final1 = pagFinal;
-            ds = servicio.PaginacionServicio();
-            dgvServ.DataSource = ds.Tables[1];
+            ds = servicio.PaginacionPreguntas();
+            dgvPreguntas.DataSource = ds.Tables[1];
 
             int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;
 
             if (Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) % numFilas > 0) cantidad++;
 
-            txtServ.Text = cantidad.ToString();
+            txtPreg.Text = cantidad.ToString();
 
-            cmbServ.Items.Clear();
+            cmbPreg.Items.Clear();
 
             for (int x = 1; x <= cantidad; x++)
-                cmbServ.Items.Add(x.ToString());
+                cmbPreg.Items.Add(x.ToString());
 
-            cmbServ.SelectedIndex = indice;
+            cmbPreg.SelectedIndex = indice;
 
-           HabilitarBotones();
+            HabilitarBotones();
         }
 
-        private void CtrlServicios_Load(object sender, EventArgs e)
-        {
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
-            btnUpdate.Name = "EDITAR";
-            dgvServ.Columns.Add(btnUpdate);
-
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
-            btnDelete.Name = "ELIMINAR";
-            dgvServ.Columns.Add(btnDelete);
-        }
 
         public void BuscarServicio(string buscarS)
         {
@@ -71,14 +62,14 @@ namespace ProyectoHCL.Formularios
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                 conn.Open();
 
-                cmd = new MySqlCommand("buscarServicio", conn);
+                cmd = new MySqlCommand("buscarPregunta", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@nombreS", MySqlDbType.VarChar, 50).Value = buscarS;
+                cmd.Parameters.Add("@nombreP", MySqlDbType.VarChar, 50).Value = buscarS;
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                dgvServ.DataSource = dt;
+                dgvPreguntas.DataSource = dt;
             }
             catch (Exception)
             {
@@ -86,37 +77,32 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
-            
-            CargarDG();
-        }
 
-        private void dgvServ_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void dgvPreguntas_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.ColumnIndex >= 0 && this.dgvServ.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
+            if (e.ColumnIndex >= 0 && this.dgvPreguntas.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
-                DataGridViewButtonCell celBoton = this.dgvServ.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
+                DataGridViewButtonCell celBoton = this.dgvPreguntas.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
                 Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico");
                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
-                this.dgvServ.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvServ.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
+                this.dgvPreguntas.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
+                this.dgvPreguntas.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
 
                 e.Handled = true;
             }
-            if (e.ColumnIndex >= 0 && this.dgvServ.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
+            if (e.ColumnIndex >= 0 && this.dgvPreguntas.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
-                DataGridViewButtonCell celBoton = this.dgvServ.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
+                DataGridViewButtonCell celBoton = this.dgvPreguntas.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
                 Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
-                this.dgvServ.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvServ.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
+                this.dgvPreguntas.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
+                this.dgvPreguntas.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
 
                 e.Handled = true;
             }
@@ -124,16 +110,16 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        private void cmbServ_SelectionChangeCommitted(object sender, EventArgs e)
+        private void cmbPreg_SelectionChangeCommitted_1(object sender, EventArgs e)
         {
-            int pagina = Convert.ToInt32(cmbServ.Text);
+            int pagina = Convert.ToInt32(cmbPreg.Text);
             indice = pagina - 1;
             pagInicio = (pagina - 1) * numFilas + 1;
             pagFinal = pagina * numFilas;
             CargarDG();
         }
 
-        private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbMostrar_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             cmbIndice = cmbMostrar.SelectedIndex;
             switch (cmbIndice)
@@ -158,27 +144,36 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        private void dgvServ_CellClick(object sender, DataGridViewCellEventArgs e)
+        public static class preg
         {
-            if (this.dgvServ.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            public static string detalle;
+            public static int op;
+            public static int id;
+        }
+
+        private void dgvPreguntas_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvPreguntas.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
                 MsgB m = new MsgB("pregunta", "¿Está seguro que desea eliminar el registro?");
                 DialogResult dg = m.ShowDialog();
 
                 if (dg == DialogResult.OK)
                 {
-                    bool elimino = admonServ.EliminarServicio(dgvServ.CurrentRow.Cells["ID"].Value.ToString());
-
-                    if (elimino)
+                    preg.detalle = dgvPreguntas.CurrentRow.Cells["PREGUNTA"].Value.ToString();
+                    using (BaseDatosHCL.ObtenerConexion())
                     {
+                        //Consulta
+                        MySqlCommand comando = new MySqlCommand();
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("UPDATE TBL_PREGUNTA SET ID_ESTADO = 2 WHERE PREGUNTA lIKE '%" + 
+                            preg.detalle + "%';");
+
+                        comando.ExecuteNonQuery();
+                        comando.Connection.Close();
                         MsgB mbox = new MsgB("informacion", "Registro eliminado");
                         DialogResult dR = mbox.ShowDialog();
                         CargarDG();
-                    }
-                    else
-                    {
-                        MsgB mbox = new MsgB("informacion", "Registro no eliminado");
-                        DialogResult dR = mbox.ShowDialog();
                     }
 
                 }
@@ -188,32 +183,46 @@ namespace ProyectoHCL.Formularios
                 }
             }
 
-            if (this.dgvServ.Columns[e.ColumnIndex].Name == "EDITAR")
+            if (this.dgvPreguntas.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                /*R_E_serv.lblTitulo.Text = "Editar Servicio";
-                R_E_serv.idS = dgvServ.CurrentRow.Cells["ID"].Value.ToString();
-                R_E_serv.txtServ.Text = dgvServ.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
-                R_E_serv.txtPrecio.Text = dgvServ.CurrentRow.Cells["PRECIO"].Value.ToString();
-                R_E_serv.ShowDialog();
-                R_E_serv.limpiarCampos();*/
+                preg.detalle = dgvPreguntas.CurrentRow.Cells["PREGUNTA"].Value.ToString();
+                preg.op = 1;
+                using (BaseDatosHCL.ObtenerConexion())
+                {
+                    //Consulta
+                    MySqlCommand comando = new MySqlCommand();
+                    comando.Connection = BaseDatosHCL.ObtenerConexion();
+                    comando.CommandText = ("SELECT * FROM TBL_PREGUNTA WHERE PREGUNTA LIKE  '%" + 
+                        preg.detalle + "%';");
+                    MySqlDataReader leer = comando.ExecuteReader();
+                    while (leer.Read())
+                    {
+                        preg.id = Convert.ToInt32(leer["ID_PREGUNTA"]);
+                    }
+
+                    comando.Connection.Close();
+
+                }
+                Form formulario = new Formularios.ShowPregunta();
+                formulario.ShowDialog();
                 CargarDG();
             }
 
 
         }
 
-        private void btnAnt_Click(object sender, EventArgs e)
+        private void btnAnt_Click_1(object sender, EventArgs e)
         {
-            int pagina = Convert.ToInt32(cmbServ.Text) - 1;
+            int pagina = Convert.ToInt32(cmbPreg.Text) - 1;
             indice = pagina - 1;
             pagInicio = (pagina - 1) * numFilas + 1;
             pagFinal = pagina * numFilas;
             CargarDG();
         }
 
-        private void btnSig_Click(object sender, EventArgs e)
+        private void btnSig_Click_1(object sender, EventArgs e)
         {
-            int pagina = Convert.ToInt32(cmbServ.Text) + 1;
+            int pagina = Convert.ToInt32(cmbPreg.Text) + 1;
             indice = pagina - 1;
             pagInicio = (pagina - 1) * numFilas + 1;
             pagFinal = pagina * numFilas;
@@ -230,7 +239,7 @@ namespace ProyectoHCL.Formularios
                 btnAnt.Enabled = true;
             }
 
-            if (indice == (Convert.ToInt32(txtServ.Text) - 1))
+            if (indice == (Convert.ToInt32(txtPreg.Text) - 1))
             {
                 btnSig.Enabled = false;
             }
@@ -240,7 +249,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        private void txtBuscar_TextChanged_1(object sender, EventArgs e)
         {
             if (txtBuscar.Text != "")
             {
@@ -251,5 +260,26 @@ namespace ProyectoHCL.Formularios
                 CargarDG();
             }
         }
+
+        private void CtrlPreguntas_Load_1(object sender, EventArgs e)
+        {
+            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
+            btnUpdate.Name = "EDITAR";
+            dgvPreguntas.Columns.Add(btnUpdate);
+
+            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+            btnDelete.Name = "ELIMINAR";
+            dgvPreguntas.Columns.Add(btnDelete);
+        }
+
+        private void btnNuevo_Click_1(object sender, EventArgs e)
+        {
+            preg.op = 2;
+            Form formulario = new Formularios.ShowPregunta();
+            formulario.ShowDialog();
+            CargarDG();
+        }
+
+        
     }
 }

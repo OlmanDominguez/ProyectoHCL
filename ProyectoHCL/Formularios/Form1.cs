@@ -9,6 +9,7 @@ using static ProyectoHCL.RecuContra;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Drawing.Drawing2D;
 using ProyectoHCL.Formularios;
+using DocumentFormat.OpenXml.Bibliography;
 
 namespace ProyectoHCL
 {
@@ -49,10 +50,10 @@ namespace ProyectoHCL
 
         }
 
-        int intentos = 3;
+        
         private void button1_Click(object sender, EventArgs e)
         {
-
+            
             try
 
             {
@@ -86,12 +87,13 @@ namespace ProyectoHCL
                     }
                     if (leer.Read() == true)
                     {
-
+                        
 
                         string usuario = (string)leer["USUARIO"];
 
                         string contrasena = (string)leer["CONTRASENA"];
 
+                        
 
                         if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text)
                         {
@@ -100,15 +102,20 @@ namespace ProyectoHCL
                             formulario.Show();
                         }
 
+                       
+
                     }
                     else
                     {
                         MessageBox.Show("USUARIO NO EXISTE");
                     }
-
+                    
+                  
+                
                     comando.Connection.Close();
                 }
 
+               
             }
             catch (Exception a)
             {
@@ -136,12 +143,13 @@ namespace ProyectoHCL
 
         private void ContraseñaBox2_TextChanged(object sender, EventArgs e)
         {
+         
             if (ContraseñaBox2.Text.Contains(" "))
             {
                 MessageBox.Show("No se permite espacios.");
                 return;  //Salekk
             }
-
+           
         }
 
         private void MostrarBox3_Click(object sender, EventArgs e)
