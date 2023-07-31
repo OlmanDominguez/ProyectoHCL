@@ -732,7 +732,8 @@ namespace ProyectoHCL.Formularios
 
                         comando.ExecuteNonQuery();
                         comando.Connection.Close();
-                        MessageBox.Show("Factura Creada", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MsgB mbox = new MsgB("informacion", "Registro Agregado");
+                        DialogResult dR = mbox.ShowDialog();
                         this.Close();
 
                     }

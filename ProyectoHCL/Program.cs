@@ -26,8 +26,8 @@ namespace ProyectoHCL
             //Application.Run(new CtrlUsuarios());
             //Application.Run(new CtrlUsuarios());
             //Application.Run(new CtrlParametros()); 
-            //Application.Run(new CtrlPreguntas());
-            Application.Run(new Restore());
+            Application.Run(new CtrlPreguntas());
+            //Application.Run(new Restore());
 
 
         }
