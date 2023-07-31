@@ -60,7 +60,7 @@ namespace ProyectoHCL.Formularios
                     comando.CommandText = ("SELECT C.NOMBRE, C.APELLIDO, C.DNI_PASAPORTE, C.TELEFONO," +
                         " C.TELEFONO2, C.EMAIL, C.EMAIL2, C.RTN, C.NOMBRE_RTN, T.DESCRIPCION " +
                         "FROM TBL_CLIENTE C INNER JOIN TBL_TIPOCLIENTE T ON C.ID_TIPOCLIENTE = " +
-                        "T.ID_TIPOCLIENTE WHERE C.CODIGO = " + claseCod.codigo);
+                        "T.ID_TIPOCLIENTE WHERE C.CODIGO = " + claseCod.id);
 
                     MySqlDataReader leer = comando.ExecuteReader();
                     if (leer.Read())

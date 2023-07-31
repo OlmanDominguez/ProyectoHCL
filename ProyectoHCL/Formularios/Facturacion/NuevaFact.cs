@@ -172,5 +172,11 @@ namespace ProyectoHCL.Formularios
                 }
             }
         }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            Form nuevo = new NuevaReservacion();
+            nuevo.ShowDialog();
+        }
     }
 }

@@ -125,6 +125,7 @@ namespace ProyectoHCL.Formularios
         public static class claseCod
         {
             public static string codigo;
+            public static string id;
         }
 
 
@@ -135,8 +136,23 @@ namespace ProyectoHCL.Formularios
             {
                 try
                 {
-                    claseCod.codigo = dgvClientes.CurrentRow.Cells["CODIGO"].Value.ToString();
-                    //MessageBox.Show(claseCod.codigo);
+                    claseCod.codigo = dgvClientes.CurrentRow.Cells["IDENTIFICACIÓN"].Value.ToString();
+                    using (BaseDatosHCL.ObtenerConexion())
+                    {
+                        //Consulta
+                        MySqlCommand comando = new MySqlCommand();
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("SELECT * FROM TBL_CLIENTE WHERE DNI_PASAPORTE = " +
+                            claseCod.codigo + ";");
+                        MySqlDataReader leer = comando.ExecuteReader();
+                        while (leer.Read())
+                        {
+                            claseCod.id = Convert.ToString(leer["CODIGO"]);
+                        }
+
+                        comando.Connection.Close();
+
+                    }
                     Form formulario = new Formularios.ShowCliente();
                     formulario.ShowDialog();
 
@@ -151,8 +167,23 @@ namespace ProyectoHCL.Formularios
             {
                 try
                 {
-                    claseCod.codigo = dgvClientes.CurrentRow.Cells["CODIGO"].Value.ToString();
-                    //MessageBox.Show(claseCod.codigo);
+                    claseCod.codigo = dgvClientes.CurrentRow.Cells["IDENTIFICACIÓN"].Value.ToString();
+                    using (BaseDatosHCL.ObtenerConexion())
+                    {
+                        //Consulta
+                        MySqlCommand comando = new MySqlCommand();
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("SELECT * FROM TBL_CLIENTE WHERE DNI_PASAPORTE = " +
+                            claseCod.codigo + ";");
+                        MySqlDataReader leer = comando.ExecuteReader();
+                        while (leer.Read())
+                        {
+                            claseCod.id = Convert.ToString(leer["CODIGO"]);
+                        }
+
+                        comando.Connection.Close();
+
+                    }
                     Form formulario = new Formularios.EditarCliente();
                     formulario.ShowDialog();
                     CargarDGCl();
