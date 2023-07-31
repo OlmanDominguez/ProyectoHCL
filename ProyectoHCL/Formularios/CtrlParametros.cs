@@ -110,7 +110,7 @@ namespace ProyectoHCL.Formularios
             PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
             PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
 
-            string[] columnas = { "id_rol", "rol", "descripcion", "estado_rol", "fecha_creacion", "feecha_ actualizacion" };
+            string[] columnas = { "id_parametro", "id_usuario", "parametro", "valor", "fecha_ ", "feecha_modifi" };
 
             float[] tamanios = { 2, 2, 2, 2, 4, 4, };
             Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
@@ -121,7 +121,7 @@ namespace ProyectoHCL.Formularios
                 tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
             }
 
-            string sql = "SELECT id_rol, rol, descripcion, estado_rol,  fecha_creacion, fecha_actualizacion FROM TBL_ROL";
+            string sql = "SELECT id_parametro, id_usuario, parametro, valor,  fecha_cre , fecha_modifi FROM TBL_PARAMETRO";
 
             MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
             // conexionBD.Open();
@@ -135,12 +135,12 @@ namespace ProyectoHCL.Formularios
                 {
 
 
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["id_rol"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["rol"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["descripcion"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["estado_rol"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_creacion"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_actualizacion"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["id_parametro"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["id_usuario"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["parametro"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["valor"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_cre "].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_modifi"].ToString()).SetFont(fontContenido)));
 
                 }
             }
@@ -155,7 +155,7 @@ namespace ProyectoHCL.Formularios
             nombre.SetTextAlignment(TextAlignment.CENTER);
             nombre.SetFontSize(12);
 
-            var titulo = new Paragraph("Reporte Roles");
+            var titulo = new Paragraph("Reporte Parametro");
             titulo.SetTextAlignment(TextAlignment.CENTER);
             titulo.SetFontSize(12);
 
@@ -166,7 +166,7 @@ namespace ProyectoHCL.Formularios
 
 
             PdfDocument pdfDoc = new PdfDocument(new PdfReader("Reporte.pdf"), new PdfWriter
-                ("ReporteRoles.pdf"));
+                ("Reporte Parametro.pdf"));
             Document doc = new Document(pdfDoc);
 
             int numeros = pdfDoc.GetNumberOfPages();
