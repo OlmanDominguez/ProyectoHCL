@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PermisosRoLes));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
             button1 = new Button();
             Roles_Permisos_DG = new DataGridView();
@@ -100,14 +100,14 @@
             // Roles_Permisos_DG
             // 
             Roles_Permisos_DG.BackgroundColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.DeepSkyBlue;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            Roles_Permisos_DG.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.DeepSkyBlue;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            Roles_Permisos_DG.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             Roles_Permisos_DG.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Roles_Permisos_DG.EnableHeadersVisualStyles = false;
             Roles_Permisos_DG.GridColor = Color.Black;
@@ -164,6 +164,7 @@
             button6.TabIndex = 41;
             button6.Text = "Imprimir";
             button6.UseVisualStyleBackColor = false;
+            button6.Click += button6_Click;
             // 
             // button7
             // 
@@ -189,6 +190,8 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 43;
             pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
+            pictureBox2.MouseClick += pictureBox2_MouseClick;
             // 
             // label9
             // 

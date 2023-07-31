@@ -1,4 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+﻿//using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.VisualBasic;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
@@ -13,8 +13,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing.Printing;//estas librerias se instalaron para imprimir un documento pdf
+using iText.Layout;
+//using System.Drawing.Printing;//estas librerias se instalaron para imprimir un documento pdf
 using Microsoft.VisualBasic.ApplicationServices;
+using iText.Kernel.Pdf;
+using System.Reflection.Metadata;
+//using DocumentFormat.OpenXml.Wordprocessing;
+using Document = iText.Layout.Document;
+using iText.Kernel.Geom;
+using iText.Layout.Element;
+using PageSize = iText.Kernel.Geom.PageSize;
+using iText.Kernel.Font;
+using iText.IO.Font.Constants;
+using iText.Layout.Properties;
 
 namespace ProyectoHCL.Formularios
 {
@@ -31,8 +42,8 @@ namespace ProyectoHCL.Formularios
             InitializeComponent();
             pagFinal = numFilas;
             RellenarGrid();
-            panel1.BackColor = Color.FromArgb(125, Color.DeepSkyBlue); //colocar transaparente el panel izquierdo al ejecutar
-            panel2.BackColor = Color.FromArgb(120, Color.DimGray);//colocar transaparente el panel superior al ejecutar
+            // panel1.BackColor = Color.FromArgb(125, Color.DeepSkyBlue); //colocar transaparente el panel izquierdo al ejecutar
+            // panel2.BackColor = Color.FromArgb(120, Color.DimGray);//colocar transaparente el panel superior al ejecutar
 
 
         }
@@ -104,19 +115,19 @@ namespace ProyectoHCL.Formularios
             if (e.ColumnIndex >= 0 && this.Roles_Permisos_DG.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
+                /*
                 DataGridViewButtonCell celBoton = this.Roles_Permisos_DG.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
+               Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
                 this.Roles_Permisos_DG.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
                 this.Roles_Permisos_DG.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
 
-                e.Handled = true;
+                e.Handled = true;*/
             }
-          
-         }
-     
+
+        }
+
         private void Roles_Permisos_DG_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (this.Roles_Permisos_DG.Columns[e.ColumnIndex].Name == "ELIMINAR")
@@ -197,47 +208,47 @@ namespace ProyectoHCL.Formularios
 
 
 
-        private void pictureBox4_Click(object sender, EventArgs e)
-        {
-            PrintDocument doc = new PrintDocument();
-            doc.DefaultPageSettings.Landscape = true;
-            doc.PrinterSettings.PrinterName = "Microsoft Print to PDF";
+        /* private void pictureBox4_Click(object sender, EventArgs e)
+         {
+             PrintDocument doc = new PrintDocument();
+             doc.DefaultPageSettings.Landscape = true;
+             doc.PrinterSettings.PrinterName = "Microsoft Print to PDF";
 
-            PrintPreviewDialog ppd = new PrintPreviewDialog { Document = doc };
-            ((Form)ppd).WindowState = FormWindowState.Maximized;
+             PrintPreviewDialog ppd = new PrintPreviewDialog { Document = doc };
+             ((Form)ppd).WindowState = FormWindowState.Maximized;
 
-            doc.PrintPage += delegate (object ev, PrintPageEventArgs ep)
-            {
+             doc.PrintPage += delegate (object ev, PrintPageEventArgs ep)
+             {
 
-                const int DGV_ALTO = 35;
-                int left = ep.MarginBounds.Left, top = ep.MarginBounds.Top;
+                 const int DGV_ALTO = 35;
+                 int left = ep.MarginBounds.Left, top = ep.MarginBounds.Top;
 
-                foreach (DataGridViewColumn col in Roles_Permisos_DG.Columns)
-                {
-                    ep.Graphics.DrawString(col.HeaderText, new Font("Segoe UI", 16, FontStyle.Bold), Brushes.DeepSkyBlue, Left, top);
-                    left += col.Width;
+                 foreach (DataGridViewColumn col in Roles_Permisos_DG.Columns)
+                 {
+                     ep.Graphics.DrawString(col.HeaderText, new Font("Segoe UI", 16, FontStyle.Bold), Brushes.DeepSkyBlue, Left, top);
+                     left += col.Width;
 
-                }
-                left = ep.MarginBounds.Left;
-                ep.Graphics.FillRectangle(Brushes.Black, left, top + 40, ep.MarginBounds.Right - left, 3);
-                top += 43;
+                 }
+                 left = ep.MarginBounds.Left;
+                 ep.Graphics.FillRectangle(Brushes.Black, left, top + 40, ep.MarginBounds.Right - left, 3);
+                 top += 43;
 
-                foreach (DataGridViewRow row in Roles_Permisos_DG.Rows)
-                {
-                    if (row.Index == Roles_Permisos_DG.RowCount - 1)
-                        Left = ep.MarginBounds.Left;
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        ep.Graphics.DrawString(Convert.ToString(cell.Value), new Font("Segoe", 13), Brushes.Black, Left, Top + 4);
-                        Left += cell.OwningColumn.Width;
+                 foreach (DataGridViewRow row in Roles_Permisos_DG.Rows)
+                 {
+                     if (row.Index == Roles_Permisos_DG.RowCount - 1)
+                         Left = ep.MarginBounds.Left;
+                     foreach (DataGridViewCell cell in row.Cells)
+                     {
+                         ep.Graphics.DrawString(Convert.ToString(cell.Value), new Font("Segoe", 13), Brushes.Black, Left, Top + 4);
+                         Left += cell.OwningColumn.Width;
 
-                    }
-                    Top += DGV_ALTO;
-                }
-            };
-            ppd.ShowDialog();
+                     }
+                     Top += DGV_ALTO;
+                 }
+             };
+             ppd.ShowDialog();
 
-        }
+         }*/
 
         private void txtBuscarRol_TextChanged(object sender, EventArgs e)
         {
@@ -312,10 +323,113 @@ namespace ProyectoHCL.Formularios
 
         }
 
-       
+        private void button6_Click(object sender, EventArgs e)
+        {
+          
+        }
+        private void pictureBox2_MouseClick(object sender, MouseEventArgs e)
+        {
+            crearPDF();
+        }
+        private void crearPDF()
+        {
+            PdfWriter pdfWriter = new PdfWriter("Reporte.pdf");
+            PdfDocument pdf = new PdfDocument(pdfWriter);
+            //1 pulgada = 72 pt (8 1/2 x 11) (612 x 792)
+            PageSize tamanioH = new PageSize (792, 612);
+            Document documento = new Document(pdf, tamanioH);
+            // Document documento = new Document(pdf, PageSize.LETTER);
 
-        
-     }
+            documento.SetMargins(60, 20, 55, 20);
+
+            PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+            PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+
+            string[] columnas = { "id_rol", "rol", "descripcion", "estado_rol", "fecha_creacion", "feecha_ actualizacion" };
+
+            float[] tamanios = { 2, 2, 2, 2, 4, 4, };
+            Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
+             tabla.SetWidth(UnitValue.CreatePercentValue(100));
+
+            foreach (string columna in columnas)
+            {
+                tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+            }
+
+            string sql = "SELECT id_rol, rol, descripcion, estado_rol,  fecha_creacion, fecha_actualizacion FROM TBL_ROL";
+
+            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+           // conexionBD.Open();
+
+            MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+            MySqlDataReader reader = comando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                for (int x = 1; x < 100; x++) ;
+                {
+
+
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["id_rol"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["rol"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["descripcion"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["estado_rol"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_creacion"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_actualizacion"].ToString()).SetFont(fontContenido)));
+
+                }
+            }
+               
+            documento.Add(tabla);
+            documento.Close();
+
+            var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/DAOdo/Desktop/SEGUNDO PERIODO 2023/Programacion he implementacion de Sistemas/ProyectoHotelCasaLomas/logo.jpeg")).SetWidth(50);
+            var plogo =new  Paragraph("").Add(logo);
+
+            var nombre = new Paragraph("Hotel Casa Lomas");
+            nombre.SetTextAlignment(TextAlignment.CENTER);
+            nombre.SetFontSize(12);
+
+            var titulo = new Paragraph("Reporte Roles");
+            titulo.SetTextAlignment(TextAlignment.CENTER);
+            titulo.SetFontSize(12);
+
+            var dfecha = DateTime.Now.ToString("dd.MM.yyy");
+            var dhora = DateTime.Now.ToString("hh.mm.ss");
+            var fecha =new Paragraph("fecha:"+ dfecha + "\nHora:" + dhora);
+            fecha.SetFontSize(12);
+
+
+            PdfDocument pdfDoc = new PdfDocument(new PdfReader("Reporte.pdf"), new PdfWriter
+                ("ReporteRoles.pdf"));
+            Document doc = new Document (pdfDoc);
+
+            int numeros = pdfDoc.GetNumberOfPages();
+
+            for (int i = 1; i<= numeros; i++) 
+            {
+            PdfPage pagina = pdfDoc.GetPage(i);
+            
+            float y = (pdfDoc.GetPage(i).GetPageSize().GetTop() - 15);
+                doc.ShowTextAligned(plogo, 40, y, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                doc.ShowTextAligned(nombre, 110, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                doc.ShowTextAligned(titulo, 396, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                doc.ShowTextAligned(fecha, 700, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+
+                doc.ShowTextAligned(new Paragraph(String.Format("pagina {0} de {1}", i, numeros)), pdfDoc.GetPage
+                    (i).GetPageSize().GetWidth() / 2, pdfDoc.GetPage(i).GetPageSize().GetBottom() + 30, i,
+                    TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+            }
+            doc.Close();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+    
+    }
 }
 
 

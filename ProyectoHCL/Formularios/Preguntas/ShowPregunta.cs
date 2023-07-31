@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ProyectoHCL.Formularios.Preguntas.CtrlPreguntas;
+using ProyectoHCL.Formularios.Preguntas;
 
 namespace ProyectoHCL.Formularios.Preguntas
 {
