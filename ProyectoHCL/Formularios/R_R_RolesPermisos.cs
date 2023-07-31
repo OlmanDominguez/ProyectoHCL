@@ -22,7 +22,7 @@ namespace ProyectoHCL.Formularios
             GuardarPermisoRol();
         }
 
-        
+
         RolUsuario rolUs = new RolUsuario();
         PermisoRol permiso = new PermisoRol();
         CDatos cDatos = new CDatos();
@@ -51,6 +51,26 @@ namespace ProyectoHCL.Formularios
                 cmbPagR.Items.Add(x.ToString());
 
             cmbPagR.SelectedIndex = indice;
+
+            DataGridViewCheckBoxColumn chkVer = new DataGridViewCheckBoxColumn();
+            chkVer.Name = "VER";
+            chkVer.Tag = 1;
+            dgvRolPermiso.Columns.Add(chkVer);
+
+            DataGridViewCheckBoxColumn chkCrear = new DataGridViewCheckBoxColumn();
+            chkCrear.Name = "CREAR";
+            chkCrear.Tag = 2;
+            dgvRolPermiso.Columns.Add(chkCrear);
+
+            DataGridViewCheckBoxColumn chkEditar = new DataGridViewCheckBoxColumn();
+            chkEditar.Name = "EDITAR";
+            chkEditar.Tag = 3;
+            dgvRolPermiso.Columns.Add(chkEditar);
+
+            DataGridViewCheckBoxColumn chkEliminar = new DataGridViewCheckBoxColumn();
+            chkEliminar.Name = "ELIMINAR";
+            chkEliminar.Tag = 4;
+            dgvRolPermiso.Columns.Add(chkEliminar);
 
             HabilitarBotones();
         }
@@ -144,25 +164,6 @@ namespace ProyectoHCL.Formularios
 
         private void RolesPermisos_Load(object sender, EventArgs e)
         {
-            DataGridViewCheckBoxColumn chkVer = new DataGridViewCheckBoxColumn();
-            chkVer.Name = "VER";
-            chkVer.Tag = 1;
-            dgvRolPermiso.Columns.Add(chkVer);
-
-            DataGridViewCheckBoxColumn chkCrear = new DataGridViewCheckBoxColumn();
-            chkCrear.Name = "CREAR";
-            chkCrear.Tag = 2;
-            dgvRolPermiso.Columns.Add(chkCrear);
-
-            DataGridViewCheckBoxColumn chkEditar = new DataGridViewCheckBoxColumn();
-            chkEditar.Name = "EDITAR";
-            chkEditar.Tag = 3;
-            dgvRolPermiso.Columns.Add(chkEditar);
-
-            DataGridViewCheckBoxColumn chkEliminar = new DataGridViewCheckBoxColumn();
-            chkEliminar.Name = "ELIMINAR";
-            chkEliminar.Tag = 4;
-            dgvRolPermiso.Columns.Add(chkEliminar);
         }
 
         private void GuardarRolUs()
@@ -172,21 +173,80 @@ namespace ProyectoHCL.Formularios
         }
 
         private void GuardarPermisoRol()
-        {            
+        {
             foreach (DataGridViewRow row in dgvRolPermiso.Rows)
             {
                 permiso.IdRol = IdRol;
-                
+
                 if (Convert.ToBoolean(row.Cells["VER"].Value))
                 {
-                    
-                    
-                    permiso.IdObjeto = Convert.ToInt32(dgvRolPermiso.CurrentRow.Cells["PANTALLA"].Value.ToString());
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns[2].Tag);
+                    permiso.IdObjeto = dgvRolPermiso.CurrentRow.Cells["PANTALLA"].Value.ToString();
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
+                    permiso.Permitido = true;
+                    cDatos.GuardarPermiso(permiso);
+                }
+                else if (!Convert.ToBoolean(row.Cells["VER"].Value))
+                {
+                    permiso.IdObjeto = Convert.ToString(row.Cells["PANTALLA"].Value);
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
+                    permiso.Permitido = false;
+                    cDatos.GuardarPermiso(permiso);
+                }
+                
+                if (Convert.ToBoolean(row.Cells["CREAR"].Value))
+                {
+                    permiso.IdObjeto = dgvRolPermiso.CurrentRow.Cells["PANTALLA"].Value.ToString();
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
+                    permiso.Permitido = true;
+                    cDatos.GuardarPermiso(permiso);
+                }
+                else if (!Convert.ToBoolean(row.Cells["CREAR"].Value))
+                {
+                    permiso.IdObjeto = Convert.ToString(row.Cells["PANTALLA"].Value);
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
+                    permiso.Permitido = false;
+                    cDatos.GuardarPermiso(permiso);
+                }
+               
+                if (Convert.ToBoolean(row.Cells["EDITAR"].Value))
+                {
+                    permiso.IdObjeto = dgvRolPermiso.CurrentRow.Cells["PANTALLA"].Value.ToString();
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
+                    permiso.Permitido = true;
+                    cDatos.GuardarPermiso(permiso);
+                }
+                else if (!Convert.ToBoolean(row.Cells["EDITAR"].Value))
+                {
+                    permiso.IdObjeto = Convert.ToString(row.Cells["PANTALLA"].Value);
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
+                    permiso.Permitido = false;
+                    cDatos.GuardarPermiso(permiso);
+                }
 
+                if (Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                {
+                    permiso.IdObjeto = dgvRolPermiso.CurrentRow.Cells["PANTALLA"].Value.ToString();
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
+                    permiso.Permitido = true;
+                    cDatos.GuardarPermiso(permiso);
+                }
+                else if(!Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                {
+                    permiso.IdObjeto = Convert.ToString(row.Cells["PANTALLA"].Value);
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
+                    permiso.Permitido = false;
+                    cDatos.GuardarPermiso(permiso);
                 }
 
             }
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            GuardarRolUs();
+            GuardarPermisoRol();
+            MsgB mbox = new MsgB("informacion", "Registro guardado");
+            DialogResult dR = mbox.ShowDialog();
         }
     }
 }

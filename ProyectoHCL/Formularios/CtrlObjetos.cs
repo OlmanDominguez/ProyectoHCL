@@ -276,10 +276,12 @@ namespace ProyectoHCL.Formularios
             if (pagInicio == 1)
             {
                 btnAnterior.Enabled = false;
+                cmbMostrar.Enabled = true;
             }
             else
             {
                 btnAnterior.Enabled = true;
+                cmbMostrar.Enabled = false;
             }
 
             if (indice == (Convert.ToInt32(txtPag.Text) - 1))

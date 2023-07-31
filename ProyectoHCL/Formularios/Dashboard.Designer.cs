@@ -371,6 +371,7 @@
             Ibtn_facturacion.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_facturacion.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_facturacion.UseVisualStyleBackColor = true;
+            Ibtn_facturacion.Click += Ibtn_facturacion_Click;
             // 
             // paneladminSubMenu
             // 
@@ -423,7 +424,7 @@
             Ibtn_descuentos.Padding = new Padding(35, 0, 0, 0);
             Ibtn_descuentos.Size = new Size(246, 45);
             Ibtn_descuentos.TabIndex = 31;
-            Ibtn_descuentos.Text = "Descuantos ";
+            Ibtn_descuentos.Text = "Descuentos ";
             Ibtn_descuentos.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_descuentos.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_descuentos.UseVisualStyleBackColor = true;
