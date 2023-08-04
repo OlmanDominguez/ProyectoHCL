@@ -205,7 +205,6 @@
             txtNumero.Location = new Point(243, 138);
             txtNumero.MaxLength = 50;
             txtNumero.Name = "txtNumero";
-            txtNumero.ShortcutsEnabled = false;
             txtNumero.Size = new Size(316, 27);
             txtNumero.TabIndex = 12;
             txtNumero.KeyPress += txtNumero_KeyPress;
@@ -256,6 +255,7 @@
             Controls.Add(panel3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            MaximumSize = new Size(800, 450);
             Name = "R_E_Habitacion";
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;

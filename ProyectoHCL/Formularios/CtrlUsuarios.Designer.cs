@@ -109,9 +109,9 @@
             label11.ForeColor = Color.Black;
             label11.Location = new Point(20, 17);
             label11.Name = "label11";
-            label11.Size = new Size(235, 32);
+            label11.Size = new Size(240, 32);
             label11.TabIndex = 41;
-            label11.Text = "Usuarios registrados";
+            label11.Text = "Usuarios Registrados";
             // 
             // button2
             // 
@@ -180,12 +180,10 @@
             btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnNuevo.ForeColor = SystemColors.ButtonFace;
             btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNuevo.Location = new Point(29, 15);
+            btnNuevo.Location = new Point(29, 17);
             btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(100, 39);
+            btnNuevo.Size = new Size(50, 35);
             btnNuevo.TabIndex = 40;
-            btnNuevo.Text = "Agregar";
             btnNuevo.TextAlign = ContentAlignment.MiddleRight;
             btnNuevo.UseVisualStyleBackColor = false;
             btnNuevo.Click += btnNuevo_Click_1;
@@ -240,7 +238,7 @@
             // 
             txtBuscar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             txtBuscar.BackColor = SystemColors.Info;
-            txtBuscar.Location = new Point(232, 22);
+            txtBuscar.Location = new Point(173, 22);
             txtBuscar.Margin = new Padding(2);
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(252, 23);
@@ -254,7 +252,7 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(172, 24);
+            label4.Location = new Point(113, 24);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(55, 20);
@@ -447,6 +445,7 @@
             // 
             // panel4
             // 
+            panel4.BackColor = SystemColors.Window;
             panel4.Controls.Add(dgvUsuarios);
             panel4.Dock = DockStyle.Fill;
             panel4.Location = new Point(0, 132);
@@ -489,7 +488,7 @@
             dgvUsuarios.DefaultCellStyle = dataGridViewCellStyle3;
             dgvUsuarios.EnableHeadersVisualStyles = false;
             dgvUsuarios.GridColor = Color.FromArgb(45, 66, 91);
-            dgvUsuarios.Location = new Point(0, 0);
+            dgvUsuarios.Location = new Point(29, 6);
             dgvUsuarios.Name = "dgvUsuarios";
             dgvUsuarios.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -508,7 +507,7 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
             dgvUsuarios.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvUsuarios.RowTemplate.Height = 25;
-            dgvUsuarios.Size = new Size(1084, 353);
+            dgvUsuarios.Size = new Size(1027, 341);
             dgvUsuarios.TabIndex = 2;
             dgvUsuarios.CellClick += dgvUsuarios_CellClick_1;
             dgvUsuarios.CellPainting += dgvUsuarios_CellPainting_1;
