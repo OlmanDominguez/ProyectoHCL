@@ -225,10 +225,12 @@ namespace ProyectoHCL.Formularios
             if (pagInicio == 1)
             {
                 btnAnt.Enabled = false;
+                cmbMostrar.Enabled = true;
             }
             else
             {
                 btnAnt.Enabled = true;
+                cmbMostrar.Enabled = false;
             }
 
             if (indice == (Convert.ToInt32(txtServ.Text) - 1))

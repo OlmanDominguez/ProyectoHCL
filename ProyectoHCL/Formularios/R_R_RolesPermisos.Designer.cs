@@ -282,6 +282,7 @@
             btnGuardar.TabIndex = 69;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // txtRol
             // 
@@ -947,7 +948,7 @@
             dgvRolPermiso.Size = new Size(1084, 317);
             dgvRolPermiso.TabIndex = 5;
             // 
-            // RolesPermisos
+            // R_R_RolesPermisos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -957,7 +958,7 @@
             Controls.Add(panel5);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "RolesPermisos";
+            Name = "R_R_RolesPermisos";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "RolesPermisos";
             WindowState = FormWindowState.Maximized;

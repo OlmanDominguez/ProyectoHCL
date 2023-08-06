@@ -175,7 +175,6 @@
             txtPrecio.Location = new Point(242, 140);
             txtPrecio.MaxLength = 100;
             txtPrecio.Name = "txtPrecio";
-            txtPrecio.ShortcutsEnabled = false;
             txtPrecio.Size = new Size(316, 27);
             txtPrecio.TabIndex = 10;
             txtPrecio.KeyPress += txtPrecio_KeyPress;
@@ -188,9 +187,8 @@
             txtServ.CharacterCasing = CharacterCasing.Upper;
             txtServ.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtServ.Location = new Point(242, 68);
-            txtServ.MaxLength = 15;
+            txtServ.MaxLength = 100;
             txtServ.Name = "txtServ";
-            txtServ.ShortcutsEnabled = false;
             txtServ.Size = new Size(316, 27);
             txtServ.TabIndex = 9;
             txtServ.Leave += txtServ_Leave;
@@ -229,6 +227,7 @@
             Controls.Add(panel3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            MaximumSize = new Size(800, 405);
             Name = "R_E_Servicio";
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;

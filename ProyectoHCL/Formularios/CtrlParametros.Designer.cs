@@ -156,6 +156,7 @@
             button10.TabIndex = 59;
             button10.Text = "PDF";
             button10.UseVisualStyleBackColor = false;
+            button10.Click += button10_Click;
             // 
             // button11
             // 

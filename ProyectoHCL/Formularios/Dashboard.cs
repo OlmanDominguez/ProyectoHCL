@@ -1085,5 +1085,13 @@ namespace ProyectoHCL
             pbt_fechas.Visible = false;
 
         }
+
+        private void Ibtn_facturacion_Click(object sender, EventArgs e)
+        {
+            //codigo para el formilario
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlFacturacion());
+            //hideSubMenu2();
+        }
     }
 }

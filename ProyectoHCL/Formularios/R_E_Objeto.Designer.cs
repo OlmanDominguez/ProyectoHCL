@@ -36,7 +36,7 @@
             btnCerrar = new Button();
             btnMin = new Button();
             panel3 = new Panel();
-            rTxtDesc = new RichTextBox();
+            rTxtDesc = new TextBox();
             txtObj = new TextBox();
             cmbEstado = new ComboBox();
             btnCancelar = new Button();
@@ -140,15 +140,17 @@
             // 
             // rTxtDesc
             // 
+            rTxtDesc.BackColor = Color.White;
             rTxtDesc.BorderStyle = BorderStyle.FixedSingle;
             rTxtDesc.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             rTxtDesc.Location = new Point(243, 138);
+            rTxtDesc.MaxLength = 500;
+            rTxtDesc.Multiline = true;
             rTxtDesc.Name = "rTxtDesc";
-            rTxtDesc.Size = new Size(316, 109);
+            rTxtDesc.Size = new Size(316, 113);
             rTxtDesc.TabIndex = 25;
-            rTxtDesc.Text = "";
-            rTxtDesc.KeyPress += rTxtDesc_KeyPress;
-            rTxtDesc.Leave += rTxtDesc_Leave;
+            rTxtDesc.KeyPress += rTxtDesc_KeyPress_1;
+            rTxtDesc.Leave += rTxtDesc_Leave_1;
             // 
             // txtObj
             // 
@@ -157,9 +159,8 @@
             txtObj.CharacterCasing = CharacterCasing.Upper;
             txtObj.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtObj.Location = new Point(243, 65);
-            txtObj.MaxLength = 50;
+            txtObj.MaxLength = 150;
             txtObj.Name = "txtObj";
-            txtObj.ShortcutsEnabled = false;
             txtObj.Size = new Size(316, 27);
             txtObj.TabIndex = 24;
             txtObj.Leave += txtObj_Leave;
@@ -259,6 +260,7 @@
             Controls.Add(panel3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            MaximumSize = new Size(800, 428);
             Name = "R_E_Objeto";
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
@@ -285,9 +287,9 @@
         public ComboBox cmbEstado;
         public TextBox txtObj;
         private ErrorProvider errorT;
-        public RichTextBox rTxtDesc;
         public Label label6;
         public Label label2;
         public Label label1;
+        public TextBox rTxtDesc;
     }
 }
