@@ -13,8 +13,8 @@ namespace ProyectoHCL
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             //ApplicationConfiguration.Initialize();
-            // Application.Run(new PermisosRoLes());
-            // Application.Run(new FORMULARIO()); 
+           Application.Run(new PermisosRoLes());
+           // Application.Run(new FORMULARIO()); 
             //  Application.Run(new CtrlUsuarios());
 
 
@@ -23,10 +23,12 @@ namespace ProyectoHCL
             //Application.Run(new CtrlObjetos());
 
            // Application.Run(new CtrlClientes());
+            //Application.Run(new Backup());
             //Application.Run(new CtrlUsuarios());
             //Application.Run(new CtrlUsuarios());
-           // Application.Run(new CtrlParametros()); 
-          // Application.Run(new CtrlPreguntas());
+            //Application.Run(new CtrlParametros()); 
+            //Application.Run(new CtrlFacturacion());
+            //Application.Run(new Restore());
 
 
         }

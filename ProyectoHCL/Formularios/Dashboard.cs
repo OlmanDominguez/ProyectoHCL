@@ -36,175 +36,7 @@ namespace ProyectoHCL
             panelmanteSubMenu.Visible = false;
             paneladminSubMenu.Visible = false;
         }
-        private void hideSubMenu2()
-        {
-            if (panelmanteSubMenu.Visible == true)
-                panelmanteSubMenu.Visible = false;
-            if (paneladminSubMenu.Visible == true)
-                paneladminSubMenu.Visible = false;
-        }
-        private void showSubMenu(Panel SubMenu)
-        {
-            if (SubMenu.Visible == false)
-            {
-                hideSubMenu();
-                SubMenu.Visible = true;
-            }
-            else
-                SubMenu.Visible = false;
-        }
-        private Form activeForm = null;
-        private void openChildFormInPanel(Form childForm)
-        {
-            if (activeForm != null)
-                activeForm.Close();
-            activeForm = childForm;
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
-            panelChildForm.Controls.Add(childForm);
-            panelChildForm.Tag = childForm;
-            childForm.BringToFront();
-            childForm.Show();
-        }
-
-
-
-        private void Dashboard_Load(object sender, EventArgs e)
-        {
-            //panelChildForm.Visible = false;
-            dgv_habitacion.Visible = false;
-            lbl_fechas.Visible = false;
-            lbl_cerrar.Visible = false;
-            pbt_fechas.Visible = false;
-
-            try
-            {
-                using (BaseDatosHCL.ObtenerConexion())
-                {
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("call estado_reserva(1,2,3,'RESERVADO','DISPONIBLE')");
-
-                    MySqlDataReader leer = comando.ExecuteReader();
-                    if (leer.Read() == true)
-                    {
-                        lbl_pendientes.Text = leer["pendientes"].ToString();
-                        lbl_reservadas.Text = leer["reservadas"].ToString();
-                        lbl_disponible.Text = leer["disponibles"].ToString();
-                        lbl_confirmadas.Text = leer["confirmadas"].ToString();
-                        lbl_anuladas.Text = leer["anuladas"].ToString();
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("error al cargar");
-                    }
-                }
-
-            }
-            catch (Exception a)
-            {
-                MessageBox.Show(a.Message);
-            }
-
-
-        }
-
-        private void Ibtn_administracion_Click(object sender, EventArgs e)
-        {
-            showSubMenu(paneladminSubMenu);
-        }
-
-        private void Ibtn_habitaciones_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario 
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlHabitaciones());
-            //hideSubMenu2();
-        }
-
-        private void Ibtn_servicios_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario 
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlServicios());
-            //hideSubMenu2();
-        }
-
-        private void Ibtn_descuentos_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlDescuentos());
-            //hideSubMenu2();
-        }
-
-        private void Ibtn_usuarios_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario 
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlUsuarios());
-            //hideSubMenu2();
-        }
-
-        private void Ibtn_mantenimiento_Click(object sender, EventArgs e)
-        {
-            showSubMenu(panelmanteSubMenu);
-        }
-
-        private void Ibtn_mantenimiento_Click_1(object sender, EventArgs e)
-        {
-            showSubMenu(panelmanteSubMenu);
-        }
-
-        private void Ibtn_roles_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario 
-            hideSubMenu2();
-        }
-
-        private void Ibtn_objetos_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlObjetos());
-            //hideSubMenu2();
-        }
-
-        private void Ibtn_permisos_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario 
-            hideSubMenu2();
-        }
-
-        private void Ibtn_parametros_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlParametros());
-            //hideSubMenu2();
-        }
-
-        private void Ibtn_reservacion_Click_1(object sender, EventArgs e)
-        {
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new Reservaciones());
-
-
-        }
-
-        private void pictureBox5_Click(object sender, EventArgs e)
-        {
-            panelChildForm.Visible = false;
-        }
-
-        private void pbx_habitaciones_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void iconButton1_Click(object sender, EventArgs e)
+        private void mostrarhabitaciones()
         {
             try
             {
@@ -212,7 +44,7 @@ namespace ProyectoHCL
                 {
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("call habitaciones_disponibles('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16');");
+                    comando.CommandText = ("call habitaciones_disponibles('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','20');");
 
                     MySqlDataReader leer = comando.ExecuteReader();
                     if (leer.Read() == true)
@@ -455,6 +287,181 @@ namespace ProyectoHCL
             {
                 MessageBox.Show(a.Message);
             }
+
+
+        }
+        private void hideSubMenu2()
+        {
+            if (panelmanteSubMenu.Visible == true)
+                panelmanteSubMenu.Visible = false;
+            if (paneladminSubMenu.Visible == true)
+                paneladminSubMenu.Visible = false;
+        }
+        private void showSubMenu(Panel SubMenu)
+        {
+            if (SubMenu.Visible == false)
+            {
+                hideSubMenu();
+                SubMenu.Visible = true;
+            }
+            else
+                SubMenu.Visible = false;
+        }
+        private Form activeForm = null;
+        private void openChildFormInPanel(Form childForm)
+        {
+            if (activeForm != null)
+                activeForm.Close();
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            panelChildForm.Controls.Add(childForm);
+            panelChildForm.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+        }
+
+
+
+        private void Dashboard_Load(object sender, EventArgs e)
+        {
+            mostrarhabitaciones();
+            //panelChildForm.Visible = false;
+            dgv_habitacion.Visible = false;
+            lbl_fechas.Visible = false;
+            lbl_cerrar.Visible = false;
+            pbt_fechas.Visible = false;
+
+            try
+            {
+                using (BaseDatosHCL.ObtenerConexion())
+                {
+                    MySqlCommand comando = new MySqlCommand();
+                    comando.Connection = BaseDatosHCL.ObtenerConexion();
+                    comando.CommandText = ("call estado_reserva(1,2,3,'RESERVADO','DISPONIBLE')");
+
+                    MySqlDataReader leer = comando.ExecuteReader();
+                    if (leer.Read() == true)
+                    {
+                        lbl_pendientes.Text = leer["pendientes"].ToString();
+                        lbl_reservadas.Text = leer["reservadas"].ToString();
+                        lbl_disponible.Text = leer["disponibles"].ToString();
+                        lbl_confirmadas.Text = leer["confirmadas"].ToString();
+                        lbl_anuladas.Text = leer["anuladas"].ToString();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("error al cargar");
+                    }
+                }
+
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show(a.Message);
+            }
+
+
+        }
+
+        private void Ibtn_administracion_Click(object sender, EventArgs e)
+        {
+            showSubMenu(paneladminSubMenu);
+        }
+
+        private void Ibtn_habitaciones_Click(object sender, EventArgs e)
+        {
+            //codigo para el formilario 
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlHabitaciones());
+            //hideSubMenu2();
+        }
+
+        private void Ibtn_servicios_Click(object sender, EventArgs e)
+        {
+            //codigo para el formilario 
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlServicios());
+            //hideSubMenu2();
+        }
+
+        private void Ibtn_descuentos_Click(object sender, EventArgs e)
+        {
+            //codigo para el formilario
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlDescuentos());
+            //hideSubMenu2();
+        }
+
+        private void Ibtn_usuarios_Click(object sender, EventArgs e)
+        {
+            //codigo para el formilario 
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlUsuarios());
+            //hideSubMenu2();
+        }
+
+        private void Ibtn_mantenimiento_Click(object sender, EventArgs e)
+        {
+            showSubMenu(panelmanteSubMenu);
+        }
+
+        private void Ibtn_mantenimiento_Click_1(object sender, EventArgs e)
+        {
+            showSubMenu(panelmanteSubMenu);
+        }
+
+        private void Ibtn_roles_Click(object sender, EventArgs e)
+        {
+            //codigo para el formilario 
+            hideSubMenu2();
+        }
+
+        private void Ibtn_objetos_Click(object sender, EventArgs e)
+        {
+            //codigo para el formilario
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlObjetos());
+            //hideSubMenu2();
+        }
+
+        private void Ibtn_permisos_Click(object sender, EventArgs e)
+        {
+            //codigo para el formilario 
+            hideSubMenu2();
+        }
+
+        private void Ibtn_parametros_Click(object sender, EventArgs e)
+        {
+            //codigo para el formilario
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlParametros());
+            //hideSubMenu2();
+        }
+
+        private void Ibtn_reservacion_Click_1(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new Reservaciones());
+
+
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = false;
+        }
+
+        private void pbx_habitaciones_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void iconButton1_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -923,7 +930,7 @@ namespace ProyectoHCL
                 {
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("select INGRESO, SALIDA from TBL_SOLICITUDRESERVA where NUMEROHABITACION=16;");
+                    comando.CommandText = ("select INGRESO, SALIDA from TBL_SOLICITUDRESERVA where NUMEROHABITACION=20;");
 
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
                     adapter.SelectCommand = comando;

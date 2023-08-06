@@ -20,10 +20,10 @@ namespace ProyectoHCL
         AdmonDescuento admonDescuento = new AdmonDescuento();   
 
         public void editarUs(string id, string estado, string rol, string usuario, string nombre,
-            string vencimiento, string email)
+            string contraseña, string vencimiento, string email)
         {
             admonUsuario.modificarUsuario(Convert.ToInt32(id), estado, rol, usuario, nombre,
-                Convert.ToDateTime(vencimiento), email);
+               contraseña, Convert.ToDateTime(vencimiento), email);
         }
 
         public void editarObj(string id, string nombreObj, string descObj, string estadoObj)

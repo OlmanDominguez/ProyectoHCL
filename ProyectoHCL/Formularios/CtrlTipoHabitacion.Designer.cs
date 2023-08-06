@@ -122,9 +122,9 @@
             label11.ForeColor = Color.Black;
             label11.Location = new Point(19, 17);
             label11.Name = "label11";
-            label11.Size = new Size(354, 32);
+            label11.Size = new Size(363, 32);
             label11.TabIndex = 41;
-            label11.Text = "Tipos de habitación registrados";
+            label11.Text = "Tipos de Habitación Registrados";
             // 
             // button2
             // 
@@ -193,12 +193,10 @@
             btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnNuevo.ForeColor = SystemColors.ButtonFace;
             btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
             btnNuevo.Location = new Point(27, 16);
             btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(100, 35);
+            btnNuevo.Size = new Size(50, 35);
             btnNuevo.TabIndex = 40;
-            btnNuevo.Text = "Agregar";
             btnNuevo.TextAlign = ContentAlignment.MiddleRight;
             btnNuevo.UseVisualStyleBackColor = false;
             btnNuevo.Click += btnNuevo_Click;
@@ -287,7 +285,7 @@
             // 
             txtBuscar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             txtBuscar.BackColor = SystemColors.Info;
-            txtBuscar.Location = new Point(235, 24);
+            txtBuscar.Location = new Point(171, 22);
             txtBuscar.Margin = new Padding(2);
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(252, 23);
@@ -301,7 +299,7 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(175, 26);
+            label4.Location = new Point(111, 24);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(55, 20);
@@ -585,7 +583,7 @@
             dgvTH.DefaultCellStyle = dataGridViewCellStyle3;
             dgvTH.EnableHeadersVisualStyles = false;
             dgvTH.GridColor = Color.FromArgb(45, 66, 91);
-            dgvTH.Location = new Point(0, -2);
+            dgvTH.Location = new Point(27, 6);
             dgvTH.Name = "dgvTH";
             dgvTH.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -604,7 +602,7 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
             dgvTH.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvTH.RowTemplate.Height = 25;
-            dgvTH.Size = new Size(1084, 356);
+            dgvTH.Size = new Size(1027, 341);
             dgvTH.TabIndex = 3;
             dgvTH.CellClick += dgvTH_CellClick;
             dgvTH.CellPainting += dgvTH_CellPainting;
