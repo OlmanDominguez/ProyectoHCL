@@ -175,6 +175,9 @@ namespace ProyectoHCL.Formularios
                     info.salida = salida1;
                     info.reserva = dgvFacturas.CurrentRow.Cells["RESERVA"].Value.ToString();
                     info.est = 1;
+                    DateTime fecha2 = Convert.ToDateTime(dgvFacturas.CurrentRow.Cells["SALIDA"].Value.ToString());
+                    string fecha1 = fecha2.ToString("dd/MM/yyyy");
+                    info.fecha = fecha1;
                     Form form = new Formularios.ShowFactura();
                     form.ShowDialog();
 

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Title of the document</title>
+    <style>
+        table.border {
+            border-collapse: collapse;
+        }
+
+            table.border th {
+                padding: 5px;
+                border: 1px solid black;
+            }
+
+            table.border td {
+                padding: 5px;
+                border: 1px solid black;
+            }
+    </style>
+</head>
+<body>
+    <table style="width:100%">
+        <tr>
+            <td style="width:20%"></td>
+            <td style="width:60%" align="center" valign="top">
+                <table>
+                    <tr><td align="center"><h4 style="margin:0px">HOTEL CASA LOMAS</h4></td></tr>
+                    <tr><td align="center">Direccion: Col. Lomas del Guijarro, sendero Llamarada del Bosque, Casa#530, Tegucigalpa, Honduras</td></tr>
+                    <tr><td align="center">Telefono: +504 9884-6939 / +504 9435-0016</td></tr>
+                </table>
+            </td>
+            <td style="width:20%">
+                <table style="width:100%">
+                    <tr><td align="center">@FECHA1</td></tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr><td colspan="3" height="50"></td></tr>
+
+        <tr>
+            <td colspan="3">
+                <table style="width:100%">
+                    <tr>
+                        <td colspan="1" style="width:0%">Cliente:</td>
+                        <td colspan="3" style="width:80%;border-bottom:1px solid black">@CLIENTE</td>
+                    </tr>
+                </table>
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:20%">Identificación:</td>
+                        <td style="width:30%;border-bottom:1px solid black">@ID</td>
+                        <td style="width:10%">Factura:</td>
+                        <td style="width:40%;border-bottom:1px solid black">@FACTURA</td>
+                    </tr>
+                </table>
+                 <table style="width:100%">
+                    <tr>
+                        <td style="width:20%">Ingreso:</td>
+                        <td style="width:13%;border-bottom:1px solid black">@INGRESO</td>
+                        <td style="width:20%">Salida:</td>
+                        <td style="width:13%;border-bottom:1px solid black">@SALIDA</td>
+                        <td style="width:20%">Noches:</td>
+                        <td style="width:14%;border-bottom:1px solid black">@NOCHES</td>
+                    </tr>
+                </table>
+            </td>
+            <td></td>
+        </tr>
+
+        <tr><td colspan="3" height="30"></td></tr>
+
+        <tr>
+            <td colspan="3">
+                <table class="border" style="width:100%;">
+                    <thead>
+                        <tr style="background-color:#A4C2DE">
+                            <th>Cant.</th>
+                            <th>Descripcion</th>
+                            <th style="width:20%;">P. Unitario</th>
+                            <th>Importe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @FILAS
+                        <tr>
+                            <td style="border: 0px !important"></td>
+                            <td style="border: 0px !important"></td>
+                            <td align="right">SubTotal:</td>
+                            <td>@SUBTOTAL</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 0px !important"></td>
+                            <td style="border: 0px !important"></td>
+                            <td align="right">Descuento:</td>
+                            <td>@DESCUENTO</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 0px !important"></td>
+                            <td style="border: 0px !important"></td>
+                            <td align="right" style="background-color:#A4C2DE">SubTotal menos Descuento:</td>
+                            <td style="background-color:#A4C2DE">@STMD</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 0px !important"></td>
+                            <td style="border: 0px !important"></td>
+                            <td align="right">Impuesto S/Venta:</td>
+                            <td>@ISV</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 0px !important"></td>
+                            <td style="border: 0px !important"></td>
+                            <td align="right">Impuesto Turismo:</td>
+                            <td>@IST</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 0px !important"></td>
+                            <td style="border: 0px !important"></td>
+                            <td align="right" style="background-color:#A4C2DE">Total Impuesto:</td>
+                            <td style="background-color:#A4C2DE">@TOIM</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 0px !important"></td>
+                            <td style="border: 0px !important"></td>
+                            <td align="right" style="background-color:#849CB3">Total:</td>
+                            <td style="background-color:#849CB3">@TOTAL</td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </td>
+        </tr>
+        <tr><td colspan="3" height="40"></td></tr>    
+    </table>
+    
+    
+    
+    <table>
+        <tr>
+            <td style="width:100%;border-top:1px solid black">Cuenta Cheques BAC 730311161, INVERSIONES MAXIM / Maximo Junot Jerez Ulloa</td>
+        </tr>
+        <tr><td style="width:100%" align="center">maximinversiones@gmail.com  RTN: 08011980151738</td></tr>
+    </table>
+</body>
+</html>
