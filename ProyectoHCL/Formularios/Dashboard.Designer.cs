@@ -76,7 +76,6 @@
             lbl_3 = new Label();
             lbl_2 = new Label();
             lbl_1 = new Label();
-            iconButton1 = new FontAwesome.Sharp.IconButton();
             pbt_h16 = new PictureBox();
             pbt_h15 = new PictureBox();
             pbt_h14 = new PictureBox();
@@ -601,7 +600,6 @@
             panelChildForm.Controls.Add(lbl_3);
             panelChildForm.Controls.Add(lbl_2);
             panelChildForm.Controls.Add(lbl_1);
-            panelChildForm.Controls.Add(iconButton1);
             panelChildForm.Controls.Add(pbt_h16);
             panelChildForm.Controls.Add(pbt_h15);
             panelChildForm.Controls.Add(pbt_h14);
@@ -963,29 +961,6 @@
             lbl_1.Text = "-";
             lbl_1.Visible = false;
             // 
-            // iconButton1
-            // 
-            iconButton1.BackColor = Color.FromArgb(60, 150, 249);
-            iconButton1.FlatAppearance.BorderSize = 0;
-            iconButton1.FlatStyle = FlatStyle.Flat;
-            iconButton1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            iconButton1.ForeColor = SystemColors.Control;
-            iconButton1.IconChar = FontAwesome.Sharp.IconChar.ArrowsRotate;
-            iconButton1.IconColor = Color.Black;
-            iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton1.IconSize = 25;
-            iconButton1.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton1.Location = new Point(141, 81);
-            iconButton1.Name = "iconButton1";
-            iconButton1.Padding = new Padding(15, 0, 0, 0);
-            iconButton1.Size = new Size(124, 31);
-            iconButton1.TabIndex = 82;
-            iconButton1.Text = "Ver Estado";
-            iconButton1.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton1.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton1.UseVisualStyleBackColor = false;
-            iconButton1.Click += iconButton1_Click;
-            // 
             // pbt_h16
             // 
             pbt_h16.BackColor = Color.White;
@@ -1040,7 +1015,7 @@
             label19.Name = "label19";
             label19.Size = new Size(32, 17);
             label19.TabIndex = 77;
-            label19.Text = "H16";
+            label19.Text = "H20";
             label19.Click += label19_Click;
             // 
             // label20
@@ -1451,7 +1426,7 @@
             label1.BackColor = Color.FromArgb(60, 150, 249);
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ButtonFace;
-            label1.Location = new Point(107, 53);
+            label1.Location = new Point(107, 73);
             label1.Name = "label1";
             label1.Size = new Size(192, 25);
             label1.TabIndex = 43;
@@ -1772,7 +1747,6 @@
         private PictureBox pbt_h1;
         private Label label10;
         private Label label9;
-        private FontAwesome.Sharp.IconButton iconButton1;
         private Label lbl_16;
         private Label lbl_15;
         private Label lbl_14;

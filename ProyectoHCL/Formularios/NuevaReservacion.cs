@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
@@ -26,6 +27,113 @@ namespace ProyectoHCL
 
 
         }
+        public void inserdetalle()
+        {
+            try
+            {
+                MySqlConnection conn;
+                MySqlCommand cmd;
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
+
+                cmd = new MySqlCommand("InsertDetalle", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_habitacion", txt_id.Text);
+                cmd.Parameters.AddWithValue("@id_estado", txt_estado.Text);
+
+                cmd.ExecuteNonQuery();
+
+                /*MsgB m = new MsgB("informacion", "Reserva agregada con exito");
+                DialogResult dR = m.ShowDialog();
+                limpiarCampos();*/
+                conn.Close();
+            }
+            catch (Exception ex)
+            {/*
+                MsgB m = new MsgB("Error: ", ex.Message);
+                DialogResult dR = m.ShowDialog();*/
+            }
+
+        }
+        public void updatedetalle()
+        {
+            try
+            {
+                MySqlConnection conn;
+                MySqlCommand cmd;
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
+
+                cmd = new MySqlCommand("UpdateDetalle", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_solicitud", txt_id_solicitud.Text);
+                cmd.Parameters.AddWithValue("@id_habitacion", txt_id.Text);
+                cmd.Parameters.AddWithValue("@id_estado", txt_estado.Text);
+
+                cmd.ExecuteNonQuery();
+
+                /*MsgB m = new MsgB("informacion", "Reserva agregada con exito");
+                DialogResult dR = m.ShowDialog();
+                limpiarCampos();*/
+                conn.Close();
+            }
+            catch (Exception ex)
+            {/*
+                MsgB m = new MsgB("Error: ", ex.Message);
+                DialogResult dR = m.ShowDialog();*/
+            }
+
+        }
+        public void updatehabitacion()
+        {
+            String ESTADO = cb_estado.SelectedValue.ToString();
+            try
+            {
+                MySqlConnection conn;
+                MySqlCommand cmd;
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
+
+                cmd = new MySqlCommand("UpdateH", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@num_habitacion", txt_id.Text);
+                cmd.Parameters.AddWithValue("@estado", ESTADO);
+
+                cmd.ExecuteNonQuery();
+
+                /*MsgB m = new MsgB("informacion", "Reserva agregada con exito");
+                DialogResult dR = m.ShowDialog();
+                limpiarCampos();*/
+                conn.Close();
+            }
+            catch (Exception ex)
+            {/*
+                MsgB m = new MsgB("Error: ", ex.Message);
+                DialogResult dR = m.ShowDialog();*/
+            }
+
+
+        }
+
+        public void limpiarCampos()
+        {
+            txt_codigo.Clear();
+            txt_cod_cliente.Clear();
+            txt_estado.Clear();
+            txt_huespedes.Clear();
+            txt_id.Clear();
+            txt_metodo_reserva.Clear();
+            txt_monto.Clear();
+            txt_tipo_habitacion.Clear();
+            txt_vehiculo.Clear();
+            cb_metodo.SelectedIndex = 0;
+            cb_numero.SelectedIndex = 0;
+            cb_tipo.SelectedIndex = 0;
+            cb_cliente.SelectedIndex = 0;
+            cb_estado.SelectedIndex = 0;
+
+
+        }
 
         private void combo_metodo()
         {
@@ -50,6 +158,9 @@ namespace ProyectoHCL
                     cb_metodo.ValueMember = "ID_METODORESERVA";
                     cb_metodo.DisplayMember = "DESCRIPCION";
                     cb_metodo.DataSource = dt;
+
+                    cb_metodo.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    cb_metodo.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
 
@@ -85,6 +196,9 @@ namespace ProyectoHCL
                     cb_tipo.ValueMember = "ID_TIPOHABITACION";
                     cb_tipo.DisplayMember = "TIPO";
                     cb_tipo.DataSource = dt;
+
+                    cb_tipo.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    cb_tipo.AutoCompleteSource = AutoCompleteSource.ListItems;
 
                     /*//combobox tipo habitacion
                     cb_tipo.DataSource = dt;
@@ -129,6 +243,8 @@ namespace ProyectoHCL
                     cb_numero.DisplayMember = "NUMEROHABITACION";
                     cb_numero.DataSource = dt;
 
+                    cb_numero.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    cb_numero.AutoCompleteSource = AutoCompleteSource.ListItems;
 
                 }
 
@@ -165,6 +281,8 @@ namespace ProyectoHCL
                     cb_estado.DisplayMember = "TBL_ESTADORESERVA";
                     cb_estado.ValueMember = "DESCRIPCION";
 
+                    cb_estado.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    cb_estado.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
 
@@ -203,7 +321,8 @@ namespace ProyectoHCL
                     cb_cliente.DisplayMember = "TBL_CLIENTE";
                     cb_cliente.ValueMember = "NOMBRE";
 
-
+                    cb_cliente.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    cb_cliente.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
                 }
@@ -260,7 +379,51 @@ namespace ProyectoHCL
 
         private void NuevaReservacion_Load(object sender, EventArgs e)
         {
+            if (txt_id_solicitud.Text != "")
+            {
+                btn_guardar2.Visible = true;
+                string id = txt_id_solicitud.Text;
+                try
+                {
+                    using (BaseDatosHCL.ObtenerConexion())
+                    {
+                        MySqlCommand comando = new MySqlCommand();
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("select * from TBL_SOLICITUDRESERVA where ID_SOLICITUDRESERVA='" + id + "';");
 
+                        MySqlDataReader leer = comando.ExecuteReader();
+                        if (leer.Read() == true)
+                        {
+                            txt_codigo.Text = leer["ID_USUARIO"].ToString();
+                            txt_cod_cliente.Text = leer["COD_CLIENTE"].ToString();
+                            txt_estado.Text = leer["ID_ESTADORESERVA"].ToString();
+                            txt_metodo_reserva.Text = leer["ID_METODORESERVA"].ToString();
+                            txt_monto.Text = leer["MONTORESERVAR"].ToString();
+                            txt_vehiculo.Text = leer["VEHICULO"].ToString();
+                            txt_huespedes.Text = leer["NHUESPEDES"].ToString();
+                            cb_numero.Text = leer["NUMEROHABITACION"].ToString();
+                            dt_fecha_coti.Value = Convert.ToDateTime(leer["FECHACOTI"].ToString());
+                            dt_fecha_entrada.Value = Convert.ToDateTime(leer["INGRESO"].ToString());
+                            dt_fecha_salida.Value = Convert.ToDateTime(leer["SALIDA"].ToString());
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message);
+                }
+            }
+            else
+            {
+                btnGuardar.Visible = true;
+
+            }
         }
 
         private void cb_metodo_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -366,18 +529,57 @@ namespace ProyectoHCL
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            int codigoU = int.Parse(txt_codigo.Text);
-            int codigoC = int.Parse(txt_cod_cliente.Text);
-            int metodo = int.Parse(txt_metodo_reserva.Text);
-            int estado = int.Parse(txt_estado.Text);
-            int huespedes = int.Parse(txt_huespedes.Text);
-            double monto = double.Parse(txt_monto.Text);
-            string fecha_coti = txt_fecha_coti.Text;
-            string fecha_entrada = txt_fecha_entrada.Text;
-            string fecha_salida = txt_fecha_salida.Text;
-            int habitacion = int.Parse(txt_tipo_habitacion.Text);
-            int numhanitacion = cb_numero.SelectedIndex;
-            int vehiculo = int.Parse(txt_vehiculo.Text);
+
+            try
+            {
+                MySqlConnection conn;
+                MySqlCommand cmd;
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
+
+                cmd = new MySqlCommand("InsertarReserva", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_estado", txt_estado.Text);
+                cmd.Parameters.AddWithValue("@id_metodo", txt_metodo_reserva.Text);
+                cmd.Parameters.AddWithValue("@id_usuaio", txt_codigo.Text);
+                cmd.Parameters.AddWithValue("@fecha_coti", Convert.ToDateTime(dt_fecha_coti.Text));
+                cmd.Parameters.AddWithValue("@fecha_ingreso", Convert.ToDateTime(dt_fecha_entrada.Text));
+                cmd.Parameters.AddWithValue("@fecha_salida", Convert.ToDateTime(dt_fecha_salida.Text));
+                cmd.Parameters.AddWithValue("@n_huespedes", txt_huespedes.Text);
+                cmd.Parameters.AddWithValue("@vehiculo", txt_vehiculo.Text);
+                cmd.Parameters.AddWithValue("@monto", txt_monto.Text);
+                cmd.Parameters.AddWithValue("@cod_cliente", txt_cod_cliente.Text);
+                cmd.Parameters.AddWithValue("@num_habitacion", cb_numero.Text);
+
+
+                cmd.ExecuteNonQuery();
+                inserdetalle();
+                updatehabitacion();
+                MsgB m = new MsgB("informacion", "Reserva agregada con exito");
+                DialogResult dR = m.ShowDialog();
+                limpiarCampos();
+                conn.Close();
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MsgB m = new MsgB("Error: ", "Validar los datos Ingresados");
+                DialogResult dR = m.ShowDialog();
+            }
+
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void cb_numero_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            object adb = cb_numero.SelectedItem;
+            object b = cb_numero.GetItemText(adb);
+
 
             try
             {
@@ -385,54 +587,65 @@ namespace ProyectoHCL
                 {
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("insert into TBL_SOLICITUDRESERVA (ID_ESTADORESERVA, ID_METODORESERVA, ID_USUARIO, FECHACOTI, INGRESO, SALIDA, NHUESPEDES,VEHICULO, MONTORESERVAR,COD_CLIENTE, NUMEROHABITACION) " +
-                        "values ('" + estado + "', '" + metodo + "', '" + codigoU + "', '" + fecha_coti + "', '" + fecha_entrada + "', '" + fecha_salida + "','" + huespedes + "', '" + vehiculo + "', '" + monto + "','" + codigoC + "','" + numhanitacion + "');");
+                    comando.CommandText = ("SELECT ID_HABITACION FROM TBL_HABITACION where NUMEROHABITACION='" + b + "';");
 
-                    comando.ExecuteReader();
-                    MessageBox.Show("Reservacion ingresada con exito");
+                    MySqlDataReader leer = comando.ExecuteReader();
+                    if (leer.Read() == true)
+                    {
+                        txt_id.Text = leer["ID_HABITACION"].ToString();
 
+                    }
+                    else
+                    {
+
+                    }
                 }
-
             }
             catch (Exception a)
             {
                 MessageBox.Show(a.Message);
             }
-            
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btn_guardar2_Click(object sender, EventArgs e)
         {
+            try
+            {
+                MySqlConnection conn;
+                MySqlCommand cmd;
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
 
-        }
+                cmd = new MySqlCommand("UpdateReserva", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_solicitud", txt_id_solicitud.Text);
+                cmd.Parameters.AddWithValue("@id_estado", txt_estado.Text);
+                cmd.Parameters.AddWithValue("@id_metodo", txt_metodo_reserva.Text);
+                cmd.Parameters.AddWithValue("@id_usuaio", txt_codigo.Text);
+                cmd.Parameters.AddWithValue("@fecha_coti", Convert.ToDateTime(dt_fecha_coti.Text));
+                cmd.Parameters.AddWithValue("@fecha_ingreso", Convert.ToDateTime(dt_fecha_entrada.Text));
+                cmd.Parameters.AddWithValue("@fecha_salida", Convert.ToDateTime(dt_fecha_salida.Text));
+                cmd.Parameters.AddWithValue("@n_huespedes", txt_huespedes.Text);
+                cmd.Parameters.AddWithValue("@vehiculo", txt_vehiculo.Text);
+                cmd.Parameters.AddWithValue("@monto", txt_monto.Text);
+                cmd.Parameters.AddWithValue("@cod_cliente", txt_cod_cliente.Text);
+                cmd.Parameters.AddWithValue("@num_habitacion", cb_numero.Text);
 
-        private void cb_numero_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            /* String nombre = cb_numero.SelectedValue.ToString();
-             try
-             {
-                 using (BaseDatosHCL.ObtenerConexion())
-                 {
-                     MySqlCommand comando = new MySqlCommand();
-                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                     comando.CommandText = ("SELECT ID_HABITACION FROM TBL_HABITACION where NUMEROHABITACION='" + nombre + "';");
 
-                     MySqlDataReader leer = comando.ExecuteReader();
-                     if (leer.Read() == true)
-                     {
-                        txt_id.Text = leer["ID_HABITACION"].ToString();
-
-                     }
-                     else
-                     {
-
-                     }
-                 }
-             }
-             catch (Exception a)
-             {
-                 MessageBox.Show(a.Message);
-             }*/
+                cmd.ExecuteNonQuery();
+                updatedetalle();
+                updatehabitacion();
+                MsgB m = new MsgB("informacion", "Reserva actualizada con exito");
+                DialogResult dR = m.ShowDialog();
+                //limpiarCampos();
+                conn.Close();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MsgB m = new MsgB("Error: ", "Validar los datos Ingresados");
+                DialogResult dR = m.ShowDialog();
+            }
         }
     }
 }
