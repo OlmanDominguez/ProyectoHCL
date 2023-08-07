@@ -125,7 +125,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(38, 51);
+            label2.Location = new Point(411, 53);
             label2.Name = "label2";
             label2.Size = new Size(83, 19);
             label2.TabIndex = 29;
@@ -215,7 +215,7 @@
             txtEmpresa.CharacterCasing = CharacterCasing.Upper;
             txtEmpresa.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtEmpresa.Location = new Point(462, 26);
-            txtEmpresa.MaxLength = 15;
+            txtEmpresa.MaxLength = 200;
             txtEmpresa.Name = "txtEmpresa";
             txtEmpresa.ShortcutsEnabled = false;
             txtEmpresa.Size = new Size(238, 27);
@@ -229,7 +229,7 @@
             txtRTN.CharacterCasing = CharacterCasing.Upper;
             txtRTN.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtRTN.Location = new Point(60, 26);
-            txtRTN.MaxLength = 15;
+            txtRTN.MaxLength = 200;
             txtRTN.Name = "txtRTN";
             txtRTN.ShortcutsEnabled = false;
             txtRTN.Size = new Size(298, 27);
@@ -294,7 +294,7 @@
             txtEmail2.CharacterCasing = CharacterCasing.Upper;
             txtEmail2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtEmail2.Location = new Point(124, 170);
-            txtEmail2.MaxLength = 15;
+            txtEmail2.MaxLength = 200;
             txtEmail2.Name = "txtEmail2";
             txtEmail2.ShortcutsEnabled = false;
             txtEmail2.Size = new Size(259, 27);
@@ -308,7 +308,7 @@
             txtEmail1.CharacterCasing = CharacterCasing.Upper;
             txtEmail1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtEmail1.Location = new Point(124, 128);
-            txtEmail1.MaxLength = 15;
+            txtEmail1.MaxLength = 200;
             txtEmail1.Name = "txtEmail1";
             txtEmail1.ShortcutsEnabled = false;
             txtEmail1.Size = new Size(259, 27);
@@ -322,7 +322,7 @@
             txtTele2.CharacterCasing = CharacterCasing.Upper;
             txtTele2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtTele2.Location = new Point(497, 128);
-            txtTele2.MaxLength = 15;
+            txtTele2.MaxLength = 200;
             txtTele2.Name = "txtTele2";
             txtTele2.ShortcutsEnabled = false;
             txtTele2.Size = new Size(230, 27);
@@ -336,7 +336,7 @@
             txtTele1.CharacterCasing = CharacterCasing.Upper;
             txtTele1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtTele1.Location = new Point(497, 89);
-            txtTele1.MaxLength = 15;
+            txtTele1.MaxLength = 200;
             txtTele1.Name = "txtTele1";
             txtTele1.ShortcutsEnabled = false;
             txtTele1.Size = new Size(230, 27);
@@ -349,8 +349,8 @@
             txtID.BorderStyle = BorderStyle.FixedSingle;
             txtID.CharacterCasing = CharacterCasing.Upper;
             txtID.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtID.Location = new Point(163, 89);
-            txtID.MaxLength = 15;
+            txtID.Location = new Point(163, 49);
+            txtID.MaxLength = 200;
             txtID.Name = "txtID";
             txtID.ShortcutsEnabled = false;
             txtID.Size = new Size(220, 27);
@@ -363,11 +363,11 @@
             txtApellido.BorderStyle = BorderStyle.FixedSingle;
             txtApellido.CharacterCasing = CharacterCasing.Upper;
             txtApellido.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtApellido.Location = new Point(497, 47);
-            txtApellido.MaxLength = 15;
+            txtApellido.Location = new Point(124, 89);
+            txtApellido.MaxLength = 200;
             txtApellido.Name = "txtApellido";
             txtApellido.ShortcutsEnabled = false;
-            txtApellido.Size = new Size(230, 27);
+            txtApellido.Size = new Size(259, 27);
             txtApellido.TabIndex = 49;
             // 
             // txtNombre
@@ -377,11 +377,11 @@
             txtNombre.BorderStyle = BorderStyle.FixedSingle;
             txtNombre.CharacterCasing = CharacterCasing.Upper;
             txtNombre.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNombre.Location = new Point(124, 47);
-            txtNombre.MaxLength = 15;
+            txtNombre.Location = new Point(497, 49);
+            txtNombre.MaxLength = 200;
             txtNombre.Name = "txtNombre";
             txtNombre.ShortcutsEnabled = false;
-            txtNombre.Size = new Size(259, 27);
+            txtNombre.Size = new Size(230, 27);
             txtNombre.TabIndex = 48;
             // 
             // label7
@@ -443,7 +443,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(38, 91);
+            label3.Location = new Point(38, 51);
             label3.Name = "label3";
             label3.Size = new Size(119, 19);
             label3.TabIndex = 35;
@@ -456,7 +456,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(406, 51);
+            label1.Location = new Point(38, 91);
             label1.Name = "label1";
             label1.Size = new Size(85, 19);
             label1.TabIndex = 32;

@@ -35,6 +35,7 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             panel2 = new Panel();
+            btnCerrar = new Button();
             label11 = new Label();
             btnCerrarSesion = new Button();
             panel5 = new Panel();
@@ -43,7 +44,6 @@
             btnNuevo = new Button();
             txtBuscar = new TextBox();
             label4 = new Label();
-            dgvPreguntas = new DataGridView();
             panel1 = new Panel();
             btnSig = new Button();
             btnAnt = new Button();
@@ -54,15 +54,19 @@
             cmbMostrar = new ComboBox();
             cmbPreg = new ComboBox();
             label3 = new Label();
+            panel3 = new Panel();
+            dgvPreguntas = new DataGridView();
             panel2.SuspendLayout();
             panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvPreguntas).BeginInit();
             panel1.SuspendLayout();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvPreguntas).BeginInit();
             SuspendLayout();
             // 
             // panel2
             // 
             panel2.BackColor = Color.WhiteSmoke;
+            panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(label11);
             panel2.Controls.Add(btnCerrarSesion);
             panel2.Dock = DockStyle.Top;
@@ -70,6 +74,22 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1084, 65);
             panel2.TabIndex = 37;
+            // 
+            // btnCerrar
+            // 
+            btnCerrar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCerrar.BackColor = Color.Transparent;
+            btnCerrar.BackgroundImage = (Image)resources.GetObject("btnCerrar.BackgroundImage");
+            btnCerrar.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCerrar.FlatAppearance.BorderSize = 0;
+            btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            btnCerrar.FlatStyle = FlatStyle.Flat;
+            btnCerrar.Location = new Point(1058, 12);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(14, 17);
+            btnCerrar.TabIndex = 80;
+            btnCerrar.UseVisualStyleBackColor = false;
+            btnCerrar.Click += btnCerrar_Click;
             // 
             // label11
             // 
@@ -153,12 +173,10 @@
             btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnNuevo.ForeColor = SystemColors.ButtonFace;
             btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
             btnNuevo.Location = new Point(29, 17);
             btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(100, 35);
+            btnNuevo.Size = new Size(50, 35);
             btnNuevo.TabIndex = 40;
-            btnNuevo.Text = "Agregar";
             btnNuevo.TextAlign = ContentAlignment.MiddleRight;
             btnNuevo.UseVisualStyleBackColor = false;
             btnNuevo.Click += btnNuevo_Click_1;
@@ -167,7 +185,7 @@
             // 
             txtBuscar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             txtBuscar.BackColor = SystemColors.Info;
-            txtBuscar.Location = new Point(236, 22);
+            txtBuscar.Location = new Point(171, 22);
             txtBuscar.Margin = new Padding(2);
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(252, 23);
@@ -181,17 +199,168 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(176, 24);
+            label4.Location = new Point(113, 24);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(55, 20);
             label4.TabIndex = 45;
             label4.Text = "Buscar:";
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(45, 66, 91);
+            panel1.Controls.Add(btnSig);
+            panel1.Controls.Add(btnAnt);
+            panel1.Controls.Add(txtPreg);
+            panel1.Controls.Add(label6);
+            panel1.Controls.Add(label7);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(cmbMostrar);
+            panel1.Controls.Add(cmbPreg);
+            panel1.Controls.Add(label3);
+            panel1.Dock = DockStyle.Bottom;
+            panel1.Location = new Point(0, 485);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1084, 76);
+            panel1.TabIndex = 40;
+            // 
+            // btnSig
+            // 
+            btnSig.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSig.BackColor = Color.Transparent;
+            btnSig.BackgroundImage = (Image)resources.GetObject("btnSig.BackgroundImage");
+            btnSig.BackgroundImageLayout = ImageLayout.Stretch;
+            btnSig.FlatAppearance.BorderSize = 0;
+            btnSig.FlatAppearance.MouseOverBackColor = Color.Silver;
+            btnSig.FlatStyle = FlatStyle.Flat;
+            btnSig.Location = new Point(787, 15);
+            btnSig.Name = "btnSig";
+            btnSig.Size = new Size(30, 31);
+            btnSig.TabIndex = 79;
+            btnSig.UseVisualStyleBackColor = false;
+            btnSig.Click += btnSig_Click_1;
+            // 
+            // btnAnt
+            // 
+            btnAnt.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAnt.BackColor = Color.Transparent;
+            btnAnt.BackgroundImage = (Image)resources.GetObject("btnAnt.BackgroundImage");
+            btnAnt.BackgroundImageLayout = ImageLayout.Stretch;
+            btnAnt.FlatAppearance.BorderSize = 0;
+            btnAnt.FlatAppearance.MouseOverBackColor = Color.Silver;
+            btnAnt.FlatStyle = FlatStyle.Flat;
+            btnAnt.Location = new Point(751, 15);
+            btnAnt.Name = "btnAnt";
+            btnAnt.Size = new Size(30, 31);
+            btnAnt.TabIndex = 78;
+            btnAnt.UseVisualStyleBackColor = false;
+            btnAnt.Click += btnAnt_Click_1;
+            // 
+            // txtPreg
+            // 
+            txtPreg.Anchor = AnchorStyles.Right;
+            txtPreg.Location = new Point(979, 20);
+            txtPreg.Name = "txtPreg";
+            txtPreg.ReadOnly = true;
+            txtPreg.Size = new Size(63, 23);
+            txtPreg.TabIndex = 77;
+            // 
+            // label6
+            // 
+            label6.Anchor = AnchorStyles.Right;
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.ForeColor = SystemColors.ControlLightLight;
+            label6.Location = new Point(952, 23);
+            label6.Name = "label6";
+            label6.Size = new Size(24, 17);
+            label6.TabIndex = 76;
+            label6.Text = "De";
+            // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.Right;
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.ForeColor = SystemColors.ControlLightLight;
+            label7.Location = new Point(824, 23);
+            label7.Name = "label7";
+            label7.Size = new Size(47, 17);
+            label7.TabIndex = 75;
+            label7.Text = "Página";
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = SystemColors.ControlLightLight;
+            label1.Location = new Point(27, 20);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(55, 17);
+            label1.TabIndex = 72;
+            label1.Text = "Mostrar";
+            // 
+            // cmbMostrar
+            // 
+            cmbMostrar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            cmbMostrar.BackColor = SystemColors.Info;
+            cmbMostrar.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbMostrar.FormattingEnabled = true;
+            cmbMostrar.Items.AddRange(new object[] { "5", "10", "20", "30", "40" });
+            cmbMostrar.Location = new Point(90, 17);
+            cmbMostrar.Margin = new Padding(2);
+            cmbMostrar.Name = "cmbMostrar";
+            cmbMostrar.Size = new Size(77, 23);
+            cmbMostrar.TabIndex = 71;
+            cmbMostrar.SelectedIndexChanged += cmbMostrar_SelectedIndexChanged_1;
+            // 
+            // cmbPreg
+            // 
+            cmbPreg.Anchor = AnchorStyles.Right;
+            cmbPreg.BackColor = SystemColors.Info;
+            cmbPreg.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPreg.FormattingEnabled = true;
+            cmbPreg.Location = new Point(872, 20);
+            cmbPreg.Margin = new Padding(2);
+            cmbPreg.Name = "cmbPreg";
+            cmbPreg.Size = new Size(65, 23);
+            cmbPreg.TabIndex = 73;
+            cmbPreg.SelectionChangeCommitted += cmbPreg_SelectionChangeCommitted_1;
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = SystemColors.ControlLightLight;
+            label3.Location = new Point(171, 20);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(60, 17);
+            label3.TabIndex = 74;
+            label3.Text = "registros";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = SystemColors.Window;
+            panel3.Controls.Add(dgvPreguntas);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(0, 132);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1084, 353);
+            panel3.TabIndex = 42;
+            // 
             // dgvPreguntas
             // 
             dgvPreguntas.AllowUserToAddRows = false;
             dgvPreguntas.AllowUserToDeleteRows = false;
+            dgvPreguntas.AllowUserToResizeColumns = false;
+            dgvPreguntas.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
             dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = Color.Black;
@@ -223,7 +392,7 @@
             dgvPreguntas.DefaultCellStyle = dataGridViewCellStyle3;
             dgvPreguntas.EnableHeadersVisualStyles = false;
             dgvPreguntas.GridColor = Color.FromArgb(45, 66, 91);
-            dgvPreguntas.Location = new Point(0, 134);
+            dgvPreguntas.Location = new Point(27, 6);
             dgvPreguntas.Name = "dgvPreguntas";
             dgvPreguntas.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -242,159 +411,21 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
             dgvPreguntas.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvPreguntas.RowTemplate.Height = 25;
-            dgvPreguntas.Size = new Size(1084, 354);
-            dgvPreguntas.TabIndex = 39;
+            dgvPreguntas.Size = new Size(1027, 341);
+            dgvPreguntas.TabIndex = 4;
             dgvPreguntas.CellClick += dgvPreguntas_CellClick_1;
             dgvPreguntas.CellPainting += dgvPreguntas_CellPainting;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.FromArgb(45, 66, 91);
-            panel1.Controls.Add(btnSig);
-            panel1.Controls.Add(btnAnt);
-            panel1.Controls.Add(txtPreg);
-            panel1.Controls.Add(label6);
-            panel1.Controls.Add(label7);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(cmbMostrar);
-            panel1.Controls.Add(cmbPreg);
-            panel1.Controls.Add(label3);
-            panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 485);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1084, 76);
-            panel1.TabIndex = 40;
-            // 
-            // btnSig
-            // 
-            btnSig.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnSig.BackColor = Color.Transparent;
-            btnSig.BackgroundImage = (Image)resources.GetObject("btnSig.BackgroundImage");
-            btnSig.BackgroundImageLayout = ImageLayout.Stretch;
-            btnSig.FlatAppearance.BorderSize = 0;
-            btnSig.FlatAppearance.MouseOverBackColor = Color.Silver;
-            btnSig.FlatStyle = FlatStyle.Flat;
-            btnSig.Location = new Point(761, 23);
-            btnSig.Name = "btnSig";
-            btnSig.Size = new Size(30, 31);
-            btnSig.TabIndex = 79;
-            btnSig.UseVisualStyleBackColor = false;
-            btnSig.Click += btnSig_Click_1;
-            // 
-            // btnAnt
-            // 
-            btnAnt.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAnt.BackColor = Color.Transparent;
-            btnAnt.BackgroundImage = (Image)resources.GetObject("btnAnt.BackgroundImage");
-            btnAnt.BackgroundImageLayout = ImageLayout.Stretch;
-            btnAnt.FlatAppearance.BorderSize = 0;
-            btnAnt.FlatAppearance.MouseOverBackColor = Color.Silver;
-            btnAnt.FlatStyle = FlatStyle.Flat;
-            btnAnt.Location = new Point(725, 23);
-            btnAnt.Name = "btnAnt";
-            btnAnt.Size = new Size(30, 31);
-            btnAnt.TabIndex = 78;
-            btnAnt.UseVisualStyleBackColor = false;
-            btnAnt.Click += btnAnt_Click_1;
-            // 
-            // txtPreg
-            // 
-            txtPreg.Anchor = AnchorStyles.Right;
-            txtPreg.Location = new Point(959, 24);
-            txtPreg.Name = "txtPreg";
-            txtPreg.ReadOnly = true;
-            txtPreg.Size = new Size(63, 23);
-            txtPreg.TabIndex = 77;
-            // 
-            // label6
-            // 
-            label6.Anchor = AnchorStyles.Right;
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.ForeColor = SystemColors.ControlLightLight;
-            label6.Location = new Point(932, 27);
-            label6.Name = "label6";
-            label6.Size = new Size(24, 17);
-            label6.TabIndex = 76;
-            label6.Text = "De";
-            // 
-            // label7
-            // 
-            label7.Anchor = AnchorStyles.Right;
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.ForeColor = SystemColors.ControlLightLight;
-            label7.Location = new Point(804, 27);
-            label7.Name = "label7";
-            label7.Size = new Size(47, 17);
-            label7.TabIndex = 75;
-            label7.Text = "Página";
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(63, 27);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(55, 17);
-            label1.TabIndex = 72;
-            label1.Text = "Mostrar";
-            // 
-            // cmbMostrar
-            // 
-            cmbMostrar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            cmbMostrar.BackColor = SystemColors.Info;
-            cmbMostrar.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbMostrar.FormattingEnabled = true;
-            cmbMostrar.Items.AddRange(new object[] { "2", "3", "4", "5", "6" });
-            cmbMostrar.Location = new Point(126, 24);
-            cmbMostrar.Margin = new Padding(2);
-            cmbMostrar.Name = "cmbMostrar";
-            cmbMostrar.Size = new Size(77, 23);
-            cmbMostrar.TabIndex = 71;
-            cmbMostrar.SelectedIndexChanged += cmbMostrar_SelectedIndexChanged_1;
-            // 
-            // cmbPreg
-            // 
-            cmbPreg.Anchor = AnchorStyles.Right;
-            cmbPreg.BackColor = SystemColors.Info;
-            cmbPreg.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbPreg.FormattingEnabled = true;
-            cmbPreg.Location = new Point(852, 24);
-            cmbPreg.Margin = new Padding(2);
-            cmbPreg.Name = "cmbPreg";
-            cmbPreg.Size = new Size(65, 23);
-            cmbPreg.TabIndex = 73;
-            cmbPreg.SelectionChangeCommitted += cmbPreg_SelectionChangeCommitted_1;
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.ForeColor = SystemColors.ControlLightLight;
-            label3.Location = new Point(207, 27);
-            label3.Margin = new Padding(2, 0, 2, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(60, 17);
-            label3.TabIndex = 74;
-            label3.Text = "registros";
-            label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // CtrlPreguntas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 561);
+            Controls.Add(panel3);
             Controls.Add(panel1);
-            Controls.Add(dgvPreguntas);
             Controls.Add(panel5);
             Controls.Add(panel2);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "CtrlPreguntas";
             Text = "CtrlPreguntas";
             Load += CtrlPreguntas_Load_1;
@@ -402,9 +433,10 @@
             panel2.PerformLayout();
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvPreguntas).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvPreguntas).EndInit();
             ResumeLayout(false);
         }
 
@@ -419,7 +451,6 @@
         private Button btnNuevo;
         private TextBox txtBuscar;
         private Label label4;
-        private DataGridView dgvPreguntas;
         private Panel panel1;
         private Button btnSig;
         private Button btnAnt;
@@ -430,5 +461,8 @@
         private ComboBox cmbMostrar;
         private ComboBox cmbPreg;
         private Label label3;
+        private Panel panel3;
+        private DataGridView dgvPreguntas;
+        private Button btnCerrar;
     }
 }

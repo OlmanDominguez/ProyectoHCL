@@ -33,16 +33,17 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             panel2 = new Panel();
             pictureBox5 = new PictureBox();
             btnCerrar = new Button();
             label11 = new Label();
             panel1 = new Panel();
+            btnNuevo = new Button();
             txtBuscarRe = new TextBox();
             label1 = new Label();
             panel3 = new Panel();
             dgvReservas = new DataGridView();
-            btnNuevo = new Button();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel1.SuspendLayout();
@@ -115,11 +116,30 @@
             panel1.Size = new Size(1000, 341);
             panel1.TabIndex = 21;
             // 
+            // btnNuevo
+            // 
+            btnNuevo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnNuevo.BackColor = Color.RoyalBlue;
+            btnNuevo.BackgroundImageLayout = ImageLayout.Stretch;
+            btnNuevo.FlatAppearance.BorderSize = 0;
+            btnNuevo.FlatAppearance.MouseOverBackColor = Color.MidnightBlue;
+            btnNuevo.FlatStyle = FlatStyle.Flat;
+            btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnNuevo.ForeColor = SystemColors.ButtonFace;
+            btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
+            btnNuevo.Location = new Point(26, 14);
+            btnNuevo.Name = "btnNuevo";
+            btnNuevo.Size = new Size(50, 35);
+            btnNuevo.TabIndex = 41;
+            btnNuevo.TextAlign = ContentAlignment.MiddleRight;
+            btnNuevo.UseVisualStyleBackColor = false;
+            btnNuevo.Click += btnNuevo_Click;
+            // 
             // txtBuscarRe
             // 
             txtBuscarRe.Anchor = AnchorStyles.Bottom;
             txtBuscarRe.BackColor = SystemColors.Info;
-            txtBuscarRe.Location = new Point(75, 22);
+            txtBuscarRe.Location = new Point(167, 22);
             txtBuscarRe.Margin = new Padding(2);
             txtBuscarRe.Name = "txtBuscarRe";
             txtBuscarRe.Size = new Size(247, 23);
@@ -133,7 +153,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(15, 24);
+            label1.Location = new Point(107, 24);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(55, 20);
@@ -155,75 +175,60 @@
             dgvReservas.AllowUserToDeleteRows = false;
             dgvReservas.AllowUserToResizeColumns = false;
             dgvReservas.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = Color.SlateGray;
+            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+            dgvReservas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvReservas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvReservas.BackgroundColor = Color.FromArgb(45, 66, 91);
+            dgvReservas.BackgroundColor = Color.WhiteSmoke;
             dgvReservas.BorderStyle = BorderStyle.None;
             dgvReservas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(252, 222, 73);
-            dataGridViewCellStyle1.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.MenuText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvReservas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Teal;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvReservas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvReservas.ColumnHeadersHeight = 30;
             dgvReservas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.MenuHighlight;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvReservas.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.MenuHighlight;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgvReservas.DefaultCellStyle = dataGridViewCellStyle3;
             dgvReservas.Dock = DockStyle.Fill;
             dgvReservas.EnableHeadersVisualStyles = false;
-            dgvReservas.GridColor = Color.SteelBlue;
+            dgvReservas.GridColor = Color.FromArgb(45, 66, 91);
             dgvReservas.Location = new Point(0, 0);
             dgvReservas.Name = "dgvReservas";
             dgvReservas.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle3.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgvReservas.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle4.SelectionBackColor = Color.CadetBlue;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgvReservas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dgvReservas.RowHeadersVisible = false;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle4.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle4.SelectionForeColor = Color.White;
-            dgvReservas.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle5.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = Color.LightGray;
+            dataGridViewCellStyle5.SelectionForeColor = Color.Black;
+            dgvReservas.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvReservas.RowTemplate.Height = 25;
             dgvReservas.Size = new Size(1000, 255);
-            dgvReservas.TabIndex = 2;
+            dgvReservas.TabIndex = 5;
             dgvReservas.CellClick += dgvReservas_CellClick;
             dgvReservas.CellPainting += dgvReservas_CellPainting;
-            // 
-            // btnNuevo
-            // 
-            btnNuevo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnNuevo.BackColor = Color.RoyalBlue;
-            btnNuevo.BackgroundImageLayout = ImageLayout.Stretch;
-            btnNuevo.FlatAppearance.BorderSize = 0;
-            btnNuevo.FlatAppearance.MouseOverBackColor = Color.MidnightBlue;
-            btnNuevo.FlatStyle = FlatStyle.Flat;
-            btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            btnNuevo.ForeColor = SystemColors.ButtonFace;
-            btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNuevo.Location = new Point(868, 12);
-            btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(100, 39);
-            btnNuevo.TabIndex = 41;
-            btnNuevo.Text = "Agregar";
-            btnNuevo.TextAlign = ContentAlignment.MiddleRight;
-            btnNuevo.UseVisualStyleBackColor = false;
-            btnNuevo.Click += btnNuevo_Click;
             // 
             // NuevaFact
             // 
@@ -260,9 +265,9 @@
         private PictureBox pictureBox5;
         private Panel panel1;
         private Panel panel3;
-        private DataGridView dgvReservas;
         private TextBox txtBuscarRe;
         private Label label1;
         private Button btnNuevo;
+        private DataGridView dgvReservas;
     }
 }

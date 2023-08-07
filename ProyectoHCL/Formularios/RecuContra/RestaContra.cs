@@ -87,7 +87,7 @@ namespace ProyectoHCL.Formularios
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
                     comando.CommandText = ("UPDATE TBL_USUARIO SET CONTRASENA = '"
-                        + TXT_Confi.Text + "' where USUARIO = '" + clasecompartida.user + "'");
+                        + TXT_Confi.Text + "', PASS = '0' where USUARIO = '" + clasecompartida.user + "'");
 
                     comando.ExecuteNonQuery();
                     comando.Connection.Close();

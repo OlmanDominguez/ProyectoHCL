@@ -107,7 +107,7 @@ namespace ProyectoHCL.Formularios
                     DialogResult dR = mbox.ShowDialog();
                     conn.Close();
                     this.Close();
-                    
+
 
                 }
                 catch (Exception ex)

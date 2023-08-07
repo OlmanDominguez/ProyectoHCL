@@ -12,6 +12,10 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 
+using System.Net.Mime;
+using iText.Bouncycastlefips.Tsp;
+
+
 namespace ProyectoHCL
 {
     
@@ -79,10 +83,39 @@ namespace ProyectoHCL
                             else if (usuario == clasecompartida.user & RBTN_Email.Checked == true)
                             {
                                 string Error = "";
-                                String mensaje = "Hola "+ clasecompartida.user + "\n\nTu contraseña es " + (string)leer["CONTRASENA"] + "\n\n";
-                                StringBuilder mensajebuilder = new StringBuilder();
-                                mensajebuilder.Append(mensaje);
-                                sendemail(mensajebuilder, DateTime.Now, "sistemahcasalomas@gmail.com", (string)leer["EMAIL"], out Error);
+                                String mensaje = Properties.Resources.Contrasena.ToString();
+
+                                string tokenf = token(10);
+
+                                mensaje = mensaje.Replace("@CODIGO", tokenf);
+
+                                sendemail(mensaje, DateTime.Now, "sistemahcasalomas@gmail.com", (string)leer["EMAIL"], out Error);
+
+                                comando.Connection.Close();
+
+
+                                try
+                                {
+                                    using (BaseDatosHCL.ObtenerConexion())
+                                    {
+                                        string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                                        comando.CommandText = ("UPDATE TBL_USUARIO SET PASS = '" + 
+                                            tokenf + "', GENERADO = '" + ahora + 
+                                            "' WHERE USUARIO = '" + clasecompartida.user + "';");
+
+                                        comando.ExecuteNonQuery();
+                                        comando.Connection.Close();
+                                    }
+
+                                }
+                                catch (Exception a)
+                                {
+                                    comando.Connection.Close();
+                                    MessageBox.Show(a.Message + a.StackTrace);
+                                }
+
+                                MessageBox.Show(Error);
                                 this.Close();
                             }
                         }
@@ -116,19 +149,22 @@ namespace ProyectoHCL
             e.Handled = char.IsWhiteSpace(e.KeyChar); //Bloquea espacio
         }
 
-        public static void sendemail(StringBuilder mensaje, DateTime fechaenvio, string de, string para, out string Error)
+        public static void sendemail(string mensaje, DateTime fechaenvio, string de, string para, out string Error)
         {
             Error = "";
             try
             {
-                mensaje.Append(Environment.NewLine);
-                mensaje.Append(string.Format("Este correo ha sido enviado el día {0:dd/MM/yyyy} a las {0:H:mm:ss} Hrs: \n\n", fechaenvio));
-                mensaje.Append(Environment.NewLine);
+                
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress(de);
                 mail.To.Add(para);
-                mail.Subject = "Recuperación Contraseña Hotel Casa Lomas: Usuario " + clasecompartida.user;
-                mail.Body = mensaje.ToString();
+                mail.Subject = "Recuperación Contraseña Hotel Casa Lomas";
+
+                AlternateView htmlView = AlternateView.CreateAlternateViewFromString(mensaje, Encoding.UTF8, MediaTypeNames.Text.Html);
+                mail.AlternateViews.Add(htmlView);
+
+
+               
                 SmtpClient smtp = new SmtpClient("smtp.gmail.com");
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;
@@ -137,8 +173,7 @@ namespace ProyectoHCL
                 smtp.Send(mail);
 
                 Error = "Se envio un correo de recuperación a tu email registrado";
-                MessageBox.Show(Error);
-
+                              
 
             }
             catch (Exception ex)
@@ -148,6 +183,17 @@ namespace ProyectoHCL
                 return;
             }
         }
+
+        private static Random random = new Random();
+        public static string token(int length)
+        {
+            const string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            return new string(Enumerable.Repeat(characters, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+
+
 
     }
 }

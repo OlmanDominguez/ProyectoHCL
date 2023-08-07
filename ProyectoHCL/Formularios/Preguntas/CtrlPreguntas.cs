@@ -166,7 +166,7 @@ namespace ProyectoHCL.Formularios
                         //Consulta
                         MySqlCommand comando = new MySqlCommand();
                         comando.Connection = BaseDatosHCL.ObtenerConexion();
-                        comando.CommandText = ("UPDATE TBL_PREGUNTA SET ID_ESTADO = 2 WHERE PREGUNTA lIKE '%" + 
+                        comando.CommandText = ("UPDATE TBL_PREGUNTA SET ID_ESTADO = 2 WHERE PREGUNTA lIKE '%" +
                             preg.detalle + "%';");
 
                         comando.ExecuteNonQuery();
@@ -192,7 +192,7 @@ namespace ProyectoHCL.Formularios
                     //Consulta
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("SELECT * FROM TBL_PREGUNTA WHERE PREGUNTA LIKE  '%" + 
+                    comando.CommandText = ("SELECT * FROM TBL_PREGUNTA WHERE PREGUNTA LIKE  '%" +
                         preg.detalle + "%';");
                     MySqlDataReader leer = comando.ExecuteReader();
                     while (leer.Read())
@@ -233,10 +233,12 @@ namespace ProyectoHCL.Formularios
             if (pagInicio == 1)
             {
                 btnAnt.Enabled = false;
+                cmbMostrar.Enabled = true;
             }
             else
             {
                 btnAnt.Enabled = true;
+                cmbMostrar.Enabled = false;
             }
 
             if (indice == (Convert.ToInt32(txtPreg.Text) - 1))
@@ -280,6 +282,9 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
