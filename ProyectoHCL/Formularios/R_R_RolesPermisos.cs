@@ -36,7 +36,6 @@ namespace ProyectoHCL.Formularios
         {
             obj.Inicio1 = pagInicio;
             obj.Final1 = pagFinal;
-            ds = obj.PaginacionObjetos2();
             dgvRolPermiso.DataSource = ds.Tables[1];
 
             int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;
@@ -192,7 +191,7 @@ namespace ProyectoHCL.Formularios
                     permiso.Permitido = false;
                     cDatos.GuardarPermiso(permiso);
                 }
-                
+
                 if (Convert.ToBoolean(row.Cells["CREAR"].Value))
                 {
                     permiso.IdObjeto = dgvRolPermiso.CurrentRow.Cells["PANTALLA"].Value.ToString();
@@ -207,7 +206,7 @@ namespace ProyectoHCL.Formularios
                     permiso.Permitido = false;
                     cDatos.GuardarPermiso(permiso);
                 }
-               
+
                 if (Convert.ToBoolean(row.Cells["EDITAR"].Value))
                 {
                     permiso.IdObjeto = dgvRolPermiso.CurrentRow.Cells["PANTALLA"].Value.ToString();
@@ -230,7 +229,7 @@ namespace ProyectoHCL.Formularios
                     permiso.Permitido = true;
                     cDatos.GuardarPermiso(permiso);
                 }
-                else if(!Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                else if (!Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
                 {
                     permiso.IdObjeto = Convert.ToString(row.Cells["PANTALLA"].Value);
                     permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
@@ -247,6 +246,11 @@ namespace ProyectoHCL.Formularios
             GuardarPermisoRol();
             MsgB mbox = new MsgB("informacion", "Registro guardado");
             DialogResult dR = mbox.ShowDialog();
+        }
+
+        private void txtRol_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

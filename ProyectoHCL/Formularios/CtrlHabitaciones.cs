@@ -257,5 +257,10 @@ namespace ProyectoHCL.Formularios
         {
             this.Close();
         }
+
+        private void dgvHab_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

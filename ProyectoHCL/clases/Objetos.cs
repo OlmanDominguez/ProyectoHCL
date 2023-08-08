@@ -54,7 +54,7 @@ namespace ProyectoHCL.clases
             return dt;
         }
 
-        public DataSet PaginacionObjetos2()
+      /*  public DataSet PaginacionObjetos2()
         {
 
             MySqlConnection conn;
@@ -71,6 +71,6 @@ namespace ProyectoHCL.clases
             da.Fill(dt);
 
             return dt;
-        }
+        }*/
     }
 }
