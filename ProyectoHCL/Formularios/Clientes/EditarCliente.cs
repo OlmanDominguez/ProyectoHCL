@@ -124,7 +124,7 @@ namespace ProyectoHCL.Formularios
             if (VCamposVacios() == false)
             {
                 MsgB mbox1 = new MsgB("advertencia", "Favor llene todos los campos");
-                        DialogResult dR1 = mbox1.ShowDialog();
+                DialogResult dR1 = mbox1.ShowDialog();
             }
             else
             {
@@ -143,7 +143,7 @@ namespace ProyectoHCL.Formularios
                     MsgB mbox = new MsgB("informacion", "Cliente Agregado");
                     DialogResult dR = mbox.ShowDialog();
                     this.Close();
-                    
+
                 }
                 catch (Exception ex)
                 {

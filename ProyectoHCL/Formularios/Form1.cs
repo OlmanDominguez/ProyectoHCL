@@ -10,6 +10,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Drawing.Drawing2D;
 using ProyectoHCL.Formularios;
 using DocumentFormat.OpenXml.Bibliography;
+using static ProyectoHCL.RecuContra;
 
 namespace ProyectoHCL
 {
@@ -66,7 +67,7 @@ namespace ProyectoHCL
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
                     comando.CommandText = ("Select * From TBL_USUARIO where USUARIO = '"
-                        + UsuarioBox1.Text + "' AND CONTRASENA = '" + ContraseñaBox2.Text + "' ");
+                        + UsuarioBox1.Text + "';");
 
                     MySqlDataReader leer = comando.ExecuteReader();
 
@@ -85,6 +86,7 @@ namespace ProyectoHCL
                         ContraseñaBox2.Focus();
                         return;
                     }
+
                     if (leer.Read() == true)
                     {
                         
@@ -93,13 +95,31 @@ namespace ProyectoHCL
 
                         string contrasena = (string)leer["CONTRASENA"];
 
-                        
+                        string pass = (string)leer["PASS"];
+
+                        DateTime generado = (DateTime)leer["GENERADO"];
+
+                        string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                        var tiempo = Convert.ToDateTime(ahora) - generado;
+
 
                         if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text)
                         {
-
+                            clasecompartida.iduser = (int)leer["ID_USUARIO"];
+                            clasecompartida.user = UsuarioBox1.Text;
                             Form formulario = new Dashboard();
                             formulario.Show();
+                        }
+                        else if (usuario == UsuarioBox1.Text & pass == ContraseñaBox2.Text & tiempo.Hours < 2)
+                        {
+                            clasecompartida.user = UsuarioBox1.Text;
+                            Form formulario = new RestaContra();
+                            formulario.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VALIDOS");
                         }
 
                        
@@ -107,7 +127,7 @@ namespace ProyectoHCL
                     }
                     else
                     {
-                        MessageBox.Show("USUARIO NO EXISTE");
+                        MessageBox.Show("USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VALIDOS");
                     }
                     
                   

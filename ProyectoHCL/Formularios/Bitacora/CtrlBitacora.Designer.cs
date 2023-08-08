@@ -1,6 +1,6 @@
 ﻿namespace ProyectoHCL.Formularios
 {
-    partial class CtrlPreguntas
+    partial class CtrlBitacora
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CtrlPreguntas));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CtrlBitacora));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
@@ -41,7 +41,6 @@
             panel5 = new Panel();
             button10 = new Button();
             button11 = new Button();
-            btnNuevo = new Button();
             txtBuscar = new TextBox();
             label4 = new Label();
             panel1 = new Panel();
@@ -55,12 +54,12 @@
             cmbPreg = new ComboBox();
             label3 = new Label();
             panel3 = new Panel();
-            dgvPreguntas = new DataGridView();
+            dgvBitacora = new DataGridView();
             panel2.SuspendLayout();
             panel5.SuspendLayout();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvPreguntas).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvBitacora).BeginInit();
             SuspendLayout();
             // 
             // panel2
@@ -99,9 +98,9 @@
             label11.ForeColor = Color.Black;
             label11.Location = new Point(18, 17);
             label11.Name = "label11";
-            label11.Size = new Size(311, 32);
+            label11.Size = new Size(208, 32);
             label11.TabIndex = 41;
-            label11.Text = "Preguntas de Recuperación";
+            label11.Text = "Historico Bitacora";
             // 
             // btnCerrarSesion
             // 
@@ -121,7 +120,6 @@
             panel5.BackColor = Color.Gainsboro;
             panel5.Controls.Add(button10);
             panel5.Controls.Add(button11);
-            panel5.Controls.Add(btnNuevo);
             panel5.Controls.Add(txtBuscar);
             panel5.Controls.Add(label4);
             panel5.Dock = DockStyle.Top;
@@ -162,30 +160,11 @@
             button11.Text = "Excel ";
             button11.UseVisualStyleBackColor = false;
             // 
-            // btnNuevo
-            // 
-            btnNuevo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnNuevo.BackColor = Color.RoyalBlue;
-            btnNuevo.BackgroundImageLayout = ImageLayout.Stretch;
-            btnNuevo.FlatAppearance.BorderSize = 0;
-            btnNuevo.FlatAppearance.MouseOverBackColor = Color.MidnightBlue;
-            btnNuevo.FlatStyle = FlatStyle.Flat;
-            btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            btnNuevo.ForeColor = SystemColors.ButtonFace;
-            btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.Location = new Point(29, 17);
-            btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(50, 35);
-            btnNuevo.TabIndex = 40;
-            btnNuevo.TextAlign = ContentAlignment.MiddleRight;
-            btnNuevo.UseVisualStyleBackColor = false;
-            btnNuevo.Click += btnNuevo_Click_1;
-            // 
             // txtBuscar
             // 
             txtBuscar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             txtBuscar.BackColor = SystemColors.Info;
-            txtBuscar.Location = new Point(171, 22);
+            txtBuscar.Location = new Point(90, 22);
             txtBuscar.Margin = new Padding(2);
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(252, 23);
@@ -199,7 +178,7 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(113, 24);
+            label4.Location = new Point(32, 24);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(55, 20);
@@ -348,30 +327,30 @@
             // panel3
             // 
             panel3.BackColor = SystemColors.Window;
-            panel3.Controls.Add(dgvPreguntas);
+            panel3.Controls.Add(dgvBitacora);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 132);
             panel3.Name = "panel3";
             panel3.Size = new Size(1084, 353);
             panel3.TabIndex = 42;
             // 
-            // dgvPreguntas
+            // dgvBitacora
             // 
-            dgvPreguntas.AllowUserToAddRows = false;
-            dgvPreguntas.AllowUserToDeleteRows = false;
-            dgvPreguntas.AllowUserToResizeColumns = false;
-            dgvPreguntas.AllowUserToResizeRows = false;
+            dgvBitacora.AllowUserToAddRows = false;
+            dgvBitacora.AllowUserToDeleteRows = false;
+            dgvBitacora.AllowUserToResizeColumns = false;
+            dgvBitacora.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
             dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = Color.Black;
             dataGridViewCellStyle1.SelectionBackColor = Color.SlateGray;
             dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            dgvPreguntas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dgvPreguntas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvPreguntas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvPreguntas.BackgroundColor = Color.WhiteSmoke;
-            dgvPreguntas.BorderStyle = BorderStyle.None;
-            dgvPreguntas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvBitacora.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dgvBitacora.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvBitacora.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvBitacora.BackgroundColor = Color.WhiteSmoke;
+            dgvBitacora.BorderStyle = BorderStyle.None;
+            dgvBitacora.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
             dataGridViewCellStyle2.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
@@ -379,9 +358,9 @@
             dataGridViewCellStyle2.SelectionBackColor = Color.Teal;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvPreguntas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dgvPreguntas.ColumnHeadersHeight = 30;
-            dgvPreguntas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvBitacora.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dgvBitacora.ColumnHeadersHeight = 30;
+            dgvBitacora.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.MenuHighlight;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -389,12 +368,12 @@
             dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgvPreguntas.DefaultCellStyle = dataGridViewCellStyle3;
-            dgvPreguntas.EnableHeadersVisualStyles = false;
-            dgvPreguntas.GridColor = Color.FromArgb(45, 66, 91);
-            dgvPreguntas.Location = new Point(27, 6);
-            dgvPreguntas.Name = "dgvPreguntas";
-            dgvPreguntas.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgvBitacora.DefaultCellStyle = dataGridViewCellStyle3;
+            dgvBitacora.EnableHeadersVisualStyles = false;
+            dgvBitacora.GridColor = Color.FromArgb(45, 66, 91);
+            dgvBitacora.Location = new Point(27, 6);
+            dgvBitacora.Name = "dgvBitacora";
+            dgvBitacora.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = Color.Gainsboro;
             dataGridViewCellStyle4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -402,21 +381,21 @@
             dataGridViewCellStyle4.SelectionBackColor = Color.CadetBlue;
             dataGridViewCellStyle4.SelectionForeColor = SystemColors.InfoText;
             dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgvPreguntas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            dgvPreguntas.RowHeadersVisible = false;
+            dgvBitacora.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dgvBitacora.RowHeadersVisible = false;
             dataGridViewCellStyle5.BackColor = Color.Gainsboro;
             dataGridViewCellStyle5.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
             dataGridViewCellStyle5.ForeColor = Color.Black;
             dataGridViewCellStyle5.SelectionBackColor = Color.LightGray;
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
-            dgvPreguntas.RowsDefaultCellStyle = dataGridViewCellStyle5;
-            dgvPreguntas.RowTemplate.Height = 25;
-            dgvPreguntas.Size = new Size(1027, 341);
-            dgvPreguntas.TabIndex = 4;
-            dgvPreguntas.CellClick += dgvPreguntas_CellClick_1;
-            dgvPreguntas.CellPainting += dgvPreguntas_CellPainting;
+            dgvBitacora.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dgvBitacora.RowTemplate.Height = 25;
+            dgvBitacora.Size = new Size(1027, 341);
+            dgvBitacora.TabIndex = 4;
+            dgvBitacora.CellClick += dgvBitacora_CellClick_1;
+            dgvBitacora.CellPainting += dgvBitacora_CellPainting;
             // 
-            // CtrlPreguntas
+            // CtrlBitacora
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -426,9 +405,9 @@
             Controls.Add(panel5);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "CtrlPreguntas";
+            Name = "CtrlBitacora";
             Text = "CtrlPreguntas";
-            Load += CtrlPreguntas_Load_1;
+            Load += CtrlBitacora_Load_1;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel5.ResumeLayout(false);
@@ -436,7 +415,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvPreguntas).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvBitacora).EndInit();
             ResumeLayout(false);
         }
 
@@ -448,7 +427,6 @@
         private Panel panel5;
         private Button button10;
         private Button button11;
-        private Button btnNuevo;
         private TextBox txtBuscar;
         private Label label4;
         private Panel panel1;
@@ -462,7 +440,7 @@
         private ComboBox cmbPreg;
         private Label label3;
         private Panel panel3;
-        private DataGridView dgvPreguntas;
+        private DataGridView dgvBitacora;
         private Button btnCerrar;
     }
 }

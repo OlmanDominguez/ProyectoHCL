@@ -19,14 +19,13 @@ namespace ProyectoHCL.Formularios
     {
         clases.Clientes clien = new clases.Clientes();
         DataSet ds = new DataSet();
-        int pagInicio = 1, indice = 0, numFilas = 10, pagFinal;
+        int pagInicio = 1, indice = 0, numFilas = 10, pagFinal, cmbIndice = 0;
 
         public CtrlClientes()
         {
             InitializeComponent();
             pagFinal = numFilas;
             CargarDGCl();
-            //BuscarClientes("");
         }
 
         AdmonClientes admonClientes = new AdmonClientes();
@@ -101,19 +100,6 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        private void btnCerrarSesion_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
 
         private void btnNuevo_Click_1(object sender, EventArgs e)
         {
@@ -309,10 +295,12 @@ namespace ProyectoHCL.Formularios
             if (pagInicio == 1)
             {
                 btnAnt.Enabled = false;
+                cmbMostrarCl.Enabled = true;
             }
             else
             {
                 btnAnt.Enabled = true;
+                cmbMostrarCl.Enabled = false;
             }
 
             if (indice == (Convert.ToInt32(txtPagCl.Text) - 1))
@@ -327,7 +315,25 @@ namespace ProyectoHCL.Formularios
 
         private void cmbMostrarCl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            numFilas = int.Parse(cmbMostrarCl.Text);
+            cmbIndice = cmbMostrarCl.SelectedIndex;
+            switch (cmbIndice)
+            {
+                case 0:
+                    numFilas = 5;
+                    break;
+                case 1:
+                    numFilas = 10;
+                    break;
+                case 2:
+                    numFilas = 20;
+                    break;
+                case 3:
+                    numFilas = 30;
+                    break;
+                case 4:
+                    numFilas = 40;
+                    break;
+            }
             pagFinal = numFilas;
             CargarDGCl();
         }
@@ -339,6 +345,11 @@ namespace ProyectoHCL.Formularios
             pagInicio = (pagina - 1) * numFilas + 1;
             pagFinal = pagina * numFilas;
             CargarDGCl();
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

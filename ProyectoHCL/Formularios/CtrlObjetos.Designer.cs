@@ -102,8 +102,7 @@
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = Color.Black;
-            label11.Location = new Point(21, 25);
-            label11.Margin = new Padding(4, 0, 4, 0);
+            label11.Location = new Point(20, 17);
             label11.Name = "label11";
             label11.Size = new Size(342, 48);
             label11.TabIndex = 37;
@@ -150,13 +149,10 @@
             btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnNuevo.ForeColor = SystemColors.ButtonFace;
             btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNuevo.Location = new Point(47, 28);
-            btnNuevo.Margin = new Padding(4, 5, 4, 5);
+            btnNuevo.Location = new Point(29, 17);
             btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(143, 58);
+            btnNuevo.Size = new Size(50, 35);
             btnNuevo.TabIndex = 36;
-            btnNuevo.Text = "Agregar";
             btnNuevo.TextAlign = ContentAlignment.MiddleRight;
             btnNuevo.UseVisualStyleBackColor = false;
             btnNuevo.Click += btnNuevo_Click_1;
@@ -210,7 +206,8 @@
             // 
             txtBuscar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             txtBuscar.BackColor = SystemColors.Info;
-            txtBuscar.Location = new Point(333, 37);
+            txtBuscar.Location = new Point(170, 23);
+            txtBuscar.Margin = new Padding(2);
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(358, 31);
             txtBuscar.TabIndex = 36;
@@ -223,7 +220,8 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(249, 38);
+            label1.Location = new Point(111, 24);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(86, 31);
             label1.TabIndex = 37;
@@ -272,6 +270,7 @@
             // panel3
             // 
             panel3.AutoSize = true;
+            panel3.BackColor = SystemColors.Window;
             panel3.Controls.Add(dgvObjetos);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 220);
@@ -315,8 +314,7 @@
             dgvObjetos.DefaultCellStyle = dataGridViewCellStyle3;
             dgvObjetos.EnableHeadersVisualStyles = false;
             dgvObjetos.GridColor = Color.FromArgb(45, 66, 91);
-            dgvObjetos.Location = new Point(0, 0);
-            dgvObjetos.Margin = new Padding(4, 5, 4, 5);
+            dgvObjetos.Location = new Point(29, 6);
             dgvObjetos.Name = "dgvObjetos";
             dgvObjetos.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -336,7 +334,7 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
             dgvObjetos.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvObjetos.RowTemplate.Height = 25;
-            dgvObjetos.Size = new Size(1549, 590);
+            dgvObjetos.Size = new Size(1027, 341);
             dgvObjetos.TabIndex = 1;
             dgvObjetos.CellClick += dgvObjetos_CellClick_1;
             dgvObjetos.CellPainting += dgvObjetos_CellPainting_1;

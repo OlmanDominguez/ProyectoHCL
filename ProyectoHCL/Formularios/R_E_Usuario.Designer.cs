@@ -36,9 +36,9 @@
             pictureBox5 = new PictureBox();
             lblTitulo = new Label();
             panel3 = new Panel();
+            MostrarBox3 = new PictureBox();
+            OcultarBox4 = new PictureBox();
             dtpVencimiento = new DateTimePicker();
-            cmbEstado2 = new ComboBox();
-            lblEstado2 = new Label();
             btnCancelar = new Button();
             txtFechaV = new TextBox();
             btnGuardar = new Button();
@@ -61,6 +61,8 @@
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)MostrarBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)OcultarBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorT).BeginInit();
             SuspendLayout();
             // 
@@ -135,9 +137,9 @@
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
+            panel3.Controls.Add(MostrarBox3);
+            panel3.Controls.Add(OcultarBox4);
             panel3.Controls.Add(dtpVencimiento);
-            panel3.Controls.Add(cmbEstado2);
-            panel3.Controls.Add(lblEstado2);
             panel3.Controls.Add(btnCancelar);
             panel3.Controls.Add(txtFechaV);
             panel3.Controls.Add(btnGuardar);
@@ -162,6 +164,34 @@
             panel3.Size = new Size(886, 418);
             panel3.TabIndex = 3;
             // 
+            // MostrarBox3
+            // 
+            MostrarBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            MostrarBox3.BackColor = Color.White;
+            MostrarBox3.Image = (Image)resources.GetObject("MostrarBox3.Image");
+            MostrarBox3.Location = new Point(380, 206);
+            MostrarBox3.Margin = new Padding(2);
+            MostrarBox3.Name = "MostrarBox3";
+            MostrarBox3.Size = new Size(29, 25);
+            MostrarBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            MostrarBox3.TabIndex = 24;
+            MostrarBox3.TabStop = false;
+            MostrarBox3.Click += MostrarBox3_Click;
+            // 
+            // OcultarBox4
+            // 
+            OcultarBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            OcultarBox4.BackColor = Color.White;
+            OcultarBox4.Image = (Image)resources.GetObject("OcultarBox4.Image");
+            OcultarBox4.Location = new Point(380, 206);
+            OcultarBox4.Margin = new Padding(2);
+            OcultarBox4.Name = "OcultarBox4";
+            OcultarBox4.Size = new Size(29, 25);
+            OcultarBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+            OcultarBox4.TabIndex = 25;
+            OcultarBox4.TabStop = false;
+            OcultarBox4.Click += OcultarBox4_Click;
+            // 
             // dtpVencimiento
             // 
             dtpVencimiento.Anchor = AnchorStyles.Top;
@@ -173,32 +203,6 @@
             dtpVencimiento.TabIndex = 21;
             dtpVencimiento.Visible = false;
             dtpVencimiento.CloseUp += dtpVencimiento_CloseUp;
-            // 
-            // cmbEstado2
-            // 
-            cmbEstado2.BackColor = Color.White;
-            cmbEstado2.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbEstado2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            cmbEstado2.FormattingEnabled = true;
-            cmbEstado2.Items.AddRange(new object[] { "BLOQUEADO", "ACTIVO", "INACTIVO", "NUEVO" });
-            cmbEstado2.Location = new Point(98, 205);
-            cmbEstado2.Name = "cmbEstado2";
-            cmbEstado2.Size = new Size(316, 28);
-            cmbEstado2.TabIndex = 20;
-            cmbEstado2.Visible = false;
-            cmbEstado2.Leave += cmbEstado2_Leave;
-            // 
-            // lblEstado2
-            // 
-            lblEstado2.AutoSize = true;
-            lblEstado2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblEstado2.ForeColor = Color.Black;
-            lblEstado2.Location = new Point(98, 177);
-            lblEstado2.Name = "lblEstado2";
-            lblEstado2.Size = new Size(123, 19);
-            lblEstado2.TabIndex = 19;
-            lblEstado2.Text = "Estado usuario:";
-            lblEstado2.Visible = false;
             // 
             // btnCancelar
             // 
@@ -272,7 +276,6 @@
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(316, 28);
             cmbEstado.TabIndex = 16;
-            cmbEstado.Visible = false;
             cmbEstado.Leave += cmbEstado_Leave;
             // 
             // cmbRol
@@ -294,9 +297,8 @@
             txtCorreo.BorderStyle = BorderStyle.FixedSingle;
             txtCorreo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtCorreo.Location = new Point(463, 62);
-            txtCorreo.MaxLength = 50;
+            txtCorreo.MaxLength = 150;
             txtCorreo.Name = "txtCorreo";
-            txtCorreo.ShortcutsEnabled = false;
             txtCorreo.Size = new Size(316, 27);
             txtCorreo.TabIndex = 12;
             txtCorreo.Leave += txtCorreo_Leave;
@@ -309,10 +311,9 @@
             txtContraseña.Location = new Point(98, 205);
             txtContraseña.MaxLength = 10;
             txtContraseña.Name = "txtContraseña";
-            txtContraseña.ShortcutsEnabled = false;
+            txtContraseña.PasswordChar = '*';
             txtContraseña.Size = new Size(316, 27);
             txtContraseña.TabIndex = 11;
-            txtContraseña.Visible = false;
             txtContraseña.KeyPress += txtContraseña_KeyPress;
             txtContraseña.Leave += txtContraseña_Leave;
             // 
@@ -323,9 +324,8 @@
             txtNombre.CharacterCasing = CharacterCasing.Upper;
             txtNombre.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtNombre.Location = new Point(98, 134);
-            txtNombre.MaxLength = 100;
+            txtNombre.MaxLength = 150;
             txtNombre.Name = "txtNombre";
-            txtNombre.ShortcutsEnabled = false;
             txtNombre.Size = new Size(316, 27);
             txtNombre.TabIndex = 10;
             txtNombre.KeyPress += txtNombre_KeyPress;
@@ -338,9 +338,8 @@
             txtUsuario.CharacterCasing = CharacterCasing.Upper;
             txtUsuario.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtUsuario.Location = new Point(98, 62);
-            txtUsuario.MaxLength = 15;
+            txtUsuario.MaxLength = 150;
             txtUsuario.Name = "txtUsuario";
-            txtUsuario.ShortcutsEnabled = false;
             txtUsuario.Size = new Size(316, 27);
             txtUsuario.TabIndex = 9;
             txtUsuario.Leave += txtUsuario_Leave;
@@ -355,7 +354,6 @@
             lblEstado.Size = new Size(123, 19);
             lblEstado.TabIndex = 8;
             lblEstado.Text = "Estado usuario:";
-            lblEstado.Visible = false;
             // 
             // label8
             // 
@@ -411,7 +409,6 @@
             lblContraseña.Size = new Size(102, 19);
             lblContraseña.TabIndex = 3;
             lblContraseña.Text = "Contraseña:";
-            lblContraseña.Visible = false;
             // 
             // label3
             // 
@@ -447,6 +444,7 @@
             Controls.Add(panel3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            MaximumSize = new Size(886, 491);
             Name = "R_E_Usuario";
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
@@ -456,6 +454,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)MostrarBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)OcultarBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorT).EndInit();
             ResumeLayout(false);
         }
@@ -476,8 +476,6 @@
         public TextBox txtNombre;
         public TextBox txtUsuario;
         public DateTimePicker dtpVencimiento;
-        public ComboBox cmbEstado2;
-        public Label lblEstado2;
         public TextBox txtFechaV;
         public TextBox txtFechaC;
         public ComboBox cmbEstado;
@@ -490,5 +488,7 @@
         private Label label6;
         private Label label5;
         public Label lblContraseña;
+        private PictureBox MostrarBox3;
+        private PictureBox OcultarBox4;
     }
 }

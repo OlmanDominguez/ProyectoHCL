@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Drawing.Diagrams;
+using DocumentFormat.OpenXml.Office.Word;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ProyectoHCL.RecuContra; //Para uso del user y IDUser iniciado
 
 namespace ProyectoHCL.Formularios
 {
@@ -32,7 +34,6 @@ namespace ProyectoHCL.Formularios
             txtCorreo.Clear();
             cmbRol.SelectedIndex = -1;
             cmbEstado.SelectedIndex = -1;
-            cmbEstado2.SelectedIndex = -1;
         }
 
         public void limpiarError()
@@ -43,7 +44,6 @@ namespace ProyectoHCL.Formularios
             errorT.SetError(txtCorreo, "");
             errorT.SetError(cmbRol, "");
             errorT.SetError(cmbEstado, "");
-            errorT.SetError(cmbEstado2, "");
             errorT.SetError(dtpVencimiento, "");
         }
 
@@ -139,6 +139,20 @@ namespace ProyectoHCL.Formularios
                         cmd.Parameters.AddWithValue("@email", txtCorreo.Text);
 
                         cmd.ExecuteNonQuery();
+
+                        string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                        conn.Close();
+                        string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
+                            "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'CREACION', 'CREACION USUARIO " +
+                            txtUsuario.Text + "');";
+                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                        conn.Open();
+
+                        cmd = new MySqlCommand(sql, conn);
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+
                         MsgB m = new MsgB("informacion", "Registro creado con éxito");
                         DialogResult dR = m.ShowDialog();
                         limpiarCampos();
@@ -156,7 +170,7 @@ namespace ProyectoHCL.Formularios
                 Control control = new Control();
 
                 if (txtNombre.Text.Trim() == "" || txtUsuario.Text.Trim() == "" || cmbRol.Text.Trim() == "" ||
-                    txtCorreo.Text.Trim() == "" || cmbEstado2.Text.Trim() == "")
+                    txtCorreo.Text.Trim() == "" || cmbEstado.Text.Trim() == "" || txtContraseña.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
@@ -170,8 +184,24 @@ namespace ProyectoHCL.Formularios
                 {
                     try
                     {
-                        control.editarUs(idUs, cmbEstado2.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
-                            dtpVencimiento.Text, txtCorreo.Text);
+                        control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
+                           txtContraseña.Text, dtpVencimiento.Text, txtCorreo.Text);
+
+
+                        string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                        MySqlConnection conn;
+                        MySqlCommand cmd;
+                        
+                        string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
+                            "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'EDICION', 'EDICION USUARIO " +
+                            idUs + " " + txtUsuario.Text + "');";
+                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                        conn.Open();
+
+                        cmd = new MySqlCommand(sql, conn);
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
 
                         MsgB m = new MsgB("informacion", "Registro modificado");
                         DialogResult dR = m.ShowDialog();
@@ -237,14 +267,6 @@ namespace ProyectoHCL.Formularios
 
         private void cmbEstado2_Leave(object sender, EventArgs e)
         {
-            if (ValidarTxt.cmbVacio(cmbEstado2))
-            {
-                errorT.SetError(cmbEstado2, "Seleccione un estado");
-            }
-            else
-            {
-                errorT.Clear();
-            }
         }
 
         private void cmbRol_Leave(object sender, EventArgs e)
@@ -286,6 +308,18 @@ namespace ProyectoHCL.Formularios
             {
                 errorT.Clear();
             }
+        }
+
+        private void OcultarBox4_Click(object sender, EventArgs e)
+        {
+            MostrarBox3.BringToFront();
+            txtContraseña.PasswordChar = '*';
+        }
+
+        private void MostrarBox3_Click(object sender, EventArgs e)
+        {
+            OcultarBox4.BringToFront();
+            txtContraseña.PasswordChar = '\0';
         }
     }
 }

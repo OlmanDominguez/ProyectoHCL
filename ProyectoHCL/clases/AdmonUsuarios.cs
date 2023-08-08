@@ -40,7 +40,7 @@ namespace ProyectoHCL.clases
         }
 
         public void modificarUsuario(int id, string estado, string rol, string usuario, string nombre,
-            DateTime vencimiento, string email)
+            string contraseña, DateTime vencimiento, string email)
         {
 
             try
@@ -57,6 +57,7 @@ namespace ProyectoHCL.clases
                 cmd.Parameters.AddWithValue("@rol", rol);
                 cmd.Parameters.AddWithValue("@usuario", usuario);
                 cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.Parameters.AddWithValue("@contraseña", contraseña);
                 cmd.Parameters.AddWithValue("@vencimiento", vencimiento);
                 cmd.Parameters.AddWithValue("@email", email);
 
@@ -70,31 +71,31 @@ namespace ProyectoHCL.clases
 
         }
 
-        public bool EliminarUsuario(string idUsuario) //Recibe un string (el id del usuario)
-        {
-            bool elimino = false;   
+        //public bool EliminarUsuario(string idUsuario) //Recibe un string (el id del usuario)
+        //{
+        //    bool elimino = false;   
 
-            try
-            {
-                string sql = "DELETE FROM TBL_USUARIO WHERE ID_USUARIO = @ID_USUARIO;"; //sentencia sql para eliminar el usuario
+        //    try
+        //    {
+        //        string sql = "DELETE FROM TBL_USUARIO WHERE ID_USUARIO = @ID_USUARIO;"; //sentencia sql para eliminar el usuario
 
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
+        //        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+        //        conn.Open();
 
-                cmd = new MySqlCommand(sql, conn); //comando que recibe la sentencia sql y la conexion
+        //        cmd = new MySqlCommand(sql, conn); //comando que recibe la sentencia sql y la conexion
 
-                cmd.Parameters.AddWithValue("@ID_USUARIO", idUsuario); //obtener valor del parametro id del usuario
+        //        cmd.Parameters.AddWithValue("@ID_USUARIO", idUsuario); //obtener valor del parametro id del usuario
 
-                cmd.ExecuteNonQuery();
-                elimino = true;
-                conn.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
+        //        cmd.ExecuteNonQuery();
+        //        elimino = true;
+        //        conn.Close();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show(e.Message);
+        //    }
 
-            return elimino;
-        }
+        //    return elimino;
+        //}
     }
 }

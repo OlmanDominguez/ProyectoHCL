@@ -178,5 +178,7 @@ namespace ProyectoHCL.Formularios
             Form nuevo = new NuevaReservacion();
             nuevo.ShowDialog();
         }
+
+
     }
 }

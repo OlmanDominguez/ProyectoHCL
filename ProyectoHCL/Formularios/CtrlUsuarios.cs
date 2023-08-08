@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ProyectoHCL.RecuContra; //Para uso del user y IDUser iniciado
 
 namespace ProyectoHCL.Formularios
 {
@@ -68,10 +69,7 @@ namespace ProyectoHCL.Formularios
             DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
             btnUpdate.Name = "EDITAR"; //Nombre del boton 
             dgvUsuarios.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
-
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
-            btnDelete.Name = "ELIMINAR";
-            dgvUsuarios.Columns.Add(btnDelete);
+                        
         }
 
         public void BuscarUsuarios(string buscarU) //Recibe string para buscar usuarios
@@ -139,13 +137,13 @@ namespace ProyectoHCL.Formularios
         {
             int diasV = Convert.ToInt32(ParametroDias());
             R_E_user.lblTitulo.Text = "Registrar Usuario";
-            R_E_user.txtContraseña.Visible = true;
-            R_E_user.lblContraseña.Visible = true;
+            //R_E_user.txtContraseña.Visible = true;
+            //R_E_user.lblContraseña.Visible = true;
             R_E_user.txtFechaV.Visible = true;
-            R_E_user.cmbEstado.Visible = true;
-            R_E_user.lblEstado.Visible = true;
-            R_E_user.cmbEstado2.Visible = false;
-            R_E_user.lblEstado2.Visible = false;
+            //R_E_user.cmbEstado.Visible = true;
+            //R_E_user.lblEstado.Visible = true;
+            //R_E_user.cmbEstado2.Visible = false;
+            //R_E_user.lblEstado2.Visible = false;
             R_E_user.dtpVencimiento.Visible = false;
             R_E_user.txtFechaC.Text = DateTime.Now.ToShortDateString();
             R_E_user.txtFechaV.Text = DateTime.Now.AddDays(diasV).ToShortDateString();
@@ -168,67 +166,97 @@ namespace ProyectoHCL.Formularios
 
                 e.Handled = true;
             }
-            if (e.ColumnIndex >= 0 && this.dgvUsuarios.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+            //if (e.ColumnIndex >= 0 && this.dgvUsuarios.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
+            //{
+            //    e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
-                DataGridViewButtonCell celBoton = this.dgvUsuarios.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
+            //    DataGridViewButtonCell celBoton = this.dgvUsuarios.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
+            //    Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
+            //    e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
-                this.dgvUsuarios.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvUsuarios.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
+            //    this.dgvUsuarios.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
+            //    this.dgvUsuarios.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
 
-                e.Handled = true;
-            }
+            //    e.Handled = true;
+            //}
         }
 
         private void dgvUsuarios_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvUsuarios.Columns[e.ColumnIndex].Name == "ELIMINAR")
-            {
-                MsgB m = new MsgB("pregunta", "¿Está seguro que desea eliminar el registro?");
-                DialogResult dg = m.ShowDialog();
+            //if (this.dgvUsuarios.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            //{
+            //    MsgB m = new MsgB("pregunta", "¿Está seguro que desea eliminar el registro?");
+            //    DialogResult dg = m.ShowDialog();
 
-                if (dg == DialogResult.OK)
-                {
-                    bool elimino = admonUsuario.EliminarUsuario(dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString());
+            //    if (dg == DialogResult.OK)
+            //    {
+            //        bool elimino = admonUsuario.EliminarUsuario(dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString());
 
-                    if (elimino)
-                    {
-                        MsgB mbox = new MsgB("informacion", "Registro eliminado");
-                        DialogResult dR = mbox.ShowDialog();
-                        CargarDG();
-                    }
-                    else
-                    {
-                        MsgB mbox = new MsgB("informacion", "Registro no eliminado");
-                        DialogResult dR = mbox.ShowDialog();
-                    }
+            //        if (elimino)
+            //        {
+            //            MsgB mbox = new MsgB("informacion", "Registro eliminado");
+            //            DialogResult dR = mbox.ShowDialog();
+            //            CargarDG();
+            //        }
+            //        else
+            //        {
+            //            MsgB mbox = new MsgB("informacion", "Registro no eliminado");
+            //            DialogResult dR = mbox.ShowDialog();
+            //        }
 
-                }
-                else if (dg == DialogResult.Cancel)
-                {
+            //    }
+            //    else if (dg == DialogResult.Cancel)
+            //    {
 
-                }
-            }
+            //    }
+            //}
 
             if (this.dgvUsuarios.Columns[e.ColumnIndex].Name == "EDITAR")
             {
                 R_E_user.lblTitulo.Text = "Editar Usuario";
-                R_E_user.cmbEstado2.Visible = true;
-                R_E_user.lblEstado2.Visible = true;
+
+                MySqlConnection conn;
+                MySqlCommand cmd;
+
+                string sql = "SELECT CONTRASENA FROM TBL_USUARIO WHERE ID_USUARIO = '" + dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString() + "'";
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
+
+                cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader read = cmd.ExecuteReader();
+
+                if (read.Read() == true)
+                {
+                    R_E_user.txtContraseña.Text = read["CONTRASENA"].ToString();
+                }
+
+                //R_E_user.cmbEstado2.Visible = true;
+                //R_E_user.lblEstado2.Visible = true;
                 R_E_user.dtpVencimiento.Visible = true;
-                R_E_user.cmbEstado.Visible = false;
-                R_E_user.lblEstado.Visible = false;
+                //R_E_user.cmbEstado.Visible = false;
+                //R_E_user.lblEstado.Visible = false;
                 R_E_user.idUs = dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString();
                 R_E_user.txtUsuario.Text = dgvUsuarios.CurrentRow.Cells["USUARIO"].Value.ToString(); //Traer los datos del dataGrid al form para editar
                 R_E_user.txtNombre.Text = dgvUsuarios.CurrentRow.Cells["NOMBRE"].Value.ToString();
                 R_E_user.txtCorreo.Text = dgvUsuarios.CurrentRow.Cells["CORREO"].Value.ToString();
-                R_E_user.cmbEstado2.Text = dgvUsuarios.CurrentRow.Cells["ESTADO"].Value.ToString();
+                R_E_user.cmbEstado.Text = dgvUsuarios.CurrentRow.Cells["ESTADO"].Value.ToString();
                 R_E_user.cmbRol.Text = dgvUsuarios.CurrentRow.Cells["ROL"].Value.ToString();
                 R_E_user.txtFechaC.Text = dgvUsuarios.CurrentRow.Cells["CREACION"].Value.ToString();
                 R_E_user.dtpVencimiento.Text = dgvUsuarios.CurrentRow.Cells["VENCIMIENTO"].Value.ToString();
+
+                string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                conn.Close();
+                sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
+                    "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'INGRESO', 'INGRESO A EDITAR USUARIO " +
+                    R_E_user.idUs + " " + R_E_user.txtUsuario.Text + "');";
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
+
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
                 R_E_user.ShowDialog();
                 R_E_user.limpiarCampos();
                 CargarDG(); //Se llama el metodo Mostrar usuarios para actualizar el DataGrid al editar 

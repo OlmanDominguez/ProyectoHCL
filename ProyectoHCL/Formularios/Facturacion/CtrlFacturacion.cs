@@ -175,6 +175,9 @@ namespace ProyectoHCL.Formularios
                     info.salida = salida1;
                     info.reserva = dgvFacturas.CurrentRow.Cells["RESERVA"].Value.ToString();
                     info.est = 1;
+                    DateTime fecha2 = Convert.ToDateTime(dgvFacturas.CurrentRow.Cells["SALIDA"].Value.ToString());
+                    string fecha1 = fecha2.ToString("dd/MM/yyyy");
+                    info.fecha = fecha1;
                     Form form = new Formularios.ShowFactura();
                     form.ShowDialog();
 
@@ -225,19 +228,19 @@ namespace ProyectoHCL.Formularios
             switch (cmbIndice)
             {
                 case 0:
-                    numFilas = 2;
-                    break;
-                case 1:
-                    numFilas = 3;
-                    break;
-                case 2:
-                    numFilas = 4;
-                    break;
-                case 3:
                     numFilas = 5;
                     break;
+                case 1:
+                    numFilas = 10;
+                    break;
+                case 2:
+                    numFilas = 20;
+                    break;
+                case 3:
+                    numFilas = 30;
+                    break;
                 case 4:
-                    numFilas = 6;
+                    numFilas = 40;
                     break;
             }
             pagFinal = numFilas;
@@ -267,10 +270,12 @@ namespace ProyectoHCL.Formularios
             if (pagInicio == 1)
             {
                 btnAnt.Enabled = false;
+                cmbMostrar.Enabled = true;
             }
             else
             {
                 btnAnt.Enabled = true;
+                cmbMostrar.Enabled = false;
             }
 
             if (indice == (Convert.ToInt32(txtPaginacion.Text) - 1))
@@ -283,6 +288,9 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

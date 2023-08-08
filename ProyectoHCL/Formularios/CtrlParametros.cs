@@ -179,7 +179,7 @@ namespace ProyectoHCL.Formularios
         }
         private void crearPDF()
         {
-            PdfWriter pdfWriter = new PdfWriter("C:/Users/DAOdo/Desktop/SEGUNDO PERIODO 2023/Programacion he implementacion de Sistemas/ProyectoHotelCasaLomas/BackupReporte");
+            PdfWriter pdfWriter = new PdfWriter("Prueba.pdf");
             PdfDocument pdf = new PdfDocument(pdfWriter);
             //1 pulgada = 72 pt (8 1/2 x 11) (612 x 792)
             PageSize tamanioH = new PageSize(792, 612);
@@ -220,7 +220,7 @@ namespace ProyectoHCL.Formularios
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["id_usuario"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["parametro"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["valor"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_cre "].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_cre"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_modifi"].ToString()).SetFont(fontContenido)));
 
                 }

@@ -15,14 +15,14 @@ using ProyectoHCL.Formularios;
 
 namespace ProyectoHCL.Formularios
 {
-    public partial class CtrlPreguntas : Form
+    public partial class CtrlBitacora : Form
     {
-        clases.Preguntas servicio = new clases.Preguntas();
+        clases.Bitacora bitacora = new clases.Bitacora();
         DataSet ds = new DataSet();
         MsgB msgB = new MsgB();
         int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
 
-        public CtrlPreguntas()
+        public CtrlBitacora()
         {
             InitializeComponent();
             pagFinal = numFilas;
@@ -31,10 +31,10 @@ namespace ProyectoHCL.Formularios
 
         private void CargarDG()
         {
-            servicio.Inicio1 = pagInicio;
-            servicio.Final1 = pagFinal;
-            ds = servicio.PaginacionPreguntas();
-            dgvPreguntas.DataSource = ds.Tables[1];
+            bitacora.Inicio1 = pagInicio;
+            bitacora.Final1 = pagFinal;
+            ds = bitacora.PaginacionBitacora();
+            dgvBitacora.DataSource = ds.Tables[1];
 
             int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;
 
@@ -62,14 +62,14 @@ namespace ProyectoHCL.Formularios
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                 conn.Open();
 
-                cmd = new MySqlCommand("buscarPregunta", conn);
+                cmd = new MySqlCommand("buscarBitacora", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@nombreP", MySqlDbType.VarChar, 50).Value = buscarS;
+                cmd.Parameters.Add("@nombreU", MySqlDbType.VarChar, 50).Value = buscarS;
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                dgvPreguntas.DataSource = dt;
+                dgvBitacora.DataSource = dt;
             }
             catch (Exception)
             {
@@ -78,35 +78,21 @@ namespace ProyectoHCL.Formularios
         }
 
 
-        private void dgvPreguntas_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void dgvBitacora_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.ColumnIndex >= 0 && this.dgvPreguntas.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
+            if (e.ColumnIndex >= 0 && this.dgvBitacora.Columns[e.ColumnIndex].Name == "VER" && e.RowIndex >= 0)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
-                DataGridViewButtonCell celBoton = this.dgvPreguntas.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico");
+                DataGridViewButtonCell celBoton = this.dgvBitacora.Rows[e.RowIndex].Cells["VER"] as DataGridViewButtonCell;
+                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\ver.ico");
                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
-                this.dgvPreguntas.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvPreguntas.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
+                this.dgvBitacora.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
+                this.dgvBitacora.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
 
                 e.Handled = true;
             }
-            if (e.ColumnIndex >= 0 && this.dgvPreguntas.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvPreguntas.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvPreguntas.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvPreguntas.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
-
 
         }
 
@@ -151,61 +137,13 @@ namespace ProyectoHCL.Formularios
             public static int id;
         }
 
-        private void dgvPreguntas_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        private void dgvBitacora_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvPreguntas.Columns[e.ColumnIndex].Name == "ELIMINAR")
+
+            if (this.dgvBitacora.Columns[e.ColumnIndex].Name == "VER")
             {
-                MsgB m = new MsgB("pregunta", "¿Está seguro que desea eliminar el registro?");
-                DialogResult dg = m.ShowDialog();
+                //Agregar codigo para ver detalle de bitacora
 
-                if (dg == DialogResult.OK)
-                {
-                    preg.detalle = dgvPreguntas.CurrentRow.Cells["PREGUNTA"].Value.ToString();
-                    using (BaseDatosHCL.ObtenerConexion())
-                    {
-                        //Consulta
-                        MySqlCommand comando = new MySqlCommand();
-                        comando.Connection = BaseDatosHCL.ObtenerConexion();
-                        comando.CommandText = ("UPDATE TBL_PREGUNTA SET ID_ESTADO = 2 WHERE PREGUNTA lIKE '%" +
-                            preg.detalle + "%';");
-
-                        comando.ExecuteNonQuery();
-                        comando.Connection.Close();
-                        MsgB mbox = new MsgB("informacion", "Registro eliminado");
-                        DialogResult dR = mbox.ShowDialog();
-                        CargarDG();
-                    }
-
-                }
-                else if (dg == DialogResult.Cancel)
-                {
-
-                }
-            }
-
-            if (this.dgvPreguntas.Columns[e.ColumnIndex].Name == "EDITAR")
-            {
-                preg.detalle = dgvPreguntas.CurrentRow.Cells["PREGUNTA"].Value.ToString();
-                preg.op = 1;
-                using (BaseDatosHCL.ObtenerConexion())
-                {
-                    //Consulta
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("SELECT * FROM TBL_PREGUNTA WHERE PREGUNTA LIKE  '%" +
-                        preg.detalle + "%';");
-                    MySqlDataReader leer = comando.ExecuteReader();
-                    while (leer.Read())
-                    {
-                        preg.id = Convert.ToInt32(leer["ID_PREGUNTA"]);
-                    }
-
-                    comando.Connection.Close();
-
-                }
-                Form formulario = new Formularios.ShowPregunta();
-                formulario.ShowDialog();
-                CargarDG();
             }
 
 
@@ -263,24 +201,14 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void CtrlPreguntas_Load_1(object sender, EventArgs e)
+        private void CtrlBitacora_Load_1(object sender, EventArgs e)
         {
             DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
-            btnUpdate.Name = "EDITAR";
-            dgvPreguntas.Columns.Add(btnUpdate);
+            btnUpdate.Name = "VER";
+            dgvBitacora.Columns.Add(btnUpdate);
 
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
-            btnDelete.Name = "ELIMINAR";
-            dgvPreguntas.Columns.Add(btnDelete);
         }
 
-        private void btnNuevo_Click_1(object sender, EventArgs e)
-        {
-            preg.op = 2;
-            Form formulario = new Formularios.ShowPregunta();
-            formulario.ShowDialog();
-            CargarDG();
-        }
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {

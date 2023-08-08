@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reservaciones));
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             btnExit = new PictureBox();
             dgv_reservaciones = new DataGridView();
             panel3 = new Panel();
@@ -70,7 +70,7 @@
             button9 = new Button();
             button1 = new Button();
             button6 = new Button();
-            txtBuscar = new TextBox();
+            txtBuscar_reservas = new TextBox();
             label4 = new Label();
             panelChildForm = new Panel();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
@@ -98,59 +98,61 @@
             // 
             dgv_reservaciones.AllowUserToAddRows = false;
             dgv_reservaciones.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle6.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = Color.SlateGray;
-            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
-            dgv_reservaciones.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = Color.SlateGray;
+            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+            dgv_reservaciones.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgv_reservaciones.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_reservaciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_reservaciones.BackgroundColor = Color.WhiteSmoke;
             dgv_reservaciones.BorderStyle = BorderStyle.None;
             dgv_reservaciones.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle7.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = Color.Teal;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            dgv_reservaciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Teal;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgv_reservaciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgv_reservaciones.ColumnHeadersHeight = 30;
             dgv_reservaciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = SystemColors.MenuHighlight;
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle8.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            dgv_reservaciones.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.MenuHighlight;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgv_reservaciones.DefaultCellStyle = dataGridViewCellStyle3;
             dgv_reservaciones.EnableHeadersVisualStyles = false;
             dgv_reservaciones.GridColor = Color.FromArgb(45, 66, 91);
             dgv_reservaciones.Location = new Point(2, 213);
             dgv_reservaciones.Name = "dgv_reservaciones";
             dgv_reservaciones.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.Gainsboro;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle9.ForeColor = SystemColors.InfoText;
-            dataGridViewCellStyle9.SelectionBackColor = Color.CadetBlue;
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.InfoText;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            dgv_reservaciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle4.SelectionBackColor = Color.CadetBlue;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgv_reservaciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dgv_reservaciones.RowHeadersVisible = false;
-            dataGridViewCellStyle10.BackColor = Color.Gainsboro;
-            dataGridViewCellStyle10.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle10.ForeColor = Color.Black;
-            dataGridViewCellStyle10.SelectionBackColor = Color.LightGray;
-            dataGridViewCellStyle10.SelectionForeColor = Color.Black;
-            dgv_reservaciones.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle5.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = Color.LightGray;
+            dataGridViewCellStyle5.SelectionForeColor = Color.Black;
+            dgv_reservaciones.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgv_reservaciones.RowTemplate.Height = 25;
-            dgv_reservaciones.Size = new Size(896, 226);
+            dgv_reservaciones.Size = new Size(896, 306);
             dgv_reservaciones.TabIndex = 37;
+            dgv_reservaciones.CellClick += dgv_reservaciones_CellClick;
             dgv_reservaciones.CellContentClick += dgv_reservaciones_CellContentClick;
+            dgv_reservaciones.CellPainting += dgv_reservaciones_CellPainting;
             // 
             // panel3
             // 
@@ -251,6 +253,7 @@
             cmbMostrar.Name = "cmbMostrar";
             cmbMostrar.Size = new Size(77, 23);
             cmbMostrar.TabIndex = 57;
+            cmbMostrar.SelectedIndexChanged += cmbMostrar_SelectedIndexChanged;
             // 
             // label12
             // 
@@ -510,7 +513,7 @@
             panel5.Controls.Add(button9);
             panel5.Controls.Add(button1);
             panel5.Controls.Add(button6);
-            panel5.Controls.Add(txtBuscar);
+            panel5.Controls.Add(txtBuscar_reservas);
             panel5.Controls.Add(label4);
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 125);
@@ -614,15 +617,16 @@
             button6.Text = "Excel ";
             button6.UseVisualStyleBackColor = false;
             // 
-            // txtBuscar
+            // txtBuscar_reservas
             // 
-            txtBuscar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            txtBuscar.BackColor = SystemColors.Info;
-            txtBuscar.Location = new Point(89, 32);
-            txtBuscar.Margin = new Padding(2);
-            txtBuscar.Name = "txtBuscar";
-            txtBuscar.Size = new Size(252, 23);
-            txtBuscar.TabIndex = 44;
+            txtBuscar_reservas.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            txtBuscar_reservas.BackColor = SystemColors.Info;
+            txtBuscar_reservas.Location = new Point(89, 32);
+            txtBuscar_reservas.Margin = new Padding(2);
+            txtBuscar_reservas.Name = "txtBuscar_reservas";
+            txtBuscar_reservas.Size = new Size(252, 23);
+            txtBuscar_reservas.TabIndex = 44;
+            txtBuscar_reservas.TextChanged += txtBuscar_TextChanged;
             // 
             // label4
             // 
@@ -646,7 +650,7 @@
             panelChildForm.Dock = DockStyle.Top;
             panelChildForm.Location = new Point(0, 0);
             panelChildForm.Name = "panelChildForm";
-            panelChildForm.Size = new Size(896, 488);
+            panelChildForm.Size = new Size(896, 531);
             panelChildForm.TabIndex = 2;
             panelChildForm.Paint += panelChildForm_Paint;
             // 
@@ -678,7 +682,6 @@
         #endregion
 
         private PictureBox btnExit;
-        private DataGridView dgv_reservaciones;
         private Panel panel3;
         private TextBox txtPagTH;
         private Label label8;
@@ -694,27 +697,28 @@
         private ComboBox cmbPag;
         private Label label1;
         private Label label3;
-        private ComboBox comboBox1;
         private Label label10;
-        private ComboBox cmbMostrar;
         private Label label12;
-        private TextBox textBox1;
         private Panel panel2;
         private Button button2;
         private Button button5;
         private Button btnPerfil;
         private Button btnCerrarSesion;
-        private Button btnNuevo;
         private Label label11;
-        private Panel panel5;
         private Button button3;
         private Button button4;
         private Button button7;
         private Button button9;
-        private Button button1;
-        private Button button6;
-        private TextBox txtBuscar;
         private Label label4;
         private Panel panelChildForm;
+        public DataGridView dgv_reservaciones;
+        public ComboBox comboBox1;
+        public ComboBox cmbMostrar;
+        public TextBox textBox1;
+        public Button btnNuevo;
+        public Panel panel5;
+        public Button button1;
+        public Button button6;
+        public TextBox txtBuscar_reservas;
     }
 }

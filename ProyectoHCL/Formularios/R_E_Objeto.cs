@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Utilities;
 using ProyectoHCL.clases;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace ProyectoHCL.Formularios
             InitializeComponent();
         }
 
+        //public int usu;
         public string idObj = null;
         MsgB msgB = new MsgB();
 
@@ -53,6 +55,8 @@ namespace ProyectoHCL.Formularios
             this.Close();
             limpiarCampos();
             limpiarError();
+            //MsgB m = new MsgB("advertencia", "Id: " + usu);
+            //DialogResult dR = m.ShowDialog();
         }
 
         int posY = 0;
@@ -72,11 +76,6 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void rTxtDesc_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            ValidarTxt.TxtLetras(e);
-        }
-
         private void txtObj_Leave(object sender, EventArgs e)
         {
             if (ValidarTxt.txtVacio(txtObj))
@@ -94,18 +93,6 @@ namespace ProyectoHCL.Formularios
             if (ValidarTxt.cmbVacio(cmbEstado))
             {
                 errorT.SetError(cmbEstado, "Seleccione un estado");
-            }
-            else
-            {
-                errorT.Clear();
-            }
-        }
-
-        private void rTxtDesc_Leave(object sender, EventArgs e)
-        {
-            if (ValidarTxt.RtxtVacio(rTxtDesc))
-            {
-                errorT.SetError(rTxtDesc, "Introduzca una descripción");
             }
             else
             {
@@ -182,6 +169,23 @@ namespace ProyectoHCL.Formularios
                         DialogResult dR = m.ShowDialog();
                     }
                 }
+            }
+        }
+
+        private void rTxtDesc_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtLetras(e);
+        }
+
+        private void rTxtDesc_Leave_1(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(rTxtDesc))
+            {
+                errorT.SetError(rTxtDesc, "Introduzca una descripción");
+            }
+            else
+            {
+                errorT.Clear();
             }
         }
 

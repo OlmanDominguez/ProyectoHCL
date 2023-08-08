@@ -23,7 +23,6 @@ namespace ProyectoHCL.Formularios
         MsgB msgB = new MsgB();
         int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
 
-
         public CtrlObjetos()
         {
             InitializeComponent();
@@ -64,6 +63,7 @@ namespace ProyectoHCL.Formularios
             DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
             btnDelete.Name = "ELIMINAR";
             dgvObjetos.Columns.Add(btnDelete);
+
         }
 
         public void BuscarObjetos(string buscarOb)
@@ -108,7 +108,7 @@ namespace ProyectoHCL.Formularios
         }
 
         private void btnNuevo_Click_1(object sender, EventArgs e)
-        {
+        {   
             R_E_obj.lblTitulo.Text = "Registrar Objeto";
             R_E_obj.Size = new System.Drawing.Size(800, 431);
             R_E_obj.btnGuardar.Location = new Point(256, 282);

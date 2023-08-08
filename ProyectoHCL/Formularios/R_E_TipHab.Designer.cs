@@ -147,7 +147,6 @@
             txtPrecio.Location = new Point(243, 221);
             txtPrecio.MaxLength = 100;
             txtPrecio.Name = "txtPrecio";
-            txtPrecio.ShortcutsEnabled = false;
             txtPrecio.Size = new Size(316, 27);
             txtPrecio.TabIndex = 28;
             txtPrecio.KeyPress += txtPrecio_KeyPress;
@@ -172,7 +171,6 @@
             txtCapacidad.Location = new Point(243, 142);
             txtCapacidad.MaxLength = 50;
             txtCapacidad.Name = "txtCapacidad";
-            txtCapacidad.ShortcutsEnabled = false;
             txtCapacidad.Size = new Size(316, 27);
             txtCapacidad.TabIndex = 26;
             txtCapacidad.KeyPress += txtCapacidad_KeyPress;
@@ -196,9 +194,8 @@
             txtTipo.CharacterCasing = CharacterCasing.Upper;
             txtTipo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtTipo.Location = new Point(243, 64);
-            txtTipo.MaxLength = 15;
+            txtTipo.MaxLength = 100;
             txtTipo.Name = "txtTipo";
-            txtTipo.ShortcutsEnabled = false;
             txtTipo.Size = new Size(316, 27);
             txtTipo.TabIndex = 24;
             txtTipo.Leave += txtTipo_Leave;
@@ -262,6 +259,7 @@
             Controls.Add(panel3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            MaximumSize = new Size(800, 450);
             Name = "R_E_TipHab";
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;

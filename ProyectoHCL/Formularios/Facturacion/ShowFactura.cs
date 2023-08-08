@@ -1,11 +1,4 @@
-﻿using iText.IO.Font.Constants;
-using iText.Kernel.Font;
-using iText.Kernel.Geom;
-using iText.Kernel.Pdf;
-using iText.Layout;
-using iText.Layout.Element;
-using iText.Layout.Properties;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
 using System.Collections.Generic;
@@ -22,7 +15,11 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static ProyectoHCL.Formularios.CtrlFacturacion;
-using Paragraph = iText.Layout.Element.Paragraph;
+
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using System.IO;
 
 namespace ProyectoHCL.Formularios
 {
@@ -42,6 +39,7 @@ namespace ProyectoHCL.Formularios
             this.Close();
         }
 
+        //Variables para fechas, y totales y subtotales
         DateTime today = DateTime.Today;
         Decimal st1, st2, st3, sth = 0;
         Decimal St1, St2, St3, StS = 0;
@@ -64,10 +62,11 @@ namespace ProyectoHCL.Formularios
             }
         }
 
+        //Procedimiento para generar consulta de info para la vista de factura
         private DataTable consulta(string param, int op)
         {
             DataTable dt = new DataTable();
-            if (op == 1)
+            if (op == 1) //Consulta la info de la reserva de forma general
             {
                 try
                 {
@@ -94,7 +93,7 @@ namespace ProyectoHCL.Formularios
                     return dt;
                 }
             }
-            else if (op == 2)
+            else if (op == 2) //Consulta las habitaciones reservadas
             {
                 try
                 {
@@ -122,7 +121,7 @@ namespace ProyectoHCL.Formularios
                     return dt;
                 }
             }
-            else if (op == 3)
+            else if (op == 3) //Consulta los servicios de la reserva
             {
                 try
                 {
@@ -181,11 +180,15 @@ namespace ProyectoHCL.Formularios
         }
 
         int h, s;
+        DataTable ht = new DataTable();
+        DataTable st= new DataTable();
+
 
         private void ShowFactura_Load(object sender, EventArgs e)
         {
             try
             {
+                //Carga del combobox de tipo de pago
                 using (BaseDatosHCL.ObtenerConexion())
                 {
                     //Consulta
@@ -212,12 +215,11 @@ namespace ProyectoHCL.Formularios
             }
 
             string hoy = today.ToString("dd/MM/yyyy");
+            var noches = Convert.ToDateTime(info.salida) - Convert.ToDateTime(info.ingreso);
 
-            //Factura desde reserva
+            //Vista de la reserva en formato factura, aun sin facturar
             if (info.reserva != "0" & info.factura == "0") 
             {
-
-
                 try
                 {
                     DataTable dt = new DataTable();
@@ -228,13 +230,13 @@ namespace ProyectoHCL.Formularios
 
                     if (n != 0)
                     {
+                        //Carga de datos generales en la vista
                         lb_nombres.Text = dt.Rows[0]["NOMBRE"].ToString() + " " + dt.Rows[0]["APELLIDO"].ToString();
                         lb_ID.Text = dt.Rows[0]["DNI_PASAPORTE"].ToString();
                         lb_fecha.Text = hoy;
                         lb_ingreso.Text = info.ingreso;
                         lb_Salida.Text = info.salida;
                         lb_huespedes.Text = dt.Rows[0]["NHUESPEDES"].ToString();
-                        var noches = Convert.ToDateTime(info.salida) - Convert.ToDateTime(info.ingreso);
                         lb_noches.Text = Convert.ToString(noches.Days);
 
 
@@ -408,7 +410,7 @@ namespace ProyectoHCL.Formularios
                         }
                         else if (sth != 0.00m & StS == 0)
                         {
-                            isv = Decimal.Round((sth / 1.19m) * 0.15m);
+                            isv = Decimal.Round((sth / 1.19m) * 0.15m, 2);
                             it = Decimal.Round((sth / 1.19m) * 0.04m, 2);
                             subt = Decimal.Round((sth / 1.19m) + (StS / 1.15m), 2);
                             total = Decimal.Round(isv + it + subt, 2);
@@ -428,7 +430,7 @@ namespace ProyectoHCL.Formularios
             else if (info.reserva != "0" & info.factura != "0") //Factura solo para modificar metodo de pago
             {
                 DataTable dt = new DataTable();
-                try
+                try //Carga de combobox para tipo de pago
                 {
                     using (BaseDatosHCL.ObtenerConexion())
                     {
@@ -507,13 +509,13 @@ namespace ProyectoHCL.Formularios
                         lb_ingreso.Text = info.ingreso;
                         lb_Salida.Text = info.salida;
                         lb_huespedes.Text = dt.Rows[0]["NHUESPEDES"].ToString();
-                        var noches = Convert.ToDateTime(info.salida) - Convert.ToDateTime(info.ingreso);
+                        
                         lb_noches.Text = Convert.ToString(noches.Days);
 
                         
 
-                        dt = consulta(info.reserva, 2);
-                        h = dt.Rows.Count;
+                        ht = consulta(info.reserva, 2);
+                        h = ht.Rows.Count;
                         //DetalleHabitaciones
 
                         if (h == 0)
@@ -534,9 +536,9 @@ namespace ProyectoHCL.Formularios
                         }
                         else if (h == 1)
                         {
-                            lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
-                            lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
-                            lb_pre1.Text = dt.Rows[0]["PRECIO"].ToString();
+                            lb_Habi1.Text = ht.Rows[0]["NUMEROHABITACION"].ToString();
+                            lb_Tipo1.Text = ht.Rows[0]["TIPO"].ToString();
+                            lb_pre1.Text = ht.Rows[0]["PRECIO"].ToString();
                             lb_sbt1.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]));
                             lb_Habi2.Text = "N/A";
                             lb_Tipo2.Text = "N/A";
@@ -551,15 +553,15 @@ namespace ProyectoHCL.Formularios
                         }
                         else if (h == 2)
                         {
-                            lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
-                            lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
-                            lb_pre1.Text = dt.Rows[0]["PRECIO"].ToString();
-                            st1 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]);
+                            lb_Habi1.Text = ht.Rows[0]["NUMEROHABITACION"].ToString();
+                            lb_Tipo1.Text = ht.Rows[0]["TIPO"].ToString();
+                            lb_pre1.Text = ht.Rows[0]["PRECIO"].ToString();
+                            st1 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[0]["PRECIO"]);
                             lb_sbt1.Text = Convert.ToString(st1);
-                            lb_Habi2.Text = dt.Rows[1]["NUMEROHABITACION"].ToString();
-                            lb_Tipo2.Text = dt.Rows[1]["TIPO"].ToString();
-                            lb_pre2.Text = dt.Rows[1]["PRECIO"].ToString();
-                            st2 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[1]["PRECIO"]);
+                            lb_Habi2.Text = ht.Rows[1]["NUMEROHABITACION"].ToString();
+                            lb_Tipo2.Text = ht.Rows[1]["TIPO"].ToString();
+                            lb_pre2.Text = ht.Rows[1]["PRECIO"].ToString();
+                            st2 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[1]["PRECIO"]);
                             lb_sbt2.Text = Convert.ToString(st2);
                             lb_Habi3.Text = "N/A";
                             lb_Tipo3.Text = "N/A";
@@ -570,20 +572,20 @@ namespace ProyectoHCL.Formularios
                         }
                         else if (h == 3)
                         {
-                            lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
-                            lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
-                            lb_pre1.Text = dt.Rows[0]["PRECIO"].ToString();
-                            st1 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]);
+                            lb_Habi1.Text = ht.Rows[0]["NUMEROHABITACION"].ToString();
+                            lb_Tipo1.Text = ht.Rows[0]["TIPO"].ToString();
+                            lb_pre1.Text = ht.Rows[0]["PRECIO"].ToString();
+                            st1 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[0]["PRECIO"]);
                             lb_sbt1.Text = Convert.ToString(st1);
-                            lb_Habi2.Text = dt.Rows[1]["NUMEROHABITACION"].ToString();
-                            lb_Tipo2.Text = dt.Rows[1]["TIPO"].ToString();
-                            lb_pre2.Text = dt.Rows[1]["PRECIO"].ToString();
-                            st2 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[1]["PRECIO"]);
+                            lb_Habi2.Text = ht.Rows[1]["NUMEROHABITACION"].ToString();
+                            lb_Tipo2.Text = ht.Rows[1]["TIPO"].ToString();
+                            lb_pre2.Text = ht.Rows[1]["PRECIO"].ToString();
+                            st2 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[1]["PRECIO"]);
                             lb_sbt2.Text = Convert.ToString(st2);
-                            lb_Habi3.Text = dt.Rows[2]["NUMEROHABITACION"].ToString();
-                            lb_Tipo3.Text = dt.Rows[2]["TIPO"].ToString();
-                            lb_pre3.Text = dt.Rows[2]["PRECIO"].ToString();
-                            st3 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[2]["PRECIO"]);
+                            lb_Habi3.Text = ht.Rows[2]["NUMEROHABITACION"].ToString();
+                            lb_Tipo3.Text = ht.Rows[2]["TIPO"].ToString();
+                            lb_pre3.Text = ht.Rows[2]["PRECIO"].ToString();
+                            st3 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[2]["PRECIO"]);
                             lb_sbt3.Text = Convert.ToString(st3);
                             sth = st1 + st2 + st3;
                             lb_StH.Text = Convert.ToString(sth);
@@ -591,8 +593,8 @@ namespace ProyectoHCL.Formularios
 
                         //DetalleServicios
 
-                        dt = consulta(info.reserva, 3);
-                        s = dt.Rows.Count;
+                        st = consulta(info.reserva, 3);
+                        s = st.Rows.Count;
                         if (s == 0)
                         {
                             lb_Ser1.Text = "N/A";
@@ -611,10 +613,10 @@ namespace ProyectoHCL.Formularios
                         }
                         else if (s == 1)
                         {
-                            lb_Ser1.Text = dt.Rows[0]["DESCRIPCION"].ToString();
-                            lb_Ca1.Text = dt.Rows[0]["CANTIDAD"].ToString();
-                            lb_Pr1.Text = dt.Rows[0]["PRECIO"].ToString();
-                            St1 = Convert.ToDecimal(dt.Rows[0]["CANTIDAD"]) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]);
+                            lb_Ser1.Text = st.Rows[0]["DESCRIPCION"].ToString();
+                            lb_Ca1.Text = st.Rows[0]["CANTIDAD"].ToString();
+                            lb_Pr1.Text = st.Rows[0]["PRECIO"].ToString();
+                            St1 = Convert.ToDecimal(st.Rows[0]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[0]["PRECIO"]);
                             lb_St1.Text = Convert.ToString(St1);
                             lb_Ser2.Text = "N/A";
                             lb_Ca2.Text = "N/A";
@@ -629,15 +631,15 @@ namespace ProyectoHCL.Formularios
                         }
                         else if (s == 2)
                         {
-                            lb_Ser1.Text = dt.Rows[0]["DESCRIPCION"].ToString();
-                            lb_Ca1.Text = dt.Rows[0]["CANTIDAD"].ToString();
-                            lb_Pr1.Text = dt.Rows[0]["PRECIO"].ToString();
-                            St1 = Convert.ToDecimal(dt.Rows[0]["CANTIDAD"]) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]);
+                            lb_Ser1.Text = st.Rows[0]["DESCRIPCION"].ToString();
+                            lb_Ca1.Text = st.Rows[0]["CANTIDAD"].ToString();
+                            lb_Pr1.Text = st.Rows[0]["PRECIO"].ToString();
+                            St1 = Convert.ToDecimal(st.Rows[0]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[0]["PRECIO"]);
                             lb_St1.Text = Convert.ToString(St1);
-                            lb_Ser2.Text = dt.Rows[1]["DESCRIPCION"].ToString();
-                            lb_Ca2.Text = dt.Rows[1]["CANTIDAD"].ToString();
-                            lb_Pr2.Text = dt.Rows[1]["PRECIO"].ToString();
-                            St2 = Convert.ToDecimal(dt.Rows[1]["CANTIDAD"]) * Convert.ToDecimal(dt.Rows[1]["PRECIO"]);
+                            lb_Ser2.Text = st.Rows[1]["DESCRIPCION"].ToString();
+                            lb_Ca2.Text = st.Rows[1]["CANTIDAD"].ToString();
+                            lb_Pr2.Text = st.Rows[1]["PRECIO"].ToString();
+                            St2 = Convert.ToDecimal(st.Rows[1]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[1]["PRECIO"]);
                             lb_St2.Text = Convert.ToString(St2);
                             lb_Ser3.Text = "N/A";
                             lb_Ca3.Text = "N/A";
@@ -648,20 +650,20 @@ namespace ProyectoHCL.Formularios
                         }
                         else if (s == 3)
                         {
-                            lb_Ser1.Text = dt.Rows[0]["DESCRIPCION"].ToString();
-                            lb_Ca1.Text = dt.Rows[0]["CANTIDAD"].ToString();
-                            lb_Pr1.Text = dt.Rows[0]["PRECIO"].ToString();
-                            St1 = Convert.ToDecimal(dt.Rows[0]["CANTIDAD"]) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]);
+                            lb_Ser1.Text = st.Rows[0]["DESCRIPCION"].ToString();
+                            lb_Ca1.Text = st.Rows[0]["CANTIDAD"].ToString();
+                            lb_Pr1.Text = st.Rows[0]["PRECIO"].ToString();
+                            St1 = Convert.ToDecimal(st.Rows[0]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[0]["PRECIO"]);
                             lb_St1.Text = Convert.ToString(St1);
-                            lb_Ser2.Text = dt.Rows[1]["DESCRIPCION"].ToString();
-                            lb_Ca2.Text = dt.Rows[1]["CANTIDAD"].ToString();
-                            lb_Pr2.Text = dt.Rows[1]["PRECIO"].ToString();
-                            St2 = Convert.ToDecimal(dt.Rows[1]["CANTIDAD"]) * Convert.ToDecimal(dt.Rows[1]["PRECIO"]);
+                            lb_Ser2.Text = st.Rows[1]["DESCRIPCION"].ToString();
+                            lb_Ca2.Text = st.Rows[1]["CANTIDAD"].ToString();
+                            lb_Pr2.Text = st.Rows[1]["PRECIO"].ToString();
+                            St2 = Convert.ToDecimal(st.Rows[1]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[1]["PRECIO"]);
                             lb_St2.Text = Convert.ToString(St2);
-                            lb_Ser3.Text = dt.Rows[2]["DESCRIPCION"].ToString();
-                            lb_Ca3.Text = dt.Rows[2]["CANTIDAD"].ToString();
-                            lb_Pr3.Text = dt.Rows[2]["PRECIO"].ToString();
-                            St3 = Convert.ToDecimal(dt.Rows[2]["CANTIDAD"]) * Convert.ToDecimal(dt.Rows[2]["PRECIO"]);
+                            lb_Ser3.Text = st.Rows[2]["DESCRIPCION"].ToString();
+                            lb_Ca3.Text = st.Rows[2]["CANTIDAD"].ToString();
+                            lb_Pr3.Text = st.Rows[2]["PRECIO"].ToString();
+                            St3 = Convert.ToDecimal(st.Rows[2]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[2]["PRECIO"]);
                             lb_St3.Text = Convert.ToString(St3);
                             StS = St1 + St2 + St3;
                             lb_StS.Text = Convert.ToString(StS);
@@ -682,7 +684,7 @@ namespace ProyectoHCL.Formularios
                         }
                         else if (sth != 0.00m & StS == 0)
                         {
-                            isv = Decimal.Round((sth / 1.19m) * 0.15m);
+                            isv = Decimal.Round((sth / 1.19m) * 0.15m, 2);
                             it = Decimal.Round((sth / 1.19m) * 0.04m, 2);
                             subt = Decimal.Round((sth / 1.19m) + (StS / 1.15m), 2);
                             total = Decimal.Round(isv + it + subt, 2);
@@ -699,11 +701,7 @@ namespace ProyectoHCL.Formularios
                 }
 
             }
-            else if (info.factura == "0" & info.reserva == "0") //Factura nueva de 0
-            {
-
-            }
-
+            
         }
 
         private void btnFacturar_Click(object sender, EventArgs e)
@@ -759,47 +757,85 @@ namespace ProyectoHCL.Formularios
         
         private void crearPDF()
         {
-            PdfWriter pdfWriter = new PdfWriter("Factura.pdf");
-            PdfDocument pdf = new PdfDocument (pdfWriter);
-            Document documento = new Document(pdf, PageSize.LETTER);
+            SaveFileDialog guardar = new SaveFileDialog();
+            guardar.FileName = DateTime.Now.ToString("ddMMyyyy") + ".pdf";
+            
+            string paginahtml_texto = Properties.Resources.Plantilla.ToString();
+            paginahtml_texto = paginahtml_texto.Replace("@FECHA1", info.fecha);
+            paginahtml_texto = paginahtml_texto.Replace("@CLIENTE", lb_nombres.Text);
+            paginahtml_texto = paginahtml_texto.Replace("@ID", lb_ID.Text);
+            paginahtml_texto = paginahtml_texto.Replace("@FACTURA", info.factura);
+            paginahtml_texto = paginahtml_texto.Replace("@INGRESO", lb_ingreso.Text);
+            paginahtml_texto = paginahtml_texto.Replace("@SALIDA", lb_Salida.Text);
+            paginahtml_texto = paginahtml_texto.Replace("@NOCHES", lb_noches.Text);
 
-            documento.SetMargins(60, 20, 55, 20);
+            string filas = string.Empty;
 
-            PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
-            PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+            int i = 0;
+            int j = 0;
+            var noches = Convert.ToDateTime(info.salida) - Convert.ToDateTime(info.ingreso);
 
-            string[] columnas = { "Cantidad", "Descripción", "Precio Unidad", "SubTotal" };
-            float[] tamanios = {2,4,2,2,4};
-            Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
-            tabla.SetWidth(UnitValue.CreatePercentValue(100));
-
-            foreach (string columna in columnas)
+            while (i < h)
             {
-                tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+                filas += "<tr>";
+                filas += "<td>1</td>";
+                filas += "<td>Habi. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString() + "</td>";
+                filas += "<td>" + ht.Rows[i]["PRECIO"].ToString() + "</td>";
+                filas += "<td>" + Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])) + "</td>";
+                filas += "</tr>";
+                i = i + 1;
             }
 
-            if (h == 1)
+            while (j < s)
             {
-                tabla.AddCell(new Cell().Add(new Paragraph("1").SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph((lb_Habi1.Text + " " + lb_Tipo1.Text)).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(lb_pre1.Text).SetFont(fontContenido)));
-            }
-            if (h == 2)
-            {
-                tabla.AddCell(new Cell().Add(new Paragraph("1").SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph((lb_Habi1.Text + " " + lb_Tipo1.Text)).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(lb_pre1.Text).SetFont(fontContenido)));
-
-                tabla.AddCell(new Cell().Add(new Paragraph("1").SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph((lb_Habi2.Text + " " + lb_Tipo2.Text)).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(lb_pre2.Text).SetFont(fontContenido)));
+                filas += "<tr>";
+                filas += "<td>" + st.Rows[j]["CANTIDAD"].ToString() + "</td>";
+                filas += "<td>" + st.Rows[j]["DESCRIPCION"].ToString() + "</td>";
+                filas += "<td>" + st.Rows[j]["PRECIO"].ToString() + "</td>";
+                filas += "<td>" + Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])) + "</td>";
+                filas += "</tr>";
+                j = j + 1;
             }
 
+            paginahtml_texto = paginahtml_texto.Replace("@FILAS", filas);
+
+            paginahtml_texto = paginahtml_texto.Replace("@SUBTOTAL", Convert.ToString(subt));
+            paginahtml_texto = paginahtml_texto.Replace("@DESCUENTO", Convert.ToString(0));
+            paginahtml_texto = paginahtml_texto.Replace("@STMD", Convert.ToString(subt));
+            paginahtml_texto = paginahtml_texto.Replace("@ISV", Convert.ToString(isv));
+            paginahtml_texto = paginahtml_texto.Replace("@IST", Convert.ToString(it));
+            paginahtml_texto = paginahtml_texto.Replace("@TOIM", Convert.ToString(isv + it));
+            paginahtml_texto = paginahtml_texto.Replace("@TOTAL", Convert.ToString(total));
+
+            if (guardar.ShowDialog() == DialogResult.OK)
+            {
+                using(FileStream stream = new FileStream(guardar.FileName, FileMode.Create))
+                {
+                    Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
+
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc,stream);
+                    pdfDoc.Open();
+                    pdfDoc.Add(new Phrase(""));
+
+                    iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(Properties.Resources.logo, System.Drawing.Imaging.ImageFormat.Png);
+                    img.ScaleToFit(80, 60);
+                    img.Alignment = iTextSharp.text.Image.UNDERLYING;
+                    img.SetAbsolutePosition(pdfDoc.LeftMargin, pdfDoc.Top - 60);
+                    pdfDoc.Add(img);
+
+                    using (StringReader sr = new StringReader(paginahtml_texto))
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                    }
 
 
-            documento.Add(tabla);
-            documento.Close();
+                    pdfDoc.Close();
+                    stream.Close();
+                }
 
+                
+
+            }
 
         }
 

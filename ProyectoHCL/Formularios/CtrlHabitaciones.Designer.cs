@@ -124,9 +124,9 @@
             label11.Location = new Point(26, 28);
             label11.Margin = new Padding(4, 0, 4, 0);
             label11.Name = "label11";
-            label11.Size = new Size(423, 48);
+            label11.Size = new Size(287, 32);
             label11.TabIndex = 41;
-            label11.Text = "Habitaciones registradas";
+            label11.Text = "Habitaciones Registradas";
             // 
             // button2
             // 
@@ -199,13 +199,10 @@
             btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnNuevo.ForeColor = SystemColors.ButtonFace;
             btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNuevo.Location = new Point(39, 27);
-            btnNuevo.Margin = new Padding(4, 5, 4, 5);
+            btnNuevo.Location = new Point(27, 18);
             btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(143, 58);
+            btnNuevo.Size = new Size(50, 35);
             btnNuevo.TabIndex = 40;
-            btnNuevo.Text = "Agregar";
             btnNuevo.TextAlign = ContentAlignment.MiddleRight;
             btnNuevo.UseVisualStyleBackColor = false;
             btnNuevo.Click += btnNuevo_Click;
@@ -237,7 +234,8 @@
             button6.FlatStyle = FlatStyle.Flat;
             button6.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button6.ForeColor = SystemColors.ButtonHighlight;
-            button6.Location = new Point(1374, 35);
+            button6.Location = new Point(966, 23);
+            button6.Margin = new Padding(2);
             button6.Name = "button6";
             button6.Size = new Size(111, 42);
             button6.TabIndex = 55;
@@ -252,7 +250,8 @@
             button8.FlatStyle = FlatStyle.Flat;
             button8.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button8.ForeColor = SystemColors.ButtonHighlight;
-            button8.Location = new Point(1244, 35);
+            button8.Location = new Point(875, 23);
+            button8.Margin = new Padding(2);
             button8.Name = "button8";
             button8.Size = new Size(111, 42);
             button8.TabIndex = 54;
@@ -323,7 +322,8 @@
             // 
             txtBuscar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             txtBuscar.BackColor = SystemColors.Info;
-            txtBuscar.Location = new Point(334, 35);
+            txtBuscar.Location = new Point(171, 23);
+            txtBuscar.Margin = new Padding(2);
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(358, 31);
             txtBuscar.TabIndex = 44;
@@ -336,7 +336,8 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(249, 38);
+            label4.Location = new Point(111, 25);
+            label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(86, 31);
             label4.TabIndex = 45;
@@ -382,8 +383,7 @@
             btnSiguiente.FlatAppearance.BorderSize = 0;
             btnSiguiente.FlatAppearance.MouseOverBackColor = Color.Silver;
             btnSiguiente.FlatStyle = FlatStyle.Flat;
-            btnSiguiente.Location = new Point(1123, 25);
-            btnSiguiente.Margin = new Padding(4, 5, 4, 5);
+            btnSiguiente.Location = new Point(789, 15);
             btnSiguiente.Name = "btnSiguiente";
             btnSiguiente.Size = new Size(43, 52);
             btnSiguiente.TabIndex = 62;
@@ -399,8 +399,7 @@
             btnAnterior.FlatAppearance.BorderSize = 0;
             btnAnterior.FlatAppearance.MouseOverBackColor = Color.Silver;
             btnAnterior.FlatStyle = FlatStyle.Flat;
-            btnAnterior.Location = new Point(1071, 25);
-            btnAnterior.Margin = new Padding(4, 5, 4, 5);
+            btnAnterior.Location = new Point(753, 15);
             btnAnterior.Name = "btnAnterior";
             btnAnterior.Size = new Size(43, 52);
             btnAnterior.TabIndex = 61;
@@ -410,8 +409,7 @@
             // txtPagH
             // 
             txtPagH.Anchor = AnchorStyles.Right;
-            txtPagH.Location = new Point(1397, 33);
-            txtPagH.Margin = new Padding(4, 5, 4, 5);
+            txtPagH.Location = new Point(981, 20);
             txtPagH.Name = "txtPagH";
             txtPagH.ReadOnly = true;
             txtPagH.Size = new Size(88, 31);
@@ -423,8 +421,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label10.ForeColor = SystemColors.ControlLightLight;
-            label10.Location = new Point(1359, 38);
-            label10.Margin = new Padding(4, 0, 4, 0);
+            label10.Location = new Point(954, 23);
             label10.Name = "label10";
             label10.Size = new Size(36, 28);
             label10.TabIndex = 59;
@@ -436,8 +433,7 @@
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label12.ForeColor = SystemColors.ControlLightLight;
-            label12.Location = new Point(1176, 38);
-            label12.Margin = new Padding(4, 0, 4, 0);
+            label12.Location = new Point(826, 23);
             label12.Name = "label12";
             label12.Size = new Size(70, 28);
             label12.TabIndex = 58;
@@ -449,7 +445,8 @@
             cmbPagH.BackColor = SystemColors.Info;
             cmbPagH.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPagH.FormattingEnabled = true;
-            cmbPagH.Location = new Point(1244, 33);
+            cmbPagH.Location = new Point(874, 20);
+            cmbPagH.Margin = new Padding(2);
             cmbPagH.Name = "cmbPagH";
             cmbPagH.Size = new Size(91, 33);
             cmbPagH.TabIndex = 57;
@@ -633,7 +630,7 @@
             // 
             // panel4
             // 
-            panel4.BackColor = Color.SlateGray;
+            panel4.BackColor = SystemColors.Window;
             panel4.Controls.Add(dgvHab);
             panel4.Dock = DockStyle.Fill;
             panel4.Location = new Point(0, 220);
@@ -677,8 +674,7 @@
             dgvHab.DefaultCellStyle = dataGridViewCellStyle3;
             dgvHab.EnableHeadersVisualStyles = false;
             dgvHab.GridColor = Color.FromArgb(45, 66, 91);
-            dgvHab.Location = new Point(0, 0);
-            dgvHab.Margin = new Padding(4, 5, 4, 5);
+            dgvHab.Location = new Point(27, 6);
             dgvHab.Name = "dgvHab";
             dgvHab.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -698,7 +694,7 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
             dgvHab.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvHab.RowTemplate.Height = 25;
-            dgvHab.Size = new Size(1549, 590);
+            dgvHab.Size = new Size(1027, 341);
             dgvHab.TabIndex = 4;
             dgvHab.CellClick += dgvHab_CellClick;
             dgvHab.CellContentClick += dgvHab_CellContentClick;

@@ -175,7 +175,6 @@
             txtPorcentaje.Location = new Point(242, 140);
             txtPorcentaje.MaxLength = 100;
             txtPorcentaje.Name = "txtPorcentaje";
-            txtPorcentaje.ShortcutsEnabled = false;
             txtPorcentaje.Size = new Size(316, 27);
             txtPorcentaje.TabIndex = 10;
             txtPorcentaje.KeyPress += txtPorcentaje_KeyPress;
@@ -188,9 +187,8 @@
             txtDesc.CharacterCasing = CharacterCasing.Upper;
             txtDesc.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtDesc.Location = new Point(242, 68);
-            txtDesc.MaxLength = 15;
+            txtDesc.MaxLength = 100;
             txtDesc.Name = "txtDesc";
-            txtDesc.ShortcutsEnabled = false;
             txtDesc.Size = new Size(316, 27);
             txtDesc.TabIndex = 9;
             txtDesc.Leave += txtNombre_Leave;
@@ -229,6 +227,7 @@
             Controls.Add(panel3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            MaximumSize = new Size(800, 405);
             Name = "R_E_Descuento";
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
