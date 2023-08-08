@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Drawing.Diagrams;
+using DocumentFormat.OpenXml.Office.Word;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ProyectoHCL.RecuContra; //Para uso del user y IDUser iniciado
 
 namespace ProyectoHCL.Formularios
 {
@@ -137,6 +139,20 @@ namespace ProyectoHCL.Formularios
                         cmd.Parameters.AddWithValue("@email", txtCorreo.Text);
 
                         cmd.ExecuteNonQuery();
+
+                        string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                        conn.Close();
+                        string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
+                            "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'CREACION', 'CREACION USUARIO " +
+                            txtUsuario.Text + "');";
+                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                        conn.Open();
+
+                        cmd = new MySqlCommand(sql, conn);
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+
                         MsgB m = new MsgB("informacion", "Registro creado con éxito");
                         DialogResult dR = m.ShowDialog();
                         limpiarCampos();
@@ -170,6 +186,22 @@ namespace ProyectoHCL.Formularios
                     {
                         control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
                            txtContraseña.Text, dtpVencimiento.Text, txtCorreo.Text);
+
+
+                        string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                        MySqlConnection conn;
+                        MySqlCommand cmd;
+                        
+                        string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
+                            "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'EDICION', 'EDICION USUARIO " +
+                            idUs + " " + txtUsuario.Text + "');";
+                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                        conn.Open();
+
+                        cmd = new MySqlCommand(sql, conn);
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
 
                         MsgB m = new MsgB("informacion", "Registro modificado");
                         DialogResult dR = m.ShowDialog();

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ProyectoHCL.RecuContra; //Para uso del user y IDUser iniciado
 
 namespace ProyectoHCL.Formularios
 {
@@ -68,10 +69,7 @@ namespace ProyectoHCL.Formularios
             DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
             btnUpdate.Name = "EDITAR"; //Nombre del boton 
             dgvUsuarios.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
-
-            //DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
-            //btnDelete.Name = "ELIMINAR";
-            //dgvUsuarios.Columns.Add(btnDelete);
+                        
         }
 
         public void BuscarUsuarios(string buscarU) //Recibe string para buscar usuarios
@@ -245,6 +243,20 @@ namespace ProyectoHCL.Formularios
                 R_E_user.cmbRol.Text = dgvUsuarios.CurrentRow.Cells["ROL"].Value.ToString();
                 R_E_user.txtFechaC.Text = dgvUsuarios.CurrentRow.Cells["CREACION"].Value.ToString();
                 R_E_user.dtpVencimiento.Text = dgvUsuarios.CurrentRow.Cells["VENCIMIENTO"].Value.ToString();
+
+                string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                conn.Close();
+                sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
+                    "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'INGRESO', 'INGRESO A EDITAR USUARIO " +
+                    R_E_user.idUs + " " + R_E_user.txtUsuario.Text + "');";
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
+
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
                 R_E_user.ShowDialog();
                 R_E_user.limpiarCampos();
                 CargarDG(); //Se llama el metodo Mostrar usuarios para actualizar el DataGrid al editar 

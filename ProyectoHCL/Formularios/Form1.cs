@@ -106,7 +106,8 @@ namespace ProyectoHCL
 
                         if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text)
                         {
-
+                            clasecompartida.iduser = (int)leer["ID_USUARIO"];
+                            clasecompartida.user = UsuarioBox1.Text;
                             Form formulario = new Dashboard();
                             formulario.Show();
                         }
