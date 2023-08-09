@@ -157,8 +157,8 @@
             rTxtDesc.Size = new Size(316, 109);
             rTxtDesc.TabIndex = 25;
             rTxtDesc.Text = "";
-            rTxtDesc.KeyPress += rTxtDesc_KeyPress;
-            rTxtDesc.Leave += rTxtDesc_Leave;
+            rTxtDesc.KeyPress += rTxtDesc_KeyPress_1;
+            rTxtDesc.Leave += rTxtDesc_Leave_1;
             // 
             // txtObj
             // 

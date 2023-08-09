@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ProyectoHCL.Formularios;
+using ProyectoHCL.Formularios.Bitacora;
 
 namespace ProyectoHCL.Formularios
 {
@@ -132,9 +132,8 @@ namespace ProyectoHCL.Formularios
 
         public static class preg
         {
-            public static string detalle;
-            public static int op;
-            public static int id;
+            public static string id,user,submenu,pantalla,accion,fecha, descripcion;
+            
         }
 
         private void dgvBitacora_CellClick_1(object sender, DataGridViewCellEventArgs e)
@@ -142,7 +141,16 @@ namespace ProyectoHCL.Formularios
 
             if (this.dgvBitacora.Columns[e.ColumnIndex].Name == "VER")
             {
-                //Agregar codigo para ver detalle de bitacora
+                preg.id = dgvBitacora.CurrentRow.Cells["ID"].Value.ToString();
+                preg.user = dgvBitacora.CurrentRow.Cells["USUARIO"].Value.ToString();
+                preg.submenu = dgvBitacora.CurrentRow.Cells["SUBMENU"].Value.ToString();
+                preg.pantalla = dgvBitacora.CurrentRow.Cells["PANTALLA"].Value.ToString();
+                preg.accion = dgvBitacora.CurrentRow.Cells["ACCION"].Value.ToString();
+                preg.fecha = dgvBitacora.CurrentRow.Cells["FECHA"].Value.ToString();
+                preg.descripcion = dgvBitacora.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
+
+                Form form = new Formularios.Bitacora.ShowBitacora();
+                form.ShowDialog();
 
             }
 

@@ -14,7 +14,7 @@ namespace ProyectoHCL
             // see https://aka.ms/applicationconfiguration.
             //ApplicationConfiguration.Initialize();
             //Application.Run(new PermisosRoLes());
-            Application.Run(new FORMULARIO()); 
+            Application.Run(new CtrlBitacora()); 
             //  Application.Run(new CtrlUsuarios());
 
             //Application.Run(new R_R_RolesPermisos()); 
