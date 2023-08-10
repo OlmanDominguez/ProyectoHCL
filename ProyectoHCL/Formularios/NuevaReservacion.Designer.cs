@@ -245,7 +245,6 @@
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
-            panel3.Controls.Add(txt_habi_vieja);
             panel3.Controls.Add(btn_guardar2);
             panel3.Controls.Add(dt_fecha_salida);
             panel3.Controls.Add(dt_fecha_entrada);
@@ -279,6 +278,7 @@
             panel3.Controls.Add(txt_estado);
             panel3.Controls.Add(txt_cod_cliente);
             panel3.Controls.Add(txt_id_solicitud);
+            panel3.Controls.Add(txt_habi_vieja);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
@@ -287,7 +287,7 @@
             // 
             // txt_habi_vieja
             // 
-            txt_habi_vieja.Location = new Point(754, 352);
+            txt_habi_vieja.Location = new Point(700, 198);
             txt_habi_vieja.Name = "txt_habi_vieja";
             txt_habi_vieja.Size = new Size(91, 23);
             txt_habi_vieja.TabIndex = 79;
@@ -314,7 +314,7 @@
             // 
             dt_fecha_salida.CustomFormat = "yyyy/MM/dd";
             dt_fecha_salida.Format = DateTimePickerFormat.Custom;
-            dt_fecha_salida.Location = new Point(686, 202);
+            dt_fecha_salida.Location = new Point(686, 198);
             dt_fecha_salida.Name = "dt_fecha_salida";
             dt_fecha_salida.Size = new Size(105, 23);
             dt_fecha_salida.TabIndex = 76;

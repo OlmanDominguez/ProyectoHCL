@@ -18,10 +18,10 @@ namespace ProyectoHCL
 {
     public partial class NuevaReservacion : Form
     {
-        
+
         public NuevaReservacion()
         {
-            
+
             InitializeComponent();
             combo_metodo();
             combo_estado();
@@ -30,7 +30,7 @@ namespace ProyectoHCL
 
 
         }
-        
+
         public void updatenumero()
         {
             string num1 = cb_numero.Text;
@@ -677,11 +677,11 @@ namespace ProyectoHCL
                 updatedetalle();
                 updatehabitacion();
                 updatenumero();
-                
+
                 MsgB m = new MsgB("informacion", "Reserva actualizada con exito");
                 DialogResult dR = m.ShowDialog();
                 //limpiarCampos();
-              
+
                 conn.Close();
                 this.Close();
             }
@@ -692,7 +692,7 @@ namespace ProyectoHCL
             }
         }
 
-       
+
     }
 }
 
