@@ -45,7 +45,7 @@
             btnCerrar = new Button();
             btnMin = new Button();
             panel3 = new Panel();
-            txt_id_solicitud = new TextBox();
+            txt_habi_vieja = new TextBox();
             btn_guardar2 = new Button();
             dt_fecha_salida = new DateTimePicker();
             dt_fecha_entrada = new DateTimePicker();
@@ -69,6 +69,7 @@
             txt_tipo_habitacion = new TextBox();
             txt_metodo_reserva = new TextBox();
             txt_estado = new TextBox();
+            txt_id_solicitud = new TextBox();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
@@ -244,6 +245,7 @@
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
+            panel3.Controls.Add(txt_habi_vieja);
             panel3.Controls.Add(btn_guardar2);
             panel3.Controls.Add(dt_fecha_salida);
             panel3.Controls.Add(dt_fecha_entrada);
@@ -283,13 +285,12 @@
             panel3.Size = new Size(949, 531);
             panel3.TabIndex = 52;
             // 
-            // txt_id_solicitud
+            // txt_habi_vieja
             // 
-            txt_id_solicitud.Location = new Point(299, 127);
-            txt_id_solicitud.Name = "txt_id_solicitud";
-            txt_id_solicitud.ReadOnly = true;
-            txt_id_solicitud.Size = new Size(47, 23);
-            txt_id_solicitud.TabIndex = 78;
+            txt_habi_vieja.Location = new Point(754, 352);
+            txt_habi_vieja.Name = "txt_habi_vieja";
+            txt_habi_vieja.Size = new Size(91, 23);
+            txt_habi_vieja.TabIndex = 79;
             // 
             // btn_guardar2
             // 
@@ -370,7 +371,7 @@
             // cb_numero
             // 
             cb_numero.FormattingEnabled = true;
-            cb_numero.Location = new Point(682, 306);
+            cb_numero.Location = new Point(681, 306);
             cb_numero.Name = "cb_numero";
             cb_numero.Size = new Size(163, 23);
             cb_numero.TabIndex = 61;
@@ -528,6 +529,14 @@
             txt_estado.Size = new Size(47, 23);
             txt_estado.TabIndex = 65;
             // 
+            // txt_id_solicitud
+            // 
+            txt_id_solicitud.Location = new Point(299, 127);
+            txt_id_solicitud.Name = "txt_id_solicitud";
+            txt_id_solicitud.ReadOnly = true;
+            txt_id_solicitud.Size = new Size(47, 23);
+            txt_id_solicitud.TabIndex = 78;
+            // 
             // NuevaReservacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -592,5 +601,6 @@
         public DateTimePicker dt_fecha_coti;
         public Button btn_guardar2;
         public TextBox txt_id_solicitud;
+        public TextBox txt_habi_vieja;
     }
 }

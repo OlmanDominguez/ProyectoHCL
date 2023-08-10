@@ -247,7 +247,7 @@
             cmbMostrar.BackColor = SystemColors.Info;
             cmbMostrar.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbMostrar.FormattingEnabled = true;
-            cmbMostrar.Items.AddRange(new object[] { "2", "3", "4", "5", "6" });
+            cmbMostrar.Items.AddRange(new object[] { "5", "10", "15", "20" });
             cmbMostrar.Location = new Point(77, 22);
             cmbMostrar.Margin = new Padding(2);
             cmbMostrar.Name = "cmbMostrar";

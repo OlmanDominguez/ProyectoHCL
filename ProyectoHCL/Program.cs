@@ -14,11 +14,11 @@ namespace ProyectoHCL
             // see https://aka.ms/applicationconfiguration.
             //ApplicationConfiguration.Initialize();
             //Application.Run(new PermisosRoLes());
-            Application.Run(new FORMULARIO()); 
+            //Application.Run(new FORMULARIO()); 
             //  Application.Run(new CtrlUsuarios());
 
 
-            //Application.Run(new Dashboard());
+            Application.Run(new Dashboard());
             //Application.Run(new NuevaReservacion());
             //Application.Run(new CtrlObjetos());
             //Application.Run(new CtrlPreguntas());
