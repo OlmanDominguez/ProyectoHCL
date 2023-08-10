@@ -18,16 +18,64 @@ using Microsoft.VisualBasic.ApplicationServices;
 using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Spreadsheet;
 using ProyectoHCL.Formularios;
+using iText.Layout.Element;
 
 namespace ProyectoHCL
 {
     public partial class Dashboard : Form
     {
         int a;
+
         public Dashboard()
         {
             InitializeComponent();
             hideSubMenu();
+        }
+
+        private void Permisos()
+        {
+            CDatos cDatos = new CDatos();
+            
+            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
+
+            foreach (var obj in LsObj)
+            {
+                switch (obj.IdObjeto)
+                {
+                    case "HABITACIONES":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            Ibtn_habitaciones.Enabled = false;
+                        }
+                        break;
+                    case "DESCUENTOS":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            Ibtn_descuentos.Enabled = false;
+                        }
+                        break;
+                    case "USUARIOS":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            Ibtn_usuarios.Enabled = false;
+                        }
+                        break;
+                    case "SERVICIOS":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            Ibtn_servicios.Enabled = false;
+                        }
+                        break;
+                    case "OBJETOS":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            Ibtn_objetos.Enabled = false;
+                        }
+                        break;
+                }
+                               
+            }
+        
         }
 
         private void hideSubMenu()
@@ -38,6 +86,13 @@ namespace ProyectoHCL
         }
         private void mostrarhabitaciones()
         {
+            Permisos();
+            //panelChildForm.Visible = false;
+            dgv_habitacion.Visible = false;
+            lbl_fechas.Visible = false;
+            lbl_cerrar.Visible = false;
+            pbt_fechas.Visible = false;
+
             try
             {
                 using (BaseDatosHCL.ObtenerConexion())

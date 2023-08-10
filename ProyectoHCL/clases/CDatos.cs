@@ -7,46 +7,42 @@ using MySql.Data.MySqlClient;
 using ProyectoHCL.RolesPermisos;
 using System.Windows.Forms;
 using System.Data;
+using ProyectoHCL.Formularios;
 
 namespace ProyectoHCL.clases
 {
      class CDatos
     {
-       public int GuardarRol(RolUsuario rolUsuario)
-       {
-			try
-			{
-                MySqlConnection conn;
-                MySqlCommand cmd;
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
 
-                int ultimoRegistro = 0;
-                cmd = new MySqlCommand("spInsertRol", conn); 
-                cmd.CommandType = CommandType.StoredProcedure;
+        public static int idUsu; //Almacenar id Usuario
+        public static int idRolUs; //ALmacenar id Rol
 
-                MySqlParameter IdRol = new MySqlParameter("@IdRol", MySqlDbType.Int32);
-                IdRol.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(IdRol);
+        public DataTable listarObjetos()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
 
-                cmd.Parameters.Add(new MySqlParameter("@rol", rolUsuario.Rol));
-                cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
 
-                if (IdRol.Value != DBNull.Value)
-                {
-                    ultimoRegistro = Convert.ToInt32(IdRol.Value);
-                }
+            try
+            {
+                string sql = "SELECT ID_OBJETO AS ID, OBJETO AS PANTALLA FROM PT_OBJETO;";               
+                cmd = new MySqlCommand(sql, conn);
 
-                return ultimoRegistro;
+                MySqlDataReader reader = cmd.ExecuteReader();
+                dt.Load(reader);
             }
-			catch (Exception ex)
-			{
+            catch (Exception)
+            {
                 MessageBox.Show(ex.Message);
-                return 0;
-			}
+            }
+
+            return dt;
         }
 
-       public void GuardarPermiso(PermisoRol permisoR)
+        public void GuardarPermiso(PermisoRol permisoR)
         {
             try
             {
@@ -60,7 +56,7 @@ namespace ProyectoHCL.clases
 
                 cmd.Parameters.Add(new MySqlParameter("@idRol", permisoR.IdRol));
                 cmd.Parameters.Add(new MySqlParameter("@idPermiso", permisoR.IdPermiso));
-                cmd.Parameters.Add(new MySqlParameter("@objeto", permisoR.IdObjeto));
+                cmd.Parameters.Add(new MySqlParameter("@idObjeto", permisoR.IdObjeto));
                 cmd.Parameters.Add(new MySqlParameter("@permitido", permisoR.Permitido));
 
                 cmd.ExecuteNonQuery();
@@ -70,5 +66,44 @@ namespace ProyectoHCL.clases
                 MessageBox.Show(ex.Message);
             }
         }
+
+        public List<PermisoRol> SelectObjeto(int idR)
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+
+            DataTable dt = new DataTable();
+
+            try
+            {
+                cmd = new MySqlCommand("spSelectObjeto", conn);
+                conn.Open();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("@idRol", idR));
+                da.SelectCommand = cmd;
+                da.Fill(dt);
+
+                List<PermisoRol> Objeto =
+                    (from row in dt.AsEnumerable()
+                     select new PermisoRol()
+                     {
+                         IdPermiso = int.Parse(row["ID_PERMISO"].ToString()),
+                         IdRol = row["ROL"].ToString(),
+                         IdObjeto = row["OBJETO"].ToString(),
+                         Permitido = Convert.ToBoolean(row["PERMITIDO"])
+
+                     }).ToList();
+
+                return Objeto;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
+
     }
 }

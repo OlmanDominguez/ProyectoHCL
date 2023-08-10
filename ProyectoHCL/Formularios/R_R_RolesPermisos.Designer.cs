@@ -44,9 +44,9 @@
             btnPerfil = new Button();
             btnCerrarSesion = new Button();
             panel5 = new Panel();
+            cmbRol = new ComboBox();
             btnCancelar = new Button();
             btnGuardar = new Button();
-            txtRol = new TextBox();
             button6 = new Button();
             label2 = new Label();
             button8 = new Button();
@@ -55,12 +55,6 @@
             button7 = new Button();
             button9 = new Button();
             panel3 = new Panel();
-            btnSigR = new Button();
-            btnAntR = new Button();
-            txtPagR = new TextBox();
-            label1 = new Label();
-            label4 = new Label();
-            cmbPagR = new ComboBox();
             btnSiguiente = new Button();
             btnAnterior = new Button();
             txtPagH = new TextBox();
@@ -174,9 +168,9 @@
             label11.Location = new Point(127, 33);
             label11.Margin = new Padding(4, 0, 4, 0);
             label11.Name = "label11";
-            label11.Size = new Size(227, 48);
+            label11.Size = new Size(214, 32);
             label11.TabIndex = 41;
-            label11.Text = "Registrar Rol";
+            label11.Text = "Registrar Permisos";
             // 
             // button2
             // 
@@ -241,9 +235,9 @@
             // panel5
             // 
             panel5.BackColor = Color.Gainsboro;
+            panel5.Controls.Add(cmbRol);
             panel5.Controls.Add(btnCancelar);
             panel5.Controls.Add(btnGuardar);
-            panel5.Controls.Add(txtRol);
             panel5.Controls.Add(button6);
             panel5.Controls.Add(label2);
             panel5.Controls.Add(button8);
@@ -257,6 +251,15 @@
             panel5.Name = "panel5";
             panel5.Size = new Size(1549, 98);
             panel5.TabIndex = 37;
+            // 
+            // cmbRol
+            // 
+            cmbRol.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbRol.FormattingEnabled = true;
+            cmbRol.Location = new Point(78, 17);
+            cmbRol.Name = "cmbRol";
+            cmbRol.Size = new Size(235, 28);
+            cmbRol.TabIndex = 71;
             // 
             // btnCancelar
             // 
@@ -296,21 +299,6 @@
             btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
-            // txtRol
-            // 
-            txtRol.BackColor = Color.White;
-            txtRol.BorderStyle = BorderStyle.FixedSingle;
-            txtRol.CharacterCasing = CharacterCasing.Upper;
-            txtRol.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtRol.Location = new Point(159, 27);
-            txtRol.Margin = new Padding(4, 5, 4, 5);
-            txtRol.MaxLength = 50;
-            txtRol.Name = "txtRol";
-            txtRol.ShortcutsEnabled = false;
-            txtRol.Size = new Size(451, 37);
-            txtRol.TabIndex = 39;
-            txtRol.TextChanged += txtRol_TextChanged;
-            // 
             // button6
             // 
             button6.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -331,12 +319,11 @@
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(40, 30);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(36, 19);
             label2.Name = "label2";
-            label2.Size = new Size(114, 28);
+            label2.Size = new Size(36, 19);
             label2.TabIndex = 38;
-            label2.Text = "Nombre:";
+            label2.Text = "Rol:";
             // 
             // button8
             // 
@@ -416,12 +403,6 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(45, 66, 91);
-            panel3.Controls.Add(btnSigR);
-            panel3.Controls.Add(btnAntR);
-            panel3.Controls.Add(txtPagR);
-            panel3.Controls.Add(label1);
-            panel3.Controls.Add(label4);
-            panel3.Controls.Add(cmbPagR);
             panel3.Controls.Add(btnSiguiente);
             panel3.Controls.Add(btnAnterior);
             panel3.Controls.Add(txtPagH);
@@ -441,93 +422,10 @@
             panel3.Controls.Add(txtPag);
             panel3.Controls.Add(cmbPag);
             panel3.Dock = DockStyle.Bottom;
-            panel3.Location = new Point(0, 808);
-            panel3.Margin = new Padding(4, 5, 4, 5);
+            panel3.Location = new Point(0, 510);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1549, 127);
+            panel3.Size = new Size(1084, 51);
             panel3.TabIndex = 39;
-            // 
-            // btnSigR
-            // 
-            btnSigR.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnSigR.BackColor = Color.Transparent;
-            btnSigR.BackgroundImage = (Image)resources.GetObject("btnSigR.BackgroundImage");
-            btnSigR.BackgroundImageLayout = ImageLayout.Stretch;
-            btnSigR.FlatAppearance.BorderSize = 0;
-            btnSigR.FlatAppearance.MouseOverBackColor = Color.Silver;
-            btnSigR.FlatStyle = FlatStyle.Flat;
-            btnSigR.Location = new Point(1121, 25);
-            btnSigR.Margin = new Padding(4, 5, 4, 5);
-            btnSigR.Name = "btnSigR";
-            btnSigR.Size = new Size(43, 52);
-            btnSigR.TabIndex = 68;
-            btnSigR.UseVisualStyleBackColor = false;
-            btnSigR.Click += btnSigR_Click;
-            // 
-            // btnAntR
-            // 
-            btnAntR.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAntR.BackColor = Color.Transparent;
-            btnAntR.BackgroundImage = (Image)resources.GetObject("btnAntR.BackgroundImage");
-            btnAntR.BackgroundImageLayout = ImageLayout.Stretch;
-            btnAntR.FlatAppearance.BorderSize = 0;
-            btnAntR.FlatAppearance.MouseOverBackColor = Color.Silver;
-            btnAntR.FlatStyle = FlatStyle.Flat;
-            btnAntR.Location = new Point(1070, 25);
-            btnAntR.Margin = new Padding(4, 5, 4, 5);
-            btnAntR.Name = "btnAntR";
-            btnAntR.Size = new Size(43, 52);
-            btnAntR.TabIndex = 67;
-            btnAntR.UseVisualStyleBackColor = false;
-            btnAntR.Click += btnAntR_Click;
-            // 
-            // txtPagR
-            // 
-            txtPagR.Anchor = AnchorStyles.Right;
-            txtPagR.Location = new Point(1396, 33);
-            txtPagR.Margin = new Padding(4, 5, 4, 5);
-            txtPagR.Name = "txtPagR";
-            txtPagR.ReadOnly = true;
-            txtPagR.Size = new Size(88, 31);
-            txtPagR.TabIndex = 66;
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Right;
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(1357, 38);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(36, 28);
-            label1.TabIndex = 65;
-            label1.Text = "De";
-            // 
-            // label4
-            // 
-            label4.Anchor = AnchorStyles.Right;
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.ForeColor = SystemColors.ControlLightLight;
-            label4.Location = new Point(1174, 38);
-            label4.Margin = new Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(70, 28);
-            label4.TabIndex = 64;
-            label4.Text = "Página";
-            // 
-            // cmbPagR
-            // 
-            cmbPagR.Anchor = AnchorStyles.Right;
-            cmbPagR.BackColor = SystemColors.Info;
-            cmbPagR.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbPagR.FormattingEnabled = true;
-            cmbPagR.Location = new Point(1243, 33);
-            cmbPagR.Name = "cmbPagR";
-            cmbPagR.Size = new Size(91, 33);
-            cmbPagR.TabIndex = 63;
-            cmbPagR.SelectionChangeCommitted += cmbPagR_SelectionChangeCommitted;
             // 
             // btnSiguiente
             // 
@@ -564,8 +462,7 @@
             // txtPagH
             // 
             txtPagH.Anchor = AnchorStyles.Right;
-            txtPagH.Location = new Point(2574, 13);
-            txtPagH.Margin = new Padding(4, 5, 4, 5);
+            txtPagH.Location = new Point(1802, -5);
             txtPagH.Name = "txtPagH";
             txtPagH.ReadOnly = true;
             txtPagH.Size = new Size(88, 31);
@@ -577,8 +474,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label10.ForeColor = SystemColors.ControlLightLight;
-            label10.Location = new Point(2536, 18);
-            label10.Margin = new Padding(4, 0, 4, 0);
+            label10.Location = new Point(1775, -2);
             label10.Name = "label10";
             label10.Size = new Size(36, 28);
             label10.TabIndex = 59;
@@ -590,8 +486,7 @@
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label12.ForeColor = SystemColors.ControlLightLight;
-            label12.Location = new Point(2353, 18);
-            label12.Margin = new Padding(4, 0, 4, 0);
+            label12.Location = new Point(1647, -2);
             label12.Name = "label12";
             label12.Size = new Size(70, 28);
             label12.TabIndex = 58;
@@ -603,7 +498,8 @@
             cmbPagH.BackColor = SystemColors.Info;
             cmbPagH.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPagH.FormattingEnabled = true;
-            cmbPagH.Location = new Point(2421, 13);
+            cmbPagH.Location = new Point(1695, -5);
+            cmbPagH.Margin = new Padding(2);
             cmbPagH.Name = "cmbPagH";
             cmbPagH.Size = new Size(91, 33);
             cmbPagH.TabIndex = 57;
@@ -611,8 +507,7 @@
             // txtPagTH
             // 
             txtPagTH.Anchor = AnchorStyles.Right;
-            txtPagTH.Location = new Point(3753, -12);
-            txtPagTH.Margin = new Padding(4, 5, 4, 5);
+            txtPagTH.Location = new Point(2627, -20);
             txtPagTH.Name = "txtPagTH";
             txtPagTH.ReadOnly = true;
             txtPagTH.Size = new Size(88, 31);
@@ -624,8 +519,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label8.ForeColor = SystemColors.ControlLightLight;
-            label8.Location = new Point(3714, -7);
-            label8.Margin = new Padding(4, 0, 4, 0);
+            label8.Location = new Point(2600, -17);
             label8.Name = "label8";
             label8.Size = new Size(36, 28);
             label8.TabIndex = 55;
@@ -637,8 +531,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label9.ForeColor = SystemColors.ControlLightLight;
-            label9.Location = new Point(3531, -7);
-            label9.Margin = new Padding(4, 0, 4, 0);
+            label9.Location = new Point(2472, -17);
             label9.Name = "label9";
             label9.Size = new Size(70, 28);
             label9.TabIndex = 54;
@@ -650,7 +543,8 @@
             cboxPag.BackColor = SystemColors.Info;
             cboxPag.DropDownStyle = ComboBoxStyle.DropDownList;
             cboxPag.FormattingEnabled = true;
-            cboxPag.Location = new Point(3600, -12);
+            cboxPag.Location = new Point(2520, -20);
+            cboxPag.Margin = new Padding(2);
             cboxPag.Name = "cboxPag";
             cboxPag.Size = new Size(91, 33);
             cboxPag.TabIndex = 53;
@@ -658,8 +552,7 @@
             // txtPaginacion
             // 
             txtPaginacion.Anchor = AnchorStyles.Right;
-            txtPaginacion.Location = new Point(4939, -33);
-            txtPaginacion.Margin = new Padding(4, 5, 4, 5);
+            txtPaginacion.Location = new Point(3457, -33);
             txtPaginacion.Name = "txtPaginacion";
             txtPaginacion.ReadOnly = true;
             txtPaginacion.Size = new Size(88, 31);
@@ -671,8 +564,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label6.ForeColor = SystemColors.ControlLightLight;
-            label6.Location = new Point(4900, -28);
-            label6.Margin = new Padding(4, 0, 4, 0);
+            label6.Location = new Point(3430, -30);
             label6.Name = "label6";
             label6.Size = new Size(36, 28);
             label6.TabIndex = 51;
@@ -684,8 +576,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label7.ForeColor = SystemColors.ControlLightLight;
-            label7.Location = new Point(4717, -28);
-            label7.Margin = new Padding(4, 0, 4, 0);
+            label7.Location = new Point(3302, -30);
             label7.Name = "label7";
             label7.Size = new Size(70, 28);
             label7.TabIndex = 50;
@@ -697,7 +588,8 @@
             cmbPaginacion.BackColor = SystemColors.Info;
             cmbPaginacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPaginacion.FormattingEnabled = true;
-            cmbPaginacion.Location = new Point(4786, -33);
+            cmbPaginacion.Location = new Point(3350, -33);
+            cmbPaginacion.Margin = new Padding(2);
             cmbPaginacion.Name = "cmbPaginacion";
             cmbPaginacion.Size = new Size(91, 33);
             cmbPaginacion.TabIndex = 48;
@@ -706,8 +598,7 @@
             // 
             label3.Anchor = AnchorStyles.Right;
             label3.AutoSize = true;
-            label3.Location = new Point(6077, -48);
-            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Location = new Point(4254, -42);
             label3.Name = "label3";
             label3.Size = new Size(34, 25);
             label3.TabIndex = 47;
@@ -717,8 +608,7 @@
             // 
             label5.Anchor = AnchorStyles.Right;
             label5.AutoSize = true;
-            label5.Location = new Point(5894, -48);
-            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Location = new Point(4126, -42);
             label5.Name = "label5";
             label5.Size = new Size(64, 25);
             label5.TabIndex = 46;
@@ -727,8 +617,7 @@
             // txtPag
             // 
             txtPag.Anchor = AnchorStyles.Right;
-            txtPag.Location = new Point(6116, -53);
-            txtPag.Margin = new Padding(4, 5, 4, 5);
+            txtPag.Location = new Point(4281, -45);
             txtPag.Name = "txtPag";
             txtPag.Size = new Size(91, 31);
             txtPag.TabIndex = 45;
@@ -739,21 +628,22 @@
             cmbPag.BackColor = SystemColors.Info;
             cmbPag.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPag.FormattingEnabled = true;
-            cmbPag.Location = new Point(5963, -53);
+            cmbPag.Location = new Point(4174, -45);
+            cmbPag.Margin = new Padding(2);
             cmbPag.Name = "cmbPag";
             cmbPag.Size = new Size(91, 33);
             cmbPag.TabIndex = 44;
             // 
             // panel1
             // 
-            panel1.BackColor = Color.SlateGray;
+            panel1.BackColor = SystemColors.ControlLightLight;
             panel1.Controls.Add(panel4);
             panel1.Controls.Add(dgvRolPermiso);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 220);
             panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1549, 588);
+            panel1.Size = new Size(1084, 378);
             panel1.TabIndex = 40;
             // 
             // panel4
@@ -949,8 +839,7 @@
             dgvRolPermiso.DefaultCellStyle = dataGridViewCellStyle3;
             dgvRolPermiso.EnableHeadersVisualStyles = false;
             dgvRolPermiso.GridColor = Color.FromArgb(45, 66, 91);
-            dgvRolPermiso.Location = new Point(0, 60);
-            dgvRolPermiso.Margin = new Padding(4, 5, 4, 5);
+            dgvRolPermiso.Location = new Point(12, 42);
             dgvRolPermiso.Name = "dgvRolPermiso";
             dgvRolPermiso.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -970,7 +859,7 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
             dgvRolPermiso.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvRolPermiso.RowTemplate.Height = 25;
-            dgvRolPermiso.Size = new Size(1549, 528);
+            dgvRolPermiso.Size = new Size(1060, 330);
             dgvRolPermiso.TabIndex = 5;
             // 
             // R_R_RolesPermisos
@@ -987,7 +876,6 @@
             Name = "R_R_RolesPermisos";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "RolesPermisos";
-            WindowState = FormWindowState.Maximized;
             Load += RolesPermisos_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -1018,7 +906,6 @@
         private Button button4;
         private Button button7;
         private Button button9;
-        public TextBox txtRol;
         public Label label2;
         private Panel panel3;
         private Button btnSiguiente;
@@ -1039,12 +926,6 @@
         private Label label5;
         private TextBox txtPag;
         private ComboBox cmbPag;
-        private Button btnSigR;
-        private Button btnAntR;
-        private TextBox txtPagR;
-        private Label label1;
-        private Label label4;
-        private ComboBox cmbPagR;
         public Button btnCancelar;
         public Button btnGuardar;
         private PictureBox pictureBox5;
@@ -1062,5 +943,6 @@
         private Button button14;
         private Button button15;
         private Button button16;
+        private ComboBox cmbRol;
     }
 }
