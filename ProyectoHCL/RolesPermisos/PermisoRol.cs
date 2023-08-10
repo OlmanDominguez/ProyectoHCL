@@ -10,7 +10,7 @@ namespace ProyectoHCL.RolesPermisos
     {
         public int IdPermisoRol { get; set; }
 
-        public int IdRol { get; set; }
+        public string IdRol { get; set; }
 
         public int IdPermiso { get; set; }
 

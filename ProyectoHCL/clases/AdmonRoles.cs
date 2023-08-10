@@ -1,4 +1,4 @@
-﻿using DocumentFormat.OpenXml.Presentation;
+﻿
 using MySql.Data.MySqlClient;
 using ProyectoHCL.Formularios;
 using System;
@@ -8,9 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProyectoHCL.clases;
+
 namespace ProyectoHCL.clases
 {
-    public class RgtRoles
+    public  class AdmonRoles
     {
         MySqlConnection conn;
         MySqlCommand cmd;
@@ -20,6 +21,7 @@ namespace ProyectoHCL.clases
 
             try
             {
+                string sql = " SELECT ID_ROL, ROL, ESTADO_ROL, FECHA_CREACION, FECHA_ACTUALIZACION FROM  TBL_ROL ";
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                 conn.Open();
 

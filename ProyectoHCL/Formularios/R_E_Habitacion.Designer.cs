@@ -154,7 +154,7 @@
             cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbEstado.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             cmbEstado.FormattingEnabled = true;
-            cmbEstado.Items.AddRange(new object[] { "RESERVADO", "DISPONIBLE" });
+            cmbEstado.Items.AddRange(new object[] { "ACTIVO", "INACTIVO" });
             cmbEstado.Location = new Point(243, 219);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(316, 28);

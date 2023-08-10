@@ -271,7 +271,6 @@
             cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbEstado.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             cmbEstado.FormattingEnabled = true;
-            cmbEstado.Items.AddRange(new object[] { "BLOQUEADO", "ACTIVO", "INACTIVO", "NUEVO" });
             cmbEstado.Location = new Point(463, 277);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(316, 28);
@@ -284,7 +283,6 @@
             cmbRol.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbRol.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             cmbRol.FormattingEnabled = true;
-            cmbRol.Items.AddRange(new object[] { "ADMINISTRADOR", "COLABORADOR" });
             cmbRol.Location = new Point(98, 277);
             cmbRol.Name = "cmbRol";
             cmbRol.Size = new Size(316, 28);

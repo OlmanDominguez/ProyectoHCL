@@ -1,5 +1,7 @@
-﻿using DocumentFormat.OpenXml.Office2013.Excel;
-using DocumentFormat.OpenXml.Vml;
+﻿using iText.IO.Font.Constants;
+using iText.Kernel.Font;
+using iText.Kernel.Pdf;
+using iText.Layout.Properties;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
@@ -11,6 +13,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection.Metadata;
+using Document = iText.Layout.Document;
+using iText.Kernel.Geom;
+using iText.Layout.Element;
+using SpreadsheetLight;
+using SpreadsheetLight.Drawing;
+using Point = System.Drawing.Point;
 
 namespace ProyectoHCL.Formularios
 {
@@ -21,6 +30,7 @@ namespace ProyectoHCL.Formularios
         Objetos obj = new Objetos();
         DataSet ds = new DataSet();
         MsgB msgB = new MsgB();
+        CDatos cDatos = new CDatos();
         int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
 
         public CtrlObjetos()
@@ -28,6 +38,36 @@ namespace ProyectoHCL.Formularios
             InitializeComponent();
             pagFinal = numFilas;
             CargarDG();
+        }
+
+        private void Permisos()
+        {
+            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
+
+            foreach (var obj in LsObj)
+            {
+                switch (obj.IdPermiso)
+                {
+                    case 2:
+                        if (obj.IdObjeto == "OBJETOS" && !obj.Permitido)
+                        {
+                            btnNuevo.Enabled = false;
+                        }
+                        break;
+                    case 3:
+                        if (obj.IdObjeto == "OBJETOS" && !obj.Permitido)
+                        {
+                            dgvObjetos.Columns["EDITAR"].Visible = false;
+                        }
+                        break;
+                    case 4:
+                        if (obj.IdObjeto == "OBJETOS" && !obj.Permitido)
+                        {
+                            dgvObjetos.Columns["ELIMINAR"].Visible = false;
+                        }
+                        break;
+                }
+            }
         }
 
         private void CargarDG()
@@ -63,6 +103,8 @@ namespace ProyectoHCL.Formularios
             DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
             btnDelete.Name = "ELIMINAR";
             dgvObjetos.Columns.Add(btnDelete);
+
+            Permisos();
 
         }
 
@@ -108,7 +150,7 @@ namespace ProyectoHCL.Formularios
         }
 
         private void btnNuevo_Click_1(object sender, EventArgs e)
-        {   
+        {
             R_E_obj.lblTitulo.Text = "Registrar Objeto";
             R_E_obj.Size = new System.Drawing.Size(800, 431);
             R_E_obj.btnGuardar.Location = new Point(256, 282);
@@ -297,6 +339,196 @@ namespace ProyectoHCL.Formularios
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void crearPDF()
+        {
+            PdfWriter pdfWriter = new PdfWriter("Reporte.pdf");
+            PdfDocument pdf = new PdfDocument(pdfWriter);
+            //1 pulgada = 72 pt (8 1/2 x 11) (612 x 792)
+            PageSize tamanioH = new PageSize(792, 612);
+            Document documento = new Document(pdf, tamanioH);
+            // Document documento = new Document(pdf, PageSize.LETTER);
+
+            documento.SetMargins(70, 20, 55, 20);
+
+            PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+            PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+
+            string[] columnas = { "Id", "Nombre", "Descripcion", "Estado", "Creacion", "Actualizacion" };
+
+            float[] tamanios = { 1, 2, 3, 2, 3, 3 };
+            Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
+            tabla.SetWidth(UnitValue.CreatePercentValue(100));
+
+            foreach (string columna in columnas)
+            {
+                tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+            }
+
+            string sql = "SELECT ID_OBJETO AS ID, OBJETO AS NOMBRE, DESCRIPCION, ESTADO_OBJETO AS ESTADO, FECHA_CREACION AS CREACION," +
+                " FECHA_ACTUALIZACION AS ACTUALIZACION FROM TBL_OBJETO";
+
+            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+            // conexionBD.Open();
+
+            MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+            MySqlDataReader reader = comando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                tabla.AddCell(new Cell().Add(new Paragraph(reader["Id"].ToString()).SetFont(fontContenido)));
+                tabla.AddCell(new Cell().Add(new Paragraph(reader["Nombre"].ToString()).SetFont(fontContenido)));
+                tabla.AddCell(new Cell().Add(new Paragraph(reader["Descripcion"].ToString()).SetFont(fontContenido)));
+                tabla.AddCell(new Cell().Add(new Paragraph(reader["Estado"].ToString()).SetFont(fontContenido)));
+                tabla.AddCell(new Cell().Add(new Paragraph(reader["Creacion"].ToString()).SetFont(fontContenido)));
+                tabla.AddCell(new Cell().Add(new Paragraph(reader["Actualizacion"].ToString()).SetFont(fontContenido)));
+            }
+
+            documento.Add(tabla);
+            documento.Close();
+
+            var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/jmont/OneDrive/Documentos/HM/ProyectoIP/logoCL.png")).SetWidth(50);
+            var plogo = new Paragraph("").Add(logo);
+
+            var nombre = new Paragraph("Hotel Casa Lomas");
+            nombre.SetTextAlignment(TextAlignment.CENTER);
+            nombre.SetFontSize(12);
+
+            var titulo = new Paragraph("Reporte Objetos");
+            titulo.SetTextAlignment(TextAlignment.CENTER);
+            titulo.SetFontSize(14);
+            titulo.SetBold();
+
+            var dfecha = DateTime.Now.ToString("dd.MM.yyy");
+            var dhora = DateTime.Now.ToString("hh:mm:ss");
+            var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
+            fecha.SetFontSize(12);
+
+            PdfDocument pdfDoc = new PdfDocument(new PdfReader("Reporte.pdf"), new PdfWriter
+                ("ReporteObjetos.pdf"));
+            Document doc = new Document(pdfDoc);
+
+            int numeros = pdfDoc.GetNumberOfPages();
+
+            for (int i = 1; i <= numeros; i++)
+            {
+                PdfPage pagina = pdfDoc.GetPage(i);
+
+                float y = (pdfDoc.GetPage(i).GetPageSize().GetTop() - 15);
+                doc.ShowTextAligned(plogo, 40, y, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                doc.ShowTextAligned(nombre, 115, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                doc.ShowTextAligned(titulo, 396, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                doc.ShowTextAligned(fecha, 700, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+
+                doc.ShowTextAligned(new Paragraph(String.Format("pagina {0} de {1}", i, numeros)), pdfDoc.GetPage
+                    (i).GetPageSize().GetWidth() / 2, pdfDoc.GetPage(i).GetPageSize().GetBottom() + 30, i,
+                    TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+            }
+            doc.Close();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            crearPDF();
+            MsgB mbox = new MsgB("informacion", "PDF creado con éxito");
+            DialogResult dR = mbox.ShowDialog();
+        }
+
+        private void crearExcel()
+        {
+            SLDocument sl = new SLDocument();
+
+            System.Drawing.Bitmap bm = new System.Drawing.Bitmap("C:/Users/jmont/OneDrive/Documentos/HM/ProyectoIP/logoCL.png");
+            Byte[] ba;
+            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+            {
+                bm.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                ms.Close();
+                ba = ms.ToArray();
+            }
+            SLPicture pic = new SLPicture(ba, DocumentFormat.OpenXml.Packaging.ImagePartType.Jpeg);
+            pic.SetPosition(0, 0);
+            pic.ResizeInPixels(80, 80);
+            sl.InsertPicture(pic);
+
+            sl.SetCellValue("C2", "Reporte de Objetos");
+            SLStyle estiloT = sl.CreateStyle();
+            estiloT.Font.FontName = "Arial";
+            estiloT.Font.FontSize = 14;
+            estiloT.Font.Bold = true;
+            sl.SetCellStyle("C2", estiloT);
+            sl.MergeWorksheetCells("C2", "F2");
+
+            int celdaCabecera = 6, celdaInicial = 6;
+
+            sl.RenameWorksheet(SLDocument.DefaultFirstSheetName, "TBL_OBJETO");
+            sl.SetCellValue("B" + celdaCabecera, "Id");
+            sl.SetCellValue("C" + celdaCabecera, "Nombre");
+            sl.SetCellValue("D" + celdaCabecera, "Descripcion");
+            sl.SetCellValue("E" + celdaCabecera, "Estado");
+            sl.SetCellValue("F" + celdaCabecera, "Creacion");
+            sl.SetCellValue("G" + celdaCabecera, "Actualizacion");
+
+            SLStyle estiloCa = sl.CreateStyle();
+            estiloT.Font.FontName = "Arial";
+            estiloT.Font.FontSize = 12;
+            estiloT.Font.Bold = true;
+            estiloCa.Font.FontColor = System.Drawing.Color.White;
+            estiloCa.Fill.SetPattern(DocumentFormat.OpenXml.Spreadsheet.PatternValues.Solid, System.Drawing.Color.Blue, System.Drawing.Color.Blue);
+            sl.SetCellStyle("B" + celdaCabecera, "G" + celdaCabecera, estiloCa);
+
+            string sql = "SELECT ID_OBJETO AS ID, OBJETO AS NOMBRE, DESCRIPCION, ESTADO_OBJETO AS ESTADO, FECHA_CREACION AS CREACION," +
+                " FECHA_ACTUALIZACION AS ACTUALIZACION FROM TBL_OBJETO";
+
+            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+
+            MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+            MySqlDataReader reader = comando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                celdaCabecera++;
+                sl.SetCellValue("B" + celdaCabecera, reader["id"].ToString());
+                sl.SetCellValue("C" + celdaCabecera, reader["nombre"].ToString());
+                sl.SetCellValue("D" + celdaCabecera, reader["descripcion"].ToString());
+                sl.SetCellValue("E" + celdaCabecera, reader["estado"].ToString());
+                sl.SetCellValue("F" + celdaCabecera, reader["creacion"].ToString());
+                sl.SetCellValue("G" + celdaCabecera, reader["actualizacion"].ToString());
+            }
+
+            SLStyle EstiloB = sl.CreateStyle();
+            EstiloB.Border.LeftBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            EstiloB.Border.LeftBorder.Color = System.Drawing.Color.Black;
+            EstiloB.Border.TopBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            EstiloB.Border.RightBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            EstiloB.Border.BottomBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            sl.SetCellStyle("B" + celdaInicial, "G" + celdaCabecera, EstiloB);
+
+            sl.AutoFitColumn("B", "G");
+
+            SaveFileDialog sf = new SaveFileDialog();
+
+            sf.DefaultExt = "*.xlsx";
+            sf.FileName = "ExcelObjetos";
+            sf.Filter = " Libro de Excel (*.xlsx) | *.xlsx";
+
+            if (sf.ShowDialog() == DialogResult.OK)
+            {
+                sl.SaveAs(sf.FileName);
+                MsgB mbox = new MsgB("informacion", "Archivo Excel creado con éxito");
+                DialogResult dR = mbox.ShowDialog();
+            }
+        }
+
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            crearExcel();
+        }
+
+        private void btnNuevo_EnabledChanged(object sender, EventArgs e)
+        {
+            btnNuevo.BackColor = Color.DarkGray;
         }
     }
 }

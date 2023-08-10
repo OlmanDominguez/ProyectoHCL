@@ -1,6 +1,6 @@
 ﻿namespace ProyectoHCL.Formularios
 {
-    partial class EditarParametro
+    partial class R_E_Parametro
     {
         /// <summary>
         /// Required designer variable.
@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarParametro));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(R_E_Parametro));
             panel2 = new Panel();
             btnCerrar = new Button();
             pictureBox5 = new PictureBox();
-            label11 = new Label();
+            lbPar = new Label();
             btnMin = new Button();
             panel3 = new Panel();
-            cmbParametro = new ComboBox();
+            texPa = new TextBox();
             btnCancelar = new Button();
             btnGuardar = new Button();
             txtValor = new TextBox();
             label6 = new Label();
             label2 = new Label();
-            errorProvider1 = new ErrorProvider(components);
+            errorp = new ErrorProvider(components);
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorp).BeginInit();
             SuspendLayout();
             // 
             // panel2
@@ -54,7 +54,7 @@
             panel2.BackColor = Color.SteelBlue;
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(pictureBox5);
-            panel2.Controls.Add(label11);
+            panel2.Controls.Add(lbPar);
             panel2.Controls.Add(btnMin);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
@@ -62,6 +62,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1541, 122);
             panel2.TabIndex = 23;
+            panel2.MouseMove += panel2_MouseMove;
             // 
             // btnCerrar
             // 
@@ -91,19 +92,19 @@
             pictureBox5.TabIndex = 34;
             pictureBox5.TabStop = false;
             // 
-            // label11
+            // lbPar
             // 
-            label11.Anchor = AnchorStyles.Top;
-            label11.AutoSize = true;
-            label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.ForeColor = Color.White;
-            label11.Location = new Point(595, 35);
-            label11.Margin = new Padding(4, 0, 4, 0);
-            label11.Name = "label11";
-            label11.Size = new Size(266, 45);
-            label11.TabIndex = 19;
-            label11.Text = "Editar Parametro";
+            lbPar.Anchor = AnchorStyles.Top;
+            lbPar.AutoSize = true;
+            lbPar.BackColor = Color.Transparent;
+            lbPar.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            lbPar.ForeColor = Color.White;
+            lbPar.Location = new Point(595, 35);
+            lbPar.Margin = new Padding(4, 0, 4, 0);
+            lbPar.Name = "lbPar";
+            lbPar.Size = new Size(66, 45);
+            lbPar.TabIndex = 19;
+            lbPar.Text = "lbP";
             // 
             // btnMin
             // 
@@ -124,7 +125,7 @@
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
-            panel3.Controls.Add(cmbParametro);
+            panel3.Controls.Add(texPa);
             panel3.Controls.Add(btnCancelar);
             panel3.Controls.Add(btnGuardar);
             panel3.Controls.Add(txtValor);
@@ -137,16 +138,13 @@
             panel3.Size = new Size(1541, 543);
             panel3.TabIndex = 25;
             // 
-            // cmbParametro
+            // texPa
             // 
-            cmbParametro.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbParametro.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            cmbParametro.FormattingEnabled = true;
-            cmbParametro.Location = new Point(366, 192);
-            cmbParametro.Margin = new Padding(4, 5, 4, 5);
-            cmbParametro.Name = "cmbParametro";
-            cmbParametro.Size = new Size(450, 39);
-            cmbParametro.TabIndex = 24;
+            texPa.Location = new Point(356, 181);
+            texPa.Name = "texPa";
+            texPa.Size = new Size(334, 31);
+            texPa.TabIndex = 23;
+            texPa.KeyPress += texPar_KeyPress;
             // 
             // btnCancelar
             // 
@@ -182,20 +180,22 @@
             btnGuardar.TabIndex = 21;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // txtValor
             // 
             txtValor.BackColor = Color.White;
             txtValor.BorderStyle = BorderStyle.FixedSingle;
             txtValor.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtValor.Location = new Point(366, 317);
+            txtValor.Location = new Point(366, 318);
             txtValor.Margin = new Padding(4, 5, 4, 5);
             txtValor.MaxLength = 50;
             txtValor.Name = "txtValor";
             txtValor.ShortcutsEnabled = false;
             txtValor.Size = new Size(451, 37);
             txtValor.TabIndex = 12;
-            txtValor.TextChanged += txtNumero_TextChanged;
+            txtValor.KeyPress += txtValor_KeyPress;
+            txtValor.Leave += txtValor_Leave;
             // 
             // label6
             // 
@@ -221,11 +221,11 @@
             label2.TabIndex = 1;
             label2.Text = "Parametro:";
             // 
-            // errorProvider1
+            // errorp
             // 
-            errorProvider1.ContainerControl = this;
+            errorp.ContainerControl = this;
             // 
-            // EditarParametro
+            // R_E_Parametro
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -233,15 +233,14 @@
             Controls.Add(panel3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "EditarParametro";
+            Name = "R_E_Parametro";
             Text = "EditarParametro";
-            Load += EditarParametro_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorp).EndInit();
             ResumeLayout(false);
         }
 
@@ -249,16 +248,16 @@
 
         private Panel panel2;
         private PictureBox pictureBox5;
-        private Label label11;
+        private Label lbPar;
         private Button btnCerrar;
         private Button btnMin;
         public Panel panel3;
-        public ComboBox cmbParametro;
         public TextBox txtValor;
         private Label label6;
         private Label label2;
-        private ErrorProvider errorProvider1;
+        private ErrorProvider errorp;
         public Button btnCancelar;
         public Button btnGuardar;
+        private TextBox texPa;
     }
 }

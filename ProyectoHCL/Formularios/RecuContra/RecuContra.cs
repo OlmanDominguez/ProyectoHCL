@@ -48,6 +48,7 @@ namespace ProyectoHCL
         public static class clasecompartida
         {
             public static string user;
+            public static int iduser;
         }
 
         private async void BTN_Aceptar_Click(object sender, EventArgs e)

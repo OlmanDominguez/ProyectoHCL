@@ -46,8 +46,8 @@
             btnGuardar = new Button();
             btnCancelar = new Button();
             panel2 = new Panel();
-            label11 = new Label();
             btnCerrar = new Button();
+            label11 = new Label();
             panel1 = new Panel();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
@@ -196,6 +196,7 @@
             ID_Rol.ShortcutsEnabled = false;
             ID_Rol.Size = new Size(313, 37);
             ID_Rol.TabIndex = 50;
+            ID_Rol.TextChanged += ID_Rol_TextChanged;
             // 
             // txtFechaC
             // 
@@ -294,7 +295,7 @@
             // 
             // panel2
             // 
-            panel2.BackColor = Color.Black;
+            panel2.BackColor = Color.WhiteSmoke;
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(label11);
             panel2.Dock = DockStyle.Top;
@@ -303,20 +304,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1259, 122);
             panel2.TabIndex = 60;
-            // 
-            // label11
-            // 
-            label11.Anchor = AnchorStyles.Top;
-            label11.AutoSize = true;
-            label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.ForeColor = Color.White;
-            label11.Location = new Point(919, 35);
-            label11.Margin = new Padding(4, 0, 4, 0);
-            label11.Name = "label11";
-            label11.Size = new Size(299, 45);
-            label11.TabIndex = 28;
-            label11.Text = "Informacion ROLES";
             // 
             // btnCerrar
             // 
@@ -332,6 +319,20 @@
             btnCerrar.Size = new Size(20, 28);
             btnCerrar.TabIndex = 31;
             btnCerrar.UseVisualStyleBackColor = false;
+            // 
+            // label11
+            // 
+            label11.Anchor = AnchorStyles.Top;
+            label11.AutoSize = true;
+            label11.BackColor = Color.Transparent;
+            label11.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.ForeColor = Color.Black;
+            label11.Location = new Point(530, 40);
+            label11.Margin = new Padding(4, 0, 4, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(299, 45);
+            label11.TabIndex = 28;
+            label11.Text = "Informacion ROLES";
             // 
             // panel1
             // 

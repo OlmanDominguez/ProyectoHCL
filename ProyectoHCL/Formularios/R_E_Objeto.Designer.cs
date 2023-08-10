@@ -60,18 +60,21 @@
             panel2.Controls.Add(btnMin);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
+            panel2.Margin = new Padding(4, 5, 4, 5);
             panel2.Name = "panel2";
-            panel2.Size = new Size(800, 73);
+            panel2.Size = new Size(1143, 122);
             panel2.TabIndex = 23;
+            panel2.Paint += panel2_Paint;
             panel2.MouseMove += panel2_MouseMove;
             // 
             // pictureBox5
             // 
             pictureBox5.BackColor = Color.Transparent;
             pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(12, 12);
+            pictureBox5.Location = new Point(17, 20);
+            pictureBox5.Margin = new Padding(4, 5, 4, 5);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(50, 48);
+            pictureBox5.Size = new Size(71, 80);
             pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox5.TabIndex = 34;
             pictureBox5.TabStop = false;
@@ -83,10 +86,11 @@
             lblTitulo.BackColor = Color.Transparent;
             lblTitulo.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
             lblTitulo.ForeColor = Color.White;
-            lblTitulo.Location = new Point(314, 21);
+            lblTitulo.Location = new Point(449, 35);
+            lblTitulo.Margin = new Padding(4, 0, 4, 0);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.RightToLeft = RightToLeft.No;
-            lblTitulo.Size = new Size(38, 30);
+            lblTitulo.Size = new Size(55, 45);
             lblTitulo.TabIndex = 19;
             lblTitulo.Text = "lbl";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -99,9 +103,10 @@
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnCerrar.FlatStyle = FlatStyle.Flat;
-            btnCerrar.Location = new Point(774, 12);
+            btnCerrar.Location = new Point(1106, 20);
+            btnCerrar.Margin = new Padding(4, 5, 4, 5);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(14, 17);
+            btnCerrar.Size = new Size(20, 28);
             btnCerrar.TabIndex = 33;
             btnCerrar.UseVisualStyleBackColor = false;
             btnCerrar.Click += btnCerrar_Click;
@@ -114,9 +119,10 @@
             btnMin.FlatAppearance.BorderSize = 0;
             btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnMin.FlatStyle = FlatStyle.Flat;
-            btnMin.Location = new Point(739, 10);
+            btnMin.Location = new Point(1056, 17);
+            btnMin.Margin = new Padding(4, 5, 4, 5);
             btnMin.Name = "btnMin";
-            btnMin.Size = new Size(19, 20);
+            btnMin.Size = new Size(27, 33);
             btnMin.TabIndex = 32;
             btnMin.UseVisualStyleBackColor = false;
             btnMin.Click += btnMin_Click;
@@ -133,9 +139,10 @@
             panel3.Controls.Add(label1);
             panel3.Controls.Add(label2);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(0, 73);
+            panel3.Location = new Point(0, 122);
+            panel3.Margin = new Padding(4, 5, 4, 5);
             panel3.Name = "panel3";
-            panel3.Size = new Size(800, 355);
+            panel3.Size = new Size(1143, 591);
             panel3.TabIndex = 25;
             // 
             // rTxtDesc
@@ -147,8 +154,9 @@
             rTxtDesc.MaxLength = 500;
             rTxtDesc.Multiline = true;
             rTxtDesc.Name = "rTxtDesc";
-            rTxtDesc.Size = new Size(316, 113);
+            rTxtDesc.Size = new Size(316, 109);
             rTxtDesc.TabIndex = 25;
+            rTxtDesc.Text = "";
             rTxtDesc.KeyPress += rTxtDesc_KeyPress_1;
             rTxtDesc.Leave += rTxtDesc_Leave_1;
             // 
@@ -159,10 +167,12 @@
             txtObj.CharacterCasing = CharacterCasing.Upper;
             txtObj.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtObj.Location = new Point(243, 65);
-            txtObj.MaxLength = 150;
+            txtObj.MaxLength = 50;
             txtObj.Name = "txtObj";
+            txtObj.ShortcutsEnabled = false;
             txtObj.Size = new Size(316, 27);
             txtObj.TabIndex = 24;
+            txtObj.TextChanged += txtObj_TextChanged;
             txtObj.Leave += txtObj_Leave;
             // 
             // cmbEstado
@@ -171,9 +181,10 @@
             cmbEstado.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             cmbEstado.FormattingEnabled = true;
             cmbEstado.Items.AddRange(new object[] { "ACTIVO", "INACTIVO" });
-            cmbEstado.Location = new Point(517, 65);
+            cmbEstado.Location = new Point(739, 108);
+            cmbEstado.Margin = new Padding(4, 5, 4, 5);
             cmbEstado.Name = "cmbEstado";
-            cmbEstado.Size = new Size(316, 28);
+            cmbEstado.Size = new Size(450, 39);
             cmbEstado.TabIndex = 23;
             cmbEstado.Visible = false;
             cmbEstado.Leave += cmbEstado_Leave;
@@ -188,9 +199,10 @@
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(466, 282);
+            btnCancelar.Location = new Point(666, 470);
+            btnCancelar.Margin = new Padding(4, 5, 4, 5);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(82, 32);
+            btnCancelar.Size = new Size(117, 53);
             btnCancelar.TabIndex = 22;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
@@ -206,9 +218,10 @@
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(256, 282);
+            btnGuardar.Location = new Point(366, 470);
+            btnGuardar.Margin = new Padding(4, 5, 4, 5);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(82, 32);
+            btnGuardar.Size = new Size(117, 53);
             btnGuardar.TabIndex = 21;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
@@ -219,9 +232,10 @@
             label6.AutoSize = true;
             label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(243, 107);
+            label6.Location = new Point(347, 178);
+            label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new Size(104, 19);
+            label6.Size = new Size(157, 28);
             label6.TabIndex = 5;
             label6.Text = "Descripción:";
             // 
@@ -230,9 +244,10 @@
             label1.AutoSize = true;
             label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(517, 34);
+            label1.Location = new Point(739, 57);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(63, 19);
+            label1.Size = new Size(96, 28);
             label1.TabIndex = 2;
             label1.Text = "Estado:";
             label1.Visible = false;
@@ -242,9 +257,10 @@
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(243, 34);
+            label2.Location = new Point(347, 57);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(77, 19);
+            label2.Size = new Size(114, 28);
             label2.TabIndex = 1;
             label2.Text = "Nombre:";
             // 
@@ -254,13 +270,12 @@
             // 
             // R_E_Objeto
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 428);
+            ClientSize = new Size(1143, 713);
             Controls.Add(panel3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
-            MaximumSize = new Size(800, 428);
             Name = "R_E_Objeto";
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;

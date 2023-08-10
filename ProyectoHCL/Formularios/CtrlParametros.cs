@@ -6,6 +6,7 @@ using ProyectoHCL.clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Point = System.Drawing.Point;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -26,18 +27,44 @@ namespace ProyectoHCL.Formularios
     public partial class CtrlParametros : Form
     {
 
-        Parametros Paramt = new Parametros();
+        R_E_Parametro R_E_pmo = new R_E_Parametro();
+        AdmonParametros admonParametro = new AdmonParametros();
+        Parametros pmo = new Parametros();
         DataSet ds = new DataSet();
+        MsgB msgB = new MsgB();
+        int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
 
         public CtrlParametros()
         {
             InitializeComponent();
-            // pagFinal = numFilas;
-            //CargarDGCl();
+            pagFinal = numFilas;
+            CargarDGP();
 
         }
 
-        AdmonParametros admonParametros = new AdmonParametros();
+        private void CargarDGP()
+        {
+            pmo.Inicio1 = pagInicio;
+            pmo.Final1 = pagFinal;
+            ds = pmo.PaginacionParametro();
+            dgvParametro.DataSource = ds.Tables[1];
+
+            int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;
+
+            if (Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) % numFilas > 0) cantidad++;
+
+            txtPag.Text = cantidad.ToString();
+
+            cmbPag.Items.Clear();
+
+            for (int x = 1; x <= cantidad; x++)
+                cmbPag.Items.Add(x.ToString());
+
+            cmbPag.SelectedIndex = indice;
+
+            HabilitarBotones();
+        }
+
         private void CtrlParametros_Load(object sender, EventArgs e)
         {
             // RellenarGrid();
@@ -47,14 +74,95 @@ namespace ProyectoHCL.Formularios
 
         }
 
+        public void BuscarParametro(string buscarP)
+        {
+            try
+            {
+                MySqlConnection conn;
+                MySqlCommand cmd;
+
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
+
+                cmd = new MySqlCommand("buscarParametro", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@nombreP", MySqlDbType.VarChar, 100).Value = buscarP;
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvParametro.DataSource = dt;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void btnnuevoP_Click(object sender, EventArgs e)
+        {
+           // R_E_pmo.lbPar.Text = "Registrar Parametro";
+            R_E_pmo.Size = new System.Drawing.Size(800, 431);
+            R_E_pmo.btnGuardar.Location = new Point(256, 282);
+            R_E_pmo.btnCancelar.Location = new Point(466, 282);
+          //  R_E_pmo.label2.Location = new Point(243, 34);
+           // R_E_pmo.texPa.Location = new Point(243, 65);
+            //R_E_pmo.label6.Visible = false;
+            R_E_pmo.txtValor.Visible = false;
+            //R_E_pmo.label6.Location = new Point(243, 107);
+            //R_E_pmo.texPar.Location = new Point(243, 138);
+            R_E_pmo.ShowDialog();
+            CargarDGP();
+        }
+
+        private void txtBuscarP_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscarP.Text != "")
+            {
+                BuscarParametro(txtBuscarP.Text);
+            }
+            else
+            {
+                CargarDGP();
+            }
+        }
+
+        private void dgvParametro_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvParametro.Columns[e.ColumnIndex].Name == "EDITAR")
+            {
+               /* R_E_Parametro.lbPar.Text = "Editar Objeto";
+                R_E_Parametro.Size = new System.Drawing.Size(800, 371);
+                R_E_Parametro.btnGuardar.Location = new Point(256, 213);
+                R_E_Parametro.btnCancelar.Location = new Point(466, 213);
+                R_E_Parametro.label2.Location = new Point(59, 34);
+                R_E_Parametro.txtObj.Location = new Point(59, 67);
+                R_E_Parametro.label1.Location = new Point(59, 115);
+                R_E_Parametro.cmbEstado.Location = new Point(59, 146);
+                R_E_Parametro.label1.Visible = true;
+                R_E_Parametro.cmbEstado.Visible = true;
+                R_E_Parametro.label6.Location = new Point(421, 34);
+                R_E_Parametro.rTxtDesc.Location = new Point(421, 65);
+                R_E_Parametro.idpar = dgvParametro.CurrentRow.Cells["ID"].Value.ToString();
+                R_E_Parametro.txtObj.Text = dgvParametro.CurrentRow.Cells["NOMBRE"].Value.ToString();
+                R_E_Parametro.rTxtDesc.Text = dgvParametro.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
+                R_E_Parametro.cmbEstado.Text = dgvParametro.CurrentRow.Cells["ESTADO"].Value.ToString();
+                R_E_Parametro.ShowDialog();
+                R_E_Parametro.limpiarCampos();
+                CargarDGP();*/
+            }
+        }
         private void dgvParametro_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
+
             if (e.ColumnIndex >= 0 && this.dgvParametro.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
                 DataGridViewButtonCell celBoton = this.dgvParametro.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico");
+                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico"); //Se define la carpeta en la que está guardado el ícono del boton
                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
                 this.dgvParametro.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
@@ -64,33 +172,6 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void dgvParametro_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-            if (this.dgvParametro.Columns[e.ColumnIndex].Name == "EDITAR")
-            {
-                EditarParametro editarPart = new EditarParametro();
-
-                // editarPart.id = dgvParametro.CurrentRow.Cells["ID"].Value.ToString();
-                editarPart.cmbParametro.Text = dgvParametro.CurrentRow.Cells["NOMBRE_PARAMETRO"].Value.ToString();
-                editarPart.txtValor.Text = dgvParametro.CurrentRow.Cells["VALOR"].Value.ToString();
-                //  editarPart. = dgvParametro.CurrentRow.Cells["FECHA_CREACION"].Value.ToString();
-                //editarPart. = dgvParametro.CurrentRow.Cells["FECHA_MODIFICACION"].Value.ToString();
-                editarPart.ShowDialog();
-                //  CargarDG();
-            }
-        }
-        /* public void MostrarParametro()
-         {
-            dgvParametro.DataSource = AdmonParametros.MostrarParametro(); //Llamar metodo mostrar Roles en dataGrid
-         }*/
-
-        private void btnAgregarParametro_Click(object sender, EventArgs e)
-        {
-            EditarParametro regParametro = new EditarParametro(); //Se crea un objeto del form RegistrarUsuarios
-            regParametro.ShowDialog();
-            //  CargarDG();
-        }
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -131,7 +212,7 @@ namespace ProyectoHCL.Formularios
 
             while (reader.Read())
             {
-                for (int x=1; x<100; x++) 
+                
                 {
 
 
@@ -188,5 +269,86 @@ namespace ProyectoHCL.Formularios
             doc.Close();
         }
 
+
+        private void cmbPag_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPag.Text);
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDGP();
+        }
+
+        private void pmtMostrar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbIndice = pmtMostrar.SelectedIndex;
+            switch (cmbIndice)
+            {
+                case 0:
+                    numFilas = 5;
+                    break;
+                case 1:
+                    numFilas = 10;
+                    break;
+                case 2:
+                    numFilas = 20;
+                    break;
+                case 3:
+                    numFilas = 30;
+                    break;
+                case 4:
+                    numFilas = 40;
+                    break;
+            }
+            pagFinal = numFilas;
+            CargarDGP();
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPag.Text) - 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDGP();
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPag.Text) + 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDGP();
+        }
+
+        private void HabilitarBotones()
+        {
+            if (pagInicio == 1)
+            {
+                btnAnterior.Enabled = false;
+                pmtMostrar.Enabled = true;
+            }
+            else
+            {
+                btnAnterior.Enabled = true;
+                pmtMostrar.Enabled = false;
+            }
+
+            if (indice == (Convert.ToInt32(txtPag.Text) - 1))
+            {
+                btnSiguiente.Enabled = false;
+            }
+            else
+            {
+                btnSiguiente.Enabled = true;
+            }
+        }
+
+
+        private void btCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

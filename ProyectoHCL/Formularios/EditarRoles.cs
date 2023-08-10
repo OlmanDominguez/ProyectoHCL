@@ -26,5 +26,10 @@ namespace ProyectoHCL.Formularios
         {
 
         }
+
+        private void ID_Rol_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
