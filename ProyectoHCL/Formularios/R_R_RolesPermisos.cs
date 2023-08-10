@@ -41,7 +41,7 @@ namespace ProyectoHCL.Formularios
 
             cmbRol.DataSource = null;
             cmbRol.Items.Clear();
-            string sql = "SELECT ID_ROL, ROL FROM PT_ROL;";
+            string sql = "SELECT ID_ROL, ROL FROM TBL_ROL;";
 
             conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
             conn.Open();
@@ -221,5 +221,6 @@ namespace ProyectoHCL.Formularios
         {
 
         }
+
     }
 }

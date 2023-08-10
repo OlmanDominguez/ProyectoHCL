@@ -28,13 +28,13 @@ namespace ProyectoHCL.clases
 
             try
             {
-                string sql = "SELECT ID_OBJETO AS ID, OBJETO AS PANTALLA FROM PT_OBJETO;";               
+                string sql = "SELECT ID_OBJETO AS ID, OBJETO AS PANTALLA FROM TBL_OBJETO;";               
                 cmd = new MySqlCommand(sql, conn);
 
                 MySqlDataReader reader = cmd.ExecuteReader();
                 dt.Load(reader);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

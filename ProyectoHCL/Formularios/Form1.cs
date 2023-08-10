@@ -108,6 +108,8 @@ namespace ProyectoHCL
                         {
                             clasecompartida.iduser = (int)leer["ID_USUARIO"];
                             clasecompartida.user = UsuarioBox1.Text;
+                            //clases.CDatos.idUsu = (int)leer["ID_USUARIO"];
+                            clases.CDatos.idRolUs = (int)leer["ID_ROL"];
                             Form formulario = new Dashboard();
                             formulario.Show();
                         }

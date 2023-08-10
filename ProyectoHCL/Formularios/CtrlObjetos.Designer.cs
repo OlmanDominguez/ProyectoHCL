@@ -77,7 +77,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1549, 108);
             panel2.TabIndex = 32;
-            panel2.Paint += panel2_Paint;
             // 
             // btnCerrar
             // 

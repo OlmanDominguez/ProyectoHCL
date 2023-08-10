@@ -700,7 +700,6 @@
             dgvHab.Size = new Size(1027, 341);
             dgvHab.TabIndex = 4;
             dgvHab.CellClick += dgvHab_CellClick;
-            dgvHab.CellContentClick += dgvHab_CellContentClick;
             dgvHab.CellPainting += dgvHab_CellPainting;
             // 
             // CtrlHabitaciones
