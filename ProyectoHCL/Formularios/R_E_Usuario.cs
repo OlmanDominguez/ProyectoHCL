@@ -21,10 +21,80 @@ namespace ProyectoHCL.Formularios
         public R_E_Usuario()
         {
             InitializeComponent();
+            cargarEstado();
+            cargarRoles();
+            cmbRol.SelectedIndex = -1;
+            cmbEstado.SelectedIndex = -1;
         }
 
         public string idUs = null;
         MsgB msgB = new MsgB();
+
+        private void cargarRoles()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            cmbRol.DataSource = null;
+            cmbRol.Items.Clear();
+            string sql = "SELECT ID_ROL, DESCRIPCION FROM TBL_ROL;";
+
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            try
+            {
+                cmd = new MySqlCommand(sql, conn);
+                MySqlDataAdapter data = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                data.Fill(dt);
+
+                cmbRol.ValueMember = "ID_ROL";
+                cmbRol.DisplayMember = "DESCRIPCION";
+                cmbRol.DataSource = dt;
+
+            }
+            catch (MySqlException e)
+            {
+                MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
+                DialogResult dR = m.ShowDialog();
+            }
+            finally { conn.Close(); }
+
+        }
+
+        private void cargarEstado()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            cmbEstado.DataSource = null;
+            cmbEstado.Items.Clear();
+            string sql = "SELECT ID_ESTADO, DESCRIPCION FROM TBL_ESTADO;";
+
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            try
+            {
+                cmd = new MySqlCommand(sql, conn);
+                MySqlDataAdapter data = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                data.Fill(dt);
+
+                cmbEstado.ValueMember = "ID_ESTADO";
+                cmbEstado.DisplayMember = "DESCRIPCION";
+                cmbEstado.DataSource = dt;
+
+            }
+            catch (MySqlException e)
+            {
+                MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
+                DialogResult dR = m.ShowDialog();
+            }
+            finally { conn.Close(); }
+
+        }
 
         public void limpiarCampos()
         {

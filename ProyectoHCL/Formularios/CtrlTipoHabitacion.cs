@@ -1,4 +1,8 @@
 ﻿using DocumentFormat.OpenXml.Vml;
+using iText.IO.Font.Constants;
+using iText.Kernel.Font;
+using iText.Kernel.Pdf;
+using iText.Layout.Properties;
 using Microsoft.VisualBasic.ApplicationServices;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
@@ -11,12 +15,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection.Metadata;
+using Document = iText.Layout.Document;
+using iText.Kernel.Geom;
+using iText.Layout.Element;
+using SpreadsheetLight;
+using SpreadsheetLight.Drawing;
 
 namespace ProyectoHCL.Formularios
 {
     public partial class CtrlTipoHabitacion : Form
     {
-        //R_E_TipHabitacion R_E_tip = new R_E_TipHabitacion();
+        R_E_TipHab R_E_tip = new R_E_TipHab();
         AdmonTipHab admonTipHab = new AdmonTipHab();
         TipoHabitacion tipHab = new TipoHabitacion();
         DataSet ds = new DataSet();
@@ -50,7 +60,7 @@ namespace ProyectoHCL.Formularios
 
             cboxPag.SelectedIndex = indice;
 
-            //HabilitarBotones();
+            HabilitarBotones();
         }
 
         private void CtrlTipoHabitacion_Load(object sender, EventArgs e)
@@ -91,8 +101,8 @@ namespace ProyectoHCL.Formularios
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            //R_E_tip.lblTitulo.Text = "Registrar Tipo de Habitación";
-            //R_E_tip.ShowDialog();
+            R_E_tip.lblTitulo.Text = "Registrar Tipo de Habitación";
+            R_E_tip.ShowDialog();
             CargarDG();
         }
 
@@ -192,14 +202,14 @@ namespace ProyectoHCL.Formularios
 
             if (this.dgvTH.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                // R_E_tip.lblTitulo.Text = "Editar Tipo de Habitación";
+                R_E_tip.lblTitulo.Text = "Editar Tipo de Habitación";
 
-                //R_E_tip.idTH = dgvTH.CurrentRow.Cells["ID"].Value.ToString();
-                //R_E_tip.txtTipo.Text = dgvTH.CurrentRow.Cells["TIPO"].Value.ToString();
-                //R_E_tip.txtCapacidad.Text = dgvTH.CurrentRow.Cells["CAPACIDAD"].Value.ToString();
-                //R_E_tip.txtPrecio.Text = dgvTH.CurrentRow.Cells["PRECIO"].Value.ToString();
-                //R_E_tip.ShowDialog();
-                //R_E_tip.limpiarCampos();
+                R_E_tip.idTH = dgvTH.CurrentRow.Cells["ID"].Value.ToString();
+                R_E_tip.txtTipo.Text = dgvTH.CurrentRow.Cells["TIPO"].Value.ToString();
+                R_E_tip.txtCapacidad.Text = dgvTH.CurrentRow.Cells["CAPACIDAD"].Value.ToString();
+                R_E_tip.txtPrecio.Text = dgvTH.CurrentRow.Cells["PRECIO"].Value.ToString();
+                R_E_tip.ShowDialog();
+                R_E_tip.limpiarCampos();
                 CargarDG();
             }
         }
@@ -260,6 +270,183 @@ namespace ProyectoHCL.Formularios
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void crearPDF()
+        {
+            PdfWriter pdfWriter = new PdfWriter("Reporte.pdf");
+            PdfDocument pdf = new PdfDocument(pdfWriter);
+            //1 pulgada = 72 pt (8 1/2 x 11) (612 x 792)
+            PageSize tamanioH = new PageSize(792, 612);
+            Document documento = new Document(pdf, tamanioH);
+            // Document documento = new Document(pdf, PageSize.LETTER);
+
+            documento.SetMargins(70, 20, 55, 20);
+
+            PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+            PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+
+            string[] columnas = { "Id", "Tipo", "Capacidad", "Precio" };
+
+            float[] tamanios = { 1, 3, 2, 2 };
+            Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
+            tabla.SetWidth(UnitValue.CreatePercentValue(100));
+
+            foreach (string columna in columnas)
+            {
+                tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+            }
+
+            string sql = "SELECT ID_TIPOHABITACION AS ID, TIPO, CAPACIDAD, PRECIO FROM TBL_TIPOHABITACION";
+
+            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+            // conexionBD.Open();
+
+            MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+            MySqlDataReader reader = comando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                tabla.AddCell(new Cell().Add(new Paragraph(reader["Id"].ToString()).SetFont(fontContenido)));
+                tabla.AddCell(new Cell().Add(new Paragraph(reader["Tipo"].ToString()).SetFont(fontContenido)));
+                tabla.AddCell(new Cell().Add(new Paragraph(reader["Capacidad"].ToString()).SetFont(fontContenido)));
+                tabla.AddCell(new Cell().Add(new Paragraph(reader["Precio"].ToString()).SetFont(fontContenido)));
+            }
+
+            documento.Add(tabla);
+            documento.Close();
+
+            var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/jmont/OneDrive/Documentos/HM/ProyectoIP/logoCL.png")).SetWidth(50);
+            var plogo = new Paragraph("").Add(logo);
+
+            var nombre = new Paragraph("Hotel Casa Lomas");
+            nombre.SetTextAlignment(TextAlignment.CENTER);
+            nombre.SetFontSize(12);
+
+            var titulo = new Paragraph("Reporte Tipos de Habitación");
+            titulo.SetTextAlignment(TextAlignment.CENTER);
+            titulo.SetFontSize(14);
+            titulo.SetBold();
+
+            var dfecha = DateTime.Now.ToString("dd.MM.yyy");
+            var dhora = DateTime.Now.ToString("hh:mm:ss");
+            var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
+            fecha.SetFontSize(12);
+
+            PdfDocument pdfDoc = new PdfDocument(new PdfReader("Reporte.pdf"), new PdfWriter
+                ("ReporteTipoHabitacion.pdf"));
+            Document doc = new Document(pdfDoc);
+
+            int numeros = pdfDoc.GetNumberOfPages();
+
+            for (int i = 1; i <= numeros; i++)
+            {
+                PdfPage pagina = pdfDoc.GetPage(i);
+
+                float y = (pdfDoc.GetPage(i).GetPageSize().GetTop() - 15);
+                doc.ShowTextAligned(plogo, 40, y, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                doc.ShowTextAligned(nombre, 115, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                doc.ShowTextAligned(titulo, 396, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                doc.ShowTextAligned(fecha, 700, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+
+                doc.ShowTextAligned(new Paragraph(String.Format("pagina {0} de {1}", i, numeros)), pdfDoc.GetPage
+                    (i).GetPageSize().GetWidth() / 2, pdfDoc.GetPage(i).GetPageSize().GetBottom() + 30, i,
+                    TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+            }
+            doc.Close();
+        }
+
+        private void btnPdf_Click(object sender, EventArgs e)
+        {
+            crearPDF();
+            MsgB mbox = new MsgB("informacion", "PDF creado con éxito");
+            DialogResult dR = mbox.ShowDialog();
+        }
+
+        private void crearExcel()
+        {
+            SLDocument sl = new SLDocument();
+
+            System.Drawing.Bitmap bm = new System.Drawing.Bitmap("C:/Users/jmont/OneDrive/Documentos/HM/ProyectoIP/logoCL.png");
+            Byte[] ba;
+            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+            {
+                bm.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                ms.Close();
+                ba = ms.ToArray();
+            }
+            SLPicture pic = new SLPicture(ba, DocumentFormat.OpenXml.Packaging.ImagePartType.Jpeg);
+            pic.SetPosition(0, 0);
+            pic.ResizeInPixels(80, 80);
+            sl.InsertPicture(pic);
+
+            sl.SetCellValue("C2", "Reporte de Tipos de Habitación");
+            SLStyle estiloT = sl.CreateStyle();
+            estiloT.Font.FontName = "Arial";
+            estiloT.Font.FontSize = 14;
+            estiloT.Font.Bold = true;
+            sl.SetCellStyle("C2", estiloT);
+            sl.MergeWorksheetCells("C2", "F2");
+
+            int celdaCabecera = 6, celdaInicial = 6;
+
+            sl.RenameWorksheet(SLDocument.DefaultFirstSheetName, "TBL_TIPOHABITACION");
+            sl.SetCellValue("B" + celdaCabecera, "Id");
+            sl.SetCellValue("C" + celdaCabecera, "Tipo");
+            sl.SetCellValue("D" + celdaCabecera, "Capacidad");
+            sl.SetCellValue("E" + celdaCabecera, "Precio");
+
+            SLStyle estiloCa = sl.CreateStyle();
+            estiloT.Font.FontName = "Arial";
+            estiloT.Font.FontSize = 12;
+            estiloT.Font.Bold = true;
+            estiloCa.Font.FontColor = System.Drawing.Color.White;
+            estiloCa.Fill.SetPattern(DocumentFormat.OpenXml.Spreadsheet.PatternValues.Solid, System.Drawing.Color.Blue, System.Drawing.Color.Blue);
+            sl.SetCellStyle("B" + celdaCabecera, "E" + celdaCabecera, estiloCa);
+
+            string sql = "SELECT ID_TIPOHABITACION AS ID, TIPO, CAPACIDAD, PRECIO FROM TBL_TIPOHABITACION";
+
+            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+
+            MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+            MySqlDataReader reader = comando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                celdaCabecera++;
+                sl.SetCellValue("B" + celdaCabecera, reader["id"].ToString());
+                sl.SetCellValue("C" + celdaCabecera, reader["tipo"].ToString());
+                sl.SetCellValue("D" + celdaCabecera, reader["capacidad"].ToString());
+                sl.SetCellValue("E" + celdaCabecera, reader["precio"].ToString());
+            }
+
+            SLStyle EstiloB = sl.CreateStyle();
+            EstiloB.Border.LeftBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            EstiloB.Border.LeftBorder.Color = System.Drawing.Color.Black;
+            EstiloB.Border.TopBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            EstiloB.Border.RightBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            EstiloB.Border.BottomBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            sl.SetCellStyle("B" + celdaInicial, "E" + celdaCabecera, EstiloB);
+
+            sl.AutoFitColumn("B", "E");
+
+            SaveFileDialog sf = new SaveFileDialog();
+
+            sf.DefaultExt = "*.xlsx";
+            sf.FileName = "ExcelTipoHabitacion";
+            sf.Filter = " Libro de Excel (*.xlsx) | *.xlsx";
+
+            if (sf.ShowDialog() == DialogResult.OK)
+            {
+                sl.SaveAs(sf.FileName);
+                MsgB mbox = new MsgB("informacion", "Archivo Excel creado con éxito");
+                DialogResult dR = mbox.ShowDialog();
+            }
+        }
+
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            crearExcel();
         }
     }
 }

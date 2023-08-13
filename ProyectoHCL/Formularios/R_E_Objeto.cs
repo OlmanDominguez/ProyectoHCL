@@ -20,8 +20,8 @@ namespace ProyectoHCL.Formularios
             InitializeComponent();
         }
 
-        //public int usu;
         public string idObj = null;
+
         MsgB msgB = new MsgB();
 
         public void limpiarCampos()
@@ -55,8 +55,6 @@ namespace ProyectoHCL.Formularios
             this.Close();
             limpiarCampos();
             limpiarError();
-            //MsgB m = new MsgB("advertencia", "Id: " + usu);
-            //DialogResult dR = m.ShowDialog();
         }
 
         int posY = 0;

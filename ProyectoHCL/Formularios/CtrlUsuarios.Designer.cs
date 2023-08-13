@@ -43,8 +43,8 @@
             btnCerrarSesion = new Button();
             btnNuevo = new Button();
             panel5 = new Panel();
-            button7 = new Button();
-            button9 = new Button();
+            btnPdf = new Button();
+            btnExcel = new Button();
             txtBuscar = new TextBox();
             label4 = new Label();
             label1 = new Label();
@@ -186,14 +186,15 @@
             btnNuevo.TabIndex = 40;
             btnNuevo.TextAlign = ContentAlignment.MiddleRight;
             btnNuevo.UseVisualStyleBackColor = false;
+            btnNuevo.EnabledChanged += btnNuevo_EnabledChanged;
             btnNuevo.Click += btnNuevo_Click_1;
             // 
             // panel5
             // 
             panel5.BackColor = Color.Gainsboro;
             panel5.Controls.Add(btnNuevo);
-            panel5.Controls.Add(button7);
-            panel5.Controls.Add(button9);
+            panel5.Controls.Add(btnPdf);
+            panel5.Controls.Add(btnExcel);
             panel5.Controls.Add(txtBuscar);
             panel5.Controls.Add(label4);
             panel5.Dock = DockStyle.Top;
@@ -202,37 +203,39 @@
             panel5.Size = new Size(1084, 67);
             panel5.TabIndex = 34;
             // 
-            // button7
+            // btnPdf
             // 
-            button7.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button7.BackColor = Color.Red;
-            button7.FlatAppearance.BorderSize = 0;
-            button7.FlatStyle = FlatStyle.Flat;
-            button7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button7.ForeColor = SystemColors.ButtonHighlight;
-            button7.Location = new Point(970, 22);
-            button7.Margin = new Padding(2);
-            button7.Name = "button7";
-            button7.Size = new Size(78, 25);
-            button7.TabIndex = 51;
-            button7.Text = "PDF";
-            button7.UseVisualStyleBackColor = false;
+            btnPdf.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnPdf.BackColor = Color.Red;
+            btnPdf.FlatAppearance.BorderSize = 0;
+            btnPdf.FlatStyle = FlatStyle.Flat;
+            btnPdf.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnPdf.ForeColor = SystemColors.ButtonHighlight;
+            btnPdf.Location = new Point(970, 22);
+            btnPdf.Margin = new Padding(2);
+            btnPdf.Name = "btnPdf";
+            btnPdf.Size = new Size(78, 25);
+            btnPdf.TabIndex = 51;
+            btnPdf.Text = "PDF";
+            btnPdf.UseVisualStyleBackColor = false;
+            btnPdf.Click += btnPdf_Click;
             // 
-            // button9
+            // btnExcel
             // 
-            button9.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button9.BackColor = Color.FromArgb(0, 192, 0);
-            button9.FlatAppearance.BorderSize = 0;
-            button9.FlatStyle = FlatStyle.Flat;
-            button9.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button9.ForeColor = SystemColors.ButtonHighlight;
-            button9.Location = new Point(879, 22);
-            button9.Margin = new Padding(2);
-            button9.Name = "button9";
-            button9.Size = new Size(78, 25);
-            button9.TabIndex = 50;
-            button9.Text = "Excel ";
-            button9.UseVisualStyleBackColor = false;
+            btnExcel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnExcel.BackColor = Color.FromArgb(0, 192, 0);
+            btnExcel.FlatAppearance.BorderSize = 0;
+            btnExcel.FlatStyle = FlatStyle.Flat;
+            btnExcel.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnExcel.ForeColor = SystemColors.ButtonHighlight;
+            btnExcel.Location = new Point(879, 22);
+            btnExcel.Margin = new Padding(2);
+            btnExcel.Name = "btnExcel";
+            btnExcel.Size = new Size(78, 25);
+            btnExcel.TabIndex = 50;
+            btnExcel.Text = "Excel ";
+            btnExcel.UseVisualStyleBackColor = false;
+            btnExcel.Click += btnExcel_Click;
             // 
             // txtBuscar
             // 
@@ -546,11 +549,10 @@
         private Button button5;
         private Button btnPerfil;
         private Button btnCerrarSesion;
-        private Button btnNuevo;
         private Label label11;
         private Panel panel5;
-        private Button button7;
-        private Button button9;
+        private Button btnPdf;
+        private Button btnExcel;
         private Label label1;
         private ComboBox cmbMostrar;
         private TextBox txtBuscar;
@@ -562,7 +564,6 @@
         private TextBox txtPag;
         private ComboBox cmbPag;
         private Panel panel4;
-        private DataGridView dgvUsuarios;
         private Label label6;
         private Label label7;
         private ComboBox cmbPaginacion;
@@ -570,5 +571,7 @@
         private Button btnSiguiente;
         private Button btnAnterior;
         private Button btnCerrar;
+        public Button btnNuevo;
+        public DataGridView dgvUsuarios;
     }
 }

@@ -1,4 +1,5 @@
-﻿using ProyectoHCL.clases;
+﻿using MySql.Data.MySqlClient;
+using ProyectoHCL.clases;
 using ProyectoHCL.RolesPermisos;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,8 @@ namespace ProyectoHCL.Formularios
         public R_R_RolesPermisos()
         {
             InitializeComponent();
-            pagFinal = numFilas;
-            CargarDG();
-            GuardarPermisoRol();
+            cargarRoles();
         }
-
 
         RolUsuario rolUs = new RolUsuario();
         PermisoRol permiso = new PermisoRol();
@@ -29,28 +27,48 @@ namespace ProyectoHCL.Formularios
         Objetos obj = new Objetos();
         DataSet ds = new DataSet();
         MsgB msgB = new MsgB();
-        int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
         int IdRol;
+
+        private void ListarObjetos()
+        {
+            dgvRolPermiso.DataSource = cDatos.listarObjetos();
+        }
+
+        private void cargarRoles()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            cmbRol.DataSource = null;
+            cmbRol.Items.Clear();
+            string sql = "SELECT ID_ROL, ROL FROM TBL_ROL;";
+
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            try
+            {
+                cmd = new MySqlCommand(sql, conn);
+                MySqlDataAdapter data = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                data.Fill(dt);
+
+                cmbRol.ValueMember = "ID_ROL";
+                cmbRol.DisplayMember = "ROL";
+                cmbRol.DataSource = dt;
+
+            }
+            catch (MySqlException e)
+            {
+                MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
+                DialogResult dR = m.ShowDialog();
+            }
+            finally { conn.Close(); }
+
+        }
 
         private void CargarDG()
         {
-            obj.Inicio1 = pagInicio;
-            obj.Final1 = pagFinal;
-            dgvRolPermiso.DataSource = ds.Tables[1];
-
-            int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;
-
-            if (Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) % numFilas > 0) cantidad++;
-
-            txtPagR.Text = cantidad.ToString();
-
-            cmbPagR.Items.Clear();
-
-            for (int x = 1; x <= cantidad; x++)
-                cmbPagR.Items.Add(x.ToString());
-
-            cmbPagR.SelectedIndex = indice;
-
             DataGridViewCheckBoxColumn chkVer = new DataGridViewCheckBoxColumn();
             chkVer.Name = "VER";
             chkVer.Tag = 1;
@@ -70,13 +88,11 @@ namespace ProyectoHCL.Formularios
             chkEliminar.Name = "ELIMINAR";
             chkEliminar.Tag = 4;
             dgvRolPermiso.Columns.Add(chkEliminar);
-
-            HabilitarBotones();
         }
 
         public void limpiarCampos()
         {
-            txtRol.Clear();
+            cmbRol.SelectedIndex = -1;
         }
 
         private void btnMin_Click(object sender, EventArgs e)
@@ -113,80 +129,40 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void HabilitarBotones()
-        {
-            if (pagInicio == 1)
-            {
-                btnAnterior.Enabled = false;
-            }
-            else
-            {
-                btnAnterior.Enabled = true;
-            }
-
-            if (indice == (Convert.ToInt32(txtPagR.Text) - 1))
-            {
-                btnSiguiente.Enabled = false;
-            }
-            else
-            {
-                btnSiguiente.Enabled = true;
-            }
-        }
-
         private void btnAntR_Click(object sender, EventArgs e)
         {
-            int pagina = Convert.ToInt32(cmbPagR.Text) - 1;
-            indice = pagina - 1;
-            pagInicio = (pagina - 1) * numFilas + 1;
-            pagFinal = pagina * numFilas;
-            CargarDG();
         }
 
         private void btnSigR_Click(object sender, EventArgs e)
         {
-            int pagina = Convert.ToInt32(cmbPagR.Text) + 1;
-            indice = pagina - 1;
-            pagInicio = (pagina - 1) * numFilas + 1;
-            pagFinal = pagina * numFilas;
-            CargarDG();
         }
 
         private void cmbPagR_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            int pagina = Convert.ToInt32(cmbPagR.Text);
-            indice = pagina - 1;
-            pagInicio = (pagina - 1) * numFilas + 1;
-            pagFinal = pagina * numFilas;
-            CargarDG();
         }
 
         private void RolesPermisos_Load(object sender, EventArgs e)
         {
-        }
-
-        private void GuardarRolUs()
-        {
-            rolUs.Rol = txtRol.Text.ToUpper().Trim();
-            IdRol = cDatos.GuardarRol(rolUs);
+            ListarObjetos();
+            cmbRol.SelectedIndex = -1;
+            CargarDG();
         }
 
         private void GuardarPermisoRol()
         {
             foreach (DataGridViewRow row in dgvRolPermiso.Rows)
             {
-                permiso.IdRol = IdRol;
+                permiso.IdRol = cmbRol.Text;
+                permiso.IdObjeto = row.Cells["PANTALLA"].Value.ToString();
 
                 if (Convert.ToBoolean(row.Cells["VER"].Value))
                 {
-                    permiso.IdObjeto = dgvRolPermiso.CurrentRow.Cells["PANTALLA"].Value.ToString();
                     permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
                     permiso.Permitido = true;
                     cDatos.GuardarPermiso(permiso);
                 }
                 else if (!Convert.ToBoolean(row.Cells["VER"].Value))
                 {
-                    permiso.IdObjeto = Convert.ToString(row.Cells["PANTALLA"].Value);
                     permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
                     permiso.Permitido = false;
                     cDatos.GuardarPermiso(permiso);
@@ -194,14 +170,12 @@ namespace ProyectoHCL.Formularios
 
                 if (Convert.ToBoolean(row.Cells["CREAR"].Value))
                 {
-                    permiso.IdObjeto = dgvRolPermiso.CurrentRow.Cells["PANTALLA"].Value.ToString();
                     permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
                     permiso.Permitido = true;
                     cDatos.GuardarPermiso(permiso);
                 }
                 else if (!Convert.ToBoolean(row.Cells["CREAR"].Value))
                 {
-                    permiso.IdObjeto = Convert.ToString(row.Cells["PANTALLA"].Value);
                     permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
                     permiso.Permitido = false;
                     cDatos.GuardarPermiso(permiso);
@@ -209,14 +183,12 @@ namespace ProyectoHCL.Formularios
 
                 if (Convert.ToBoolean(row.Cells["EDITAR"].Value))
                 {
-                    permiso.IdObjeto = dgvRolPermiso.CurrentRow.Cells["PANTALLA"].Value.ToString();
                     permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
                     permiso.Permitido = true;
                     cDatos.GuardarPermiso(permiso);
                 }
                 else if (!Convert.ToBoolean(row.Cells["EDITAR"].Value))
                 {
-                    permiso.IdObjeto = Convert.ToString(row.Cells["PANTALLA"].Value);
                     permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
                     permiso.Permitido = false;
                     cDatos.GuardarPermiso(permiso);
@@ -224,14 +196,12 @@ namespace ProyectoHCL.Formularios
 
                 if (Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
                 {
-                    permiso.IdObjeto = dgvRolPermiso.CurrentRow.Cells["PANTALLA"].Value.ToString();
                     permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
                     permiso.Permitido = true;
                     cDatos.GuardarPermiso(permiso);
                 }
                 else if (!Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
                 {
-                    permiso.IdObjeto = Convert.ToString(row.Cells["PANTALLA"].Value);
                     permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
                     permiso.Permitido = false;
                     cDatos.GuardarPermiso(permiso);
@@ -242,9 +212,8 @@ namespace ProyectoHCL.Formularios
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            GuardarRolUs();
             GuardarPermisoRol();
-            MsgB mbox = new MsgB("informacion", "Registro guardado");
+            MsgB mbox = new MsgB("informacion", "Permisos registrados");
             DialogResult dR = mbox.ShowDialog();
         }
 
@@ -252,5 +221,6 @@ namespace ProyectoHCL.Formularios
         {
 
         }
+
     }
 }

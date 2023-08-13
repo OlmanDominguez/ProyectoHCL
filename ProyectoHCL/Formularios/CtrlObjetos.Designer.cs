@@ -42,7 +42,7 @@
             btnNuevo = new Button();
             panel4 = new Panel();
             button6 = new Button();
-            button5 = new Button();
+            btnExcel = new Button();
             txtBuscar = new TextBox();
             label1 = new Label();
             label2 = new Label();
@@ -77,7 +77,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1549, 108);
             panel2.TabIndex = 32;
-            panel2.Paint += panel2_Paint;
             // 
             // btnCerrar
             // 
@@ -155,6 +154,7 @@
             btnNuevo.TabIndex = 36;
             btnNuevo.TextAlign = ContentAlignment.MiddleRight;
             btnNuevo.UseVisualStyleBackColor = false;
+            btnNuevo.EnabledChanged += btnNuevo_EnabledChanged;
             btnNuevo.Click += btnNuevo_Click_1;
             // 
             // panel4
@@ -162,7 +162,7 @@
             panel4.BackColor = Color.Gainsboro;
             panel4.Controls.Add(btnNuevo);
             panel4.Controls.Add(button6);
-            panel4.Controls.Add(button5);
+            panel4.Controls.Add(btnExcel);
             panel4.Controls.Add(txtBuscar);
             panel4.Controls.Add(label1);
             panel4.Dock = DockStyle.Top;
@@ -186,21 +186,24 @@
             button6.TabIndex = 43;
             button6.Text = "PDF";
             button6.UseVisualStyleBackColor = false;
+            button6.Click += button6_Click;
             // 
-            // button5
+            // btnExcel
             // 
-            button5.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button5.BackColor = Color.FromArgb(0, 192, 0);
-            button5.FlatAppearance.BorderSize = 0;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button5.ForeColor = SystemColors.ButtonHighlight;
-            button5.Location = new Point(1259, 33);
-            button5.Name = "button5";
-            button5.Size = new Size(111, 42);
-            button5.TabIndex = 42;
-            button5.Text = "Excel ";
-            button5.UseVisualStyleBackColor = false;
+            btnExcel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnExcel.BackColor = Color.FromArgb(0, 192, 0);
+            btnExcel.FlatAppearance.BorderSize = 0;
+            btnExcel.FlatStyle = FlatStyle.Flat;
+            btnExcel.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnExcel.ForeColor = SystemColors.ButtonHighlight;
+            btnExcel.Location = new Point(881, 20);
+            btnExcel.Margin = new Padding(2);
+            btnExcel.Name = "btnExcel";
+            btnExcel.Size = new Size(78, 25);
+            btnExcel.TabIndex = 42;
+            btnExcel.Text = "Excel ";
+            btnExcel.UseVisualStyleBackColor = false;
+            btnExcel.Click += btnExcel_Click;
             // 
             // txtBuscar
             // 
@@ -477,15 +480,13 @@
         private Button btnCerrarSesion;
         private Panel panel4;
         private Panel panel3;
-        private Button btnNuevo;
         private Label label11;
-        private Button button5;
+        private Button btnExcel;
         private Label label2;
         private ComboBox cmbMostrar;
         private TextBox txtBuscar;
         private Label label5;
         private Label label1;
-        private DataGridView dgvObjetos;
         private Button button6;
         private Panel panel5;
         private Label label4;
@@ -495,5 +496,7 @@
         private Button btnSiguiente;
         private Button btnAnterior;
         private Button btnCerrar;
+        public Button btnNuevo;
+        public DataGridView dgvObjetos;
     }
 }

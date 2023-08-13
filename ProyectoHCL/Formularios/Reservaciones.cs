@@ -19,6 +19,7 @@ namespace ProyectoHCL
     {
         AdminReserva adminReserva = new AdminReserva();
         NuevaReservacion reservacion = new NuevaReservacion();
+        int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
         public Reservaciones()
         {
             InitializeComponent();
@@ -211,6 +212,8 @@ namespace ProyectoHCL
             {
                 reservacion.lbl_titulo.Text = "Editar Reservacion";
                 reservacion.txt_id_solicitud.Text = dgv_reservaciones.CurrentRow.Cells["ID"].Value.ToString();
+                reservacion.cb_cliente.Text = dgv_reservaciones.CurrentRow.Cells["NOMBRE"].Value.ToString();
+                reservacion.cb_estado.Text = dgv_reservaciones.CurrentRow.Cells["ESTADO"].Value.ToString();
                 reservacion.ShowDialog();
 
 
@@ -233,7 +236,26 @@ namespace ProyectoHCL
 
         private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            cmbIndice = cmbMostrar.SelectedIndex;
+            switch (cmbIndice)
+            {
+                case 0:
+                    numFilas = 5;
+                    break;
+                case 1:
+                    numFilas = 10;
+                    break;
+                case 2:
+                    numFilas = 20;
+                    break;
+                case 3:
+                    numFilas = 30;
+                    break;
+                case 4:
+                    numFilas = 40;
+                    break;
+            }
+            pagFinal = numFilas;
         }
     }
 }
