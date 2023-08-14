@@ -18,6 +18,23 @@ namespace ProyectoHCL.clases
         MySqlCommand cmd;
         private int Inicio;
         private int Final;
+        private int ID_SOLICITUDRESERVA;
+        private DateTime FECHACOTI;
+        private DateTime INGRESO;
+        private DateTime SALIDA;
+        private int NHUESPEDES;
+        private string NOMBRE;
+        private string ESTADO;
+        private int NUMEROHABITACION;
+
+        public int ID_SOLICITUDRESERVA1 { get => ID_SOLICITUDRESERVA; set => ID_SOLICITUDRESERVA = value; }
+        public DateTime FECHACOTI1 { get => FECHACOTI; set => FECHACOTI = value; }
+        public DateTime INGRESO1 { get => INGRESO; set => INGRESO = value; }
+        public DateTime SALIDA1 { get => SALIDA; set => SALIDA = value; }
+        public int NHUESPEDES1 { get => NHUESPEDES; set => NHUESPEDES = value; }
+        public string NOMBRE1 { get => NOMBRE; set => NOMBRE = value; }
+        public string ESTADO1 { get => ESTADO; set => ESTADO = value; }
+        public int NUMEROHABITACION1 { get => NUMEROHABITACION; set => NUMEROHABITACION = value; }
 
         public int Inicio1 { get => Inicio; set => Inicio = value; }
         public int Final1 { get => Final; set => Final = value; }
