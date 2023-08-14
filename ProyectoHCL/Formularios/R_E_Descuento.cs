@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DocumentFormat.OpenXml.Office.Word;
+using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ProyectoHCL.RecuContra;
 
 namespace ProyectoHCL.Formularios
 {
@@ -135,6 +137,8 @@ namespace ProyectoHCL.Formularios
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@descripcion", txtDesc.Text);
                         cmd.Parameters.AddWithValue("@porcentaje", txtPorcentaje.Text);
+                        cmd.Parameters.AddWithValue("@creadoPor", clasecompartida.iduser);
+                        cmd.Parameters.AddWithValue("@actualizadoPor", clasecompartida.iduser);
 
                         cmd.ExecuteNonQuery();
                         MsgB m = new MsgB("informacion", "Registro creado con éxito");
@@ -162,7 +166,7 @@ namespace ProyectoHCL.Formularios
                 {
                     try
                     {
-                        control.editarDesc(idDesc, txtDesc.Text, txtPorcentaje.Text);
+                        control.editarDesc(idDesc, txtDesc.Text, txtPorcentaje.Text, clasecompartida.iduser.ToString());
 
                         MsgB m = new MsgB("informacion", "Registro modificado");
                         DialogResult dR = m.ShowDialog();

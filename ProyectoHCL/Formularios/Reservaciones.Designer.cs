@@ -29,18 +29,20 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reservaciones));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             btnExit = new PictureBox();
             dgv_reservaciones = new DataGridView();
             panel3 = new Panel();
-            textBox1 = new TextBox();
+            btnSiguiente = new Button();
+            btnAnterior = new Button();
+            TXT_PAGINACION_X = new TextBox();
             label1 = new Label();
             label3 = new Label();
-            comboBox1 = new ComboBox();
+            CB_PAGINACION_R = new ComboBox();
             label10 = new Label();
             cmbMostrar = new ComboBox();
             label12 = new Label();
@@ -68,8 +70,8 @@
             button4 = new Button();
             button7 = new Button();
             button9 = new Button();
-            button1 = new Button();
-            button6 = new Button();
+            btn_pdf = new Button();
+            btn_excel = new Button();
             txtBuscar_reservas = new TextBox();
             label4 = new Label();
             panelChildForm = new Panel();
@@ -98,55 +100,55 @@
             // 
             dgv_reservaciones.AllowUserToAddRows = false;
             dgv_reservaciones.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = Color.SlateGray;
-            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            dgv_reservaciones.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = Color.SlateGray;
+            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
+            dgv_reservaciones.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             dgv_reservaciones.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv_reservaciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_reservaciones.BackgroundColor = Color.WhiteSmoke;
             dgv_reservaciones.BorderStyle = BorderStyle.None;
             dgv_reservaciones.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.Teal;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgv_reservaciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle7.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = Color.Teal;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            dgv_reservaciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dgv_reservaciones.ColumnHeadersHeight = 30;
             dgv_reservaciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.MenuHighlight;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgv_reservaciones.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = SystemColors.MenuHighlight;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            dgv_reservaciones.DefaultCellStyle = dataGridViewCellStyle8;
             dgv_reservaciones.EnableHeadersVisualStyles = false;
             dgv_reservaciones.GridColor = Color.FromArgb(45, 66, 91);
             dgv_reservaciones.Location = new Point(2, 213);
             dgv_reservaciones.Name = "dgv_reservaciones";
             dgv_reservaciones.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.Gainsboro;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = SystemColors.InfoText;
-            dataGridViewCellStyle4.SelectionBackColor = Color.CadetBlue;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.InfoText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgv_reservaciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle9.ForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle9.SelectionBackColor = Color.CadetBlue;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            dgv_reservaciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             dgv_reservaciones.RowHeadersVisible = false;
-            dataGridViewCellStyle5.BackColor = Color.Gainsboro;
-            dataGridViewCellStyle5.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = Color.LightGray;
-            dataGridViewCellStyle5.SelectionForeColor = Color.Black;
-            dgv_reservaciones.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle10.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle10.ForeColor = Color.Black;
+            dataGridViewCellStyle10.SelectionBackColor = Color.LightGray;
+            dataGridViewCellStyle10.SelectionForeColor = Color.Black;
+            dgv_reservaciones.RowsDefaultCellStyle = dataGridViewCellStyle10;
             dgv_reservaciones.RowTemplate.Height = 25;
             dgv_reservaciones.Size = new Size(896, 306);
             dgv_reservaciones.TabIndex = 37;
@@ -157,10 +159,12 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(45, 66, 91);
-            panel3.Controls.Add(textBox1);
+            panel3.Controls.Add(btnSiguiente);
+            panel3.Controls.Add(btnAnterior);
+            panel3.Controls.Add(TXT_PAGINACION_X);
             panel3.Controls.Add(label1);
             panel3.Controls.Add(label3);
-            panel3.Controls.Add(comboBox1);
+            panel3.Controls.Add(CB_PAGINACION_R);
             panel3.Controls.Add(label10);
             panel3.Controls.Add(cmbMostrar);
             panel3.Controls.Add(label12);
@@ -182,14 +186,46 @@
             panel3.Size = new Size(896, 76);
             panel3.TabIndex = 38;
             // 
-            // textBox1
+            // btnSiguiente
             // 
-            textBox1.Anchor = AnchorStyles.Right;
-            textBox1.Location = new Point(825, 24);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(63, 23);
-            textBox1.TabIndex = 63;
+            btnSiguiente.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSiguiente.BackColor = Color.Transparent;
+            btnSiguiente.BackgroundImage = (Image)resources.GetObject("btnSiguiente.BackgroundImage");
+            btnSiguiente.BackgroundImageLayout = ImageLayout.Stretch;
+            btnSiguiente.FlatAppearance.BorderSize = 0;
+            btnSiguiente.FlatAppearance.MouseOverBackColor = Color.Silver;
+            btnSiguiente.FlatStyle = FlatStyle.Flat;
+            btnSiguiente.Location = new Point(631, 17);
+            btnSiguiente.Name = "btnSiguiente";
+            btnSiguiente.Size = new Size(30, 31);
+            btnSiguiente.TabIndex = 66;
+            btnSiguiente.UseVisualStyleBackColor = false;
+            btnSiguiente.Click += btnSiguiente_Click;
+            // 
+            // btnAnterior
+            // 
+            btnAnterior.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAnterior.BackColor = Color.Transparent;
+            btnAnterior.BackgroundImage = (Image)resources.GetObject("btnAnterior.BackgroundImage");
+            btnAnterior.BackgroundImageLayout = ImageLayout.Stretch;
+            btnAnterior.FlatAppearance.BorderSize = 0;
+            btnAnterior.FlatAppearance.MouseOverBackColor = Color.Silver;
+            btnAnterior.FlatStyle = FlatStyle.Flat;
+            btnAnterior.Location = new Point(595, 17);
+            btnAnterior.Name = "btnAnterior";
+            btnAnterior.Size = new Size(30, 31);
+            btnAnterior.TabIndex = 65;
+            btnAnterior.UseVisualStyleBackColor = false;
+            btnAnterior.Click += btnAnterior_Click;
+            // 
+            // TXT_PAGINACION_X
+            // 
+            TXT_PAGINACION_X.Anchor = AnchorStyles.Right;
+            TXT_PAGINACION_X.Location = new Point(825, 24);
+            TXT_PAGINACION_X.Name = "TXT_PAGINACION_X";
+            TXT_PAGINACION_X.ReadOnly = true;
+            TXT_PAGINACION_X.Size = new Size(63, 23);
+            TXT_PAGINACION_X.TabIndex = 63;
             // 
             // label1
             // 
@@ -215,17 +251,17 @@
             label3.TabIndex = 61;
             label3.Text = "Página";
             // 
-            // comboBox1
+            // CB_PAGINACION_R
             // 
-            comboBox1.Anchor = AnchorStyles.Right;
-            comboBox1.BackColor = SystemColors.Info;
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(715, 22);
-            comboBox1.Margin = new Padding(2);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(65, 23);
-            comboBox1.TabIndex = 60;
+            CB_PAGINACION_R.Anchor = AnchorStyles.Right;
+            CB_PAGINACION_R.BackColor = SystemColors.Info;
+            CB_PAGINACION_R.DropDownStyle = ComboBoxStyle.DropDownList;
+            CB_PAGINACION_R.FormattingEnabled = true;
+            CB_PAGINACION_R.Location = new Point(715, 22);
+            CB_PAGINACION_R.Margin = new Padding(2);
+            CB_PAGINACION_R.Name = "CB_PAGINACION_R";
+            CB_PAGINACION_R.Size = new Size(65, 23);
+            CB_PAGINACION_R.TabIndex = 60;
             // 
             // label10
             // 
@@ -511,8 +547,8 @@
             panel5.Controls.Add(button4);
             panel5.Controls.Add(button7);
             panel5.Controls.Add(button9);
-            panel5.Controls.Add(button1);
-            panel5.Controls.Add(button6);
+            panel5.Controls.Add(btn_pdf);
+            panel5.Controls.Add(btn_excel);
             panel5.Controls.Add(txtBuscar_reservas);
             panel5.Controls.Add(label4);
             panel5.Dock = DockStyle.Top;
@@ -585,37 +621,39 @@
             button9.Text = "Excel ";
             button9.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // btn_pdf
             // 
-            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button1.BackColor = Color.Red;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.ForeColor = SystemColors.ButtonHighlight;
-            button1.Location = new Point(806, 34);
-            button1.Margin = new Padding(2);
-            button1.Name = "button1";
-            button1.Size = new Size(78, 25);
-            button1.TabIndex = 55;
-            button1.Text = "PDF";
-            button1.UseVisualStyleBackColor = false;
+            btn_pdf.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btn_pdf.BackColor = Color.Red;
+            btn_pdf.FlatAppearance.BorderSize = 0;
+            btn_pdf.FlatStyle = FlatStyle.Flat;
+            btn_pdf.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_pdf.ForeColor = SystemColors.ButtonHighlight;
+            btn_pdf.Location = new Point(806, 34);
+            btn_pdf.Margin = new Padding(2);
+            btn_pdf.Name = "btn_pdf";
+            btn_pdf.Size = new Size(78, 25);
+            btn_pdf.TabIndex = 55;
+            btn_pdf.Text = "PDF";
+            btn_pdf.UseVisualStyleBackColor = false;
+            btn_pdf.Click += button1_Click;
             // 
-            // button6
+            // btn_excel
             // 
-            button6.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button6.BackColor = Color.FromArgb(0, 192, 0);
-            button6.FlatAppearance.BorderSize = 0;
-            button6.FlatStyle = FlatStyle.Flat;
-            button6.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button6.ForeColor = SystemColors.ButtonHighlight;
-            button6.Location = new Point(715, 34);
-            button6.Margin = new Padding(2);
-            button6.Name = "button6";
-            button6.Size = new Size(78, 25);
-            button6.TabIndex = 54;
-            button6.Text = "Excel ";
-            button6.UseVisualStyleBackColor = false;
+            btn_excel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btn_excel.BackColor = Color.FromArgb(0, 192, 0);
+            btn_excel.FlatAppearance.BorderSize = 0;
+            btn_excel.FlatStyle = FlatStyle.Flat;
+            btn_excel.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_excel.ForeColor = SystemColors.ButtonHighlight;
+            btn_excel.Location = new Point(715, 34);
+            btn_excel.Margin = new Padding(2);
+            btn_excel.Name = "btn_excel";
+            btn_excel.Size = new Size(78, 25);
+            btn_excel.TabIndex = 54;
+            btn_excel.Text = "Excel ";
+            btn_excel.UseVisualStyleBackColor = false;
+            btn_excel.Click += button6_Click;
             // 
             // txtBuscar_reservas
             // 
@@ -712,13 +750,15 @@
         private Label label4;
         private Panel panelChildForm;
         public DataGridView dgv_reservaciones;
-        public ComboBox comboBox1;
+        public ComboBox CB_PAGINACION_R;
         public ComboBox cmbMostrar;
-        public TextBox textBox1;
+        public TextBox TXT_PAGINACION_X;
         public Button btnNuevo;
         public Panel panel5;
-        public Button button1;
-        public Button button6;
+        public Button btn_pdf;
+        public Button btn_excel;
         public TextBox txtBuscar_reservas;
+        private Button btnSiguiente;
+        private Button btnAnterior;
     }
 }
