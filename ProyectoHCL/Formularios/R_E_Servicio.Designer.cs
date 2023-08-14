@@ -36,6 +36,8 @@
             pictureBox5 = new PictureBox();
             lblTitulo = new Label();
             panel3 = new Panel();
+            cmbEstado = new ComboBox();
+            label1 = new Label();
             btnCancelar = new Button();
             btnGuardar = new Button();
             txtPrecio = new TextBox();
@@ -120,6 +122,8 @@
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
+            panel3.Controls.Add(cmbEstado);
+            panel3.Controls.Add(label1);
             panel3.Controls.Add(btnCancelar);
             panel3.Controls.Add(btnGuardar);
             panel3.Controls.Add(txtPrecio);
@@ -129,8 +133,31 @@
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 73);
             panel3.Name = "panel3";
-            panel3.Size = new Size(800, 332);
+            panel3.Size = new Size(800, 357);
             panel3.TabIndex = 5;
+            // 
+            // cmbEstado
+            // 
+            cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbEstado.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbEstado.FormattingEnabled = true;
+            cmbEstado.Items.AddRange(new object[] { "ACTIVO", "INACTIVO" });
+            cmbEstado.Location = new Point(242, 212);
+            cmbEstado.Name = "cmbEstado";
+            cmbEstado.Size = new Size(316, 28);
+            cmbEstado.TabIndex = 13;
+            cmbEstado.Leave += cmbEstado_Leave;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(242, 184);
+            label1.Name = "label1";
+            label1.Size = new Size(63, 19);
+            label1.TabIndex = 12;
+            label1.Text = "Estado:";
             // 
             // btnCancelar
             // 
@@ -141,7 +168,7 @@
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(468, 209);
+            btnCancelar.Location = new Point(469, 274);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(80, 32);
             btnCancelar.TabIndex = 11;
@@ -158,7 +185,7 @@
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(256, 209);
+            btnGuardar.Location = new Point(257, 274);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(82, 32);
             btnGuardar.TabIndex = 10;
@@ -223,11 +250,11 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 405);
+            ClientSize = new Size(800, 430);
             Controls.Add(panel3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
-            MaximumSize = new Size(800, 405);
+            MaximumSize = new Size(800, 450);
             Name = "R_E_Servicio";
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
@@ -256,5 +283,7 @@
         private Label label3;
         private Label label2;
         private ErrorProvider errorT;
+        private Label label1;
+        public ComboBox cmbEstado;
     }
 }

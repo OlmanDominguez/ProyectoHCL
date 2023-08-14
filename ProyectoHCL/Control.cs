@@ -26,9 +26,9 @@ namespace ProyectoHCL
                contraseña, Convert.ToDateTime(vencimiento), email);
         }
 
-        public void editarObj(string id, string nombreObj, string descObj, string estadoObj)
+        public void editarObj(string id, string nombreObj, string descObj, string estadoObj, string actP) 
         {
-            admonObjeto.modificarObjeto(Convert.ToInt32(id), nombreObj, descObj, estadoObj);
+            admonObjeto.modificarObjeto(Convert.ToInt32(id), nombreObj, descObj, estadoObj, Convert.ToInt32(actP));
         }
 
         public void editarTipHab(string id, string tipo, string capacidad, string precio)
@@ -42,14 +42,14 @@ namespace ProyectoHCL
             admonHabitaciones.modificarHabitacion(Convert.ToInt32(id), tipo, Convert.ToInt32(numero), estado);
         }
 
-        public void editarServ(string id, string descripcion, string precio)
+        public void editarServ(string id, string descripcion, string precio, string est)
         {
-            admonServicios.modificarServicio(Convert.ToInt32(id), descripcion, Convert.ToDecimal(precio));
+            admonServicios.modificarServicio(Convert.ToInt32(id), descripcion, Convert.ToDecimal(precio), est);
         }
 
-        public void editarDesc(string id, string descripcion, string porcentaje)
+        public void editarDesc(string id, string descripcion, string porcentaje, string idU)
         {
-            admonDescuento.modificarDescuento(Convert.ToInt32(id), descripcion, Convert.ToDecimal(porcentaje));
+            admonDescuento.modificarDescuento(Convert.ToInt32(id), descripcion, Convert.ToDecimal(porcentaje), Convert.ToInt32(idU));
         }
 
         public void editarClie(string NOMBRECL, int ID_TIPOCLIENTECL, string APELLIDOCL,

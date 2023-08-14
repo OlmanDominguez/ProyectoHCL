@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static iText.Kernel.Pdf.Colorspace.PdfDeviceCs;
 
 namespace ProyectoHCL.Formularios
 {
@@ -27,6 +28,7 @@ namespace ProyectoHCL.Formularios
         Objetos obj = new Objetos();
         DataSet ds = new DataSet();
         MsgB msgB = new MsgB();
+        Modelo modelo = new Modelo();
         int IdRol;
 
         private void ListarObjetos()
@@ -150,71 +152,94 @@ namespace ProyectoHCL.Formularios
 
         private void GuardarPermisoRol()
         {
-            foreach (DataGridViewRow row in dgvRolPermiso.Rows)
-            {
-                permiso.IdRol = cmbRol.Text;
-                permiso.IdObjeto = row.Cells["PANTALLA"].Value.ToString();
+            //using (BackWorker bw = new BackWorker())
+            //{
+            //    bw.Visible = true;
 
-                if (Convert.ToBoolean(row.Cells["VER"].Value))
+                foreach (DataGridViewRow row in dgvRolPermiso.Rows)
                 {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
-                    permiso.Permitido = true;
-                    cDatos.GuardarPermiso(permiso);
-                }
-                else if (!Convert.ToBoolean(row.Cells["VER"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
-                    permiso.Permitido = false;
-                    cDatos.GuardarPermiso(permiso);
-                }
+                    permiso.IdRol = cmbRol.Text;
+                    permiso.IdObjeto = row.Cells["PANTALLA"].Value.ToString();
 
-                if (Convert.ToBoolean(row.Cells["CREAR"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
-                    permiso.Permitido = true;
-                    cDatos.GuardarPermiso(permiso);
-                }
-                else if (!Convert.ToBoolean(row.Cells["CREAR"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
-                    permiso.Permitido = false;
-                    cDatos.GuardarPermiso(permiso);
-                }
+                    if (Convert.ToBoolean(row.Cells["VER"].Value))
+                    {
+                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
+                        permiso.Permitido = true;
+                        cDatos.GuardarPermiso(permiso);
+                    }
+                    else if (!Convert.ToBoolean(row.Cells["VER"].Value))
+                    {
+                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
+                        permiso.Permitido = false;
+                        cDatos.GuardarPermiso(permiso);
+                    }
 
-                if (Convert.ToBoolean(row.Cells["EDITAR"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
-                    permiso.Permitido = true;
-                    cDatos.GuardarPermiso(permiso);
-                }
-                else if (!Convert.ToBoolean(row.Cells["EDITAR"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
-                    permiso.Permitido = false;
-                    cDatos.GuardarPermiso(permiso);
-                }
+                    if (Convert.ToBoolean(row.Cells["CREAR"].Value))
+                    {
+                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
+                        permiso.Permitido = true;
+                        cDatos.GuardarPermiso(permiso);
+                    }
+                    else if (!Convert.ToBoolean(row.Cells["CREAR"].Value))
+                    {
+                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
+                        permiso.Permitido = false;
+                        cDatos.GuardarPermiso(permiso);
+                    }
 
-                if (Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
-                    permiso.Permitido = true;
-                    cDatos.GuardarPermiso(permiso);
-                }
-                else if (!Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
-                    permiso.Permitido = false;
-                    cDatos.GuardarPermiso(permiso);
-                }
+                    if (Convert.ToBoolean(row.Cells["EDITAR"].Value))
+                    {
+                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
+                        permiso.Permitido = true;
+                        cDatos.GuardarPermiso(permiso);
+                    }
+                    else if (!Convert.ToBoolean(row.Cells["EDITAR"].Value))
+                    {
+                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
+                        permiso.Permitido = false;
+                        cDatos.GuardarPermiso(permiso);
+                    }
 
+                    if (Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                    {
+                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
+                        permiso.Permitido = true;
+                        cDatos.GuardarPermiso(permiso);
+                    }
+                    else if (!Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                    {
+                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
+                        permiso.Permitido = false;
+                        cDatos.GuardarPermiso(permiso);
+                    }
+
+                //}
             }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            GuardarPermisoRol();
-            MsgB mbox = new MsgB("informacion", "Permisos registrados");
-            DialogResult dR = mbox.ShowDialog();
+
+            if (cmbRol.Text == "")
+            {
+                MsgB Mbox = new MsgB("advertencia", "Seleccione un rol");
+                DialogResult DR = Mbox.ShowDialog();
+            }
+            else
+            {
+                //using (BackWorker bw = new BackWorker())
+                //{
+                MsgB mbox = new MsgB("informacion", "Registrando permisos. Espere un momento...");
+                DialogResult dR = mbox.ShowDialog();
+                GuardarPermisoRol();
+                MsgB Mbox = new MsgB("informacion", "Permisos registrados");
+                DialogResult DR = Mbox.ShowDialog();
+                    //bw.Close();
+                //}
+                //GuardarPermisoRol();
+                //MsgB mbox = new MsgB("informacion", "Permisos registrados");
+                //DialogResult dR = mbox.ShowDialog();
+            }
         }
 
         private void txtRol_TextChanged(object sender, EventArgs e)
@@ -222,5 +247,17 @@ namespace ProyectoHCL.Formularios
 
         }
 
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            if (cmbRol.Text == "")
+            {
+                MsgB mbox = new MsgB("informacion", "Seleccione el rol a editar permisos");
+                DialogResult dR = mbox.ShowDialog();
+            }
+            else if (!modelo.existePermiso(cmbRol.Text)) ///////Al crear nuevos permisos
+            {
+                ////////////////Hacer select inner join en modelo
+            }
+        }
     }
 }

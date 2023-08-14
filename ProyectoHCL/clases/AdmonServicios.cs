@@ -13,7 +13,7 @@ namespace ProyectoHCL.clases
         MySqlConnection conn;
         MySqlCommand cmd;
 
-        public void modificarServicio(int id, string descripcion, decimal precio)
+        public void modificarServicio(int id, string descripcion, decimal precio, string estado)
         {
 
             try
@@ -26,6 +26,7 @@ namespace ProyectoHCL.clases
                 cmd.Parameters.AddWithValue("@idServicio", id);
                 cmd.Parameters.AddWithValue("@descripcion", descripcion);
                 cmd.Parameters.AddWithValue("@precio", precio);
+                cmd.Parameters.AddWithValue("@estado", estado);
 
                 cmd.ExecuteNonQuery();
                 conn.Close();

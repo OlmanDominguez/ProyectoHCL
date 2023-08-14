@@ -72,6 +72,48 @@ namespace ProyectoHCL
                             Ibtn_objetos.Enabled = false;
                         }
                         break;
+                    case "TIPO HABITACION":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            //Ibtn_TIPOHAB.Enabled = false;
+                        }
+                        break;
+                    case "FACTURACION":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            Ibtn_facturacion.Enabled = false;
+                        }
+                        break;
+                    case "RESERVACION":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            Ibtn_reservacion.Enabled = false;
+                        }
+                        break;
+                    case "ROLES":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            Ibtn_roles.Enabled = false;
+                        }
+                        break;
+                    case "PERMISOS":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            Ibtn_permisos.Enabled = false;
+                        }
+                        break;
+                    case "PARAMETROS":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            Ibtn_parametros.Enabled = false;
+                        }
+                        break;
+                    case "CLIENTES":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            Ibtn_clientes.Enabled = false;
+                        }
+                        break;
                 }
 
             }
@@ -86,7 +128,6 @@ namespace ProyectoHCL
         }
         private void mostrarhabitaciones()
         {
-            Permisos();
             //panelChildForm.Visible = false;
             dgv_habitacion.Visible = false;
             lbl_fechas.Visible = false;
@@ -381,6 +422,7 @@ namespace ProyectoHCL
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
+            Permisos();
             mostrarhabitaciones();
             //panelChildForm.Visible = false;
             dgv_habitacion.Visible = false;
@@ -471,7 +513,9 @@ namespace ProyectoHCL
         private void Ibtn_roles_Click(object sender, EventArgs e)
         {
             //codigo para el formilario 
-            hideSubMenu2();
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlRoles());
+            //hideSubMenu2();
         }
 
         private void Ibtn_objetos_Click(object sender, EventArgs e)
@@ -485,7 +529,9 @@ namespace ProyectoHCL
         private void Ibtn_permisos_Click(object sender, EventArgs e)
         {
             //codigo para el formilario 
-            hideSubMenu2();
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new R_R_RolesPermisos());
+            //hideSubMenu2();
         }
 
         private void Ibtn_parametros_Click(object sender, EventArgs e)

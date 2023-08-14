@@ -44,6 +44,7 @@
             btnPerfil = new Button();
             btnCerrarSesion = new Button();
             panel5 = new Panel();
+            btnEditar = new Button();
             cmbRol = new ComboBox();
             btnCancelar = new Button();
             btnGuardar = new Button();
@@ -85,6 +86,7 @@
             button15 = new Button();
             button16 = new Button();
             dgvRolPermiso = new DataGridView();
+            bgW = new System.ComponentModel.BackgroundWorker();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel5.SuspendLayout();
@@ -163,9 +165,9 @@
             label11.ForeColor = Color.White;
             label11.Location = new Point(89, 20);
             label11.Name = "label11";
-            label11.Size = new Size(214, 32);
+            label11.Size = new Size(287, 32);
             label11.TabIndex = 41;
-            label11.Text = "Registrar Permisos";
+            label11.Text = "Registrar/Editar Permisos";
             // 
             // button2
             // 
@@ -226,6 +228,7 @@
             // panel5
             // 
             panel5.BackColor = Color.Gainsboro;
+            panel5.Controls.Add(btnEditar);
             panel5.Controls.Add(cmbRol);
             panel5.Controls.Add(btnCancelar);
             panel5.Controls.Add(btnGuardar);
@@ -241,6 +244,26 @@
             panel5.Name = "panel5";
             panel5.Size = new Size(1100, 59);
             panel5.TabIndex = 37;
+            // 
+            // btnEditar
+            // 
+            btnEditar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnEditar.BackColor = Color.Gold;
+            btnEditar.BackgroundImage = (Image)resources.GetObject("btnEditar.BackgroundImage");
+            btnEditar.BackgroundImageLayout = ImageLayout.Zoom;
+            btnEditar.FlatAppearance.BorderSize = 0;
+            btnEditar.FlatAppearance.MouseDownBackColor = Color.DarkGreen;
+            btnEditar.FlatAppearance.MouseOverBackColor = Color.DarkGreen;
+            btnEditar.FlatStyle = FlatStyle.Flat;
+            btnEditar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            btnEditar.ForeColor = Color.White;
+            btnEditar.Location = new Point(277, 16);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(46, 27);
+            btnEditar.TabIndex = 72;
+            btnEditar.UseVisualStyleBackColor = false;
+            btnEditar.Visible = false;
+            btnEditar.Click += btnEditar_Click;
             // 
             // cmbRol
             // 
@@ -872,6 +895,11 @@
             dgvRolPermiso.Size = new Size(1027, 392);
             dgvRolPermiso.TabIndex = 5;
             // 
+            // bgW
+            // 
+            bgW.WorkerReportsProgress = true;
+            bgW.WorkerSupportsCancellation = true;
+            // 
             // R_R_RolesPermisos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -939,7 +967,6 @@
         public Button btnGuardar;
         private PictureBox pictureBox5;
         private Panel panel1;
-        private DataGridView dgvRolPermiso;
         private Button btnCerrar;
         private Button btnMin;
         private Panel panel4;
@@ -952,6 +979,9 @@
         private Button button14;
         private Button button15;
         private Button button16;
-        private ComboBox cmbRol;
+        public Button btnEditar;
+        public DataGridView dgvRolPermiso;
+        public ComboBox cmbRol;
+        private System.ComponentModel.BackgroundWorker bgW;
     }
 }

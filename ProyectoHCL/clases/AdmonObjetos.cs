@@ -14,7 +14,7 @@ namespace ProyectoHCL.clases
         MySqlConnection conn;
         MySqlCommand cmd;
 
-        public void modificarObjeto(int id, string nombreObj, string descObj, string estadoObj)
+        public void modificarObjeto(int id, string nombreObj, string descObj, string estadoObj, int actPor)
         {
 
             try
@@ -30,6 +30,7 @@ namespace ProyectoHCL.clases
                 cmd.Parameters.AddWithValue("@nombreObj", nombreObj);
                 cmd.Parameters.AddWithValue("@descObj", descObj);
                 cmd.Parameters.AddWithValue("@estadoObj", estadoObj);
+                cmd.Parameters.AddWithValue("@actPor", actPor); 
 
                 cmd.ExecuteNonQuery();
                 conn.Close();

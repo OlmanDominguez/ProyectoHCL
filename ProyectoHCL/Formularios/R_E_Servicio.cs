@@ -17,6 +17,7 @@ namespace ProyectoHCL.Formularios
         public R_E_Servicio()
         {
             InitializeComponent();
+            cmbEstado.SelectedIndex = -1;
         }
 
         public string idS = null;
@@ -26,12 +27,14 @@ namespace ProyectoHCL.Formularios
         {
             txtServ.Clear();
             txtPrecio.Clear();
+            cmbEstado.SelectedIndex = -1;
         }
 
         public void limpiarError()
         {
             errorT.SetError(txtServ, "");
             errorT.SetError(txtPrecio, "");
+            errorT.SetError(cmbEstado, "");
         }
 
         private void btnMin_Click(object sender, EventArgs e)
@@ -105,7 +108,7 @@ namespace ProyectoHCL.Formularios
             {
                 Modelo modelo = new Modelo();
 
-                if (txtServ.Text.Trim() == "" || txtPrecio.Text.Trim() == "")
+                if (txtServ.Text.Trim() == "" || txtPrecio.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
@@ -129,6 +132,7 @@ namespace ProyectoHCL.Formularios
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@descripcion", txtServ.Text);
                         cmd.Parameters.AddWithValue("@precio", txtPrecio.Text);
+                        cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
 
                         cmd.ExecuteNonQuery();
                         MsgB m = new MsgB("informacion", "Registro creado con éxito");
@@ -147,7 +151,7 @@ namespace ProyectoHCL.Formularios
             {
                 Control control = new Control();
 
-                if (txtServ.Text.Trim() == "" || txtPrecio.Text.Trim() == "")
+                if (txtServ.Text.Trim() == "" || txtPrecio.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
@@ -156,7 +160,7 @@ namespace ProyectoHCL.Formularios
                 {
                     try
                     {
-                        control.editarServ(idS, txtServ.Text, txtPrecio.Text);
+                        control.editarServ(idS, txtServ.Text, txtPrecio.Text, cmbEstado.Text);
 
                         MsgB m = new MsgB("informacion", "Registro modificado");
                         DialogResult dR = m.ShowDialog();
@@ -168,6 +172,18 @@ namespace ProyectoHCL.Formularios
                         DialogResult dR = m.ShowDialog();
                     }
                 }
+            }
+        }
+
+        private void cmbEstado_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.cmbVacio(cmbEstado))
+            {
+                errorT.SetError(cmbEstado, "Seleccione un estado");
+            }
+            else
+            {
+                errorT.Clear();
             }
         }
     }

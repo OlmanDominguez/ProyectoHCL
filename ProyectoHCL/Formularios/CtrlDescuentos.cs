@@ -35,7 +35,7 @@ namespace ProyectoHCL.Formularios
         MsgB msgB = new MsgB();
         DataSet ds = new DataSet();
         CDatos cDatos = new CDatos();
-        int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
+        int pagInicio = 1, indice = 0, numFilas = 10, pagFinal, cmbIndice = 0;
 
         public CtrlDescuentos()
         {
@@ -185,19 +185,19 @@ namespace ProyectoHCL.Formularios
             switch (cmbIndice)
             {
                 case 0:
-                    numFilas = 5;
-                    break;
-                case 1:
                     numFilas = 10;
                     break;
-                case 2:
+                case 1:
                     numFilas = 20;
                     break;
-                case 3:
+                case 2:
                     numFilas = 30;
                     break;
-                case 4:
+                case 3:
                     numFilas = 40;
+                    break;
+                case 4:
+                    numFilas = 50;
                     break;
             }
             pagFinal = numFilas;
