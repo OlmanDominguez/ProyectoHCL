@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProyectoHCL.Formularios;
+using SpreadsheetLight.Drawing;
+using SpreadsheetLight;
 
 namespace ProyectoHCL.Formularios
 {
@@ -285,6 +287,94 @@ namespace ProyectoHCL.Formularios
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void crearExcel()
+        {
+            SLDocument sl = new SLDocument();
+
+            System.Drawing.Bitmap bm = new System.Drawing.Bitmap(Properties.Resources.logo);
+            Byte[] ba;
+            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+            {
+                bm.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                ms.Close();
+                ba = ms.ToArray();
+            }
+            SLPicture pic = new SLPicture(ba, DocumentFormat.OpenXml.Packaging.ImagePartType.Jpeg);
+            pic.SetPosition(0, 0);
+            pic.ResizeInPixels(80, 80);
+            sl.InsertPicture(pic);
+
+            sl.SetCellValue("C2", "Reporte de Preguntas");
+            SLStyle estiloT = sl.CreateStyle();
+            estiloT.Font.FontName = "Arial";
+            estiloT.Font.FontSize = 14;
+            estiloT.Font.Bold = true;
+            sl.SetCellStyle("C2", estiloT);
+            sl.MergeWorksheetCells("C2", "F2");
+
+            int celdaCabecera = 6, celdaInicial = 6;
+
+            sl.RenameWorksheet(SLDocument.DefaultFirstSheetName, "TBL_Pregunta");
+            sl.SetCellValue("B" + celdaCabecera, "Id");
+            sl.SetCellValue("C" + celdaCabecera, "Pregunta");
+            sl.SetCellValue("D" + celdaCabecera, "Id Estado");
+            sl.SetCellValue("E" + celdaCabecera, "Estado");
+
+
+            SLStyle estiloCa = sl.CreateStyle();
+            estiloT.Font.FontName = "Arial";
+            estiloT.Font.FontSize = 12;
+            estiloT.Font.Bold = true;
+            estiloCa.Font.FontColor = System.Drawing.Color.White;
+            estiloCa.Fill.SetPattern(DocumentFormat.OpenXml.Spreadsheet.PatternValues.Solid, System.Drawing.Color.Blue, System.Drawing.Color.Blue);
+            sl.SetCellStyle("B" + celdaCabecera, "E" + celdaCabecera, estiloCa);
+
+            string sql = "Select f.ID_PREGUNTA, f.PREGUNTA, f.ID_ESTADO, e.DESCRIPCION from TBL_PREGUNTA f INNER JOIN TBL_ESTADO e ON f.ID_ESTADO = e.ID_ESTADO";
+
+            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+
+            MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+            MySqlDataReader reader = comando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                celdaCabecera++;
+                sl.SetCellValue("B" + celdaCabecera, reader["ID_PREGUNTA"].ToString());
+                sl.SetCellValue("C" + celdaCabecera, reader["PREGUNTA"].ToString());
+                sl.SetCellValue("D" + celdaCabecera, reader["ID_ESTADO"].ToString());
+                sl.SetCellValue("E" + celdaCabecera, reader["DESCRIPCION"].ToString());
+
+            }
+
+            SLStyle EstiloB = sl.CreateStyle();
+            EstiloB.Border.LeftBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            EstiloB.Border.LeftBorder.Color = System.Drawing.Color.Black;
+            EstiloB.Border.TopBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            EstiloB.Border.RightBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            EstiloB.Border.BottomBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            sl.SetCellStyle("B" + celdaInicial, "E" + celdaCabecera, EstiloB);
+
+            sl.AutoFitColumn("B", "E");
+
+            SaveFileDialog sf = new SaveFileDialog();
+
+            sf.DefaultExt = "*.xlsx";
+            sf.FileName = "ExcelPreguntas";
+            sf.Filter = " Libro de Excel (*.xlsx) | *.xlsx";
+
+            if (sf.ShowDialog() == DialogResult.OK)
+            {
+                sl.SaveAs(sf.FileName);
+                MsgB mbox = new MsgB("informacion", "Archivo Excel creado con éxito");
+                DialogResult dR = mbox.ShowDialog();
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            crearExcel();
         }
     }
 }
