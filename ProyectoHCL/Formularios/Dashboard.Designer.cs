@@ -35,6 +35,8 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             panel1 = new Panel();
             panelmanteSubMenu = new Panel();
+            iconButton3 = new FontAwesome.Sharp.IconButton();
+            iconButton2 = new FontAwesome.Sharp.IconButton();
             Ibtn_clientes = new FontAwesome.Sharp.IconButton();
             Ibtn_parametros = new FontAwesome.Sharp.IconButton();
             Ibtn_permisos = new FontAwesome.Sharp.IconButton();
@@ -44,6 +46,7 @@
             Ibtn_reservacion = new FontAwesome.Sharp.IconButton();
             Ibtn_facturacion = new FontAwesome.Sharp.IconButton();
             paneladminSubMenu = new Panel();
+            iconButton1 = new FontAwesome.Sharp.IconButton();
             Ibtn_usuarios = new FontAwesome.Sharp.IconButton();
             Ibtn_descuentos = new FontAwesome.Sharp.IconButton();
             Ibtn_servicios = new FontAwesome.Sharp.IconButton();
@@ -185,16 +188,62 @@
             // panelmanteSubMenu
             // 
             panelmanteSubMenu.BackColor = Color.FromArgb(74, 181, 221);
+            panelmanteSubMenu.Controls.Add(iconButton3);
+            panelmanteSubMenu.Controls.Add(iconButton2);
             panelmanteSubMenu.Controls.Add(Ibtn_clientes);
             panelmanteSubMenu.Controls.Add(Ibtn_parametros);
             panelmanteSubMenu.Controls.Add(Ibtn_permisos);
             panelmanteSubMenu.Controls.Add(Ibtn_objetos);
             panelmanteSubMenu.Controls.Add(Ibtn_roles);
             panelmanteSubMenu.Dock = DockStyle.Top;
-            panelmanteSubMenu.Location = new Point(0, 500);
+            panelmanteSubMenu.Location = new Point(0, 547);
             panelmanteSubMenu.Name = "panelmanteSubMenu";
-            panelmanteSubMenu.Size = new Size(246, 226);
-            panelmanteSubMenu.TabIndex = 34;
+            panelmanteSubMenu.Size = new Size(246, 326);
+            panelmanteSubMenu.TabIndex = 35;
+            // 
+            // iconButton3
+            // 
+            iconButton3.Dock = DockStyle.Top;
+            iconButton3.FlatAppearance.BorderSize = 0;
+            iconButton3.FlatStyle = FlatStyle.Flat;
+            iconButton3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            iconButton3.IconChar = FontAwesome.Sharp.IconChar.Bimobject;
+            iconButton3.IconColor = Color.Black;
+            iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButton3.IconSize = 25;
+            iconButton3.ImageAlign = ContentAlignment.MiddleLeft;
+            iconButton3.Location = new Point(0, 270);
+            iconButton3.Name = "iconButton3";
+            iconButton3.Padding = new Padding(35, 0, 0, 0);
+            iconButton3.Size = new Size(246, 45);
+            iconButton3.TabIndex = 38;
+            iconButton3.Text = "Bitacora";
+            iconButton3.TextAlign = ContentAlignment.MiddleLeft;
+            iconButton3.TextImageRelation = TextImageRelation.ImageBeforeText;
+            iconButton3.UseVisualStyleBackColor = true;
+            iconButton3.Click += iconButton3_Click;
+            // 
+            // iconButton2
+            // 
+            iconButton2.Dock = DockStyle.Top;
+            iconButton2.FlatAppearance.BorderSize = 0;
+            iconButton2.FlatStyle = FlatStyle.Flat;
+            iconButton2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            iconButton2.IconChar = FontAwesome.Sharp.IconChar.Question;
+            iconButton2.IconColor = Color.Black;
+            iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButton2.IconSize = 25;
+            iconButton2.ImageAlign = ContentAlignment.MiddleLeft;
+            iconButton2.Location = new Point(0, 225);
+            iconButton2.Name = "iconButton2";
+            iconButton2.Padding = new Padding(35, 0, 0, 0);
+            iconButton2.Size = new Size(246, 45);
+            iconButton2.TabIndex = 37;
+            iconButton2.Text = "Preguntas";
+            iconButton2.TextAlign = ContentAlignment.MiddleLeft;
+            iconButton2.TextImageRelation = TextImageRelation.ImageBeforeText;
+            iconButton2.UseVisualStyleBackColor = true;
+            iconButton2.Click += iconButton2_Click;
             // 
             // Ibtn_clientes
             // 
@@ -211,12 +260,11 @@
             Ibtn_clientes.Name = "Ibtn_clientes";
             Ibtn_clientes.Padding = new Padding(35, 0, 0, 0);
             Ibtn_clientes.Size = new Size(246, 45);
-            Ibtn_clientes.TabIndex = 35;
+            Ibtn_clientes.TabIndex = 36;
             Ibtn_clientes.Text = "Clientes";
             Ibtn_clientes.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_clientes.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_clientes.UseVisualStyleBackColor = true;
-            Ibtn_clientes.Click += Ibtn_clientes_Click_1;
             // 
             // Ibtn_parametros
             // 
@@ -233,12 +281,11 @@
             Ibtn_parametros.Name = "Ibtn_parametros";
             Ibtn_parametros.Padding = new Padding(35, 0, 0, 0);
             Ibtn_parametros.Size = new Size(246, 45);
-            Ibtn_parametros.TabIndex = 34;
+            Ibtn_parametros.TabIndex = 35;
             Ibtn_parametros.Text = "Parametros";
             Ibtn_parametros.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_parametros.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_parametros.UseVisualStyleBackColor = true;
-            Ibtn_parametros.Click += Ibtn_parametros_Click;
             // 
             // Ibtn_permisos
             // 
@@ -255,12 +302,11 @@
             Ibtn_permisos.Name = "Ibtn_permisos";
             Ibtn_permisos.Padding = new Padding(35, 0, 0, 0);
             Ibtn_permisos.Size = new Size(246, 45);
-            Ibtn_permisos.TabIndex = 33;
+            Ibtn_permisos.TabIndex = 34;
             Ibtn_permisos.Text = "Permisos ";
             Ibtn_permisos.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_permisos.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_permisos.UseVisualStyleBackColor = true;
-            Ibtn_permisos.Click += Ibtn_permisos_Click;
             // 
             // Ibtn_objetos
             // 
@@ -277,12 +323,11 @@
             Ibtn_objetos.Name = "Ibtn_objetos";
             Ibtn_objetos.Padding = new Padding(35, 0, 0, 0);
             Ibtn_objetos.Size = new Size(246, 45);
-            Ibtn_objetos.TabIndex = 32;
+            Ibtn_objetos.TabIndex = 33;
             Ibtn_objetos.Text = "Objetos";
             Ibtn_objetos.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_objetos.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_objetos.UseVisualStyleBackColor = true;
-            Ibtn_objetos.Click += Ibtn_objetos_Click;
             // 
             // Ibtn_roles
             // 
@@ -299,12 +344,11 @@
             Ibtn_roles.Name = "Ibtn_roles";
             Ibtn_roles.Padding = new Padding(35, 0, 0, 0);
             Ibtn_roles.Size = new Size(246, 45);
-            Ibtn_roles.TabIndex = 31;
+            Ibtn_roles.TabIndex = 32;
             Ibtn_roles.Text = "Roles";
             Ibtn_roles.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_roles.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_roles.UseVisualStyleBackColor = true;
-            Ibtn_roles.Click += Ibtn_roles_Click;
             // 
             // Ibtn_mantenimiento
             // 
@@ -317,16 +361,15 @@
             Ibtn_mantenimiento.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_mantenimiento.IconSize = 25;
             Ibtn_mantenimiento.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_mantenimiento.Location = new Point(0, 455);
+            Ibtn_mantenimiento.Location = new Point(0, 502);
             Ibtn_mantenimiento.Name = "Ibtn_mantenimiento";
             Ibtn_mantenimiento.Padding = new Padding(15, 0, 0, 0);
             Ibtn_mantenimiento.Size = new Size(246, 45);
-            Ibtn_mantenimiento.TabIndex = 33;
+            Ibtn_mantenimiento.TabIndex = 34;
             Ibtn_mantenimiento.Text = "Seguridad";
             Ibtn_mantenimiento.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_mantenimiento.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_mantenimiento.UseVisualStyleBackColor = true;
-            Ibtn_mantenimiento.Click += Ibtn_mantenimiento_Click_1;
             // 
             // Ibtn_reservacion
             // 
@@ -339,16 +382,15 @@
             Ibtn_reservacion.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_reservacion.IconSize = 25;
             Ibtn_reservacion.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_reservacion.Location = new Point(0, 410);
+            Ibtn_reservacion.Location = new Point(0, 457);
             Ibtn_reservacion.Name = "Ibtn_reservacion";
             Ibtn_reservacion.Padding = new Padding(15, 0, 0, 0);
             Ibtn_reservacion.Size = new Size(246, 45);
-            Ibtn_reservacion.TabIndex = 32;
+            Ibtn_reservacion.TabIndex = 33;
             Ibtn_reservacion.Text = "Reservacion";
             Ibtn_reservacion.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_reservacion.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_reservacion.UseVisualStyleBackColor = true;
-            Ibtn_reservacion.Click += Ibtn_reservacion_Click_1;
             // 
             // Ibtn_facturacion
             // 
@@ -361,20 +403,20 @@
             Ibtn_facturacion.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_facturacion.IconSize = 25;
             Ibtn_facturacion.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_facturacion.Location = new Point(0, 365);
+            Ibtn_facturacion.Location = new Point(0, 412);
             Ibtn_facturacion.Name = "Ibtn_facturacion";
             Ibtn_facturacion.Padding = new Padding(15, 0, 0, 0);
             Ibtn_facturacion.Size = new Size(246, 45);
-            Ibtn_facturacion.TabIndex = 31;
+            Ibtn_facturacion.TabIndex = 32;
             Ibtn_facturacion.Text = "Facturacion";
             Ibtn_facturacion.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_facturacion.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_facturacion.UseVisualStyleBackColor = true;
-            Ibtn_facturacion.Click += Ibtn_facturacion_Click;
             // 
             // paneladminSubMenu
             // 
             paneladminSubMenu.BackColor = Color.FromArgb(74, 181, 221);
+            paneladminSubMenu.Controls.Add(iconButton1);
             paneladminSubMenu.Controls.Add(Ibtn_usuarios);
             paneladminSubMenu.Controls.Add(Ibtn_descuentos);
             paneladminSubMenu.Controls.Add(Ibtn_servicios);
@@ -382,8 +424,30 @@
             paneladminSubMenu.Dock = DockStyle.Top;
             paneladminSubMenu.Location = new Point(0, 177);
             paneladminSubMenu.Name = "paneladminSubMenu";
-            paneladminSubMenu.Size = new Size(246, 188);
+            paneladminSubMenu.Size = new Size(246, 235);
             paneladminSubMenu.TabIndex = 29;
+            // 
+            // iconButton1
+            // 
+            iconButton1.Dock = DockStyle.Top;
+            iconButton1.FlatAppearance.BorderSize = 0;
+            iconButton1.FlatStyle = FlatStyle.Flat;
+            iconButton1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            iconButton1.IconChar = FontAwesome.Sharp.IconChar.HireAHelper;
+            iconButton1.IconColor = Color.Black;
+            iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButton1.IconSize = 25;
+            iconButton1.ImageAlign = ContentAlignment.MiddleLeft;
+            iconButton1.Location = new Point(0, 180);
+            iconButton1.Name = "iconButton1";
+            iconButton1.Padding = new Padding(35, 0, 0, 0);
+            iconButton1.Size = new Size(246, 45);
+            iconButton1.TabIndex = 33;
+            iconButton1.Text = "Tipo de Habitacion";
+            iconButton1.TextAlign = ContentAlignment.MiddleLeft;
+            iconButton1.TextImageRelation = TextImageRelation.ImageBeforeText;
+            iconButton1.UseVisualStyleBackColor = true;
+            iconButton1.Click += iconButton1_Click_1;
             // 
             // Ibtn_usuarios
             // 
@@ -1685,14 +1749,6 @@
         private FontAwesome.Sharp.IconButton Ibtn_servicios;
         private FontAwesome.Sharp.IconButton Ibtn_habitaciones;
         private FontAwesome.Sharp.IconButton Ibtn_usuarios;
-        private Panel panelmanteSubMenu;
-        private FontAwesome.Sharp.IconButton Ibtn_parametros;
-        private FontAwesome.Sharp.IconButton Ibtn_permisos;
-        private FontAwesome.Sharp.IconButton Ibtn_objetos;
-        private FontAwesome.Sharp.IconButton Ibtn_roles;
-        private FontAwesome.Sharp.IconButton Ibtn_mantenimiento;
-        private FontAwesome.Sharp.IconButton Ibtn_reservacion;
-        private FontAwesome.Sharp.IconButton Ibtn_facturacion;
         private Panel panelChildForm;
         private Label lbl_anuladas;
         private Label lbl_anu;
@@ -1764,10 +1820,21 @@
         private Label lbl_3;
         private Label lbl_2;
         private Label lbl_1;
-        private FontAwesome.Sharp.IconButton Ibtn_clientes;
         private DataGridView dgv_habitacion;
         private PictureBox pbt_fechas;
         private Label lbl_cerrar;
         private Label lbl_fechas;
+        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton Ibtn_facturacion;
+        private Panel panelmanteSubMenu;
+        private FontAwesome.Sharp.IconButton Ibtn_parametros;
+        private FontAwesome.Sharp.IconButton Ibtn_permisos;
+        private FontAwesome.Sharp.IconButton Ibtn_objetos;
+        private FontAwesome.Sharp.IconButton Ibtn_roles;
+        private FontAwesome.Sharp.IconButton Ibtn_mantenimiento;
+        private FontAwesome.Sharp.IconButton Ibtn_reservacion;
+        private FontAwesome.Sharp.IconButton iconButton2;
+        private FontAwesome.Sharp.IconButton Ibtn_clientes;
+        private FontAwesome.Sharp.IconButton iconButton3;
     }
 }

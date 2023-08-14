@@ -35,7 +35,7 @@ namespace ProyectoHCL
         private void Permisos()
         {
             CDatos cDatos = new CDatos();
-            
+
             var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
 
             foreach (var obj in LsObj)
@@ -73,9 +73,9 @@ namespace ProyectoHCL
                         }
                         break;
                 }
-                               
+
             }
-        
+
         }
 
         private void hideSubMenu()
@@ -1147,6 +1147,24 @@ namespace ProyectoHCL
             panelChildForm.Visible = true;
             openChildFormInPanel(new CtrlFacturacion());
             //hideSubMenu2();
+        }
+
+        private void iconButton1_Click_1(object sender, EventArgs e)
+        {
+            //codigo para el formilario 
+            hideSubMenu2();
+        }
+
+        private void iconButton2_Click(object sender, EventArgs e)
+        {
+            //codigo para el formilario 
+            hideSubMenu2();
+        }
+
+        private void iconButton3_Click(object sender, EventArgs e)
+        {
+            //codigo para el formilario 
+            hideSubMenu2();
         }
     }
 }
