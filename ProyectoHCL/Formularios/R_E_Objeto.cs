@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ProyectoHCL.RecuContra;
 
 namespace ProyectoHCL.Formularios
 {
@@ -128,6 +129,8 @@ namespace ProyectoHCL.Formularios
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@nombreObj", txtObj.Text);
                         cmd.Parameters.AddWithValue("@descObj", rTxtDesc.Text);
+                        cmd.Parameters.AddWithValue("@creadoPor", clasecompartida.iduser);
+                        cmd.Parameters.AddWithValue("@actualizadoPor", clasecompartida.iduser);
 
                         cmd.ExecuteNonQuery();
                         MsgB m = new MsgB("informacion", "Registro creado con éxito");
@@ -155,7 +158,7 @@ namespace ProyectoHCL.Formularios
                 {
                     try
                     {
-                        control.editarObj(idObj, txtObj.Text, rTxtDesc.Text, cmbEstado.Text);
+                        control.editarObj(idObj, txtObj.Text, rTxtDesc.Text, cmbEstado.Text, clasecompartida.iduser.ToString());
 
                         MsgB m = new MsgB("informacion", "Registro modificado");
                         DialogResult dR = m.ShowDialog();

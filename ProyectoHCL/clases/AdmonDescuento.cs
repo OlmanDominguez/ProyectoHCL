@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ProyectoHCL.RecuContra;
 
 namespace ProyectoHCL.clases
 {
@@ -13,7 +14,7 @@ namespace ProyectoHCL.clases
         MySqlConnection conn;
         MySqlCommand cmd;
 
-        public void modificarDescuento(int id, string descripcion, decimal porcentaje)
+        public void modificarDescuento(int id, string descripcion, decimal porcentaje, int idUs)
         {
 
             try
@@ -26,6 +27,7 @@ namespace ProyectoHCL.clases
                 cmd.Parameters.AddWithValue("@idDescuento", id);
                 cmd.Parameters.AddWithValue("@descripcion", descripcion);
                 cmd.Parameters.AddWithValue("@porcentaje", porcentaje);
+                cmd.Parameters.AddWithValue("@actPor", idUs);
 
                 cmd.ExecuteNonQuery();
                 conn.Close();
