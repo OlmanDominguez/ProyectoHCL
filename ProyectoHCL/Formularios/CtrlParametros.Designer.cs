@@ -66,7 +66,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1549, 208);
             panel2.TabIndex = 20;
-          
             // 
             // btCerrar
             // 
@@ -105,8 +104,7 @@
             btnnuevoP.Text = "Agregar";
             btnnuevoP.TextAlign = ContentAlignment.MiddleRight;
             btnnuevoP.UseVisualStyleBackColor = false;
-            
-
+            btnnuevoP.Click += btnnuevoP_Click_1;
             // 
             // label11
             // 
@@ -201,7 +199,6 @@
             dgvParametro.RowTemplate.Height = 33;
             dgvParametro.Size = new Size(1549, 459);
             dgvParametro.TabIndex = 4;
-           // dgvParametro.CellContentClick += dgvParametro_CellContentClick;
             dgvParametro.CellPainting += dgvParametro_CellPainting;
             // 
             // panel4

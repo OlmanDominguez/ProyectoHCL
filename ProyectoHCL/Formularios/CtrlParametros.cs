@@ -101,18 +101,21 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnnuevoP_Click(object sender, EventArgs e)
+
+        private void btnnuevoP_Click_1(object sender, EventArgs e)
         {
-           // R_E_pmo.lbPar.Text = "Registrar Parametro";
+
+        
+        R_E_pmo.lbPar.Text = "Registrar Parametro";
             R_E_pmo.Size = new System.Drawing.Size(800, 431);
             R_E_pmo.btnGuardar.Location = new Point(256, 282);
             R_E_pmo.btnCancelar.Location = new Point(466, 282);
-          //  R_E_pmo.label2.Location = new Point(243, 34);
-           // R_E_pmo.texPa.Location = new Point(243, 65);
-            //R_E_pmo.label6.Visible = false;
-            R_E_pmo.txtValor.Visible = false;
-            //R_E_pmo.label6.Location = new Point(243, 107);
-            //R_E_pmo.texPar.Location = new Point(243, 138);
+            R_E_pmo.label2.Location = new Point(243, 34);
+            R_E_pmo.texPa.Location = new Point(243, 65);
+            R_E_pmo.label2.Visible = true;
+            R_E_pmo.txtValor.Visible = true;
+            R_E_pmo.label6.Location = new Point(243, 107);
+            R_E_pmo.txtValor.Location = new Point(243, 138);
             R_E_pmo.ShowDialog();
             CargarDGP();
         }
@@ -133,25 +136,24 @@ namespace ProyectoHCL.Formularios
         {
             if (this.dgvParametro.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-               /* R_E_Parametro.lbPar.Text = "Editar Objeto";
-                R_E_Parametro.Size = new System.Drawing.Size(800, 371);
-                R_E_Parametro.btnGuardar.Location = new Point(256, 213);
-                R_E_Parametro.btnCancelar.Location = new Point(466, 213);
-                R_E_Parametro.label2.Location = new Point(59, 34);
-                R_E_Parametro.txtObj.Location = new Point(59, 67);
-                R_E_Parametro.label1.Location = new Point(59, 115);
-                R_E_Parametro.cmbEstado.Location = new Point(59, 146);
-                R_E_Parametro.label1.Visible = true;
-                R_E_Parametro.cmbEstado.Visible = true;
-                R_E_Parametro.label6.Location = new Point(421, 34);
-                R_E_Parametro.rTxtDesc.Location = new Point(421, 65);
-                R_E_Parametro.idpar = dgvParametro.CurrentRow.Cells["ID"].Value.ToString();
-                R_E_Parametro.txtObj.Text = dgvParametro.CurrentRow.Cells["NOMBRE"].Value.ToString();
-                R_E_Parametro.rTxtDesc.Text = dgvParametro.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
-                R_E_Parametro.cmbEstado.Text = dgvParametro.CurrentRow.Cells["ESTADO"].Value.ToString();
-                R_E_Parametro.ShowDialog();
-                R_E_Parametro.limpiarCampos();
-                CargarDGP();*/
+                R_E_pmo.lbPar.Text = "Editar Objeto";
+                R_E_pmo.Size = new System.Drawing.Size(800, 371);
+                R_E_pmo.btnGuardar.Location = new Point(256, 213);
+                R_E_pmo.btnCancelar.Location = new Point(466, 213);
+                R_E_pmo.label2.Location = new Point(59, 34);
+                R_E_pmo.texPa.Location = new Point(59, 67);
+                R_E_pmo.label6.Location = new Point(59, 115);
+                R_E_pmo.txtValor.Location = new Point(59, 146);
+                R_E_pmo.label6.Visible = true;
+                R_E_pmo.txtValor.Visible = true;
+               R_E_pmo.label6.Location = new Point(421, 34);
+               R_E_pmo.txtValor.Location = new Point(421, 65);
+                R_E_pmo.idpar = dgvParametro.CurrentRow.Cells["idrol"].Value.ToString();
+                R_E_pmo.texPa.Text = dgvParametro.CurrentRow.Cells["PARAMETRO"].Value.ToString();
+                R_E_pmo.txtValor.Text = dgvParametro.CurrentRow.Cells["VALOR"].Value.ToString();
+                R_E_pmo.ShowDialog();
+                R_E_pmo.limpiarCampos();
+                 CargarDGP();
             }
         }
         private void dgvParametro_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -212,7 +214,7 @@ namespace ProyectoHCL.Formularios
 
             while (reader.Read())
             {
-                
+
                 {
 
 
@@ -350,5 +352,6 @@ namespace ProyectoHCL.Formularios
         {
             this.Close();
         }
+
     }
 }

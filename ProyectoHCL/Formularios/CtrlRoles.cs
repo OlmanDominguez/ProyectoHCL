@@ -30,10 +30,12 @@ namespace ProyectoHCL.Formularios
 {
     public partial class CtrlRoles : Form
     {
-        Roles user = new Roles();
-        DataSet ds = new DataSet();
-        int pagInicio = 1, indice = 0, numFilas = 10, pagFinal;
 
+        AdmonRoles rgtRoles = new AdmonRoles(); //crear objeto Rgtroles para acceder a sus metodos
+        Roles user = new Roles();     //crear objetos roles para acceder a sus parametros 
+        DataSet ds = new DataSet();
+        //int pagInicio = 1, indice = 0, numFilas = 5, pagFinal;
+        int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
         public CtrlRoles()
         {
             InitializeComponent();
@@ -62,13 +64,9 @@ namespace ProyectoHCL.Formularios
 
             cmbPagR.SelectedIndex = indice;
         }
-
-
-        AdmonRoles rgtRoles = new AdmonRoles(); //crear objeto Rgtroles para acceder a sus metodos
-        Roles roles = new Roles();//crear objetos roles para acceder a sus parametros 
         private void CtrlRoles_Load(object sender, EventArgs e)
         {
-            RellenarGrid(); //se muestran roles registrados en el dataGrid
+
 
             DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
             btnUpdate.Name = "EDITAR"; //Nombre del boton 
@@ -77,6 +75,8 @@ namespace ProyectoHCL.Formularios
             DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
             btnDelete.Name = "ELIMINAR";
             dgvRoles.Columns.Add(btnDelete);
+
+            RellenarGrid();  //se muestran roles registrados en el dataGrid
         }
         private void dgvRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -111,15 +111,21 @@ namespace ProyectoHCL.Formularios
             {
                 EditarRoles editarRoles = new EditarRoles(); //Crear objeto del form Editarroles
 
-                //  editarRoles.ID_rol= Roles_Permisos_DG.CurrentRow.Cells["ID"].Value.ToString();
-                editarRoles.txtNombre.Text = dgvRoles.CurrentRow.Cells["NOMBRE_ROL"].Value.ToString();
-                editarRoles.txtEstadoRol.Text = dgvRoles.CurrentRow.Cells["ESTADO_ROL"].Value.ToString();
-                editarRoles.txtFechaC.Text = dgvRoles.CurrentRow.Cells["FECHA_CREACION"].Value.ToString();
-                editarRoles.txtFechaActualizacion.Text = dgvRoles.CurrentRow.Cells["FECHA_ACTUALIZACION"].Value.ToString();
+                // editarRoles.ID_Rol=dgvRoles.CurrentRow.Cells["idrol"].Value.ToString();
+                //editarRoles.txtNombre.Text = dgvRoles.CurrentRow.Cells["estado_rol"].Value.ToString();
+                //editarRoles.txtestadorol.Text = dgvRoles.CurrentRow.Cells["nombrerol"].Value.ToString();
+
                 editarRoles.ShowDialog(); //Se oculta el form principal y solo muestra el form editarRol
                 RellenarGrid(); //Se llama el metodo Mostrar Roles para actualizar el DataGrid al editar 
             }
         }
+
+        public void RellenarGrid()
+        {
+            dgvRoles.DataSource = rgtRoles.RellenarGrid();  //Llamar metodo mostrar Roles en dataGrid
+        }
+
+
         private void dgvRoles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.ColumnIndex >= 0 && this.dgvRoles.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
@@ -149,12 +155,6 @@ namespace ProyectoHCL.Formularios
                 e.Handled = true;
             }
         }
-        public void RellenarGrid()
-        {
-            dgvRoles.DataSource = rgtRoles.RellenarGrid(); //Llamar metodo mostrar Roles en dataGrid
-        }
-
-
         private void pdf_Click(object sender, EventArgs e)
         {
             crearPDF();
@@ -357,7 +357,7 @@ namespace ProyectoHCL.Formularios
             sl.SaveAs("Excel.xlsx");
         }
 
-        public void txtBuscar_TextChanged(string buscarR) //Recibe string para buscar usuarios
+        public void BuscarRol(string buscarR) //Recibe string para buscar usuarios
         {
             try
             {
@@ -382,6 +382,7 @@ namespace ProyectoHCL.Formularios
                 throw;
             }
         }
+
 
         private void btSiguiente_Click(object sender, EventArgs e)
         {
@@ -428,34 +429,40 @@ namespace ProyectoHCL.Formularios
 
         private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // numFilas = int.Parse(mostrarR.Text);
-            // pagFinal = numFilas;
 
             indice = cmbMostrar.SelectedIndex;
             switch (indice)
             {
                 case 0:
-                    numFilas = 2;
-                    break;
-                case 1:
-                    numFilas = 3;
-                    break;
-                case 2:
-                    numFilas = 4;
-                    break;
-                case 3:
                     numFilas = 5;
                     break;
+                case 1:
+                    numFilas = 10;
+                    break;
+                case 2:
+                    numFilas = 20;
+                    break;
+                case 3:
+                    numFilas = 30;
+                    break;
                 case 4:
-                    numFilas = 6;
+                    numFilas = 40;
                     break;
             }
             pagFinal = numFilas;
             CargarDT();
         }
 
-
-
-
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscar.Text != "")
+            {
+                BuscarRol(txtBuscar.Text);
+            }
+            else
+            {
+                CargarDT();
+            }
+        }
     }
 }

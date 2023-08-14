@@ -191,5 +191,32 @@ namespace ProyectoHCL.clases
                 return false;
             }
         }
+
+        public bool existeParametro(string idrol)
+        {
+            MySqlDataReader reader;
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            if (conectar.State == ConnectionState.Closed)
+            {
+                conectar.Open();
+            }
+
+            String sql = "SELECT ID_ROL FROM TBL_PARAMETRO WHERE ROL LIKE @ROL";
+            MySqlCommand comando = new MySqlCommand(sql, conectar);
+            comando.Parameters.AddWithValue("@ID_ROL", idrol);
+            reader = comando.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

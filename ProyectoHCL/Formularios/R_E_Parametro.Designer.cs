@@ -192,7 +192,7 @@
             txtValor.MaxLength = 50;
             txtValor.Name = "txtValor";
             txtValor.ShortcutsEnabled = false;
-            txtValor.Size = new Size(451, 37);
+            txtValor.Size = new Size(324, 37);
             txtValor.TabIndex = 12;
             txtValor.KeyPress += txtValor_KeyPress;
             txtValor.Leave += txtValor_Leave;
@@ -248,16 +248,16 @@
 
         private Panel panel2;
         private PictureBox pictureBox5;
-        private Label lbPar;
         private Button btnCerrar;
         private Button btnMin;
         public Panel panel3;
         public TextBox txtValor;
-        private Label label6;
-        private Label label2;
         private ErrorProvider errorp;
         public Button btnCancelar;
         public Button btnGuardar;
-        private TextBox texPa;
+        public Label lbPar;
+        public Label label6;
+        public Label label2;
+        public TextBox texPa;
     }
 }
