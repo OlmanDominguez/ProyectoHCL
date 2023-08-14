@@ -432,7 +432,7 @@ namespace ProyectoHCL.Formularios
         {
             SLDocument sl = new SLDocument();
 
-            System.Drawing.Bitmap bm = new System.Drawing.Bitmap("C:/Users/jmont/OneDrive/Documentos/HM/ProyectoIP/logoCL.png");
+            System.Drawing.Bitmap bm = new System.Drawing.Bitmap(Properties.Resources.logo);
             Byte[] ba;
             using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
             {

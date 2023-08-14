@@ -159,6 +159,7 @@
             button11.TabIndex = 56;
             button11.Text = "Excel ";
             button11.UseVisualStyleBackColor = false;
+            button11.Click += button11_Click;
             // 
             // txtBuscar
             // 

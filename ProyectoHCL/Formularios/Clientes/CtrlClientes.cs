@@ -11,7 +11,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using ProyectoHCL.clases;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using DocumentFormat.OpenXml.Office2013.Excel;
+using SpreadsheetLight;
+using SpreadsheetLight.Drawing;
 
 namespace ProyectoHCL.Formularios
 {
@@ -19,6 +23,7 @@ namespace ProyectoHCL.Formularios
     {
         clases.Clientes clien = new clases.Clientes();
         DataSet ds = new DataSet();
+        CDatos cDatos = new CDatos();
         int pagInicio = 1, indice = 0, numFilas = 10, pagFinal, cmbIndice = 0;
 
         public CtrlClientes()
@@ -29,6 +34,36 @@ namespace ProyectoHCL.Formularios
         }
 
         AdmonClientes admonClientes = new AdmonClientes();
+
+        private void Permisos()
+        {
+            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
+
+            foreach (var obj in LsObj)
+            {
+                switch (obj.IdPermiso)
+                {
+                    case 2:
+                        if (obj.IdObjeto == "CLIENTES" && !obj.Permitido) //Validar pantalla y el permiso
+                        {
+                            btnNuevo.Enabled = false; //Deshabilitar botón para crear
+                        }
+                        break;
+                    case 3:
+                        if (obj.IdObjeto == "CLIENTES" && !obj.Permitido)
+                        {
+                            dgvClientes.Columns["EDITAR"].Visible = false; //Ocultar columna del botón para editar en datagrid
+                        }
+                        break;
+                    case 4:
+                        if (obj.IdObjeto == "CLIENTES" && !obj.Permitido)
+                        {
+                            dgvClientes.Columns["ELIMINAR"].Visible = false; //Ocultar columna del botón para eliminar en datagrid
+                        }
+                        break;
+                }
+            }
+        }
 
         private void CargarDGCl()
         {
@@ -66,6 +101,8 @@ namespace ProyectoHCL.Formularios
             DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
             btnDelete.Name = "ELIMINAR";
             dgvClientes.Columns.Add(btnDelete);
+
+            Permisos();
         }
 
 
@@ -354,7 +391,106 @@ namespace ProyectoHCL.Formularios
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            crearExcel();
         }
+
+        private void crearExcel()
+        {
+            SLDocument sl = new SLDocument();
+
+            System.Drawing.Bitmap bm = new System.Drawing.Bitmap(Properties.Resources.logo);
+            Byte[] ba;
+            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+            {
+                bm.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                ms.Close();
+                ba = ms.ToArray();
+            }
+            SLPicture pic = new SLPicture(ba, DocumentFormat.OpenXml.Packaging.ImagePartType.Jpeg);
+            pic.SetPosition(0, 0);
+            pic.ResizeInPixels(80, 80);
+            sl.InsertPicture(pic);
+
+            sl.SetCellValue("C2", "Reporte de Clientes");
+            SLStyle estiloT = sl.CreateStyle();
+            estiloT.Font.FontName = "Arial";
+            estiloT.Font.FontSize = 14;
+            estiloT.Font.Bold = true;
+            sl.SetCellStyle("C2", estiloT);
+            sl.MergeWorksheetCells("C2", "F2");
+
+            int celdaCabecera = 6, celdaInicial = 6;
+
+            sl.RenameWorksheet(SLDocument.DefaultFirstSheetName, "TBL_CLIENTE");
+            sl.SetCellValue("B" + celdaCabecera, "Codigo");
+            sl.SetCellValue("C" + celdaCabecera, "Nombre");
+            sl.SetCellValue("D" + celdaCabecera, "Apellido");
+            sl.SetCellValue("E" + celdaCabecera, "Identificacion");
+            sl.SetCellValue("F" + celdaCabecera, "Id TipoCliente");
+            sl.SetCellValue("G" + celdaCabecera, "Tipo Cliente");
+            sl.SetCellValue("H" + celdaCabecera, "Nombre Juridico");
+            sl.SetCellValue("I" + celdaCabecera, "RTN");
+            sl.SetCellValue("J" + celdaCabecera, "Telefono1");
+            sl.SetCellValue("K" + celdaCabecera, "Telefono2");
+            sl.SetCellValue("L" + celdaCabecera, "Email1");
+            sl.SetCellValue("M" + celdaCabecera, "Email2");
+
+            SLStyle estiloCa = sl.CreateStyle();
+            estiloT.Font.FontName = "Arial";
+            estiloT.Font.FontSize = 12;
+            estiloT.Font.Bold = true;
+            estiloCa.Font.FontColor = System.Drawing.Color.White;
+            estiloCa.Fill.SetPattern(DocumentFormat.OpenXml.Spreadsheet.PatternValues.Solid, System.Drawing.Color.Blue, System.Drawing.Color.Blue);
+            sl.SetCellStyle("B" + celdaCabecera, "M" + celdaCabecera, estiloCa);
+
+            string sql = "SELECT c.CODIGO, c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, c.ID_TIPOCLIENTE, t.DESCRIPCION, c.NOMBRE_RTN, c.RTN, c.TELEFONO, c.TELEFONO2, c.EMAIL, c.EMAIL2 FROM TBL_CLIENTE c INNER JOIN TBL_TIPOCLIENTE t ON c.ID_TIPOCLIENTE = t.ID_TIPOCLIENTE";
+
+            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+
+            MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+            MySqlDataReader reader = comando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                celdaCabecera++;
+                sl.SetCellValue("B" + celdaCabecera, reader["CODIGO"].ToString());
+                sl.SetCellValue("C" + celdaCabecera, reader["NOMBRE"].ToString());
+                sl.SetCellValue("D" + celdaCabecera, reader["APELLIDO"].ToString());
+                sl.SetCellValue("E" + celdaCabecera, reader["DNI_PASAPORTE"].ToString());
+                sl.SetCellValue("F" + celdaCabecera, reader["ID_TIPOCLIENTE"].ToString());
+                sl.SetCellValue("G" + celdaCabecera, reader["DESCRIPCION"].ToString());
+                sl.SetCellValue("H" + celdaCabecera, reader["NOMBRE_RTN"].ToString());
+                sl.SetCellValue("I" + celdaCabecera, reader["RTN"].ToString());
+                sl.SetCellValue("J" + celdaCabecera, reader["TELEFONO"].ToString());
+                sl.SetCellValue("K" + celdaCabecera, reader["TELEFONO2"].ToString());
+                sl.SetCellValue("L" + celdaCabecera, reader["EMAIL"].ToString());
+                sl.SetCellValue("M" + celdaCabecera, reader["EMAIL2"].ToString());
+            }
+
+            SLStyle EstiloB = sl.CreateStyle();
+            EstiloB.Border.LeftBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            EstiloB.Border.LeftBorder.Color = System.Drawing.Color.Black;
+            EstiloB.Border.TopBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            EstiloB.Border.RightBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            EstiloB.Border.BottomBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
+            sl.SetCellStyle("B" + celdaInicial, "M" + celdaCabecera, EstiloB);
+
+            sl.AutoFitColumn("B", "F");
+
+            SaveFileDialog sf = new SaveFileDialog();
+
+            sf.DefaultExt = "*.xlsx";
+            sf.FileName = "ExcelClientes";
+            sf.Filter = " Libro de Excel (*.xlsx) | *.xlsx";
+
+            if (sf.ShowDialog() == DialogResult.OK)
+            {
+                sl.SaveAs(sf.FileName);
+                MsgB mbox = new MsgB("informacion", "Archivo Excel creado con éxito");
+                DialogResult dR = mbox.ShowDialog();
+            }
+        }
+
+
     }
 }
