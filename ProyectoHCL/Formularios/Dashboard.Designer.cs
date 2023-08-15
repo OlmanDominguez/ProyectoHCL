@@ -265,6 +265,7 @@
             Ibtn_clientes.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_clientes.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_clientes.UseVisualStyleBackColor = true;
+            Ibtn_clientes.Click += Ibtn_clientes_Click;
             // 
             // Ibtn_parametros
             // 
@@ -286,6 +287,7 @@
             Ibtn_parametros.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_parametros.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_parametros.UseVisualStyleBackColor = true;
+            Ibtn_parametros.Click += Ibtn_parametros_Click_1;
             // 
             // Ibtn_permisos
             // 
@@ -307,6 +309,7 @@
             Ibtn_permisos.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_permisos.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_permisos.UseVisualStyleBackColor = true;
+            Ibtn_permisos.Click += Ibtn_permisos_Click_1;
             // 
             // Ibtn_objetos
             // 
@@ -328,6 +331,7 @@
             Ibtn_objetos.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_objetos.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_objetos.UseVisualStyleBackColor = true;
+            Ibtn_objetos.Click += Ibtn_objetos_Click_1;
             // 
             // Ibtn_roles
             // 
@@ -349,6 +353,7 @@
             Ibtn_roles.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_roles.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_roles.UseVisualStyleBackColor = true;
+            Ibtn_roles.Click += Ibtn_roles_Click_1;
             // 
             // Ibtn_mantenimiento
             // 
@@ -370,6 +375,7 @@
             Ibtn_mantenimiento.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_mantenimiento.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_mantenimiento.UseVisualStyleBackColor = true;
+            Ibtn_mantenimiento.Click += Ibtn_mantenimiento_Click_2;
             // 
             // Ibtn_reservacion
             // 
@@ -391,6 +397,7 @@
             Ibtn_reservacion.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_reservacion.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_reservacion.UseVisualStyleBackColor = true;
+            Ibtn_reservacion.Click += Ibtn_reservacion_Click;
             // 
             // Ibtn_facturacion
             // 
@@ -412,6 +419,7 @@
             Ibtn_facturacion.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_facturacion.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_facturacion.UseVisualStyleBackColor = true;
+            Ibtn_facturacion.Click += Ibtn_facturacion_Click_1;
             // 
             // paneladminSubMenu
             // 
