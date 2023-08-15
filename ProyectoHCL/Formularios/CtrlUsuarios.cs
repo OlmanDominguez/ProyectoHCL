@@ -264,7 +264,7 @@ namespace ProyectoHCL.Formularios
             switch (cmbIndice)
             {
                 case 0:
-                    numFilas = 10;
+                    numFilas = 5;
                     break;
                 case 1:
                     numFilas = 20;
