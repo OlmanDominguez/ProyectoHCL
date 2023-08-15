@@ -114,7 +114,7 @@ namespace ProyectoHCL.Formularios
                     DialogResult dR = m.ShowDialog();
 
                 }
-                else if (modelo.existeObjeto(texPa.Text))
+                else if (modelo.existeParametro(texPa.Text))
                 {
                     MsgB m = new MsgB("advertencia", "El parametro ya existe");
                     DialogResult dR = m.ShowDialog();
@@ -130,7 +130,7 @@ namespace ProyectoHCL.Formularios
 
                         cmd = new MySqlCommand("insertarParametro", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@nombre", texPa.Text);
+                        cmd.Parameters.AddWithValue("@Parametro", texPa.Text);
                         cmd.Parameters.AddWithValue("@Valor", txtValor.Text);
 
                         cmd.ExecuteNonQuery();

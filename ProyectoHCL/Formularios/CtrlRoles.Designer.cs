@@ -319,6 +319,7 @@
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(252, 23);
             txtBuscar.TabIndex = 44;
+            txtBuscar.TextChanged += txtBuscar_TextChanged;
             // 
             // label4
             // 
@@ -636,8 +637,8 @@
             dataGridViewCellStyle20.SelectionForeColor = Color.Black;
             dgvRoles.RowsDefaultCellStyle = dataGridViewCellStyle20;
             dgvRoles.RowTemplate.Height = 25;
-            dgvRoles.Size = new Size(1326, 403);
-            dgvRoles.TabIndex = 39;
+            dgvRoles.Size = new Size(1828, 672);
+            dgvRoles.TabIndex = 1;
             dgvRoles.CellContentClick += dgvRoles_CellContentClick;
             dgvRoles.CellPainting += dgvRoles_CellPainting;
             // 
@@ -700,6 +701,6 @@
         private Label label7;
         private TextBox txtPagR;
         private ComboBox cmbPagR;
-        private DataGridView dgvRoles;
+        public DataGridView dgvRoles;
     }
 }
