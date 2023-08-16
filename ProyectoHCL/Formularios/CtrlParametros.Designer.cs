@@ -42,10 +42,10 @@
             panel4 = new Panel();
             btnSiguiente = new Button();
             btnAnterior = new Button();
-            txtPag = new TextBox();
+            txtPagP = new TextBox();
             label13 = new Label();
             label14 = new Label();
-            cmbPag = new ComboBox();
+            cmbPagP = new ComboBox();
             label1 = new Label();
             pmtMostrar = new ComboBox();
             label3 = new Label();
@@ -104,7 +104,8 @@
             btnnuevoP.Text = "Agregar";
             btnnuevoP.TextAlign = ContentAlignment.MiddleRight;
             btnnuevoP.UseVisualStyleBackColor = false;
-            btnnuevoP.Click += btnnuevoP_Click_1;
+            btnnuevoP.EnabledChanged += btnnuevoP_EnabledChanged;
+            btnnuevoP.Click += btnnuevoP_Click;
             // 
             // label11
             // 
@@ -164,6 +165,7 @@
             button11.TabIndex = 58;
             button11.Text = "Excel ";
             button11.UseVisualStyleBackColor = false;
+            button11.Click += button11_Click;
             // 
             // txtBuscarP
             // 
@@ -199,6 +201,7 @@
             dgvParametro.RowTemplate.Height = 33;
             dgvParametro.Size = new Size(1549, 459);
             dgvParametro.TabIndex = 4;
+            dgvParametro.CellClick += dgvParametro_CellClick;
             dgvParametro.CellPainting += dgvParametro_CellPainting;
             // 
             // panel4
@@ -206,10 +209,10 @@
             panel4.BackColor = Color.FromArgb(45, 66, 91);
             panel4.Controls.Add(btnSiguiente);
             panel4.Controls.Add(btnAnterior);
-            panel4.Controls.Add(txtPag);
+            panel4.Controls.Add(txtPagP);
             panel4.Controls.Add(label13);
             panel4.Controls.Add(label14);
-            panel4.Controls.Add(cmbPag);
+            panel4.Controls.Add(cmbPagP);
             panel4.Controls.Add(label1);
             panel4.Controls.Add(pmtMostrar);
             panel4.Controls.Add(label3);
@@ -235,6 +238,7 @@
             btnSiguiente.Size = new Size(43, 52);
             btnSiguiente.TabIndex = 70;
             btnSiguiente.UseVisualStyleBackColor = false;
+            btnSiguiente.Click += btnSiguiente_Click;
             // 
             // btnAnterior
             // 
@@ -251,16 +255,17 @@
             btnAnterior.Size = new Size(43, 52);
             btnAnterior.TabIndex = 69;
             btnAnterior.UseVisualStyleBackColor = false;
+            btnAnterior.Click += btnAnterior_Click;
             // 
-            // txtPag
+            // txtPagP
             // 
-            txtPag.Anchor = AnchorStyles.Right;
-            txtPag.Location = new Point(1320, 32);
-            txtPag.Margin = new Padding(4, 5, 4, 5);
-            txtPag.Name = "txtPag";
-            txtPag.ReadOnly = true;
-            txtPag.Size = new Size(88, 31);
-            txtPag.TabIndex = 68;
+            txtPagP.Anchor = AnchorStyles.Right;
+            txtPagP.Location = new Point(1320, 32);
+            txtPagP.Margin = new Padding(4, 5, 4, 5);
+            txtPagP.Name = "txtPagP";
+            txtPagP.ReadOnly = true;
+            txtPagP.Size = new Size(88, 31);
+            txtPagP.TabIndex = 68;
             // 
             // label13
             // 
@@ -288,16 +293,17 @@
             label14.TabIndex = 66;
             label14.Text = "Página";
             // 
-            // cmbPag
+            // cmbPagP
             // 
-            cmbPag.Anchor = AnchorStyles.Right;
-            cmbPag.BackColor = SystemColors.Info;
-            cmbPag.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbPag.FormattingEnabled = true;
-            cmbPag.Location = new Point(1167, 32);
-            cmbPag.Name = "cmbPag";
-            cmbPag.Size = new Size(91, 33);
-            cmbPag.TabIndex = 65;
+            cmbPagP.Anchor = AnchorStyles.Right;
+            cmbPagP.BackColor = SystemColors.Info;
+            cmbPagP.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPagP.FormattingEnabled = true;
+            cmbPagP.Location = new Point(1167, 32);
+            cmbPagP.Name = "cmbPagP";
+            cmbPagP.Size = new Size(91, 33);
+            cmbPagP.TabIndex = 65;
+            cmbPagP.SelectedIndexChanged += cmbPagP_SelectedIndexChanged_1;
             // 
             // label1
             // 
@@ -323,6 +329,7 @@
             pmtMostrar.Name = "pmtMostrar";
             pmtMostrar.Size = new Size(108, 33);
             pmtMostrar.TabIndex = 49;
+            pmtMostrar.SelectedIndexChanged += pmtMostrar_SelectedIndexChanged_1;
             // 
             // label3
             // 
@@ -376,10 +383,10 @@
         private Label label1;
         private ComboBox pmtMostrar;
         private Label label3;
-        private TextBox txtPag;
+        private TextBox txtPagP;
         private Label label13;
         private Label label14;
-        private ComboBox cmbPag;
+        private ComboBox cmbPagP;
         private Button btnSiguiente;
         private Button btnAnterior;
         private Button btCerrar;

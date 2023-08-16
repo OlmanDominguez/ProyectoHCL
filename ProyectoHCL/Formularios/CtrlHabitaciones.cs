@@ -41,6 +41,7 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
+
         private void Permisos()
         {
             var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
