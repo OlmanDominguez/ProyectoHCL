@@ -18,6 +18,7 @@ using Microsoft.VisualBasic.ApplicationServices;
 using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Spreadsheet;
 using ProyectoHCL.Formularios;
+using ProyectoHCL.Formularios.Parametros;
 using iText.Layout.Element;
 
 namespace ProyectoHCL
@@ -538,7 +539,7 @@ namespace ProyectoHCL
         {
             //codigo para el formilario
             panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlParametros());
+            openChildFormInPanel(new CtrlParametro());
             //hideSubMenu2();
         }
 

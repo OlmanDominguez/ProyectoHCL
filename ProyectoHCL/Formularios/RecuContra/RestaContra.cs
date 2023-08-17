@@ -15,6 +15,8 @@ namespace ProyectoHCL.Formularios
 {
     public partial class RestaContra : Form
     {
+        MsgB msgB = new MsgB();
+
         public RestaContra()
         {
             InitializeComponent();
@@ -79,29 +81,41 @@ namespace ProyectoHCL.Formularios
 
         private void BTN_Aceptar_Click(object sender, EventArgs e)
         {
-            try
+            if (TXT_Contra.Text == TXT_Confi.Text)
             {
-                using (BaseDatosHCL.ObtenerConexion())
+                try
                 {
-                    //Conexion y comando
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("UPDATE TBL_USUARIO SET CONTRASENA = '"
-                        + TXT_Confi.Text + "', PASS = '0' where USUARIO = '" + clasecompartida.user + "'");
+                    using (BaseDatosHCL.ObtenerConexion())
+                    {
+                        //Conexion y comando
+                        MySqlCommand comando = new MySqlCommand();
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("UPDATE TBL_USUARIO SET CONTRASENA = '"
+                            + TXT_Confi.Text + "', PASS = '0' where USUARIO = '" + clasecompartida.user + "'");
 
-                    comando.ExecuteNonQuery();
-                    comando.Connection.Close();
-                    MessageBox.Show("Cambio de contraseña Exitoso");
-                    comando.Connection.Close();
-                    this.Close();
+                        comando.ExecuteNonQuery();
+                        comando.Connection.Close();
+                        MsgB m = new MsgB("informacion", "Contraseña actualizada con exito");
+                        DialogResult dR = m.ShowDialog();
+                        comando.Connection.Close();
+                        this.Close();
+
+                    }
 
                 }
-
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message + a.StackTrace);
+                }
             }
-            catch (Exception a)
+            else
             {
-                MessageBox.Show(a.Message + a.StackTrace);
+                MsgB m = new MsgB("advertencia", "Contraseñas no coinciden");
+                DialogResult dR = m.ShowDialog();
             }
+            
+            
+            
         }
     }
 }

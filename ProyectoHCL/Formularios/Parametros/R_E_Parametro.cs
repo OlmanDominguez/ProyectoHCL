@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ProyectoHCL.Formularios.Parametros.CtrlParametro;
+using static ProyectoHCL.RecuContra;
 
 namespace ProyectoHCL.Formularios
 {
@@ -41,10 +43,6 @@ namespace ProyectoHCL.Formularios
             limpiarError();
         }
 
-        private void btnMin_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -104,7 +102,7 @@ namespace ProyectoHCL.Formularios
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (lbPar.Text == "Registrar Roles")
+            if (parame.p == 2)
             {
                 Modelo modelo = new Modelo();
 
@@ -130,14 +128,31 @@ namespace ProyectoHCL.Formularios
 
                         cmd = new MySqlCommand("insertarParametro", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Parametro", texPa.Text);
-                        cmd.Parameters.AddWithValue("@Valor", txtValor.Text);
+                        cmd.Parameters.AddWithValue("@parametro", texPa.Text);
+                        cmd.Parameters.AddWithValue("@valor", txtValor.Text);
+                        cmd.Parameters.AddWithValue("@idusuario", clasecompartida.iduser);
+                        string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        cmd.Parameters.AddWithValue("@fecha", ahora);
 
                         cmd.ExecuteNonQuery();
                         MsgB m = new MsgB("informacion", "Registro creado con éxito");
                         DialogResult dR = m.ShowDialog();
                         limpiarCampos();
                         conn.Close();
+
+                        string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
+                        "('" + clasecompartida.iduser + "', '7', '" + ahora + "', 'CREACION', 'CREACION PARAMETRO " +
+                        texPa.Text + " " + txtValor.Text + "');";
+                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                        conn.Open();
+
+                        cmd = new MySqlCommand(sql, conn);
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+
+
+
+                        this.Close();
                     }
                     catch (Exception ex)
                     {
@@ -146,7 +161,7 @@ namespace ProyectoHCL.Formularios
                     }
                 }
             }
-            else if (lbPar.Text == "Editar Parametro")
+            else if (parame.p == 1)
             {
                 Control control = new Control();
 
@@ -159,7 +174,33 @@ namespace ProyectoHCL.Formularios
                 {
                     try
                     {
-                        //control.editar(idpar, texPa.Text, txtValor.Text); //id,Fechamodificacion.Text
+                        MySqlConnection conn;
+                        MySqlCommand cmd;
+                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                        conn.Open();
+
+                        cmd = new MySqlCommand("UpdateParametro", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@parametro", texPa.Text);
+                        cmd.Parameters.AddWithValue("@valor", txtValor.Text);
+                        cmd.Parameters.AddWithValue("@idusuario", clasecompartida.iduser);
+                        string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        cmd.Parameters.AddWithValue("@fecha", ahora);
+                        cmd.Parameters.AddWithValue("@id", parame.idparametro);
+
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+
+                        string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
+                        "('" + clasecompartida.iduser + "', '7', '" + ahora + "', 'EDICION', 'EDICION PARAMETRO " +
+                        parame.idparametro + " " + texPa.Text + "');";
+                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                        conn.Open();
+
+                        cmd = new MySqlCommand(sql, conn);
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+
 
                         MsgB m = new MsgB("informacion", "Registro modificado");
                         DialogResult dR = m.ShowDialog();
@@ -171,6 +212,20 @@ namespace ProyectoHCL.Formularios
                         DialogResult dR = m.ShowDialog();
                     }
                 }
+            }
+        }
+
+        private void R_E_Parametro_Load(object sender, EventArgs e)
+        {
+            if(parame.p == 1)
+            {
+                txtValor.Text = parame.valor;
+                texPa.Text = parame.parametro;
+            }
+            else if (parame.p == 2)
+            {
+                limpiarCampos();
+                limpiarError();
             }
         }
     }

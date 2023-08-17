@@ -22,6 +22,7 @@ namespace ProyectoHCL.Formularios
     public partial class CtrlClientes : Form
     {
         clases.Clientes clien = new clases.Clientes();
+        AdmonClientes admonClientes = new AdmonClientes();
         DataSet ds = new DataSet();
         CDatos cDatos = new CDatos();
         int pagInicio = 1, indice = 0, numFilas = 10, pagFinal, cmbIndice = 0;
@@ -33,8 +34,7 @@ namespace ProyectoHCL.Formularios
             CargarDGCl();
         }
 
-        AdmonClientes admonClientes = new AdmonClientes();
-
+        
         private void Permisos()
         {
             var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
@@ -475,7 +475,7 @@ namespace ProyectoHCL.Formularios
             EstiloB.Border.BottomBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
             sl.SetCellStyle("B" + celdaInicial, "M" + celdaCabecera, EstiloB);
 
-            sl.AutoFitColumn("B", "F");
+            sl.AutoFitColumn("B", "M");
 
             SaveFileDialog sf = new SaveFileDialog();
 

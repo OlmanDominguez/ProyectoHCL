@@ -10,23 +10,26 @@ namespace ProyectoHCL.clases
 {
     public class Parametros
     {
-        private int IDP;
-        private string NOMBRE_PARAMETRO;
+        private int ID_PARAMETRO;
+        private int ID_USUARIO;
+        private string PARAMETRO;
         private string VALOR;
-        private DateTime FECHA_CREACION;
-        private DateTime FECHA_ACTUALIZACION;
+        private DateTime FECHACRE;
+        private DateTime FECHAMODIFI;
         private int Inicio;
         private int Final;
 
 
-        public int IDP1 { get => IDP; set => IDP = value; }
-        public string NOMBRE_PARAMETRO1 { get => NOMBRE_PARAMETRO; set => NOMBRE_PARAMETRO = value; }
+        public int ID_PARAMETRO1 { get => ID_PARAMETRO; set => ID_PARAMETRO = value; }
+        public int ID_USUARIO1 { get => ID_USUARIO; set => ID_USUARIO = value; }
+        public string PARAMETRO1 { get => PARAMETRO; set => PARAMETRO = value; }
         public string VALOR1 { get => VALOR; set => VALOR = value; }
-        public DateTime FECHA_CREACION1 { get => FECHA_CREACION; set => FECHA_CREACION = value; }
-        public DateTime FECHA_ACTUALIZACION1 { get => FECHA_ACTUALIZACION; set => FECHA_ACTUALIZACION = value; }
-
+        public DateTime FECHACRE1 { get => FECHACRE; set => FECHACRE = value; }
+        public DateTime FECHAMODIFI1 { get => FECHAMODIFI; set => FECHAMODIFI = value; }
         public int Inicio1 { get => Inicio; set => Inicio = value; }
         public int Final1 { get => Final; set => Final = value; }
+
+
         public DataSet PaginacionParametro()
         {
             MySqlConnection conn;
