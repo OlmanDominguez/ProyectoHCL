@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using static ProyectoHCL.RecuContra; //Para uso del user y IDUser iniciado
 
@@ -177,7 +178,7 @@ namespace ProyectoHCL.Formularios
                 Modelo modelo = new Modelo();
 
                 if (txtNombre.Text.Trim() == "" || txtUsuario.Text.Trim() == "" || txtContraseña.Text.Trim() == "" ||
-                            cmbRol.Text.Trim() == "" || txtCorreo.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
+                    cmbRol.Text.Trim() == "" || txtCorreo.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
@@ -188,6 +189,16 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "El usuario ya existe");
                     DialogResult dR = m.ShowDialog();
                 }
+                //else if (DateTime.Today > dtpVencimiento.Value)
+                //{
+                //    MsgB m = new MsgB("advertencia", "La fecha de vencimiento seleccionada no es válida");
+                //    DialogResult dR = m.ShowDialog();
+                //}
+                //else if (!ValidarTxt.CorreoValido(txtCorreo.Text))
+                //{
+                //    MsgB m = new MsgB("advertencia", "Dirección de correo no válida");
+                //    DialogResult dR = m.ShowDialog();
+                //}
                 else
                 {
                     try
@@ -199,13 +210,13 @@ namespace ProyectoHCL.Formularios
 
                         cmd = new MySqlCommand("InsertarUsuarios", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
+                        cmd.Parameters.AddWithValue("@estado", "NUEVO");
                         cmd.Parameters.AddWithValue("@rol", cmbRol.Text);
                         cmd.Parameters.AddWithValue("@usuario", txtUsuario.Text);
                         cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
                         cmd.Parameters.AddWithValue("@contrasena", txtContraseña.Text);
                         cmd.Parameters.AddWithValue("@primerIngreso", Convert.ToDateTime(txtFechaC.Text));
-                        cmd.Parameters.AddWithValue("@vencimiento", Convert.ToDateTime(txtFechaV.Text));
+                        cmd.Parameters.AddWithValue("@vencimiento", Convert.ToDateTime(dtpVencimiento.Text));
                         cmd.Parameters.AddWithValue("@email", txtCorreo.Text);
 
                         cmd.ExecuteNonQuery();
@@ -245,9 +256,19 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (DateTime.Today > dtpVencimiento.Value)
+                //else if (DateTime.Today > dtpVencimiento.Value)
+                //{
+                //    MsgB m = new MsgB("advertencia", "La fecha de vencimiento seleccionada no es válida");
+                //    DialogResult dR = m.ShowDialog();
+                //}
+                //else if(!ValidarTxt.CorreoValido(txtCorreo.Text))
+                //{
+                //    MsgB m = new MsgB("advertencia", "Dirección de correo no válida");
+                //    DialogResult dR = m.ShowDialog();
+                //}
+                else if (cmbEstado.SelectedIndex == 2)
                 {
-                    MsgB m = new MsgB("advertencia", "La fecha de vencimiento seleccionada no es válida");
+                    MsgB m = new MsgB("advertencia", "El estado seleccionado no es válido");
                     DialogResult dR = m.ShowDialog();
                 }
                 else
@@ -262,7 +283,7 @@ namespace ProyectoHCL.Formularios
 
                         MySqlConnection conn;
                         MySqlCommand cmd;
-                        
+
                         string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
                             "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'EDICION', 'EDICION USUARIO " +
                             idUs + " " + txtUsuario.Text + "');";
@@ -290,6 +311,7 @@ namespace ProyectoHCL.Formularios
         {
             if (!ValidarTxt.CorreoValido(txtCorreo.Text))
             {
+                dtpVencimiento.Focus();
                 errorT.SetError(txtCorreo, "Dirección de correo no válida");
             }
             else
@@ -363,23 +385,6 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void dtpVencimiento_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtpVencimiento_CloseUp(object sender, EventArgs e)
-        {
-            if (DateTime.Today > dtpVencimiento.Value)
-            {
-                errorT.SetError(dtpVencimiento, "Fecha no válida, seleccione una fecha futura");
-            }
-            else
-            {
-                errorT.Clear();
-            }
-        }
-
         private void OcultarBox4_Click(object sender, EventArgs e)
         {
             MostrarBox3.BringToFront();
@@ -390,6 +395,49 @@ namespace ProyectoHCL.Formularios
         {
             OcultarBox4.BringToFront();
             txtContraseña.PasswordChar = '\0';
+        }
+
+        private void dtpVencimiento_Leave(object sender, EventArgs e)
+        {
+            if (DateTime.Today > dtpVencimiento.Value)
+            {
+                dtpVencimiento.Focus();
+                errorT.SetError(dtpVencimiento, "Fecha no válida, seleccione una fecha futura");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+        }
+
+        private void txtCorreo_MouseLeave(object sender, EventArgs e)
+        {
+            if (!ValidarTxt.CorreoValido(txtCorreo.Text))
+            {
+                txtCorreo.Focus();
+            }
+        }
+
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+                MsgB m = new MsgB("advertencia", "No se permiten espacios");
+                DialogResult dR = m.ShowDialog();
+            }
+        }
+
+        private void cmbEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbEstado.SelectedIndex == 2)
+            {
+                errorT.SetError(cmbEstado, "El estado no es válido");
+            }
+            else
+            {
+                errorT.Clear();
+            }
         }
     }
 }

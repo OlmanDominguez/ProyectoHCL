@@ -95,6 +95,26 @@ namespace ProyectoHCL.Formularios
         public void limpiarCampos()
         {
             cmbRol.SelectedIndex = -1;
+
+            foreach (DataGridViewRow row in dgvRolPermiso.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells["VER"].Value))
+                {
+                    row.Cells["VER"].Value = false;
+                }
+                if (Convert.ToBoolean(row.Cells["CREAR"].Value))
+                {
+                    row.Cells["CREAR"].Value = false;
+                }
+                if (Convert.ToBoolean(row.Cells["EDITAR"].Value))
+                {
+                    row.Cells["EDITAR"].Value = false;
+                }
+                if (Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                {
+                    row.Cells["ELIMINAR"].Value = false;
+                }
+            }
         }
 
         private void btnMin_Click(object sender, EventArgs e)
@@ -148,73 +168,73 @@ namespace ProyectoHCL.Formularios
             ListarObjetos();
             cmbRol.SelectedIndex = -1;
             CargarDG();
+            //pictureBox1.Image = Image.FromFile(@"C:\Users\jmont\OneDrive\Documentos\HM\reloj-de-arena.gif");
+            //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void GuardarPermisoRol()
         {
-            //using (BackWorker bw = new BackWorker())
-            //{
-            //    bw.Visible = true;
+            panel6.Visible = true;
 
-                foreach (DataGridViewRow row in dgvRolPermiso.Rows)
+            foreach (DataGridViewRow row in dgvRolPermiso.Rows)
+            {
+                permiso.IdRol = cmbRol.Text;
+                permiso.IdObjeto = row.Cells["PANTALLA"].Value.ToString();
+
+                if (Convert.ToBoolean(row.Cells["VER"].Value))
                 {
-                    permiso.IdRol = cmbRol.Text;
-                    permiso.IdObjeto = row.Cells["PANTALLA"].Value.ToString();
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
+                    permiso.Permitido = true;
+                    cDatos.GuardarPermiso(permiso);
+                }
+                else if (!Convert.ToBoolean(row.Cells["VER"].Value))
+                {
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
+                    permiso.Permitido = false;
+                    cDatos.GuardarPermiso(permiso);
+                }
 
-                    if (Convert.ToBoolean(row.Cells["VER"].Value))
-                    {
-                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
-                        permiso.Permitido = true;
-                        cDatos.GuardarPermiso(permiso);
-                    }
-                    else if (!Convert.ToBoolean(row.Cells["VER"].Value))
-                    {
-                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
-                        permiso.Permitido = false;
-                        cDatos.GuardarPermiso(permiso);
-                    }
+                if (Convert.ToBoolean(row.Cells["CREAR"].Value))
+                {
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
+                    permiso.Permitido = true;
+                    cDatos.GuardarPermiso(permiso);
+                }
+                else if (!Convert.ToBoolean(row.Cells["CREAR"].Value))
+                {
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
+                    permiso.Permitido = false;
+                    cDatos.GuardarPermiso(permiso);
+                }
 
-                    if (Convert.ToBoolean(row.Cells["CREAR"].Value))
-                    {
-                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
-                        permiso.Permitido = true;
-                        cDatos.GuardarPermiso(permiso);
-                    }
-                    else if (!Convert.ToBoolean(row.Cells["CREAR"].Value))
-                    {
-                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
-                        permiso.Permitido = false;
-                        cDatos.GuardarPermiso(permiso);
-                    }
+                if (Convert.ToBoolean(row.Cells["EDITAR"].Value))
+                {
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
+                    permiso.Permitido = true;
+                    cDatos.GuardarPermiso(permiso);
+                }
+                else if (!Convert.ToBoolean(row.Cells["EDITAR"].Value))
+                {
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
+                    permiso.Permitido = false;
+                    cDatos.GuardarPermiso(permiso);
+                }
 
-                    if (Convert.ToBoolean(row.Cells["EDITAR"].Value))
-                    {
-                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
-                        permiso.Permitido = true;
-                        cDatos.GuardarPermiso(permiso);
-                    }
-                    else if (!Convert.ToBoolean(row.Cells["EDITAR"].Value))
-                    {
-                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
-                        permiso.Permitido = false;
-                        cDatos.GuardarPermiso(permiso);
-                    }
-
-                    if (Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
-                    {
-                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
-                        permiso.Permitido = true;
-                        cDatos.GuardarPermiso(permiso);
-                    }
-                    else if (!Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
-                    {
-                        permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
-                        permiso.Permitido = false;
-                        cDatos.GuardarPermiso(permiso);
-                    }
-
-                //}
+                if (Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                {
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
+                    permiso.Permitido = true;
+                    cDatos.GuardarPermiso(permiso);
+                }
+                else if (!Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                {
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
+                    permiso.Permitido = false;
+                    cDatos.GuardarPermiso(permiso);
+                }
             }
+
+            panel6.Visible = false;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -227,18 +247,14 @@ namespace ProyectoHCL.Formularios
             }
             else
             {
-                //using (BackWorker bw = new BackWorker())
-                //{
-                MsgB mbox = new MsgB("informacion", "Registrando permisos. Espere un momento...");
-                DialogResult dR = mbox.ShowDialog();
+                btnGuardar.Enabled = false;
+                btnCancelar.Enabled = false;
                 GuardarPermisoRol();
                 MsgB Mbox = new MsgB("informacion", "Permisos registrados");
                 DialogResult DR = Mbox.ShowDialog();
-                    //bw.Close();
-                //}
-                //GuardarPermisoRol();
-                //MsgB mbox = new MsgB("informacion", "Permisos registrados");
-                //DialogResult dR = mbox.ShowDialog();
+                limpiarCampos();
+                btnGuardar.Enabled = true;
+                btnCancelar.Enabled = true;
             }
         }
 
@@ -249,14 +265,64 @@ namespace ProyectoHCL.Formularios
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            if (cmbRol.Text == "")
+            cargarPermisos();
+            //if (cmbRol.Text == "")
+            //{
+            //    MsgB mbox = new MsgB("informacion", "Seleccione el rol a editar permisos");
+            //    DialogResult dR = mbox.ShowDialog();
+            //}
+            //else
+            //{
+
+            //}
+        }
+
+        private void cargarPermisos()
+        {
+            CDatos cDatos = new CDatos();
+
+            var LsObj = cDatos.SelectObjeto(3); //***********
+
+            foreach (var obj in LsObj)
             {
-                MsgB mbox = new MsgB("informacion", "Seleccione el rol a editar permisos");
-                DialogResult dR = mbox.ShowDialog();
-            }
-            else if (!modelo.existePermiso(cmbRol.Text)) ///////Al crear nuevos permisos
-            {
-                ////////////////Hacer select inner join en modelo
+                foreach (DataGridViewRow row in dgvRolPermiso.Rows)
+                {
+                    if (obj.IdPermiso == 1 && obj.Permitido)
+                    {
+                        row.Cells["VER"].Value = true;
+                    }
+                    else
+                    {
+                        row.Cells["VER"].Value = false;
+                    }
+
+                    if (obj.IdPermiso == 2 && obj.Permitido)
+                    {
+                        row.Cells["CREAR"].Value = true;
+                    }
+                    else
+                    {
+                        row.Cells["CREAR"].Value = false;
+                    }
+
+                    if (obj.IdPermiso == 3 && obj.Permitido)
+                    {
+                        row.Cells["EDITAR"].Value = true;
+                    }
+                    else
+                    {
+                        row.Cells["EDITAR"].Value = false;
+                    }
+
+                    if (obj.IdPermiso == 4 && obj.Permitido)
+                    {
+                        row.Cells["ELIMINAR"].Value = true;
+                    }
+                    else
+                    {
+                        row.Cells["ELIMINAR"].Value = false;
+                    }
+                }
             }
         }
     }

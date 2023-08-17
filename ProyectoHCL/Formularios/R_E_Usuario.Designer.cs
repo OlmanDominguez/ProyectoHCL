@@ -40,7 +40,6 @@
             OcultarBox4 = new PictureBox();
             dtpVencimiento = new DateTimePicker();
             btnCancelar = new Button();
-            txtFechaV = new TextBox();
             btnGuardar = new Button();
             txtFechaC = new TextBox();
             cmbEstado = new ComboBox();
@@ -141,7 +140,6 @@
             panel3.Controls.Add(OcultarBox4);
             panel3.Controls.Add(dtpVencimiento);
             panel3.Controls.Add(btnCancelar);
-            panel3.Controls.Add(txtFechaV);
             panel3.Controls.Add(btnGuardar);
             panel3.Controls.Add(txtFechaC);
             panel3.Controls.Add(cmbEstado);
@@ -201,8 +199,7 @@
             dtpVencimiento.Name = "dtpVencimiento";
             dtpVencimiento.Size = new Size(316, 27);
             dtpVencimiento.TabIndex = 21;
-            dtpVencimiento.Visible = false;
-            dtpVencimiento.CloseUp += dtpVencimiento_CloseUp;
+            dtpVencimiento.Leave += dtpVencimiento_Leave;
             // 
             // btnCancelar
             // 
@@ -220,20 +217,6 @@
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
-            // 
-            // txtFechaV
-            // 
-            txtFechaV.BackColor = Color.White;
-            txtFechaV.BorderStyle = BorderStyle.FixedSingle;
-            txtFechaV.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtFechaV.Location = new Point(463, 205);
-            txtFechaV.MaxLength = 50;
-            txtFechaV.Name = "txtFechaV";
-            txtFechaV.ReadOnly = true;
-            txtFechaV.ShortcutsEnabled = false;
-            txtFechaV.Size = new Size(316, 27);
-            txtFechaV.TabIndex = 18;
-            txtFechaV.Visible = false;
             // 
             // btnGuardar
             // 
@@ -275,6 +258,7 @@
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(316, 28);
             cmbEstado.TabIndex = 16;
+            cmbEstado.SelectedIndexChanged += cmbEstado_SelectedIndexChanged;
             cmbEstado.Leave += cmbEstado_Leave;
             // 
             // cmbRol
@@ -300,6 +284,7 @@
             txtCorreo.Size = new Size(316, 27);
             txtCorreo.TabIndex = 12;
             txtCorreo.Leave += txtCorreo_Leave;
+            txtCorreo.MouseLeave += txtCorreo_MouseLeave;
             // 
             // txtContraseña
             // 
@@ -340,6 +325,7 @@
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(316, 27);
             txtUsuario.TabIndex = 9;
+            txtUsuario.KeyPress += txtUsuario_KeyPress;
             txtUsuario.Leave += txtUsuario_Leave;
             // 
             // lblEstado
@@ -474,7 +460,6 @@
         public TextBox txtNombre;
         public TextBox txtUsuario;
         public DateTimePicker dtpVencimiento;
-        public TextBox txtFechaV;
         public TextBox txtFechaC;
         public ComboBox cmbEstado;
         public ComboBox cmbRol;

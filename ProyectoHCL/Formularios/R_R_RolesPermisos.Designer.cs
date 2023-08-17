@@ -75,6 +75,10 @@
             txtPag = new TextBox();
             cmbPag = new ComboBox();
             panel1 = new Panel();
+            panel6 = new Panel();
+            pictureBox1 = new PictureBox();
+            label4 = new Label();
+            label1 = new Label();
             panel4 = new Panel();
             button1 = new Button();
             button10 = new Button();
@@ -86,12 +90,13 @@
             button15 = new Button();
             button16 = new Button();
             dgvRolPermiso = new DataGridView();
-            bgW = new System.ComponentModel.BackgroundWorker();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel5.SuspendLayout();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
+            panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRolPermiso).BeginInit();
             SuspendLayout();
@@ -262,7 +267,6 @@
             btnEditar.Size = new Size(46, 27);
             btnEditar.TabIndex = 72;
             btnEditar.UseVisualStyleBackColor = false;
-            btnEditar.Visible = false;
             btnEditar.Click += btnEditar_Click;
             // 
             // cmbRol
@@ -668,6 +672,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ControlLightLight;
+            panel1.Controls.Add(panel6);
             panel1.Controls.Add(panel4);
             panel1.Controls.Add(dgvRolPermiso);
             panel1.Dock = DockStyle.Fill;
@@ -675,6 +680,52 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1100, 437);
             panel1.TabIndex = 40;
+            // 
+            // panel6
+            // 
+            panel6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel6.BackColor = SystemColors.Window;
+            panel6.BorderStyle = BorderStyle.FixedSingle;
+            panel6.Controls.Add(pictureBox1);
+            panel6.Controls.Add(label4);
+            panel6.Controls.Add(label1);
+            panel6.Location = new Point(433, 138);
+            panel6.MaximumSize = new Size(276, 125);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(276, 125);
+            panel6.TabIndex = 39;
+            panel6.Visible = false;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox1.Location = new Point(117, 64);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(39, 41);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 3;
+            pictureBox1.TabStop = false;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Emoji", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(69, 34);
+            label4.Name = "label4";
+            label4.Size = new Size(135, 17);
+            label4.TabIndex = 2;
+            label4.Text = "Espere un momento...";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Emoji", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(68, 17);
+            label1.Name = "label1";
+            label1.Size = new Size(137, 17);
+            label1.TabIndex = 1;
+            label1.Text = "Registrando permisos";
             // 
             // panel4
             // 
@@ -895,11 +946,6 @@
             dgvRolPermiso.Size = new Size(1027, 392);
             dgvRolPermiso.TabIndex = 5;
             // 
-            // bgW
-            // 
-            bgW.WorkerReportsProgress = true;
-            bgW.WorkerSupportsCancellation = true;
-            // 
             // R_R_RolesPermisos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -922,6 +968,9 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel1.ResumeLayout(false);
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRolPermiso).EndInit();
@@ -982,6 +1031,9 @@
         public Button btnEditar;
         public DataGridView dgvRolPermiso;
         public ComboBox cmbRol;
-        private System.ComponentModel.BackgroundWorker bgW;
+        private Panel panel6;
+        private Label label4;
+        private Label label1;
+        private PictureBox pictureBox1;
     }
 }

@@ -23,6 +23,7 @@ using iText.Layout.Element;
 using SpreadsheetLight;
 using SpreadsheetLight.Drawing;
 using static ProyectoHCL.RecuContra; //Para uso del user y IDUser iniciado
+using System.Windows.Controls;
 
 namespace ProyectoHCL.Formularios
 {
@@ -174,10 +175,10 @@ namespace ProyectoHCL.Formularios
         {
             int diasV = Convert.ToInt32(ParametroDias());
             R_E_user.lblTitulo.Text = "Registrar Usuario";
-            R_E_user.txtFechaV.Visible = true;
-            R_E_user.dtpVencimiento.Visible = false;
+            R_E_user.cmbEstado.Visible = false;
+            R_E_user.lblEstado.Visible = false;
             R_E_user.txtFechaC.Text = DateTime.Now.ToShortDateString();
-            R_E_user.txtFechaV.Text = DateTime.Now.AddDays(diasV).ToShortDateString();
+            R_E_user.dtpVencimiento.Text = DateTime.Now.AddDays(diasV).ToShortDateString();
             R_E_user.ShowDialog();
             CargarDG();
         }
@@ -217,10 +218,11 @@ namespace ProyectoHCL.Formularios
 
                 if (read.Read() == true)
                 {
-                    R_E_user.txtContraseña.Text = read["CONTRASENA"].ToString();
+                    // R_E_user.txtContraseña.Text = read["CONTRASENA"].ToString();
                 }
 
-                R_E_user.dtpVencimiento.Visible = true;
+                R_E_user.cmbEstado.Visible = true;
+                R_E_user.lblEstado.Visible = true;
                 R_E_user.idUs = dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString();
                 R_E_user.txtUsuario.Text = dgvUsuarios.CurrentRow.Cells["USUARIO"].Value.ToString(); //Traer los datos del dataGrid al form para editar
                 R_E_user.txtNombre.Text = dgvUsuarios.CurrentRow.Cells["NOMBRE"].Value.ToString();
