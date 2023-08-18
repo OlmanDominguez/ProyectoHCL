@@ -103,8 +103,9 @@ namespace ProyectoHCL
 
                         var tiempo = Convert.ToDateTime(ahora) - generado;
 
+                        clasecompartida.estado = (int)leer["ID_ESTADO"];
 
-                        if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text)
+                        if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text & clasecompartida.estado != 3)
                         {
                             clasecompartida.iduser = (int)leer["ID_USUARIO"];
                             clasecompartida.user = UsuarioBox1.Text;
@@ -112,6 +113,18 @@ namespace ProyectoHCL
                             clases.CDatos.idRolUs = (int)leer["ID_ROL"];
                             Form formulario = new Dashboard();
                             formulario.Show();
+                        }
+                        else if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text & clasecompartida.estado == 3)
+                        {
+                            clasecompartida.iduser = (int)leer["ID_USUARIO"];
+                            clasecompartida.user = UsuarioBox1.Text;
+                            //clases.CDatos.idUsu = (int)leer["ID_USUARIO"];
+                            clases.CDatos.idRolUs = (int)leer["ID_ROL"];
+                            Form formulario = new Dashboard();
+                            formulario.Show();
+
+                            Form formu = new PreguntasRecuContra();
+                            formu.ShowDialog();
                         }
                         else if (usuario == UsuarioBox1.Text & pass == ContraseñaBox2.Text & tiempo.Hours < 2)
                         {

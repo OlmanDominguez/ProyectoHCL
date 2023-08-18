@@ -49,6 +49,7 @@ namespace ProyectoHCL
         {
             public static string user;
             public static int iduser;
+            public static int estado;
         }
 
         private async void BTN_Aceptar_Click(object sender, EventArgs e)
