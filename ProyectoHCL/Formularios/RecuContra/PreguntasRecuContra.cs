@@ -31,7 +31,8 @@ namespace ProyectoHCL.Formularios
 
         private void PreguntasRecuContra_Load(object sender, EventArgs e)
         {
-            if(clasecompartida.estado == 3){
+            if (clasecompartida.estado == 3)
+            {
 
                 label1.Text = "Responde a 2(dos) preguntas de seguridad para restablecer tu contraseña en un futuro.";
                 try
@@ -91,7 +92,7 @@ namespace ProyectoHCL.Formularios
                     MessageBox.Show(a.Message + a.StackTrace);
                 }
             }
-            
+
 
         }
 
@@ -109,7 +110,7 @@ namespace ProyectoHCL.Formularios
                 string pregunta = COBPREG.SelectedItem.ToString();
                 string respuesta = TXT_Respuesta.Text;
 
-                if(clasecompartida.estado == 3)
+                if (clasecompartida.estado == 3)
                 {
                     try
                     {
@@ -160,7 +161,7 @@ namespace ProyectoHCL.Formularios
                             comando.Connection.Close();
 
                             comando.Connection = BaseDatosHCL.ObtenerConexion();
-                            comando.CommandText = ("SELECT COUNT(*) FROM TBL_PREGUNTAUSUARIO WHERE ID_USUARIO = '" + 
+                            comando.CommandText = ("SELECT COUNT(*) FROM TBL_PREGUNTAUSUARIO WHERE ID_USUARIO = '" +
                                 clasecompartida.iduser + "'");
 
                             MySqlDataReader leer1 = comando.ExecuteReader();
@@ -168,7 +169,7 @@ namespace ProyectoHCL.Formularios
                             if (leer1.Read())
                             {
                                 long cant = Convert.ToInt64(leer1["COUNT(*)"]);
-                                if(cant == 2)
+                                if (cant == 2)
                                 {
                                     MessageBox.Show("Gracias por responder");
                                     comando.Connection.Close();
@@ -187,9 +188,9 @@ namespace ProyectoHCL.Formularios
                                     MessageBox.Show("Favor contesta otra pregunta");
                                     TXT_Respuesta.Text = "";
                                 }
-                                
-                            }
 
+                            }
+                            comando.Connection.Close();
                         }
                     }
                     catch (Exception a)
@@ -216,6 +217,7 @@ namespace ProyectoHCL.Formularios
 
                                 if (resp == respuesta)
                                 {
+                                    comando.Connection.Close();
                                     Form formulario = new Formularios.RestaContra();
                                     formulario.ShowDialog();
                                     this.Close();
@@ -237,7 +239,7 @@ namespace ProyectoHCL.Formularios
                     }
                 }
 
-               
+
             }
             else if (COBPREG.SelectedIndex.Equals(0) & TXT_Respuesta.Text == "")
             {

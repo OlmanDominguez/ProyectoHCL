@@ -36,6 +36,7 @@ namespace ProyectoHCL
         {
             InitializeComponent();
             pagFinal = numFilas;
+            CargarDG();
         }
 
         private void CargarDG()
@@ -125,10 +126,7 @@ namespace ProyectoHCL
 
         private void Reservaciones_Load(object sender, EventArgs e)
         {
-
-
-            CargarDG();
-            //CargarReservas();
+                        
             DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
             btnUpdate.Name = "EDITAR";//Nombre del boton 
             dgv_reservaciones.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
