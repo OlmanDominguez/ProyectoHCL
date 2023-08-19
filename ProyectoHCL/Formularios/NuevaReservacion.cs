@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Markup;
+using static ProyectoHCL.RecuContra;
 
 namespace ProyectoHCL
 {
@@ -23,41 +24,10 @@ namespace ProyectoHCL
         {
 
             InitializeComponent();
-            
 
 
-        }
-
-        public void id_empleado()
-        {
-            string valor = Dato.valor;
-            try
-            {
-                using (BaseDatosHCL.ObtenerConexion())
-                {
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("select ID_USUARIO from TBL_USUARIO where USUARIO='" + valor + "';");
-
-                    MySqlDataReader leer = comando.ExecuteReader();
-                    if (leer.Read() == true)
-                    {
-                        txt_codigo.Text = leer["ID_USUARIO"].ToString();
-                    }
-                    else
-                    {
-
-                    }
-                }
-
-            }
-            catch (Exception a)
-            {
-                MessageBox.Show(a.Message);
-            }
 
         }
-
         public void updatenumero()
         {
             string num1 = cb_numero.Text;
@@ -152,7 +122,9 @@ namespace ProyectoHCL
         }
         public void updatehabitacion()
         {
-            String ESTADO = cb_estado.SelectedValue.ToString();
+            object adb = cb_estado.SelectedItem;
+            object b = cb_estado.GetItemText(adb);
+            //String ESTADO = cb_estado.SelectedValue.ToString();
             try
             {
                 MySqlConnection conn;
@@ -163,7 +135,7 @@ namespace ProyectoHCL
                 cmd = new MySqlCommand("UpdateH", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@num_habitacion", txt_id.Text);
-                cmd.Parameters.AddWithValue("@estado", ESTADO);
+                cmd.Parameters.AddWithValue("@estado", adb);
 
                 cmd.ExecuteNonQuery();
 
@@ -429,6 +401,7 @@ namespace ProyectoHCL
                     if (leer.Read() == true)
                     {
                         txt_cod_cliente.Text = leer["CODIGO"].ToString();
+                        lbl_cliente.Text = nombre;
                     }
                     else
                     {
@@ -447,10 +420,10 @@ namespace ProyectoHCL
 
         private void NuevaReservacion_Load(object sender, EventArgs e)
         {
-            id_empleado();
 
-
-
+            txt_codigo.Text = clasecompartida.iduser.ToString();
+            combo_cliente();
+            combo_tipo();
             if (txt_id_solicitud.Text != "")
             {
                 btn_guardar2.Visible = true;
@@ -466,8 +439,9 @@ namespace ProyectoHCL
                         MySqlDataReader leer = comando.ExecuteReader();
                         if (leer.Read() == true)
                         {
-                            txt_codigo.Text = leer["ID_USUARIO"].ToString();
+                            //txt_codigo.Text = leer["ID_USUARIO"].ToString();
                             txt_cod_cliente.Text = leer["COD_CLIENTE"].ToString();
+                            //cb_numero.Text = leer["NUMEROHABITACION"].ToString();
                             txt_estado.Text = leer["ID_ESTADORESERVA"].ToString();
                             switch (Convert.ToInt16(txt_estado.Text))
                             {
@@ -502,9 +476,17 @@ namespace ProyectoHCL
                             }
                             txt_monto.Text = leer["MONTORESERVAR"].ToString();
                             txt_vehiculo.Text = leer["VEHICULO"].ToString();
+                            int vh = Convert.ToInt16(txt_vehiculo.Text);
+                            if (vh > 0)
+                            {
+                                radioButton1.Checked = true;
+                            }
+                            else
+                            {
+                                radioButton2.Checked = true;
+                            }
                             txt_huespedes.Text = leer["NHUESPEDES"].ToString();
                             txt_habi_vieja.Text = leer["NUMEROHABITACION"].ToString();
-                            cb_numero.Text = leer["NUMEROHABITACION"].ToString();
                             dt_fecha_coti.Value = Convert.ToDateTime(leer["FECHACOTI"].ToString());
                             dt_fecha_entrada.Value = Convert.ToDateTime(leer["INGRESO"].ToString());
                             dt_fecha_salida.Value = Convert.ToDateTime(leer["SALIDA"].ToString());
@@ -528,11 +510,12 @@ namespace ProyectoHCL
             else
             {
                 btnGuardar.Visible = true;
-                combo_cliente();
+
                 //combo_metodo();
                 //combo_estado();
-                
+
             }
+
         }
 
         private void cb_metodo_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -681,7 +664,7 @@ namespace ProyectoHCL
                             updatehabitacion();
                             MsgB m = new MsgB("informacion", "Reserva agregada con exito");
                             DialogResult dR = m.ShowDialog();
-                            limpiarCampos();
+                            //limpiarCampos();
                             conn.Close();
 
                             this.Close();
@@ -725,6 +708,7 @@ namespace ProyectoHCL
                     if (leer.Read() == true)
                     {
                         txt_id.Text = leer["ID_HABITACION"].ToString();
+                        lbl_habitacion.Text = Convert.ToString(b);
                         //txt_habi_vieja.Text = leer["ID_HABITACION"].ToString();
                     }
                     else
@@ -784,7 +768,7 @@ namespace ProyectoHCL
                         }
                         catch (Exception ex)
                         {
-                            MsgB m = new MsgB("advertencia", "Validar los datos Ingresados");
+                            MsgB m = new MsgB("advertencia", "Validar los datos ingresados");
                             DialogResult dR = m.ShowDialog();
                         }
                     }
@@ -800,10 +784,7 @@ namespace ProyectoHCL
 
         private void txt_codigo_TextChanged(object sender, EventArgs e)
         {
-            if (txt_codigo.Text != "")
-            {
-                combo_tipo();
-            }
+
         }
 
         private void txt_monto_KeyPress(object sender, KeyPressEventArgs e)
