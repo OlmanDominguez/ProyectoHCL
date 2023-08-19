@@ -15,7 +15,7 @@ namespace ProyectoHCL
             // see https://aka.ms/applicationconfiguration.
             //ApplicationConfiguration.Initialize();
            // Application.Run(new CtrlFacturacion());
-        // Application.Run(new FORMULARIO()); 
+         //Application.Run(new FORMULARIO()); 
             //  Application.Run(new CtrlUsuarios());
 
 
@@ -28,7 +28,7 @@ namespace ProyectoHCL
           // Application.Run(new CtrlUsuarios());
          // Application.Run(new CtrlParametro()); 
             // Application.Run(new CtrlPreguntas());
-        // Application.Run(new CtrlRoles());
+       Application.Run(new CtrlRoles());
 
 
 

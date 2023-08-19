@@ -28,18 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(R_E_Roles));
             label2 = new Label();
             label1 = new Label();
             txtNombre = new TextBox();
             txtApellido = new TextBox();
             panel2 = new Panel();
+            btnMin = new Button();
+            cerrar = new Button();
+            pictureBox5 = new PictureBox();
             btnCerrar = new Button();
             label11 = new Label();
             panel1 = new Panel();
-            pictureBox5 = new PictureBox();
             panel3 = new Panel();
-            cmbTipo = new ComboBox();
+            txtRol = new TextBox();
             cmbEstado = new ComboBox();
             btnCancelar = new Button();
             btnGuardar = new Button();
@@ -47,12 +50,12 @@
             label6 = new Label();
             label3 = new Label();
             label4 = new Label();
-            button1 = new Button();
-            btnMin = new Button();
+            error1 = new ErrorProvider(components);
             panel2.SuspendLayout();
-            panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            panel1.SuspendLayout();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)error1).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -116,8 +119,8 @@
             // panel2
             // 
             panel2.BackColor = Color.SteelBlue;
-            panel2.Controls.Add(button1);
             panel2.Controls.Add(btnMin);
+            panel2.Controls.Add(cerrar);
             panel2.Controls.Add(pictureBox5);
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(label11);
@@ -127,6 +130,51 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1259, 122);
             panel2.TabIndex = 60;
+            panel2.MouseMove += panel2_MouseMove;
+            // 
+            // btnMin
+            // 
+            btnMin.BackColor = Color.Transparent;
+            btnMin.BackgroundImage = (Image)resources.GetObject("btnMin.BackgroundImage");
+            btnMin.BackgroundImageLayout = ImageLayout.Stretch;
+            btnMin.FlatAppearance.BorderSize = 0;
+            btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            btnMin.FlatStyle = FlatStyle.Flat;
+            btnMin.Location = new Point(1191, 3);
+            btnMin.Margin = new Padding(4, 5, 4, 5);
+            btnMin.Name = "btnMin";
+            btnMin.Size = new Size(27, 33);
+            btnMin.TabIndex = 64;
+            btnMin.UseVisualStyleBackColor = false;
+            btnMin.Click += btnMin_Click_1;
+            // 
+            // cerrar
+            // 
+            cerrar.BackColor = Color.Transparent;
+            cerrar.BackgroundImage = (Image)resources.GetObject("cerrar.BackgroundImage");
+            cerrar.BackgroundImageLayout = ImageLayout.Stretch;
+            cerrar.FlatAppearance.BorderSize = 0;
+            cerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            cerrar.FlatStyle = FlatStyle.Flat;
+            cerrar.Location = new Point(1226, 5);
+            cerrar.Margin = new Padding(4, 5, 4, 5);
+            cerrar.Name = "cerrar";
+            cerrar.Size = new Size(20, 28);
+            cerrar.TabIndex = 63;
+            cerrar.UseVisualStyleBackColor = false;
+            cerrar.Click += cerrar_Click;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.BackColor = Color.Transparent;
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(13, 14);
+            pictureBox5.Margin = new Padding(4, 5, 4, 5);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(71, 80);
+            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox5.TabIndex = 61;
+            pictureBox5.TabStop = false;
             // 
             // btnCerrar
             // 
@@ -153,9 +201,9 @@
             label11.Location = new Point(530, 40);
             label11.Margin = new Padding(4, 0, 4, 0);
             label11.Name = "label11";
-            label11.Size = new Size(299, 45);
+            label11.Size = new Size(67, 45);
             label11.TabIndex = 28;
-            label11.Text = "Informacion ROLES";
+            label11.Text = "lbR";
             // 
             // panel1
             // 
@@ -172,22 +220,10 @@
             panel1.Size = new Size(1259, 658);
             panel1.TabIndex = 22;
             // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(13, 14);
-            pictureBox5.Margin = new Padding(4, 5, 4, 5);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(71, 80);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 61;
-            pictureBox5.TabStop = false;
-            // 
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
-            panel3.Controls.Add(cmbTipo);
+            panel3.Controls.Add(txtRol);
             panel3.Controls.Add(cmbEstado);
             panel3.Controls.Add(btnCancelar);
             panel3.Controls.Add(btnGuardar);
@@ -202,16 +238,19 @@
             panel3.Size = new Size(1259, 536);
             panel3.TabIndex = 61;
             // 
-            // cmbTipo
+            // txtRol
             // 
-            cmbTipo.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbTipo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            cmbTipo.FormattingEnabled = true;
-            cmbTipo.Location = new Point(347, 105);
-            cmbTipo.Margin = new Padding(4, 5, 4, 5);
-            cmbTipo.Name = "cmbTipo";
-            cmbTipo.Size = new Size(450, 39);
-            cmbTipo.TabIndex = 24;
+            txtRol.BackColor = Color.White;
+            txtRol.BorderStyle = BorderStyle.FixedSingle;
+            txtRol.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtRol.Location = new Point(346, 117);
+            txtRol.Margin = new Padding(4, 5, 4, 5);
+            txtRol.MaxLength = 50;
+            txtRol.Name = "txtRol";
+            txtRol.Size = new Size(451, 37);
+            txtRol.TabIndex = 24;
+            txtRol.TextChanged += txtRol_TextChanged;
+            txtRol.Leave += txtRol_Leave;
             // 
             // cmbEstado
             // 
@@ -224,6 +263,7 @@
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(450, 39);
             cmbEstado.TabIndex = 23;
+            cmbEstado.Leave += cmbEstado_Leave;
             // 
             // btnCancelar
             // 
@@ -242,6 +282,7 @@
             btnCancelar.TabIndex = 22;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGuardar
             // 
@@ -272,6 +313,7 @@
             txtNumero.Name = "txtNumero";
             txtNumero.Size = new Size(451, 37);
             txtNumero.TabIndex = 12;
+            txtNumero.Leave += txtNumero_Leave;
             // 
             // label6
             // 
@@ -302,42 +344,17 @@
             label4.AutoSize = true;
             label4.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(347, 53);
+            label4.Location = new Point(347, 54);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(54, 28);
             label4.TabIndex = 1;
             label4.Text = "Rol:";
+            label4.Click += label4_Click;
             // 
-            // button1
+            // error1
             // 
-            button1.BackColor = Color.Transparent;
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.BackgroundImageLayout = ImageLayout.Stretch;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(1226, 5);
-            button1.Margin = new Padding(4, 5, 4, 5);
-            button1.Name = "button1";
-            button1.Size = new Size(20, 28);
-            button1.TabIndex = 63;
-            button1.UseVisualStyleBackColor = false;
-            // 
-            // btnMin
-            // 
-            btnMin.BackColor = Color.Transparent;
-            btnMin.BackgroundImage = (Image)resources.GetObject("btnMin.BackgroundImage");
-            btnMin.BackgroundImageLayout = ImageLayout.Stretch;
-            btnMin.FlatAppearance.BorderSize = 0;
-            btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            btnMin.FlatStyle = FlatStyle.Flat;
-            btnMin.Location = new Point(1191, 3);
-            btnMin.Margin = new Padding(4, 5, 4, 5);
-            btnMin.Name = "btnMin";
-            btnMin.Size = new Size(27, 33);
-            btnMin.TabIndex = 62;
-            btnMin.UseVisualStyleBackColor = false;
+            error1.ContainerControl = this;
             // 
             // R_E_Roles
             // 
@@ -349,11 +366,12 @@
             Text = "EditarRoles";
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)error1).EndInit();
             ResumeLayout(false);
         }
 
@@ -365,19 +383,20 @@
         public TextBox txtApellido;
         private Panel panel2;
         private Button btnCerrar;
-        private Label label11;
         private Panel panel1;
         private PictureBox pictureBox5;
         public Panel panel3;
-        public ComboBox cmbTipo;
         public ComboBox cmbEstado;
         public Button btnCancelar;
         public Button btnGuardar;
         public TextBox txtNumero;
-        private Label label6;
-        private Label label3;
-        private Label label4;
-        private Button button1;
+        private Button cerrar;
+        public Label label11;
+        public Label label6;
+        public Label label3;
+        public Label label4;
+        private ErrorProvider error1;
+        public TextBox txtRol;
         private Button btnMin;
     }
 }

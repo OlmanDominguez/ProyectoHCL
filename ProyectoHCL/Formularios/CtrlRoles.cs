@@ -35,7 +35,7 @@ namespace ProyectoHCL.Formularios
 {
     public partial class CtrlRoles : Form
     {
-        R_R_RolesPermisos R_E_rolp = new R_R_RolesPermisos();
+        R_E_Roles R_E_rolp = new R_E_Roles();
         AdmonRoles rgtRoles = new AdmonRoles(); //crear objeto Rgtroles para acceder a sus metodos
         Roles user = new Roles();     //crear objetos roles para acceder a sus parametros 
         DataSet ds = new DataSet();
@@ -116,14 +116,19 @@ namespace ProyectoHCL.Formularios
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            //R_E_rolp.label11.Text = "Registrar Rol";
+            R_E_rolp.label11.Text = "Registrar Rol";
             R_E_rolp.Size = new System.Drawing.Size(800, 431);
-            R_E_rolp.btnGuardar.Location = new Point(256, 282);
-            R_E_rolp.btnCancelar.Location = new Point(466, 282);
-            R_E_rolp.label2.Location = new Point(243, 34);
-            R_E_rolp.cmbRol.Location = new Point(243, 65);
+            R_E_rolp.btnGuardar.Location = new Point(81, 455);
+            R_E_rolp.btnCancelar.Location = new Point(700, 455);
+            R_E_rolp.label4.Location = new Point(347, 54);
+            R_E_rolp.txtRol.Location = new Point(347, 105);
+            R_E_rolp.label6.Location = new Point(347, 183);
+            R_E_rolp.txtNumero.Location = new Point(347, 230);
+            R_E_rolp.label3.Location = new Point(347, 313);
+            R_E_rolp.cmbEstado.Location = new Point(347, 365);
             R_E_rolp.ShowDialog();
-            CargarDT(); 
+            CargarDT();
+
         }
 
         //pendiente revisar
@@ -160,14 +165,23 @@ namespace ProyectoHCL.Formularios
             }
             if (this.dgvRoles.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                R_R_RolesPermisos editarRoles = new R_R_RolesPermisos(); //Crear rol del form Editarroles
-
-                // editarRoles.ID_Rol=dgvRoles.CurrentRow.Cells["idrol"].Value.ToString();
-                editarRoles.cmbRol.Text = dgvRoles.CurrentRow.Cells["nombre_rol"].Value.ToString();
-
-
-                editarRoles.ShowDialog(); //Se oculta el form principal y solo muestra el form editarRol
-                                          //CargarDT(); //Se llama el metodo Mostrar Roles para actualizar el DataGrid al editar 
+                R_E_rolp.label11.Text = "Registrar Rol";
+                R_E_rolp.Size = new System.Drawing.Size(800, 431);
+                R_E_rolp.btnGuardar.Location = new Point(81, 455);
+                R_E_rolp.btnCancelar.Location = new Point(700, 455);
+                R_E_rolp.label4.Location = new Point(347, 54);
+                R_E_rolp.txtRol.Location = new Point(347, 105);
+                R_E_rolp.label6.Location = new Point(347, 183);
+                R_E_rolp.txtNumero.Location = new Point(347, 230);
+                R_E_rolp.label3.Location = new Point(347, 313);
+                R_E_rolp.cmbEstado.Location = new Point(347, 365);
+                R_E_rolp.idRol = dgvRoles.CurrentRow.Cells["ID"].Value.ToString();
+                R_E_rolp.txtRol.Text = dgvRoles.CurrentRow.Cells["ROL"].Value.ToString();
+                R_E_rolp.txtNumero.Text = dgvRoles.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
+                R_E_rolp.cmbEstado.Text = dgvRoles.CurrentRow.Cells["ESTADO_ROL"].Value.ToString();
+                R_E_rolp.ShowDialog();
+                R_E_rolp.limpiarCampos();
+                CargarDT();
             }
         }
 
