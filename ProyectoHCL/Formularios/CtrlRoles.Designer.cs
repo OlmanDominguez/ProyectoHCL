@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CtrlRoles));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
@@ -38,8 +39,8 @@
             DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CtrlRoles));
             panel2 = new Panel();
+            button6 = new Button();
             btnCerrar = new Button();
             label11 = new Label();
             button2 = new Button();
@@ -58,6 +59,7 @@
             label4 = new Label();
             dgvrRoles = new DataGridView();
             panel1 = new Panel();
+            button1 = new Button();
             btSiguiente = new Button();
             btAnterior = new Button();
             label6 = new Label();
@@ -72,8 +74,6 @@
             cmbMostrar = new ComboBox();
             label5 = new Label();
             dgvRoles = new DataGridView();
-            button1 = new Button();
-            button6 = new Button();
             panel2.SuspendLayout();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvrRoles).BeginInit();
@@ -97,6 +97,23 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1755, 108);
             panel2.TabIndex = 35;
+            // 
+            // button6
+            // 
+            button6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button6.BackColor = Color.Transparent;
+            button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
+            button6.BackgroundImageLayout = ImageLayout.Stretch;
+            button6.FlatAppearance.BorderSize = 0;
+            button6.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            button6.FlatStyle = FlatStyle.Flat;
+            button6.Location = new Point(1722, 14);
+            button6.Margin = new Padding(4, 5, 4, 5);
+            button6.Name = "button6";
+            button6.Size = new Size(20, 28);
+            button6.TabIndex = 43;
+            button6.UseVisualStyleBackColor = false;
+            button6.Click += button6_Click;
             // 
             // btnCerrar
             // 
@@ -423,6 +440,22 @@
             panel1.Size = new Size(1755, 127);
             panel1.TabIndex = 38;
             // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.BackColor = Color.Transparent;
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.BackgroundImageLayout = ImageLayout.Stretch;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(867, 49);
+            button1.Margin = new Padding(4, 5, 4, 5);
+            button1.Name = "button1";
+            button1.Size = new Size(20, 28);
+            button1.TabIndex = 71;
+            button1.UseVisualStyleBackColor = false;
+            // 
             // btSiguiente
             // 
             btSiguiente.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -654,39 +687,6 @@
             dgvRoles.CellClick += dgvRoles_CellClick;
             dgvRoles.CellPainting += dgvRoles_CellPainting;
             // 
-            // button1
-            // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.BackColor = Color.Transparent;
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.BackgroundImageLayout = ImageLayout.Stretch;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(867, 49);
-            button1.Margin = new Padding(4, 5, 4, 5);
-            button1.Name = "button1";
-            button1.Size = new Size(20, 28);
-            button1.TabIndex = 71;
-            button1.UseVisualStyleBackColor = false;
-            // 
-            // button6
-            // 
-            button6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button6.BackColor = Color.Transparent;
-            button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
-            button6.BackgroundImageLayout = ImageLayout.Stretch;
-            button6.FlatAppearance.BorderSize = 0;
-            button6.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            button6.FlatStyle = FlatStyle.Flat;
-            button6.Location = new Point(1722, 14);
-            button6.Margin = new Padding(4, 5, 4, 5);
-            button6.Name = "button6";
-            button6.Size = new Size(20, 28);
-            button6.TabIndex = 43;
-            button6.UseVisualStyleBackColor = false;
-            button6.Click += button6_Click;
-            // 
             // CtrlRoles
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -727,7 +727,6 @@
         private Button button4;
         private Button button7;
         private Button button9;
-        private TextBox txtBuscar;
         private Label label4;
         private Button pdf;
         private Button Excel;
@@ -749,5 +748,6 @@
         public DataGridView dgvRoles;
         private Button button6;
         private Button button1;
+        public TextBox txtBuscar;
     }
 }
