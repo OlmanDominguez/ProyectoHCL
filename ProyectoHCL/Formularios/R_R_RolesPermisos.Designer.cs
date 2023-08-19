@@ -38,12 +38,15 @@
             btnCerrar = new Button();
             btnMin = new Button();
             pictureBox5 = new PictureBox();
-            label11 = new Label();
+            lblTitulo = new Label();
             button2 = new Button();
             button5 = new Button();
             btnPerfil = new Button();
             btnCerrarSesion = new Button();
             panel5 = new Panel();
+            btnNuevo = new Button();
+            cmbEstado = new ComboBox();
+            label11 = new Label();
             btnEditar = new Button();
             cmbRol = new ComboBox();
             btnCancelar = new Button();
@@ -107,7 +110,7 @@
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(btnMin);
             panel2.Controls.Add(pictureBox5);
-            panel2.Controls.Add(label11);
+            panel2.Controls.Add(lblTitulo);
             panel2.Controls.Add(button2);
             panel2.Controls.Add(button5);
             panel2.Controls.Add(btnPerfil);
@@ -162,17 +165,17 @@
             pictureBox5.TabIndex = 40;
             pictureBox5.TabStop = false;
             // 
-            // label11
+            // lblTitulo
             // 
-            label11.AutoSize = true;
-            label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.ForeColor = Color.White;
-            label11.Location = new Point(89, 20);
-            label11.Name = "label11";
-            label11.Size = new Size(287, 32);
-            label11.TabIndex = 41;
-            label11.Text = "Registrar/Editar Permisos";
+            lblTitulo.AutoSize = true;
+            lblTitulo.BackColor = Color.Transparent;
+            lblTitulo.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTitulo.ForeColor = Color.White;
+            lblTitulo.Location = new Point(89, 20);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(214, 32);
+            lblTitulo.TabIndex = 41;
+            lblTitulo.Text = "Registrar Permisos";
             // 
             // button2
             // 
@@ -233,6 +236,9 @@
             // panel5
             // 
             panel5.BackColor = Color.Gainsboro;
+            panel5.Controls.Add(btnNuevo);
+            panel5.Controls.Add(cmbEstado);
+            panel5.Controls.Add(label11);
             panel5.Controls.Add(btnEditar);
             panel5.Controls.Add(cmbRol);
             panel5.Controls.Add(btnCancelar);
@@ -250,6 +256,52 @@
             panel5.Size = new Size(1100, 59);
             panel5.TabIndex = 37;
             // 
+            // btnNuevo
+            // 
+            btnNuevo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnNuevo.BackColor = Color.RoyalBlue;
+            btnNuevo.BackgroundImageLayout = ImageLayout.Stretch;
+            btnNuevo.FlatAppearance.BorderSize = 0;
+            btnNuevo.FlatAppearance.MouseOverBackColor = Color.MidnightBlue;
+            btnNuevo.FlatStyle = FlatStyle.Flat;
+            btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnNuevo.ForeColor = SystemColors.ButtonFace;
+            btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
+            btnNuevo.Location = new Point(277, 16);
+            btnNuevo.Name = "btnNuevo";
+            btnNuevo.Size = new Size(46, 27);
+            btnNuevo.TabIndex = 41;
+            btnNuevo.TextAlign = ContentAlignment.MiddleRight;
+            btnNuevo.UseVisualStyleBackColor = false;
+            btnNuevo.Visible = false;
+            btnNuevo.Click += btnNuevo_Click;
+            // 
+            // cmbEstado
+            // 
+            cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbEstado.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbEstado.FormattingEnabled = true;
+            cmbEstado.Items.AddRange(new object[] { "ACTIVO", "INACTIVO" });
+            cmbEstado.Location = new Point(442, 15);
+            cmbEstado.Margin = new Padding(2);
+            cmbEstado.Name = "cmbEstado";
+            cmbEstado.Size = new Size(166, 28);
+            cmbEstado.TabIndex = 74;
+            cmbEstado.Visible = false;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.ForeColor = Color.Black;
+            label11.Location = new Point(375, 18);
+            label11.Margin = new Padding(2, 0, 2, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(63, 19);
+            label11.TabIndex = 73;
+            label11.Text = "Estado:";
+            label11.Visible = false;
+            // 
             // btnEditar
             // 
             btnEditar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -257,8 +309,8 @@
             btnEditar.BackgroundImage = (Image)resources.GetObject("btnEditar.BackgroundImage");
             btnEditar.BackgroundImageLayout = ImageLayout.Zoom;
             btnEditar.FlatAppearance.BorderSize = 0;
-            btnEditar.FlatAppearance.MouseDownBackColor = Color.DarkGreen;
-            btnEditar.FlatAppearance.MouseOverBackColor = Color.DarkGreen;
+            btnEditar.FlatAppearance.MouseDownBackColor = Color.Goldenrod;
+            btnEditar.FlatAppearance.MouseOverBackColor = Color.Goldenrod;
             btnEditar.FlatStyle = FlatStyle.Flat;
             btnEditar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnEditar.ForeColor = Color.White;
@@ -279,6 +331,7 @@
             cmbRol.Name = "cmbRol";
             cmbRol.Size = new Size(166, 28);
             cmbRol.TabIndex = 71;
+            cmbRol.SelectedValueChanged += cmbRol_SelectedValueChanged;
             // 
             // btnCancelar
             // 
@@ -689,7 +742,7 @@
             panel6.Controls.Add(pictureBox1);
             panel6.Controls.Add(label4);
             panel6.Controls.Add(label1);
-            panel6.Location = new Point(433, 138);
+            panel6.Location = new Point(419, 138);
             panel6.MaximumSize = new Size(276, 125);
             panel6.Name = "panel6";
             panel6.Size = new Size(276, 125);
@@ -980,7 +1033,7 @@
         #endregion
 
         private Panel panel2;
-        private Label label11;
+        private Label lblTitulo;
         private Button button2;
         private Button button5;
         private Button btnPerfil;
@@ -1035,5 +1088,8 @@
         private Label label4;
         private Label label1;
         private PictureBox pictureBox1;
+        public ComboBox cmbEstado;
+        public Label label11;
+        public Button btnNuevo;
     }
 }

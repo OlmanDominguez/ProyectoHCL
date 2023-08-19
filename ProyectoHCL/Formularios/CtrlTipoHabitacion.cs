@@ -31,6 +31,7 @@ namespace ProyectoHCL.Formularios
         TipoHabitacion tipHab = new TipoHabitacion();
         DataSet ds = new DataSet();
         MsgB msgB = new MsgB();
+        CDatos cDatos = new CDatos();
         int pagInicio = 1, indice = 0, numFilas = 10, pagFinal, cmbIndice = 0;
 
         public CtrlTipoHabitacion()
@@ -38,6 +39,36 @@ namespace ProyectoHCL.Formularios
             InitializeComponent();
             pagFinal = numFilas;
             CargarDG();
+        }
+
+        private void Permisos()
+        {
+            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
+
+            foreach (var obj in LsObj)
+            {
+                switch (obj.IdPermiso)
+                {
+                    case 2:
+                        if (obj.IdObjeto == "TIPO HABITACION" && !obj.Permitido)
+                        {
+                            btnNuevo.Enabled = false;
+                        }
+                        break;
+                    case 3:
+                        if (obj.IdObjeto == "TIPO HABITACION" && !obj.Permitido)
+                        {
+                            dgvUsuarios.Columns["EDITAR"].Visible = false;
+                        }
+                        break;
+                    case 4:
+                        if (obj.IdObjeto == "TIPO HABITACION" && !obj.Permitido)
+                        {
+                            dgvUsuarios.Columns["ELIMINAR"].Visible = false;
+                        }
+                        break;
+                }
+            }
         }
 
         private void CargarDG()
@@ -72,6 +103,8 @@ namespace ProyectoHCL.Formularios
             DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
             btnDelete.Name = "ELIMINAR";
             dgvTH.Columns.Add(btnDelete);
+
+            Permisos();
         }
 
         public void BuscarTipHab(string buscarTH)
@@ -367,7 +400,7 @@ namespace ProyectoHCL.Formularios
         {
             SLDocument sl = new SLDocument();
 
-            System.Drawing.Bitmap bm = new System.Drawing.Bitmap("C:/Users/jmont/OneDrive/Documentos/HM/ProyectoIP/logoCL.png");
+            System.Drawing.Bitmap bm = new System.Drawing.Bitmap(Properties.Resources.logo);
             Byte[] ba;
             using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
             {
@@ -447,6 +480,11 @@ namespace ProyectoHCL.Formularios
         private void btnExcel_Click(object sender, EventArgs e)
         {
             crearExcel();
+        }
+
+        private void btnNuevo_EnabledChanged(object sender, EventArgs e)
+        {
+            btnNuevo.BackColor = Color.DarkGray;
         }
     }
 }

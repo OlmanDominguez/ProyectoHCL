@@ -284,7 +284,6 @@
             txtCorreo.Size = new Size(316, 27);
             txtCorreo.TabIndex = 12;
             txtCorreo.Leave += txtCorreo_Leave;
-            txtCorreo.MouseLeave += txtCorreo_MouseLeave;
             // 
             // txtContraseña
             // 

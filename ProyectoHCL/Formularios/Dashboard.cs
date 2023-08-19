@@ -58,7 +58,7 @@ namespace ProyectoHCL
                     case "USUARIOS":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_usuarios.Enabled = false;
+                            Ibtn_clientes.Enabled = false;
                         }
                         break;
                     case "SERVICIOS":
@@ -76,7 +76,7 @@ namespace ProyectoHCL
                     case "TIPO HABITACION":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            //Ibtn_TIPOHAB.Enabled = false;
+                            iconButton1.Enabled = false;
                         }
                         break;
                     case "FACTURACION":
@@ -112,7 +112,19 @@ namespace ProyectoHCL
                     case "CLIENTES":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_clientes.Enabled = false;
+                            Ibtn_usuarios.Enabled = false;
+                        }
+                        break;
+                    case "BITACORA":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            iconButton3.Enabled = false;
+                        }
+                        break;
+                    case "PREGUNTAS":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            Ibtn_usuarios.Enabled = false;
                         }
                         break;
                 }
@@ -497,7 +509,7 @@ namespace ProyectoHCL
         {
             //codigo para el formilario 
             panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlUsuarios());
+            openChildFormInPanel(new CtrlClientes());
             //hideSubMenu2();
         }
 
@@ -1175,7 +1187,7 @@ namespace ProyectoHCL
         {
             //codigo para el formilario 
             panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlClientes());
+            openChildFormInPanel(new CtrlUsuarios());
             //hideSubMenu2();
         }
 
@@ -1199,6 +1211,8 @@ namespace ProyectoHCL
         private void iconButton1_Click_1(object sender, EventArgs e)
         {
             //codigo para el formilario 
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlTipoHabitacion());
             hideSubMenu2();
         }
 
@@ -1223,6 +1237,10 @@ namespace ProyectoHCL
             openChildFormInPanel(new Reservaciones());
         }
 
-        
+        private void Ibtn_perfil_Click(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new PerfilUsuario());
+        }
     }
 }
