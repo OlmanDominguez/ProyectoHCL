@@ -45,7 +45,8 @@
             btnCerrar = new Button();
             btnMin = new Button();
             panel3 = new Panel();
-            txt_habi_vieja = new TextBox();
+            radioButton2 = new RadioButton();
+            radioButton1 = new RadioButton();
             btn_guardar2 = new Button();
             dt_fecha_salida = new DateTimePicker();
             dt_fecha_entrada = new DateTimePicker();
@@ -70,6 +71,7 @@
             txt_metodo_reserva = new TextBox();
             txt_estado = new TextBox();
             txt_id_solicitud = new TextBox();
+            txt_habi_vieja = new TextBox();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
@@ -130,6 +132,7 @@
             // cb_metodo
             // 
             cb_metodo.FormattingEnabled = true;
+            cb_metodo.Items.AddRange(new object[] { "Booking", "Whatsapp", "Airbnb", "Presencial o llamada celular" });
             cb_metodo.Location = new Point(255, 256);
             cb_metodo.Name = "cb_metodo";
             cb_metodo.Size = new Size(163, 23);
@@ -153,6 +156,8 @@
             txt_huespedes.Name = "txt_huespedes";
             txt_huespedes.Size = new Size(47, 23);
             txt_huespedes.TabIndex = 46;
+            txt_huespedes.TextChanged += txt_huespedes_TextChanged;
+            txt_huespedes.KeyPress += txt_huespedes_KeyPress;
             // 
             // label5
             // 
@@ -245,6 +250,8 @@
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
+            panel3.Controls.Add(radioButton2);
+            panel3.Controls.Add(radioButton1);
             panel3.Controls.Add(btn_guardar2);
             panel3.Controls.Add(dt_fecha_salida);
             panel3.Controls.Add(dt_fecha_entrada);
@@ -285,12 +292,31 @@
             panel3.Size = new Size(949, 531);
             panel3.TabIndex = 52;
             // 
-            // txt_habi_vieja
+            // radioButton2
             // 
-            txt_habi_vieja.Location = new Point(700, 198);
-            txt_habi_vieja.Name = "txt_habi_vieja";
-            txt_habi_vieja.Size = new Size(91, 23);
-            txt_habi_vieja.TabIndex = 79;
+            radioButton2.AutoSize = true;
+            radioButton2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            radioButton2.Location = new Point(681, 367);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Size = new Size(46, 21);
+            radioButton2.TabIndex = 81;
+            radioButton2.TabStop = true;
+            radioButton2.Text = "NO";
+            radioButton2.UseVisualStyleBackColor = true;
+            radioButton2.CheckedChanged += radioButton2_CheckedChanged;
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            radioButton1.Location = new Point(681, 346);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(37, 21);
+            radioButton1.TabIndex = 80;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "SI";
+            radioButton1.UseVisualStyleBackColor = true;
+            radioButton1.CheckedChanged += radioButton1_CheckedChanged;
             // 
             // btn_guardar2
             // 
@@ -351,6 +377,7 @@
             // cb_estado
             // 
             cb_estado.FormattingEnabled = true;
+            cb_estado.Items.AddRange(new object[] { "RESERVADO", "CONFIRMADO", "ANULADO", "FACTURADA" });
             cb_estado.Location = new Point(255, 306);
             cb_estado.Name = "cb_estado";
             cb_estado.Size = new Size(163, 23);
@@ -394,6 +421,7 @@
             txt_monto.Name = "txt_monto";
             txt_monto.Size = new Size(121, 23);
             txt_monto.TabIndex = 59;
+            txt_monto.KeyPress += txt_monto_KeyPress;
             // 
             // label11
             // 
@@ -410,8 +438,10 @@
             // 
             txt_codigo.Location = new Point(255, 127);
             txt_codigo.Name = "txt_codigo";
-            txt_codigo.Size = new Size(91, 23);
+            txt_codigo.ReadOnly = true;
+            txt_codigo.Size = new Size(47, 23);
             txt_codigo.TabIndex = 57;
+            txt_codigo.TextChanged += txt_codigo_TextChanged;
             // 
             // label10
             // 
@@ -426,9 +456,9 @@
             // 
             // txt_vehiculo
             // 
-            txt_vehiculo.Location = new Point(682, 352);
+            txt_vehiculo.Location = new Point(681, 351);
             txt_vehiculo.Name = "txt_vehiculo";
-            txt_vehiculo.Size = new Size(47, 23);
+            txt_vehiculo.Size = new Size(30, 23);
             txt_vehiculo.TabIndex = 55;
             // 
             // label9
@@ -531,11 +561,18 @@
             // 
             // txt_id_solicitud
             // 
-            txt_id_solicitud.Location = new Point(299, 127);
+            txt_id_solicitud.Location = new Point(255, 127);
             txt_id_solicitud.Name = "txt_id_solicitud";
             txt_id_solicitud.ReadOnly = true;
             txt_id_solicitud.Size = new Size(47, 23);
             txt_id_solicitud.TabIndex = 78;
+            // 
+            // txt_habi_vieja
+            // 
+            txt_habi_vieja.Location = new Point(700, 198);
+            txt_habi_vieja.Name = "txt_habi_vieja";
+            txt_habi_vieja.Size = new Size(91, 23);
+            txt_habi_vieja.TabIndex = 79;
             // 
             // NuevaReservacion
             // 
@@ -602,5 +639,7 @@
         public Button btn_guardar2;
         public TextBox txt_id_solicitud;
         public TextBox txt_habi_vieja;
+        private RadioButton radioButton2;
+        private RadioButton radioButton1;
     }
 }
