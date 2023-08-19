@@ -90,7 +90,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(36, 97);
+            label2.Location = new Point(36, 90);
             label2.Name = "label2";
             label2.Size = new Size(92, 21);
             label2.TabIndex = 18;
@@ -101,7 +101,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.ButtonHighlight;
-            label3.Location = new Point(36, 176);
+            label3.Location = new Point(36, 168);
             label3.Name = "label3";
             label3.Size = new Size(167, 21);
             label3.TabIndex = 19;

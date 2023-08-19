@@ -587,6 +587,7 @@
             Ibtn_perfil.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_perfil.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_perfil.UseVisualStyleBackColor = true;
+            Ibtn_perfil.Click += Ibtn_perfil_Click;
             // 
             // btn_perfil
             // 

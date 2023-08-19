@@ -111,6 +111,8 @@ namespace ProyectoHCL
                             clasecompartida.user = UsuarioBox1.Text;
                             //clases.CDatos.idUsu = (int)leer["ID_USUARIO"];
                             clases.CDatos.idRolUs = (int)leer["ID_ROL"];
+                            clases.CDatos.nombre = (string)leer["NOMBRE_USUARIO"];
+                            clases.CDatos.correo = (string)leer["EMAIL"];
                             ContraseñaBox2.Text = "";
                             Form formulario = new Dashboard();
                             formulario.Show();

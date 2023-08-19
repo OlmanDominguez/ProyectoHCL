@@ -78,6 +78,7 @@ namespace ProyectoHCL
                             string usuario = (string)leer["USUARIO"];
                             if (usuario == clasecompartida.user & RBTN_Pregu.Checked == true)
                             {
+                                clasecompartida.estado = 2;
                                 Form formulario = new Formularios.PreguntasRecuContra();
                                 formulario.ShowDialog();
                                 this.Close();

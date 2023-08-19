@@ -113,9 +113,9 @@ namespace ProyectoHCL.Formularios
                 MsgB m = new MsgB("advertencia", "Contraseñas no coinciden");
                 DialogResult dR = m.ShowDialog();
             }
-            
-            
-            
+
+
+
         }
     }
 }

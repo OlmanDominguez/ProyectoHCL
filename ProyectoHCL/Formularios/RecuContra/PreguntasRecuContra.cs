@@ -62,7 +62,7 @@ namespace ProyectoHCL.Formularios
                     MessageBox.Show(a.Message + a.StackTrace);
                 }
             }
-            else
+            else if (clasecompartida.estado == 2)
             {
                 label1.Text = "Responde a una de tus preguntas de seguridad para restablecer tu contraseña.";
                 try
@@ -91,6 +91,10 @@ namespace ProyectoHCL.Formularios
                 {
                     MessageBox.Show(a.Message + a.StackTrace);
                 }
+            }
+            else if (clasecompartida.estado == 1)
+            {
+
             }
 
 
@@ -169,7 +173,7 @@ namespace ProyectoHCL.Formularios
                             if (leer1.Read())
                             {
                                 long cant = Convert.ToInt64(leer1["COUNT(*)"]);
-                                if (cant == 2)
+                                if (cant == 2 || cant > 2)
                                 {
                                     MessageBox.Show("Gracias por responder");
                                     comando.Connection.Close();

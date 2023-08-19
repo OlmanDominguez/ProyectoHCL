@@ -12,7 +12,12 @@ using ProyectoHCL.Formularios;
 namespace ProyectoHCL.clases
 {
      class CDatos
-    {
+     {
+        public static string usuario;
+        public static string nombre;
+        public static string correo;
+        public static string contraseña;
+
 
         public static int idUsu; //Almacenar id Usuario
         public static int idRolUs; //ALmacenar id Rol

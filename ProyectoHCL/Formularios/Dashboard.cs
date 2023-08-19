@@ -1237,6 +1237,10 @@ namespace ProyectoHCL
             openChildFormInPanel(new Reservaciones());
         }
 
-
+        private void Ibtn_perfil_Click(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new PerfilUsuario());
+        }
     }
 }
