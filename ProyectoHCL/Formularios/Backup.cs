@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DocumentFormat.OpenXml.Wordprocessing;
+//using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace ProyectoHCL.Formularios
 {

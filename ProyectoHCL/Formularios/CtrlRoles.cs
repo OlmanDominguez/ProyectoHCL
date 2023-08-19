@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Text;
+//using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -99,7 +99,7 @@ namespace ProyectoHCL.Formularios
 
                 cmd = new MySqlCommand("buscarrol", conn); //recibe proc almacenado
                 cmd.CommandType = CommandType.StoredProcedure; //se especifica que es un proc almacenado
-                cmd.Parameters.Add("@rolR", MySqlDbType.VarChar, 30).Value = buscarR; //recibe el parametro nombreR definido en el parametro almacenado
+                cmd.Parameters.Add("@rolR", MySqlDbType.VarChar, 30).Value = buscarR; //recibe el parametro buscarR definido en el parametro almacenado
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable(); //Se crea tabla
@@ -116,14 +116,14 @@ namespace ProyectoHCL.Formularios
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            /* R_E_rolp.lblTitulo.Text = "Registrar Objeto";
-             R_E_rolp.Size = new System.Drawing.Size(800, 431);
-             R_E_rolp.btnGuardar.Location = new Point(256, 282);
-             R_E_rolp.btnCancelar.Location = new Point(466, 282);
-             R_E_rolp.label2.Location = new Point(243, 34);
-             R_E_rolp.txtRol.Location = new Point(243, 65);
-             R_E_rolp.ShowDialog();
-              CargarDT();*/
+            //R_E_rolp.label11.Text = "Registrar Rol";
+            R_E_rolp.Size = new System.Drawing.Size(800, 431);
+            R_E_rolp.btnGuardar.Location = new Point(256, 282);
+            R_E_rolp.btnCancelar.Location = new Point(466, 282);
+            R_E_rolp.label2.Location = new Point(243, 34);
+            R_E_rolp.cmbRol.Location = new Point(243, 65);
+            R_E_rolp.ShowDialog();
+            CargarDT(); 
         }
 
         //pendiente revisar
@@ -163,7 +163,7 @@ namespace ProyectoHCL.Formularios
                 R_R_RolesPermisos editarRoles = new R_R_RolesPermisos(); //Crear rol del form Editarroles
 
                 // editarRoles.ID_Rol=dgvRoles.CurrentRow.Cells["idrol"].Value.ToString();
-                // editarRoles.txtNombre.Text = dgvRoles.CurrentRow.Cells["estado_rol"].Value.ToString();
+                editarRoles.cmbRol.Text = dgvRoles.CurrentRow.Cells["nombre_rol"].Value.ToString();
 
 
                 editarRoles.ShowDialog(); //Se oculta el form principal y solo muestra el form editarRol
@@ -208,9 +208,18 @@ namespace ProyectoHCL.Formularios
         }
         private void crearPDF()
         {
+            /*SaveFileDialog selecciona = new SaveFileDialog();
+            selecciona.Filter = "Archivo PDF (*.pdf)|*.pdf";
+            selecciona.InitialDirectory = @"C:\Users\Descargas\ReporteRoles.pdf";
+            selecciona.Title = "Seleccionar la Carpeta";
 
-           
-            PdfWriter pdfWriter = new PdfWriter("Reporte.pdf");
+            if (selecciona.ShowDialog() == DialogResult.OK)
+
+            {
+                string ruta = selecciona.FileName;*/
+
+
+            PdfWriter pdfWriter = new PdfWriter("Reporte.pdf");//iniicio
             PdfDocument pdf = new PdfDocument(pdfWriter);
             //1 pulgada = 72 pt (8 1/2 x 11) (612 x 792)
             PageSize tamanioH = new PageSize(792, 612);
@@ -256,86 +265,78 @@ namespace ProyectoHCL.Formularios
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_actualizacion"].ToString()).SetFont(fontContenido)));
 
                 }
-            }
-            documento.Add(tabla);
-            documento.Close();
+                //  }
+                // comando.Connection = conexionBD;
+                // object value = comando.ExportToFile(ruta);
+                // documento.Add(tabla);
+                //documento.Close();
 
-            SaveFileDialog selecciona = new SaveFileDialog();
-               selecciona.Filter = "Archivo PDF (*.pdf)|*.pdf";
-               selecciona.InitialDirectory = @"C:\Users\Descargas\ReporteRoles.pdf";
-               selecciona.Title = "Seleccionar la Carpeta";
 
-            if (selecciona.ShowDialog() == DialogResult.OK)
+                documento.Add(tabla);
+                documento.Close();
 
-            {
-                string ruta = selecciona.FileName;
+                var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/DAOdo/Desktop/SEGUNDO PERIODO 2023/Programacion he implementacion de Sistemas/ProyectoHotelCasaLomas/logo.jpeg")).SetWidth(50);
+                var plogo = new Paragraph("").Add(logo);
+
+                var nombre = new Paragraph("Hotel Casa Lomas");
+                nombre.SetTextAlignment(TextAlignment.CENTER);
+                nombre.SetFontSize(12);
+
+                var titulo = new Paragraph("Reporte Roles");
+                titulo.SetTextAlignment(TextAlignment.CENTER);
+                titulo.SetFontSize(12);
+
+                var dfecha = DateTime.Now.ToString("dd.MM.yyy");
+                var dhora = DateTime.Now.ToString("hh.mm.ss");
+                var fecha = new Paragraph("fecha:" + dfecha + "\nHora:" + dhora);
+                fecha.SetFontSize(12);
+
+
+                PdfDocument pdfDoc = new PdfDocument(new PdfReader("Reporte.pdf"), new PdfWriter
+                    ("ReporteRoles.pdf"));
+                Document doc = new Document(pdfDoc);
+
+                int numeros = pdfDoc.GetNumberOfPages();
+
+
+                for (int i = 1; i <= numeros; i++)
                 {
-                    documento.Add(tabla);
-                    documento.Close();
+                    PdfPage pagina = pdfDoc.GetPage(i);
 
-                    var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/DAOdo/Desktop/SEGUNDO PERIODO 2023/Programacion he implementacion de Sistemas/ProyectoHotelCasaLomas/logo.jpeg")).SetWidth(50);
-                    var plogo = new Paragraph("").Add(logo);
+                    float y = (pdfDoc.GetPage(i).GetPageSize().GetTop() - 15);
+                    doc.ShowTextAligned(plogo, 40, y, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                    doc.ShowTextAligned(nombre, 110, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                    doc.ShowTextAligned(titulo, 396, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                    doc.ShowTextAligned(fecha, 700, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
 
-                    var nombre = new Paragraph("Hotel Casa Lomas");
-                    nombre.SetTextAlignment(TextAlignment.CENTER);
-                    nombre.SetFontSize(12);
+                    doc.ShowTextAligned(new Paragraph(String.Format("pagina {0} de {1}", i, numeros)), pdfDoc.GetPage
+                        (i).GetPageSize().GetWidth() / 2, pdfDoc.GetPage(i).GetPageSize().GetBottom() + 30, i,
+                        TextAlignment.CENTER, VerticalAlignment.TOP, 0);
 
-                    var titulo = new Paragraph("Reporte Roles");
-                    titulo.SetTextAlignment(TextAlignment.CENTER);
-                    titulo.SetFontSize(12);
+                    /* SaveFileDialog sf = new SaveFileDialog();
+                      sf.DefaultExt = "*.pdf";
+                      sf.FileName = "pdfRoles";
+                      sf.Filter = " PDF (*.pdf) | *.pdf";
 
-                    var dfecha = DateTime.Now.ToString("dd.MM.yyy");
-                    var dhora = DateTime.Now.ToString("hh.mm.ss");
-                    var fecha = new Paragraph("fecha:" + dfecha + "\nHora:" + dhora);
-                    fecha.SetFontSize(12);
-
-
-                    PdfDocument pdfDoc = new PdfDocument(new PdfReader("Reporte.pdf"), new PdfWriter
-                        ("ReporteRoles.pdf"));
-                    Document doc = new Document(pdfDoc);
-
-                    int numeros = pdfDoc.GetNumberOfPages();
-
-
-                    for (int i = 1; i <= numeros; i++)
-                    {
-                        PdfPage pagina = pdfDoc.GetPage(i);
-
-                        float y = (pdfDoc.GetPage(i).GetPageSize().GetTop() - 15);
-                        doc.ShowTextAligned(plogo, 40, y, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                        doc.ShowTextAligned(nombre, 110, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                        doc.ShowTextAligned(titulo, 396, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                        doc.ShowTextAligned(fecha, 700, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-
-                        doc.ShowTextAligned(new Paragraph(String.Format("pagina {0} de {1}", i, numeros)), pdfDoc.GetPage
-                            (i).GetPageSize().GetWidth() / 2, pdfDoc.GetPage(i).GetPageSize().GetBottom() + 30, i,
-                            TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-
-                        /* SaveFileDialog sf = new SaveFileDialog();
-                          sf.DefaultExt = "*.pdf";
-                          sf.FileName = "pdfRoles";
-                          sf.Filter = " PDF (*.pdf) | *.pdf";
-
-                          if (sf.ShowDialog() == DialogResult.OK)
-                          {
-                              pdfDoc.SaveAs(sf.FileName);
-                              MsgB mbox = new MsgB("informacion", "Archivo Excel creado con éxito");
-                              DialogResult dR = mbox.ShowDialog();
-
-                      }*/
-                        comando.Connection = conexionBD;
-                        //conexionBD.Open();
-                        ///comando.ExportToFile(ruta);
-                        documento.Close();
-
+                      if (sf.ShowDialog() == DialogResult.OK)
+                      {
+                          pdfDoc.SaveAs(sf.FileName);
+                          MsgB mbox = new MsgB("informacion", "Archivo Excel creado con éxito");
+                          DialogResult dR = mbox.ShowDialog();
                     }
+                  }*/
+
                 }
+
+                doc.Close();
             }
+
+
         }
 
         private void Excel_Click(object sender, EventArgs e)
         {
-          
+
 
             SLDocument sl = new SLDocument();
 
@@ -506,9 +507,9 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void cmbPagR_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbPagR_SelectedIndexChanged(object sender, EventArgs e)//me genera problema 
         {
-       /*     int pagina = Convert.ToInt32(cmbPagR.Text);
+            /*int pagina = Convert.ToInt32(cmbPagR.Text);
             indice = pagina - 1;
             pagInicio = (pagina - 1) * numFilas + 1;
             pagFinal = pagina * numFilas;
