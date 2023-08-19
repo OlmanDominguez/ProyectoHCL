@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Markup;
+using static ProyectoHCL.RecuContra;
 
 namespace ProyectoHCL
 {
@@ -23,7 +24,7 @@ namespace ProyectoHCL
         {
 
             InitializeComponent();
-            
+            combo_tipo();
 
 
         }
@@ -152,7 +153,9 @@ namespace ProyectoHCL
         }
         public void updatehabitacion()
         {
-            String ESTADO = cb_estado.SelectedValue.ToString();
+            //String ESTADO = cb_estado.SelectedValue.ToString();
+            object adb = cb_estado.SelectedItem;
+            object b = cb_estado.GetItemText(adb);
             try
             {
                 MySqlConnection conn;
@@ -163,7 +166,7 @@ namespace ProyectoHCL
                 cmd = new MySqlCommand("UpdateH", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@num_habitacion", txt_id.Text);
-                cmd.Parameters.AddWithValue("@estado", ESTADO);
+                cmd.Parameters.AddWithValue("@estado", adb);
 
                 cmd.ExecuteNonQuery();
 
@@ -417,6 +420,7 @@ namespace ProyectoHCL
         {
 
             String nombre = cb_cliente.SelectedValue.ToString();
+            lbl_cliente.Text = nombre;
             try
             {
                 using (BaseDatosHCL.ObtenerConexion())
@@ -447,9 +451,10 @@ namespace ProyectoHCL
 
         private void NuevaReservacion_Load(object sender, EventArgs e)
         {
-            id_empleado();
+            //id_empleado();
 
 
+            txt_codigo.Text = clasecompartida.iduser.ToString();
 
             if (txt_id_solicitud.Text != "")
             {
@@ -466,7 +471,7 @@ namespace ProyectoHCL
                         MySqlDataReader leer = comando.ExecuteReader();
                         if (leer.Read() == true)
                         {
-                            txt_codigo.Text = leer["ID_USUARIO"].ToString();
+                            //txt_codigo.Text = leer["ID_USUARIO"].ToString();
                             txt_cod_cliente.Text = leer["COD_CLIENTE"].ToString();
                             txt_estado.Text = leer["ID_ESTADORESERVA"].ToString();
                             switch (Convert.ToInt16(txt_estado.Text))
@@ -504,10 +509,18 @@ namespace ProyectoHCL
                             txt_vehiculo.Text = leer["VEHICULO"].ToString();
                             txt_huespedes.Text = leer["NHUESPEDES"].ToString();
                             txt_habi_vieja.Text = leer["NUMEROHABITACION"].ToString();
-                            cb_numero.Text = leer["NUMEROHABITACION"].ToString();
+                            //cb_numero.Text = leer["NUMEROHABITACION"].ToString();
                             dt_fecha_coti.Value = Convert.ToDateTime(leer["FECHACOTI"].ToString());
                             dt_fecha_entrada.Value = Convert.ToDateTime(leer["INGRESO"].ToString());
                             dt_fecha_salida.Value = Convert.ToDateTime(leer["SALIDA"].ToString());
+                            if (txt_vehiculo.Text != "0")
+                            {
+                                radioButton1.Checked = true;
+                            }
+                            else
+                            {
+                                radioButton2.Checked = true;
+                            }
 
 
 
@@ -531,7 +544,7 @@ namespace ProyectoHCL
                 combo_cliente();
                 //combo_metodo();
                 //combo_estado();
-                
+
             }
         }
 
@@ -681,14 +694,14 @@ namespace ProyectoHCL
                             updatehabitacion();
                             MsgB m = new MsgB("informacion", "Reserva agregada con exito");
                             DialogResult dR = m.ShowDialog();
-                            limpiarCampos();
+                            //limpiarCampos();
                             conn.Close();
 
                             this.Close();
                         }
                         catch (Exception ex)
                         {
-                            MsgB m = new MsgB("advertencia", "Validar los datos Ingresados");
+                            MsgB m = new MsgB("advertencia", "Validar datos ingresados");
                             DialogResult dR = m.ShowDialog();
                         }
                     }
@@ -726,6 +739,7 @@ namespace ProyectoHCL
                     {
                         txt_id.Text = leer["ID_HABITACION"].ToString();
                         //txt_habi_vieja.Text = leer["ID_HABITACION"].ToString();
+                        lbl_habitacion.Text = Convert.ToString(b);
                     }
                     else
                     {
@@ -802,7 +816,7 @@ namespace ProyectoHCL
         {
             if (txt_codigo.Text != "")
             {
-                combo_tipo();
+
             }
         }
 
@@ -855,6 +869,11 @@ namespace ProyectoHCL
         private void txt_huespedes_TextChanged(object sender, EventArgs e)
         {
 
+
+        }
+
+        private void txt_monto_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }
