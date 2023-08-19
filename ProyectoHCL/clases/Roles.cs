@@ -1,10 +1,14 @@
-﻿using MySql.Data.MySqlClient;
+﻿using iText.Kernel.Pdf;
+using iTextSharp.text.pdf;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.Design;
+using PdfWriter = iTextSharp.text.pdf.PdfWriter;
 
 namespace ProyectoHCL.clases
 {
@@ -55,4 +59,8 @@ namespace ProyectoHCL.clases
     }
 }
         
-    
+ 
+
+
+
+

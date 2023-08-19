@@ -25,22 +25,29 @@ using iText.Layout.Properties;
 using SpreadsheetLight;
 using SpreadsheetLight.Drawing;
 using DocumentFormat.OpenXml.Vml;
+using Point = System.Drawing.Point;
+/*using iTextSharp.text;*/  //pqara pdf
+//using iTextSharp.text.pdf*/
+using iTextSharp.tool.xml;
+using System.IO;
 
 namespace ProyectoHCL.Formularios
 {
     public partial class CtrlRoles : Form
     {
-
+        R_R_RolesPermisos R_E_rolp = new R_R_RolesPermisos();
         AdmonRoles rgtRoles = new AdmonRoles(); //crear objeto Rgtroles para acceder a sus metodos
         Roles user = new Roles();     //crear objetos roles para acceder a sus parametros 
         DataSet ds = new DataSet();
-        //int pagInicio = 1, indice = 0, numFilas = 5, pagFinal;
-        int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
+        MsgB msgB = new MsgB();
+        CDatos cDatos = new CDatos();
+        int pagInicio = 1, indice = 0, numFilas = 10, pagFinal, cmbIndice = 0;
         public CtrlRoles()
         {
             InitializeComponent();
             pagFinal = numFilas;
-            RellenarGrid();
+            CargarDT();
+
         }
 
 
@@ -76,55 +83,93 @@ namespace ProyectoHCL.Formularios
             btnDelete.Name = "ELIMINAR";
             dgvRoles.Columns.Add(btnDelete);
 
-            RellenarGrid();  //se muestran roles registrados en el dataGrid
-        }
-        private void dgvRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
+        }
+
+
+        public void BuscarRol(string buscarR) //Recibe string para buscar rol
+        {
+            try
+            {
+                MySqlConnection conn;
+                MySqlCommand cmd;
+
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
+
+                cmd = new MySqlCommand("buscarrol", conn); //recibe proc almacenado
+                cmd.CommandType = CommandType.StoredProcedure; //se especifica que es un proc almacenado
+                cmd.Parameters.Add("@rolR", MySqlDbType.VarChar, 30).Value = buscarR; //recibe el parametro nombreR definido en el parametro almacenado
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable(); //Se crea tabla
+                da.Fill(dt); //Se devuelven los registros en la tabla
+                dgvrRoles.DataSource = dt; //se define la tabla en la que se devuelven los registros
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            /* R_E_rolp.lblTitulo.Text = "Registrar Objeto";
+             R_E_rolp.Size = new System.Drawing.Size(800, 431);
+             R_E_rolp.btnGuardar.Location = new Point(256, 282);
+             R_E_rolp.btnCancelar.Location = new Point(466, 282);
+             R_E_rolp.label2.Location = new Point(243, 34);
+             R_E_rolp.txtRol.Location = new Point(243, 65);
+             R_E_rolp.ShowDialog();
+              CargarDT();*/
+        }
+
+        //pendiente revisar
+
+
+        private void dgvRoles_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
             if (this.dgvRoles.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
-                bool elimino = rgtRoles.EliminarRoles(dgvRoles.CurrentRow.Cells["ID_ROL"].Value.ToString()); //EL metodo eliminar recibe como string el id del DataGrid
 
-                DialogResult dialogResult = MessageBox.Show("¿Está seguro que desea eliminar este Rol?",
-                    "", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
+                MsgB m = new MsgB("pregunta", "¿Está seguro que desea eliminar el registro?");
+                DialogResult dg = m.ShowDialog();
 
-                if (dialogResult == DialogResult.Yes)
+                if (dg == DialogResult.Yes)
                 {
+                    bool elimino = rgtRoles.EliminarRoles(dgvRoles.CurrentRow.Cells["ID"].Value.ToString()); //EL metodo eliminar recibe como string el id del DataGrid
                     if (elimino)
                     {
-                        MessageBox.Show("Rol eliminado");
-                        RellenarGrid();
+                        MsgB mbox = new MsgB("informacion", "Registro eliminado");
+                        DialogResult dR = mbox.ShowDialog();
+                        CargarDT();
                     }
                     else
                     {
-                        MessageBox.Show("Rol no eliminado");
+                        MsgB mbox = new MsgB("informacion", "Registro no eliminado");
+                        DialogResult dR = mbox.ShowDialog();
                     }
 
                 }
-                else /*if (dialogResult == DialogResult.No)*/
+                else if (dg == DialogResult.No)
                 {
 
                 }
             }
             if (this.dgvRoles.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                EditarRoles editarRoles = new EditarRoles(); //Crear objeto del form Editarroles
+                R_R_RolesPermisos editarRoles = new R_R_RolesPermisos(); //Crear rol del form Editarroles
 
                 // editarRoles.ID_Rol=dgvRoles.CurrentRow.Cells["idrol"].Value.ToString();
-                //editarRoles.txtNombre.Text = dgvRoles.CurrentRow.Cells["estado_rol"].Value.ToString();
-                //editarRoles.txtestadorol.Text = dgvRoles.CurrentRow.Cells["nombrerol"].Value.ToString();
+                // editarRoles.txtNombre.Text = dgvRoles.CurrentRow.Cells["estado_rol"].Value.ToString();
+
 
                 editarRoles.ShowDialog(); //Se oculta el form principal y solo muestra el form editarRol
-                RellenarGrid(); //Se llama el metodo Mostrar Roles para actualizar el DataGrid al editar 
+                                          //CargarDT(); //Se llama el metodo Mostrar Roles para actualizar el DataGrid al editar 
             }
         }
-
-        public void RellenarGrid()
-        {
-            dgvRoles.DataSource = rgtRoles.RellenarGrid();  //Llamar metodo mostrar Roles en dataGrid
-        }
-
 
         private void dgvRoles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -158,11 +203,13 @@ namespace ProyectoHCL.Formularios
         private void pdf_Click(object sender, EventArgs e)
         {
             crearPDF();
+            MsgB mbox = new MsgB("informacion", "PDF creado con éxito");
+            DialogResult dR = mbox.ShowDialog();
         }
         private void crearPDF()
         {
 
-
+           
             PdfWriter pdfWriter = new PdfWriter("Reporte.pdf");
             PdfDocument pdf = new PdfDocument(pdfWriter);
             //1 pulgada = 72 pt (8 1/2 x 11) (612 x 792)
@@ -210,75 +257,85 @@ namespace ProyectoHCL.Formularios
 
                 }
             }
-
-            /* SaveFileDialog selecciona = new SaveFileDialog();
-             selecciona.Filter = "PDF (*.pdf)|*.pdf";
-             selecciona.InitialDirectory = @"C:\Users\Descargas\ReporteRoles.pdf";
-             selecciona.Title = "Seleccionar la Carpeta";
-
-             if (selecciona.ShowDialog() == DialogResult.OK)
-
-             {
-                 string ruta = selecciona.FileName;*/
             documento.Add(tabla);
             documento.Close();
 
-            var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/DAOdo/Desktop/SEGUNDO PERIODO 2023/Programacion he implementacion de Sistemas/ProyectoHotelCasaLomas/logo.jpeg")).SetWidth(50);
-            var plogo = new Paragraph("").Add(logo);
+            SaveFileDialog selecciona = new SaveFileDialog();
+               selecciona.Filter = "Archivo PDF (*.pdf)|*.pdf";
+               selecciona.InitialDirectory = @"C:\Users\Descargas\ReporteRoles.pdf";
+               selecciona.Title = "Seleccionar la Carpeta";
 
-            var nombre = new Paragraph("Hotel Casa Lomas");
-            nombre.SetTextAlignment(TextAlignment.CENTER);
-            nombre.SetFontSize(12);
+            if (selecciona.ShowDialog() == DialogResult.OK)
 
-            var titulo = new Paragraph("Reporte Roles");
-            titulo.SetTextAlignment(TextAlignment.CENTER);
-            titulo.SetFontSize(12);
-
-            var dfecha = DateTime.Now.ToString("dd.MM.yyy");
-            var dhora = DateTime.Now.ToString("hh.mm.ss");
-            var fecha = new Paragraph("fecha:" + dfecha + "\nHora:" + dhora);
-            fecha.SetFontSize(12);
-
-
-            PdfDocument pdfDoc = new PdfDocument(new PdfReader("Reporte.pdf"), new PdfWriter
-                ("ReporteRoles.pdf"));
-            Document doc = new Document(pdfDoc);
-
-            int numeros = pdfDoc.GetNumberOfPages();
-
-
-            for (int i = 1; i <= numeros; i++)
             {
-                PdfPage pagina = pdfDoc.GetPage(i);
+                string ruta = selecciona.FileName;
+                {
+                    documento.Add(tabla);
+                    documento.Close();
 
-                float y = (pdfDoc.GetPage(i).GetPageSize().GetTop() - 15);
-                doc.ShowTextAligned(plogo, 40, y, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(nombre, 110, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(titulo, 396, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(fecha, 700, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                    var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/DAOdo/Desktop/SEGUNDO PERIODO 2023/Programacion he implementacion de Sistemas/ProyectoHotelCasaLomas/logo.jpeg")).SetWidth(50);
+                    var plogo = new Paragraph("").Add(logo);
 
-                doc.ShowTextAligned(new Paragraph(String.Format("pagina {0} de {1}", i, numeros)), pdfDoc.GetPage
-                    (i).GetPageSize().GetWidth() / 2, pdfDoc.GetPage(i).GetPageSize().GetBottom() + 30, i,
-                    TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                    var nombre = new Paragraph("Hotel Casa Lomas");
+                    nombre.SetTextAlignment(TextAlignment.CENTER);
+                    nombre.SetFontSize(12);
+
+                    var titulo = new Paragraph("Reporte Roles");
+                    titulo.SetTextAlignment(TextAlignment.CENTER);
+                    titulo.SetFontSize(12);
+
+                    var dfecha = DateTime.Now.ToString("dd.MM.yyy");
+                    var dhora = DateTime.Now.ToString("hh.mm.ss");
+                    var fecha = new Paragraph("fecha:" + dfecha + "\nHora:" + dhora);
+                    fecha.SetFontSize(12);
 
 
+                    PdfDocument pdfDoc = new PdfDocument(new PdfReader("Reporte.pdf"), new PdfWriter
+                        ("ReporteRoles.pdf"));
+                    Document doc = new Document(pdfDoc);
+
+                    int numeros = pdfDoc.GetNumberOfPages();
+
+
+                    for (int i = 1; i <= numeros; i++)
+                    {
+                        PdfPage pagina = pdfDoc.GetPage(i);
+
+                        float y = (pdfDoc.GetPage(i).GetPageSize().GetTop() - 15);
+                        doc.ShowTextAligned(plogo, 40, y, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                        doc.ShowTextAligned(nombre, 110, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                        doc.ShowTextAligned(titulo, 396, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                        doc.ShowTextAligned(fecha, 700, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+
+                        doc.ShowTextAligned(new Paragraph(String.Format("pagina {0} de {1}", i, numeros)), pdfDoc.GetPage
+                            (i).GetPageSize().GetWidth() / 2, pdfDoc.GetPage(i).GetPageSize().GetBottom() + 30, i,
+                            TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+
+                        /* SaveFileDialog sf = new SaveFileDialog();
+                          sf.DefaultExt = "*.pdf";
+                          sf.FileName = "pdfRoles";
+                          sf.Filter = " PDF (*.pdf) | *.pdf";
+
+                          if (sf.ShowDialog() == DialogResult.OK)
+                          {
+                              pdfDoc.SaveAs(sf.FileName);
+                              MsgB mbox = new MsgB("informacion", "Archivo Excel creado con éxito");
+                              DialogResult dR = mbox.ShowDialog();
+
+                      }*/
+                        comando.Connection = conexionBD;
+                        //conexionBD.Open();
+                        ///comando.ExportToFile(ruta);
+                        documento.Close();
+
+                    }
+                }
             }
-            doc.Close();
-
-
         }
 
         private void Excel_Click(object sender, EventArgs e)
         {
-            /*SaveFileDialog selecciona = new SaveFileDialog();
-          selecciona.Filter = "Archivo Libro de Excel (*.Libro de Excel)|*.Libro de Excel";
-          selecciona.InitialDirectory = @"C:\Users\Descargas\Excdl.xlsx";
-          selecciona.Title = "Seleccionar la Carpeta";
-
-          if (selecciona.ShowDialog() == DialogResult.OK)
-
-          {
-              string ruta = selecciona.FileName;*/
+          
 
             SLDocument sl = new SLDocument();
 
@@ -353,34 +410,18 @@ namespace ProyectoHCL.Formularios
 
             sl.AutoFitColumn("B", "G");
 
+            SaveFileDialog sf = new SaveFileDialog();
+            sf.DefaultExt = "*.xlsx";
+            sf.FileName = "ExcelRoles";
+            sf.Filter = " Libro de Excel (*.xlsx) | *.xlsx";
 
-            sl.SaveAs("Excel.xlsx");
-        }
-
-        public void BuscarRol(string buscarR) //Recibe string para buscar usuarios
-        {
-            try
+            if (sf.ShowDialog() == DialogResult.OK)
             {
-                MySqlConnection conn;
-                MySqlCommand cmd;
-
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
-
-                cmd = new MySqlCommand("buscarrol", conn); //recibe proc almacenado
-                cmd.CommandType = CommandType.StoredProcedure; //se especifica que es un proc almacenado
-                cmd.Parameters.Add("@nombreR", MySqlDbType.VarChar, 30).Value = buscarR; //recibe el parametro nombreR definido en el parametro almacenado
-
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable(); //Se crea tabla
-                da.Fill(dt); //Se devuelven los registros en la tabla
-                dgvrRoles.DataSource = dt; //se define la tabla en la que se devuelven los registros
+                sl.SaveAs(sf.FileName);
+                MsgB mbox = new MsgB("informacion", "Archivo Excel creado con éxito");
+                DialogResult dR = mbox.ShowDialog();
             }
-            catch (Exception)
-            {
 
-                throw;
-            }
         }
 
 
@@ -404,7 +445,7 @@ namespace ProyectoHCL.Formularios
         }
 
 
-        private void RolesBotones()
+        private void HabilitarBotones()
         {
             if (pagInicio == 1)
             {
@@ -463,6 +504,20 @@ namespace ProyectoHCL.Formularios
             {
                 CargarDT();
             }
+        }
+
+        private void cmbPagR_SelectedIndexChanged(object sender, EventArgs e)
+        {
+       /*     int pagina = Convert.ToInt32(cmbPagR.Text);
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDT();*/
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

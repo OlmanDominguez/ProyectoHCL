@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ProyectoHCL.Formularios
 {
-    public partial class EditarRoles : Form
+    public partial class R_E_Roles : Form
     {
-        public EditarRoles()
+        public R_E_Roles()
         {
             InitializeComponent();
         }

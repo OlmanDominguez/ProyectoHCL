@@ -39,8 +39,8 @@ namespace ProyectoHCL.clases
             return rellenarGridDT;
 
         }
-        public void modificarRol(int id, string rol, string pantalla, string estado_rol,
-           DateTime primerIngreso, DateTime actualizar)
+        public void modificarRol(int id, string rol, string descripcion, string estado_rol,
+           DateTime fecha_creacion, DateTime fecha_actualizacion)
         {
 
             try
@@ -55,9 +55,9 @@ namespace ProyectoHCL.clases
                 cmd.Parameters.AddWithValue("@ID_rol", id);
                 cmd.Parameters.AddWithValue("@Rol", rol);
                 cmd.Parameters.AddWithValue("@estado_Rol", estado_rol);
-                cmd.Parameters.AddWithValue("@pantalla", pantalla);
-                cmd.Parameters.AddWithValue("@primerIngreso", primerIngreso);
-                cmd.Parameters.AddWithValue("@actualizar", actualizar);
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                cmd.Parameters.AddWithValue("@fechacreacion",fecha_creacion);
+                cmd.Parameters.AddWithValue("@actualizar", fecha_actualizacion);
 
                 cmd.ExecuteNonQuery();
                 conn.Close();
@@ -70,7 +70,7 @@ namespace ProyectoHCL.clases
 
         }
 
-        public bool EliminarRoles(string id) //Recibe un string (el id del Rol)
+        public bool EliminarRoles(string idrol) //Recibe un string (el id del Rol)
         {
             bool elimino = false;
 
@@ -83,7 +83,7 @@ namespace ProyectoHCL.clases
 
                 cmd = new MySqlCommand(sql, conn); //comando que recibe la sentencia sql y la conexion
 
-                cmd.Parameters.AddWithValue("@Id", id); //obtener valor del parametro id del ROL 
+                cmd.Parameters.AddWithValue("@ID_ROL", idrol); //obtener valor del parametro id del ROL 
 
                 cmd.ExecuteNonQuery();
                 elimino = true;
