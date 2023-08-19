@@ -247,12 +247,6 @@ namespace ProyectoHCL.Formularios
                     MsgB Mbox = new MsgB("advertencia", "Seleccione un rol");
                     DialogResult DR = Mbox.ShowDialog();
                 }
-                else if (modelo.existePermiso(ExisteRol()))
-                {
-                    MsgB m = new MsgB("error", "El rol seleccionado ya tiene permisos asignados");
-                    DialogResult dR = m.ShowDialog();
-                    limpiarCampos();
-                }
                 else
                 {
                     btnGuardar.Enabled = false;
@@ -271,12 +265,6 @@ namespace ProyectoHCL.Formularios
                 {
                     MsgB Mbox = new MsgB("advertencia", "Seleccione un rol");
                     DialogResult DR = Mbox.ShowDialog();
-                }
-                else if (!modelo.existePermiso(ExisteRol()))
-                {
-                    MsgB m = new MsgB("error", "No se realizó la modificación. El rol seleccionado no tiene permisos asignados");
-                    DialogResult dR = m.ShowDialog();
-                    limpiarCampos();
                 }
                 else
                 {
@@ -403,6 +391,18 @@ namespace ProyectoHCL.Formularios
 
         private void cmbRol_SelectedValueChanged(object sender, EventArgs e)
         {
+            if (lblTitulo.Text == "Registrar Permisos" && modelo.existePermiso(ExisteRol()) && !String.IsNullOrEmpty(cmbRol.Text))
+            {
+                MsgB m = new MsgB("error", "El rol seleccionado ya tiene permisos asignados");
+                DialogResult dR = m.ShowDialog();
+                limpiarCampos();
+            }
+            else if (lblTitulo.Text == "Editar Permisos" && !modelo.existePermiso(ExisteRol()) && !String.IsNullOrEmpty(cmbRol.Text))
+            {
+                MsgB m = new MsgB("error", "El rol seleccionado no puede editarse, no tiene permisos asignados");
+                DialogResult dR = m.ShowDialog();
+                limpiarCampos();
+            }
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
