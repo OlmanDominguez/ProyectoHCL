@@ -261,7 +261,7 @@
             Ibtn_clientes.Padding = new Padding(35, 0, 0, 0);
             Ibtn_clientes.Size = new Size(246, 45);
             Ibtn_clientes.TabIndex = 36;
-            Ibtn_clientes.Text = "Clientes";
+            Ibtn_clientes.Text = "Usuarios";
             Ibtn_clientes.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_clientes.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_clientes.UseVisualStyleBackColor = true;
@@ -473,7 +473,7 @@
             Ibtn_usuarios.Padding = new Padding(35, 0, 0, 0);
             Ibtn_usuarios.Size = new Size(246, 45);
             Ibtn_usuarios.TabIndex = 32;
-            Ibtn_usuarios.Text = "Usuarios";
+            Ibtn_usuarios.Text = "Clientes";
             Ibtn_usuarios.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_usuarios.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_usuarios.UseVisualStyleBackColor = true;

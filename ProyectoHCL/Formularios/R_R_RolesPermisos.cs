@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using iTextSharp.text;
+using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using ProyectoHCL.RolesPermisos;
 using System;
@@ -239,23 +240,57 @@ namespace ProyectoHCL.Formularios
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (lblTitulo.Text == "Registrar Permisos")
+            {
+                if (cmbRol.Text == "")
+                {
+                    MsgB Mbox = new MsgB("advertencia", "Seleccione un rol");
+                    DialogResult DR = Mbox.ShowDialog();
+                }
+                else if (modelo.existePermiso(ExisteRol()))
+                {
+                    MsgB m = new MsgB("error", "El rol seleccionado ya tiene permisos asignados");
+                    DialogResult dR = m.ShowDialog();
+                    limpiarCampos();
+                }
+                else
+                {
+                    btnGuardar.Enabled = false;
+                    btnCancelar.Enabled = false;
+                    GuardarPermisoRol();
+                    MsgB Mbox = new MsgB("informacion", "Permisos registrados");
+                    DialogResult DR = Mbox.ShowDialog();
+                    limpiarCampos();
+                    btnGuardar.Enabled = true;
+                    btnCancelar.Enabled = true;
+                }
+            }
+            else if (lblTitulo.Text == "Editar Permisos")
+            {
+                if (cmbRol.Text == "")
+                {
+                    MsgB Mbox = new MsgB("advertencia", "Seleccione un rol");
+                    DialogResult DR = Mbox.ShowDialog();
+                }
+                else if (!modelo.existePermiso(ExisteRol()))
+                {
+                    MsgB m = new MsgB("error", "No se realizó la modificación. El rol seleccionado no tiene permisos asignados");
+                    DialogResult dR = m.ShowDialog();
+                    limpiarCampos();
+                }
+                else
+                {
+                    btnGuardar.Enabled = false;
+                    btnCancelar.Enabled = false;
+                    ActualizarPermisoRol();
+                    MsgB Mbox = new MsgB("informacion", "Permisos actualizados");
+                    DialogResult DR = Mbox.ShowDialog();
+                    limpiarCampos();
+                    btnGuardar.Enabled = true;
+                    btnCancelar.Enabled = true;
+                }
+            }
 
-            if (cmbRol.Text == "")
-            {
-                MsgB Mbox = new MsgB("advertencia", "Seleccione un rol");
-                DialogResult DR = Mbox.ShowDialog();
-            }
-            else
-            {
-                btnGuardar.Enabled = false;
-                btnCancelar.Enabled = false;
-                GuardarPermisoRol();
-                MsgB Mbox = new MsgB("informacion", "Permisos registrados");
-                DialogResult DR = Mbox.ShowDialog();
-                limpiarCampos();
-                btnGuardar.Enabled = true;
-                btnCancelar.Enabled = true;
-            }
         }
 
         private void txtRol_TextChanged(object sender, EventArgs e)
@@ -265,64 +300,135 @@ namespace ProyectoHCL.Formularios
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            cargarPermisos();
-            //if (cmbRol.Text == "")
-            //{
-            //    MsgB mbox = new MsgB("informacion", "Seleccione el rol a editar permisos");
-            //    DialogResult dR = mbox.ShowDialog();
-            //}
-            //else
-            //{
+            lblTitulo.Text = "Editar Permisos";
+            btnEditar.Visible = false;
+            btnNuevo.Visible = true;
 
-            //}
         }
 
-        private void cargarPermisos()
+        //private void cargarPermisos()
+        //{
+        //    MySqlCommand cmd;
+        //    MySqlConnection conn = new MySqlConnection();
+        //    conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+
+        //    conn.Open();
+
+        //    string sql = "SELECT PERMITIDO FROM TBL_PERMISO_ROL WHERE ID_ROL = 3";
+        //    cmd = new MySqlCommand(sql, conn);
+
+        //    MySqlDataAdapter data = new MySqlDataAdapter(cmd);
+        //    DataTable dt = new DataTable();
+        //    data.Fill(dt);
+
+
+        //    foreach (DataGridViewRow rows in dgvRolPermiso.Rows)
+        //    {
+        //        foreach (DataRow row in dt.Rows)
+        //        {
+        //            rows.Cells["VER"].Value = row["PERMITIDO"];
+        //            rows.Cells["CREAR"].Value = row["PERMITIDO"];
+        //            rows.Cells["EDITAR"].Value = row["PERMITIDO"];
+        //            rows.Cells["ELIMINAR"].Value = row["PERMITIDO"];
+
+        //        }
+        //    }
+        //}
+
+        private void ActualizarPermisoRol()
         {
-            CDatos cDatos = new CDatos();
+            label1.Text = "Actualizando permisos";
+            panel6.Visible = true;
 
-            var LsObj = cDatos.SelectObjeto(3); //***********
-
-            foreach (var obj in LsObj)
+            foreach (DataGridViewRow row in dgvRolPermiso.Rows)
             {
-                foreach (DataGridViewRow row in dgvRolPermiso.Rows)
+                permiso.IdRol = cmbRol.Text;
+                permiso.IdObjetoAct = int.Parse(row.Cells["ID"].Value.ToString());
+
+                if (Convert.ToBoolean(row.Cells["VER"].Value))
                 {
-                    if (obj.IdPermiso == 1 && obj.Permitido)
-                    {
-                        row.Cells["VER"].Value = true;
-                    }
-                    else
-                    {
-                        row.Cells["VER"].Value = false;
-                    }
-
-                    if (obj.IdPermiso == 2 && obj.Permitido)
-                    {
-                        row.Cells["CREAR"].Value = true;
-                    }
-                    else
-                    {
-                        row.Cells["CREAR"].Value = false;
-                    }
-
-                    if (obj.IdPermiso == 3 && obj.Permitido)
-                    {
-                        row.Cells["EDITAR"].Value = true;
-                    }
-                    else
-                    {
-                        row.Cells["EDITAR"].Value = false;
-                    }
-
-                    if (obj.IdPermiso == 4 && obj.Permitido)
-                    {
-                        row.Cells["ELIMINAR"].Value = true;
-                    }
-                    else
-                    {
-                        row.Cells["ELIMINAR"].Value = false;
-                    }
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
+                    permiso.Permitido = true;
+                    cDatos.ActualizarPermiso(permiso);
                 }
+                else if (!Convert.ToBoolean(row.Cells["VER"].Value))
+                {
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
+                    permiso.Permitido = false;
+                    cDatos.ActualizarPermiso(permiso);
+                }
+
+                if (Convert.ToBoolean(row.Cells["CREAR"].Value))
+                {
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
+                    permiso.Permitido = true;
+                    cDatos.ActualizarPermiso(permiso);
+                }
+                else if (!Convert.ToBoolean(row.Cells["CREAR"].Value))
+                {
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
+                    permiso.Permitido = false;
+                    cDatos.ActualizarPermiso(permiso);
+                }
+
+                if (Convert.ToBoolean(row.Cells["EDITAR"].Value))
+                {
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
+                    permiso.Permitido = true;
+                    cDatos.ActualizarPermiso(permiso);
+                }
+                else if (!Convert.ToBoolean(row.Cells["EDITAR"].Value))
+                {
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
+                    permiso.Permitido = false;
+                    cDatos.ActualizarPermiso(permiso);
+                }
+
+                if (Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                {
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
+                    permiso.Permitido = true;
+                    cDatos.ActualizarPermiso(permiso);
+                }
+                else if (!Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                {
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
+                    permiso.Permitido = false;
+                    cDatos.ActualizarPermiso(permiso);
+                }
+            }
+
+            panel6.Visible = false;
+        }
+
+        private void cmbRol_SelectedValueChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            lblTitulo.Text = "Registrar Permisos";
+            btnEditar.Visible = true;
+            btnNuevo.Visible = false;
+        }
+
+        public int ExisteRol()
+        {
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = BaseDatosHCL.ObtenerConexion();
+            comando.CommandText = ("SELECT ID_ROL FROM TBL_ROL WHERE ROL = '"
+                + cmbRol.Text + "';");
+
+            MySqlDataReader leer = comando.ExecuteReader();
+
+            if (leer.Read())
+            {
+                return (int)leer["ID_ROL"];
+            }
+            else
+            {
+                return 0;
+
             }
         }
     }

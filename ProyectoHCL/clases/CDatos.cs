@@ -105,5 +105,29 @@ namespace ProyectoHCL.clases
             }
         }
 
-    }
+        public void ActualizarPermiso(PermisoRol permisoR)
+        {
+            try
+            {
+                MySqlConnection conn;
+                MySqlCommand cmd;
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
+
+                cmd = new MySqlCommand("EditarPermisos", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new MySqlParameter("@idRol", permisoR.IdRol));
+                cmd.Parameters.Add(new MySqlParameter("@idPermiso", permisoR.IdPermiso));
+                cmd.Parameters.Add(new MySqlParameter("@idObjeto", permisoR.IdObjeto));
+                cmd.Parameters.Add(new MySqlParameter("@permitido", permisoR.Permitido));
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+     }
 }

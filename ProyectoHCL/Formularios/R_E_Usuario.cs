@@ -189,16 +189,16 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "El usuario ya existe");
                     DialogResult dR = m.ShowDialog();
                 }
-                //else if (DateTime.Today > dtpVencimiento.Value)
-                //{
-                //    MsgB m = new MsgB("advertencia", "La fecha de vencimiento seleccionada no es válida");
-                //    DialogResult dR = m.ShowDialog();
-                //}
-                //else if (!ValidarTxt.CorreoValido(txtCorreo.Text))
-                //{
-                //    MsgB m = new MsgB("advertencia", "Dirección de correo no válida");
-                //    DialogResult dR = m.ShowDialog();
-                //}
+                else if (DateTime.Today > dtpVencimiento.Value)
+                {
+                    MsgB m = new MsgB("advertencia", "La fecha de vencimiento seleccionada no es válida");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (!ValidarTxt.CorreoValido(txtCorreo.Text))
+                {
+                    MsgB m = new MsgB("advertencia", "Dirección de correo no válida");
+                    DialogResult dR = m.ShowDialog();
+                }
                 else
                 {
                     try
@@ -256,16 +256,16 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
                 }
-                //else if (DateTime.Today > dtpVencimiento.Value)
-                //{
-                //    MsgB m = new MsgB("advertencia", "La fecha de vencimiento seleccionada no es válida");
-                //    DialogResult dR = m.ShowDialog();
-                //}
-                //else if(!ValidarTxt.CorreoValido(txtCorreo.Text))
-                //{
-                //    MsgB m = new MsgB("advertencia", "Dirección de correo no válida");
-                //    DialogResult dR = m.ShowDialog();
-                //}
+                else if (DateTime.Today > dtpVencimiento.Value)
+                {
+                    MsgB m = new MsgB("advertencia", "La fecha de vencimiento seleccionada no es válida");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (!ValidarTxt.CorreoValido(txtCorreo.Text))
+                {
+                    MsgB m = new MsgB("advertencia", "Dirección de correo no válida");
+                    DialogResult dR = m.ShowDialog();
+                }
                 else if (cmbEstado.SelectedIndex == 2)
                 {
                     MsgB m = new MsgB("advertencia", "El estado seleccionado no es válido");
@@ -311,8 +311,8 @@ namespace ProyectoHCL.Formularios
         {
             if (!ValidarTxt.CorreoValido(txtCorreo.Text))
             {
-                dtpVencimiento.Focus();
                 errorT.SetError(txtCorreo, "Dirección de correo no válida");
+                dtpVencimiento.Focus();
             }
             else
             {
@@ -401,20 +401,12 @@ namespace ProyectoHCL.Formularios
         {
             if (DateTime.Today > dtpVencimiento.Value)
             {
-                dtpVencimiento.Focus();
                 errorT.SetError(dtpVencimiento, "Fecha no válida, seleccione una fecha futura");
+                dtpVencimiento.Focus();
             }
             else
             {
                 errorT.Clear();
-            }
-        }
-
-        private void txtCorreo_MouseLeave(object sender, EventArgs e)
-        {
-            if (!ValidarTxt.CorreoValido(txtCorreo.Text))
-            {
-                txtCorreo.Focus();
             }
         }
 
@@ -433,6 +425,7 @@ namespace ProyectoHCL.Formularios
             if (cmbEstado.SelectedIndex == 2)
             {
                 errorT.SetError(cmbEstado, "El estado no es válido");
+                cmbEstado.Focus();
             }
             else
             {

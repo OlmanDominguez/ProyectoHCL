@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DocumentFormat.OpenXml.Office.Word;
+using MySql.Data.MySqlClient;
 using ProyectoHCL.Formularios;
 using System;
 using System.Collections.Generic;
@@ -192,8 +193,9 @@ namespace ProyectoHCL.clases
             }
         }
 
-        public bool existePermiso(string rol)
+        public bool existePermiso(int rol)
         {
+            MySqlCommand cmd;
             MySqlDataReader reader;
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
 
@@ -202,10 +204,11 @@ namespace ProyectoHCL.clases
                 conectar.Open();
             }
 
-            String sql = "SELECT ID_ROL FROM TBL_PERMISO_ROL WHERE ID_ROL LIKE @ID_ROL"; //INNER JOIN
-            MySqlCommand comando = new MySqlCommand(sql, conectar);
-            comando.Parameters.AddWithValue("@ID_ROL", rol);
-            reader = comando.ExecuteReader();
+            cmd = new MySqlCommand("existePermiso", conectar);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@idRol", rol);
+            reader = cmd.ExecuteReader();
 
             if (reader.HasRows)
             {
@@ -246,5 +249,6 @@ namespace ProyectoHCL.clases
                 return false;
             }
         }
+
     }
 }
