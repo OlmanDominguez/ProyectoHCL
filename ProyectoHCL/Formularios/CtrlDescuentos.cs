@@ -240,6 +240,7 @@ namespace ProyectoHCL.Formularios
                 R_E_desc.idDesc = dgvDesc.CurrentRow.Cells["ID"].Value.ToString();
                 R_E_desc.txtDesc.Text = dgvDesc.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
                 R_E_desc.txtPorcentaje.Text = dgvDesc.CurrentRow.Cells["PORCENTAJE"].Value.ToString();
+                R_E_desc.cmbEstado.Text = dgvDesc.CurrentRow.Cells["ESTADO"].Value.ToString();
                 R_E_desc.ShowDialog();
                 R_E_desc.limpiarCampos();
                 CargarDG();

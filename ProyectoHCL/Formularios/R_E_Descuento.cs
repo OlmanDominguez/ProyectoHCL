@@ -19,6 +19,7 @@ namespace ProyectoHCL.Formularios
         public R_E_Descuento()
         {
             InitializeComponent();
+            txtPorcentaje.KeyPress += txtPorcentaje_KeyPress;
         }
 
         public string idDesc = null;
@@ -28,12 +29,14 @@ namespace ProyectoHCL.Formularios
         {
             txtPorcentaje.Clear();
             txtDesc.Clear();
+            cmbEstado.SelectedIndex = -1;
         }
 
         public void limpiarError()
         {
             errorT.SetError(txtPorcentaje, "");
             errorT.SetError(txtDesc, "");
+            errorT.SetError(cmbEstado, "");
         }
 
         private void btnMin_Click(object sender, EventArgs e)
@@ -80,7 +83,14 @@ namespace ProyectoHCL.Formularios
 
         private void txtPorcentaje_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidarTxt.TxtNumeros(e);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '.' && (sender as TextBox).Text.Contains("."))
+            {
+                e.Handled = true;
+            }
         }
 
         private void txtNombre_Leave(object sender, EventArgs e)
@@ -113,7 +123,7 @@ namespace ProyectoHCL.Formularios
             {
                 Modelo modelo = new Modelo();
 
-                if (txtDesc.Text.Trim() == "" || txtPorcentaje.Text.Trim() == "")
+                if (txtDesc.Text.Trim() == "" || txtPorcentaje.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
@@ -137,6 +147,7 @@ namespace ProyectoHCL.Formularios
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@descripcion", txtDesc.Text);
                         cmd.Parameters.AddWithValue("@porcentaje", txtPorcentaje.Text);
+                        cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
                         cmd.Parameters.AddWithValue("@creadoPor", clasecompartida.iduser);
                         cmd.Parameters.AddWithValue("@actualizadoPor", clasecompartida.iduser);
 
@@ -157,7 +168,7 @@ namespace ProyectoHCL.Formularios
             {
                 Control control = new Control();
 
-                if (txtDesc.Text.Trim() == "" || txtPorcentaje.Text.Trim() == "")
+                if (txtDesc.Text.Trim() == "" || txtPorcentaje.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
@@ -166,7 +177,7 @@ namespace ProyectoHCL.Formularios
                 {
                     try
                     {
-                        control.editarDesc(idDesc, txtDesc.Text, txtPorcentaje.Text, clasecompartida.iduser.ToString());
+                        control.editarDesc(idDesc, txtDesc.Text, txtPorcentaje.Text, cmbEstado.Text, clasecompartida.iduser.ToString());
 
                         MsgB m = new MsgB("informacion", "Registro modificado");
                         DialogResult dR = m.ShowDialog();
@@ -178,6 +189,18 @@ namespace ProyectoHCL.Formularios
                         DialogResult dR = m.ShowDialog();
                     }
                 }
+            }
+        }
+
+        private void cmbEstado_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.cmbVacio(cmbEstado))
+            {
+                errorT.SetError(cmbEstado, "Seleccione un estado");
+            }
+            else
+            {
+                errorT.Clear();
             }
         }
     }

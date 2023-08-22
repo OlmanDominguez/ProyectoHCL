@@ -18,6 +18,7 @@ namespace ProyectoHCL.Formularios
         {
             InitializeComponent();
             cmbEstado.SelectedIndex = -1;
+            txtPrecio.KeyPress += txtPrecio_KeyPress;
         }
 
         public string idS = null;
@@ -75,7 +76,14 @@ namespace ProyectoHCL.Formularios
 
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidarTxt.TxtNumeros(e);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '.' && (sender as TextBox).Text.Contains("."))
+            {
+                e.Handled = true;
+            }
         }
 
         private void txtServ_Leave(object sender, EventArgs e)

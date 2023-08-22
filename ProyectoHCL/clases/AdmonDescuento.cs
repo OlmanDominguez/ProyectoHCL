@@ -14,7 +14,7 @@ namespace ProyectoHCL.clases
         MySqlConnection conn;
         MySqlCommand cmd;
 
-        public void modificarDescuento(int id, string descripcion, decimal porcentaje, int idUs)
+        public void modificarDescuento(int id, string descripcion, decimal porcentaje, string estado, int idUs)
         {
 
             try
@@ -27,6 +27,7 @@ namespace ProyectoHCL.clases
                 cmd.Parameters.AddWithValue("@idDescuento", id);
                 cmd.Parameters.AddWithValue("@descripcion", descripcion);
                 cmd.Parameters.AddWithValue("@porcentaje", porcentaje);
+                cmd.Parameters.AddWithValue("@estado", estado);
                 cmd.Parameters.AddWithValue("@actPor", idUs);
 
                 cmd.ExecuteNonQuery();

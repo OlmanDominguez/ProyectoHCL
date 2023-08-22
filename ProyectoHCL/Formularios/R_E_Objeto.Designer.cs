@@ -45,6 +45,9 @@
             label1 = new Label();
             label2 = new Label();
             errorT = new ErrorProvider(components);
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
@@ -125,6 +128,9 @@
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
+            panel3.Controls.Add(label5);
+            panel3.Controls.Add(label4);
+            panel3.Controls.Add(label3);
             panel3.Controls.Add(rTxtDesc);
             panel3.Controls.Add(txtObj);
             panel3.Controls.Add(cmbEstado);
@@ -136,7 +142,7 @@
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 73);
             panel3.Name = "panel3";
-            panel3.Size = new Size(800, 355);
+            panel3.Size = new Size(800, 328);
             panel3.TabIndex = 25;
             // 
             // rTxtDesc
@@ -144,7 +150,7 @@
             rTxtDesc.BackColor = Color.White;
             rTxtDesc.BorderStyle = BorderStyle.FixedSingle;
             rTxtDesc.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            rTxtDesc.Location = new Point(170, 83);
+            rTxtDesc.Location = new Point(418, 75);
             rTxtDesc.Margin = new Padding(2);
             rTxtDesc.MaxLength = 500;
             rTxtDesc.Multiline = true;
@@ -160,7 +166,7 @@
             txtObj.BorderStyle = BorderStyle.FixedSingle;
             txtObj.CharacterCasing = CharacterCasing.Upper;
             txtObj.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtObj.Location = new Point(170, 39);
+            txtObj.Location = new Point(69, 75);
             txtObj.Margin = new Padding(2);
             txtObj.MaxLength = 50;
             txtObj.Name = "txtObj";
@@ -176,11 +182,10 @@
             cmbEstado.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             cmbEstado.FormattingEnabled = true;
             cmbEstado.Items.AddRange(new object[] { "ACTIVO", "INACTIVO" });
-            cmbEstado.Location = new Point(517, 65);
+            cmbEstado.Location = new Point(69, 157);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(316, 28);
             cmbEstado.TabIndex = 23;
-            cmbEstado.Visible = false;
             cmbEstado.Leave += cmbEstado_Leave;
             // 
             // btnCancelar
@@ -193,7 +198,7 @@
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(466, 282);
+            btnCancelar.Location = new Point(467, 230);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(82, 32);
             btnCancelar.TabIndex = 22;
@@ -211,7 +216,7 @@
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(256, 282);
+            btnGuardar.Location = new Point(257, 230);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(82, 32);
             btnGuardar.TabIndex = 21;
@@ -224,7 +229,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(243, 107);
+            label6.Location = new Point(418, 44);
             label6.Name = "label6";
             label6.Size = new Size(104, 19);
             label6.TabIndex = 5;
@@ -235,19 +240,18 @@
             label1.AutoSize = true;
             label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(517, 34);
+            label1.Location = new Point(69, 126);
             label1.Name = "label1";
             label1.Size = new Size(63, 19);
             label1.TabIndex = 2;
             label1.Text = "Estado:";
-            label1.Visible = false;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(243, 34);
+            label2.Location = new Point(69, 44);
             label2.Name = "label2";
             label2.Size = new Size(77, 19);
             label2.TabIndex = 1;
@@ -257,11 +261,44 @@
             // 
             errorT.ContainerControl = this;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.Red;
+            label3.Location = new Point(142, 36);
+            label3.Name = "label3";
+            label3.Size = new Size(23, 30);
+            label3.TabIndex = 29;
+            label3.Text = "*";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.Red;
+            label4.Location = new Point(127, 118);
+            label4.Name = "label4";
+            label4.Size = new Size(23, 30);
+            label4.TabIndex = 30;
+            label4.Text = "*";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.ForeColor = Color.Red;
+            label5.Location = new Point(517, 36);
+            label5.Name = "label5";
+            label5.Size = new Size(23, 30);
+            label5.TabIndex = 31;
+            label5.Text = "*";
+            // 
             // R_E_Objeto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 428);
+            ClientSize = new Size(800, 401);
             Controls.Add(panel3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
@@ -296,5 +333,8 @@
         public Label label2;
         public Label label1;
         public TextBox rTxtDesc;
+        private Label label5;
+        private Label label4;
+        private Label label3;
     }
 }

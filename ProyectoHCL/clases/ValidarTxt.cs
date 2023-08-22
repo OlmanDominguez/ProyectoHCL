@@ -79,6 +79,5 @@ namespace ProyectoHCL.clases
                 return false;
             }
         }
-
     }
 }
