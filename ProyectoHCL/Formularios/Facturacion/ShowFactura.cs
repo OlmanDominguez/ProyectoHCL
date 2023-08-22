@@ -181,7 +181,7 @@ namespace ProyectoHCL.Formularios
 
         int h, s;
         DataTable ht = new DataTable();
-        DataTable st= new DataTable();
+        DataTable st = new DataTable();
 
 
         private void ShowFactura_Load(object sender, EventArgs e)
@@ -218,7 +218,7 @@ namespace ProyectoHCL.Formularios
             var noches = Convert.ToDateTime(info.salida) - Convert.ToDateTime(info.ingreso);
 
             //Vista de la reserva en formato factura, aun sin facturar
-            if (info.reserva != "0" & info.factura == "0") 
+            if (info.reserva != "0" & info.factura == "0")
             {
                 try
                 {
@@ -240,161 +240,44 @@ namespace ProyectoHCL.Formularios
                         lb_noches.Text = Convert.ToString(noches.Days);
 
 
-                        dt = consulta(info.reserva, 2);
-                        h = dt.Rows.Count;
+                        ht = consulta(info.reserva, 2);
+                        h = ht.Rows.Count;
                         //DetalleHabitaciones
 
-                        if (h == 0)
-                        {
-                            lb_Habi1.Text = "N/A";
-                            lb_Tipo1.Text = "N/A";
-                            lb_pre1.Text = "N/A";
-                            lb_sbt1.Text = "N/A";
-                            lb_Habi2.Text = "N/A";
-                            lb_Tipo2.Text = "N/A";
-                            lb_pre2.Text = "N/A";
-                            lb_sbt2.Text = "N/A";
-                            lb_Habi3.Text = "N/A";
-                            lb_Tipo3.Text = "N/A";
-                            lb_pre3.Text = "N/A";
-                            lb_sbt3.Text = "N/A";
-                            lb_StH.Text = "0.00";
-                        }
-                        else if (h == 1)
-                        {
-                            lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
-                            lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
-                            lb_pre1.Text = dt.Rows[0]["PRECIO"].ToString();
-                            lb_sbt1.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]));
-                            lb_Habi2.Text = "N/A";
-                            lb_Tipo2.Text = "N/A";
-                            lb_pre2.Text = "N/A";
-                            lb_sbt2.Text = "N/A";
-                            lb_Habi3.Text = "N/A";
-                            lb_Tipo3.Text = "N/A";
-                            lb_pre3.Text = "N/A";
-                            lb_sbt3.Text = "N/A";
-                            sth = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]);
-                            lb_StH.Text = Convert.ToString(sth);
-                        }
-                        else if (h == 2)
-                        {
-                            lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
-                            lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
-                            lb_pre1.Text = dt.Rows[0]["PRECIO"].ToString();
-                            st1 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]);
-                            lb_sbt1.Text = Convert.ToString(st1);
-                            lb_Habi2.Text = dt.Rows[1]["NUMEROHABITACION"].ToString();
-                            lb_Tipo2.Text = dt.Rows[1]["TIPO"].ToString();
-                            lb_pre2.Text = dt.Rows[1]["PRECIO"].ToString();
-                            st2 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[1]["PRECIO"]);
-                            lb_sbt2.Text = Convert.ToString(st2);
-                            lb_Habi3.Text = "N/A";
-                            lb_Tipo3.Text = "N/A";
-                            lb_pre3.Text = "N/A";
-                            lb_sbt3.Text = "N/A";
-                            sth = st1 + st2;
-                            lb_StH.Text = Convert.ToString(sth);
-                        }
-                        else if (h == 3)
-                        {
-                            lb_Habi1.Text = dt.Rows[0]["NUMEROHABITACION"].ToString();
-                            lb_Tipo1.Text = dt.Rows[0]["TIPO"].ToString();
-                            lb_pre1.Text = dt.Rows[0]["PRECIO"].ToString();
-                            st1 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]);
-                            lb_sbt1.Text = Convert.ToString(st1);
-                            lb_Habi2.Text = dt.Rows[1]["NUMEROHABITACION"].ToString();
-                            lb_Tipo2.Text = dt.Rows[1]["TIPO"].ToString();
-                            lb_pre2.Text = dt.Rows[1]["PRECIO"].ToString();
-                            st2 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[1]["PRECIO"]);
-                            lb_sbt2.Text = Convert.ToString(st2);
-                            lb_Habi3.Text = dt.Rows[2]["NUMEROHABITACION"].ToString();
-                            lb_Tipo3.Text = dt.Rows[2]["TIPO"].ToString();
-                            lb_pre3.Text = dt.Rows[2]["PRECIO"].ToString();
-                            st3 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[2]["PRECIO"]);
-                            lb_sbt3.Text = Convert.ToString(st3);
-                            sth = st1 + st2 + st3;
-                            lb_StH.Text = Convert.ToString(sth);
-                        }
+                        dgvDetalleFact.Columns.Add("cant.", "Cant.");
+                        dgvDetalleFact.Columns.Add("descripción", "Descripción");
+                        dgvDetalleFact.Columns.Add("p. unitario", "P. Unitario");
+                        dgvDetalleFact.Columns.Add("importe", "Importe");
+                        dgvDetalleFact.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        dgvDetalleFact.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-                        //DetalleServicios
+                        int i = 0;
+                        int j = 0;
 
-                        dt = consulta(info.reserva, 3);
-                        s = dt.Rows.Count;
-                        if (s  == 0)
+                        if (h > 0)
                         {
-                            lb_Ser1.Text = "N/A";
-                            lb_Ca1.Text = "N/A";
-                            lb_Pr1.Text = "N/A";
-                            lb_St1.Text = "N/A";
-                            lb_Ser2.Text = "N/A";
-                            lb_Ca2.Text = "N/A";
-                            lb_Pr2.Text = "N/A";
-                            lb_St2.Text = "N/A";
-                            lb_Ser3.Text = "N/A";
-                            lb_Ca3.Text = "N/A";
-                            lb_Pr3.Text = "N/A";
-                            lb_St3.Text = "N/A";
-                            lb_StS.Text = "0.00";
+                            while (i < h)
+                            {
+                                dgvDetalleFact.Rows.Add("1", ("Habit. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString()),
+                                    ht.Rows[i]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])));
+                                i = i + 1;
+                            }
                         }
-                        else if (s == 1)
-                        {
-                            lb_Ser1.Text = dt.Rows[0]["DESCRIPCION"].ToString();
-                            lb_Ca1.Text = dt.Rows[0]["CANTIDAD"].ToString();
-                            lb_Pr1.Text = dt.Rows[0]["PRECIO"].ToString();
-                            St1 = Convert.ToDecimal(dt.Rows[0]["CANTIDAD"]) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]);
-                            lb_St1.Text = Convert.ToString(St1);
-                            lb_Ser2.Text = "N/A";
-                            lb_Ca2.Text = "N/A";
-                            lb_Pr2.Text = "N/A";
-                            lb_St2.Text = "N/A";
-                            lb_Ser3.Text = "N/A";
-                            lb_Ca3.Text = "N/A";
-                            lb_Pr3.Text = "N/A";
-                            lb_St3.Text = "N/A";
-                            StS = St1;
-                            lb_StS.Text = Convert.ToString(StS);
-                        }
-                        else if (s == 2)
-                        {
-                            lb_Ser1.Text = dt.Rows[0]["DESCRIPCION"].ToString();
-                            lb_Ca1.Text = dt.Rows[0]["CANTIDAD"].ToString();
-                            lb_Pr1.Text = dt.Rows[0]["PRECIO"].ToString();
-                            St1 = Convert.ToDecimal(dt.Rows[0]["CANTIDAD"]) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]);
-                            lb_St1.Text = Convert.ToString(St1);
-                            lb_Ser2.Text = dt.Rows[1]["DESCRIPCION"].ToString();
-                            lb_Ca2.Text = dt.Rows[1]["CANTIDAD"].ToString();
-                            lb_Pr2.Text = dt.Rows[1]["PRECIO"].ToString();
-                            St2 = Convert.ToDecimal(dt.Rows[1]["CANTIDAD"]) * Convert.ToDecimal(dt.Rows[1]["PRECIO"]);
-                            lb_St2.Text = Convert.ToString(St2);
-                            lb_Ser3.Text = "N/A";
-                            lb_Ca3.Text = "N/A";
-                            lb_Pr3.Text = "N/A";
-                            lb_St3.Text = "N/A";
-                            StS = St1 + St2;
-                            lb_StS.Text = Convert.ToString(StS);
-                        }
-                        else if (s == 3)
-                        {
-                            lb_Ser1.Text = dt.Rows[0]["DESCRIPCION"].ToString();
-                            lb_Ca1.Text = dt.Rows[0]["CANTIDAD"].ToString();
-                            lb_Pr1.Text = dt.Rows[0]["PRECIO"].ToString();
-                            St1 = Convert.ToDecimal(dt.Rows[0]["CANTIDAD"]) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]);
-                            lb_St1.Text = Convert.ToString(St1);
-                            lb_Ser2.Text = dt.Rows[1]["DESCRIPCION"].ToString();
-                            lb_Ca2.Text = dt.Rows[1]["CANTIDAD"].ToString();
-                            lb_Pr2.Text = dt.Rows[1]["PRECIO"].ToString();
-                            St2 = Convert.ToDecimal(dt.Rows[1]["CANTIDAD"]) * Convert.ToDecimal(dt.Rows[1]["PRECIO"]);
-                            lb_St2.Text = Convert.ToString(St2);
-                            lb_Ser3.Text = dt.Rows[2]["DESCRIPCION"].ToString();
-                            lb_Ca3.Text = dt.Rows[2]["CANTIDAD"].ToString();
-                            lb_Pr3.Text = dt.Rows[2]["PRECIO"].ToString();
-                            St3 = Convert.ToDecimal(dt.Rows[2]["CANTIDAD"]) * Convert.ToDecimal(dt.Rows[2]["PRECIO"]);
-                            lb_St3.Text = Convert.ToString(St3);
-                            StS = St1 + St2 + St3;
-                            lb_StS.Text = Convert.ToString(StS);
-                        }
+                        
 
+                        st = consulta(info.reserva, 3);
+                        s = st.Rows.Count;
+
+                        if (s > 0)
+                        {
+                            while (j < s)
+                            {
+                                dgvDetalleFact.Rows.Add(st.Rows[j]["CANTIDAD"].ToString(), st.Rows[j]["DESCRIPCION"].ToString(),
+                                    st.Rows[j]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])));
+                                j = j + 1;
+                            }
+                        }
+                        
                         //Datos de impuestos y totales
 
                         if (sth != 0.00m & StS != 0.00m)
@@ -456,15 +339,15 @@ namespace ProyectoHCL.Formularios
                     MessageBox.Show(a.Message + a.StackTrace);
                 }
 
-                
+
 
                 dt = consulta(info.reserva, 4);
                 txt_OCExenta.Text = dt.Rows[0]["N_OCEXCENTA"].ToString();
                 txt_ConsExone.Text = dt.Rows[0]["NCONSTANCIAEXONERADO"].ToString();
                 txt_RegSar.Text = dt.Rows[0]["NREGISTROSAR"].ToString();
-                
 
-                if ( info.est == 1)
+
+                if (info.est == 1)
                 {
                     txt_ConsExone.Enabled = false;
                     txt_OCExenta.Enabled = false;
@@ -495,7 +378,7 @@ namespace ProyectoHCL.Formularios
 
                 try
                 {
-                    
+
                     dt = consulta(info.reserva, 1);
 
                     int n = dt.Rows.Count;
@@ -509,164 +392,48 @@ namespace ProyectoHCL.Formularios
                         lb_ingreso.Text = info.ingreso;
                         lb_Salida.Text = info.salida;
                         lb_huespedes.Text = dt.Rows[0]["NHUESPEDES"].ToString();
-                        
+
                         lb_noches.Text = Convert.ToString(noches.Days);
 
-                        
+
 
                         ht = consulta(info.reserva, 2);
                         h = ht.Rows.Count;
                         //DetalleHabitaciones
 
-                        if (h == 0)
+                        dgvDetalleFact.Columns.Add("cant.", "Cant.");
+                        dgvDetalleFact.Columns.Add("descripción", "Descripción");
+                        dgvDetalleFact.Columns.Add("p. unitario", "P. Unitario");
+                        dgvDetalleFact.Columns.Add("importe", "Importe");
+
+                        dgvDetalleFact.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        dgvDetalleFact.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+                        int i = 0;
+                        int j = 0;
+
+                        if (h > 0)
                         {
-                            lb_Habi1.Text = "N/A";
-                            lb_Tipo1.Text = "N/A";
-                            lb_pre1.Text = "N/A";
-                            lb_sbt1.Text = "N/A";
-                            lb_Habi2.Text = "N/A";
-                            lb_Tipo2.Text = "N/A";
-                            lb_pre2.Text = "N/A";
-                            lb_sbt2.Text = "N/A";
-                            lb_Habi3.Text = "N/A";
-                            lb_Tipo3.Text = "N/A";
-                            lb_pre3.Text = "N/A";
-                            lb_sbt3.Text = "N/A";
-                            lb_StH.Text = "0.00";
-                        }
-                        else if (h == 1)
-                        {
-                            lb_Habi1.Text = ht.Rows[0]["NUMEROHABITACION"].ToString();
-                            lb_Tipo1.Text = ht.Rows[0]["TIPO"].ToString();
-                            lb_pre1.Text = ht.Rows[0]["PRECIO"].ToString();
-                            lb_sbt1.Text = Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]));
-                            lb_Habi2.Text = "N/A";
-                            lb_Tipo2.Text = "N/A";
-                            lb_pre2.Text = "N/A";
-                            lb_sbt2.Text = "N/A";
-                            lb_Habi3.Text = "N/A";
-                            lb_Tipo3.Text = "N/A";
-                            lb_pre3.Text = "N/A";
-                            lb_sbt3.Text = "N/A";
-                            sth = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(dt.Rows[0]["PRECIO"]);
-                            lb_StH.Text = Convert.ToString(sth);
-                        }
-                        else if (h == 2)
-                        {
-                            lb_Habi1.Text = ht.Rows[0]["NUMEROHABITACION"].ToString();
-                            lb_Tipo1.Text = ht.Rows[0]["TIPO"].ToString();
-                            lb_pre1.Text = ht.Rows[0]["PRECIO"].ToString();
-                            st1 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[0]["PRECIO"]);
-                            lb_sbt1.Text = Convert.ToString(st1);
-                            lb_Habi2.Text = ht.Rows[1]["NUMEROHABITACION"].ToString();
-                            lb_Tipo2.Text = ht.Rows[1]["TIPO"].ToString();
-                            lb_pre2.Text = ht.Rows[1]["PRECIO"].ToString();
-                            st2 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[1]["PRECIO"]);
-                            lb_sbt2.Text = Convert.ToString(st2);
-                            lb_Habi3.Text = "N/A";
-                            lb_Tipo3.Text = "N/A";
-                            lb_pre3.Text = "N/A";
-                            lb_sbt3.Text = "N/A";
-                            sth = st1 + st2;
-                            lb_StH.Text = Convert.ToString(sth);
-                        }
-                        else if (h == 3)
-                        {
-                            lb_Habi1.Text = ht.Rows[0]["NUMEROHABITACION"].ToString();
-                            lb_Tipo1.Text = ht.Rows[0]["TIPO"].ToString();
-                            lb_pre1.Text = ht.Rows[0]["PRECIO"].ToString();
-                            st1 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[0]["PRECIO"]);
-                            lb_sbt1.Text = Convert.ToString(st1);
-                            lb_Habi2.Text = ht.Rows[1]["NUMEROHABITACION"].ToString();
-                            lb_Tipo2.Text = ht.Rows[1]["TIPO"].ToString();
-                            lb_pre2.Text = ht.Rows[1]["PRECIO"].ToString();
-                            st2 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[1]["PRECIO"]);
-                            lb_sbt2.Text = Convert.ToString(st2);
-                            lb_Habi3.Text = ht.Rows[2]["NUMEROHABITACION"].ToString();
-                            lb_Tipo3.Text = ht.Rows[2]["TIPO"].ToString();
-                            lb_pre3.Text = ht.Rows[2]["PRECIO"].ToString();
-                            st3 = Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[2]["PRECIO"]);
-                            lb_sbt3.Text = Convert.ToString(st3);
-                            sth = st1 + st2 + st3;
-                            lb_StH.Text = Convert.ToString(sth);
+                            while (i < h)
+                            {
+                                dgvDetalleFact.Rows.Add("1", ("Habit. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString()),
+                                    ht.Rows[i]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])));
+                                i = i + 1;
+                            }
                         }
 
-                        //DetalleServicios
 
                         st = consulta(info.reserva, 3);
                         s = st.Rows.Count;
-                        if (s == 0)
+
+                        if (s > 0)
                         {
-                            lb_Ser1.Text = "N/A";
-                            lb_Ca1.Text = "N/A";
-                            lb_Pr1.Text = "N/A";
-                            lb_St1.Text = "N/A";
-                            lb_Ser2.Text = "N/A";
-                            lb_Ca2.Text = "N/A";
-                            lb_Pr2.Text = "N/A";
-                            lb_St2.Text = "N/A";
-                            lb_Ser3.Text = "N/A";
-                            lb_Ca3.Text = "N/A";
-                            lb_Pr3.Text = "N/A";
-                            lb_St3.Text = "N/A";
-                            lb_StS.Text = "0.00";
-                        }
-                        else if (s == 1)
-                        {
-                            lb_Ser1.Text = st.Rows[0]["DESCRIPCION"].ToString();
-                            lb_Ca1.Text = st.Rows[0]["CANTIDAD"].ToString();
-                            lb_Pr1.Text = st.Rows[0]["PRECIO"].ToString();
-                            St1 = Convert.ToDecimal(st.Rows[0]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[0]["PRECIO"]);
-                            lb_St1.Text = Convert.ToString(St1);
-                            lb_Ser2.Text = "N/A";
-                            lb_Ca2.Text = "N/A";
-                            lb_Pr2.Text = "N/A";
-                            lb_St2.Text = "N/A";
-                            lb_Ser3.Text = "N/A";
-                            lb_Ca3.Text = "N/A";
-                            lb_Pr3.Text = "N/A";
-                            lb_St3.Text = "N/A";
-                            StS = St1;
-                            lb_StS.Text = Convert.ToString(StS);
-                        }
-                        else if (s == 2)
-                        {
-                            lb_Ser1.Text = st.Rows[0]["DESCRIPCION"].ToString();
-                            lb_Ca1.Text = st.Rows[0]["CANTIDAD"].ToString();
-                            lb_Pr1.Text = st.Rows[0]["PRECIO"].ToString();
-                            St1 = Convert.ToDecimal(st.Rows[0]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[0]["PRECIO"]);
-                            lb_St1.Text = Convert.ToString(St1);
-                            lb_Ser2.Text = st.Rows[1]["DESCRIPCION"].ToString();
-                            lb_Ca2.Text = st.Rows[1]["CANTIDAD"].ToString();
-                            lb_Pr2.Text = st.Rows[1]["PRECIO"].ToString();
-                            St2 = Convert.ToDecimal(st.Rows[1]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[1]["PRECIO"]);
-                            lb_St2.Text = Convert.ToString(St2);
-                            lb_Ser3.Text = "N/A";
-                            lb_Ca3.Text = "N/A";
-                            lb_Pr3.Text = "N/A";
-                            lb_St3.Text = "N/A";
-                            StS = St1 + St2;
-                            lb_StS.Text = Convert.ToString(StS);
-                        }
-                        else if (s == 3)
-                        {
-                            lb_Ser1.Text = st.Rows[0]["DESCRIPCION"].ToString();
-                            lb_Ca1.Text = st.Rows[0]["CANTIDAD"].ToString();
-                            lb_Pr1.Text = st.Rows[0]["PRECIO"].ToString();
-                            St1 = Convert.ToDecimal(st.Rows[0]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[0]["PRECIO"]);
-                            lb_St1.Text = Convert.ToString(St1);
-                            lb_Ser2.Text = st.Rows[1]["DESCRIPCION"].ToString();
-                            lb_Ca2.Text = st.Rows[1]["CANTIDAD"].ToString();
-                            lb_Pr2.Text = st.Rows[1]["PRECIO"].ToString();
-                            St2 = Convert.ToDecimal(st.Rows[1]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[1]["PRECIO"]);
-                            lb_St2.Text = Convert.ToString(St2);
-                            lb_Ser3.Text = st.Rows[2]["DESCRIPCION"].ToString();
-                            lb_Ca3.Text = st.Rows[2]["CANTIDAD"].ToString();
-                            lb_Pr3.Text = st.Rows[2]["PRECIO"].ToString();
-                            St3 = Convert.ToDecimal(st.Rows[2]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[2]["PRECIO"]);
-                            lb_St3.Text = Convert.ToString(St3);
-                            StS = St1 + St2 + St3;
-                            lb_StS.Text = Convert.ToString(StS);
+                            while (j < s)
+                            {
+                                dgvDetalleFact.Rows.Add(st.Rows[j]["CANTIDAD"].ToString(), st.Rows[j]["DESCRIPCION"].ToString(),
+                                    st.Rows[j]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])));
+                                j = j + 1;
+                            }
                         }
 
                         //Datos de impuestos y totales
@@ -701,12 +468,13 @@ namespace ProyectoHCL.Formularios
                 }
 
             }
-            
+
         }
 
         private void btnFacturar_Click(object sender, EventArgs e)
         {
-            if (info.est == 2) {
+            if (info.est == 2)
+            {
 
                 try
                 {
@@ -751,15 +519,15 @@ namespace ProyectoHCL.Formularios
 
 
             }
-            
+
         }
 
-        
+
         private void crearPDF()
         {
             SaveFileDialog guardar = new SaveFileDialog();
             guardar.FileName = DateTime.Now.ToString("ddMMyyyy") + ".pdf";
-            
+
             string paginahtml_texto = Properties.Resources.Plantilla.ToString();
             paginahtml_texto = paginahtml_texto.Replace("@FECHA1", info.fecha);
             paginahtml_texto = paginahtml_texto.Replace("@CLIENTE", lb_nombres.Text);
@@ -809,11 +577,11 @@ namespace ProyectoHCL.Formularios
 
             if (guardar.ShowDialog() == DialogResult.OK)
             {
-                using(FileStream stream = new FileStream(guardar.FileName, FileMode.Create))
+                using (FileStream stream = new FileStream(guardar.FileName, FileMode.Create))
                 {
                     Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
 
-                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc,stream);
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
                     pdfDoc.Open();
                     pdfDoc.Add(new Phrase(""));
 
@@ -833,7 +601,7 @@ namespace ProyectoHCL.Formularios
                     stream.Close();
                 }
 
-                
+
 
             }
 
