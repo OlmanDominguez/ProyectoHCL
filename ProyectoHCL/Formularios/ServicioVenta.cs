@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DocumentFormat.OpenXml.Drawing;
+using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,14 @@ namespace ProyectoHCL.Formularios
             InitializeComponent();
             cargarServicios();
             cmbServicio.SelectedIndex = -1;
+            btnAgregar.Enabled = false;
+            btnAgregar.BackColor = Color.DarkGray;
+            btnEliminar.Enabled = false;
+            btnEliminar.BackColor = Color.DarkGray;
+            btnVenta.Enabled = false;
+            btnVenta.BackColor = Color.DarkGray;
+            cmbEstado.Enabled = false;
+            cmbServicio.Enabled = false;
         }
 
         private void limpiarCampos()
@@ -32,6 +41,12 @@ namespace ProyectoHCL.Formularios
             txtCliente.Clear();
             txtEntrada.Clear();
             txtSalida.Clear();
+        }
+
+        public void limpiarError()
+        {
+            errorT.SetError(cmbServicio, "");
+            errorT.SetError(cmbEstado, "");
         }
 
         private void cargarServicios()
@@ -87,13 +102,26 @@ namespace ProyectoHCL.Formularios
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            ListViewItem lista = new ListViewItem(cmbServicio.Text);
-            lista.SubItems.Add(txtPrecio.Text);
-            lista.SubItems.Add(txtPrecio.Text);
-            lista.SubItems.Add(cmbEstado.Text);
-            listView.Items.Add(lista);
+            if (cmbServicio.Text == "")
+            {
+                MsgB Mbox = new MsgB("advertencia", "Seleccione un servicio");
+                DialogResult DR = Mbox.ShowDialog();
+            }
+            else if (cmbEstado.Text == "")
+            {
+                MsgB Mbox = new MsgB("advertencia", "Seleccione un estado");
+                DialogResult DR = Mbox.ShowDialog();
+            }
+            else
+            {
+                ListViewItem lista = new ListViewItem(cmbServicio.Text);
+                lista.SubItems.Add(txtPrecio.Text);
+                lista.SubItems.Add(txtPrecio.Text);
+                lista.SubItems.Add(cmbEstado.Text);
+                listView.Items.Add(lista);
 
-            ActualizarResultado();
+                ActualizarResultado();
+            }
         }
 
 
@@ -113,12 +141,25 @@ namespace ProyectoHCL.Formularios
 
                 listView.Items.Remove(item);
             }
+            else
+            {
+                MsgB Mbox = new MsgB("advertencia", "Seleccione un item de la lista");
+                DialogResult DR = Mbox.ShowDialog();
+            }
         }
 
         private void btnVenta_Click(object sender, EventArgs e)
         {
-            listView.Items.Clear();
-            limpiarCampos();
+            if (listView.Items.Count == 0)
+            {
+                MsgB Mbox = new MsgB("advertencia", "No se guardó, no hay items en la lista");
+                DialogResult DR = Mbox.ShowDialog();
+            }
+            else
+            {
+                listView.Items.Clear();
+                limpiarCampos();
+            }
         }
 
         private void cmbServicio_SelectedIndexChanged(object sender, EventArgs e)
@@ -154,6 +195,57 @@ namespace ProyectoHCL.Formularios
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
+            limpiarError();
+        }
+
+        private void txtHab_TextChanged(object sender, EventArgs e)
+        {
+            if (txtHab.Text == "")
+            {
+                btnAgregar.Enabled = false;
+                btnAgregar.BackColor = Color.DarkGray;
+                btnEliminar.Enabled = false;
+                btnEliminar.BackColor = Color.DarkGray;
+                btnVenta.Enabled = false;
+                btnVenta.BackColor = Color.DarkGray;
+                cmbEstado.Enabled = false;
+                cmbServicio.Enabled = false;
+            }
+            else
+            {
+                btnAgregar.Enabled = true;
+                btnAgregar.BackColor = Color.CadetBlue;
+                btnEliminar.Enabled = true;
+                btnEliminar.BackColor = Color.Red;
+                btnVenta.Enabled = true;
+                btnVenta.BackColor = Color.CadetBlue;
+                cmbEstado.Enabled = true;
+                cmbServicio.Enabled = true;
+            }
+        }
+
+        private void cmbServicio_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.cmbVacio(cmbServicio))
+            {
+                errorT.SetError(cmbServicio, "Seleccione un servicio");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+        }
+
+        private void cmbEstado_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.cmbVacio(cmbEstado))
+            {
+                errorT.SetError(cmbEstado, "Seleccione un estado");
+            }
+            else
+            {
+                errorT.Clear();
+            }
         }
     }
 }

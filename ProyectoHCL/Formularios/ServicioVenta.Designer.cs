@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ServicioVenta));
             panelPrincipal = new Panel();
             panel3 = new Panel();
@@ -64,12 +65,14 @@
             panel1 = new Panel();
             btnCerrar = new Button();
             label11 = new Label();
+            errorT = new ErrorProvider(components);
             panelPrincipal.SuspendLayout();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorT).BeginInit();
             SuspendLayout();
             // 
             // panelPrincipal
@@ -258,6 +261,7 @@
             // 
             // cmbEstado
             // 
+            cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbEstado.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             cmbEstado.FormattingEnabled = true;
             cmbEstado.Items.AddRange(new object[] { "Pagado", "Pendiente" });
@@ -265,6 +269,7 @@
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(232, 25);
             cmbEstado.TabIndex = 87;
+            cmbEstado.Leave += cmbEstado_Leave;
             // 
             // label8
             // 
@@ -292,6 +297,7 @@
             // 
             // cmbServicio
             // 
+            cmbServicio.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbServicio.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             cmbServicio.FormattingEnabled = true;
             cmbServicio.Location = new Point(30, 71);
@@ -299,6 +305,7 @@
             cmbServicio.Size = new Size(292, 25);
             cmbServicio.TabIndex = 83;
             cmbServicio.SelectedIndexChanged += cmbServicio_SelectedIndexChanged;
+            cmbServicio.Leave += cmbServicio_Leave;
             // 
             // label7
             // 
@@ -439,6 +446,7 @@
             txtHab.ReadOnly = true;
             txtHab.Size = new Size(278, 25);
             txtHab.TabIndex = 0;
+            txtHab.TextChanged += txtHab_TextChanged;
             // 
             // label2
             // 
@@ -503,6 +511,10 @@
             label11.TabIndex = 31;
             label11.Text = "Servicio a la habitación";
             // 
+            // errorT
+            // 
+            errorT.ContainerControl = this;
+            // 
             // ServicioVenta
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -525,6 +537,7 @@
             panel2.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorT).EndInit();
             ResumeLayout(false);
         }
 
@@ -565,5 +578,6 @@
         public TextBox txtSalida;
         public TextBox txtEntrada;
         public TextBox txtCliente;
+        private ErrorProvider errorT;
     }
 }
