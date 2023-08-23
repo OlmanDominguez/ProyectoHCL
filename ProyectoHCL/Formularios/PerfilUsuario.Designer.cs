@@ -52,6 +52,7 @@
             txtUsuario = new TextBox();
             label9 = new Label();
             panel2 = new Panel();
+            button3 = new Button();
             button1 = new Button();
             label11 = new Label();
             button2 = new Button();
@@ -75,7 +76,6 @@
             groupBox1 = new GroupBox();
             btneditar = new Button();
             error1 = new ErrorProvider(components);
-            button3 = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel5.SuspendLayout();
@@ -233,10 +233,10 @@
             linkLabelPreguntas.LinkColor = Color.White;
             linkLabelPreguntas.Location = new Point(38, 368);
             linkLabelPreguntas.Name = "linkLabelPreguntas";
-            linkLabelPreguntas.Size = new Size(241, 21);
+            linkLabelPreguntas.Size = new Size(192, 21);
             linkLabelPreguntas.TabIndex = 45;
             linkLabelPreguntas.TabStop = true;
-            linkLabelPreguntas.Text = "Editar Preguntas de Seguridad";
+            linkLabelPreguntas.Text = "Preguntas de Seguridad";
             linkLabelPreguntas.LinkClicked += linkLabel1_LinkClicked;
             // 
             // btncancelar
@@ -263,10 +263,10 @@
             linkLabelContraseña.LinkColor = Color.White;
             linkLabelContraseña.Location = new Point(38, 331);
             linkLabelContraseña.Name = "linkLabelContraseña";
-            linkLabelContraseña.Size = new Size(164, 21);
+            linkLabelContraseña.Size = new Size(96, 21);
             linkLabelContraseña.TabIndex = 44;
             linkLabelContraseña.TabStop = true;
-            linkLabelContraseña.Text = "Cambiar Contraseña";
+            linkLabelContraseña.Text = "Contraseña";
             linkLabelContraseña.LinkClicked += linkLabelContraseña_LinkClicked;
             // 
             // label1
@@ -387,6 +387,21 @@
             panel2.Size = new Size(780, 65);
             panel2.TabIndex = 34;
             panel2.Paint += panel2_Paint;
+            // 
+            // button3
+            // 
+            button3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button3.BackColor = Color.Transparent;
+            button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
+            button3.BackgroundImageLayout = ImageLayout.Stretch;
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Location = new Point(754, 12);
+            button3.Name = "button3";
+            button3.Size = new Size(14, 17);
+            button3.TabIndex = 43;
+            button3.UseVisualStyleBackColor = false;
             // 
             // button1
             // 
@@ -686,21 +701,6 @@
             // error1
             // 
             error1.ContainerControl = this;
-            // 
-            // button3
-            // 
-            button3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button3.BackColor = Color.Transparent;
-            button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
-            button3.BackgroundImageLayout = ImageLayout.Stretch;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Location = new Point(754, 12);
-            button3.Name = "button3";
-            button3.Size = new Size(14, 17);
-            button3.TabIndex = 43;
-            button3.UseVisualStyleBackColor = false;
             // 
             // PerfilUsuario
             // 

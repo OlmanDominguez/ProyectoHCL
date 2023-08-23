@@ -36,6 +36,13 @@
             pictureBox5 = new PictureBox();
             lblTitulo = new Label();
             panel3 = new Panel();
+            label14 = new Label();
+            label13 = new Label();
+            label11 = new Label();
+            label10 = new Label();
+            label9 = new Label();
+            label4 = new Label();
+            label1 = new Label();
             MostrarBox3 = new PictureBox();
             OcultarBox4 = new PictureBox();
             dtpVencimiento = new DateTimePicker();
@@ -136,6 +143,13 @@
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
+            panel3.Controls.Add(label14);
+            panel3.Controls.Add(label13);
+            panel3.Controls.Add(label11);
+            panel3.Controls.Add(label10);
+            panel3.Controls.Add(label9);
+            panel3.Controls.Add(label4);
+            panel3.Controls.Add(label1);
             panel3.Controls.Add(MostrarBox3);
             panel3.Controls.Add(OcultarBox4);
             panel3.Controls.Add(dtpVencimiento);
@@ -161,6 +175,85 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(886, 418);
             panel3.TabIndex = 3;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label14.ForeColor = Color.Red;
+            label14.Location = new Point(583, 242);
+            label14.Name = "label14";
+            label14.Size = new Size(23, 30);
+            label14.TabIndex = 35;
+            label14.Text = "*";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.BackColor = Color.Transparent;
+            label13.FlatStyle = FlatStyle.Flat;
+            label13.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label13.ForeColor = Color.Red;
+            label13.Location = new Point(623, 169);
+            label13.Name = "label13";
+            label13.Size = new Size(23, 30);
+            label13.TabIndex = 34;
+            label13.Text = "*";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.ForeColor = Color.Red;
+            label11.Location = new Point(616, 26);
+            label11.Name = "label11";
+            label11.Size = new Size(23, 30);
+            label11.TabIndex = 32;
+            label11.Text = "*";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label10.ForeColor = Color.Red;
+            label10.Location = new Point(190, 242);
+            label10.Name = "label10";
+            label10.Size = new Size(23, 30);
+            label10.TabIndex = 31;
+            label10.Text = "*";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label9.ForeColor = Color.Red;
+            label9.Location = new Point(195, 169);
+            label9.Name = "label9";
+            label9.Size = new Size(23, 30);
+            label9.TabIndex = 30;
+            label9.Text = "*";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.Red;
+            label4.Location = new Point(171, 98);
+            label4.Name = "label4";
+            label4.Size = new Size(23, 30);
+            label4.TabIndex = 29;
+            label4.Text = "*";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Red;
+            label1.Location = new Point(162, 26);
+            label1.Name = "label1";
+            label1.Size = new Size(23, 30);
+            label1.TabIndex = 28;
+            label1.Text = "*";
             // 
             // MostrarBox3
             // 
@@ -258,7 +351,6 @@
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(316, 28);
             cmbEstado.TabIndex = 16;
-            cmbEstado.SelectedIndexChanged += cmbEstado_SelectedIndexChanged;
             cmbEstado.Leave += cmbEstado_Leave;
             // 
             // cmbRol
@@ -472,5 +564,12 @@
         public Label lblContraseña;
         private PictureBox MostrarBox3;
         private PictureBox OcultarBox4;
+        private Label label4;
+        private Label label1;
+        private Label label13;
+        private Label label11;
+        private Label label10;
+        public Label label9;
+        public Label label14;
     }
 }

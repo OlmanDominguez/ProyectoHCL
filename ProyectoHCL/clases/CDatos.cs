@@ -17,10 +17,15 @@ namespace ProyectoHCL.clases
         public static string nombre;
         public static string correo;
         public static string contraseña;
+        public static string cliente;
+        public static DateTime entrada;
+        public static DateTime salida;
 
 
         public static int idUsu; //Almacenar id Usuario
         public static int idRolUs; //ALmacenar id Rol
+        public static int numeroHab;
+
 
         public DataTable listarObjetos()
         {

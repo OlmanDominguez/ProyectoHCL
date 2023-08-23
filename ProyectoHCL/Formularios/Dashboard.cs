@@ -124,7 +124,7 @@ namespace ProyectoHCL
                     case "PREGUNTAS":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_usuarios.Enabled = false;
+                            iconButton2.Enabled = false;
                         }
                         break;
                 }

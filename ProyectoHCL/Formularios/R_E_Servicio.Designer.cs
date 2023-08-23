@@ -45,6 +45,9 @@
             label3 = new Label();
             label2 = new Label();
             errorT = new ErrorProvider(components);
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
@@ -122,6 +125,9 @@
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
+            panel3.Controls.Add(label6);
+            panel3.Controls.Add(label5);
+            panel3.Controls.Add(label4);
             panel3.Controls.Add(cmbEstado);
             panel3.Controls.Add(label1);
             panel3.Controls.Add(btnCancelar);
@@ -246,6 +252,39 @@
             // 
             errorT.ContainerControl = this;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.Red;
+            label4.Location = new Point(316, 32);
+            label4.Name = "label4";
+            label4.Size = new Size(23, 30);
+            label4.TabIndex = 29;
+            label4.Text = "*";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.ForeColor = Color.Red;
+            label5.Location = new Point(300, 104);
+            label5.Name = "label5";
+            label5.Size = new Size(23, 30);
+            label5.TabIndex = 30;
+            label5.Text = "*";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.ForeColor = Color.Red;
+            label6.Location = new Point(300, 176);
+            label6.Name = "label6";
+            label6.Size = new Size(23, 30);
+            label6.TabIndex = 31;
+            label6.Text = "*";
+            // 
             // R_E_Servicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -285,5 +324,8 @@
         private ErrorProvider errorT;
         private Label label1;
         public ComboBox cmbEstado;
+        private Label label6;
+        private Label label5;
+        private Label label4;
     }
 }

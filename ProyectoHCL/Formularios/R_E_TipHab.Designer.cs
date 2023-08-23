@@ -36,6 +36,12 @@
             btnCerrar = new Button();
             btnMin = new Button();
             panel3 = new Panel();
+            cmbEstado = new ComboBox();
+            label7 = new Label();
+            label8 = new Label();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
             txtPrecio = new TextBox();
             label1 = new Label();
             txtCapacidad = new TextBox();
@@ -124,6 +130,12 @@
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
+            panel3.Controls.Add(cmbEstado);
+            panel3.Controls.Add(label7);
+            panel3.Controls.Add(label8);
+            panel3.Controls.Add(label5);
+            panel3.Controls.Add(label4);
+            panel3.Controls.Add(label3);
             panel3.Controls.Add(txtPrecio);
             panel3.Controls.Add(label1);
             panel3.Controls.Add(txtCapacidad);
@@ -135,8 +147,75 @@
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 73);
             panel3.Name = "panel3";
-            panel3.Size = new Size(800, 377);
+            panel3.Size = new Size(800, 320);
             panel3.TabIndex = 25;
+            // 
+            // cmbEstado
+            // 
+            cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbEstado.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbEstado.FormattingEnabled = true;
+            cmbEstado.Items.AddRange(new object[] { "ACTIVO", "INACTIVO" });
+            cmbEstado.Location = new Point(414, 144);
+            cmbEstado.Name = "cmbEstado";
+            cmbEstado.Size = new Size(316, 28);
+            cmbEstado.TabIndex = 34;
+            cmbEstado.Leave += cmbEstado_Leave;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.ForeColor = Color.Red;
+            label7.Location = new Point(471, 108);
+            label7.Name = "label7";
+            label7.Size = new Size(23, 30);
+            label7.TabIndex = 33;
+            label7.Text = "*";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.ForeColor = Color.Black;
+            label8.Location = new Point(414, 116);
+            label8.Name = "label8";
+            label8.Size = new Size(63, 19);
+            label8.TabIndex = 32;
+            label8.Text = "Estado:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.ForeColor = Color.Red;
+            label5.Location = new Point(471, 34);
+            label5.Name = "label5";
+            label5.Size = new Size(23, 30);
+            label5.TabIndex = 31;
+            label5.Text = "*";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.Red;
+            label4.Location = new Point(163, 108);
+            label4.Name = "label4";
+            label4.Size = new Size(23, 30);
+            label4.TabIndex = 30;
+            label4.Text = "*";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.Red;
+            label3.Location = new Point(105, 26);
+            label3.Name = "label3";
+            label3.Size = new Size(23, 30);
+            label3.TabIndex = 29;
+            label3.Text = "*";
             // 
             // txtPrecio
             // 
@@ -144,7 +223,7 @@
             txtPrecio.BorderStyle = BorderStyle.FixedSingle;
             txtPrecio.CharacterCasing = CharacterCasing.Upper;
             txtPrecio.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtPrecio.Location = new Point(243, 221);
+            txtPrecio.Location = new Point(414, 67);
             txtPrecio.MaxLength = 100;
             txtPrecio.Name = "txtPrecio";
             txtPrecio.Size = new Size(316, 27);
@@ -157,7 +236,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(243, 193);
+            label1.Location = new Point(414, 39);
             label1.Name = "label1";
             label1.Size = new Size(61, 19);
             label1.TabIndex = 27;
@@ -168,7 +247,7 @@
             txtCapacidad.BackColor = Color.White;
             txtCapacidad.BorderStyle = BorderStyle.FixedSingle;
             txtCapacidad.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtCapacidad.Location = new Point(243, 142);
+            txtCapacidad.Location = new Point(63, 144);
             txtCapacidad.MaxLength = 50;
             txtCapacidad.Name = "txtCapacidad";
             txtCapacidad.Size = new Size(316, 27);
@@ -181,7 +260,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(243, 114);
+            label6.Location = new Point(63, 116);
             label6.Name = "label6";
             label6.Size = new Size(105, 19);
             label6.TabIndex = 25;
@@ -193,7 +272,7 @@
             txtTipo.BorderStyle = BorderStyle.FixedSingle;
             txtTipo.CharacterCasing = CharacterCasing.Upper;
             txtTipo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTipo.Location = new Point(243, 64);
+            txtTipo.Location = new Point(63, 66);
             txtTipo.MaxLength = 100;
             txtTipo.Name = "txtTipo";
             txtTipo.Size = new Size(316, 27);
@@ -210,7 +289,7 @@
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(467, 280);
+            btnCancelar.Location = new Point(456, 219);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(82, 32);
             btnCancelar.TabIndex = 22;
@@ -228,7 +307,7 @@
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(257, 280);
+            btnGuardar.Location = new Point(246, 219);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(82, 32);
             btnGuardar.TabIndex = 21;
@@ -241,7 +320,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(243, 32);
+            label2.Location = new Point(63, 34);
             label2.Name = "label2";
             label2.Size = new Size(45, 19);
             label2.TabIndex = 1;
@@ -255,7 +334,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 393);
             Controls.Add(panel3);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
@@ -290,5 +369,11 @@
         public TextBox txtPrecio;
         private Label label1;
         private ErrorProvider errorT;
+        private Label label5;
+        private Label label4;
+        private Label label3;
+        private Label label7;
+        private Label label8;
+        public ComboBox cmbEstado;
     }
 }

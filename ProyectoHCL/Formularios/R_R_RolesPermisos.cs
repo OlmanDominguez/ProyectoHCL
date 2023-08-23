@@ -291,37 +291,37 @@ namespace ProyectoHCL.Formularios
             lblTitulo.Text = "Editar Permisos";
             btnEditar.Visible = false;
             btnNuevo.Visible = true;
+            cargarPermisos();
 
         }
 
-        //private void cargarPermisos()
-        //{
-        //    MySqlCommand cmd;
-        //    MySqlConnection conn = new MySqlConnection();
-        //    conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+        private void cargarPermisos()
+        {
+            MySqlCommand cmd;
+            MySqlConnection conn = new MySqlConnection();
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
 
-        //    conn.Open();
+            conn.Open();
 
-        //    string sql = "SELECT PERMITIDO FROM TBL_PERMISO_ROL WHERE ID_ROL = 3";
-        //    cmd = new MySqlCommand(sql, conn);
+            string sql = "SELECT PERMITIDO FROM TBL_PERMISO_ROL WHERE ID_ROL = 3";
+            cmd = new MySqlCommand(sql, conn);
 
-        //    MySqlDataAdapter data = new MySqlDataAdapter(cmd);
-        //    DataTable dt = new DataTable();
-        //    data.Fill(dt);
+            MySqlDataAdapter data = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            data.Fill(dt);
 
 
-        //    foreach (DataGridViewRow rows in dgvRolPermiso.Rows)
-        //    {
-        //        foreach (DataRow row in dt.Rows)
-        //        {
-        //            rows.Cells["VER"].Value = row["PERMITIDO"];
-        //            rows.Cells["CREAR"].Value = row["PERMITIDO"];
-        //            rows.Cells["EDITAR"].Value = row["PERMITIDO"];
-        //            rows.Cells["ELIMINAR"].Value = row["PERMITIDO"];
-
-        //        }
-        //    }
-        //}
+            foreach (DataRow row in dt.Rows)
+            {
+                foreach (DataGridViewRow rows in dgvRolPermiso.Rows)
+                {
+                    rows.Cells["VER"].Value = row["PERMITIDO"];
+                    rows.Cells["CREAR"].Value = row["PERMITIDO"];
+                    rows.Cells["EDITAR"].Value = row["PERMITIDO"];
+                    rows.Cells["ELIMINAR"].Value = row["PERMITIDO"];
+                }
+            }
+        }
 
         private void ActualizarPermisoRol()
         {
@@ -428,7 +428,6 @@ namespace ProyectoHCL.Formularios
             else
             {
                 return 0;
-
             }
         }
     }
