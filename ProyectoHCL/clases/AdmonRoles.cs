@@ -39,8 +39,8 @@ namespace ProyectoHCL.clases
             return rellenarGridDT;
 
         }
-        public void modificarRol(int id, string rol, string descripcion, string estado_rol,
-           DateTime fecha_creacion, DateTime fecha_actualizacion)
+        public void modificarRol(int id, string rol, string descripcion, string estado_rol)
+          // DateTime fecha_creacion, DateTime fecha_actualizacion)
         {
 
             try
@@ -56,8 +56,8 @@ namespace ProyectoHCL.clases
                 cmd.Parameters.AddWithValue("@Rol", rol);
                 cmd.Parameters.AddWithValue("@estado_Rol", estado_rol);
                 cmd.Parameters.AddWithValue("@descripcion", descripcion);
-                cmd.Parameters.AddWithValue("@fechacreacion",fecha_creacion);
-                cmd.Parameters.AddWithValue("@actualizar", fecha_actualizacion);
+                //cmd.Parameters.AddWithValue("@fechacreacion",fecha_creacion);
+                //cmd.Parameters.AddWithValue("@actualizar", fecha_actualizacion);
 
                 cmd.ExecuteNonQuery();
                 conn.Close();

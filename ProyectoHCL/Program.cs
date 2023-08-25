@@ -21,14 +21,14 @@ namespace ProyectoHCL
 
             //Application.Run(new Dashboard());
             //Application.Run(new NuevaReservacion());
-            //Application.Run(new CtrlObjetos());
+           Application.Run(new CtrlObjetos());
 
             //Application.Run(new CtrlClientes());
            //Application.Run(new Backup());
-          // Application.Run(new CtrlUsuarios());
+         // Application.Run(new CtrlUsuarios());
          // Application.Run(new CtrlParametro()); 
             // Application.Run(new CtrlPreguntas());
-       Application.Run(new CtrlRoles());
+      //Application.Run(new CtrlRoles());
 
 
 

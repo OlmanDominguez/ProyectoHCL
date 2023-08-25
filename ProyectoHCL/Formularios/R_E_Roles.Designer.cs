@@ -301,6 +301,7 @@
             btnGuardar.TabIndex = 21;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // txtNumero
             // 
