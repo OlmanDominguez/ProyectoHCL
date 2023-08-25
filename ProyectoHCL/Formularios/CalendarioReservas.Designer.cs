@@ -75,7 +75,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(939, 62);
+            panel1.Size = new Size(906, 62);
             panel1.TabIndex = 3;
             // 
             // btnCerrar
@@ -87,7 +87,7 @@
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnCerrar.FlatStyle = FlatStyle.Flat;
-            btnCerrar.Location = new Point(1797, 12);
+            btnCerrar.Location = new Point(1764, 12);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(14, 17);
             btnCerrar.TabIndex = 44;
@@ -110,13 +110,13 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(939, 534);
+            ClientSize = new Size(906, 534);
             Controls.Add(panel1);
             Controls.Add(comboBox1);
             Controls.Add(label1);
             Controls.Add(monthCalendar1);
             Name = "CalendarioReservas";
-            Text = "CalendarioReservas";
+            Text = " ";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
