@@ -52,6 +52,8 @@ namespace ProyectoHCL.Formularios
                         if (obj.IdObjeto == "OBJETOS" && !obj.Permitido)
                         {
                             btnNuevo.Visible = false;
+                            label1.Location = new Point(28, 24);
+                            txtBuscar.Location = new Point(84, 22); 
                         }
                         break;
                     case 3:

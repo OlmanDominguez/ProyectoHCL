@@ -19,6 +19,7 @@ using iText.Kernel.Geom;
 using iText.Layout.Element;
 using SpreadsheetLight;
 using SpreadsheetLight.Drawing;
+using Point = System.Drawing.Point;
 
 namespace ProyectoHCL.Formularios
 {
@@ -51,6 +52,8 @@ namespace ProyectoHCL.Formularios
                         if (obj.IdObjeto == "SERVICIOS" && !obj.Permitido)
                         {
                             btnNuevo.Visible = false;
+                            label4.Location = new Point(28, 24);
+                            txtBuscar.Location = new Point(84, 22);
                         }
                         break;
                     case 3:
