@@ -50,7 +50,7 @@ namespace ProyectoHCL.Formularios
                     case 2:
                         if (obj.IdObjeto == "SERVICIOS" && !obj.Permitido)
                         {
-                            btnNuevo.Enabled = false;
+                            btnNuevo.Visible = false;
                         }
                         break;
                     case 3:

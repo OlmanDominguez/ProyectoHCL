@@ -968,6 +968,8 @@
             dgvRolPermiso.RowTemplate.Height = 25;
             dgvRolPermiso.Size = new Size(1027, 392);
             dgvRolPermiso.TabIndex = 5;
+            dgvRolPermiso.CellContentClick += dgvRolPermiso_CellContentClick;
+            dgvRolPermiso.CellValueChanged += dgvRolPermiso_CellValueChanged;
             // 
             // R_R_RolesPermisos
             // 

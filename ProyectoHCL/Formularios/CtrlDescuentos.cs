@@ -55,7 +55,7 @@ namespace ProyectoHCL.Formularios
                     case 2:
                         if (obj.IdObjeto == "DESCUENTOS" && !obj.Permitido) //Validar pantalla y el permiso
                         {
-                            btnNuevo.Enabled = false; //Deshabilitar botón para crear
+                            btnNuevo.Visible = false; //Ocultar botón para crear
                         }
                         break;
                     case 3:
