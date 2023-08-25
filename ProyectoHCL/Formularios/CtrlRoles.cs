@@ -37,7 +37,7 @@ namespace ProyectoHCL.Formularios
     {
         R_E_Roles R_E_rolp = new R_E_Roles();
         AdmonRoles rgtRoles = new AdmonRoles(); //crear objeto Rgtroles para acceder a sus metodos
-        Roles rolr= new Roles();     //crear objetos roles para acceder a sus parametros 
+        Roles rolr = new Roles();     //crear objetos roles para acceder a sus parametros 
         DataSet ds = new DataSet();
         MsgB msgB = new MsgB();
         CDatos cDatos = new CDatos();
@@ -70,6 +70,8 @@ namespace ProyectoHCL.Formularios
                 cmbPagR.Items.Add(x.ToString());
 
             cmbPagR.SelectedIndex = indice;
+
+            HabilitarBotones();
         }
         private void CtrlRoles_Load(object sender, EventArgs e)
         {
@@ -99,12 +101,12 @@ namespace ProyectoHCL.Formularios
 
                 cmd = new MySqlCommand("buscarRol", conn); //recibe proc almacenado
                 cmd.CommandType = CommandType.StoredProcedure; //se especifica que es un proc almacenado
-                cmd.Parameters.Add("@nombreR", MySqlDbType.VarChar, 50).Value = buscarR; //recibe el parametro buscarR definido en el parametro almacenado
+                cmd.Parameters.Add("@nombreR", MySqlDbType.VarChar, 30).Value = buscarR; //recibe el parametro buscarR definido en el parametro almacenado
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable(); //Se crea tabla
                 da.Fill(dt); //Se devuelven los registros en la tabla
-                dgvrRoles.DataSource = dt; //se define la tabla en la que se devuelven los registros
+                dgvRoles.DataSource = dt; //se define la tabla en la que se devuelven los registros
             }
             catch (Exception)
             {
@@ -116,26 +118,38 @@ namespace ProyectoHCL.Formularios
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
+
             R_E_rolp.label11.Text = "Registrar Rol";
-            R_E_rolp.Size = new System.Drawing.Size(800, 431);
-            R_E_rolp.btnGuardar.Location = new Point(256, 282);
-            R_E_rolp.btnCancelar.Location = new Point(466, 282);
-            R_E_rolp.label4.Location = new Point(243, 34);
-            R_E_rolp.txtRol.Location = new Point(243, 65);
-            R_E_rolp.label6.Location = new Point(243, 107);
-            R_E_rolp.txtNumero.Location = new Point(243, 138);
-            R_E_rolp.label3.Visible = false;
-            R_E_rolp.cmbEstado.Visible = false;
             R_E_rolp.ShowDialog();
             CargarDT();
-
         }
 
-        //pendiente revisar
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscarR.Text != "")
+            {
+                BuscarRol(txtBuscarR.Text);
+            }
+            else
+            {
+                CargarDT();
+            }
+        }
 
 
         private void dgvRoles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (this.dgvRoles.Columns[e.ColumnIndex].Name == "EDITAR")
+            {
+                R_E_rolp.label11.Text = "Editar Roles";
+                R_E_rolp.idRol = dgvRoles.CurrentRow.Cells["ID"].Value.ToString();
+                R_E_rolp.txtRol.Text = dgvRoles.CurrentRow.Cells["NOMBRE"].Value.ToString();
+                R_E_rolp.txtNumero.Text = dgvRoles.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
+                R_E_rolp.cmbEstado.Text = dgvRoles.CurrentRow.Cells["ESTADO"].Value.ToString();
+                R_E_rolp.ShowDialog();
+                R_E_rolp.limpiarCampos();
+                CargarDT();
+            }
             if (this.dgvRoles.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
 
@@ -163,26 +177,7 @@ namespace ProyectoHCL.Formularios
 
                 }
             }
-            if (this.dgvRoles.Columns[e.ColumnIndex].Name == "EDITAR")
-            {
-                R_E_rolp.label11.Text = "editar Rol";
-                R_E_rolp.Size = new System.Drawing.Size(800, 431);
-                R_E_rolp.btnGuardar.Location = new Point(81, 455);
-                R_E_rolp.btnCancelar.Location = new Point(700, 455);
-                R_E_rolp.label4.Location = new Point(347, 54);
-                R_E_rolp.txtRol.Location = new Point(347, 105);
-                R_E_rolp.label6.Location = new Point(347, 183);
-                R_E_rolp.txtNumero.Location = new Point(347, 230);
-                R_E_rolp.label3.Visible = true; //new Point(347, 313);//Location
-                R_E_rolp.cmbEstado.Visible = true;                  //new Point(347, 365);
-                R_E_rolp.idRol = dgvRoles.CurrentRow.Cells["ID"].Value.ToString();
-                R_E_rolp.txtRol.Text = dgvRoles.CurrentRow.Cells["ROL"].Value.ToString();
-                R_E_rolp.txtNumero.Text = dgvRoles.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
-                R_E_rolp.cmbEstado.Text = dgvRoles.CurrentRow.Cells["ESTADO_ROL"].Value.ToString();
-                R_E_rolp.ShowDialog();
-                R_E_rolp.limpiarCampos();
-                CargarDT();
-            }
+            
         }
 
         private void dgvRoles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -362,6 +357,15 @@ namespace ProyectoHCL.Formularios
                 btSiguiente.Enabled = true;
             }
         }
+        private void cmbPagR_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPagR.Text);
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDT();
+
+        }
 
         private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -389,31 +393,16 @@ namespace ProyectoHCL.Formularios
             CargarDT();
         }
 
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
-        {
-            if (txtBuscarR.Text != "")
-            {
-                BuscarRol(txtBuscarR.Text);
-            }
-            else
-            {
-                CargarDT();
-            }
-        }
-
-        private void cmbPagR_SelectedIndexChanged(object sender, EventArgs e)//me genera problema 
-        {
-            //
-            /*int pagina = Convert.ToInt32(cmbPagR.Text);
-            indice = pagina - 1;
-            pagInicio = (pagina - 1) * numFilas + 1;
-            pagFinal = pagina * numFilas;
-            CargarDT();*/
-        }
+      
 
         private void button6_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnNuevo_EnabledChanged(object sender, EventArgs e)
+        {
+            btnNuevo.BackColor = Color.DarkGray;
         }
     }
 }

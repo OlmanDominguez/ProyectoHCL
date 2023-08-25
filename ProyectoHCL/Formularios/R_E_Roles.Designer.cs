@@ -243,13 +243,13 @@
             txtRol.BackColor = Color.White;
             txtRol.BorderStyle = BorderStyle.FixedSingle;
             txtRol.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtRol.Location = new Point(346, 117);
+            txtRol.Location = new Point(99, 125);
             txtRol.Margin = new Padding(4, 5, 4, 5);
             txtRol.MaxLength = 50;
             txtRol.Name = "txtRol";
             txtRol.Size = new Size(451, 37);
             txtRol.TabIndex = 24;
-            txtRol.TextChanged += txtRol_TextChanged;
+         //   txtRol.TextChanged += txtRol_TextChanged;
             txtRol.Leave += txtRol_Leave;
             // 
             // cmbEstado
@@ -258,7 +258,7 @@
             cmbEstado.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             cmbEstado.FormattingEnabled = true;
             cmbEstado.Items.AddRange(new object[] { "ACTIVO", "INACTIVO" });
-            cmbEstado.Location = new Point(347, 365);
+            cmbEstado.Location = new Point(99, 262);
             cmbEstado.Margin = new Padding(4, 5, 4, 5);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(450, 39);
@@ -275,7 +275,7 @@
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(903, 455);
+            btnCancelar.Location = new Point(667, 383);
             btnCancelar.Margin = new Padding(4, 5, 4, 5);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(117, 53);
@@ -294,7 +294,7 @@
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(81, 455);
+            btnGuardar.Location = new Point(367, 383);
             btnGuardar.Margin = new Padding(4, 5, 4, 5);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(117, 53);
@@ -308,12 +308,13 @@
             txtNumero.BackColor = Color.White;
             txtNumero.BorderStyle = BorderStyle.FixedSingle;
             txtNumero.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNumero.Location = new Point(347, 230);
-            txtNumero.Margin = new Padding(4, 5, 4, 5);
-            txtNumero.MaxLength = 50;
+            txtNumero.Location = new Point(597, 125);
+            txtNumero.MaxLength = 500;
+            txtNumero.Multiline = true;
             txtNumero.Name = "txtNumero";
-            txtNumero.Size = new Size(451, 37);
-            txtNumero.TabIndex = 12;
+            txtNumero.Size = new Size(451, 182);
+            txtNumero.TabIndex = 25;
+            txtNumero.KeyPress += txtNumero_KeyPress;
             txtNumero.Leave += txtNumero_Leave;
             // 
             // label6
@@ -321,7 +322,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(347, 183);
+            label6.Location = new Point(597, 73);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
             label6.Size = new Size(157, 28);
@@ -333,7 +334,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(347, 313);
+            label3.Location = new Point(99, 210);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(96, 28);
@@ -345,13 +346,13 @@
             label4.AutoSize = true;
             label4.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(347, 54);
+            label4.Location = new Point(99, 73);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(54, 28);
             label4.TabIndex = 1;
             label4.Text = "Rol:";
-            label4.Click += label4_Click;
+           // label4.Click += label4_Click;
             // 
             // error1
             // 

@@ -42,27 +42,6 @@ namespace ProyectoHCL.Formularios
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
-        private void txtEmail2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ID_Rol_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
 
@@ -97,23 +76,6 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        private void cmbEstado_Leave(object sender, EventArgs e)
-        {
-            if (ValidarTxt.cmbVacio(cmbEstado))
-            {
-                error1.SetError(cmbEstado, "Seleccione un estado");
-            }
-            else
-            {
-                error1.Clear();
-            }
-        }
-
-        private void txtRol_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtRol_Leave(object sender, EventArgs e)
         {
             if (ValidarTxt.txtVacio(txtRol))
@@ -126,11 +88,11 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtNumero_Leave(object sender, EventArgs e)
+        private void cmbEstado_Leave(object sender, EventArgs e)
         {
-            if (ValidarTxt.txtVacio(txtNumero))
+            if (ValidarTxt.cmbVacio(cmbEstado))
             {
-                error1.SetError(txtNumero, "Introduzca una descripción");
+                error1.SetError(cmbEstado, "Seleccione un estado");
             }
             else
             {
@@ -144,7 +106,7 @@ namespace ProyectoHCL.Formularios
             {
                 Modelo modelo = new Modelo();
 
-                if (txtRol.Text.Trim() == "" || txtNumero.Text.Trim() == "")
+                if (txtRol.Text.Trim() == "" || txtNumero.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
@@ -166,14 +128,9 @@ namespace ProyectoHCL.Formularios
 
                         cmd = new MySqlCommand("insertarRol", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@nombreRol", txtRol.Text);
+                        cmd.Parameters.AddWithValue("@nombrerol", txtRol.Text);
                         cmd.Parameters.AddWithValue("@descripcion", txtNumero.Text);
-                        cmd.Parameters.AddWithValue("@estado_rol", cmbEstado.Text);
-                        string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                        cmd.Parameters.AddWithValue("@fecha", ahora);
-
-                        //cmd.Parameters.AddWithValue("@", clasecompartida.iduser);
-                        //cmd.Parameters.AddWithValue("@actualizadoPor", clasecompartida.iduser);
+                        cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
 
                         cmd.ExecuteNonQuery();
                         MsgB m = new MsgB("informacion", "Registro creado con éxito");
@@ -188,11 +145,11 @@ namespace ProyectoHCL.Formularios
                     }
                 }
             }
-            else if (label11.Text == "Editar Objeto")
+            else if (label11.Text == "Editar Rol")
             {
                 Control control = new Control();
 
-                if (txtRol.Text.Trim() == "" || cmbEstado.Text.Trim() == "" || txtNumero.Text.Trim() == "")
+                if (txtRol.Text.Trim() == "" ||  txtNumero.Text.Trim() == "" || cmbEstado.Text.Trim() == "" )
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
@@ -216,5 +173,23 @@ namespace ProyectoHCL.Formularios
             }
 
         }
+
+        private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtLetras(e);
+        }
+
+        private void txtNumero_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtNumero))
+            {
+                error1.SetError(txtNumero, "Introduzca una descripción");
+            }
+            else
+            {
+                error1.Clear();
+            }
+        }
+
     }
 }

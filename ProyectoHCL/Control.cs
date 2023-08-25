@@ -60,9 +60,9 @@ namespace ProyectoHCL
                 RTNCL, TELEFONOCL, EMAILCL, CODIGOCL, DNI_PASAPORTECL, TELEFONO2CL, EMAIL2CL);
         }
 
-        public void editarR(string  id, string rol, string descripcion, string estado_rol)// string fecha_creacion,string fecha_actualizacion)
+        public void editarR(string  id, string nombrerol, string descripcion, string estado_rol)// string fecha_creacion,string fecha_actualizacion)
         {
-            admonRoles.modificarRol(Convert.ToInt32(id), rol, descripcion, estado_rol); //Convert.ToDateTime(fecha_creacion), Convert.ToDateTime(fecha_actualizacion));//Convert.ToDateTime(fecha_creacion), Convert.ToDateTime(fecha_actualizacion)
+            admonRoles.modificarRol(Convert.ToInt32(id), nombrerol, descripcion, estado_rol); //Convert.ToDateTime(fecha_creacion), Convert.ToDateTime(fecha_actualizacion));//Convert.ToDateTime(fecha_creacion), Convert.ToDateTime(fecha_actualizacion)
 
         }
     }
