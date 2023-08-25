@@ -38,7 +38,7 @@ namespace ProyectoHCL.Formularios
 
             cmbRol.DataSource = null;
             cmbRol.Items.Clear();
-            string sql = "SELECT ID_ROL, DESCRIPCION FROM TBL_ROL;";
+            string sql = "SELECT ID_ROL, ROL FROM TBL_ROL;";
 
             conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
             conn.Open();
@@ -51,7 +51,7 @@ namespace ProyectoHCL.Formularios
                 data.Fill(dt);
 
                 cmbRol.ValueMember = "ID_ROL";
-                cmbRol.DisplayMember = "DESCRIPCION";
+                cmbRol.DisplayMember = "ROL";
                 cmbRol.DataSource = dt;
 
             }
@@ -64,17 +64,36 @@ namespace ProyectoHCL.Formularios
 
         }
 
+        public string Pass()
+        {
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = BaseDatosHCL.ObtenerConexion();
+            comando.CommandText = ("SELECT CONTRASENA FROM TBL_USUARIO WHERE USUARIO = '"
+                + txtUsuario.Text + "';");
+
+            MySqlDataReader leer = comando.ExecuteReader();
+
+            if (leer.Read())
+            {
+                return (string)leer["CONTRASENA"];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         private void cargarEstado()
         {
             MySqlConnection conn;
             MySqlCommand cmd;
 
-            cmbEstado.DataSource = null;
-            cmbEstado.Items.Clear();
-            string sql = "SELECT ID_ESTADO, DESCRIPCION FROM TBL_ESTADO;";
-
             conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
             conn.Open();
+
+            cmbEstado.DataSource = null;
+            cmbEstado.Items.Clear();
+            string sql = "SELECT DESCRIPCION FROM TBL_ESTADO;";
 
             try
             {
@@ -83,9 +102,15 @@ namespace ProyectoHCL.Formularios
                 DataTable dt = new DataTable();
                 data.Fill(dt);
 
-                cmbEstado.ValueMember = "ID_ESTADO";
-                cmbEstado.DisplayMember = "DESCRIPCION";
-                cmbEstado.DataSource = dt;
+                foreach (DataRow dr in dt.Rows)
+                {
+                    string nombreEstado = dr["DESCRIPCION"].ToString();
+
+                    if (nombreEstado != "NUEVO")
+                    {
+                        cmbEstado.Items.Add(nombreEstado);
+                    }
+                }
 
             }
             catch (MySqlException e)
@@ -182,7 +207,6 @@ namespace ProyectoHCL.Formularios
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
-
                 }
                 else if (modelo.existeUsuario(txtUsuario.Text))
                 {
@@ -197,6 +221,11 @@ namespace ProyectoHCL.Formularios
                 else if (!ValidarTxt.CorreoValido(txtCorreo.Text))
                 {
                     MsgB m = new MsgB("advertencia", "Dirección de correo no válida");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (txtContraseña.TextLength < 5)
+                {
+                    MsgB m = new MsgB("advertencia", "La contraseña es muy corta");
                     DialogResult dR = m.ShowDialog();
                 }
                 else
@@ -251,7 +280,7 @@ namespace ProyectoHCL.Formularios
                 Control control = new Control();
 
                 if (txtNombre.Text.Trim() == "" || txtUsuario.Text.Trim() == "" || cmbRol.Text.Trim() == "" ||
-                    txtCorreo.Text.Trim() == "" || cmbEstado.Text.Trim() == "" || txtContraseña.Text.Trim() == "")
+                    txtCorreo.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
@@ -266,19 +295,25 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "Dirección de correo no válida");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (cmbEstado.SelectedIndex == 2)
+                else if (txtContraseña.TextLength < 5 && txtContraseña.Text != "")
                 {
-                    MsgB m = new MsgB("advertencia", "El estado seleccionado no es válido");
+                    MsgB m = new MsgB("advertencia", "La contraseña es muy corta");
                     DialogResult dR = m.ShowDialog();
                 }
                 else
                 {
                     try
                     {
-                        control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
+                        if (txtContraseña.Text == "")
+                        {
+                            control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
+                            Pass(), dtpVencimiento.Text, txtCorreo.Text);
+                        }
+                        else{
+
+                           control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
                            txtContraseña.Text, dtpVencimiento.Text, txtCorreo.Text);
-
-
+                        }
                         string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                         MySqlConnection conn;
@@ -326,6 +361,7 @@ namespace ProyectoHCL.Formularios
             if (txtContraseña.TextLength < 5)
             {
                 errorT.SetError(txtContraseña, "La contraseña es muy corta");
+                txtContraseña.Focus();
             }
             else
             {
@@ -417,19 +453,6 @@ namespace ProyectoHCL.Formularios
                 e.Handled = true;
                 MsgB m = new MsgB("advertencia", "No se permiten espacios");
                 DialogResult dR = m.ShowDialog();
-            }
-        }
-
-        private void cmbEstado_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbEstado.SelectedIndex == 2)
-            {
-                errorT.SetError(cmbEstado, "El estado no es válido");
-                cmbEstado.Focus();
-            }
-            else
-            {
-                errorT.Clear();
             }
         }
     }

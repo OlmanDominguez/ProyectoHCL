@@ -105,7 +105,7 @@ namespace ProyectoHCL.Formularios
             {
                 Modelo modelo = new Modelo();
 
-                if (txtObj.Text.Trim() == "" || rTxtDesc.Text.Trim() == "")
+                if (txtObj.Text.Trim() == "" || rTxtDesc.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
@@ -129,6 +129,7 @@ namespace ProyectoHCL.Formularios
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@nombreObj", txtObj.Text);
                         cmd.Parameters.AddWithValue("@descObj", rTxtDesc.Text);
+                        cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
                         cmd.Parameters.AddWithValue("@creadoPor", clasecompartida.iduser);
                         cmd.Parameters.AddWithValue("@actualizadoPor", clasecompartida.iduser);
 

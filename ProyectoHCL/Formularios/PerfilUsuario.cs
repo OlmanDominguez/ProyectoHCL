@@ -136,6 +136,7 @@ namespace ProyectoHCL.Formularios
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            clasecompartida.estado = 1;
             Form PerfilUsuario = new PreguntasRecuContra();
             PerfilUsuario.ShowDialog();
 

@@ -124,11 +124,13 @@ namespace ProyectoHCL
                             //clases.CDatos.idUsu = (int)leer["ID_USUARIO"];
                             clases.CDatos.idRolUs = (int)leer["ID_ROL"];
                             ContraseñaBox2.Text = "";
-                            Form formulario = new Dashboard();
-                            formulario.Show();
+
+                            Form contra = new RestaContra();
+                            contra.ShowDialog();
 
                             Form formu = new PreguntasRecuContra();
                             formu.ShowDialog();
+                            
                         }
                         else if (usuario == UsuarioBox1.Text & pass == ContraseñaBox2.Text & tiempo.Hours < 2)
                         {

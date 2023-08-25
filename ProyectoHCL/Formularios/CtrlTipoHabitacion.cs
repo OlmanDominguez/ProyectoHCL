@@ -52,7 +52,7 @@ namespace ProyectoHCL.Formularios
                     case 2:
                         if (obj.IdObjeto == "TIPO HABITACION" && !obj.Permitido)
                         {
-                            btnNuevo.Enabled = false;
+                            btnNuevo.Visible = false;
                         }
                         break;
                     case 3:

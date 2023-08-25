@@ -51,7 +51,7 @@ namespace ProyectoHCL.Formularios
                     case 2:
                         if (obj.IdObjeto == "OBJETOS" && !obj.Permitido)
                         {
-                            btnNuevo.Enabled = false;
+                            btnNuevo.Visible = false;
                         }
                         break;
                     case 3:
@@ -152,15 +152,6 @@ namespace ProyectoHCL.Formularios
         private void btnNuevo_Click_1(object sender, EventArgs e)
         {
             R_E_obj.lblTitulo.Text = "Registrar Objeto";
-            R_E_obj.Size = new System.Drawing.Size(800, 431);
-            R_E_obj.btnGuardar.Location = new Point(256, 282);
-            R_E_obj.btnCancelar.Location = new Point(466, 282);
-            R_E_obj.label2.Location = new Point(243, 34);
-            R_E_obj.txtObj.Location = new Point(243, 65);
-            R_E_obj.label1.Visible = false;
-            R_E_obj.cmbEstado.Visible = false;
-            R_E_obj.label6.Location = new Point(243, 107);
-            R_E_obj.rTxtDesc.Location = new Point(243, 138);
             R_E_obj.ShowDialog();
             CargarDG();
         }
@@ -182,17 +173,6 @@ namespace ProyectoHCL.Formularios
             if (this.dgvObjetos.Columns[e.ColumnIndex].Name == "EDITAR")
             {
                 R_E_obj.lblTitulo.Text = "Editar Objeto";
-                R_E_obj.Size = new System.Drawing.Size(800, 371);
-                R_E_obj.btnGuardar.Location = new Point(256, 213);
-                R_E_obj.btnCancelar.Location = new Point(466, 213);
-                R_E_obj.label2.Location = new Point(59, 34);
-                R_E_obj.txtObj.Location = new Point(59, 67);
-                R_E_obj.label1.Location = new Point(59, 115);
-                R_E_obj.cmbEstado.Location = new Point(59, 146);
-                R_E_obj.label1.Visible = true;
-                R_E_obj.cmbEstado.Visible = true;
-                R_E_obj.label6.Location = new Point(421, 34);
-                R_E_obj.rTxtDesc.Location = new Point(421, 65);
                 R_E_obj.idObj = dgvObjetos.CurrentRow.Cells["ID"].Value.ToString();
                 R_E_obj.txtObj.Text = dgvObjetos.CurrentRow.Cells["NOMBRE"].Value.ToString();
                 R_E_obj.rTxtDesc.Text = dgvObjetos.CurrentRow.Cells["DESCRIPCION"].Value.ToString();

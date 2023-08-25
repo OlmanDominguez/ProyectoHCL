@@ -45,8 +45,6 @@
             btnCerrarSesion = new Button();
             panel5 = new Panel();
             btnNuevo = new Button();
-            cmbEstado = new ComboBox();
-            label11 = new Label();
             btnEditar = new Button();
             cmbRol = new ComboBox();
             btnCancelar = new Button();
@@ -237,8 +235,6 @@
             // 
             panel5.BackColor = Color.Gainsboro;
             panel5.Controls.Add(btnNuevo);
-            panel5.Controls.Add(cmbEstado);
-            panel5.Controls.Add(label11);
             panel5.Controls.Add(btnEditar);
             panel5.Controls.Add(cmbRol);
             panel5.Controls.Add(btnCancelar);
@@ -275,32 +271,6 @@
             btnNuevo.UseVisualStyleBackColor = false;
             btnNuevo.Visible = false;
             btnNuevo.Click += btnNuevo_Click;
-            // 
-            // cmbEstado
-            // 
-            cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbEstado.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            cmbEstado.FormattingEnabled = true;
-            cmbEstado.Items.AddRange(new object[] { "ACTIVO", "INACTIVO" });
-            cmbEstado.Location = new Point(442, 15);
-            cmbEstado.Margin = new Padding(2);
-            cmbEstado.Name = "cmbEstado";
-            cmbEstado.Size = new Size(166, 28);
-            cmbEstado.TabIndex = 74;
-            cmbEstado.Visible = false;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.ForeColor = Color.Black;
-            label11.Location = new Point(375, 18);
-            label11.Margin = new Padding(2, 0, 2, 0);
-            label11.Name = "label11";
-            label11.Size = new Size(63, 19);
-            label11.TabIndex = 73;
-            label11.Text = "Estado:";
-            label11.Visible = false;
             // 
             // btnEditar
             // 
@@ -998,6 +968,7 @@
             dgvRolPermiso.RowTemplate.Height = 25;
             dgvRolPermiso.Size = new Size(1027, 392);
             dgvRolPermiso.TabIndex = 5;
+            dgvRolPermiso.CellValueChanged += dgvRolPermiso_CellValueChanged;
             // 
             // R_R_RolesPermisos
             // 
@@ -1088,8 +1059,6 @@
         private Label label4;
         private Label label1;
         private PictureBox pictureBox1;
-        public ComboBox cmbEstado;
-        public Label label11;
         public Button btnNuevo;
     }
 }

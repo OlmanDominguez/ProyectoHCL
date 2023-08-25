@@ -21,6 +21,7 @@ namespace ProyectoHCL.Formularios
         {
             InitializeComponent();
             cargarRoles();
+            dgvRolPermiso.CellValueChanged += dgvRolPermiso_CellValueChanged;
         }
 
         RolUsuario rolUs = new RolUsuario();
@@ -32,12 +33,39 @@ namespace ProyectoHCL.Formularios
         Modelo modelo = new Modelo();
         int IdRol;
 
-        private void ListarObjetos()
+        private void ListarObjetos() //Mostrar los objetos y su respectivo id almacenados en la tabla TBL_OBJETOS
         {
             dgvRolPermiso.DataSource = cDatos.listarObjetos();
         }
 
-        private void cargarRoles()
+        private void Permisos() //Asignar permisos a este form
+        {
+            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
+
+            foreach (var obj in LsObj)
+            {
+                switch (obj.IdPermiso)
+                {
+                    case 2:
+                        if (obj.IdObjeto == "PERMISOS" && !obj.Permitido) //Validar pantalla y el permiso
+                        {
+                            btnNuevo.Visible = false;
+                            btnEditar.Visible = false;
+                            lblTitulo.Text = "Editar Permisos";
+                        }
+                        break;
+                    case 3:
+                        if (obj.IdObjeto == "PERMISOS" && !obj.Permitido)
+                        {
+                            btnEditar.Visible = false;
+                            btnNuevo.Visible = false;
+                        }
+                        break;
+                }
+            }
+        }
+
+        private void cargarRoles() //Llenar el combobox con los roles almacenados en la tabla TBL_ROL
         {
             MySqlConnection conn;
             MySqlCommand cmd;
@@ -70,7 +98,7 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        private void CargarDG()
+        private void CargarDG() //Agregar las columnas checkbox
         {
             DataGridViewCheckBoxColumn chkVer = new DataGridViewCheckBoxColumn();
             chkVer.Name = "VER";
@@ -169,6 +197,7 @@ namespace ProyectoHCL.Formularios
             ListarObjetos();
             cmbRol.SelectedIndex = -1;
             CargarDG();
+            Permisos();
             //pictureBox1.Image = Image.FromFile(@"C:\Users\jmont\OneDrive\Documentos\HM\reloj-de-arena.gif");
             //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
@@ -177,7 +206,7 @@ namespace ProyectoHCL.Formularios
         {
             panel6.Visible = true;
 
-            foreach (DataGridViewRow row in dgvRolPermiso.Rows)
+            foreach (DataGridViewRow row in dgvRolPermiso.Rows)//Recorrer el datagridview para obtener los valores de las casillas y asignar los permisos
             {
                 permiso.IdRol = cmbRol.Text;
                 permiso.IdObjeto = row.Cells["PANTALLA"].Value.ToString();
@@ -291,44 +320,72 @@ namespace ProyectoHCL.Formularios
             lblTitulo.Text = "Editar Permisos";
             btnEditar.Visible = false;
             btnNuevo.Visible = true;
-
         }
 
-        //private void cargarPermisos()
-        //{
-        //    MySqlCommand cmd;
-        //    MySqlConnection conn = new MySqlConnection();
-        //    conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+        private void cargarPermisos() //Marcar los combobox del datagridview al obtener los permisos del rol a editar
+        {
+            MySqlConnection conn = new MySqlConnection();
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
 
-        //    conn.Open();
+            try
+            {
+                conn.Open();
 
-        //    string sql = "SELECT PERMITIDO FROM TBL_PERMISO_ROL WHERE ID_ROL = 3";
-        //    cmd = new MySqlCommand(sql, conn);
+                string sql = ("SELECT ID_OBJETO, ID_PERMISO, PERMITIDO FROM TBL_PERMISO_ROL WHERE ID_ROL = '"
+                + ExisteRol() + "';");
+                using (MySqlCommand command = new MySqlCommand(sql, conn))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int idObjeto = reader.GetInt32("ID_OBJETO");
+                            int idPermiso = reader.GetInt32("ID_PERMISO");
+                            bool permitido = reader.GetBoolean("PERMITIDO");
 
-        //    MySqlDataAdapter data = new MySqlDataAdapter(cmd);
-        //    DataTable dt = new DataTable();
-        //    data.Fill(dt);
+                            // Buscar la fila correspondiente al idObjeto en el DataGridView
+                            DataGridViewRow row = dgvRolPermiso.Rows
+                                .Cast<DataGridViewRow>()
+                                .FirstOrDefault(r => Convert.ToInt32(r.Cells["ID"].Value) == idObjeto);
 
-
-        //    foreach (DataGridViewRow rows in dgvRolPermiso.Rows)
-        //    {
-        //        foreach (DataRow row in dt.Rows)
-        //        {
-        //            rows.Cells["VER"].Value = row["PERMITIDO"];
-        //            rows.Cells["CREAR"].Value = row["PERMITIDO"];
-        //            rows.Cells["EDITAR"].Value = row["PERMITIDO"];
-        //            rows.Cells["ELIMINAR"].Value = row["PERMITIDO"];
-
-        //        }
-        //    }
-        //}
+                            if (row != null)
+                            {
+                                switch (idPermiso)
+                                {
+                                    case 1:
+                                        row.Cells["VER"].Value = permitido;
+                                        break;
+                                    case 2:
+                                        row.Cells["CREAR"].Value = permitido;
+                                        break;
+                                    case 3:
+                                        row.Cells["EDITAR"].Value = permitido;
+                                        break;
+                                    case 4:
+                                        row.Cells["ELIMINAR"].Value = permitido;
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
 
         private void ActualizarPermisoRol()
         {
             label1.Text = "Actualizando permisos";
             panel6.Visible = true;
 
-            foreach (DataGridViewRow row in dgvRolPermiso.Rows)
+            foreach (DataGridViewRow row in dgvRolPermiso.Rows) //Recorrer el datagridview para obtener los valores de las casillas y asignar los permisos
             {
                 permiso.IdRol = cmbRol.Text;
                 permiso.IdObjetoAct = int.Parse(row.Cells["ID"].Value.ToString());
@@ -389,7 +446,7 @@ namespace ProyectoHCL.Formularios
             panel6.Visible = false;
         }
 
-        private void cmbRol_SelectedValueChanged(object sender, EventArgs e)
+        private void cmbRol_SelectedValueChanged(object sender, EventArgs e) //Validar los permisos por rol al cambiar el valor del combobox
         {
             if (lblTitulo.Text == "Registrar Permisos" && modelo.existePermiso(ExisteRol()) && !String.IsNullOrEmpty(cmbRol.Text))
             {
@@ -397,11 +454,16 @@ namespace ProyectoHCL.Formularios
                 DialogResult dR = m.ShowDialog();
                 limpiarCampos();
             }
-            else if (lblTitulo.Text == "Editar Permisos" && !modelo.existePermiso(ExisteRol()) && !String.IsNullOrEmpty(cmbRol.Text))
+
+            if (lblTitulo.Text == "Editar Permisos" && !modelo.existePermiso(ExisteRol()) && !String.IsNullOrEmpty(cmbRol.Text))
             {
                 MsgB m = new MsgB("error", "El rol seleccionado no puede editarse, no tiene permisos asignados");
                 DialogResult dR = m.ShowDialog();
                 limpiarCampos();
+            }
+            else
+            {
+                cargarPermisos();
             }
         }
 
@@ -412,7 +474,7 @@ namespace ProyectoHCL.Formularios
             btnNuevo.Visible = false;
         }
 
-        public int ExisteRol()
+        public int ExisteRol() //Validar que existe el rol obteniendo el Id de rol según el rol en el combobox
         {
             MySqlCommand comando = new MySqlCommand();
             comando.Connection = BaseDatosHCL.ObtenerConexion();
@@ -428,7 +490,20 @@ namespace ProyectoHCL.Formularios
             else
             {
                 return 0;
+            }
+        }
 
+        private void dgvRolPermiso_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 3 || e.ColumnIndex == 4 || e.ColumnIndex == 5 && e.RowIndex >= 0)
+            {
+                // Marcar la columna 3 si la columna 4, 5 o 6 también está marcada
+                bool check = (bool)dgvRolPermiso.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+
+                if (check)
+                {
+                    dgvRolPermiso.Rows[e.RowIndex].Cells[2].Value = true;
+                }
             }
         }
     }

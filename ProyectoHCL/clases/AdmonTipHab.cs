@@ -14,7 +14,7 @@ namespace ProyectoHCL.clases
         MySqlCommand cmd;
 
 
-        public void modificarTipHab(int id, string tipo, int capacidad, decimal precio)
+        public void modificarTipHab(int id, string tipo, int capacidad, decimal precio, string estado)
         {
 
             try
@@ -28,6 +28,7 @@ namespace ProyectoHCL.clases
                 cmd.Parameters.AddWithValue("@tipo", tipo);
                 cmd.Parameters.AddWithValue("@capacidad", capacidad);
                 cmd.Parameters.AddWithValue("@precio", precio);
+                cmd.Parameters.AddWithValue("@estado", estado);
 
                 cmd.ExecuteNonQuery();
                 conn.Close();

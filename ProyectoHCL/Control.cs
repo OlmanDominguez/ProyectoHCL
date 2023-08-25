@@ -31,10 +31,10 @@ namespace ProyectoHCL
             admonObjeto.modificarObjeto(Convert.ToInt32(id), nombreObj, descObj, estadoObj, Convert.ToInt32(actP));
         }
 
-        public void editarTipHab(string id, string tipo, string capacidad, string precio)
+        public void editarTipHab(string id, string tipo, string capacidad, string precio, string est)
         {
             admonTipHab.modificarTipHab(Convert.ToInt32(id), tipo, Convert.ToInt32(capacidad), 
-                Convert.ToDecimal(precio));
+                Convert.ToDecimal(precio), est);
         }
 
         public void editarHab(string id, string tipo, string numero, string estado)
@@ -47,9 +47,9 @@ namespace ProyectoHCL
             admonServicios.modificarServicio(Convert.ToInt32(id), descripcion, Convert.ToDecimal(precio), est);
         }
 
-        public void editarDesc(string id, string descripcion, string porcentaje, string idU)
+        public void editarDesc(string id, string descripcion, string porcentaje, string est, string idU)
         {
-            admonDescuento.modificarDescuento(Convert.ToInt32(id), descripcion, Convert.ToDecimal(porcentaje), Convert.ToInt32(idU));
+            admonDescuento.modificarDescuento(Convert.ToInt32(id), descripcion, Convert.ToDecimal(porcentaje), est, Convert.ToInt32(idU));
         }
 
         public void editarClie(string NOMBRECL, int ID_TIPOCLIENTECL, string APELLIDOCL,

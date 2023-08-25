@@ -17,10 +17,15 @@ namespace ProyectoHCL.clases
         public static string nombre;
         public static string correo;
         public static string contraseña;
+        public static string cliente;
+        public static DateTime entrada;
+        public static DateTime salida;
 
 
         public static int idUsu; //Almacenar id Usuario
         public static int idRolUs; //ALmacenar id Rol
+        public static int numeroHab;
+
 
         public DataTable listarObjetos()
         {
@@ -124,7 +129,7 @@ namespace ProyectoHCL.clases
 
                 cmd.Parameters.Add(new MySqlParameter("@idRol", permisoR.IdRol));
                 cmd.Parameters.Add(new MySqlParameter("@idPermiso", permisoR.IdPermiso));
-                cmd.Parameters.Add(new MySqlParameter("@idObjeto", permisoR.IdObjeto));
+                cmd.Parameters.Add(new MySqlParameter("@idObjeto", permisoR.IdObjetoAct));
                 cmd.Parameters.Add(new MySqlParameter("@permitido", permisoR.Permitido));
 
                 cmd.ExecuteNonQuery();

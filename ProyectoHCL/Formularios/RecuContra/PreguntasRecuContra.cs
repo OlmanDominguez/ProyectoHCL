@@ -34,7 +34,7 @@ namespace ProyectoHCL.Formularios
             if (clasecompartida.estado == 3)
             {
 
-                label1.Text = "Responde a 2(dos) preguntas de seguridad para restablecer tu contraseña en un futuro.";
+                label1.Text = "Responde al menos 2(dos) preguntas de seguridad para restablecer tu contraseña en un futuro.";
                 try
                 {
                     using (BaseDatosHCL.ObtenerConexion())
@@ -94,6 +94,33 @@ namespace ProyectoHCL.Formularios
             }
             else if (clasecompartida.estado == 1)
             {
+                label1.Text = "Actualiza tus preguntas de seguridad para restablecer tu contraseña en un futuro.";
+                try
+                {
+                    using (BaseDatosHCL.ObtenerConexion())
+                    {
+                        //Consulta
+                        MySqlCommand comando = new MySqlCommand();
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("select PREGUNTA FROM TBL_PREGUNTA WHERE ID_ESTADO = 1");
+
+                        MySqlDataReader leer = comando.ExecuteReader();
+
+                        COBPREG.Items.Add("--Seleccione--");
+                        COBPREG.SelectedIndex = 0;
+                        //Validación de la data obtenida
+                        while (leer.Read())
+                        {
+                            COBPREG.Items.Add(leer["PREGUNTA"].ToString());
+                        }
+                        comando.Connection.Close();
+                    }
+
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message + a.StackTrace);
+                }
 
             }
 
@@ -202,6 +229,96 @@ namespace ProyectoHCL.Formularios
 
                         MessageBox.Show(a.Message + a.StackTrace);
                     }
+                }
+                else if (clasecompartida.estado == 1)
+                {
+                    try
+                    {
+                        using (BaseDatosHCL.ObtenerConexion())
+                        {
+                            MySqlCommand comando = new MySqlCommand();
+                            comando.Connection = BaseDatosHCL.ObtenerConexion();
+                            comando.CommandText = ("select ID_PREGUNTA FROM TBL_PREGUNTA WHERE PREGUNTA = '" + pregunta + "'");
+
+                            MySqlDataReader leer = comando.ExecuteReader();
+
+                            if (leer.Read())
+                            {
+                                int resp = (int)leer["ID_PREGUNTA"];
+                                comando.Connection.Close();
+
+                                comando.Connection = BaseDatosHCL.ObtenerConexion();
+                                comando.CommandText = ("SELECT * FROM TBL_PREGUNTAUSUARIO WHERE ID_USUARIO = '" +
+                                    clasecompartida.iduser + "' AND ID_PREGUNTA = '" + resp + "'");
+
+                                MySqlDataReader leer0 = comando.ExecuteReader();
+
+                                if (leer0.Read())
+                                {
+                                    comando.Connection.Close();
+
+                                    comando.Connection = BaseDatosHCL.ObtenerConexion();
+                                    comando.CommandText = ("UPDATE TBL_PREGUNTAUSUARIO SET RESPUESTA = '" + respuesta + "' " +
+                                        "WHERE ID_PREGUNTA = '" + resp + "' AND ID_USUARIO = '" + clasecompartida.iduser + "'");
+
+                                    comando.ExecuteNonQuery();
+
+                                    comando.Connection.Close();
+                                }
+                                else
+                                {
+                                    comando.Connection = BaseDatosHCL.ObtenerConexion();
+                                    comando.CommandText = ("INSERT INTO TBL_PREGUNTAUSUARIO(ID_PREGUNTA, ID_USUARIO, RESPUESTA) VALUES ('" +
+                                        resp + "', '" + clasecompartida.iduser + "', '" + respuesta + "')");
+
+                                    comando.ExecuteNonQuery();
+                                    comando.Connection.Close();
+                                }
+
+                                comando.Connection.Close();
+                            }
+
+                            comando.Connection.Close();
+
+                            comando.Connection = BaseDatosHCL.ObtenerConexion();
+                            comando.CommandText = ("SELECT COUNT(*) FROM TBL_PREGUNTAUSUARIO WHERE ID_USUARIO = '" +
+                                clasecompartida.iduser + "'");
+
+                            MySqlDataReader leer1 = comando.ExecuteReader();
+
+                            if (leer1.Read())
+                            {
+                                long cant = Convert.ToInt64(leer1["COUNT(*)"]);
+                                if (cant == 2 || cant > 2)
+                                {
+                                    MessageBox.Show("Gracias por responder");
+                                    comando.Connection.Close();
+
+                                    comando.Connection = BaseDatosHCL.ObtenerConexion();
+                                    comando.CommandText = ("update TBL_USUARIO SET ID_ESTADO = 1 WHERE ID_USUARIO = '" +
+                                        clasecompartida.iduser + "'");
+
+                                    comando.ExecuteNonQuery();
+                                    comando.Connection.Close();
+
+                                    this.Close();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Favor contesta otra pregunta");
+                                    TXT_Respuesta.Text = "";
+                                }
+
+                            }
+                            comando.Connection.Close();
+                        }
+                    }
+                    catch (Exception a)
+                    {
+
+                        MessageBox.Show(a.Message + a.StackTrace);
+                    }
+
                 }
                 else
                 {

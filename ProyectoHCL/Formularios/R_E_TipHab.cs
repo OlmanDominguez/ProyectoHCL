@@ -18,6 +18,7 @@ namespace ProyectoHCL.Formularios
         public R_E_TipHab()
         {
             InitializeComponent();
+            txtPrecio.KeyPress += txtPrecio_KeyPress;
         }
 
         public string idTH = null;
@@ -28,6 +29,7 @@ namespace ProyectoHCL.Formularios
             txtTipo.Clear();
             txtCapacidad.Clear();
             txtPrecio.Clear();
+            cmbEstado.SelectedIndex = -1;
         }
 
         public void limpiarError()
@@ -35,6 +37,7 @@ namespace ProyectoHCL.Formularios
             errorT.SetError(txtTipo, "");
             errorT.SetError(txtCapacidad, "");
             errorT.SetError(txtPrecio, "");
+            errorT.SetError(cmbEstado, "");
         }
 
         private void btnMin_Click(object sender, EventArgs e)
@@ -80,7 +83,14 @@ namespace ProyectoHCL.Formularios
 
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidarTxt.TxtNumeros(e);
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '.' && (sender as TextBox).Text.Contains("."))
+            {
+                e.Handled = true;
+            }
         }
 
         private void txtTipo_Leave(object sender, EventArgs e)
@@ -125,7 +135,8 @@ namespace ProyectoHCL.Formularios
             {
                 Modelo modelo = new Modelo();
 
-                if (txtTipo.Text.Trim() == "" || txtCapacidad.Text.Trim() == "" || txtPrecio.Text.Trim() == "")
+                if (txtTipo.Text.Trim() == "" || txtCapacidad.Text.Trim() == "" || txtPrecio.Text.Trim() == ""
+                    || cmbEstado.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
@@ -149,6 +160,7 @@ namespace ProyectoHCL.Formularios
                         cmd.Parameters.AddWithValue("@tipo", txtTipo.Text);
                         cmd.Parameters.AddWithValue("@capacidad", txtCapacidad.Text);
                         cmd.Parameters.AddWithValue("@precio", txtPrecio.Text);
+                        cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
 
                         cmd.ExecuteNonQuery();
                         MsgB m = new MsgB("informacion", "Registro creado con éxito");
@@ -167,7 +179,8 @@ namespace ProyectoHCL.Formularios
             {
                 Control control = new Control();
 
-                if (txtTipo.Text.Trim() == "" || txtCapacidad.Text.Trim() == "" || txtPrecio.Text.Trim() == "")
+                if (txtTipo.Text.Trim() == "" || txtCapacidad.Text.Trim() == "" || txtPrecio.Text.Trim() == ""
+                    || cmbEstado.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
@@ -176,7 +189,7 @@ namespace ProyectoHCL.Formularios
                 {
                     try
                     {
-                        control.editarTipHab(idTH, txtTipo.Text, txtCapacidad.Text, txtPrecio.Text);
+                        control.editarTipHab(idTH, txtTipo.Text, txtCapacidad.Text, txtPrecio.Text, cmbEstado.Text);
 
                         MsgB m = new MsgB("informacion", "Registro modificado");
                         DialogResult dR = m.ShowDialog();
@@ -188,6 +201,18 @@ namespace ProyectoHCL.Formularios
                         DialogResult dR = m.ShowDialog();
                     }
                 }
+            }
+        }
+
+        private void cmbEstado_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.cmbVacio(cmbEstado))
+            {
+                errorT.SetError(cmbEstado, "Seleccione un estado");
+            }
+            else
+            {
+                errorT.Clear();
             }
         }
     }

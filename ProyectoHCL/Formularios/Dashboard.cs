@@ -46,85 +46,85 @@ namespace ProyectoHCL
                     case "HABITACIONES":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_habitaciones.Enabled = false;
+                            Ibtn_habitaciones.Visible = false;
                         }
                         break;
                     case "DESCUENTOS":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_descuentos.Enabled = false;
+                            Ibtn_descuentos.Visible = false;
                         }
                         break;
                     case "USUARIOS":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_clientes.Enabled = false;
+                            Ibtn_clientes.Visible = false;
                         }
                         break;
                     case "SERVICIOS":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_servicios.Enabled = false;
+                            Ibtn_servicios.Visible = false;
                         }
                         break;
                     case "OBJETOS":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_objetos.Enabled = false;
+                            Ibtn_objetos.Visible = false;
                         }
                         break;
                     case "TIPO HABITACION":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            iconButton1.Enabled = false;
+                            iconButton1.Visible = false;
                         }
                         break;
                     case "FACTURACION":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_facturacion.Enabled = false;
+                            Ibtn_facturacion.Visible = false;
                         }
                         break;
                     case "RESERVACION":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_reservacion.Enabled = false;
+                            Ibtn_reservacion.Visible = false;
                         }
                         break;
                     case "ROLES":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_roles.Enabled = false;
+                            Ibtn_roles.Visible = false;
                         }
                         break;
                     case "PERMISOS":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_permisos.Enabled = false;
+                            Ibtn_permisos.Visible = false;
                         }
                         break;
                     case "PARAMETROS":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_parametros.Enabled = false;
+                            Ibtn_parametros.Visible = false;
                         }
                         break;
                     case "CLIENTES":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_usuarios.Enabled = false;
+                            Ibtn_usuarios.Visible = false;
                         }
                         break;
                     case "BITACORA":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            iconButton3.Enabled = false;
+                            iconButton3.Visible = false;
                         }
                         break;
                     case "PREGUNTAS":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_usuarios.Enabled = false;
+                            iconButton2.Visible = false;
                         }
                         break;
                 }

@@ -55,7 +55,7 @@ namespace ProyectoHCL.Formularios
                     case 2:
                         if (obj.IdObjeto == "USUARIOS" && !obj.Permitido)
                         {
-                            btnNuevo.Enabled = false;
+                            btnNuevo.Visible = false;
                         }
                         break;
                     case 3:
@@ -177,6 +177,8 @@ namespace ProyectoHCL.Formularios
             R_E_user.lblTitulo.Text = "Registrar Usuario";
             R_E_user.cmbEstado.Visible = false;
             R_E_user.lblEstado.Visible = false;
+            R_E_user.label14.Visible = false;
+            R_E_user.label9.Visible = true;
             R_E_user.txtFechaC.Text = DateTime.Now.ToShortDateString();
             R_E_user.dtpVencimiento.Text = DateTime.Now.AddDays(diasV).ToShortDateString();
             R_E_user.ShowDialog();
@@ -223,6 +225,8 @@ namespace ProyectoHCL.Formularios
 
                 R_E_user.cmbEstado.Visible = true;
                 R_E_user.lblEstado.Visible = true;
+                R_E_user.label9.Visible = false;
+                R_E_user.label14.Visible = true;
                 R_E_user.idUs = dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString();
                 R_E_user.txtUsuario.Text = dgvUsuarios.CurrentRow.Cells["USUARIO"].Value.ToString(); //Traer los datos del dataGrid al form para editar
                 R_E_user.txtNombre.Text = dgvUsuarios.CurrentRow.Cells["NOMBRE"].Value.ToString();
