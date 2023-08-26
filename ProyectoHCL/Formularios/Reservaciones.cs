@@ -21,6 +21,7 @@ using iText.Kernel.Pdf;
 using Document = iText.Layout.Document;
 using iText.Kernel.Geom;
 using iText.Layout.Element;
+using Point = System.Drawing.Point;
 
 
 namespace ProyectoHCL
@@ -31,12 +32,45 @@ namespace ProyectoHCL
         AdminReserva adminReserva = new AdminReserva();
         NuevaReservacion reservacion = new NuevaReservacion();
         DataSet ds = new DataSet();
+        CDatos cDatos = new CDatos();
         int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
         public Reservaciones()
         {
             InitializeComponent();
             pagFinal = numFilas;
             CargarDG();
+        }
+
+        private void Permisos()
+        {
+            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
+
+            foreach (var obj in LsObj)
+            {
+                switch (obj.IdPermiso)
+                {
+                    case 2:
+                        if (obj.IdObjeto == "RESERVACION" && !obj.Permitido)
+                        {
+                            btnNuevo.Visible = false;
+                            label4.Location = new Point(28, 24);
+                            txtBuscar_reservas.Location = new Point(84, 22);
+                        }
+                        break;
+                    case 3:
+                        if (obj.IdObjeto == "RESERVACION" && !obj.Permitido)
+                        {
+                            dgv_reservaciones.Columns["EDITAR"].Visible = false;
+                        }
+                        break;
+                    case 4:
+                        if (obj.IdObjeto == "RESERVACION" && !obj.Permitido)
+                        {
+                            dgv_reservaciones.Columns["ELIMINAR"].Visible = false;
+                        }
+                        break;
+                }
+            }
         }
 
         private void CargarDG()
@@ -134,7 +168,7 @@ namespace ProyectoHCL
             DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
             btnDelete.Name = "ELIMINAR";
             dgv_reservaciones.Columns.Add(btnDelete);
-
+            Permisos();
         }
 
 
@@ -230,14 +264,12 @@ namespace ProyectoHCL
             {
                 reservacion.lbl_titulo.Text = "Editar Reservacion";
                 reservacion.txt_id_solicitud.Text = dgv_reservaciones.CurrentRow.Cells["ID"].Value.ToString();
-                reservacion.cb_cliente.Text = dgv_reservaciones.CurrentRow.Cells["NOMBRE"].Value.ToString();
+                //reservacion.cb_cliente.Text = dgv_reservaciones.CurrentRow.Cells["NOMBRE"].Value.ToString();
                 //reservacion.cb_estado.Text = dgv_reservaciones.CurrentRow.Cells["ESTADO"].Value.ToString();
                 reservacion.lbl_1c.Visible = true;
-                reservacion.lbl_cliente.Visible = true;
-                reservacion.lbl_1h.Visible= true;
-                reservacion.lbl_habitacion.Visible = true;
+                reservacion.lbl_cliente.Visible = true;             
                 reservacion.lbl_cliente.Text= dgv_reservaciones.CurrentRow.Cells["NOMBRE"].Value.ToString();
-                reservacion.lbl_habitacion.Text = dgv_reservaciones.CurrentRow.Cells["HABITACION"].Value.ToString();
+                //reservacion.lbl_habitacion.Text = dgv_reservaciones.CurrentRow.Cells["HABITACION"].Value.ToString();
                 reservacion.ShowDialog();
 
                 CargarDG();

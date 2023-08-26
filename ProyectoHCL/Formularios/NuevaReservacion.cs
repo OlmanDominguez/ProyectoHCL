@@ -1,5 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
+using iText.Layout.Renderer;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
@@ -28,6 +29,7 @@ namespace ProyectoHCL
 
 
         }
+
 
         public void id_empleado()
         {
@@ -198,7 +200,6 @@ namespace ProyectoHCL
             cb_metodo.SelectedIndex = 0;
             cb_numero.SelectedIndex = 0;
             cb_tipo.SelectedIndex = 0;
-            cb_cliente.SelectedIndex = 0;
             cb_estado.SelectedIndex = 0;
 
 
@@ -297,7 +298,7 @@ namespace ProyectoHCL
                 {
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("select ID_TIPOHABITACION, NUMEROHABITACION from TBL_HABITACION where ESTADOHABITACION='DISPONIBLE' AND ID_TIPOHABITACION=@ID_TIPOHABITACION;");
+                    comando.CommandText = ("select ID_TIPOHABITACION, NUMEROHABITACION from TBL_HABITACION where ID_TIPOHABITACION=@ID_TIPOHABITACION;");
                     comando.Parameters.AddWithValue("ID_TIPOHABITACION", ID_TIPOHABITACION);
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
                     adapter.SelectCommand = comando;
@@ -365,44 +366,44 @@ namespace ProyectoHCL
 
         }
 
-        private void combo_cliente()
-        {
+        /* private void combo_cliente()
+         {
 
-            try
-            {
-                using (BaseDatosHCL.ObtenerConexion())
-                {
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("select NOMBRE,APELLIDO from TBL_CLIENTE;");
+             try
+             {
+                 using (BaseDatosHCL.ObtenerConexion())
+                 {
+                     MySqlCommand comando = new MySqlCommand();
+                     comando.Connection = BaseDatosHCL.ObtenerConexion();
+                     comando.CommandText = ("select NOMBRE,APELLIDO from TBL_CLIENTE;");
 
-                    MySqlDataAdapter adapter = new MySqlDataAdapter();
-                    adapter.SelectCommand = comando;
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
+                     MySqlDataAdapter adapter = new MySqlDataAdapter();
+                     adapter.SelectCommand = comando;
+                     DataTable dt = new DataTable();
+                     adapter.Fill(dt);
 
-                    DataRow fila = dt.NewRow();
-                    fila["NOMBRE"] = "Seleccione un cliente";
-                    dt.Rows.InsertAt(fila, 0);
+                     DataRow fila = dt.NewRow();
+                     fila["NOMBRE"] = "Seleccione un cliente";
+                     dt.Rows.InsertAt(fila, 0);
 
-                    //combobox estado reserva
-                    cb_cliente.DataSource = dt;
-                    cb_cliente.DisplayMember = "TBL_CLIENTE";
-                    cb_cliente.ValueMember = "NOMBRE";
+                     //combobox estado reserva
+                     cb_cliente.DataSource = dt;
+                     cb_cliente.DisplayMember = "TBL_CLIENTE";
+                     cb_cliente.ValueMember = "NOMBRE";
 
-                    cb_cliente.AutoCompleteMode = AutoCompleteMode.Suggest;
-                    cb_cliente.AutoCompleteSource = AutoCompleteSource.ListItems;
+                     cb_cliente.AutoCompleteMode = AutoCompleteMode.Suggest;
+                     cb_cliente.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
-                }
+                 }
 
-            }
-            catch (Exception a)
-            {
-                MessageBox.Show(a.Message);
-            }
+             }
+             catch (Exception a)
+             {
+                 MessageBox.Show(a.Message);
+             }
 
-        }
+         }*/
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -417,10 +418,10 @@ namespace ProyectoHCL
         }
 
         private void cb_cliente_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
+        {/*
 
             String nombre = cb_cliente.SelectedValue.ToString();
-            lbl_cliente.Text = nombre;
+            //lbl_cliente.Text = nombre;
             try
             {
                 using (BaseDatosHCL.ObtenerConexion())
@@ -446,7 +447,7 @@ namespace ProyectoHCL
                 MessageBox.Show(a.Message);
             }
 
-
+            */
         }
 
         private void NuevaReservacion_Load(object sender, EventArgs e)
@@ -509,7 +510,7 @@ namespace ProyectoHCL
                             txt_vehiculo.Text = leer["VEHICULO"].ToString();
                             txt_huespedes.Text = leer["NHUESPEDES"].ToString();
                             txt_habi_vieja.Text = leer["NUMEROHABITACION"].ToString();
-                            //cb_numero.Text = leer["NUMEROHABITACION"].ToString();
+                            cb_numero.Text = leer["NUMEROHABITACION"].ToString();
                             dt_fecha_coti.Value = Convert.ToDateTime(leer["FECHACOTI"].ToString());
                             dt_fecha_entrada.Value = Convert.ToDateTime(leer["INGRESO"].ToString());
                             dt_fecha_salida.Value = Convert.ToDateTime(leer["SALIDA"].ToString());
@@ -541,7 +542,7 @@ namespace ProyectoHCL
             else
             {
                 btnGuardar.Visible = true;
-                combo_cliente();
+                //combo_cliente();
                 //combo_metodo();
                 //combo_estado();
 
@@ -661,62 +662,95 @@ namespace ProyectoHCL
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (dt_fecha_coti.Value.Date >= DateTime.Today)
+
+            object adb = cb_numero.SelectedItem;
+            object b = cb_numero.GetItemText(adb);
+
+            string fecha1 = dt_fecha_entrada.Text;
+            string fecha2 = dt_fecha_salida.Text;
+
+
+            try
             {
-                if (dt_fecha_entrada.Value.Date >= DateTime.Today)
+                using (BaseDatosHCL.ObtenerConexion())
                 {
-                    if (dt_fecha_salida.Value.Date >= DateTime.Today)
+                    MySqlCommand comando = new MySqlCommand();
+                    comando.Connection = BaseDatosHCL.ObtenerConexion();
+                    comando.CommandText = ("select * from TBL_SOLICITUDRESERVA where NUMEROHABITACION='" + b + "' and INGRESO and SALIDA between '" + fecha1 + "' and '" + fecha2 + "';");
+
+                    MySqlDataReader leer = comando.ExecuteReader();
+                    if (leer.Read() == true)
                     {
-                        try
+                        MsgB m = new MsgB("advertencia", "Ya existe una reserva para esta habitacion en el mismo rango de fechas");
+                        DialogResult dR = m.ShowDialog();
+                    }
+                    else
+                    {
+                        if (dt_fecha_coti.Value.Date >= DateTime.Today)
                         {
-                            MySqlConnection conn;
-                            MySqlCommand cmd;
-                            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                            conn.Open();
+                            if (dt_fecha_entrada.Value.Date >= DateTime.Today)
+                            {
+                                if (dt_fecha_salida.Value.Date >= DateTime.Today)
+                                {
+                                    try
+                                    {
+                                        MySqlConnection conn;
+                                        MySqlCommand cmd;
+                                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                                        conn.Open();
 
-                            cmd = new MySqlCommand("InsertarReserva", conn);
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@id_estado", txt_estado.Text);
-                            cmd.Parameters.AddWithValue("@id_metodo", txt_metodo_reserva.Text);
-                            cmd.Parameters.AddWithValue("@id_usuaio", txt_codigo.Text);
-                            cmd.Parameters.AddWithValue("@fecha_coti", Convert.ToDateTime(dt_fecha_coti.Text));
-                            cmd.Parameters.AddWithValue("@fecha_ingreso", Convert.ToDateTime(dt_fecha_entrada.Text));
-                            cmd.Parameters.AddWithValue("@fecha_salida", Convert.ToDateTime(dt_fecha_salida.Text));
-                            cmd.Parameters.AddWithValue("@n_huespedes", txt_huespedes.Text);
-                            cmd.Parameters.AddWithValue("@vehiculo", txt_vehiculo.Text);
-                            cmd.Parameters.AddWithValue("@monto", txt_monto.Text);
-                            cmd.Parameters.AddWithValue("@cod_cliente", txt_cod_cliente.Text);
-                            cmd.Parameters.AddWithValue("@num_habitacion", cb_numero.Text);
+                                        cmd = new MySqlCommand("InsertarReserva", conn);
+                                        cmd.CommandType = CommandType.StoredProcedure;
+                                        cmd.Parameters.AddWithValue("@id_estado", txt_estado.Text);
+                                        cmd.Parameters.AddWithValue("@id_metodo", txt_metodo_reserva.Text);
+                                        cmd.Parameters.AddWithValue("@id_usuaio", txt_codigo.Text);
+                                        cmd.Parameters.AddWithValue("@fecha_coti", Convert.ToDateTime(dt_fecha_coti.Text));
+                                        cmd.Parameters.AddWithValue("@fecha_ingreso", Convert.ToDateTime(dt_fecha_entrada.Text));
+                                        cmd.Parameters.AddWithValue("@fecha_salida", Convert.ToDateTime(dt_fecha_salida.Text));
+                                        cmd.Parameters.AddWithValue("@n_huespedes", txt_huespedes.Text);
+                                        cmd.Parameters.AddWithValue("@vehiculo", txt_vehiculo.Text);
+                                        cmd.Parameters.AddWithValue("@monto", txt_monto.Text);
+                                        cmd.Parameters.AddWithValue("@cod_cliente", txt_cod_cliente.Text);
+                                        cmd.Parameters.AddWithValue("@num_habitacion", cb_numero.Text);
 
 
-                            cmd.ExecuteNonQuery();
-                            inserdetalle();
-                            updatehabitacion();
-                            MsgB m = new MsgB("informacion", "Reserva agregada con exito");
-                            DialogResult dR = m.ShowDialog();
-                            //limpiarCampos();
-                            conn.Close();
+                                        cmd.ExecuteNonQuery();
+                                        inserdetalle();
+                                        updatehabitacion();
+                                        MsgB m = new MsgB("informacion", "Reserva agregada con exito");
+                                        DialogResult dR = m.ShowDialog();
+                                        //limpiarCampos();
+                                        conn.Close();
 
-                            this.Close();
-                        }
-                        catch (Exception ex)
+                                        this.Close();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MsgB m = new MsgB("advertencia", "Validar datos ingresados");
+                                        DialogResult dR = m.ShowDialog();
+                                    }
+                                }
+                            }
+                        }//cierre del if 
+                        else
                         {
-                            MsgB m = new MsgB("advertencia", "Validar datos ingresados");
+                            MsgB m = new MsgB("advertencia", "Fechas ingresadas invalidas");
                             DialogResult dR = m.ShowDialog();
                         }
                     }
                 }
-            }//cierre del if 
-            else
+
+            }
+            catch (Exception a)
             {
-                MsgB m = new MsgB("advertencia", "Fechas ingresadas invalidas");
-                DialogResult dR = m.ShowDialog();
+                MessageBox.Show(a.Message);
             }
 
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            NuevaReservacion.ActiveForm.Close();
             this.Close();
         }
 
@@ -738,8 +772,7 @@ namespace ProyectoHCL
                     if (leer.Read() == true)
                     {
                         txt_id.Text = leer["ID_HABITACION"].ToString();
-                        //txt_habi_vieja.Text = leer["ID_HABITACION"].ToString();
-                        lbl_habitacion.Text = Convert.ToString(b);
+
                     }
                     else
                     {
@@ -751,6 +784,7 @@ namespace ProyectoHCL
             {
                 MessageBox.Show(a.Message);
             }
+
         }
 
         private void btn_guardar2_Click(object sender, EventArgs e)
@@ -822,7 +856,7 @@ namespace ProyectoHCL
 
         private void txt_monto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsNumber(e.KeyChar))
+            /*if (Char.IsNumber(e.KeyChar))
             {
                 e.Handled = false;
             }
@@ -835,6 +869,16 @@ namespace ProyectoHCL
                 e.Handled = true;
                 MsgB m = new MsgB("advertencia", "Por favor, sólo ingrese números");
                 DialogResult dR = m.ShowDialog();
+            }*/
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // solo 1 punto decimal
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
             }
         }
 
@@ -875,6 +919,12 @@ namespace ProyectoHCL
         private void txt_monto_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form nuevo = new Buscar();
+            nuevo.Show();
         }
     }
 }

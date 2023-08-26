@@ -61,13 +61,13 @@ namespace ProyectoHCL.Formularios
                     case 3:
                         if (obj.IdObjeto == "TIPO HABITACION" && !obj.Permitido)
                         {
-                            dgvUsuarios.Columns["EDITAR"].Visible = false;
+                            dgvTH.Columns["EDITAR"].Visible = false;
                         }
                         break;
                     case 4:
                         if (obj.IdObjeto == "TIPO HABITACION" && !obj.Permitido)
                         {
-                            dgvUsuarios.Columns["ELIMINAR"].Visible = false;
+                            dgvTH.Columns["ELIMINAR"].Visible = false;
                         }
                         break;
                 }

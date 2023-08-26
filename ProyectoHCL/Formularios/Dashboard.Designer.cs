@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             panel1 = new Panel();
             panelmanteSubMenu = new Panel();
+            iconButton5 = new FontAwesome.Sharp.IconButton();
+            iconButton4 = new FontAwesome.Sharp.IconButton();
             iconButton3 = new FontAwesome.Sharp.IconButton();
             iconButton2 = new FontAwesome.Sharp.IconButton();
             Ibtn_clientes = new FontAwesome.Sharp.IconButton();
@@ -133,6 +135,7 @@
             label3 = new Label();
             pictureBox4 = new PictureBox();
             pictureBox3 = new PictureBox();
+            iconButton6 = new FontAwesome.Sharp.IconButton();
             panel1.SuspendLayout();
             panelmanteSubMenu.SuspendLayout();
             paneladminSubMenu.SuspendLayout();
@@ -188,6 +191,8 @@
             // panelmanteSubMenu
             // 
             panelmanteSubMenu.BackColor = Color.FromArgb(74, 181, 221);
+            panelmanteSubMenu.Controls.Add(iconButton5);
+            panelmanteSubMenu.Controls.Add(iconButton4);
             panelmanteSubMenu.Controls.Add(iconButton3);
             panelmanteSubMenu.Controls.Add(iconButton2);
             panelmanteSubMenu.Controls.Add(Ibtn_clientes);
@@ -196,10 +201,54 @@
             panelmanteSubMenu.Controls.Add(Ibtn_objetos);
             panelmanteSubMenu.Controls.Add(Ibtn_roles);
             panelmanteSubMenu.Dock = DockStyle.Top;
-            panelmanteSubMenu.Location = new Point(0, 547);
+            panelmanteSubMenu.Location = new Point(0, 589);
             panelmanteSubMenu.Name = "panelmanteSubMenu";
-            panelmanteSubMenu.Size = new Size(246, 326);
+            panelmanteSubMenu.Size = new Size(246, 419);
             panelmanteSubMenu.TabIndex = 35;
+            // 
+            // iconButton5
+            // 
+            iconButton5.Dock = DockStyle.Top;
+            iconButton5.FlatAppearance.BorderSize = 0;
+            iconButton5.FlatStyle = FlatStyle.Flat;
+            iconButton5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            iconButton5.IconChar = FontAwesome.Sharp.IconChar.Repeat;
+            iconButton5.IconColor = Color.Black;
+            iconButton5.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButton5.IconSize = 25;
+            iconButton5.ImageAlign = ContentAlignment.MiddleLeft;
+            iconButton5.Location = new Point(0, 360);
+            iconButton5.Name = "iconButton5";
+            iconButton5.Padding = new Padding(35, 0, 0, 0);
+            iconButton5.Size = new Size(246, 45);
+            iconButton5.TabIndex = 40;
+            iconButton5.Text = "Restore";
+            iconButton5.TextAlign = ContentAlignment.MiddleLeft;
+            iconButton5.TextImageRelation = TextImageRelation.ImageBeforeText;
+            iconButton5.UseVisualStyleBackColor = true;
+            iconButton5.Click += iconButton5_Click;
+            // 
+            // iconButton4
+            // 
+            iconButton4.Dock = DockStyle.Top;
+            iconButton4.FlatAppearance.BorderSize = 0;
+            iconButton4.FlatStyle = FlatStyle.Flat;
+            iconButton4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            iconButton4.IconChar = FontAwesome.Sharp.IconChar.Bandcamp;
+            iconButton4.IconColor = Color.Black;
+            iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButton4.IconSize = 25;
+            iconButton4.ImageAlign = ContentAlignment.MiddleLeft;
+            iconButton4.Location = new Point(0, 315);
+            iconButton4.Name = "iconButton4";
+            iconButton4.Padding = new Padding(35, 0, 0, 0);
+            iconButton4.Size = new Size(246, 45);
+            iconButton4.TabIndex = 39;
+            iconButton4.Text = "Backup";
+            iconButton4.TextAlign = ContentAlignment.MiddleLeft;
+            iconButton4.TextImageRelation = TextImageRelation.ImageBeforeText;
+            iconButton4.UseVisualStyleBackColor = true;
+            iconButton4.Click += iconButton4_Click;
             // 
             // iconButton3
             // 
@@ -366,7 +415,7 @@
             Ibtn_mantenimiento.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_mantenimiento.IconSize = 25;
             Ibtn_mantenimiento.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_mantenimiento.Location = new Point(0, 502);
+            Ibtn_mantenimiento.Location = new Point(0, 544);
             Ibtn_mantenimiento.Name = "Ibtn_mantenimiento";
             Ibtn_mantenimiento.Padding = new Padding(15, 0, 0, 0);
             Ibtn_mantenimiento.Size = new Size(246, 45);
@@ -388,7 +437,7 @@
             Ibtn_reservacion.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_reservacion.IconSize = 25;
             Ibtn_reservacion.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_reservacion.Location = new Point(0, 457);
+            Ibtn_reservacion.Location = new Point(0, 499);
             Ibtn_reservacion.Name = "Ibtn_reservacion";
             Ibtn_reservacion.Padding = new Padding(15, 0, 0, 0);
             Ibtn_reservacion.Size = new Size(246, 45);
@@ -410,7 +459,7 @@
             Ibtn_facturacion.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_facturacion.IconSize = 25;
             Ibtn_facturacion.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_facturacion.Location = new Point(0, 412);
+            Ibtn_facturacion.Location = new Point(0, 454);
             Ibtn_facturacion.Name = "Ibtn_facturacion";
             Ibtn_facturacion.Padding = new Padding(15, 0, 0, 0);
             Ibtn_facturacion.Size = new Size(246, 45);
@@ -424,6 +473,7 @@
             // paneladminSubMenu
             // 
             paneladminSubMenu.BackColor = Color.FromArgb(74, 181, 221);
+            paneladminSubMenu.Controls.Add(iconButton6);
             paneladminSubMenu.Controls.Add(iconButton1);
             paneladminSubMenu.Controls.Add(Ibtn_usuarios);
             paneladminSubMenu.Controls.Add(Ibtn_descuentos);
@@ -432,7 +482,7 @@
             paneladminSubMenu.Dock = DockStyle.Top;
             paneladminSubMenu.Location = new Point(0, 177);
             paneladminSubMenu.Name = "paneladminSubMenu";
-            paneladminSubMenu.Size = new Size(246, 235);
+            paneladminSubMenu.Size = new Size(246, 277);
             paneladminSubMenu.TabIndex = 29;
             // 
             // iconButton1
@@ -767,44 +817,44 @@
             dgv_habitacion.BackgroundColor = Color.FromArgb(45, 66, 91);
             dgv_habitacion.BorderStyle = BorderStyle.None;
             dgv_habitacion.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(252, 222, 73);
-            dataGridViewCellStyle1.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.MenuText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgv_habitacion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = Color.FromArgb(252, 222, 73);
+            dataGridViewCellStyle9.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle9.ForeColor = SystemColors.MenuText;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            dgv_habitacion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             dgv_habitacion.ColumnHeadersHeight = 30;
             dgv_habitacion.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.MenuHighlight;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgv_habitacion.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = SystemColors.MenuHighlight;
+            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle10.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
+            dgv_habitacion.DefaultCellStyle = dataGridViewCellStyle10;
             dgv_habitacion.EnableHeadersVisualStyles = false;
             dgv_habitacion.GridColor = Color.SteelBlue;
             dgv_habitacion.Location = new Point(419, 56);
             dgv_habitacion.Name = "dgv_habitacion";
             dgv_habitacion.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle3.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgv_habitacion.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle11.ForeColor = SystemColors.Window;
+            dataGridViewCellStyle11.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            dgv_habitacion.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
             dgv_habitacion.RowHeadersVisible = false;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle4.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle4.SelectionForeColor = Color.White;
-            dgv_habitacion.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle12.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle12.ForeColor = Color.White;
+            dataGridViewCellStyle12.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle12.SelectionForeColor = Color.White;
+            dgv_habitacion.RowsDefaultCellStyle = dataGridViewCellStyle12;
             dgv_habitacion.RowTemplate.Height = 25;
             dgv_habitacion.Size = new Size(277, 165);
             dgv_habitacion.TabIndex = 100;
@@ -1693,6 +1743,28 @@
             pictureBox3.TabIndex = 28;
             pictureBox3.TabStop = false;
             // 
+            // iconButton6
+            // 
+            iconButton6.Dock = DockStyle.Top;
+            iconButton6.FlatAppearance.BorderSize = 0;
+            iconButton6.FlatStyle = FlatStyle.Flat;
+            iconButton6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            iconButton6.IconChar = FontAwesome.Sharp.IconChar.Hotel;
+            iconButton6.IconColor = Color.Black;
+            iconButton6.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButton6.IconSize = 25;
+            iconButton6.ImageAlign = ContentAlignment.MiddleLeft;
+            iconButton6.Location = new Point(0, 225);
+            iconButton6.Name = "iconButton6";
+            iconButton6.Padding = new Padding(35, 0, 0, 0);
+            iconButton6.Size = new Size(246, 45);
+            iconButton6.TabIndex = 34;
+            iconButton6.Text = "Calendario Reservaciones";
+            iconButton6.TextAlign = ContentAlignment.MiddleLeft;
+            iconButton6.TextImageRelation = TextImageRelation.ImageBeforeText;
+            iconButton6.UseVisualStyleBackColor = true;
+            iconButton6.Click += iconButton6_Click;
+            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1845,5 +1917,8 @@
         private FontAwesome.Sharp.IconButton iconButton2;
         private FontAwesome.Sharp.IconButton Ibtn_clientes;
         private FontAwesome.Sharp.IconButton iconButton3;
+        private FontAwesome.Sharp.IconButton iconButton5;
+        private FontAwesome.Sharp.IconButton iconButton4;
+        private FontAwesome.Sharp.IconButton iconButton6;
     }
 }
