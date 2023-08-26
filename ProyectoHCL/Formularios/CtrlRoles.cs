@@ -50,6 +50,37 @@ namespace ProyectoHCL.Formularios
 
         }
 
+        private void Permisos()
+        {
+            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
+
+            foreach (var obj in LsObj)
+            {
+                switch (obj.IdPermiso)
+                {
+                    case 2:
+                        if (obj.IdObjeto == "ROLES" && !obj.Permitido)
+                        {
+                            btnNuevo.Visible = false;
+                            label1.Location = new Point(28, 24);
+                            txtBuscarR.Location = new Point(84, 22);
+                        }
+                        break;
+                    case 3:
+                        if (obj.IdObjeto == "ROLES" && !obj.Permitido)
+                        {
+                            dgvRoles.Columns["EDITAR"].Visible = false;
+                        }
+                        break;
+                    case 4:
+                        if (obj.IdObjeto == "ROLES" && !obj.Permitido)
+                        {
+                            dgvRoles.Columns["ELIMINAR"].Visible = false;
+                        }
+                        break;
+                }
+            }
+        }
 
         private void CargarDT()
         {
@@ -85,7 +116,7 @@ namespace ProyectoHCL.Formularios
             btnDelete.Name = "ELIMINAR";
             dgvRoles.Columns.Add(btnDelete);
 
-
+            Permisos();
         }
 
 
