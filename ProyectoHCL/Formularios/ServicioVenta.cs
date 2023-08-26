@@ -126,6 +126,12 @@ namespace ProyectoHCL.Formularios
                 lista.SubItems.Add(Convert.ToString(subt));
                 listView.Items.Add(lista);
 
+
+                decimal resultadoActual = decimal.Parse(txtTotal.Text);
+                resultadoActual += subt;
+
+                txtTotal.Text = Convert.ToString(resultadoActual);
+
                 try
                 {
                     using (BaseDatosHCL.ObtenerConexion())
@@ -140,10 +146,11 @@ namespace ProyectoHCL.Formularios
                         {
                             id = (int)leer["ID_SERVICIO"];
                         }
-                        
+
 
                         comando.Connection.Close();
 
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
                         comando.CommandText = ("INSERT INTO TBL_DETALLESERVICIO (ID_SERVICIO, ID_SOLICITUDRESERVA, ID_DESCUENTO, CANTIDAD, " +
                             "MONTODESCUENTO) VALUES(" + id + ", " + info.reserva + ", 1, " + txt_cantidad.Text + ", 0);");
 
@@ -181,26 +188,28 @@ namespace ProyectoHCL.Formularios
 
                 if (Convert.ToInt32(item.SubItems[2].Text) == 1)
                 {
+                    int id = 0;
                     try
                     {
                         using (BaseDatosHCL.ObtenerConexion())
                         {
                             MySqlCommand comando = new MySqlCommand();
                             comando.Connection = BaseDatosHCL.ObtenerConexion();
-                            comando.CommandText = "SELECT * FROM TBL_SERVICIO WHERE DESCRIPCION = " + item.SubItems[0].Text;
+                            comando.CommandText = "SELECT * FROM TBL_SERVICIO WHERE DESCRIPCION = '" + item.SubItems[0].Text + "';";
                             MySqlDataReader leer = comando.ExecuteReader();
 
-                            int id = 0;
+                            id = 0;
                             if (leer.Read())
                             {
                                 id = (int)leer["ID_SERVICIO"];
                             }
-                            
+
 
                             comando.Connection.Close();
 
+                            comando.Connection = BaseDatosHCL.ObtenerConexion();
                             comando.CommandText = ("DELETE FROM TBL_DETALLESERVICIO WHERE ID_SOLICITUDRESERVA = " +
-                                info.reserva + " and ID_SERVICIO = " + id + ";");
+                                info.reserva + " and ID_SERVICIO = " + id + " and CANTIDAD = 1;");
 
                             comando.ExecuteNonQuery();
                             comando.Connection.Close();
@@ -214,19 +223,23 @@ namespace ProyectoHCL.Formularios
                     {
                         MessageBox.Show(a.Message + a.StackTrace);
                     }
+
+                                     
+                    
                 }
                 else
                 {
+                    int id = 0;
                     try
                     {
                         using (BaseDatosHCL.ObtenerConexion())
                         {
                             MySqlCommand comando = new MySqlCommand();
                             comando.Connection = BaseDatosHCL.ObtenerConexion();
-                            comando.CommandText = "SELECT * FROM TBL_SERVICIO WHERE DESCRIPCION = " + item.SubItems[0].Text;
+                            comando.CommandText = "SELECT * FROM TBL_SERVICIO WHERE DESCRIPCION = '" + item.SubItems[0].Text + "';";
                             MySqlDataReader leer = comando.ExecuteReader();
 
-                            int id = 0;
+                            id = 0;
                             if (leer.Read())
                             {
                                 id = (int)leer["ID_SERVICIO"];
@@ -234,28 +247,6 @@ namespace ProyectoHCL.Formularios
 
                             comando.Connection.Close();
 
-                            comando.CommandText = ("UPDATE TBL_DETALLESERVICIO SET CANTIDAD = " + (Convert.ToInt32(item.SubItems[2].Text) - 1) + " WHERE ID_SOLICITUDRESERVA = " +
-                                info.reserva + " and ID_SERVICIO = " + id + ";");
-
-                            comando.ExecuteNonQuery();
-                            comando.Connection.Close();
-
-                            listView.Items.Remove(item);
-
-                            comando.CommandText = "SELECT ds.CANTIDAD, s.PRECIO, s.DESCRIPCION  FROM TBL_DETALLESERVICIO ds " +
-                                "INNER JOIN TBL_SERVICIO s ON ds.ID_SERVICIO = s.ID_SERVICIO " +
-                                "WHERE ds.ID_SERVICIO = " + id + " AND ID_SOLICITUDRESERVA = " + info.reserva + "";
-                            MySqlDataReader leer1 = comando.ExecuteReader();
-
-                            if (leer1.Read())
-                            {
-                                ListViewItem lista = new ListViewItem(leer1["DESCRIPCION"].ToString());
-                                lista.SubItems.Add(leer1["PRECIO"].ToString());
-                                lista.SubItems.Add(leer1["CANTIDAD"].ToString());
-                                lista.SubItems.Add(Convert.ToString(Convert.ToDecimal(leer1["CANTIDAD"].ToString) * Convert.ToDecimal(leer1["PRECIO"].ToString)));
-                                listView.Items.Add(lista);
-                            }
-                            //Agg para validar si el cliente ya tiene cargado ese servicio                     
                         }
 
                     }
@@ -263,6 +254,92 @@ namespace ProyectoHCL.Formularios
                     {
                         MessageBox.Show(a.Message + a.StackTrace);
                     }
+
+                    int idds = 0;
+
+                    try
+                    {
+                        using (BaseDatosHCL.ObtenerConexion())
+                        {
+                            MySqlCommand comando = new MySqlCommand();
+                            comando.Connection = BaseDatosHCL.ObtenerConexion();
+                            comando.CommandText = ("SELECT ID_DETALLESERVICIO, CANTIDAD FROM TBL_DETALLESERVICIO WHERE ID_SOLICITUDRESERVA = " +
+                                info.reserva + " and ID_SERVICIO = " + id + "  ORDER BY CANTIDAD ASC;");
+
+                            MySqlDataReader leer3 = comando.ExecuteReader();
+                            if (leer3.Read())
+                            {
+                                idds = (int)leer3["ID_DETALLESERVICIO"];
+                            }
+
+
+                            comando.Connection.Close();
+
+                            listView.Items.Remove(item);
+
+                        }
+
+                    }
+                    catch (Exception a)
+                    {
+                        MessageBox.Show(a.Message + a.StackTrace);
+                    }
+
+                    try
+                    {
+                        using (BaseDatosHCL.ObtenerConexion())
+                        {
+                            MySqlCommand comando = new MySqlCommand();
+                            comando.Connection = BaseDatosHCL.ObtenerConexion();
+                            comando.CommandText = ("UPDATE TBL_DETALLESERVICIO SET CANTIDAD = " + (Convert.ToInt32(item.SubItems[2].Text) - 1) + " WHERE ID_SOLICITUDRESERVA = " +
+                                info.reserva + " and ID_SERVICIO = " + id + " and ID_DETALLESERVICIO = " + idds + ";");
+
+                            comando.ExecuteNonQuery();
+                            comando.Connection.Close();
+
+                            listView.Items.Remove(item);
+
+                        }
+
+                    }
+                    catch (Exception a)
+                    {
+                        MessageBox.Show(a.Message + a.StackTrace);
+                    }
+
+                    try
+                    {
+                        using (BaseDatosHCL.ObtenerConexion())
+                        {
+                            MySqlCommand comando = new MySqlCommand();
+
+                            comando.Connection = BaseDatosHCL.ObtenerConexion();
+                            comando.CommandText = "SELECT ds.CANTIDAD, s.PRECIO, s.DESCRIPCION  FROM TBL_DETALLESERVICIO ds " +
+                                "INNER JOIN TBL_SERVICIO s ON ds.ID_SERVICIO = s.ID_SERVICIO " +
+                                "WHERE ds.ID_SERVICIO = " + id + " AND ds.ID_SOLICITUDRESERVA = " + info.reserva + " and ID_DETALLESERVICIO = " + idds + ";";
+                            MySqlDataReader leer2 = comando.ExecuteReader();
+
+                            if (leer2.Read())
+                            {
+                                ListViewItem lista = new ListViewItem(leer2["DESCRIPCION"].ToString());
+                                lista.SubItems.Add(leer2["PRECIO"].ToString());
+                                lista.SubItems.Add(leer2["CANTIDAD"].ToString());
+                                decimal subt = Convert.ToDecimal(leer2["CANTIDAD"].ToString()) * Convert.ToDecimal(leer2["PRECIO"].ToString());
+                                lista.SubItems.Add(subt.ToString());
+                                listView.Items.Add(lista);
+
+                            }
+                            comando.Connection.Close();
+                        }
+
+                    }
+                    catch (Exception a)
+                    {
+                        MessageBox.Show(a.Message + a.StackTrace);
+                    }
+
+
+
                 }
 
 
@@ -287,6 +364,7 @@ namespace ProyectoHCL.Formularios
             {
                 listView.Items.Clear();
                 limpiarCampos();
+                this.Close();
             }
         }
 
@@ -416,7 +494,7 @@ namespace ProyectoHCL.Formularios
 
                 int s = st.Rows.Count;
                 int i = 0;
-
+                decimal total = 0;
 
                 if (s > 0)
                 {
@@ -430,9 +508,13 @@ namespace ProyectoHCL.Formularios
                         lista.SubItems.Add(Convert.ToString(Convert.ToDecimal(st.Rows[i]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[i]["PRECIO"])));
                         listView.Items.Add(lista);
 
+                        total += Convert.ToDecimal(st.Rows[i]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[i]["PRECIO"]);
+
                         i = i + 1;
                     }
                 }
+
+                txtTotal.Text = total.ToString();
 
             }
             else

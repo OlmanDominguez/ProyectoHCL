@@ -273,6 +273,8 @@ namespace ProyectoHCL.Formularios
 
                         int i = 0;
                         int j = 0;
+                        sth = 0;
+                        StS = 0;
 
                         if (h > 0)
                         {
@@ -332,6 +334,11 @@ namespace ProyectoHCL.Formularios
                         }
 
                         //Datos de impuestos y totales
+
+                        isv = 0;
+                        it = 0;
+                        subt = 0;
+                        total = 0;
 
                         if (sth != 0.00m & StS != 0.00m)
                         {
@@ -731,7 +738,7 @@ namespace ProyectoHCL.Formularios
             {
                 filas += "<tr>";
                 filas += "<td>1</td>";
-                filas += "<td>Habi. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString() + "</td>";
+                filas += "<td>" + ht.Rows[i]["DESCRIPCION"].ToString()+ "</td>";
                 filas += "<td>" + ht.Rows[i]["PRECIO"].ToString() + "</td>";
                 filas += "<td>" + Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])) + "</td>";
                 filas += "</tr>";
@@ -740,7 +747,7 @@ namespace ProyectoHCL.Formularios
 
             while (j < s)
             {
-                filas += "<tr>";
+                filas += "<tr>"
                 filas += "<td>" + st.Rows[j]["CANTIDAD"].ToString() + "</td>";
                 filas += "<td>" + st.Rows[j]["DESCRIPCION"].ToString() + "</td>";
                 filas += "<td>" + st.Rows[j]["PRECIO"].ToString() + "</td>";

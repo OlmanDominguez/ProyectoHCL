@@ -66,6 +66,7 @@
             btnCerrar = new Button();
             label11 = new Label();
             errorT = new ErrorProvider(components);
+            columnHeader4 = new ColumnHeader();
             panelPrincipal.SuspendLayout();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
@@ -178,7 +179,7 @@
             // listView
             // 
             listView.BorderStyle = BorderStyle.FixedSingle;
-            listView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader5, columnHeader3 });
+            listView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader5, columnHeader3, columnHeader4 });
             listView.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             listView.FullRowSelect = true;
             listView.GridLines = true;
@@ -512,6 +513,10 @@
             // 
             errorT.ContainerControl = this;
             // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "Codigo";
+            // 
             // ServicioVenta
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -577,5 +582,6 @@
         private ErrorProvider errorT;
         private ColumnHeader columnHeader5;
         private TextBox txt_cantidad;
+        private ColumnHeader columnHeader4;
     }
 }
