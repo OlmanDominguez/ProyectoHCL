@@ -59,6 +59,9 @@
             panel2 = new Panel();
             lbl_titulo = new Label();
             panelChildForm = new Panel();
+            panel3 = new Panel();
+            button1 = new Button();
+            label23 = new Label();
             lbl_cerrar = new Label();
             lbl_fechas = new Label();
             dgv_habitacion = new DataGridView();
@@ -140,6 +143,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel2.SuspendLayout();
             panelChildForm.SuspendLayout();
+            panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_habitacion).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbt_fechas).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbt_h16).BeginInit();
@@ -654,6 +658,7 @@
             // 
             panelChildForm.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panelChildForm.BackColor = Color.Transparent;
+            panelChildForm.Controls.Add(panel3);
             panelChildForm.Controls.Add(lbl_cerrar);
             panelChildForm.Controls.Add(lbl_fechas);
             panelChildForm.Controls.Add(dgv_habitacion);
@@ -732,6 +737,41 @@
             panelChildForm.Name = "panelChildForm";
             panelChildForm.Size = new Size(708, 653);
             panelChildForm.TabIndex = 25;
+            // 
+            // panel3
+            // 
+            panel3.Anchor = AnchorStyles.Top;
+            panel3.BackColor = Color.FromArgb(60, 150, 249);
+            panel3.Controls.Add(button1);
+            panel3.Controls.Add(label23);
+            panel3.Location = new Point(450, 236);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(223, 120);
+            panel3.TabIndex = 104;
+            // 
+            // button1
+            // 
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.BackgroundImageLayout = ImageLayout.Zoom;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(38, 31);
+            button1.Name = "button1";
+            button1.Size = new Size(137, 73);
+            button1.TabIndex = 1;
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label23.ForeColor = Color.White;
+            label23.Location = new Point(10, 8);
+            label23.Name = "label23";
+            label23.Size = new Size(206, 20);
+            label23.TabIndex = 0;
+            label23.Text = "Reservaciones Programadas";
             // 
             // lbl_cerrar
             // 
@@ -1717,6 +1757,8 @@
             panel2.PerformLayout();
             panelChildForm.ResumeLayout(false);
             panelChildForm.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_habitacion).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbt_fechas).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbt_h16).EndInit();
@@ -1845,5 +1887,8 @@
         private FontAwesome.Sharp.IconButton iconButton2;
         private FontAwesome.Sharp.IconButton Ibtn_clientes;
         private FontAwesome.Sharp.IconButton iconButton3;
+        private Panel panel3;
+        private Button button1;
+        private Label label23;
     }
 }
