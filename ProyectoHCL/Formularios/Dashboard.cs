@@ -1262,5 +1262,11 @@ namespace ProyectoHCL
             //codigo para el formilario             
             hideSubMenu2();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CalendarioReservas());
+        }
     }
 }
