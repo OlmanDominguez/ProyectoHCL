@@ -230,14 +230,12 @@ namespace ProyectoHCL
             {
                 reservacion.lbl_titulo.Text = "Editar Reservacion";
                 reservacion.txt_id_solicitud.Text = dgv_reservaciones.CurrentRow.Cells["ID"].Value.ToString();
-                reservacion.cb_cliente.Text = dgv_reservaciones.CurrentRow.Cells["NOMBRE"].Value.ToString();
+                //reservacion.cb_cliente.Text = dgv_reservaciones.CurrentRow.Cells["NOMBRE"].Value.ToString();
                 //reservacion.cb_estado.Text = dgv_reservaciones.CurrentRow.Cells["ESTADO"].Value.ToString();
                 reservacion.lbl_1c.Visible = true;
-                reservacion.lbl_cliente.Visible = true;
-                reservacion.lbl_1h.Visible= true;
-                reservacion.lbl_habitacion.Visible = true;
+                reservacion.lbl_cliente.Visible = true;             
                 reservacion.lbl_cliente.Text= dgv_reservaciones.CurrentRow.Cells["NOMBRE"].Value.ToString();
-                reservacion.lbl_habitacion.Text = dgv_reservaciones.CurrentRow.Cells["HABITACION"].Value.ToString();
+                //reservacion.lbl_habitacion.Text = dgv_reservaciones.CurrentRow.Cells["HABITACION"].Value.ToString();
                 reservacion.ShowDialog();
 
                 CargarDG();
