@@ -40,10 +40,6 @@
             btnCerrar = new Button();
             panel3 = new Panel();
             dgv_clientes = new DataGridView();
-            txtBuscar_Por_RTN = new TextBox();
-            label2 = new Label();
-            txtBuscar_Por_DNI = new TextBox();
-            label1 = new Label();
             txtBuscar_Por_Nombre = new TextBox();
             label4 = new Label();
             btn_guardar2 = new Button();
@@ -110,10 +106,6 @@
             // 
             panel3.BackColor = Color.Gainsboro;
             panel3.Controls.Add(dgv_clientes);
-            panel3.Controls.Add(txtBuscar_Por_RTN);
-            panel3.Controls.Add(label2);
-            panel3.Controls.Add(txtBuscar_Por_DNI);
-            panel3.Controls.Add(label1);
             panel3.Controls.Add(txtBuscar_Por_Nombre);
             panel3.Controls.Add(label4);
             panel3.Controls.Add(btn_guardar2);
@@ -160,7 +152,7 @@
             dgv_clientes.DefaultCellStyle = dataGridViewCellStyle3;
             dgv_clientes.EnableHeadersVisualStyles = false;
             dgv_clientes.GridColor = Color.FromArgb(45, 66, 91);
-            dgv_clientes.Location = new Point(12, 127);
+            dgv_clientes.Location = new Point(12, 76);
             dgv_clientes.Name = "dgv_clientes";
             dgv_clientes.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -179,66 +171,16 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
             dgv_clientes.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgv_clientes.RowTemplate.Height = 25;
-            dgv_clientes.Size = new Size(791, 311);
+            dgv_clientes.Size = new Size(791, 362);
             dgv_clientes.TabIndex = 84;
             dgv_clientes.CellClick += dgv_clientes_CellClick;
             dgv_clientes.CellPainting += dgv_clientes_CellPainting;
-            // 
-            // txtBuscar_Por_RTN
-            // 
-            txtBuscar_Por_RTN.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            txtBuscar_Por_RTN.BackColor = SystemColors.Info;
-            txtBuscar_Por_RTN.Location = new Point(155, 72);
-            txtBuscar_Por_RTN.Margin = new Padding(2);
-            txtBuscar_Por_RTN.Name = "txtBuscar_Por_RTN";
-            txtBuscar_Por_RTN.Size = new Size(252, 23);
-            txtBuscar_Por_RTN.TabIndex = 82;
-            txtBuscar_Por_RTN.TextChanged += txtBuscar_Por_RTN_TextChanged;
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(14, 71);
-            label2.Margin = new Padding(2, 0, 2, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(113, 20);
-            label2.TabIndex = 83;
-            label2.Text = "Buscar por RTN:";
-            // 
-            // txtBuscar_Por_DNI
-            // 
-            txtBuscar_Por_DNI.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            txtBuscar_Por_DNI.BackColor = SystemColors.Info;
-            txtBuscar_Por_DNI.Location = new Point(561, 30);
-            txtBuscar_Por_DNI.Margin = new Padding(2);
-            txtBuscar_Por_DNI.Name = "txtBuscar_Por_DNI";
-            txtBuscar_Por_DNI.Size = new Size(252, 23);
-            txtBuscar_Por_DNI.TabIndex = 80;
-            txtBuscar_Por_DNI.TextChanged += txtBuscar_Por_DNI_TextChanged;
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(420, 29);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(112, 20);
-            label1.TabIndex = 81;
-            label1.Text = "Buscar por DNI:";
             // 
             // txtBuscar_Por_Nombre
             // 
             txtBuscar_Por_Nombre.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             txtBuscar_Por_Nombre.BackColor = SystemColors.Info;
-            txtBuscar_Por_Nombre.Location = new Point(155, 30);
+            txtBuscar_Por_Nombre.Location = new Point(129, 29);
             txtBuscar_Por_Nombre.Margin = new Padding(2);
             txtBuscar_Por_Nombre.Name = "txtBuscar_Por_Nombre";
             txtBuscar_Por_Nombre.Size = new Size(252, 23);
@@ -255,9 +197,9 @@
             label4.Location = new Point(14, 29);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(136, 20);
+            label4.Size = new Size(102, 20);
             label4.TabIndex = 79;
-            label4.Text = "Buscar por Nombe:";
+            label4.Text = "Buscar Cliente";
             // 
             // btn_guardar2
             // 
@@ -340,10 +282,6 @@
         public Button btn_guardar2;
         public Button btnCancelar;
         public Button btnGuardar;
-        public TextBox txtBuscar_Por_RTN;
-        private Label label2;
-        public TextBox txtBuscar_Por_DNI;
-        private Label label1;
         public TextBox txtBuscar_Por_Nombre;
         private Label label4;
         public DataGridView dgv_clientes;

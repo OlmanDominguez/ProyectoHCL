@@ -1242,5 +1242,25 @@ namespace ProyectoHCL
             panelChildForm.Visible = true;
             openChildFormInPanel(new PerfilUsuario());
         }
+
+        private void iconButton4_Click(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new Backup());
+            hideSubMenu2();
+        }
+
+        private void iconButton5_Click(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new Restore());
+            hideSubMenu2();
+        }
+
+        private void iconButton6_Click(object sender, EventArgs e)
+        {
+            //codigo para el formilario             
+            hideSubMenu2();
+        }
     }
 }

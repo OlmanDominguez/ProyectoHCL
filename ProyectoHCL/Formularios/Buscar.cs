@@ -64,7 +64,7 @@ namespace ProyectoHCL
 
 
         }
-        public void BuscarNombre(string buscarU) //Recibe string para buscar usuarios
+        public void BuscarCliente(string buscarU) //Recibe string para buscar usuarios
         {
             try
             {
@@ -76,54 +76,6 @@ namespace ProyectoHCL
                 cmd = new MySqlCommand("buscarC", conn); //recibe proc almacenado
                 cmd.CommandType = CommandType.StoredProcedure; //se especifica que es un proc almacenado
                 cmd.Parameters.Add("@nombreC", MySqlDbType.VarChar, 50).Value = buscarU; //recibe el parametro nombreU definido en el parametro almacenado
-
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable(); //Se crea tabla
-                da.Fill(dt); //Se devuelven los registros en la tabla
-                dgv_clientes.DataSource = dt; //se define la tabla en la que se devuelven los registros
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public void BuscarDNI(string buscarU) //Recibe string para buscar usuarios
-        {
-            try
-            {
-                MySqlConnection conn;
-                MySqlCommand cmd;
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
-
-                cmd = new MySqlCommand("buscarDNI", conn); //recibe proc almacenado
-                cmd.CommandType = CommandType.StoredProcedure; //se especifica que es un proc almacenado
-                cmd.Parameters.Add("@DNI", MySqlDbType.VarChar, 50).Value = buscarU; //recibe el parametro nombreU definido en el parametro almacenado
-
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable(); //Se crea tabla
-                da.Fill(dt); //Se devuelven los registros en la tabla
-                dgv_clientes.DataSource = dt; //se define la tabla en la que se devuelven los registros
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public void BuscarRTN(string buscarU) //Recibe string para buscar usuarios
-        {
-            try
-            {
-                MySqlConnection conn;
-                MySqlCommand cmd;
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
-
-                cmd = new MySqlCommand("buscarRTN", conn); //recibe proc almacenado
-                cmd.CommandType = CommandType.StoredProcedure; //se especifica que es un proc almacenado
-                cmd.Parameters.Add("@RTN", MySqlDbType.VarChar, 50).Value = buscarU; //recibe el parametro nombreU definido en el parametro almacenado
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable(); //Se crea tabla
@@ -148,39 +100,11 @@ namespace ProyectoHCL
         {
             if (txtBuscar_Por_Nombre.Text != "") //si el textbox no está vacío devuelve el metodo buscar usuarios
             {
-                BuscarNombre(txtBuscar_Por_Nombre.Text); //El metodo recibe el string desde el textbox
+                BuscarCliente(txtBuscar_Por_Nombre.Text); //El metodo recibe el string desde el textbox
             }
             else
             {
-                CargarClientes();
-                //CargarReservas(); //Si el textbox está vacio devuelve el metodo mostrar usuarios 
-            }
-
-        }
-
-        private void txtBuscar_Por_DNI_TextChanged(object sender, EventArgs e)
-        {
-            if (txtBuscar_Por_DNI.Text != "") //si el textbox no está vacío devuelve el metodo buscar usuarios
-            {
-                BuscarDNI(txtBuscar_Por_DNI.Text); //El metodo recibe el string desde el textbox
-            }
-            else
-            {
-                CargarClientes();
-                //CargarReservas(); //Si el textbox está vacio devuelve el metodo mostrar usuarios 
-            }
-
-        }
-
-        private void txtBuscar_Por_RTN_TextChanged(object sender, EventArgs e)
-        {
-            if (txtBuscar_Por_RTN.Text != "") //si el textbox no está vacío devuelve el metodo buscar usuarios
-            {
-                BuscarRTN(txtBuscar_Por_RTN.Text); //El metodo recibe el string desde el textbox
-            }
-            else
-            {
-                CargarClientes();
+                // CargarClientes();
                 //CargarReservas(); //Si el textbox está vacio devuelve el metodo mostrar usuarios 
             }
 

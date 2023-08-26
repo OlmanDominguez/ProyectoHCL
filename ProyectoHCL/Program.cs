@@ -14,21 +14,22 @@ namespace ProyectoHCL
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             //ApplicationConfiguration.Initialize();
-           // Application.Run(new CtrlFacturacion());
-            Application.Run(new FORMULARIO()); 
+            // Application.Run(new CtrlFacturacion());
+             Application.Run(new FORMULARIO()); 
+           // Application.Run(new Buscar());
             //  Application.Run(new CtrlUsuarios());
 
 
             //Application.Run(new Dashboard());
             //Application.Run(new NuevaReservacion());
-           Application.Run(new CtrlObjetos());
+            //Application.Run(new CtrlObjetos());
 
             //Application.Run(new CtrlClientes());
-           //Application.Run(new Backup());
-         // Application.Run(new CtrlUsuarios());
-         // Application.Run(new CtrlParametro()); 
+            //Application.Run(new Backup());
+            // Application.Run(new CtrlUsuarios());
+            // Application.Run(new CtrlParametro()); 
             // Application.Run(new CtrlPreguntas());
-       //Application.Run(new CtrlRoles());
+            //Application.Run(new CtrlRoles());
 
 
 
