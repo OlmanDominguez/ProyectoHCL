@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static ProyectoHCL.RecuContra;
 using static ProyectoHCL.Formularios.CtrlFacturacion;
 
 using iTextSharp.text;
@@ -148,13 +149,63 @@ namespace ProyectoHCL.Formularios
                     return dt;
                 }
             }
-            else if (op == 4)
+            else if (op == 4) //INFO DE FACTURA
             {
                 try
                 {
                     string stri = "SELECT N_OCEXCENTA, NCONSTANCIAEXONERADO, NREGISTROSAR " +
                                   "FROM TBL_FACTURA " +
                                   "where ID_SOLICITUDRESERVA = " + param + ";";
+
+
+                    MySqlConnection conn;
+                    MySqlCommand cmd;
+                    conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                    conn.Open();
+
+                    cmd = new MySqlCommand(stri, conn);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    conn.Close();
+                    return dt;
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message + a.StackTrace);
+                    return dt;
+                }
+            }
+            else if (op == 5) //DETALLE HABITACIONES FACTURADAS
+            {
+                try
+                {
+                    string stri = "SELECT * FROM TBL_DETALLEFACTURA WHERE ID_SOLICITUDRESERVA = " +
+                        param + ";";
+
+
+                    MySqlConnection conn;
+                    MySqlCommand cmd;
+                    conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                    conn.Open();
+
+                    cmd = new MySqlCommand(stri, conn);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    conn.Close();
+                    return dt;
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message + a.StackTrace);
+                    return dt;
+                }
+            }
+            else if (op == 6) //DETALLE SERVICIOS FACTURADOS
+            {
+                try
+                {
+                    string stri = "SELECT * FROM TBL_DETALLEFACTURASERVI WHERE ID_SOLICITUDRESERVA = " +
+                        param + ";";
 
 
                     MySqlConnection conn;
@@ -182,37 +233,10 @@ namespace ProyectoHCL.Formularios
         int h, s;
         DataTable ht = new DataTable();
         DataTable st = new DataTable();
+        string query0 = "", query1 = "";
 
-
-        private void ShowFactura_Load(object sender, EventArgs e)
+        private void CargarDGV()
         {
-            try
-            {
-                //Carga del combobox de tipo de pago
-                using (BaseDatosHCL.ObtenerConexion())
-                {
-                    //Consulta
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("SELECT * FROM TBL_TIPOPAGO");
-
-                    MySqlDataReader leer = comando.ExecuteReader();
-
-                    cb_MPago.Items.Add("--Seleccione--");
-                    cb_MPago.SelectedIndex = 0;
-                    //Validación de la data obtenida
-                    while (leer.Read())
-                    {
-                        cb_MPago.Items.Add(leer["DESCRIPCION"].ToString());
-                    }
-                    comando.Connection.Close();
-                }
-
-            }
-            catch (Exception a)
-            {
-                MessageBox.Show(a.Message + a.StackTrace);
-            }
 
             string hoy = today.ToString("dd/MM/yyyy");
             var noches = Convert.ToDateTime(info.salida) - Convert.ToDateTime(info.ingreso);
@@ -232,6 +256,7 @@ namespace ProyectoHCL.Formularios
                     {
                         //Carga de datos generales en la vista
                         lb_nombres.Text = dt.Rows[0]["NOMBRE"].ToString() + " " + dt.Rows[0]["APELLIDO"].ToString();
+                        CDatos.nombre = dt.Rows[0]["NOMBRE"].ToString() + " " + dt.Rows[0]["APELLIDO"].ToString();
                         lb_ID.Text = dt.Rows[0]["DNI_PASAPORTE"].ToString();
                         lb_fecha.Text = hoy;
                         lb_ingreso.Text = info.ingreso;
@@ -244,12 +269,7 @@ namespace ProyectoHCL.Formularios
                         h = ht.Rows.Count;
                         //DetalleHabitaciones
 
-                        dgvDetalleFact.Columns.Add("cant.", "Cant.");
-                        dgvDetalleFact.Columns.Add("descripción", "Descripción");
-                        dgvDetalleFact.Columns.Add("p. unitario", "P. Unitario");
-                        dgvDetalleFact.Columns.Add("importe", "Importe");
-                        dgvDetalleFact.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                        dgvDetalleFact.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
 
                         int i = 0;
                         int j = 0;
@@ -260,10 +280,27 @@ namespace ProyectoHCL.Formularios
                             {
                                 dgvDetalleFact.Rows.Add("1", ("Habit. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString()),
                                     ht.Rows[i]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])));
+
+                                if (i == (h - 1))
+                                {
+                                    query0 = query0 + "(1,'Habit. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString() +
+                                    "'," + ht.Rows[i]["PRECIO"].ToString() + "," + Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])) +
+                                    ", " + info.reserva + ");";
+
+                                }
+                                else
+                                {
+                                    query0 = query0 + "(1,'Habit. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString() +
+                                    "'," + ht.Rows[i]["PRECIO"].ToString() + "," + Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])) +
+                                    ", " + info.reserva + "), ";
+
+                                }
+                                sth = sth + Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"]);
+
                                 i = i + 1;
                             }
                         }
-                        
+
 
                         st = consulta(info.reserva, 3);
                         s = st.Rows.Count;
@@ -274,10 +311,26 @@ namespace ProyectoHCL.Formularios
                             {
                                 dgvDetalleFact.Rows.Add(st.Rows[j]["CANTIDAD"].ToString(), st.Rows[j]["DESCRIPCION"].ToString(),
                                     st.Rows[j]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])));
+
+                                if (j == (s - 1))
+                                {
+                                    query1 = query1 + "(" + st.Rows[j]["CANTIDAD"].ToString() + ",'" + st.Rows[j]["DESCRIPCION"].ToString() + "'," +
+                                        st.Rows[j]["PRECIO"].ToString() + "," + Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])) +
+                                        ", " + info.reserva + ");";
+
+                                }
+                                else
+                                {
+                                    query1 = query1 + "(" + st.Rows[j]["CANTIDAD"].ToString() + ",'" + st.Rows[j]["DESCRIPCION"].ToString() + "'," +
+                                         st.Rows[j]["PRECIO"].ToString() + "," + Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])) +
+                                         ", " + info.reserva + "), ";
+
+                                }
+                                StS = StS + Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"]);
                                 j = j + 1;
                             }
                         }
-                        
+
                         //Datos de impuestos y totales
 
                         if (sth != 0.00m & StS != 0.00m)
@@ -286,10 +339,7 @@ namespace ProyectoHCL.Formularios
                             it = Decimal.Round((sth / 1.19m) * 0.04m, 2);
                             subt = Decimal.Round((sth / 1.19m) + (StS / 1.15m), 2);
                             total = Decimal.Round(isv + it + subt, 2);
-                            lb_isv.Text = Convert.ToString(isv);
-                            lb_it.Text = Convert.ToString(it);
-                            lb_Stotal.Text = Convert.ToString(subt);
-                            lb_Total.Text = Convert.ToString(total);
+
                         }
                         else if (sth != 0.00m & StS == 0)
                         {
@@ -297,11 +347,24 @@ namespace ProyectoHCL.Formularios
                             it = Decimal.Round((sth / 1.19m) * 0.04m, 2);
                             subt = Decimal.Round((sth / 1.19m) + (StS / 1.15m), 2);
                             total = Decimal.Round(isv + it + subt, 2);
-                            lb_isv.Text = Convert.ToString(isv);
-                            lb_it.Text = Convert.ToString(it);
-                            lb_Stotal.Text = Convert.ToString(subt);
-                            lb_Total.Text = Convert.ToString(total);
+
                         }
+                        else if (sth == 0 & StS != 0)
+                        {
+                            isv = Decimal.Round((StS / 1.15m) * 0.15m, 2);
+                            it = 0;
+                            subt = Decimal.Round((StS / 1.15m), 2);
+                            total = Decimal.Round(isv + it + subt, 2);
+                        }
+
+                        dgvMontos.Rows.Add("SubTotal", subt);
+                        dgvMontos.Rows.Add("Descuento", 0);
+                        dgvMontos.Rows.Add("SubTotal menos Descuento", subt - 0);
+                        dgvMontos.Rows.Add("Impuesto S/Venta", isv);
+                        dgvMontos.Rows.Add("Impuesto Turismo", it);
+                        dgvMontos.Rows.Add("Total Impuesto", isv + it);
+                        dgvMontos.Rows.Add("Total", subt + isv + it);
+
                     }
                 }
                 catch (Exception a)
@@ -312,6 +375,9 @@ namespace ProyectoHCL.Formularios
             }
             else if (info.reserva != "0" & info.factura != "0") //Factura solo para modificar metodo de pago
             {
+
+                sth = 0;
+                StS = 0;
                 DataTable dt = new DataTable();
                 try //Carga de combobox para tipo de pago
                 {
@@ -347,34 +413,7 @@ namespace ProyectoHCL.Formularios
                 txt_RegSar.Text = dt.Rows[0]["NREGISTROSAR"].ToString();
 
 
-                if (info.est == 1)
-                {
-                    txt_ConsExone.Enabled = false;
-                    txt_OCExenta.Enabled = false;
-                    txt_RegSar.Enabled = false;
-                    cb_MPago.Enabled = false;
-                    btnFacturar.Visible = true;
-                    btnFacturar.Text = "Generar";
-                }
-                else if (info.est == 0)
-                {
-                    txt_ConsExone.Enabled = true;
-                    txt_OCExenta.Enabled = true;
-                    txt_RegSar.Enabled = true;
-                    cb_MPago.Enabled = true;
-                    btnFacturar.Visible = true;
-                    btnFacturar.Text = "Guardar";
 
-                }
-                else if (info.est == 2)
-                {
-                    txt_ConsExone.Enabled = true;
-                    txt_OCExenta.Enabled = true;
-                    txt_RegSar.Enabled = true;
-                    cb_MPago.Enabled = true;
-                    btnFacturar.Visible = true;
-                    btnFacturar.Text = "Facturar";
-                }
 
                 try
                 {
@@ -397,17 +436,10 @@ namespace ProyectoHCL.Formularios
 
 
 
-                        ht = consulta(info.reserva, 2);
+                        ht = consulta(info.reserva, 5);
                         h = ht.Rows.Count;
                         //DetalleHabitaciones
 
-                        dgvDetalleFact.Columns.Add("cant.", "Cant.");
-                        dgvDetalleFact.Columns.Add("descripción", "Descripción");
-                        dgvDetalleFact.Columns.Add("p. unitario", "P. Unitario");
-                        dgvDetalleFact.Columns.Add("importe", "Importe");
-
-                        dgvDetalleFact.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                        dgvDetalleFact.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
                         int i = 0;
                         int j = 0;
@@ -416,14 +448,17 @@ namespace ProyectoHCL.Formularios
                         {
                             while (i < h)
                             {
-                                dgvDetalleFact.Rows.Add("1", ("Habit. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString()),
+                                dgvDetalleFact.Rows.Add("1", ht.Rows[i]["DESCRIPCION"].ToString(),
                                     ht.Rows[i]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])));
+
+                                sth = sth + Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"]);
+
                                 i = i + 1;
                             }
                         }
 
 
-                        st = consulta(info.reserva, 3);
+                        st = consulta(info.reserva, 6);
                         s = st.Rows.Count;
 
                         if (s > 0)
@@ -432,6 +467,8 @@ namespace ProyectoHCL.Formularios
                             {
                                 dgvDetalleFact.Rows.Add(st.Rows[j]["CANTIDAD"].ToString(), st.Rows[j]["DESCRIPCION"].ToString(),
                                     st.Rows[j]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])));
+
+                                StS = StS + Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"]);
                                 j = j + 1;
                             }
                         }
@@ -444,10 +481,7 @@ namespace ProyectoHCL.Formularios
                             it = Decimal.Round((sth / 1.19m) * 0.04m, 2);
                             subt = Decimal.Round((sth / 1.19m) + (StS / 1.15m), 2);
                             total = Decimal.Round(isv + it + subt, 2);
-                            lb_isv.Text = Convert.ToString(isv);
-                            lb_it.Text = Convert.ToString(it);
-                            lb_Stotal.Text = Convert.ToString(subt);
-                            lb_Total.Text = Convert.ToString(total);
+
                         }
                         else if (sth != 0.00m & StS == 0)
                         {
@@ -455,11 +489,23 @@ namespace ProyectoHCL.Formularios
                             it = Decimal.Round((sth / 1.19m) * 0.04m, 2);
                             subt = Decimal.Round((sth / 1.19m) + (StS / 1.15m), 2);
                             total = Decimal.Round(isv + it + subt, 2);
-                            lb_isv.Text = Convert.ToString(isv);
-                            lb_it.Text = Convert.ToString(it);
-                            lb_Stotal.Text = Convert.ToString(subt);
-                            lb_Total.Text = Convert.ToString(total);
+
                         }
+                        else if (sth == 0 & StS != 0)
+                        {
+                            isv = Decimal.Round((StS / 1.15m) * 0.15m, 2);
+                            it = 0;
+                            subt = Decimal.Round((StS / 1.15m), 2);
+                            total = Decimal.Round(isv + it + subt, 2);
+                        }
+
+                        dgvMontos.Rows.Add("SubTotal", subt);
+                        dgvMontos.Rows.Add("Descuento", 0);
+                        dgvMontos.Rows.Add("SubTotal menos Descuento", subt - 0);
+                        dgvMontos.Rows.Add("Impuesto S/Venta", isv);
+                        dgvMontos.Rows.Add("Impuesto Turismo", it);
+                        dgvMontos.Rows.Add("Total Impuesto", isv + it);
+                        dgvMontos.Rows.Add("Total", subt + isv + it);
                     }
                 }
                 catch (Exception a)
@@ -468,6 +514,92 @@ namespace ProyectoHCL.Formularios
                 }
 
             }
+        }
+
+
+        private void ShowFactura_Load(object sender, EventArgs e)
+        {
+
+            dgvDetalleFact.Columns.Add("cant.", "Cant.");
+            dgvDetalleFact.Columns.Add("descripción", "Descripción");
+            dgvDetalleFact.Columns.Add("p. unitario", "P. Unitario");
+            dgvDetalleFact.Columns.Add("importe", "Importe");
+            dgvDetalleFact.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetalleFact.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            dgvMontos.Columns.Add("descripcion", "Descripcion");
+            dgvMontos.Columns.Add("importe", "Importe");
+            dgvMontos.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvMontos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+
+            try
+            {
+                //Carga del combobox de tipo de pago
+                using (BaseDatosHCL.ObtenerConexion())
+                {
+                    //Consulta
+                    MySqlCommand comando = new MySqlCommand();
+                    comando.Connection = BaseDatosHCL.ObtenerConexion();
+                    comando.CommandText = ("SELECT * FROM TBL_TIPOPAGO");
+
+                    MySqlDataReader leer = comando.ExecuteReader();
+
+                    cb_MPago.Items.Add("--Seleccione--");
+                    cb_MPago.SelectedIndex = 0;
+                    //Validación de la data obtenida
+                    while (leer.Read())
+                    {
+                        cb_MPago.Items.Add(leer["DESCRIPCION"].ToString());
+                    }
+                    comando.Connection.Close();
+                }
+
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show(a.Message + a.StackTrace);
+            }
+
+            if (info.est == 1)
+            {
+                txt_ConsExone.Enabled = false;
+                txt_OCExenta.Enabled = false;
+                txt_RegSar.Enabled = false;
+                cb_MPago.Enabled = false;
+                btnFacturar.Visible = true;
+                lbl_Descuento.Visible = false;
+                lbl_servicios.Visible = false;
+                btnFacturar.Text = "Generar";
+            }
+            else if (info.est == 0)
+            {
+                txt_ConsExone.Enabled = true;
+                txt_OCExenta.Enabled = true;
+                txt_RegSar.Enabled = true;
+                cb_MPago.Enabled = true;
+                btnFacturar.Visible = true;
+                lbl_Descuento.Visible = false;
+                lbl_servicios.Visible = false;
+                btnFacturar.Text = "Guardar";
+
+            }
+            else if (info.est == 2)
+            {
+                txt_ConsExone.Enabled = true;
+                txt_OCExenta.Enabled = true;
+                txt_RegSar.Enabled = true;
+                cb_MPago.Enabled = true;
+                btnFacturar.Visible = true;
+                lbl_Descuento.Visible = true;
+                lbl_servicios.Visible = true;
+                btnFacturar.Text = "Facturar";
+            }
+
+
+            this.dgvDetalleFact.Rows.Clear();
+            this.dgvMontos.Rows.Clear();
+            CargarDGV();
 
         }
 
@@ -487,7 +619,7 @@ namespace ProyectoHCL.Formularios
                             "ID_USUARIO, FECHA, N_OCEXCENTA, NCONSTANCIAEXONERADO, NREGISTROSAR, SUBTOTAL, " +
                             "IMPOREXONERADO, IMPOREXCENTO, IMPORTEISV, IMPORTEALCOHOL, IMPORTETURISMO, " +
                             "IMPUESISV, IMPUESALCOHOL, IMPUESTURIMOS, TOTAL) VALUES (" + info.reserva + ", " +
-                            cb_MPago.SelectedIndex + ", 1, '" + today.ToString("yyyy-MM-dd HH:mm:ss") + "', " + txt_OCExenta.Text + ", " +
+                            cb_MPago.SelectedIndex + ", " + clasecompartida.iduser + ", '" + today.ToString("yyyy-MM-dd HH:mm:ss") + "', " + txt_OCExenta.Text + ", " +
                             txt_ConsExone.Text + ", " + txt_RegSar.Text + ", " + subt + ", 0, 0, " +
                             subt + ", 0, " + sth + ", " + isv + ", 0, " + it + ", " + total + ")");
 
@@ -500,6 +632,29 @@ namespace ProyectoHCL.Formularios
 
                         comando.ExecuteNonQuery();
                         comando.Connection.Close();
+
+
+                        if (query0 != "")
+                        {
+                            comando.Connection = BaseDatosHCL.ObtenerConexion();
+                            comando.CommandText = ("INSERT INTO TBL_DETALLEFACTURA (DIAS, DESCRIPCION, PRECIO, TOTAL, ID_SOLICITUDRESERVA) VALUES" +
+                                query0);
+                            comando.ExecuteNonQuery();
+                            comando.Connection.Close();
+                        }
+
+
+                        if (query1 != "")
+                        {
+                            comando.Connection = BaseDatosHCL.ObtenerConexion();
+                            comando.CommandText = ("INSERT INTO TBL_DETALLEFACTURASERVI (CANTIDAD, DESCRIPCION, PRECIO, TOTAL, ID_SOLICITUDRESERVA) VALUES" +
+                                query1);
+                            comando.ExecuteNonQuery();
+                            comando.Connection.Close();
+                        }
+
+
+
                         MsgB mbox = new MsgB("informacion", "Registro Agregado");
                         DialogResult dR = mbox.ShowDialog();
                         this.Close();
@@ -516,6 +671,35 @@ namespace ProyectoHCL.Formularios
             else if (info.est == 1)
             {
                 crearPDF();
+
+
+            }
+            else if (info.est == 0)
+            {
+                try
+                {
+                    using (BaseDatosHCL.ObtenerConexion())
+                    {
+                        MySqlCommand comando = new MySqlCommand();
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("UPDATE TBL_FACTURA SET ID_TIPOPAGO = " + cb_MPago.SelectedIndex +
+                            " WHERE ID_SOLICITUDRESERVA = " + info.reserva + ";");
+
+                        comando.ExecuteNonQuery();
+                        comando.Connection.Close();
+
+
+                        MsgB mbox = new MsgB("informacion", "Registro Modificado");
+                        DialogResult dR = mbox.ShowDialog();
+                        this.Close();
+
+                    }
+
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message + a.StackTrace);
+                }
 
 
             }
@@ -614,6 +798,17 @@ namespace ProyectoHCL.Formularios
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
+
+        }
+
+        private void lbl_servicios_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Form nuevo = new ServicioVenta();
+            nuevo.ShowDialog();
+
+            this.dgvDetalleFact.Rows.Clear();
+            this.dgvMontos.Rows.Clear();
+            CargarDGV();
 
         }
     }

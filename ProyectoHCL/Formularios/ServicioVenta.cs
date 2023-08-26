@@ -12,6 +12,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 
+using static ProyectoHCL.RecuContra;
+using static ProyectoHCL.Formularios.CtrlFacturacion;
+using static ProyectoHCL.Formularios.ShowFactura;
+using DocumentFormat.OpenXml.ExtendedProperties;
+using SpreadsheetLight;
+
 namespace ProyectoHCL.Formularios
 {
     public partial class ServicioVenta : Form
@@ -27,7 +33,6 @@ namespace ProyectoHCL.Formularios
             btnEliminar.BackColor = Color.DarkGray;
             btnVenta.Enabled = false;
             btnVenta.BackColor = Color.DarkGray;
-            cmbEstado.Enabled = false;
             cmbServicio.Enabled = false;
         }
 
@@ -36,7 +41,7 @@ namespace ProyectoHCL.Formularios
             txtTotal.Clear();
             cmbServicio.SelectedIndex = -1;
             txtPrecio.Clear();
-            cmbEstado.SelectedIndex = -1;
+            txt_cantidad.Clear();
             txtHab.Clear();
             txtCliente.Clear();
             txtEntrada.Clear();
@@ -46,7 +51,7 @@ namespace ProyectoHCL.Formularios
         public void limpiarError()
         {
             errorT.SetError(cmbServicio, "");
-            errorT.SetError(cmbEstado, "");
+            errorT.SetError(txt_cantidad, "");
         }
 
         private void cargarServicios()
@@ -107,18 +112,54 @@ namespace ProyectoHCL.Formularios
                 MsgB Mbox = new MsgB("advertencia", "Seleccione un servicio");
                 DialogResult DR = Mbox.ShowDialog();
             }
-            else if (cmbEstado.Text == "")
+            else if (txt_cantidad.Text == "")
             {
-                MsgB Mbox = new MsgB("advertencia", "Seleccione un estado");
+                MsgB Mbox = new MsgB("advertencia", "Indique cantidad");
                 DialogResult DR = Mbox.ShowDialog();
             }
             else
             {
                 ListViewItem lista = new ListViewItem(cmbServicio.Text);
                 lista.SubItems.Add(txtPrecio.Text);
-                lista.SubItems.Add(txtPrecio.Text);
-                lista.SubItems.Add(cmbEstado.Text);
+                lista.SubItems.Add(txt_cantidad.Text);
+                Decimal subt = Convert.ToDecimal(txt_cantidad.Text) * Convert.ToDecimal(txtPrecio.Text);
+                lista.SubItems.Add(Convert.ToString(subt));
                 listView.Items.Add(lista);
+
+                try
+                {
+                    using (BaseDatosHCL.ObtenerConexion())
+                    {
+                        MySqlCommand comando = new MySqlCommand();
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = "SELECT * FROM TBL_SERVICIO WHERE DESCRIPCION = '" + cmbServicio.Text + "';";
+                        MySqlDataReader leer = comando.ExecuteReader();
+
+                        int id = 0;
+                        if (leer.Read())
+                        {
+                            id = (int)leer["ID_SERVICIO"];
+                        }
+                        
+
+                        comando.Connection.Close();
+
+                        comando.CommandText = ("INSERT INTO TBL_DETALLESERVICIO (ID_SERVICIO, ID_SOLICITUDRESERVA, ID_DESCUENTO, CANTIDAD, " +
+                            "MONTODESCUENTO) VALUES(" + id + ", " + info.reserva + ", 1, " + txt_cantidad.Text + ", 0);");
+
+                        comando.ExecuteNonQuery();
+                        comando.Connection.Close();
+
+                    }
+
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message + a.StackTrace);
+                }
+
+
+
 
                 ActualizarResultado();
             }
@@ -131,15 +172,102 @@ namespace ProyectoHCL.Formularios
             {
                 ListViewItem item = listView.SelectedItems[0];
 
-                if (item.SubItems[3].Text == "Pendiente")
+
+                decimal precio = decimal.Parse(item.SubItems[1].Text);
+                decimal resultadoActual = decimal.Parse(txtTotal.Text);
+                resultadoActual -= precio;
+                txtTotal.Text = resultadoActual.ToString();
+
+
+                if (Convert.ToInt32(item.SubItems[2].Text) == 1)
                 {
-                    decimal precio = decimal.Parse(item.SubItems[1].Text);
-                    decimal resultadoActual = decimal.Parse(txtTotal.Text);
-                    resultadoActual -= precio;
-                    txtTotal.Text = resultadoActual.ToString();
+                    try
+                    {
+                        using (BaseDatosHCL.ObtenerConexion())
+                        {
+                            MySqlCommand comando = new MySqlCommand();
+                            comando.Connection = BaseDatosHCL.ObtenerConexion();
+                            comando.CommandText = "SELECT * FROM TBL_SERVICIO WHERE DESCRIPCION = " + item.SubItems[0].Text;
+                            MySqlDataReader leer = comando.ExecuteReader();
+
+                            int id = 0;
+                            if (leer.Read())
+                            {
+                                id = (int)leer["ID_SERVICIO"];
+                            }
+                            
+
+                            comando.Connection.Close();
+
+                            comando.CommandText = ("DELETE FROM TBL_DETALLESERVICIO WHERE ID_SOLICITUDRESERVA = " +
+                                info.reserva + " and ID_SERVICIO = " + id + ";");
+
+                            comando.ExecuteNonQuery();
+                            comando.Connection.Close();
+
+
+                            listView.Items.Remove(item);
+                        }
+
+                    }
+                    catch (Exception a)
+                    {
+                        MessageBox.Show(a.Message + a.StackTrace);
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        using (BaseDatosHCL.ObtenerConexion())
+                        {
+                            MySqlCommand comando = new MySqlCommand();
+                            comando.Connection = BaseDatosHCL.ObtenerConexion();
+                            comando.CommandText = "SELECT * FROM TBL_SERVICIO WHERE DESCRIPCION = " + item.SubItems[0].Text;
+                            MySqlDataReader leer = comando.ExecuteReader();
+
+                            int id = 0;
+                            if (leer.Read())
+                            {
+                                id = (int)leer["ID_SERVICIO"];
+                            }
+
+                            comando.Connection.Close();
+
+                            comando.CommandText = ("UPDATE TBL_DETALLESERVICIO SET CANTIDAD = " + (Convert.ToInt32(item.SubItems[2].Text) - 1) + " WHERE ID_SOLICITUDRESERVA = " +
+                                info.reserva + " and ID_SERVICIO = " + id + ";");
+
+                            comando.ExecuteNonQuery();
+                            comando.Connection.Close();
+
+                            listView.Items.Remove(item);
+
+                            comando.CommandText = "SELECT ds.CANTIDAD, s.PRECIO, s.DESCRIPCION  FROM TBL_DETALLESERVICIO ds " +
+                                "INNER JOIN TBL_SERVICIO s ON ds.ID_SERVICIO = s.ID_SERVICIO " +
+                                "WHERE ds.ID_SERVICIO = " + id + " AND ID_SOLICITUDRESERVA = " + info.reserva + "";
+                            MySqlDataReader leer1 = comando.ExecuteReader();
+
+                            if (leer1.Read())
+                            {
+                                ListViewItem lista = new ListViewItem(leer1["DESCRIPCION"].ToString());
+                                lista.SubItems.Add(leer1["PRECIO"].ToString());
+                                lista.SubItems.Add(leer1["CANTIDAD"].ToString());
+                                lista.SubItems.Add(Convert.ToString(Convert.ToDecimal(leer1["CANTIDAD"].ToString) * Convert.ToDecimal(leer1["PRECIO"].ToString)));
+                                listView.Items.Add(lista);
+                            }
+                            //Agg para validar si el cliente ya tiene cargado ese servicio                     
+                        }
+
+                    }
+                    catch (Exception a)
+                    {
+                        MessageBox.Show(a.Message + a.StackTrace);
+                    }
                 }
 
-                listView.Items.Remove(item);
+
+
+
             }
             else
             {
@@ -172,10 +300,10 @@ namespace ProyectoHCL.Formularios
             decimal resultado = 0;
             foreach (ListViewItem item in listView.Items)
             {
-                if (item.SubItems[3].Text == "Pendiente")
-                {
-                    resultado += decimal.Parse(item.SubItems[1].Text);
-                }
+
+
+                resultado += decimal.Parse(item.SubItems[1].Text);
+
             }
             txtTotal.Text = resultado.ToString();
         }
@@ -208,7 +336,6 @@ namespace ProyectoHCL.Formularios
                 btnEliminar.BackColor = Color.DarkGray;
                 btnVenta.Enabled = false;
                 btnVenta.BackColor = Color.DarkGray;
-                cmbEstado.Enabled = false;
                 cmbServicio.Enabled = false;
             }
             else
@@ -219,7 +346,6 @@ namespace ProyectoHCL.Formularios
                 btnEliminar.BackColor = Color.Red;
                 btnVenta.Enabled = true;
                 btnVenta.BackColor = Color.CadetBlue;
-                cmbEstado.Enabled = true;
                 cmbServicio.Enabled = true;
             }
         }
@@ -238,13 +364,80 @@ namespace ProyectoHCL.Formularios
 
         private void cmbEstado_Leave(object sender, EventArgs e)
         {
-            if (ValidarTxt.cmbVacio(cmbEstado))
+            if (txt_cantidad.Text == "")
             {
-                errorT.SetError(cmbEstado, "Seleccione un estado");
+                errorT.SetError(txt_cantidad, "Seleccione un estado");
             }
             else
             {
                 errorT.Clear();
+            }
+        }
+
+        private void ServicioVenta_Load(object sender, EventArgs e)
+        {
+            if (info.est == 2)
+            {
+                btnReservacion.Visible = false;
+                txtHab.Text = clases.CDatos.numeroHab.ToString();
+                txtCliente.Text = CDatos.nombre.ToString();
+                txtEntrada.Text = info.ingreso.ToString();
+                txtSalida.Text = info.salida.ToString();
+
+
+                DataTable st = new DataTable();
+
+                try
+                {
+
+
+                    string stri = "SELECT s.DESCRIPCION, ds.CANTIDAD, s.PRECIO " +
+                                  "FROM TBL_DETALLESERVICIO ds " +
+                                  "INNER JOIN TBL_SERVICIO s ON ds.ID_SERVICIO = s.ID_SERVICIO " +
+                                  "where ds.ID_SOLICITUDRESERVA = " + info.reserva + ";";
+
+
+                    MySqlConnection conn;
+                    MySqlCommand cmd;
+                    conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                    conn.Open();
+
+                    cmd = new MySqlCommand(stri, conn);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(st);
+                    conn.Close();
+
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message + a.StackTrace);
+
+                }
+
+                int s = st.Rows.Count;
+                int i = 0;
+
+
+                if (s > 0)
+                {
+                    while (i < s)
+                    {
+
+
+                        ListViewItem lista = new ListViewItem(st.Rows[i]["DESCRIPCION"].ToString());
+                        lista.SubItems.Add(st.Rows[i]["PRECIO"].ToString());
+                        lista.SubItems.Add(st.Rows[i]["CANTIDAD"].ToString());
+                        lista.SubItems.Add(Convert.ToString(Convert.ToDecimal(st.Rows[i]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[i]["PRECIO"])));
+                        listView.Items.Add(lista);
+
+                        i = i + 1;
+                    }
+                }
+
+            }
+            else
+            {
+                btnReservacion.Visible = true;
             }
         }
     }
