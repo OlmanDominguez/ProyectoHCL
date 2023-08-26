@@ -129,7 +129,7 @@ namespace ProyectoHCL.clases
 
                 cmd.Parameters.Add(new MySqlParameter("@idRol", permisoR.IdRol));
                 cmd.Parameters.Add(new MySqlParameter("@idPermiso", permisoR.IdPermiso));
-                cmd.Parameters.Add(new MySqlParameter("@idObjeto", permisoR.IdObjeto));
+                cmd.Parameters.Add(new MySqlParameter("@idObjeto", permisoR.IdObjetoAct));
                 cmd.Parameters.Add(new MySqlParameter("@permitido", permisoR.Permitido));
 
                 cmd.ExecuteNonQuery();

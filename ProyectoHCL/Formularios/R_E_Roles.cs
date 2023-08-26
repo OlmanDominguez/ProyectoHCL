@@ -1,4 +1,5 @@
-﻿using ProyectoHCL.clases;
+﻿using MySql.Data.MySqlClient;
+using ProyectoHCL.clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ProyectoHCL.RecuContra;
 
 namespace ProyectoHCL.Formularios
 {
@@ -40,27 +42,6 @@ namespace ProyectoHCL.Formularios
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
-        private void txtEmail2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ID_Rol_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
 
@@ -95,6 +76,18 @@ namespace ProyectoHCL.Formularios
 
         }
 
+        private void txtRol_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtRol))
+            {
+                error1.SetError(txtRol, "Introduzca un nombre");
+            }
+            else
+            {
+                error1.Clear();
+            }
+        }
+
         private void cmbEstado_Leave(object sender, EventArgs e)
         {
             if (ValidarTxt.cmbVacio(cmbEstado))
@@ -107,21 +100,83 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtRol_TextChanged(object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (label11.Text == "Registrar Rol")
+            {
+                Modelo modelo = new Modelo();
+
+                if (txtRol.Text.Trim() == "" || txtNumero.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
+                {
+                    MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
+                    DialogResult dR = m.ShowDialog();
+
+                }
+                else if (modelo.existeRol(txtRol.Text))
+                {
+                    MsgB m = new MsgB("advertencia", "El Rol ya existe");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else
+                {
+                    try
+                    {
+                        MySqlConnection conn;
+                        MySqlCommand cmd;
+                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                        conn.Open();
+
+                        cmd = new MySqlCommand("insertarRol", conn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@nombrerol", txtRol.Text);
+                        cmd.Parameters.AddWithValue("@descripcion", txtNumero.Text);
+                        cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
+
+                        cmd.ExecuteNonQuery();
+                        MsgB m = new MsgB("informacion", "Registro creado con éxito");
+                        DialogResult dR = m.ShowDialog();
+                        limpiarCampos();
+                        conn.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MsgB m = new MsgB("Error: ", ex.Message);
+                        DialogResult dR = m.ShowDialog();
+                    }
+                }
+            }
+            else if (label11.Text == "Editar Rol")
+            {
+                Control control = new Control();
+
+                if (txtRol.Text.Trim() == "" || txtNumero.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
+                {
+                    MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else
+                {
+                    try
+                    {
+                        control.editarR(idRol, txtRol.Text, txtNumero.Text, cmbEstado.Text);
+
+                        MsgB m = new MsgB("informacion", "Registro modificado");
+                        DialogResult dR = m.ShowDialog();
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MsgB m = new MsgB("Error: ", ex.Message);
+                        DialogResult dR = m.ShowDialog();
+                    }
+                }
+            }
 
         }
 
-        private void txtRol_Leave(object sender, EventArgs e)
+        private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (ValidarTxt.txtVacio(txtRol))
-            {
-                error1.SetError(txtRol, "Introduzca un nombre");
-            }
-            else
-            {
-                error1.Clear();
-            }
+            ValidarTxt.TxtLetras(e);
         }
 
         private void txtNumero_Leave(object sender, EventArgs e)
@@ -135,5 +190,6 @@ namespace ProyectoHCL.Formularios
                 error1.Clear();
             }
         }
+
     }
 }

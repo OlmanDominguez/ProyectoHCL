@@ -29,17 +29,24 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShowFactura));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
             panel2 = new Panel();
             pictureBox5 = new PictureBox();
             btnCerrar = new Button();
             label11 = new Label();
             panel1 = new Panel();
             groupBox3 = new GroupBox();
+            lbl_servicios = new LinkLabel();
+            lbl_Descuento = new LinkLabel();
             txt_RegSar = new TextBox();
             label42 = new Label();
             txt_ConsExone = new TextBox();
@@ -65,21 +72,17 @@
             btnCancelar = new Button();
             btnFacturar = new Button();
             groupinfo = new GroupBox();
+            panel3 = new Panel();
+            dgvMontos = new DataGridView();
             pl_scroll = new Panel();
             dgvDetalleFact = new DataGridView();
-            label37 = new Label();
-            label35 = new Label();
-            lb_isv = new Label();
-            label36 = new Label();
-            lb_Total = new Label();
-            lb_it = new Label();
-            label38 = new Label();
-            lb_Stotal = new Label();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel1.SuspendLayout();
             groupBox3.SuspendLayout();
             groupinfo.SuspendLayout();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvMontos).BeginInit();
             pl_scroll.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDetalleFact).BeginInit();
             SuspendLayout();
@@ -143,14 +146,6 @@
             panel1.Controls.Add(btnCancelar);
             panel1.Controls.Add(btnFacturar);
             panel1.Controls.Add(groupinfo);
-            panel1.Controls.Add(label37);
-            panel1.Controls.Add(label35);
-            panel1.Controls.Add(lb_isv);
-            panel1.Controls.Add(label36);
-            panel1.Controls.Add(lb_Total);
-            panel1.Controls.Add(lb_it);
-            panel1.Controls.Add(label38);
-            panel1.Controls.Add(lb_Stotal);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 73);
             panel1.Name = "panel1";
@@ -160,6 +155,8 @@
             // groupBox3
             // 
             groupBox3.BackColor = Color.LightGray;
+            groupBox3.Controls.Add(lbl_servicios);
+            groupBox3.Controls.Add(lbl_Descuento);
             groupBox3.Controls.Add(txt_RegSar);
             groupBox3.Controls.Add(label42);
             groupBox3.Controls.Add(txt_ConsExone);
@@ -188,6 +185,29 @@
             groupBox3.TabIndex = 64;
             groupBox3.TabStop = false;
             groupBox3.Text = "Información ";
+            // 
+            // lbl_servicios
+            // 
+            lbl_servicios.AutoSize = true;
+            lbl_servicios.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_servicios.Location = new Point(403, 91);
+            lbl_servicios.Name = "lbl_servicios";
+            lbl_servicios.Size = new Size(73, 18);
+            lbl_servicios.TabIndex = 130;
+            lbl_servicios.TabStop = true;
+            lbl_servicios.Text = "Servicios";
+            lbl_servicios.LinkClicked += lbl_servicios_LinkClicked;
+            // 
+            // lbl_Descuento
+            // 
+            lbl_Descuento.AutoSize = true;
+            lbl_Descuento.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_Descuento.Location = new Point(585, 91);
+            lbl_Descuento.Name = "lbl_Descuento";
+            lbl_Descuento.Size = new Size(93, 18);
+            lbl_Descuento.TabIndex = 129;
+            lbl_Descuento.TabStop = true;
+            lbl_Descuento.Text = "Descuentos";
             // 
             // txt_RegSar
             // 
@@ -234,7 +254,7 @@
             // txt_OCExenta
             // 
             txt_OCExenta.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            txt_OCExenta.Location = new Point(502, 120);
+            txt_OCExenta.Location = new Point(528, 151);
             txt_OCExenta.Name = "txt_OCExenta";
             txt_OCExenta.Size = new Size(172, 26);
             txt_OCExenta.TabIndex = 124;
@@ -246,7 +266,7 @@
             label40.BackColor = Color.Transparent;
             label40.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label40.ForeColor = Color.Black;
-            label40.Location = new Point(403, 123);
+            label40.Location = new Point(429, 154);
             label40.Name = "label40";
             label40.Size = new Size(100, 18);
             label40.TabIndex = 123;
@@ -257,7 +277,7 @@
             cb_MPago.DropDownStyle = ComboBoxStyle.DropDownList;
             cb_MPago.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             cb_MPago.FormattingEnabled = true;
-            cb_MPago.Location = new Point(341, 88);
+            cb_MPago.Location = new Point(538, 115);
             cb_MPago.Name = "cb_MPago";
             cb_MPago.Size = new Size(162, 26);
             cb_MPago.TabIndex = 122;
@@ -269,7 +289,7 @@
             label39.BackColor = Color.Transparent;
             label39.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label39.ForeColor = Color.Black;
-            label39.Location = new Point(202, 91);
+            label39.Location = new Point(399, 118);
             label39.Name = "label39";
             label39.Size = new Size(136, 18);
             label39.TabIndex = 121;
@@ -487,12 +507,84 @@
             // groupinfo
             // 
             groupinfo.BackColor = Color.DarkGray;
+            groupinfo.Controls.Add(panel3);
             groupinfo.Controls.Add(pl_scroll);
             groupinfo.Location = new Point(13, 215);
             groupinfo.Name = "groupinfo";
-            groupinfo.Size = new Size(767, 237);
+            groupinfo.Size = new Size(767, 305);
             groupinfo.TabIndex = 64;
             groupinfo.TabStop = false;
+            // 
+            // panel3
+            // 
+            panel3.AutoScroll = true;
+            panel3.Controls.Add(dgvMontos);
+            panel3.Location = new Point(507, 12);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(257, 287);
+            panel3.TabIndex = 3;
+            // 
+            // dgvMontos
+            // 
+            dgvMontos.AllowUserToAddRows = false;
+            dgvMontos.AllowUserToDeleteRows = false;
+            dgvMontos.AllowUserToResizeColumns = false;
+            dgvMontos.AllowUserToResizeRows = false;
+            dataGridViewCellStyle11.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle11.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle11.ForeColor = Color.Black;
+            dataGridViewCellStyle11.SelectionBackColor = Color.SlateGray;
+            dataGridViewCellStyle11.SelectionForeColor = Color.Black;
+            dgvMontos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dgvMontos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvMontos.BackgroundColor = Color.WhiteSmoke;
+            dgvMontos.BorderStyle = BorderStyle.None;
+            dgvMontos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle12.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle12.ForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.SelectionBackColor = Color.Teal;
+            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+            dgvMontos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dgvMontos.ColumnHeadersHeight = 30;
+            dgvMontos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = SystemColors.MenuHighlight;
+            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle13.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
+            dgvMontos.DefaultCellStyle = dataGridViewCellStyle13;
+            dgvMontos.Dock = DockStyle.Fill;
+            dgvMontos.EnableHeadersVisualStyles = false;
+            dgvMontos.GridColor = Color.FromArgb(45, 66, 91);
+            dgvMontos.Location = new Point(0, 0);
+            dgvMontos.Margin = new Padding(2);
+            dgvMontos.Name = "dgvMontos";
+            dgvMontos.ReadOnly = true;
+            dgvMontos.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle14.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle14.ForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle14.SelectionBackColor = Color.CadetBlue;
+            dataGridViewCellStyle14.SelectionForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
+            dgvMontos.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dgvMontos.RowHeadersVisible = false;
+            dgvMontos.RowHeadersWidth = 62;
+            dataGridViewCellStyle15.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle15.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle15.ForeColor = Color.Black;
+            dataGridViewCellStyle15.SelectionBackColor = Color.SlateGray;
+            dataGridViewCellStyle15.SelectionForeColor = Color.Black;
+            dgvMontos.RowsDefaultCellStyle = dataGridViewCellStyle15;
+            dgvMontos.RowTemplate.Height = 25;
+            dgvMontos.Size = new Size(257, 287);
+            dgvMontos.TabIndex = 2;
             // 
             // pl_scroll
             // 
@@ -500,7 +592,7 @@
             pl_scroll.Controls.Add(dgvDetalleFact);
             pl_scroll.Location = new Point(6, 12);
             pl_scroll.Name = "pl_scroll";
-            pl_scroll.Size = new Size(755, 219);
+            pl_scroll.Size = new Size(495, 287);
             pl_scroll.TabIndex = 0;
             // 
             // dgvDetalleFact
@@ -509,34 +601,34 @@
             dgvDetalleFact.AllowUserToDeleteRows = false;
             dgvDetalleFact.AllowUserToResizeColumns = false;
             dgvDetalleFact.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = Color.SlateGray;
-            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            dgvDetalleFact.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle16.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle16.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle16.ForeColor = Color.Black;
+            dataGridViewCellStyle16.SelectionBackColor = Color.SlateGray;
+            dataGridViewCellStyle16.SelectionForeColor = Color.Black;
+            dgvDetalleFact.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
             dgvDetalleFact.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvDetalleFact.BackgroundColor = Color.WhiteSmoke;
             dgvDetalleFact.BorderStyle = BorderStyle.None;
             dgvDetalleFact.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.Teal;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvDetalleFact.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle17.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle17.ForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.SelectionBackColor = Color.Teal;
+            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
+            dgvDetalleFact.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             dgvDetalleFact.ColumnHeadersHeight = 30;
             dgvDetalleFact.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.MenuHighlight;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgvDetalleFact.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = SystemColors.MenuHighlight;
+            dataGridViewCellStyle18.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle18.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
+            dgvDetalleFact.DefaultCellStyle = dataGridViewCellStyle18;
             dgvDetalleFact.Dock = DockStyle.Fill;
             dgvDetalleFact.EnableHeadersVisualStyles = false;
             dgvDetalleFact.GridColor = Color.FromArgb(45, 66, 91);
@@ -545,125 +637,25 @@
             dgvDetalleFact.Name = "dgvDetalleFact";
             dgvDetalleFact.ReadOnly = true;
             dgvDetalleFact.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.Gainsboro;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = SystemColors.InfoText;
-            dataGridViewCellStyle4.SelectionBackColor = Color.CadetBlue;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.InfoText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgvDetalleFact.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle19.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle19.ForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle19.SelectionBackColor = Color.CadetBlue;
+            dataGridViewCellStyle19.SelectionForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle19.WrapMode = DataGridViewTriState.True;
+            dgvDetalleFact.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
             dgvDetalleFact.RowHeadersVisible = false;
             dgvDetalleFact.RowHeadersWidth = 62;
-            dataGridViewCellStyle5.BackColor = Color.Gainsboro;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = Color.SlateGray;
-            dataGridViewCellStyle5.SelectionForeColor = Color.Black;
-            dgvDetalleFact.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle20.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle20.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle20.ForeColor = Color.Black;
+            dataGridViewCellStyle20.SelectionBackColor = Color.SlateGray;
+            dataGridViewCellStyle20.SelectionForeColor = Color.Black;
+            dgvDetalleFact.RowsDefaultCellStyle = dataGridViewCellStyle20;
             dgvDetalleFact.RowTemplate.Height = 25;
-            dgvDetalleFact.Size = new Size(755, 219);
+            dgvDetalleFact.Size = new Size(495, 287);
             dgvDetalleFact.TabIndex = 2;
-            // 
-            // label37
-            // 
-            label37.Anchor = AnchorStyles.Top;
-            label37.AutoSize = true;
-            label37.BackColor = Color.Transparent;
-            label37.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label37.ForeColor = Color.Black;
-            label37.Location = new Point(466, 473);
-            label37.Name = "label37";
-            label37.Size = new Size(73, 18);
-            label37.TabIndex = 117;
-            label37.Text = "SubTotal:";
-            // 
-            // label35
-            // 
-            label35.Anchor = AnchorStyles.Top;
-            label35.AutoSize = true;
-            label35.BackColor = Color.Transparent;
-            label35.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label35.ForeColor = Color.Black;
-            label35.Location = new Point(78, 473);
-            label35.Name = "label35";
-            label35.Size = new Size(35, 18);
-            label35.TabIndex = 113;
-            label35.Text = "ISV:";
-            // 
-            // lb_isv
-            // 
-            lb_isv.Anchor = AnchorStyles.Top;
-            lb_isv.AutoSize = true;
-            lb_isv.BackColor = Color.Transparent;
-            lb_isv.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_isv.ForeColor = Color.Black;
-            lb_isv.Location = new Point(111, 473);
-            lb_isv.Name = "lb_isv";
-            lb_isv.Size = new Size(0, 18);
-            lb_isv.TabIndex = 114;
-            // 
-            // label36
-            // 
-            label36.Anchor = AnchorStyles.Top;
-            label36.AutoSize = true;
-            label36.BackColor = Color.Transparent;
-            label36.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label36.ForeColor = Color.Black;
-            label36.Location = new Point(224, 473);
-            label36.Name = "label36";
-            label36.Size = new Size(116, 18);
-            label36.TabIndex = 115;
-            label36.Text = "Impto. Turismo:";
-            // 
-            // lb_Total
-            // 
-            lb_Total.Anchor = AnchorStyles.Top;
-            lb_Total.AutoSize = true;
-            lb_Total.BackColor = Color.Transparent;
-            lb_Total.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_Total.ForeColor = Color.Black;
-            lb_Total.Location = new Point(703, 473);
-            lb_Total.Name = "lb_Total";
-            lb_Total.Size = new Size(0, 18);
-            lb_Total.TabIndex = 120;
-            // 
-            // lb_it
-            // 
-            lb_it.Anchor = AnchorStyles.Top;
-            lb_it.AutoSize = true;
-            lb_it.BackColor = Color.Transparent;
-            lb_it.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_it.ForeColor = Color.Black;
-            lb_it.Location = new Point(346, 473);
-            lb_it.Name = "lb_it";
-            lb_it.Size = new Size(0, 18);
-            lb_it.TabIndex = 116;
-            // 
-            // label38
-            // 
-            label38.Anchor = AnchorStyles.Top;
-            label38.AutoSize = true;
-            label38.BackColor = Color.Transparent;
-            label38.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label38.ForeColor = Color.Black;
-            label38.Location = new Point(654, 473);
-            label38.Name = "label38";
-            label38.Size = new Size(46, 18);
-            label38.TabIndex = 119;
-            label38.Text = "Total:";
-            // 
-            // lb_Stotal
-            // 
-            lb_Stotal.Anchor = AnchorStyles.Top;
-            lb_Stotal.AutoSize = true;
-            lb_Stotal.BackColor = Color.Transparent;
-            lb_Stotal.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_Stotal.ForeColor = Color.Black;
-            lb_Stotal.Location = new Point(545, 473);
-            lb_Stotal.Name = "lb_Stotal";
-            lb_Stotal.Size = new Size(0, 18);
-            lb_Stotal.TabIndex = 118;
             // 
             // ShowFactura
             // 
@@ -684,10 +676,11 @@
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             groupinfo.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvMontos).EndInit();
             pl_scroll.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvDetalleFact).EndInit();
             ResumeLayout(false);
@@ -707,14 +700,6 @@
         private Button btnCancelar;
         private Button btnFacturar;
         private GroupBox groupBox3;
-        private Label lb_Total;
-        private Label label38;
-        private Label lb_Stotal;
-        private Label label37;
-        private Label lb_it;
-        private Label label36;
-        private Label lb_isv;
-        private Label label35;
         private Label lb_noches;
         private Label label10;
         private Label lb_Salida;
@@ -727,7 +712,6 @@
         private Label lb_ID;
         private Label label4;
         private Label label3;
-        private Label lb_nombres;
         private Label label2;
         private ComboBox cb_MPago;
         private Label label39;
@@ -739,5 +723,10 @@
         private Label label42;
         public TextBox txt_RegSar;
         public DataGridView dgvDetalleFact;
+        private Panel panel3;
+        public DataGridView dgvMontos;
+        private LinkLabel lbl_servicios;
+        private LinkLabel lbl_Descuento;
+        private Label lb_nombres;
     }
 }

@@ -24,6 +24,7 @@ using SpreadsheetLight.Drawing;
 using static iText.Kernel.Pdf.Colorspace.PdfDeviceCs;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using DocumentFormat.OpenXml.Office2013.Excel;
+using Point = System.Drawing.Point;
 
 namespace ProyectoHCL.Formularios
 {
@@ -55,7 +56,9 @@ namespace ProyectoHCL.Formularios
                     case 2:
                         if (obj.IdObjeto == "DESCUENTOS" && !obj.Permitido) //Validar pantalla y el permiso
                         {
-                            btnNuevo.Enabled = false; //Deshabilitar botón para crear
+                            btnNuevo.Visible = false; //Ocultar botón para crear
+                            label4.Location = new Point(28, 24);
+                            txtBuscar.Location = new Point(84, 22);
                         }
                         break;
                     case 3:

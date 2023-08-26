@@ -40,6 +40,7 @@
             columnHeader7 = new ColumnHeader();
             btnAceptar = new Button();
             panel2 = new Panel();
+            label1 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -56,6 +57,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(618, 62);
             panel1.TabIndex = 3;
+            panel1.MouseMove += panel1_MouseMove;
             // 
             // btnMin
             // 
@@ -122,10 +124,10 @@
             listViewR.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             listViewR.FullRowSelect = true;
             listViewR.GridLines = true;
-            listViewR.Location = new Point(38, 24);
+            listViewR.Location = new Point(41, 49);
             listViewR.MultiSelect = false;
             listViewR.Name = "listViewR";
-            listViewR.Size = new Size(541, 332);
+            listViewR.Size = new Size(541, 339);
             listViewR.TabIndex = 0;
             listViewR.UseCompatibleStateImageBehavior = false;
             listViewR.View = View.Details;
@@ -156,7 +158,7 @@
             btnAceptar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnAceptar.ForeColor = Color.White;
             btnAceptar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAceptar.Location = new Point(501, 376);
+            btnAceptar.Location = new Point(501, 406);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(81, 32);
             btnAceptar.TabIndex = 87;
@@ -167,18 +169,29 @@
             // panel2
             // 
             panel2.BackColor = SystemColors.Control;
+            panel2.Controls.Add(label1);
             panel2.Controls.Add(btnAceptar);
             panel2.Controls.Add(listViewR);
             panel2.Location = new Point(0, 62);
             panel2.Name = "panel2";
-            panel2.Size = new Size(618, 435);
+            panel2.Size = new Size(618, 456);
             panel2.TabIndex = 4;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(41, 21);
+            label1.Name = "label1";
+            label1.Size = new Size(220, 18);
+            label1.TabIndex = 88;
+            label1.Text = "Seleccione una reservación:";
             // 
             // ServicioHab
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(618, 496);
+            ClientSize = new Size(618, 518);
             Controls.Add(panel2);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -189,6 +202,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -205,5 +219,6 @@
         private Panel panel2;
         private Button button1;
         private Button btnMin;
+        private Label label1;
     }
 }

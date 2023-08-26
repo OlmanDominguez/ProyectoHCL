@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ServicioVenta));
             panelPrincipal = new Panel();
             panel3 = new Panel();
@@ -39,12 +40,12 @@
             listView = new ListView();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
+            columnHeader5 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
-            columnHeader4 = new ColumnHeader();
             panel4 = new Panel();
+            txt_cantidad = new TextBox();
             btnAgregar = new Button();
             txtPrecio = new TextBox();
-            cmbEstado = new ComboBox();
             label8 = new Label();
             label10 = new Label();
             cmbServicio = new ComboBox();
@@ -64,12 +65,14 @@
             panel1 = new Panel();
             btnCerrar = new Button();
             label11 = new Label();
+            errorT = new ErrorProvider(components);
             panelPrincipal.SuspendLayout();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorT).BeginInit();
             SuspendLayout();
             // 
             // panelPrincipal
@@ -175,14 +178,14 @@
             // listView
             // 
             listView.BorderStyle = BorderStyle.FixedSingle;
-            listView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
+            listView.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader5, columnHeader3 });
             listView.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             listView.FullRowSelect = true;
             listView.GridLines = true;
             listView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             listView.Location = new Point(30, 32);
             listView.Name = "listView";
-            listView.Size = new Size(671, 153);
+            listView.Size = new Size(672, 153);
             listView.TabIndex = 0;
             listView.TileSize = new Size(228, 36);
             listView.UseCompatibleStateImageBehavior = false;
@@ -198,23 +201,23 @@
             columnHeader2.Text = "Precio";
             columnHeader2.Width = 150;
             // 
+            // columnHeader5
+            // 
+            columnHeader5.Text = "Cantid.";
+            columnHeader5.Width = 150;
+            // 
             // columnHeader3
             // 
             columnHeader3.Text = "SubTotal";
             columnHeader3.Width = 150;
             // 
-            // columnHeader4
-            // 
-            columnHeader4.Text = "Estado";
-            columnHeader4.Width = 120;
-            // 
             // panel4
             // 
             panel4.BackColor = SystemColors.Control;
             panel4.BorderStyle = BorderStyle.FixedSingle;
+            panel4.Controls.Add(txt_cantidad);
             panel4.Controls.Add(btnAgregar);
             panel4.Controls.Add(txtPrecio);
-            panel4.Controls.Add(cmbEstado);
             panel4.Controls.Add(label8);
             panel4.Controls.Add(label10);
             panel4.Controls.Add(cmbServicio);
@@ -224,6 +227,15 @@
             panel4.Name = "panel4";
             panel4.Size = new Size(1084, 121);
             panel4.TabIndex = 1;
+            // 
+            // txt_cantidad
+            // 
+            txt_cantidad.BackColor = SystemColors.ButtonHighlight;
+            txt_cantidad.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_cantidad.Location = new Point(614, 71);
+            txt_cantidad.Name = "txt_cantidad";
+            txt_cantidad.Size = new Size(184, 25);
+            txt_cantidad.TabIndex = 87;
             // 
             // btnAgregar
             // 
@@ -256,16 +268,6 @@
             txtPrecio.Size = new Size(184, 25);
             txtPrecio.TabIndex = 82;
             // 
-            // cmbEstado
-            // 
-            cmbEstado.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            cmbEstado.FormattingEnabled = true;
-            cmbEstado.Items.AddRange(new object[] { "Pagado", "Pendiente" });
-            cmbEstado.Location = new Point(614, 71);
-            cmbEstado.Name = "cmbEstado";
-            cmbEstado.Size = new Size(232, 25);
-            cmbEstado.TabIndex = 87;
-            // 
             // label8
             // 
             label8.AutoSize = true;
@@ -286,12 +288,13 @@
             label10.Location = new Point(614, 50);
             label10.Margin = new Padding(2, 0, 2, 0);
             label10.Name = "label10";
-            label10.Size = new Size(60, 18);
+            label10.Size = new Size(77, 18);
             label10.TabIndex = 86;
-            label10.Text = "Estado:";
+            label10.Text = "Cantidad";
             // 
             // cmbServicio
             // 
+            cmbServicio.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbServicio.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             cmbServicio.FormattingEnabled = true;
             cmbServicio.Location = new Point(30, 71);
@@ -299,6 +302,7 @@
             cmbServicio.Size = new Size(292, 25);
             cmbServicio.TabIndex = 83;
             cmbServicio.SelectedIndexChanged += cmbServicio_SelectedIndexChanged;
+            cmbServicio.Leave += cmbServicio_Leave;
             // 
             // label7
             // 
@@ -439,6 +443,7 @@
             txtHab.ReadOnly = true;
             txtHab.Size = new Size(278, 25);
             txtHab.TabIndex = 0;
+            txtHab.TextChanged += txtHab_TextChanged;
             // 
             // label2
             // 
@@ -503,6 +508,10 @@
             label11.TabIndex = 31;
             label11.Text = "Servicio a la habitación";
             // 
+            // errorT
+            // 
+            errorT.ContainerControl = this;
+            // 
             // ServicioVenta
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -515,6 +524,7 @@
             Name = "ServicioVenta";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ABC";
+            Load += ServicioVenta_Load;
             panelPrincipal.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel5.ResumeLayout(false);
@@ -525,6 +535,7 @@
             panel2.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorT).EndInit();
             ResumeLayout(false);
         }
 
@@ -558,12 +569,13 @@
         private ColumnHeader columnHeader3;
         public ListView listView;
         public Button btnEliminar;
-        public ComboBox cmbEstado;
-        private ColumnHeader columnHeader4;
         public Button btnReservacion;
         public TextBox txtHab;
         public TextBox txtSalida;
         public TextBox txtEntrada;
         public TextBox txtCliente;
+        private ErrorProvider errorT;
+        private ColumnHeader columnHeader5;
+        private TextBox txt_cantidad;
     }
 }
