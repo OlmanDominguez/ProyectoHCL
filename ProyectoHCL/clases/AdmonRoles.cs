@@ -27,10 +27,10 @@ namespace ProyectoHCL.clases
 
                 cmd = new MySqlCommand("EditarRoles", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@id_rol", id);
-                cmd.Parameters.AddWithValue("@rol", nombrerol);
+                cmd.Parameters.AddWithValue("@idrol", id);
+                cmd.Parameters.AddWithValue("@nombrerol", nombrerol);
                 cmd.Parameters.AddWithValue("@descripcion", descrol);
-                cmd.Parameters.AddWithValue("@estado_Rol", estado_rol);
+                cmd.Parameters.AddWithValue("@estadorol", estado_rol);
                
                 //cmd.Parameters.AddWithValue("@fechacreacion",fecha_creacion);
                 //cmd.Parameters.AddWithValue("@actualizar", fecha_actualizacion);

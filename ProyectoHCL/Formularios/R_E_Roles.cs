@@ -102,7 +102,7 @@ namespace ProyectoHCL.Formularios
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (label11.Text == "Registrar Roles")
+            if (label11.Text == "Registrar Rol")
             {
                 Modelo modelo = new Modelo();
 
@@ -149,7 +149,7 @@ namespace ProyectoHCL.Formularios
             {
                 Control control = new Control();
 
-                if (txtRol.Text.Trim() == "" ||  txtNumero.Text.Trim() == "" || cmbEstado.Text.Trim() == "" )
+                if (txtRol.Text.Trim() == "" || txtNumero.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();

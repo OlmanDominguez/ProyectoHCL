@@ -141,7 +141,7 @@ namespace ProyectoHCL.Formularios
         {
             if (this.dgvRoles.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                R_E_rolp.label11.Text = "Editar Roles";
+                R_E_rolp.label11.Text = "Editar Rol";
                 R_E_rolp.idRol = dgvRoles.CurrentRow.Cells["ID"].Value.ToString();
                 R_E_rolp.txtRol.Text = dgvRoles.CurrentRow.Cells["NOMBRE"].Value.ToString();
                 R_E_rolp.txtNumero.Text = dgvRoles.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
@@ -156,7 +156,7 @@ namespace ProyectoHCL.Formularios
                 MsgB m = new MsgB("pregunta", "¿Está seguro que desea eliminar el registro?");
                 DialogResult dg = m.ShowDialog();
 
-                if (dg == DialogResult.Yes)
+                if (dg == DialogResult.OK)
                 {
                     bool elimino = rgtRoles.EliminarRoles(dgvRoles.CurrentRow.Cells["ID"].Value.ToString()); //EL metodo eliminar recibe como string el id del DataGrid
                     if (elimino)
@@ -172,12 +172,12 @@ namespace ProyectoHCL.Formularios
                     }
 
                 }
-                else if (dg == DialogResult.No)
+                else if (dg == DialogResult.Cancel)
                 {
 
                 }
             }
-            
+
         }
 
         private void dgvRoles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -393,7 +393,7 @@ namespace ProyectoHCL.Formularios
             CargarDT();
         }
 
-      
+
 
         private void button6_Click(object sender, EventArgs e)
         {
