@@ -15,32 +15,7 @@ namespace ProyectoHCL.clases
     {
         MySqlConnection conn;
         MySqlCommand cmd;
-        public DataTable RellenarGrid()
-        {
-            DataTable rellenarGridDT = new DataTable();
-
-            try
-            {
-                string sql = " SELECT ID_ROL, ROL, ESTADO_ROL, FECHA_CREACION, FECHA_ACTUALIZACION FROM  TBL_ROL ";
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
-
-                cmd = new MySqlCommand("listaRoles", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                MySqlDataReader reader = cmd.ExecuteReader();
-                rellenarGridDT.Load(reader);
-
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("No hay registro");
-            }
-            return rellenarGridDT;
-
-        }
-        public void modificarRol(int id, string rol, string descripcion, string estado_rol,
-           DateTime fecha_creacion, DateTime fecha_actualizacion)
+        public void modificarRol(int id, string nombrerol, string descrol, string estado_rol)
         {
 
             try
@@ -52,12 +27,13 @@ namespace ProyectoHCL.clases
 
                 cmd = new MySqlCommand("EditarRoles", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@ID_rol", id);
-                cmd.Parameters.AddWithValue("@Rol", rol);
-                cmd.Parameters.AddWithValue("@estado_Rol", estado_rol);
-                cmd.Parameters.AddWithValue("@descripcion", descripcion);
-                cmd.Parameters.AddWithValue("@fechacreacion",fecha_creacion);
-                cmd.Parameters.AddWithValue("@actualizar", fecha_actualizacion);
+                cmd.Parameters.AddWithValue("@idrol", id);
+                cmd.Parameters.AddWithValue("@nombrerol", nombrerol);
+                cmd.Parameters.AddWithValue("@descripcion", descrol);
+                cmd.Parameters.AddWithValue("@estadorol", estado_rol);
+               
+                //cmd.Parameters.AddWithValue("@fechacreacion",fecha_creacion);
+                //cmd.Parameters.AddWithValue("@actualizar", fecha_actualizacion);
 
                 cmd.ExecuteNonQuery();
                 conn.Close();

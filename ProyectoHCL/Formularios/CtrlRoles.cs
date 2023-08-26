@@ -37,7 +37,7 @@ namespace ProyectoHCL.Formularios
     {
         R_E_Roles R_E_rolp = new R_E_Roles();
         AdmonRoles rgtRoles = new AdmonRoles(); //crear objeto Rgtroles para acceder a sus metodos
-        Roles user = new Roles();     //crear objetos roles para acceder a sus parametros 
+        Roles rolr = new Roles();     //crear objetos roles para acceder a sus parametros 
         DataSet ds = new DataSet();
         MsgB msgB = new MsgB();
         CDatos cDatos = new CDatos();
@@ -53,9 +53,9 @@ namespace ProyectoHCL.Formularios
 
         private void CargarDT()
         {
-            user.Inicio1 = pagInicio;
-            user.Final1 = pagFinal;
-            ds = user.PaginacionRoles();
+            rolr.Inicio1 = pagInicio;
+            rolr.Final1 = pagFinal;
+            ds = rolr.PaginacionRoles();
             dgvRoles.DataSource = ds.Tables[1];
 
             int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;
@@ -70,6 +70,8 @@ namespace ProyectoHCL.Formularios
                 cmbPagR.Items.Add(x.ToString());
 
             cmbPagR.SelectedIndex = indice;
+
+            HabilitarBotones();
         }
         private void CtrlRoles_Load(object sender, EventArgs e)
         {
@@ -97,14 +99,14 @@ namespace ProyectoHCL.Formularios
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                 conn.Open();
 
-                cmd = new MySqlCommand("buscarrol", conn); //recibe proc almacenado
+                cmd = new MySqlCommand("buscarRol", conn); //recibe proc almacenado
                 cmd.CommandType = CommandType.StoredProcedure; //se especifica que es un proc almacenado
-                cmd.Parameters.Add("@rolR", MySqlDbType.VarChar, 30).Value = buscarR; //recibe el parametro buscarR definido en el parametro almacenado
+                cmd.Parameters.Add("@nombreR", MySqlDbType.VarChar, 30).Value = buscarR; //recibe el parametro buscarR definido en el parametro almacenado
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable(); //Se crea tabla
                 da.Fill(dt); //Se devuelven los registros en la tabla
-                dgvrRoles.DataSource = dt; //se define la tabla en la que se devuelven los registros
+                dgvRoles.DataSource = dt; //se define la tabla en la que se devuelven los registros
             }
             catch (Exception)
             {
@@ -116,33 +118,45 @@ namespace ProyectoHCL.Formularios
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
+
             R_E_rolp.label11.Text = "Registrar Rol";
-            R_E_rolp.Size = new System.Drawing.Size(800, 431);
-            R_E_rolp.btnGuardar.Location = new Point(81, 455);
-            R_E_rolp.btnCancelar.Location = new Point(700, 455);
-            R_E_rolp.label4.Location = new Point(347, 54);
-            R_E_rolp.txtRol.Location = new Point(347, 105);
-            R_E_rolp.label6.Location = new Point(347, 183);
-            R_E_rolp.txtNumero.Location = new Point(347, 230);
-            R_E_rolp.label3.Location = new Point(347, 313);
-            R_E_rolp.cmbEstado.Location = new Point(347, 365);
             R_E_rolp.ShowDialog();
             CargarDT();
-
         }
 
-        //pendiente revisar
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscarR.Text != "")
+            {
+                BuscarRol(txtBuscarR.Text);
+            }
+            else
+            {
+                CargarDT();
+            }
+        }
 
 
         private void dgvRoles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (this.dgvRoles.Columns[e.ColumnIndex].Name == "EDITAR")
+            {
+                R_E_rolp.label11.Text = "Editar Rol";
+                R_E_rolp.idRol = dgvRoles.CurrentRow.Cells["ID"].Value.ToString();
+                R_E_rolp.txtRol.Text = dgvRoles.CurrentRow.Cells["NOMBRE"].Value.ToString();
+                R_E_rolp.txtNumero.Text = dgvRoles.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
+                R_E_rolp.cmbEstado.Text = dgvRoles.CurrentRow.Cells["ESTADO"].Value.ToString();
+                R_E_rolp.ShowDialog();
+                R_E_rolp.limpiarCampos();
+                CargarDT();
+            }
             if (this.dgvRoles.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
 
                 MsgB m = new MsgB("pregunta", "¿Está seguro que desea eliminar el registro?");
                 DialogResult dg = m.ShowDialog();
 
-                if (dg == DialogResult.Yes)
+                if (dg == DialogResult.OK)
                 {
                     bool elimino = rgtRoles.EliminarRoles(dgvRoles.CurrentRow.Cells["ID"].Value.ToString()); //EL metodo eliminar recibe como string el id del DataGrid
                     if (elimino)
@@ -158,31 +172,12 @@ namespace ProyectoHCL.Formularios
                     }
 
                 }
-                else if (dg == DialogResult.No)
+                else if (dg == DialogResult.Cancel)
                 {
 
                 }
             }
-            if (this.dgvRoles.Columns[e.ColumnIndex].Name == "EDITAR")
-            {
-                R_E_rolp.label11.Text = "Registrar Rol";
-                R_E_rolp.Size = new System.Drawing.Size(800, 431);
-                R_E_rolp.btnGuardar.Location = new Point(81, 455);
-                R_E_rolp.btnCancelar.Location = new Point(700, 455);
-                R_E_rolp.label4.Location = new Point(347, 54);
-                R_E_rolp.txtRol.Location = new Point(347, 105);
-                R_E_rolp.label6.Location = new Point(347, 183);
-                R_E_rolp.txtNumero.Location = new Point(347, 230);
-                R_E_rolp.label3.Location = new Point(347, 313);
-                R_E_rolp.cmbEstado.Location = new Point(347, 365);
-                R_E_rolp.idRol = dgvRoles.CurrentRow.Cells["ID"].Value.ToString();
-                R_E_rolp.txtRol.Text = dgvRoles.CurrentRow.Cells["ROL"].Value.ToString();
-                R_E_rolp.txtNumero.Text = dgvRoles.CurrentRow.Cells["DESCRIPCION"].Value.ToString();
-                R_E_rolp.cmbEstado.Text = dgvRoles.CurrentRow.Cells["ESTADO_ROL"].Value.ToString();
-                R_E_rolp.ShowDialog();
-                R_E_rolp.limpiarCampos();
-                CargarDT();
-            }
+
         }
 
         private void dgvRoles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -217,134 +212,14 @@ namespace ProyectoHCL.Formularios
         private void pdf_Click(object sender, EventArgs e)
         {
             crearPDF();
+            SaveFileDialog guardar = new SaveFileDialog();
+            guardar.ShowDialog();
+            guardar.FileName = DateTime.Now.ToString("ddMMYYYYHHmmss") + ".pdf";
             MsgB mbox = new MsgB("informacion", "PDF creado con éxito");
             DialogResult dR = mbox.ShowDialog();
         }
         private void crearPDF()
         {
-            /*SaveFileDialog selecciona = new SaveFileDialog();
-            selecciona.Filter = "Archivo PDF (*.pdf)|*.pdf";
-            selecciona.InitialDirectory = @"C:\Users\Descargas\ReporteRoles.pdf";
-            selecciona.Title = "Seleccionar la Carpeta";
-
-            if (selecciona.ShowDialog() == DialogResult.OK)
-
-            {
-                string ruta = selecciona.FileName;*/
-
-
-            PdfWriter pdfWriter = new PdfWriter("Reporte.pdf");//iniicio
-            PdfDocument pdf = new PdfDocument(pdfWriter);
-            //1 pulgada = 72 pt (8 1/2 x 11) (612 x 792)
-            PageSize tamanioH = new PageSize(792, 612);
-            Document documento = new Document(pdf, tamanioH);
-            // Document documento = new Document(pdf, PageSize.LETTER);
-
-            documento.SetMargins(60, 20, 55, 20);
-
-            PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
-            PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
-
-            string[] columnas = { "id_rol", "rol", "descripcion", "estado_rol", "fecha_creacion", "fecha_ actualizacion" };
-
-            float[] tamanios = { 2, 2, 2, 2, 4, 4, };
-            Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
-            tabla.SetWidth(UnitValue.CreatePercentValue(100));
-
-
-            foreach (string columna in columnas)
-            {
-                tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
-            }
-
-            string sql = "SELECT id_rol, rol, descripcion, estado_rol,  fecha_creacion, fecha_actualizacion FROM TBL_ROL";
-
-            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
-            // conexionBD.Open();
-
-            MySqlCommand comando = new MySqlCommand(sql, conexionBD);
-            MySqlDataReader reader = comando.ExecuteReader();
-
-            while (reader.Read())
-            {
-                //for (int x = 1; x < 100; x++)
-                {
-
-
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["id_rol"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["rol"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["descripcion"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["estado_rol"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_creacion"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_actualizacion"].ToString()).SetFont(fontContenido)));
-
-                }
-                //  }
-                // comando.Connection = conexionBD;
-                // object value = comando.ExportToFile(ruta);
-                // documento.Add(tabla);
-                //documento.Close();
-
-
-                documento.Add(tabla);
-                documento.Close();
-
-                var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/DAOdo/Desktop/SEGUNDO PERIODO 2023/Programacion he implementacion de Sistemas/ProyectoHotelCasaLomas/logo.jpeg")).SetWidth(50);
-                var plogo = new Paragraph("").Add(logo);
-
-                var nombre = new Paragraph("Hotel Casa Lomas");
-                nombre.SetTextAlignment(TextAlignment.CENTER);
-                nombre.SetFontSize(12);
-
-                var titulo = new Paragraph("Reporte Roles");
-                titulo.SetTextAlignment(TextAlignment.CENTER);
-                titulo.SetFontSize(12);
-
-                var dfecha = DateTime.Now.ToString("dd.MM.yyy");
-                var dhora = DateTime.Now.ToString("hh.mm.ss");
-                var fecha = new Paragraph("fecha:" + dfecha + "\nHora:" + dhora);
-                fecha.SetFontSize(12);
-
-
-                PdfDocument pdfDoc = new PdfDocument(new PdfReader("Reporte.pdf"), new PdfWriter
-                    ("ReporteRoles.pdf"));
-                Document doc = new Document(pdfDoc);
-
-                int numeros = pdfDoc.GetNumberOfPages();
-
-
-                for (int i = 1; i <= numeros; i++)
-                {
-                    PdfPage pagina = pdfDoc.GetPage(i);
-
-                    float y = (pdfDoc.GetPage(i).GetPageSize().GetTop() - 15);
-                    doc.ShowTextAligned(plogo, 40, y, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                    doc.ShowTextAligned(nombre, 110, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                    doc.ShowTextAligned(titulo, 396, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                    doc.ShowTextAligned(fecha, 700, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-
-                    doc.ShowTextAligned(new Paragraph(String.Format("pagina {0} de {1}", i, numeros)), pdfDoc.GetPage
-                        (i).GetPageSize().GetWidth() / 2, pdfDoc.GetPage(i).GetPageSize().GetBottom() + 30, i,
-                        TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-
-                    /* SaveFileDialog sf = new SaveFileDialog();
-                      sf.DefaultExt = "*.pdf";
-                      sf.FileName = "pdfRoles";
-                      sf.Filter = " PDF (*.pdf) | *.pdf";
-
-                      if (sf.ShowDialog() == DialogResult.OK)
-                      {
-                          pdfDoc.SaveAs(sf.FileName);
-                          MsgB mbox = new MsgB("informacion", "Archivo Excel creado con éxito");
-                          DialogResult dR = mbox.ShowDialog();
-                    }
-                  }*/
-
-                }
-
-                doc.Close();
-            }
-
 
         }
 
@@ -482,6 +357,15 @@ namespace ProyectoHCL.Formularios
                 btSiguiente.Enabled = true;
             }
         }
+        private void cmbPagR_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPagR.Text);
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDT();
+
+        }
 
         private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -509,30 +393,16 @@ namespace ProyectoHCL.Formularios
             CargarDT();
         }
 
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
-        {
-            if (txtBuscar.Text != "")
-            {
-                BuscarRol(txtBuscar.Text);
-            }
-            else
-            {
-                CargarDT();
-            }
-        }
 
-        private void cmbPagR_SelectedIndexChanged(object sender, EventArgs e)//me genera problema 
-        {
-            /*int pagina = Convert.ToInt32(cmbPagR.Text);
-            indice = pagina - 1;
-            pagInicio = (pagina - 1) * numFilas + 1;
-            pagFinal = pagina * numFilas;
-            CargarDT();*/
-        }
 
         private void button6_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnNuevo_EnabledChanged(object sender, EventArgs e)
+        {
+            btnNuevo.BackColor = Color.DarkGray;
         }
     }
 }

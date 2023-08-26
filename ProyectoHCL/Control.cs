@@ -10,7 +10,7 @@ namespace ProyectoHCL
 {
     public class Control
     {
-
+        AdmonRoles admonRoles = new AdmonRoles();
         AdmonObjetos admonObjeto = new AdmonObjetos();
         AdmonUsuarios admonUsuario = new AdmonUsuarios();
         AdmonClientes admonClientes = new AdmonClientes();
@@ -58,6 +58,12 @@ namespace ProyectoHCL
         {
             admonClientes.modificarCliente(NOMBRECL, ID_TIPOCLIENTECL, APELLIDOCL, NOMBRE_RTNCL,
                 RTNCL, TELEFONOCL, EMAILCL, CODIGOCL, DNI_PASAPORTECL, TELEFONO2CL, EMAIL2CL);
+        }
+
+        public void editarR(string  id, string nombrerol, string descripcion, string estado_rol)// string fecha_creacion,string fecha_actualizacion)
+        {
+            admonRoles.modificarRol(Convert.ToInt32(id), nombrerol, descripcion, estado_rol); //Convert.ToDateTime(fecha_creacion), Convert.ToDateTime(fecha_actualizacion));//Convert.ToDateTime(fecha_creacion), Convert.ToDateTime(fecha_actualizacion)
+
         }
     }
 }

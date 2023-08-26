@@ -21,6 +21,7 @@ using SpreadsheetLight;
 using SpreadsheetLight.Drawing;
 using iText.Kernel.Pdf.Canvas.Wmf;
 using iText.Layout.Renderer;
+using Point = System.Drawing.Point;
 
 namespace ProyectoHCL.Formularios
 {
@@ -53,7 +54,9 @@ namespace ProyectoHCL.Formularios
                     case 2:
                         if (obj.IdObjeto == "HABITACIONES" && !obj.Permitido)
                         {
-                            btnNuevo.Enabled = false;
+                            btnNuevo.Visible = false;
+                            label4.Location = new Point(28, 24);
+                            txtBuscar.Location = new Point(84, 22);
                         }
                         break;
                     case 3:
