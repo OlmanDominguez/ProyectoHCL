@@ -138,7 +138,7 @@ namespace ProyectoHCL.Formularios
                     if (txtEmail2.Text.Trim() == "") { txtEmail2.Text = "N/A"; }
                     if (cbTipo.SelectedItem.ToString() == "Juridico") { tip = 2; } else { tip = 1; }
                     control.editarClie(txtNombre.Text, tip, txtApellido.Text, txtEmpresa.Text,
-                        txtRTN.Text, txtTele1.Text, txtEmail1.Text, Convert.ToInt32(claseCod.codigo),
+                        txtRTN.Text, txtTele1.Text, txtEmail1.Text, int.Parse(claseCod.codigo),
                         txtID.Text, txtTele2.Text, txtEmail2.Text);
                     MsgB mbox = new MsgB("informacion", "Cliente Agregado");
                     DialogResult dR = mbox.ShowDialog();

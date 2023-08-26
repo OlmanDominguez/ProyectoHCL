@@ -747,7 +747,7 @@ namespace ProyectoHCL.Formularios
 
             while (j < s)
             {
-                filas += "<tr>"
+                filas += "<tr>";
                 filas += "<td>" + st.Rows[j]["CANTIDAD"].ToString() + "</td>";
                 filas += "<td>" + st.Rows[j]["DESCRIPCION"].ToString() + "</td>";
                 filas += "<td>" + st.Rows[j]["PRECIO"].ToString() + "</td>";
