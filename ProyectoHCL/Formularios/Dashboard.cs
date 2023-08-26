@@ -127,6 +127,18 @@ namespace ProyectoHCL
                             iconButton2.Visible = false;
                         }
                         break;
+                    case "BACKUP":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            iconButton4.Visible = false;
+                        }
+                        break;
+                    case "RESTORE":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            iconButton5.Visible = false;
+                        }
+                        break;
                 }
 
             }
