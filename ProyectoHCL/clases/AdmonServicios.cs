@@ -6,6 +6,56 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//-----------------------------------------------------------------------
+//    Universidad Nacional Autonoma de Honduras (UNAH)
+//		Facultad de Ciencias Economicas
+//	Departamento de Informatica administrativa
+//         Analisis, Programacion y Evaluacion de Sistemas
+//                    Tercer Periodo 2023
+
+
+//Equipo:
+//GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+//HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+//NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+//JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+//OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+//Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+//catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+//catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+//---------------------------------------------------------------------
+
+//Programa:         Clase adminsitración servicios
+//Fecha:            25 - 09 - 2023
+//Programador:      Hildegard Montalván
+//descripcion:      Clase con las funciones para editar y elimnar  
+
+//-----------------------------------------------------------------------
+
+//                Historial de Cambio
+
+//-----------------------------------------------------------------------
+
+//Programador               Fecha                      Descripcion
+//GABRIELA  MANCIA  
+
+//HILDEGARD  MONTALVAN   
+
+//NELSON SALGADO  
+
+//JOEL  GODOY 
+
+//OLMAN  DOMÍNGUEZ 
+
+//-----------------------------------------------------------------------
+
 namespace ProyectoHCL.clases
 {
     public class AdmonServicios
@@ -13,7 +63,7 @@ namespace ProyectoHCL.clases
         MySqlConnection conn;
         MySqlCommand cmd;
 
-        public void modificarServicio(int id, string descripcion, decimal precio, string estado)
+        public void modificarServicio(int id, string descripcion, decimal precio, string estado) //función para editar los servicios
         {
 
             try
@@ -23,6 +73,7 @@ namespace ProyectoHCL.clases
 
                 cmd = new MySqlCommand("editarServicio", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                //Parámetros que recibe el procedimiento almacenado
                 cmd.Parameters.AddWithValue("@idServicio", id);
                 cmd.Parameters.AddWithValue("@descripcion", descripcion);
                 cmd.Parameters.AddWithValue("@precio", precio);
@@ -39,7 +90,7 @@ namespace ProyectoHCL.clases
 
         }
 
-        public bool EliminarServicio(string idServicio)
+        public bool EliminarServicio(string idServicio) //función para eliminar los servicios
         {
             bool elimino = false;
 

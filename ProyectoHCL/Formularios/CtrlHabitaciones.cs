@@ -23,6 +23,56 @@ using iText.Kernel.Pdf.Canvas.Wmf;
 using iText.Layout.Renderer;
 using Point = System.Drawing.Point;
 
+//-----------------------------------------------------------------------
+//    Universidad Nacional Autonoma de Honduras (UNAH)
+//		Facultad de Ciencias Economicas
+//	Departamento de Informatica administrativa
+//         Analisis, Programacion y Evaluacion de Sistemas
+//                    Tercer Periodo 2023
+
+
+//Equipo:
+//GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+//HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+//NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+//JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+//OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+//Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+//catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+//catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+//---------------------------------------------------------------------
+
+//Programa:         Control Habitaciones
+//Fecha:            25 - 09 - 2023
+//Programador:      Hildegard Montalván
+//descripcion:      Pantalla ABC donde se muestran los registros, se crean, editan y eliminan
+
+//-----------------------------------------------------------------------
+
+//                Historial de Cambio
+
+//-----------------------------------------------------------------------
+
+//Programador               Fecha                      Descripcion
+//GABRIELA  MANCIA  
+
+//HILDEGARD  MONTALVAN   
+
+//NELSON SALGADO  
+
+//JOEL  GODOY 
+
+//OLMAN  DOMÍNGUEZ 
+
+//-----------------------------------------------------------------------
+
 namespace ProyectoHCL.Formularios
 {
     public partial class CtrlHabitaciones : Form
@@ -39,43 +89,43 @@ namespace ProyectoHCL.Formularios
         {
             InitializeComponent();
             pagFinal = numFilas;
-            CargarDG();
+            CargarDG(); //mostrar registros en datagridview
         }
 
 
-        private void Permisos()
+        private void Permisos() //función para asignar permisos a la pantalla
         {
-            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
+            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs); //lista de objetos que recibe el rol para validar el permiso
 
-            foreach (var obj in LsObj)
+            foreach (var obj in LsObj) //recorrer los objetos en la lista
             {
-                switch (obj.IdPermiso)
+                switch (obj.IdPermiso) //restringir acceso según el permiso
                 {
-                    case 2:
-                        if (obj.ObjetoN == "HABITACIONES" && !obj.Permitido)
+                    case 2: //permiso crear
+                        if (obj.ObjetoN == "HABITACIONES" && !obj.Permitido) //Validar pantalla y el permiso
                         {
-                            btnNuevo.Visible = false;
+                            btnNuevo.Visible = false; //Ocultar botón para crear
                             label4.Location = new Point(28, 24);
                             txtBuscar.Location = new Point(84, 22);
                         }
                         break;
-                    case 3:
+                    case 3: //permiso editar
                         if (obj.ObjetoN == "HABITACIONES" && !obj.Permitido)
                         {
-                            dgvHab.Columns["EDITAR"].Visible = false;
+                            dgvHab.Columns["EDITAR"].Visible = false; //Ocultar columna del botón para editar en datagrid
                         }
                         break;
-                    case 4:
+                    case 4:  //permiso eliminar
                         if (obj.ObjetoN == "HABITACIONES" && !obj.Permitido)
                         {
-                            dgvHab.Columns["ELIMINAR"].Visible = false;
+                            dgvHab.Columns["ELIMINAR"].Visible = false; //Ocultar columna del botón para eliminar en datagrid
                         }
                         break;
                 }
             }
         }
 
-        private void CargarDG()
+        private void CargarDG() //Cargar datagrid con registros utilizando la función de paginación
         {
             habitacion.Inicio1 = pagInicio;
             habitacion.Final1 = pagFinal;
@@ -100,18 +150,18 @@ namespace ProyectoHCL.Formularios
 
         private void CtrlHabitaciones_Load(object sender, EventArgs e)
         {
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
+            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //agregar botón de editar en datagrid
             btnUpdate.Name = "EDITAR";
             dgvHab.Columns.Add(btnUpdate);
 
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn(); //agregar botón de eliminar en datagrid
             btnDelete.Name = "ELIMINAR";
             dgvHab.Columns.Add(btnDelete);
 
-            Permisos();
+            Permisos(); //Llamar la función permisos al cargar formulario
         }
 
-        public void BuscarHabitacion(string buscarH)
+        public void BuscarHabitacion(string buscarH) //función para buscar una habitación
         {
             try
             {
@@ -142,7 +192,7 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        private void dgvHab_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void dgvHab_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)  //Configurar datagrid para mostrar los botones de editar y eliminar que se agregaron
         {
             if (e.ColumnIndex >= 0 && this.dgvHab.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
             {
@@ -172,7 +222,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void cmbPagH_SelectionChangeCommitted(object sender, EventArgs e)
+        private void cmbPagH_SelectionChangeCommitted(object sender, EventArgs e) //Seleccionar página para mostrar registros
         {
             int pagina = Convert.ToInt32(cmbPagH.Text);
             indice = pagina - 1;
@@ -181,7 +231,7 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e) //Seleccionar la cantidad de registros a mostrar
         {
             cmbIndice = cmbMostrar.SelectedIndex;
             switch (cmbIndice)
@@ -208,11 +258,12 @@ namespace ProyectoHCL.Formularios
 
         private void dgvHab_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvHab.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            if (this.dgvHab.Columns[e.ColumnIndex].Name == "ELIMINAR") //si se dio click en el botón eliminar hacer lo siguiente
             {
                 MsgB m = new MsgB("pregunta", "¿Está seguro que desea eliminar el registro?");
                 DialogResult dg = m.ShowDialog();
 
+                //eliminar registro
                 if (dg == DialogResult.OK)
                 {
                     bool elimino = admonHab.EliminarHabitacion(dgvHab.CurrentRow.Cells["ID"].Value.ToString());
@@ -236,9 +287,10 @@ namespace ProyectoHCL.Formularios
                 }
             }
 
-            if (this.dgvHab.Columns[e.ColumnIndex].Name == "EDITAR")
+            if (this.dgvHab.Columns[e.ColumnIndex].Name == "EDITAR") //si se dio click en el botón editar hacer lo siguiente
             {
                 R_E_hab.lblTitulo.Text = "Editar Habitación";
+                //obtener los datos del datagrid del registro seleccionado
                 R_E_hab.idH = dgvHab.CurrentRow.Cells["ID"].Value.ToString();
                 R_E_hab.cmbTipo.Text = dgvHab.CurrentRow.Cells["TIPO"].Value.ToString();
                 R_E_hab.txtNumero.Text = dgvHab.CurrentRow.Cells["NUMERO"].Value.ToString();
@@ -249,7 +301,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnAnterior_Click(object sender, EventArgs e)
+        private void btnAnterior_Click(object sender, EventArgs e) //botón anterior paginación
         {
             int pagina = Convert.ToInt32(cmbPagH.Text) - 1;
             indice = pagina - 1;
@@ -258,7 +310,7 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        private void btnSiguiente_Click(object sender, EventArgs e)
+        private void btnSiguiente_Click(object sender, EventArgs e) //botón siguiente paginación
         {
             int pagina = Convert.ToInt32(cmbPagH.Text) + 1;
             indice = pagina - 1;
@@ -267,7 +319,8 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        private void HabilitarBotones()
+        private void HabilitarBotones() //mostrar los botones de anterior o siguiente
+                                        //verificando si se está en la primera o ultima pagina
         {
             if (pagInicio == 1)
             {
@@ -294,7 +347,7 @@ namespace ProyectoHCL.Formularios
         {
             if (txtBuscar.Text != "")
             {
-                BuscarHabitacion(txtBuscar.Text);
+                BuscarHabitacion(txtBuscar.Text); //se llama la función para buscar registro
             }
             else
             {
@@ -304,10 +357,10 @@ namespace ProyectoHCL.Formularios
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Close(); //cerrar formulario
         }
 
-        private void crearPDF()
+        private void crearPDF() //función para crear pdf
         {
             PdfWriter pdfWriter = new PdfWriter("Reporte.pdf");
             PdfDocument pdf = new PdfDocument(pdfWriter);
@@ -401,7 +454,7 @@ namespace ProyectoHCL.Formularios
             DialogResult dR = mbox.ShowDialog();
         }
 
-        private void crearExcel()
+        private void crearExcel() //función para crear excel
         {
             SLDocument sl = new SLDocument();
 

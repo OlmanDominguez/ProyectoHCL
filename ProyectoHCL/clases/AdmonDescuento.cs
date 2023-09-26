@@ -7,6 +7,56 @@ using System.Text;
 using System.Threading.Tasks;
 using static ProyectoHCL.RecuContra;
 
+//-----------------------------------------------------------------------
+//    Universidad Nacional Autonoma de Honduras (UNAH)
+//		Facultad de Ciencias Economicas
+//	Departamento de Informatica administrativa
+//         Analisis, Programacion y Evaluacion de Sistemas
+//                    Tercer Periodo 2023
+
+
+//Equipo:
+//GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+//HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+//NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+//JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+//OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+//Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+//catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+//catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+//---------------------------------------------------------------------
+
+//Programa:         Clase adminsitración descuentos
+//Fecha:            25 - 09 - 2023
+//Programador:      Hildegard Montalván
+//descripcion:      Clase con las funciones para editar y elimnar 
+
+//-----------------------------------------------------------------------
+
+//                Historial de Cambio
+
+//-----------------------------------------------------------------------
+
+//Programador               Fecha                      Descripcion
+//GABRIELA  MANCIA  
+
+//HILDEGARD  MONTALVAN   
+
+//NELSON SALGADO  
+
+//JOEL  GODOY 
+
+//OLMAN  DOMÍNGUEZ 
+
+//-----------------------------------------------------------------------
+
 namespace ProyectoHCL.clases
 {
     public class AdmonDescuento
@@ -14,7 +64,7 @@ namespace ProyectoHCL.clases
         MySqlConnection conn;
         MySqlCommand cmd;
 
-        public void modificarDescuento(int id, string descripcion, decimal porcentaje, string estado, int idUs)
+        public void modificarDescuento(int id, string descripcion, decimal porcentaje, string estado, int idUs) //función para editar los descuentos
         {
 
             try
@@ -24,6 +74,7 @@ namespace ProyectoHCL.clases
 
                 cmd = new MySqlCommand("editarDescuento", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                //Parametros que recibe el procedimiento almacenado
                 cmd.Parameters.AddWithValue("@idDescuento", id);
                 cmd.Parameters.AddWithValue("@descripcion", descripcion);
                 cmd.Parameters.AddWithValue("@porcentaje", porcentaje);
@@ -41,7 +92,7 @@ namespace ProyectoHCL.clases
 
         }
 
-        public bool EliminarDescuento(string idDescuento)
+        public bool EliminarDescuento(string idDescuento) //función para eliminar descuentos
         {
             bool elimino = false;
 
