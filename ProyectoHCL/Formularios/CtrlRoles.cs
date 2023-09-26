@@ -59,7 +59,7 @@ namespace ProyectoHCL.Formularios
                 switch (obj.IdPermiso)
                 {
                     case 2:
-                        if (obj.IdObjeto == "ROLES" && !obj.Permitido)
+                        if (obj.ObjetoN == "ROLES" && !obj.Permitido)
                         {
                             btnNuevo.Visible = false;
                             label1.Location = new Point(28, 24);
@@ -67,13 +67,13 @@ namespace ProyectoHCL.Formularios
                         }
                         break;
                     case 3:
-                        if (obj.IdObjeto == "ROLES" && !obj.Permitido)
+                        if (obj.ObjetoN == "ROLES" && !obj.Permitido)
                         {
                             dgvRoles.Columns["EDITAR"].Visible = false;
                         }
                         break;
                     case 4:
-                        if (obj.IdObjeto == "ROLES" && !obj.Permitido)
+                        if (obj.ObjetoN == "ROLES" && !obj.Permitido)
                         {
                             dgvRoles.Columns["ELIMINAR"].Visible = false;
                         }

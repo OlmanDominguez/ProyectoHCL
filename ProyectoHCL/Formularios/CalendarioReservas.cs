@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Office2013.Word;
 using iText.Commons.Actions;
 using MySql.Data.MySqlClient;
 using System;
@@ -12,6 +13,56 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+//-----------------------------------------------------------------------
+//    Universidad Nacional Autonoma de Honduras (UNAH)
+//		Facultad de Ciencias Economicas
+//	Departamento de Informatica administrativa
+//         Analisis, Programacion y Evaluacion de Sistemas
+//                    Tercer Periodo 2023
+
+
+//Equipo:
+//GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+//HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+//NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+//JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+//OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+//Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+//catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+//catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+//---------------------------------------------------------------------
+
+//Programa:         Pantalla de Calendario de las reservas programadas
+//Fecha:            23 - 09 - 2023
+//Programador:      Hildegard 
+//descripcion:      Pantalla que muestra en el calendario las reservas programadas de una habitación 
+
+//-----------------------------------------------------------------------
+
+//                Historial de Cambio
+
+//-----------------------------------------------------------------------
+
+//Programador               Fecha                      Descripcion
+//GABRIELA  MANCIA  
+
+//HILDEGARD  MONTALVAN   
+
+//NELSON SALGADO  
+
+//JOEL  GODOY 
+
+//OLMAN  DOMÍNGUEZ 
+
+//-----------------------------------------------------------------------
 
 namespace ProyectoHCL.Formularios
 {
