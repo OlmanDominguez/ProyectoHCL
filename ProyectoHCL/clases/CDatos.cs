@@ -101,7 +101,7 @@ namespace ProyectoHCL.clases
                      {
                          IdPermiso = int.Parse(row["ID_PERMISO"].ToString()),
                          IdRol = row["ROL"].ToString(),
-                         IdObjeto = row["OBJETO"].ToString(),
+                         ObjetoN = row["OBJETO"].ToString(),
                          Permitido = Convert.ToBoolean(row["PERMITIDO"])
 
                      }).ToList();
@@ -129,7 +129,7 @@ namespace ProyectoHCL.clases
 
                 cmd.Parameters.Add(new MySqlParameter("@idRol", permisoR.IdRol));
                 cmd.Parameters.Add(new MySqlParameter("@idPermiso", permisoR.IdPermiso));
-                cmd.Parameters.Add(new MySqlParameter("@idObjeto", permisoR.IdObjetoAct));
+                cmd.Parameters.Add(new MySqlParameter("@idObjeto", permisoR.IdObjeto));
                 cmd.Parameters.Add(new MySqlParameter("@permitido", permisoR.Permitido));
 
                 cmd.ExecuteNonQuery();

@@ -54,7 +54,7 @@ namespace ProyectoHCL.Formularios
                 switch (obj.IdPermiso)
                 {
                     case 2:
-                        if (obj.IdObjeto == "DESCUENTOS" && !obj.Permitido) //Validar pantalla y el permiso
+                        if (obj.ObjetoN == "DESCUENTOS" && !obj.Permitido) //Validar pantalla y el permiso
                         {
                             btnNuevo.Visible = false; //Ocultar botón para crear
                             label4.Location = new Point(28, 24);
@@ -62,13 +62,13 @@ namespace ProyectoHCL.Formularios
                         }
                         break;
                     case 3:
-                        if (obj.IdObjeto == "DESCUENTOS" && !obj.Permitido)
+                        if (obj.ObjetoN == "DESCUENTOS" && !obj.Permitido)
                         {
                             dgvDesc.Columns["EDITAR"].Visible = false; //Ocultar columna del botón para editar en datagrid
                         }
                         break;
                     case 4:
-                        if (obj.IdObjeto == "DESCUENTOS" && !obj.Permitido)
+                        if (obj.ObjetoN == "DESCUENTOS" && !obj.Permitido)
                         {
                             dgvDesc.Columns["ELIMINAR"].Visible = false; //Ocultar columna del botón para eliminar en datagrid
                         }

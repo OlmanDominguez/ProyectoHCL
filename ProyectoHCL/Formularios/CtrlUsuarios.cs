@@ -54,7 +54,7 @@ namespace ProyectoHCL.Formularios
                 switch (obj.IdPermiso)
                 {
                     case 2:
-                        if (obj.IdObjeto == "USUARIOS" && !obj.Permitido)
+                        if (obj.ObjetoN == "USUARIOS" && !obj.Permitido)
                         {
                             btnNuevo.Visible = false;
                             label4.Location = new Point(28, 24);
@@ -62,7 +62,7 @@ namespace ProyectoHCL.Formularios
                         }
                         break;
                     case 3:
-                        if (obj.IdObjeto == "USUARIOS" && !obj.Permitido)
+                        if (obj.ObjetoN == "USUARIOS" && !obj.Permitido)
                         {
                             dgvUsuarios.Columns["EDITAR"].Visible = false;
                         }

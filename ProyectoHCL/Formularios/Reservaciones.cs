@@ -50,7 +50,7 @@ namespace ProyectoHCL
                 switch (obj.IdPermiso)
                 {
                     case 2:
-                        if (obj.IdObjeto == "RESERVACION" && !obj.Permitido)
+                        if (obj.ObjetoN == "RESERVACION" && !obj.Permitido)
                         {
                             btnNuevo.Visible = false;
                             label4.Location = new Point(28, 24);
@@ -58,13 +58,13 @@ namespace ProyectoHCL
                         }
                         break;
                     case 3:
-                        if (obj.IdObjeto == "RESERVACION" && !obj.Permitido)
+                        if (obj.ObjetoN == "RESERVACION" && !obj.Permitido)
                         {
                             dgv_reservaciones.Columns["EDITAR"].Visible = false;
                         }
                         break;
                     case 4:
-                        if (obj.IdObjeto == "RESERVACION" && !obj.Permitido)
+                        if (obj.ObjetoN == "RESERVACION" && !obj.Permitido)
                         {
                             dgv_reservaciones.Columns["ELIMINAR"].Visible = false;
                         }

@@ -41,7 +41,7 @@ namespace ProyectoHCL
 
             foreach (var obj in LsObj)
             {
-                switch (obj.IdObjeto)
+                switch (obj.ObjetoN)
                 {
                     case "HABITACIONES":
                         if (obj.IdPermiso == 1 && !obj.Permitido)

@@ -52,7 +52,7 @@ namespace ProyectoHCL.Formularios
                 switch (obj.IdPermiso)
                 {
                     case 2:
-                        if (obj.IdObjeto == "HABITACIONES" && !obj.Permitido)
+                        if (obj.ObjetoN == "HABITACIONES" && !obj.Permitido)
                         {
                             btnNuevo.Visible = false;
                             label4.Location = new Point(28, 24);
@@ -60,13 +60,13 @@ namespace ProyectoHCL.Formularios
                         }
                         break;
                     case 3:
-                        if (obj.IdObjeto == "HABITACIONES" && !obj.Permitido)
+                        if (obj.ObjetoN == "HABITACIONES" && !obj.Permitido)
                         {
                             dgvHab.Columns["EDITAR"].Visible = false;
                         }
                         break;
                     case 4:
-                        if (obj.IdObjeto == "HABITACIONES" && !obj.Permitido)
+                        if (obj.ObjetoN == "HABITACIONES" && !obj.Permitido)
                         {
                             dgvHab.Columns["ELIMINAR"].Visible = false;
                         }

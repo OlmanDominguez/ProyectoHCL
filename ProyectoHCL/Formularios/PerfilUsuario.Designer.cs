@@ -142,7 +142,7 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1595, 83);
+            panel2.Size = new Size(1386, 83);
             panel2.TabIndex = 34;
             panel2.Paint += panel2_Paint;
             // 
@@ -194,7 +194,7 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(2453, 12);
+            button1.Location = new Point(2244, 12);
             button1.Name = "button1";
             button1.Size = new Size(14, 17);
             button1.TabIndex = 42;
@@ -208,7 +208,7 @@
             button2.BackgroundImageLayout = ImageLayout.Stretch;
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(3484, 74);
+            button2.Location = new Point(3275, 74);
             button2.Name = "button2";
             button2.Size = new Size(30, 29);
             button2.TabIndex = 38;
@@ -222,7 +222,7 @@
             button5.BackgroundImageLayout = ImageLayout.Stretch;
             button5.FlatAppearance.BorderSize = 0;
             button5.FlatStyle = FlatStyle.Flat;
-            button5.Location = new Point(3531, 72);
+            button5.Location = new Point(3322, 72);
             button5.Name = "button5";
             button5.Size = new Size(35, 33);
             button5.TabIndex = 39;
@@ -236,7 +236,7 @@
             btnPerfil.BackgroundImageLayout = ImageLayout.Stretch;
             btnPerfil.FlatAppearance.BorderSize = 0;
             btnPerfil.FlatStyle = FlatStyle.Flat;
-            btnPerfil.Location = new Point(4199, 73);
+            btnPerfil.Location = new Point(3990, 73);
             btnPerfil.Name = "btnPerfil";
             btnPerfil.Size = new Size(30, 29);
             btnPerfil.TabIndex = 34;
@@ -250,7 +250,7 @@
             btnCerrarSesion.BackgroundImageLayout = ImageLayout.Stretch;
             btnCerrarSesion.FlatAppearance.BorderSize = 0;
             btnCerrarSesion.FlatStyle = FlatStyle.Flat;
-            btnCerrarSesion.Location = new Point(4246, 71);
+            btnCerrarSesion.Location = new Point(4037, 71);
             btnCerrarSesion.Name = "btnCerrarSesion";
             btnCerrarSesion.Size = new Size(35, 33);
             btnCerrarSesion.TabIndex = 35;
@@ -264,7 +264,7 @@
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 83);
             panel5.Name = "panel5";
-            panel5.Size = new Size(1595, 55);
+            panel5.Size = new Size(1386, 55);
             panel5.TabIndex = 35;
             // 
             // button7
@@ -275,7 +275,7 @@
             button7.FlatStyle = FlatStyle.Flat;
             button7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button7.ForeColor = SystemColors.ButtonHighlight;
-            button7.Location = new Point(2365, -23);
+            button7.Location = new Point(2156, -23);
             button7.Margin = new Padding(2);
             button7.Name = "button7";
             button7.Size = new Size(78, 25);
@@ -291,7 +291,7 @@
             button9.FlatStyle = FlatStyle.Flat;
             button9.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button9.ForeColor = SystemColors.ButtonHighlight;
-            button9.Location = new Point(2274, -23);
+            button9.Location = new Point(2065, -23);
             button9.Margin = new Padding(2);
             button9.Name = "button9";
             button9.Size = new Size(78, 25);
@@ -313,9 +313,9 @@
             panel3.Controls.Add(txtPag);
             panel3.Controls.Add(cmbPag);
             panel3.Dock = DockStyle.Bottom;
-            panel3.Location = new Point(0, 793);
+            panel3.Location = new Point(0, 705);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1595, 83);
+            panel3.Size = new Size(1386, 83);
             panel3.TabIndex = 37;
             // 
             // btnSiguiente
@@ -327,7 +327,7 @@
             btnSiguiente.FlatAppearance.BorderSize = 0;
             btnSiguiente.FlatAppearance.MouseOverBackColor = Color.Silver;
             btnSiguiente.FlatStyle = FlatStyle.Flat;
-            btnSiguiente.Location = new Point(2190, 16);
+            btnSiguiente.Location = new Point(1981, 16);
             btnSiguiente.Name = "btnSiguiente";
             btnSiguiente.Size = new Size(30, 31);
             btnSiguiente.TabIndex = 64;
@@ -342,7 +342,7 @@
             btnAnterior.FlatAppearance.BorderSize = 0;
             btnAnterior.FlatAppearance.MouseOverBackColor = Color.Silver;
             btnAnterior.FlatStyle = FlatStyle.Flat;
-            btnAnterior.Location = new Point(2154, 16);
+            btnAnterior.Location = new Point(1945, 16);
             btnAnterior.Name = "btnAnterior";
             btnAnterior.Size = new Size(30, 31);
             btnAnterior.TabIndex = 63;
@@ -351,7 +351,7 @@
             // txtPaginacion
             // 
             txtPaginacion.Anchor = AnchorStyles.Right;
-            txtPaginacion.Location = new Point(2381, 10);
+            txtPaginacion.Location = new Point(2172, 10);
             txtPaginacion.Name = "txtPaginacion";
             txtPaginacion.ReadOnly = true;
             txtPaginacion.Size = new Size(63, 23);
@@ -363,7 +363,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label10.ForeColor = SystemColors.ControlLightLight;
-            label10.Location = new Point(2354, 13);
+            label10.Location = new Point(2145, 13);
             label10.Name = "label10";
             label10.Size = new Size(24, 17);
             label10.TabIndex = 51;
@@ -375,7 +375,7 @@
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             label12.ForeColor = SystemColors.ControlLightLight;
-            label12.Location = new Point(2226, 13);
+            label12.Location = new Point(2017, 13);
             label12.Name = "label12";
             label12.Size = new Size(47, 17);
             label12.TabIndex = 50;
@@ -387,7 +387,7 @@
             cmbPaginacion.BackColor = SystemColors.Info;
             cmbPaginacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPaginacion.FormattingEnabled = true;
-            cmbPaginacion.Location = new Point(2274, 10);
+            cmbPaginacion.Location = new Point(2065, 10);
             cmbPaginacion.Margin = new Padding(2);
             cmbPaginacion.Name = "cmbPaginacion";
             cmbPaginacion.Size = new Size(65, 23);
@@ -397,7 +397,7 @@
             // 
             label14.Anchor = AnchorStyles.Right;
             label14.AutoSize = true;
-            label14.Location = new Point(3177, -2);
+            label14.Location = new Point(2968, -2);
             label14.Name = "label14";
             label14.Size = new Size(21, 15);
             label14.TabIndex = 47;
@@ -407,7 +407,7 @@
             // 
             label16.Anchor = AnchorStyles.Right;
             label16.AutoSize = true;
-            label16.Location = new Point(3049, -2);
+            label16.Location = new Point(2840, -2);
             label16.Name = "label16";
             label16.Size = new Size(43, 15);
             label16.TabIndex = 46;
@@ -416,7 +416,7 @@
             // txtPag
             // 
             txtPag.Anchor = AnchorStyles.Right;
-            txtPag.Location = new Point(3204, -5);
+            txtPag.Location = new Point(2995, -5);
             txtPag.Name = "txtPag";
             txtPag.Size = new Size(65, 23);
             txtPag.TabIndex = 45;
@@ -427,7 +427,7 @@
             cmbPag.BackColor = SystemColors.Info;
             cmbPag.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPag.FormattingEnabled = true;
-            cmbPag.Location = new Point(3097, -5);
+            cmbPag.Location = new Point(2888, -5);
             cmbPag.Margin = new Padding(2);
             cmbPag.Name = "cmbPag";
             cmbPag.Size = new Size(65, 23);
@@ -548,7 +548,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(1595, 876);
+            ClientSize = new Size(1386, 788);
             Controls.Add(lblcorreo);
             Controls.Add(linkLabelPreguntas);
             Controls.Add(linkLabelContraseña);
@@ -566,7 +566,9 @@
             Controls.Add(panel2);
             Controls.Add(lblTitulo);
             FormBorderStyle = FormBorderStyle.None;
+            MaximumSize = new Size(1386, 788);
             Name = "PerfilUsuario";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "PerfilUsuario";
             Load += PerfilUsuario_Load;
             panel2.ResumeLayout(false);

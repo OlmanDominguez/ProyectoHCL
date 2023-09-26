@@ -44,19 +44,19 @@ namespace ProyectoHCL.Formularios
                 switch (obj.IdPermiso)
                 {
                     case 2:
-                        if (obj.IdObjeto == "CLIENTES" && !obj.Permitido) //Validar pantalla y el permiso
+                        if (obj.ObjetoN == "CLIENTES" && !obj.Permitido) //Validar pantalla y el permiso
                         {
                             btnNuevo.Enabled = false; //Deshabilitar botón para crear
                         }
                         break;
                     case 3:
-                        if (obj.IdObjeto == "CLIENTES" && !obj.Permitido)
+                        if (obj.ObjetoN == "CLIENTES" && !obj.Permitido)
                         {
                             dgvClientes.Columns["EDITAR"].Visible = false; //Ocultar columna del botón para editar en datagrid
                         }
                         break;
                     case 4:
-                        if (obj.IdObjeto == "CLIENTES" && !obj.Permitido)
+                        if (obj.ObjetoN == "CLIENTES" && !obj.Permitido)
                         {
                             dgvClientes.Columns["ELIMINAR"].Visible = false; //Ocultar columna del botón para eliminar en datagrid
                         }

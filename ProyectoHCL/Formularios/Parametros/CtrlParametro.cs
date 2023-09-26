@@ -424,19 +424,19 @@ namespace ProyectoHCL.Formularios.Parametros
                 switch (obj.IdPermiso)
                 {
                     case 2:
-                        if (obj.IdObjeto == "PARAMETROS" && !obj.Permitido) //Validar pantalla y el permiso
+                        if (obj.ObjetoN == "PARAMETROS" && !obj.Permitido) //Validar pantalla y el permiso
                         {
-                            btnNuevo.Enabled = false; //Deshabilitar botón para crear
+                            btnNuevo.Visible = false; //Deshabilitar botón para crear
                         }
                         break;
                     case 3:
-                        if (obj.IdObjeto == "PARAMETROS" && !obj.Permitido)
+                        if (obj.ObjetoN == "PARAMETROS" && !obj.Permitido)
                         {
                             dgvParametros.Columns["EDITAR"].Visible = false; //Ocultar columna del botón para editar en datagrid
                         }
                         break;
                     case 4:
-                        if (obj.IdObjeto == "PARAMETROS" && !obj.Permitido)
+                        if (obj.ObjetoN == "PARAMETROS" && !obj.Permitido)
                         {
                             dgvParametros.Columns["ELIMINAR"].Visible = false; //Ocultar columna del botón para eliminar en datagrid
                         }

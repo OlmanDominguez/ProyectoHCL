@@ -47,7 +47,7 @@ namespace ProyectoHCL.Formularios
                 switch (obj.IdPermiso)
                 {
                     case 2:
-                        if (obj.IdObjeto == "PERMISOS" && !obj.Permitido) //Validar pantalla y el permiso
+                        if (obj.ObjetoN == "PERMISOS" && !obj.Permitido) //Validar pantalla y el permiso
                         {
                             btnNuevo.Visible = false;
                             btnEditar.Visible = false;
@@ -55,7 +55,7 @@ namespace ProyectoHCL.Formularios
                         }
                         break;
                     case 3:
-                        if (obj.IdObjeto == "PERMISOS" && !obj.Permitido)
+                        if (obj.ObjetoN == "PERMISOS" && !obj.Permitido)
                         {
                             btnEditar.Visible = false;
                             btnNuevo.Visible = false;
@@ -209,7 +209,7 @@ namespace ProyectoHCL.Formularios
             foreach (DataGridViewRow row in dgvRolPermiso.Rows)//Recorrer el datagridview para obtener los valores de las casillas y asignar los permisos
             {
                 permiso.IdRol = cmbRol.Text;
-                permiso.IdObjeto = row.Cells["PANTALLA"].Value.ToString();
+                permiso.IdObjeto = int.Parse(row.Cells["ID"].Value.ToString());
 
                 if (Convert.ToBoolean(row.Cells["VER"].Value))
                 {
@@ -388,7 +388,7 @@ namespace ProyectoHCL.Formularios
             foreach (DataGridViewRow row in dgvRolPermiso.Rows) //Recorrer el datagridview para obtener los valores de las casillas y asignar los permisos
             {
                 permiso.IdRol = cmbRol.Text;
-                permiso.IdObjetoAct = int.Parse(row.Cells["ID"].Value.ToString());
+                permiso.IdObjeto = int.Parse(row.Cells["ID"].Value.ToString());
 
                 if (Convert.ToBoolean(row.Cells["VER"].Value))
                 {

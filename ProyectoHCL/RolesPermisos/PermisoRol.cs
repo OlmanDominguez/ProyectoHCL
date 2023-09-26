@@ -14,9 +14,9 @@ namespace ProyectoHCL.RolesPermisos
 
         public int IdPermiso { get; set; }
 
-        public string IdObjeto { get; set; }
+        public int IdObjeto { get; set; }
 
-        public int IdObjetoAct { get; set; }
+        public string ObjetoN { get; set; }
 
         public bool Permitido { get; set; }
     }

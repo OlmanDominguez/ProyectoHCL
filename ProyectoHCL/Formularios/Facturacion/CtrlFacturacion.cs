@@ -41,19 +41,19 @@ namespace ProyectoHCL.Formularios
                 switch (obj.IdPermiso)
                 {
                     case 2:
-                        if (obj.IdObjeto == "FACTURACION" && !obj.Permitido) //Validar pantalla y el permiso
+                        if (obj.ObjetoN == "FACTURACION" && !obj.Permitido) //Validar pantalla y el permiso
                         {
                             btnNuevo.Enabled = false; //Deshabilitar botón para crear
                         }
                         break;
                     case 3:
-                        if (obj.IdObjeto == "FACTURACION" && !obj.Permitido)
+                        if (obj.ObjetoN == "FACTURACION" && !obj.Permitido)
                         {
                             dgvFacturas.Columns["EDITAR"].Visible = false; //Ocultar columna del botón para editar en datagrid
                         }
                         break;
                     case 4:
-                        if (obj.IdObjeto == "FACTURACION" && !obj.Permitido)
+                        if (obj.ObjetoN == "FACTURACION" && !obj.Permitido)
                         {
                             dgvFacturas.Columns["ELIMINAR"].Visible = false; //Ocultar columna del botón para eliminar en datagrid
                         }
