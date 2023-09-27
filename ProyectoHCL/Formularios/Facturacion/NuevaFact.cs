@@ -25,7 +25,7 @@ catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda
 ---------------------------------------------------------------------
 
 Programa:         Pantalla de Ingreso de nueva Factura
-Fecha:             26 - septiembre - 2023
+Fecha:             27- septiembre - 2023
 Programador: Joel
 descripcion:       Pantalla que contrala las validaciones de nueva Factura
 
@@ -75,7 +75,7 @@ namespace ProyectoHCL.Formularios
 
 
 
-        private void btnCerrar_Click(object sender, EventArgs e) // Botón cerrrar
+        private void btnCerrar_Click(object sender, EventArgs e) // Botón cerrar
         {
             this.Close();
         }
@@ -124,7 +124,7 @@ namespace ProyectoHCL.Formularios
                 dgvReservas.DataSource = dt;
 
             }
-            catch (Exception a)
+            catch (Exception a)  /* detectar errores en ejecucion */
             {
                 MessageBox.Show(a.Message + a.StackTrace);
             }

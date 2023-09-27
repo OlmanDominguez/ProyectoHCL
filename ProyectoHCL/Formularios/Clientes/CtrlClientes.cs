@@ -50,29 +50,29 @@ OLMAN  DOMÍNGUEZ
 
 /* librerias utilizadas para facilitar el proceso */
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;   
-using MySql.Data.MySqlClient;
-using ProyectoHCL.clases;
+using MySql.Data.MySqlClient; /* libreria para conectar a la BD */
+using ProyectoHCL.clases; /* hacer uso de las clases dentro del proyecto */
 using ProyectoHCL.Properties;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System; /* directiva para identificar los bloques de codigo */
+using System.Collections.Generic;  /* libreria para lectura*/
+using System.ComponentModel; /* jerarguia de los componentes funcionales */
+using System.Data; /* Conexion a la BD*/
+using System.Drawing; /* impresion de archivos en excel */
+using System.Linq; /* libreria para clases e interfaces */
+using System.Text; /* manipular informacion dentro de la aplicacion */
+using System.Threading.Tasks; /* libreria para impresion */
 using System.Windows.Forms;
-using ProyectoHCL.clases;
+using ProyectoHCL.clases; 
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using DocumentFormat.OpenXml.Office2013.Excel;
 using SpreadsheetLight;
 using SpreadsheetLight.Drawing;
 
-namespace ProyectoHCL.Formularios  
+namespace ProyectoHCL.Formularios   
 {
-    public partial class CtrlClientes : Form
+    public partial class CtrlClientes : Form  
     {
-        clases.Clientes clien = new clases.Clientes();  /* Referencias*/
+        clases.Clientes clien = new clases.Clientes();  /* Referencias y declaracion de valores en variable*/
         AdmonClientes admonClientes = new AdmonClientes();
         DataSet ds = new DataSet();
         CDatos cDatos = new CDatos();

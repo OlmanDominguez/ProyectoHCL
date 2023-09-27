@@ -1,20 +1,71 @@
-﻿using MySql.Data.MySqlClient;
-using ProyectoHCL.clases;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*-----------------------------------------------------------------------
+    Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                    Tercer Periodo 2013
+
+
+Equipo:
+GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+JOEL ENRIQUE GODOY BONILLA---------(joel.godoy@unah.hn)
+
+OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla de Ingreso de Facturacion
+Fecha:             26 - septiembre - 2023
+Programador: Joel
+descripcion:       Pantalla que contrala las validaciones de Facturacion
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+GABRIELA  MANCIA  
+
+HILDEGARD  MONTALVAN   
+
+NELSON SALGADO  
+
+JOEL  GODOY 
+
+OLMAN  DOMÍNGUEZ 
+
+----------------------------------------------------------------------- */
+
+/* librerias utilizadas para facilitar el proceso */
+using MySql.Data.MySqlClient; /* libreria para conectar a la BD */
+using ProyectoHCL.clases; /* hacer uso de las clases dentro del proyecto */
+using System; /* directiva para identificar los bloques de codigo */
+using System.Collections.Generic; /* libreria para lectura*/
+using System.ComponentModel;  /* jerarguia de los componentes funcionales */
+using System.Data; /* Conexion a la BD*/
+using System.Drawing; /* impresion de archivos en excel */
+using System.Linq; /* libreria para clases e interfaces */
+using System.Text; /* manipular informacion dentro de la aplicacion */
+using System.Threading.Tasks; /* libreria para impresion */
 using System.Windows.Forms;
 using static ProyectoHCL.Formularios.CtrlClientes;
 using ProyectoHCL.Formularios;
 
 namespace ProyectoHCL.Formularios
 {
-    public partial class EditarCliente : Form
+    public partial class EditarCliente : Form  /* clase publica editar cliente */
     {
         MsgB msgB = new MsgB();
         public EditarCliente()
@@ -31,12 +82,12 @@ namespace ProyectoHCL.Formularios
 
 
 
-        int posY = 0;
+        int posY = 0; /* declaracion de variables */
         int posX = 0;
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Left)
+            if (e.Button != MouseButtons.Left)  /* validacion mediante condicional IF */
             {
                 posX = e.X;
                 posY = e.Y;
@@ -95,7 +146,7 @@ namespace ProyectoHCL.Formularios
                 }
 
             }
-            catch (Exception a)
+            catch (Exception a)   /* detectar errores en ejecucion */
             {
                 MessageBox.Show(a.Message + a.StackTrace);
             }
@@ -108,7 +159,7 @@ namespace ProyectoHCL.Formularios
 
         private void cbTipo_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (cbTipo.SelectedItem.ToString() == "Natural")
+            if (cbTipo.SelectedItem.ToString() == "Natural")    /* seleccion de tipo mediante IF */
             {
                 gb_juridico.Visible = false;
             }
@@ -153,7 +204,7 @@ namespace ProyectoHCL.Formularios
         }
 
 
-        private bool VCamposVacios()
+        private bool VCamposVacios()    /* valor booleano y condicional IF */
         {
             bool ok = true;
 

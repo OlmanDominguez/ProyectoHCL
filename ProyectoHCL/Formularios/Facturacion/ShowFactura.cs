@@ -25,7 +25,7 @@ catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda
 ---------------------------------------------------------------------
 
 Programa:         Pantalla de Ingreso de mostrar Factura
-Fecha:             26 - septiembre - 2023
+Fecha:             27 - septiembre - 2023
 Programador: Joel
 descripcion:       Pantalla que contrala las validaciones de mostrar Factura
 
