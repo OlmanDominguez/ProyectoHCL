@@ -76,7 +76,7 @@ using System.IO;
 namespace ProyectoHCL.Formularios
 {
 
-    public partial class ShowFactura : Form
+    public partial class ShowFactura : Form /* clase publica de mostrar factura */
     {
 
         public ShowFactura()
@@ -97,12 +97,12 @@ namespace ProyectoHCL.Formularios
         Decimal St1, St2, St3, StS = 0;
         Decimal isv, it, subt, total;
 
-        int posY = 0;
+        int posY = 0;     /* declaracion de variables */
         int posX = 0;
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Left)
+            if (e.Button != MouseButtons.Left)   /* condicional IF */
             {
                 posX = e.X;
                 posY = e.Y;
