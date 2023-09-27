@@ -1,17 +1,70 @@
-﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-using MySql.Data.MySqlClient;
-using ProyectoHCL.clases;
-using ProyectoHCL.Properties;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ProyectoHCL.Formularios;
+﻿/* -----------------------------------------------------------------------
+	Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                    Tercer Periodo 2013
+
+
+Equipo:
+GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+JOEL ENRIQUE GODOY BONILLA---------(joel.godoy@unah.hn)
+
+OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+Catedratico analisis y diseño:             Lic. Giancarlo Martini Scalici Aguilar 
+catedratico programacion e implementacion: Lic. Karla Melisa Garcia Pineda 
+catedratico evaluacion de sistemas:        Lic. Karla Melisa Garcia Pineda 
+
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla de Ingreso de Facturacion
+Fecha:             26-septiembre-2023
+Programador:       Joel
+descripcion:       Pantalla que contrala las validaciones de Facturacion
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+GABRIELA  MANCIA  
+
+HILDEGARD  MONTALVAN   
+
+NELSON SALGADO  
+
+JOEL  GODOY 
+
+OLMAN  DOMÍNGUEZ 
+
+-----------------------------------------------------------------------  */
+
+
+/* librerias utilizadas para facilitar el proceso en modulo facturacion */
+
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using MySql.Data.MySqlClient;  /* para conectar a la BD */
+using ProyectoHCL.clases; /* para hacer uso dentro de las clases en el proyecto */
+using ProyectoHCL.Properties; /* para propiedades dentro del proyecto */
+using System;  /* identificar los bloques de codigo */
+using System.Collections.Generic; /* libreria para lectura */
+using System.ComponentModel; /* jerarquia de los componentes funcionales */
+using System.Data;  /* conexion a la BD */
+using System.Drawing; /* impresion de archivos en excel */
+using System.Linq; /* clases e interfaces */
+using System.Text; /* para manipular informacion dentro de la aplicacion */
+using System.Threading.Tasks;/* para impresion */
+using System.Windows.Forms; /* para operaciones unicas que o devuelven ningun valor */
+using ProyectoHCL.Formularios; /* manipula informacion dentro del formulario cliente */
 using SpreadsheetLight;
 using SpreadsheetLight.Drawing;
 
@@ -19,7 +72,7 @@ namespace ProyectoHCL.Formularios
 {
     public partial class CtrlFacturacion : Form
     {
-        Facturacion user = new Facturacion();
+        Facturacion user = new Facturacion(); /* declaracion de variables y valores */
         DataSet ds = new DataSet();
         CDatos cDatos = new CDatos();
         int pagInicio = 1, indice = 0, numFilas = 10, pagFinal, cmbIndice = 0;
@@ -38,7 +91,7 @@ namespace ProyectoHCL.Formularios
 
             foreach (var obj in LsObj)
             {
-                switch (obj.IdPermiso)
+                switch (obj.IdPermiso)   /* realiza las respectivas validaciones de permisos */     
                 {
                     case 2:
                         if (obj.ObjetoN == "FACTURACION" && !obj.Permitido) //Validar pantalla y el permiso
@@ -69,15 +122,15 @@ namespace ProyectoHCL.Formularios
             ds = user.PaginacionFacturas();
             dgvFacturas.DataSource = ds.Tables[1];
 
-            int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;
+            int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;   /* declaracion de variable y conversion de valores  */   
 
-            if (Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) % numFilas > 0) cantidad++;
+            if (Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) % numFilas > 0) cantidad++; /* condicional IF */
 
             txtPaginacion.Text = cantidad.ToString();
 
             cmbPaginacion.Items.Clear();
 
-            for (int x = 1; x <= cantidad; x++)
+            for (int x = 1; x <= cantidad; x++)   /* Ciclo For para verificar las instrucciones correspondientes en valor de variable cantidad */
                 cmbPaginacion.Items.Add(x.ToString());
 
             cmbPaginacion.SelectedIndex = indice;
@@ -142,11 +195,11 @@ namespace ProyectoHCL.Formularios
             }
             else
             {
-                CargarDG();  /*MostrarUsuarios();*/ //Si el textbox está vacio devuelve el metodo mostrar usuarios 
+                CargarDG();  /*MostrarUsuarios();*/ //Si el textbox está vacio devuelve el metodo mostrar usuarios
             }
         }
 
-        private void btnNuevo_Click_1(object sender, EventArgs e)
+        private void btnNuevo_Click_1(object sender, EventArgs e)   
         {
             Form formulario = new Formularios.NuevaFact();
             formulario.ShowDialog();
@@ -183,9 +236,9 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        public static class info
+        public static class info    
         {
-            public static string factura;
+            public static string factura;  
             public static string fecha;
             public static string ingreso;
             public static string salida;
@@ -216,7 +269,7 @@ namespace ProyectoHCL.Formularios
                     form.ShowDialog();
 
                 }
-                catch (Exception)
+                catch (Exception)    /* detectar errores en ejecucion */
                 {
                     MessageBox.Show("Se produjo un error");
                 }
@@ -259,7 +312,7 @@ namespace ProyectoHCL.Formularios
         private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbIndice = cmbMostrar.SelectedIndex;
-            switch (cmbIndice)
+            switch (cmbIndice) /* realizar las respectivas validaciones valor por valor */
             {
                 case 0:
                     numFilas = 5;
@@ -374,9 +427,9 @@ namespace ProyectoHCL.Formularios
             estiloCa.Fill.SetPattern(DocumentFormat.OpenXml.Spreadsheet.PatternValues.Solid, System.Drawing.Color.Blue, System.Drawing.Color.Blue);
             sl.SetCellStyle("B" + celdaCabecera, "J" + celdaCabecera, estiloCa);
 
-            string sql = "SELECT NFACTURA, s.ID_SOLICITUDRESERVA, c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, f.FECHA, s.INGRESO, s.SALIDA, f.TOTAL FROM TBL_FACTURA f INNER JOIN TBL_SOLICITUDRESERVA s ON f.ID_SOLICITUDRESERVA = s.ID_SOLICITUDRESERVA INNER JOIN TBL_CLIENTE c ON s.COD_CLIENTE = c.CODIGO;";
+            string sql = "SELECT NFACTURA, s.ID_SOLICITUDRESERVA, c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, f.FECHA, s.INGRESO, s.SALIDA, f.TOTAL FROM TBL_FACTURA f INNER JOIN TBL_SOLICITUDRESERVA s ON f.ID_SOLICITUDRESERVA = s.ID_SOLICITUDRESERVA INNER JOIN TBL_CLIENTE c ON s.COD_CLIENTE = c.CODIGO;"; /* declaracion y llamada de valores de variables en BD */
 
-            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion(); /* proceso de conexion a BD */
 
             MySqlCommand comando = new MySqlCommand(sql, conexionBD);
             MySqlDataReader reader = comando.ExecuteReader();

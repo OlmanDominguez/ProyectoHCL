@@ -1,17 +1,68 @@
-﻿using MySql.Data.MySqlClient;
-using ProyectoHCL.clases;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿/* -----------------------------------------------------------------------
+    Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                    Tercer Periodo 2013
+
+
+Equipo:
+GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+JOEL ENRIQUE GODOY BONILLA---------(joel.godoy@unah.hn)
+
+OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla de Ingreso de mostrar Factura
+Fecha:             26 - septiembre - 2023
+Programador: Joel
+descripcion:       Pantalla que contrala las validaciones de mostrar Factura
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+GABRIELA  MANCIA  
+
+HILDEGARD  MONTALVAN   
+
+NELSON SALGADO  
+
+JOEL  GODOY 
+
+OLMAN  DOMÍNGUEZ 
+
+----------------------------------------------------------------------- */
+
+/* Librerias utilizadas para facilitar el proceso */
+using MySql.Data.MySqlClient;  /* libreria para conectar la BD */
+using ProyectoHCL.clases; /*hacer uso de las clases dentro del proyecto */
+using System;/* identificar los bloques de codigo */
+using System.Collections.Generic; /* libreria para lectura */
+using System.ComponentModel; /* jerarguia de componentes funcionales */
 using System.ComponentModel.Design;
-using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+using System.Data; /*conexion a la BD */
+using System.Drawing;/* impresion de archivos en excel */
+using System.Globalization; 
+using System.Linq;/* clases e interfaces */
+using System.Runtime.CompilerServices; 
+using System.Text;/* manipular informacion dentro de la aplicacion */
+using System.Threading.Tasks;/* libreria para impresion */
+using System.Windows.Controls; 
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static ProyectoHCL.RecuContra;
