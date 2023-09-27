@@ -99,9 +99,9 @@
             label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(83, 149);
             label1.Name = "label1";
-            label1.Size = new Size(95, 17);
+            label1.Size = new Size(93, 17);
             label1.TabIndex = 39;
-            label1.Text = "Buscar Cliente";
+            label1.Text = "Buscar cliente";
             // 
             // txt_cod_cliente
             // 
@@ -139,9 +139,9 @@
             label4.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             label4.Location = new Point(79, 371);
             label4.Name = "label4";
-            label4.Size = new Size(148, 17);
+            label4.Size = new Size(146, 17);
             label4.TabIndex = 45;
-            label4.Text = "Numero de Huespedes";
+            label4.Text = "Numero de huespedes";
             // 
             // txt_huespedes
             // 

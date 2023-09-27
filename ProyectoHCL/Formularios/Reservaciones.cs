@@ -1,4 +1,39 @@
-﻿using System;
+﻿/*
+ * -----------------------------------------------------------------------
+	Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                    Tercer Periodo 2023
+
+
+Equipo:
+GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+Catedratico analisis y diseño:             Lic. Giancarlo Martini Scalici Aguilar 
+catedratico programacion e implementacion: Lic. Karla Melisa Garcia Pineda 
+catedratico evaluacion de sistemas:        Lic. Karla Melisa Garcia Pineda 
+
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla de reservaciones
+Fecha:             25-09-2023
+Programador:       Nelson Salgado
+descripcion:       Pantalla en la que se puden ver y administrar las reservaciones 
+
+-----------------------------------------------------------------------
+
+ */
+using System;
 using DocumentFormat.OpenXml.Vml;
 using Microsoft.VisualBasic;
 using System.Collections.Generic;
@@ -118,38 +153,6 @@ namespace ProyectoHCL
                 throw;
             }
         }
-
-        /* public void CargarReservas()
-         {
-             try
-             {
-                 using (BaseDatosHCL.ObtenerConexion())
-                 {
-                     MySqlCommand comando = new MySqlCommand();
-                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                     comando.CommandText = ("select TBL_SOLICITUDRESERVA.ID_SOLICITUDRESERVA AS ID,TBL_SOLICITUDRESERVA.FECHACOTI AS FECHA, TBL_SOLICITUDRESERVA.INGRESO, TBL_SOLICITUDRESERVA.SALIDA, TBL_SOLICITUDRESERVA.NHUESPEDES AS HUESPEDES ,concat(TBL_CLIENTE.NOMBRE,\", \",TBL_CLIENTE.APELLIDO) AS NOMBRE, TBL_ESTADORESERVA.DESCRIPCION AS ESTADO,\r\nTBL_SOLICITUDRESERVA.NUMEROHABITACION AS HABITACION\r\nFROM TBL_CLIENTE INNER JOIN TBL_SOLICITUDRESERVA ON TBL_CLIENTE.CODIGO=TBL_SOLICITUDRESERVA.COD_CLIENTE\r\nINNER JOIN TBL_ESTADORESERVA ON TBL_SOLICITUDRESERVA.ID_ESTADORESERVA=TBL_ESTADORESERVA.ID_ESTADORESERVA\r\nINNER JOIN TBL_DETALLERESERVA ON TBL_ESTADORESERVA.ID_ESTADORESERVA=TBL_DETALLERESERVA.ID_DETALLERESERVA\r\nINNER JOIN TBL_HABITACION ON TBL_DETALLERESERVA.ID_HABITACION=TBL_HABITACION.ID_HABITACION ");
-
-                     MySqlDataAdapter adapter = new MySqlDataAdapter();
-                     adapter.SelectCommand = comando;
-                     DataTable dt = new DataTable();
-                     adapter.Fill(dt);
-                     dgv_reservaciones.DataSource = dt;
-
-
-                 }
-
-             }
-             catch (Exception a)
-             {
-                 MessageBox.Show(a.Message);
-             }
-
-
-
-         }*/
-
-
-
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -264,17 +267,12 @@ namespace ProyectoHCL
             {
                 reservacion.lbl_titulo.Text = "Editar Reservacion";
                 reservacion.txt_id_solicitud.Text = dgv_reservaciones.CurrentRow.Cells["ID"].Value.ToString();
-                //reservacion.cb_cliente.Text = dgv_reservaciones.CurrentRow.Cells["NOMBRE"].Value.ToString();
-                //reservacion.cb_estado.Text = dgv_reservaciones.CurrentRow.Cells["ESTADO"].Value.ToString();
                 reservacion.lbl_1c.Visible = true;
                 reservacion.lbl_cliente.Visible = true;             
                 reservacion.lbl_cliente.Text= dgv_reservaciones.CurrentRow.Cells["NOMBRE"].Value.ToString();
-                //reservacion.lbl_habitacion.Text = dgv_reservaciones.CurrentRow.Cells["HABITACION"].Value.ToString();
                 reservacion.ShowDialog();
 
                 CargarDG();
-
-                //CargarReservas(); //Se llama el metodo Mostrar usuarios para actualizar el DataGrid al editar 
             }
         }
 
