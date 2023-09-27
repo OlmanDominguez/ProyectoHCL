@@ -24,10 +24,10 @@ catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda
 
 ---------------------------------------------------------------------
 
-Programa:         Pantalla de Ingreso de Facturacion
-Fecha:             26 - septiembre - 2023
-Programador: Joel
-descripcion:       Pantalla que contrala las validaciones de Facturacion
+Programa:         Pantalla de Ingreso de admoncliente
+Fecha:             27 - septiembre - 2023
+Programador:      Joel
+descripcion:       Pantalla que contrala las validaciones de administracion cliente
 
 -----------------------------------------------------------------------
 
@@ -140,7 +140,7 @@ namespace ProyectoHCL.clases
             {
                 string sql = "DELETE FROM TBL_CLIENTE WHERE CODIGO = @CODIGO;"; /* declaracion de variable y borra codigo de tabla cliente */
 
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;"); /* proceso de conexion a la BD */
                 conn.Open();
 
                 cmd = new MySqlCommand(sql, conn);
