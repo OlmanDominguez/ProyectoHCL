@@ -24,9 +24,9 @@ catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda
 
 ---------------------------------------------------------------------
 
-Programa:         Pantalla de Ingreso de Facturacion
-Fecha:             26 - septiembre - 2023
-Programador: Joel
+Programa:         Pantalla de Ingreso de agregar cliente
+Fecha:             27 - septiembre - 2023
+Programador:      Joel
 descripcion:       Pantalla que contrala las validaciones de Facturacion
 
 -----------------------------------------------------------------------
@@ -81,7 +81,7 @@ namespace ProyectoHCL.Formularios
 
 
 
-        int posY = 0;
+        int posY = 0;   /* declaracion de variable */
         int posX = 0;
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
