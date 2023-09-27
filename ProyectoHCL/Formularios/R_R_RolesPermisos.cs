@@ -13,6 +13,57 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static iText.Kernel.Pdf.Colorspace.PdfDeviceCs;
 
+
+//-----------------------------------------------------------------------
+//    Universidad Nacional Autonoma de Honduras (UNAH)
+//		Facultad de Ciencias Economicas
+//	Departamento de Informatica administrativa
+//         Analisis, Programacion y Evaluacion de Sistemas
+//                    Tercer Periodo 2023
+
+
+//Equipo:
+//GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+//HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+//NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+//JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+//OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+//Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+//catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+//catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+//---------------------------------------------------------------------
+
+//Programa:         Registrar y editar permisos
+//Fecha:            25 - 09 - 2023
+//Programador:      Hildegard Montalván
+//descripcion:      Formulario que permite registrar o editar los permisos
+
+//-----------------------------------------------------------------------
+
+//                Historial de Cambio
+
+//-----------------------------------------------------------------------
+
+//Programador               Fecha                      Descripcion
+//GABRIELA  MANCIA  
+
+//HILDEGARD  MONTALVAN   
+
+//NELSON SALGADO  
+
+//JOEL  GODOY 
+
+//OLMAN  DOMÍNGUEZ 
+
+//-----------------------------------------------------------------------
+
 namespace ProyectoHCL.Formularios
 {
     public partial class R_R_RolesPermisos : Form
@@ -21,7 +72,7 @@ namespace ProyectoHCL.Formularios
         {
             InitializeComponent();
             cargarRoles();
-            dgvRolPermiso.CellValueChanged += dgvRolPermiso_CellValueChanged;
+            dgvRolPermiso.CellValueChanged += dgvRolPermiso_CellValueChanged; 
         }
 
         RolUsuario rolUs = new RolUsuario();
@@ -46,19 +97,19 @@ namespace ProyectoHCL.Formularios
             {
                 switch (obj.IdPermiso)
                 {
-                    case 2:
+                    case 2: //permiso crear
                         if (obj.ObjetoN == "PERMISOS" && !obj.Permitido) //Validar pantalla y el permiso
                         {
-                            btnNuevo.Visible = false;
-                            btnEditar.Visible = false;
+                            btnNuevo.Visible = false; //ocultar botón nuevo
+                            btnEditar.Visible = false; //ocultar botón editar
                             lblTitulo.Text = "Editar Permisos";
                         }
                         break;
-                    case 3:
-                        if (obj.ObjetoN == "PERMISOS" && !obj.Permitido)
+                    case 3: //permiso editar
+                        if (obj.ObjetoN == "PERMISOS" && !obj.Permitido) //Validar pantalla y el permiso
                         {
-                            btnEditar.Visible = false;
-                            btnNuevo.Visible = false;
+                            btnEditar.Visible = false; //ocultar botón editar
+                            btnNuevo.Visible = false; //ocultar botón nuevo
                         }
                         break;
                 }
@@ -98,34 +149,34 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        private void CargarDG() //Agregar las columnas checkbox
+        private void CargarDG() //Agregar las columnas checkbox para marcar los permisos de ver, crear, editar o eliminar
         {
             DataGridViewCheckBoxColumn chkVer = new DataGridViewCheckBoxColumn();
             chkVer.Name = "VER";
-            chkVer.Tag = 1;
+            chkVer.Tag = 1; //asignar número para asociarlo al permiso al momento de almacenar en la base de datos
             dgvRolPermiso.Columns.Add(chkVer);
 
             DataGridViewCheckBoxColumn chkCrear = new DataGridViewCheckBoxColumn();
             chkCrear.Name = "CREAR";
-            chkCrear.Tag = 2;
+            chkCrear.Tag = 2; //asignar número para asociarlo al permiso al momento de almacenar en la base de datos
             dgvRolPermiso.Columns.Add(chkCrear);
 
             DataGridViewCheckBoxColumn chkEditar = new DataGridViewCheckBoxColumn();
             chkEditar.Name = "EDITAR";
-            chkEditar.Tag = 3;
+            chkEditar.Tag = 3; //asignar número para asociarlo al permiso al momento de almacenar en la base de datos
             dgvRolPermiso.Columns.Add(chkEditar);
 
             DataGridViewCheckBoxColumn chkEliminar = new DataGridViewCheckBoxColumn();
             chkEliminar.Name = "ELIMINAR";
-            chkEliminar.Tag = 4;
+            chkEliminar.Tag = 4; //asignar número para asociarlo al permiso al momento de almacenar en la base de datos
             dgvRolPermiso.Columns.Add(chkEliminar);
         }
 
-        public void limpiarCampos()
+        public void limpiarCampos() //limpiar las casillas marcadas en el datagrid
         {
             cmbRol.SelectedIndex = -1;
 
-            foreach (DataGridViewRow row in dgvRolPermiso.Rows)
+            foreach (DataGridViewRow row in dgvRolPermiso.Rows) //recorrer las filas del datagrid
             {
                 if (Convert.ToBoolean(row.Cells["VER"].Value))
                 {
@@ -146,27 +197,28 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnMin_Click(object sender, EventArgs e)
+        private void btnMin_Click(object sender, EventArgs e)  //botón para minimizar
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
+        private void btnCerrar_Click(object sender, EventArgs e) //botón para cerrar
         {
             this.Close();
             limpiarCampos();
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e) //botón para cancelar
         {
             this.Close();
             limpiarCampos();
         }
 
+        //coordenadas para arrastrar formulario
         int posY = 0;
         int posX = 0;
 
-        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        private void panel2_MouseMove(object sender, MouseEventArgs e) //evento del panel que permite arrastrar el formulario
         {
             if (e.Button != MouseButtons.Left)
             {
@@ -194,34 +246,34 @@ namespace ProyectoHCL.Formularios
 
         private void RolesPermisos_Load(object sender, EventArgs e)
         {
-            ListarObjetos();
+            ListarObjetos(); 
             cmbRol.SelectedIndex = -1;
-            CargarDG();
+            CargarDG(); 
             Permisos();
             //pictureBox1.Image = Image.FromFile(@"C:\Users\jmont\OneDrive\Documentos\HM\reloj-de-arena.gif");
             //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
-        private void GuardarPermisoRol()
+        private void GuardarPermisoRol() //función para guardar los permisos
         {
-            panel6.Visible = true;
+            panel6.Visible = true; //mostrar panel con mensaje de espera
 
             foreach (DataGridViewRow row in dgvRolPermiso.Rows)//Recorrer el datagridview para obtener los valores de las casillas y asignar los permisos
             {
-                permiso.IdRol = cmbRol.Text;
-                permiso.IdObjeto = int.Parse(row.Cells["ID"].Value.ToString());
+                permiso.IdRol = cmbRol.Text; //asignar valor seleccionado en combobox al atributo IdRol
+                permiso.IdObjeto = int.Parse(row.Cells["ID"].Value.ToString()); //asignar valor seleccionado (id pantalla) de la fila del datagrid al atributo IdObjeto
 
-                if (Convert.ToBoolean(row.Cells["VER"].Value))
+                if (Convert.ToBoolean(row.Cells["VER"].Value)) //si se marcó la casilla del permiso...
                 {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
-                    permiso.Permitido = true;
-                    cDatos.GuardarPermiso(permiso);
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag); //asignar valor tag del checkbox al atributo IdPermiso
+                    permiso.Permitido = true; //asignar valor true al atributo Permitido
+                    cDatos.GuardarPermiso(permiso); //llamar función para guardar permiso
                 }
-                else if (!Convert.ToBoolean(row.Cells["VER"].Value))
+                else if (!Convert.ToBoolean(row.Cells["VER"].Value)) //si no se marcó la casilla del permiso
                 {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
-                    permiso.Permitido = false;
-                    cDatos.GuardarPermiso(permiso);
+                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);//asignar valor tag del checkbox al atributo IdPermiso
+                    permiso.Permitido = false; //asignar valor false al atributo Permitido
+                    cDatos.GuardarPermiso(permiso); //llamar función para guardar permiso
                 }
 
                 if (Convert.ToBoolean(row.Cells["CREAR"].Value))
@@ -264,14 +316,14 @@ namespace ProyectoHCL.Formularios
                 }
             }
 
-            panel6.Visible = false;
+            panel6.Visible = false; //ocultar panel con mensaje de espera
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e) //botón para guardar un nuevo registro o una modificación
         {
             if (lblTitulo.Text == "Registrar Permisos")
             {
-                if (cmbRol.Text == "")
+                if (cmbRol.Text == "") //validar campo vacío
                 {
                     MsgB Mbox = new MsgB("advertencia", "Seleccione un rol");
                     DialogResult DR = Mbox.ShowDialog();
@@ -288,9 +340,9 @@ namespace ProyectoHCL.Formularios
                     btnCancelar.Enabled = true;
                 }
             }
-            else if (lblTitulo.Text == "Editar Permisos")
+            else if (lblTitulo.Text == "Editar Permisos") 
             {
-                if (cmbRol.Text == "")
+                if (cmbRol.Text == "") //validar campo vacío
                 {
                     MsgB Mbox = new MsgB("advertencia", "Seleccione un rol");
                     DialogResult DR = Mbox.ShowDialog();
@@ -380,7 +432,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void ActualizarPermisoRol()
+        private void ActualizarPermisoRol() //función para actualizar permisos 
         {
             label1.Text = "Actualizando permisos";
             panel6.Visible = true;
@@ -448,14 +500,14 @@ namespace ProyectoHCL.Formularios
 
         private void cmbRol_SelectedValueChanged(object sender, EventArgs e) //Validar los permisos por rol al cambiar el valor del combobox
         {
-            if (lblTitulo.Text == "Registrar Permisos" && modelo.existePermiso(ExisteRol()) && !String.IsNullOrEmpty(cmbRol.Text))
+            if (lblTitulo.Text == "Registrar Permisos" && modelo.existePermiso(ExisteRol()) && !String.IsNullOrEmpty(cmbRol.Text)) //validar si el rol seleecionado ya tiene permisos asignados
             {
                 MsgB m = new MsgB("error", "El rol seleccionado ya tiene permisos asignados");
                 DialogResult dR = m.ShowDialog();
                 limpiarCampos();
             }
 
-            if (lblTitulo.Text == "Editar Permisos" && !modelo.existePermiso(ExisteRol()) && !String.IsNullOrEmpty(cmbRol.Text))
+            if (lblTitulo.Text == "Editar Permisos" && !modelo.existePermiso(ExisteRol()) && !String.IsNullOrEmpty(cmbRol.Text)) //validar si el rol seleccionado ya tiene permisos asignados para editar
             {
                 MsgB m = new MsgB("error", "El rol seleccionado no puede editarse, no tiene permisos asignados");
                 DialogResult dR = m.ShowDialog();
@@ -467,7 +519,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnNuevo_Click(object sender, EventArgs e)
+        private void btnNuevo_Click(object sender, EventArgs e) 
         {
             lblTitulo.Text = "Registrar Permisos";
             btnEditar.Visible = true;

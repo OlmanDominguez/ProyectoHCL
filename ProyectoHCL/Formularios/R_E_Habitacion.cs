@@ -10,6 +10,56 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//-----------------------------------------------------------------------
+//    Universidad Nacional Autonoma de Honduras (UNAH)
+//		Facultad de Ciencias Economicas
+//	Departamento de Informatica administrativa
+//         Analisis, Programacion y Evaluacion de Sistemas
+//                    Tercer Periodo 2023
+
+
+//Equipo:
+//GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+//HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+//NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+//JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+//OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+//Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+//catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+//catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+//---------------------------------------------------------------------
+
+//Programa:         Registrar y editar habitaciones
+//Fecha:            25 - 09 - 2023
+//Programador:      Hildegard Montalván
+//descripcion:      Formulario que permite registrar o editar las habitaciones
+
+//-----------------------------------------------------------------------
+
+//                Historial de Cambio
+
+//-----------------------------------------------------------------------
+
+//Programador               Fecha                      Descripcion
+//GABRIELA  MANCIA  
+
+//HILDEGARD  MONTALVAN   
+
+//NELSON SALGADO  
+
+//JOEL  GODOY 
+
+//OLMAN  DOMÍNGUEZ 
+
+//-----------------------------------------------------------------------
+
 namespace ProyectoHCL.Formularios
 {
     public partial class R_E_Habitacion : Form
@@ -17,20 +67,20 @@ namespace ProyectoHCL.Formularios
         public R_E_Habitacion()
         {
             InitializeComponent();
-            cargarTipos();
-            cmbTipo.SelectedIndex = -1;
+            cargarTipos(); //llenar combobox 
+            cmbTipo.SelectedIndex = -1; //inicializar combobox vacío
         }
 
         public string idH = null;
         MsgB msgB = new MsgB();
 
-        private void cargarTipos()
+        private void cargarTipos() //cargar combobox con los registros de la base de datos
         {
             MySqlConnection conn;
             MySqlCommand cmd;
 
             cmbTipo.DataSource = null;
-            cmbTipo.Items.Clear();
+            cmbTipo.Items.Clear(); //limpiar combobox
             string sql = "SELECT ID_TIPOHABITACION, TIPO FROM TBL_TIPOHABITACION;";
 
             conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
@@ -57,14 +107,14 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        public void limpiarCampos()
+        public void limpiarCampos() //limpiar los campos del formulario
         {
             cmbTipo.SelectedIndex = -1;
             txtNumero.Clear();
             cmbEstado.SelectedIndex = -1;
         }
 
-        public void limpiarError()
+        public void limpiarError() //limpiar los errorProvider del formulario
         {
             errorT.SetError(cmbTipo, "");
             errorT.SetError(txtNumero, "");
@@ -73,27 +123,28 @@ namespace ProyectoHCL.Formularios
 
         private void btnMin_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Minimized; //botón para minimizar
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
+        private void btnCerrar_Click(object sender, EventArgs e) //botón para cerrar
         {
             this.Close();
             limpiarCampos();
             limpiarError();
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e) //botón para cancelar
         {
             this.Close();
             limpiarCampos();
             limpiarError();
         }
 
+        //coordenadas para arrastrar formulario
         int posY = 0;
         int posX = 0;
 
-        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        private void panel2_MouseMove(object sender, MouseEventArgs e) //evento del panel que permite arrastrar el formulario
         {
             if (e.Button != MouseButtons.Left)
             {
@@ -107,20 +158,20 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e) //botón para guardar un nuevo registro o una modificación
         {
             if (lblTitulo.Text == "Registrar Habitación")
             {
                 Modelo modelo = new Modelo();
 
-                if (cmbTipo.Text.Trim() == "" || txtNumero.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
+                if (cmbTipo.Text.Trim() == "" || txtNumero.Text.Trim() == "" || cmbEstado.Text.Trim() == "") //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
                 }
                 else if (modelo.existeHabitacion(txtNumero.Text))
                 {
-                    MsgB m = new MsgB("advertencia", "El número de habitación ya existe");
+                    MsgB m = new MsgB("advertencia", "El número de habitación ya existe"); //validar si ya existe el registro
                     DialogResult dR = m.ShowDialog();
                 }
                 else
@@ -134,6 +185,7 @@ namespace ProyectoHCL.Formularios
 
                         cmd = new MySqlCommand("insertHabitacion", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
+                        //parametros que recibe el procedimiento almacenado
                         cmd.Parameters.AddWithValue("@tipo", cmbTipo.Text);
                         cmd.Parameters.AddWithValue("@numero", txtNumero.Text);
                         cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
@@ -155,7 +207,7 @@ namespace ProyectoHCL.Formularios
             {
                 Control control = new Control();
 
-                if (cmbTipo.Text.Trim() == "" || txtNumero.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
+                if (cmbTipo.Text.Trim() == "" || txtNumero.Text.Trim() == "" || cmbEstado.Text.Trim() == "") //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
@@ -164,6 +216,7 @@ namespace ProyectoHCL.Formularios
                 {
                     try
                     {
+                        //llamar función para editar 
                         control.editarHab(idH, cmbTipo.Text, txtNumero.Text, cmbEstado.Text);
 
                         MsgB m = new MsgB("informacion", "Registro modificado");
@@ -179,12 +232,12 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtNumero_KeyPress(object sender, KeyPressEventArgs e) //validar que solo se ingresen números
         {
             ValidarTxt.TxtNumeros(e);
         }
 
-        private void cmbTipo_Leave(object sender, EventArgs e)
+        private void cmbTipo_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (ValidarTxt.cmbVacio(cmbTipo))
             {
@@ -196,7 +249,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtNumero_Leave(object sender, EventArgs e)
+        private void txtNumero_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (ValidarTxt.txtVacio(txtNumero))
             {
@@ -208,7 +261,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void cmbEstado_Leave(object sender, EventArgs e)
+        private void cmbEstado_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (ValidarTxt.cmbVacio(cmbEstado))
             {
