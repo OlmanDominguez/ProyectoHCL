@@ -25,8 +25,8 @@ catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda
 ---------------------------------------------------------------------
 
 Programa:         Pantalla de clientes
-Fecha:             25 - septiembre - 2023
-Programador: Joel
+Fecha:             27 - septiembre - 2023
+Programador:      Joel
 descripcion:       Pantalla que contrala las validaciones del cliente
 
 -----------------------------------------------------------------------
@@ -180,7 +180,7 @@ namespace ProyectoHCL.Formularios
 
 
             }
-            catch (Exception)  /*para captar errores con mas facilidad */
+            catch (Exception)  /*para captar errores en ejecucion */
             {
 
                 throw;
