@@ -6,6 +6,56 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//-----------------------------------------------------------------------
+//    Universidad Nacional Autonoma de Honduras (UNAH)
+//		Facultad de Ciencias Economicas
+//	Departamento de Informatica administrativa
+//         Analisis, Programacion y Evaluacion de Sistemas
+//                    Tercer Periodo 2023
+
+
+//Equipo:
+//GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+//HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+//NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+//JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+//OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+//Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+//catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+//catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+//---------------------------------------------------------------------
+
+//Programa:         Clase adminsitración tipo habitaciones
+//Fecha:            25 - 09 - 2023
+//Programador:      Hildegard Montalván
+//descripcion:      Clase con las funciones para editar y elimnar  
+
+//-----------------------------------------------------------------------
+
+//                Historial de Cambio
+
+//-----------------------------------------------------------------------
+
+//Programador               Fecha                      Descripcion
+//GABRIELA  MANCIA  
+
+//HILDEGARD  MONTALVAN   
+
+//NELSON SALGADO  
+
+//JOEL  GODOY 
+
+//OLMAN  DOMÍNGUEZ 
+
+//-----------------------------------------------------------------------
+
 namespace ProyectoHCL.clases
 {
     public class AdmonTipHab
@@ -14,7 +64,7 @@ namespace ProyectoHCL.clases
         MySqlCommand cmd;
 
 
-        public void modificarTipHab(int id, string tipo, int capacidad, decimal precio, string estado)
+        public void modificarTipHab(int id, string tipo, int capacidad, decimal precio, string estado) //función para editar los tipos de habitaciones
         {
 
             try
@@ -24,6 +74,7 @@ namespace ProyectoHCL.clases
 
                 cmd = new MySqlCommand("editarTipHabitacion", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                //Parametros que recibe el procedimiento almacenado
                 cmd.Parameters.AddWithValue("@idTipHab", id);
                 cmd.Parameters.AddWithValue("@tipo", tipo);
                 cmd.Parameters.AddWithValue("@capacidad", capacidad);
@@ -41,7 +92,7 @@ namespace ProyectoHCL.clases
 
         }
 
-        public bool EliminarTipHab(string idTipHab) 
+        public bool EliminarTipHab(string idTipHab) //función para eliminar los tipos de habitaciones
         {
             bool elimino = false;
 

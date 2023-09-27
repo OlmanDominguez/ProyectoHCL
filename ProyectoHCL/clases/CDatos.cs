@@ -9,6 +9,56 @@ using System.Windows.Forms;
 using System.Data;
 using ProyectoHCL.Formularios;
 
+//-----------------------------------------------------------------------
+//    Universidad Nacional Autonoma de Honduras (UNAH)
+//		Facultad de Ciencias Economicas
+//	Departamento de Informatica administrativa
+//         Analisis, Programacion y Evaluacion de Sistemas
+//                    Tercer Periodo 2023
+
+
+//Equipo:
+//GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+//HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+//NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+//JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+//OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+//Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+//catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+//catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+//---------------------------------------------------------------------
+
+//Programa:         Clase datos de permisos
+//Fecha:            25 - 09 - 2023
+//Programador:      Hildegard Montalván
+//descripcion:      Clase con las funciones para listar los objetos, guardar permisos, actualizar permisos y devolver una lista de objetos con permisos
+
+//-----------------------------------------------------------------------
+
+//                Historial de Cambio
+
+//-----------------------------------------------------------------------
+
+//Programador               Fecha                      Descripcion
+//GABRIELA  MANCIA  
+
+//HILDEGARD  MONTALVAN   
+
+//NELSON SALGADO  
+
+//JOEL  GODOY 
+
+//OLMAN  DOMÍNGUEZ 
+
+//-----------------------------------------------------------------------
+
 namespace ProyectoHCL.clases
 {
      class CDatos
@@ -27,7 +77,7 @@ namespace ProyectoHCL.clases
         public static int numeroHab;
 
 
-        public DataTable listarObjetos()
+        public DataTable listarObjetos() //función para listar los objetos almacenados en la tabla TBL_OBJETO
         {
             MySqlConnection conn;
             MySqlCommand cmd;
@@ -52,7 +102,7 @@ namespace ProyectoHCL.clases
             return dt;
         }
 
-        public void GuardarPermiso(PermisoRol permisoR)
+        public void GuardarPermiso(PermisoRol permisoR) //función que guarda los permisos recibiendo como parametro un objeto permiso
         {
             try
             {
@@ -63,7 +113,7 @@ namespace ProyectoHCL.clases
 
                 cmd = new MySqlCommand("spInsertPermiso", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-
+                //parametros que recibe el procedimiento almacenado
                 cmd.Parameters.Add(new MySqlParameter("@idRol", permisoR.IdRol));
                 cmd.Parameters.Add(new MySqlParameter("@idPermiso", permisoR.IdPermiso));
                 cmd.Parameters.Add(new MySqlParameter("@idObjeto", permisoR.IdObjeto));
@@ -77,7 +127,7 @@ namespace ProyectoHCL.clases
             }
         }
 
-        public List<PermisoRol> SelectObjeto(int idR)
+        public List<PermisoRol> SelectObjeto(int idR) //lista que devuelve los objetos con sus respectivos permisos al recibir como parametro el id de Rol
         {
             MySqlConnection conn;
             MySqlCommand cmd;
@@ -91,6 +141,7 @@ namespace ProyectoHCL.clases
                 conn.Open();
                 MySqlDataAdapter da = new MySqlDataAdapter();
                 cmd.CommandType = CommandType.StoredProcedure;
+                //parametro que recibe el procedimiento almacenado
                 cmd.Parameters.Add(new MySqlParameter("@idRol", idR));
                 da.SelectCommand = cmd;
                 da.Fill(dt);
@@ -99,6 +150,7 @@ namespace ProyectoHCL.clases
                     (from row in dt.AsEnumerable()
                      select new PermisoRol()
                      {
+                         //llenar lista con el id del permiso, el id del rol, el objeto y valor permitido(true or false)
                          IdPermiso = int.Parse(row["ID_PERMISO"].ToString()),
                          IdRol = row["ROL"].ToString(),
                          ObjetoN = row["OBJETO"].ToString(),
@@ -106,16 +158,16 @@ namespace ProyectoHCL.clases
 
                      }).ToList();
 
-                return Objeto;
+                return Objeto; //retornar lista
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return null;
+                return null; //si hubo un error no retornar nada
             }
         }
 
-        public void ActualizarPermiso(PermisoRol permisoR)
+        public void ActualizarPermiso(PermisoRol permisoR) //función que actualiza los permisos recibiendo como parametro un objeto permiso
         {
             try
             {
@@ -126,7 +178,7 @@ namespace ProyectoHCL.clases
 
                 cmd = new MySqlCommand("EditarPermisos", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-
+                //parametros que recibe el procedimiento almacenado
                 cmd.Parameters.Add(new MySqlParameter("@idRol", permisoR.IdRol));
                 cmd.Parameters.Add(new MySqlParameter("@idPermiso", permisoR.IdPermiso));
                 cmd.Parameters.Add(new MySqlParameter("@idObjeto", permisoR.IdObjeto));

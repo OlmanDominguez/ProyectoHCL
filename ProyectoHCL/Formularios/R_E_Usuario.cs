@@ -15,6 +15,56 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using static ProyectoHCL.RecuContra; //Para uso del user y IDUser iniciado
 
+//-----------------------------------------------------------------------
+//    Universidad Nacional Autonoma de Honduras (UNAH)
+//		Facultad de Ciencias Economicas
+//	Departamento de Informatica administrativa
+//         Analisis, Programacion y Evaluacion de Sistemas
+//                    Tercer Periodo 2023
+
+
+//Equipo:
+//GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+//HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+//NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+//JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+//OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+//Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+//catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+//catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+//---------------------------------------------------------------------
+
+//Programa:         Registrar y editar usuarios
+//Fecha:            25 - 09 - 2023
+//Programador:      Hildegard Montalván
+//descripcion:      Formulario que permite registrar o editar los usuarios
+
+//-----------------------------------------------------------------------
+
+//                Historial de Cambio
+
+//-----------------------------------------------------------------------
+
+//Programador               Fecha                      Descripcion
+//GABRIELA  MANCIA  
+
+//HILDEGARD  MONTALVAN   
+
+//NELSON SALGADO  
+
+//JOEL  GODOY 
+
+//OLMAN  DOMÍNGUEZ 
+
+//-----------------------------------------------------------------------
+
 namespace ProyectoHCL.Formularios
 {
     public partial class R_E_Usuario : Form
@@ -22,16 +72,16 @@ namespace ProyectoHCL.Formularios
         public R_E_Usuario()
         {
             InitializeComponent();
-            cargarEstado();
-            cargarRoles();
-            cmbRol.SelectedIndex = -1;
-            cmbEstado.SelectedIndex = -1;
+            cargarEstado(); //lenar combobox con los estados
+            cargarRoles(); //lenar combobox con los roles
+            cmbRol.SelectedIndex = -1; //inicializar combobox sin opción seleccionada
+            cmbEstado.SelectedIndex = -1; //inicializar combobox sin opción seleccionada
         }
 
         public string idUs = null;
         MsgB msgB = new MsgB();
 
-        private void cargarRoles()
+        private void cargarRoles() //cargar combobox con los registros de los roles en la base de datos
         {
             MySqlConnection conn;
             MySqlCommand cmd;
@@ -64,7 +114,7 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        public string Pass()
+        public string Pass() //obtener la contraseña del usuario
         {
             MySqlCommand comando = new MySqlCommand();
             comando.Connection = BaseDatosHCL.ObtenerConexion();
@@ -83,7 +133,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void cargarEstado()
+        private void cargarEstado() //cargar combobox con los registros de los estados en la base de datos
         {
             MySqlConnection conn;
             MySqlCommand cmd;
@@ -122,7 +172,7 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        public void limpiarCampos()
+        public void limpiarCampos() //limpiar los campos del formulario
         {
             txtNombre.Clear();
             txtContraseña.Clear();
@@ -132,7 +182,7 @@ namespace ProyectoHCL.Formularios
             cmbEstado.SelectedIndex = -1;
         }
 
-        public void limpiarError()
+        public void limpiarError() //limpiar los errorProvider del formulario
         {
             errorT.SetError(txtNombre, "");
             errorT.SetError(txtContraseña, "");
@@ -143,29 +193,30 @@ namespace ProyectoHCL.Formularios
             errorT.SetError(dtpVencimiento, "");
         }
 
-        private void btnMin_Click(object sender, EventArgs e)
+        private void btnMin_Click(object sender, EventArgs e) //botón para minimizar
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
+        private void btnCerrar_Click(object sender, EventArgs e) //botón para cerrar
         {
             this.Close();
             limpiarCampos();
             limpiarError();
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e) //botón para cancelar
         {
             this.Close();
             limpiarCampos();
             limpiarError();
         }
 
+        //coordenadas para arrastrar formulario
         int posY = 0;
         int posX = 0;
 
-        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        private void panel2_MouseMove(object sender, MouseEventArgs e) //evento del panel que permite arrastrar el formulario
         {
             if (e.Button != MouseButtons.Left)
             {
@@ -179,12 +230,12 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e) //validar que se ingresen solo letras
         {
             ValidarTxt.TxtLetras(e);
         }
 
-        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e) //validar que no se ingresen espacios
         {
             if (char.IsWhiteSpace(e.KeyChar))
             {
@@ -196,34 +247,34 @@ namespace ProyectoHCL.Formularios
 
 
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e) //botón para guardar un nuevo registro o una modificación
         {
             if (lblTitulo.Text == "Registrar Usuario")
             {
                 Modelo modelo = new Modelo();
 
                 if (txtNombre.Text.Trim() == "" || txtUsuario.Text.Trim() == "" || txtContraseña.Text.Trim() == "" ||
-                    cmbRol.Text.Trim() == "" || txtCorreo.Text.Trim() == "")
+                    cmbRol.Text.Trim() == "" || txtCorreo.Text.Trim() == "") //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (modelo.existeUsuario(txtUsuario.Text))
+                else if (modelo.existeUsuario(txtUsuario.Text)) //validar si ya existe el registro
                 {
                     MsgB m = new MsgB("advertencia", "El usuario ya existe");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (DateTime.Today > dtpVencimiento.Value)
+                else if (DateTime.Today > dtpVencimiento.Value) //validar la fecha de vencimiento
                 {
                     MsgB m = new MsgB("advertencia", "La fecha de vencimiento seleccionada no es válida");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (!ValidarTxt.CorreoValido(txtCorreo.Text))
+                else if (!ValidarTxt.CorreoValido(txtCorreo.Text)) //validar correo
                 {
                     MsgB m = new MsgB("advertencia", "Dirección de correo no válida");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (txtContraseña.TextLength < 5)
+                else if (txtContraseña.TextLength < 5) //validar que la contraseña no tenga menos de 5 caracteres
                 {
                     MsgB m = new MsgB("advertencia", "La contraseña es muy corta");
                     DialogResult dR = m.ShowDialog();
@@ -239,6 +290,7 @@ namespace ProyectoHCL.Formularios
 
                         cmd = new MySqlCommand("InsertarUsuarios", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
+                        //parametros que recibe el procedimiento almacenado
                         cmd.Parameters.AddWithValue("@estado", "NUEVO");
                         cmd.Parameters.AddWithValue("@rol", cmbRol.Text);
                         cmd.Parameters.AddWithValue("@usuario", txtUsuario.Text);
@@ -253,6 +305,7 @@ namespace ProyectoHCL.Formularios
                         string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                         conn.Close();
+                        //registrar acción (crear) en bitácora
                         string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
                             "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'CREACION', 'CREACION USUARIO " +
                             txtUsuario.Text + "');";
@@ -280,22 +333,22 @@ namespace ProyectoHCL.Formularios
                 Control control = new Control();
 
                 if (txtNombre.Text.Trim() == "" || txtUsuario.Text.Trim() == "" || cmbRol.Text.Trim() == "" ||
-                    txtCorreo.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
+                    txtCorreo.Text.Trim() == "" || cmbEstado.Text.Trim() == "") //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (DateTime.Today > dtpVencimiento.Value)
+                else if (DateTime.Today > dtpVencimiento.Value) //validar la fecha de vencimiento
                 {
                     MsgB m = new MsgB("advertencia", "La fecha de vencimiento seleccionada no es válida");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (!ValidarTxt.CorreoValido(txtCorreo.Text))
+                else if (!ValidarTxt.CorreoValido(txtCorreo.Text)) //validar correo
                 {
                     MsgB m = new MsgB("advertencia", "Dirección de correo no válida");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (txtContraseña.TextLength < 5 && txtContraseña.Text != "")
+                else if (txtContraseña.TextLength < 5 && txtContraseña.Text != "") //validar contraseña que no sea menor a 5 caracteres
                 {
                     MsgB m = new MsgB("advertencia", "La contraseña es muy corta");
                     DialogResult dR = m.ShowDialog();
@@ -306,6 +359,7 @@ namespace ProyectoHCL.Formularios
                     {
                         if (txtContraseña.Text == "")
                         {
+                            //llamar función para editar 
                             control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
                             Pass(), dtpVencimiento.Text, txtCorreo.Text);
                         }
@@ -319,6 +373,7 @@ namespace ProyectoHCL.Formularios
                         MySqlConnection conn;
                         MySqlCommand cmd;
 
+                        //registrar acción(editar) en bitacóra
                         string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
                             "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'EDICION', 'EDICION USUARIO " +
                             idUs + " " + txtUsuario.Text + "');";
@@ -342,7 +397,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtCorreo_Leave(object sender, EventArgs e)
+        private void txtCorreo_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (!ValidarTxt.CorreoValido(txtCorreo.Text))
             {
@@ -356,7 +411,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtContraseña_Leave(object sender, EventArgs e)
+        private void txtContraseña_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (txtContraseña.TextLength < 5)
             {
@@ -369,7 +424,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtUsuario_Leave(object sender, EventArgs e)
+        private void txtUsuario_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (ValidarTxt.txtVacio(txtUsuario))
             {
@@ -381,7 +436,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtNombre_Leave(object sender, EventArgs e)
+        private void txtNombre_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (ValidarTxt.txtVacio(txtNombre))
             {
@@ -397,7 +452,7 @@ namespace ProyectoHCL.Formularios
         {
         }
 
-        private void cmbRol_Leave(object sender, EventArgs e)
+        private void cmbRol_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (ValidarTxt.cmbVacio(cmbRol))
             {
@@ -409,7 +464,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void cmbEstado_Leave(object sender, EventArgs e)
+        private void cmbEstado_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (ValidarTxt.cmbVacio(cmbEstado))
             {
@@ -421,19 +476,19 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void OcultarBox4_Click(object sender, EventArgs e)
+        private void OcultarBox4_Click(object sender, EventArgs e) //ocultar contraseña
         {
             MostrarBox3.BringToFront();
             txtContraseña.PasswordChar = '*';
         }
 
-        private void MostrarBox3_Click(object sender, EventArgs e)
+        private void MostrarBox3_Click(object sender, EventArgs e) //mostrar contraseña
         {
             OcultarBox4.BringToFront();
             txtContraseña.PasswordChar = '\0';
         }
 
-        private void dtpVencimiento_Leave(object sender, EventArgs e)
+        private void dtpVencimiento_Leave(object sender, EventArgs e) //validar una fecha mayor a la actual
         {
             if (DateTime.Today > dtpVencimiento.Value)
             {
@@ -446,7 +501,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e) //validar que no hayan espacios en el campo de usuario
         {
             if (char.IsWhiteSpace(e.KeyChar))
             {
