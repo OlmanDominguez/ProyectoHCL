@@ -53,7 +53,7 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1667, 73);
+            panel2.Size = new Size(1067, 73);
             panel2.TabIndex = 25;
             // 
             // btnCerrar
@@ -64,7 +64,7 @@
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnCerrar.FlatStyle = FlatStyle.Flat;
-            btnCerrar.Location = new Point(1650, 1);
+            btnCerrar.Location = new Point(1050, 3);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(14, 17);
             btnCerrar.TabIndex = 33;
@@ -89,7 +89,7 @@
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(788, 12);
+            label11.Location = new Point(477, 14);
             label11.Name = "label11";
             label11.Size = new Size(115, 37);
             label11.TabIndex = 19;
@@ -103,7 +103,7 @@
             btnMin.FlatAppearance.BorderSize = 0;
             btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnMin.FlatStyle = FlatStyle.Flat;
-            btnMin.Location = new Point(1625, -1);
+            btnMin.Location = new Point(1025, 0);
             btnMin.Name = "btnMin";
             btnMin.Size = new Size(19, 20);
             btnMin.TabIndex = 32;
@@ -116,7 +116,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Century Gothic", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(746, 268);
+            label6.Location = new Point(396, 134);
             label6.Name = "label6";
             label6.Size = new Size(296, 28);
             label6.TabIndex = 26;
@@ -125,7 +125,7 @@
             // txtRuta
             // 
             txtRuta.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtRuta.Location = new Point(589, 410);
+            txtRuta.Location = new Point(224, 283);
             txtRuta.Name = "txtRuta";
             txtRuta.Size = new Size(577, 29);
             txtRuta.TabIndex = 27;
@@ -140,9 +140,9 @@
             btnRestaurar.FlatStyle = FlatStyle.Flat;
             btnRestaurar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             btnRestaurar.ForeColor = Color.White;
-            btnRestaurar.Location = new Point(815, 486);
+            btnRestaurar.Location = new Point(815, 346);
             btnRestaurar.Name = "btnRestaurar";
-            btnRestaurar.Size = new Size(132, 41);
+            btnRestaurar.Size = new Size(0, 41);
             btnRestaurar.TabIndex = 28;
             btnRestaurar.Text = "Restaurar";
             btnRestaurar.UseVisualStyleBackColor = false;
@@ -158,7 +158,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Century Gothic", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(589, 359);
+            label1.Location = new Point(224, 255);
             label1.Name = "label1";
             label1.Size = new Size(221, 25);
             label1.TabIndex = 29;
@@ -169,7 +169,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
-            ClientSize = new Size(1667, 924);
+            ClientSize = new Size(1067, 644);
             Controls.Add(label1);
             Controls.Add(btnRestaurar);
             Controls.Add(txtRuta);
