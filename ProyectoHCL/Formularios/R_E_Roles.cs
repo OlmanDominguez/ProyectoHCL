@@ -1,20 +1,75 @@
-﻿using MySql.Data.MySqlClient;
-using ProyectoHCL.clases;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static ProyectoHCL.RecuContra;
+﻿/*-----------------------------------------------------------------------
+	Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                    Primer Periodo 2016
+
+
+Equipo:
+GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+Catedratico analisis y diseño:             Lic. Giancarlo Martini Scalici Aguilar 
+catedratico programacion e implementacion: Lic. Karla Melisa Garcia Pineda 
+catedratico evaluacion de sistemas:        Lic. Karla Melisa Garcia Pineda 
+
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla de Registro y Editar Roles.
+Fecha:             26-sept-2023
+Programador:       Olman
+descripcion:       Pantalla que contrala las validaciones para poder ingresar y editar los roles 
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+Agrado de la documentacion 
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+GABRIELA  MANCIA  
+
+HILDEGARD  MONTALVAN   
+
+NELSON SALGADO  
+
+JOEL  GODOY 
+
+OLMAN  DOMÍNGUEZ 
+
+-----------------------------------------------------------------------*/
+
+
+
+//estas librerias son las que se utilizaran para la base de datos ,para las clases del mismo programa
+using MySql.Data.MySqlClient;//esta libreria es para usar la base de datos 
+using ProyectoHCL.clases;//sirve para usar las  clases o libreria creadaas dentro del programa
+using System;//Libreria para identificar los bloques de codigo 
+using System.Collections.Generic;//Libreria de lectura 
+using System.ComponentModel;//Libreria para escribir la gerarquia de los componentes funcionales 
+using System.Data;//Libreria para la conexion a la base de datos 
+using System.Drawing;//Libreria para la impresion en excel 
+using System.Linq;//Libreria para las clases he interfaces
+using System.Text;//Libreria para manipular la informacion dentro de la aplicacion 
+using System.Threading.Tasks;//Libreria para ejecutar tareas simultaneas al mismo tiempo 
+using System.Windows.Forms;////libreria para operaciones unicas que no devuelven ningun valor 
+//estas librerias se instalaron para imprimir un documento pdf
+using static ProyectoHCL.RecuContra;//LIbreria donde ocuaparemos objetos de recucontra
 
 namespace ProyectoHCL.Formularios
 {
     public partial class R_E_Roles : Form
     {
+        //inicializamos algunas variables a utilizar
         public R_E_Roles()
         {
             InitializeComponent();
@@ -24,6 +79,7 @@ namespace ProyectoHCL.Formularios
 
         MsgB msgB = new MsgB();
 
+        //al momento de cerrar se puedan limpiar los campos  que se llenaron 
         public void limpiarCampos()
         {
             txtRol.Clear();
@@ -38,10 +94,13 @@ namespace ProyectoHCL.Formularios
             error1.SetError(cmbEstado, "");
         }
 
+        //va a minimizar la´pantalla al momento de dar clic 
         private void btnMin_Click_1(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
+        //al dar clic en el siguiente boton cancelara  ya sea la edicion o  el registro que estaba realizando 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
 
@@ -50,6 +109,7 @@ namespace ProyectoHCL.Formularios
             limpiarError();
         }
 
+        //al momento de dar clic  en el siguiente boton cerrara la ventana y a la vez limpiara los campos 
         private void cerrar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -76,6 +136,7 @@ namespace ProyectoHCL.Formularios
 
         }
 
+        //validar que los texbox esten llenos y no queden vacios 
         private void txtRol_Leave(object sender, EventArgs e)
         {
             if (ValidarTxt.txtVacio(txtRol))
@@ -88,6 +149,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
+        //validara que el texbox estado este seleccionado con una de las dos opciones 
         private void cmbEstado_Leave(object sender, EventArgs e)
         {
             if (ValidarTxt.cmbVacio(cmbEstado))
@@ -100,6 +162,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
+        // esta funcucion es creada para que al momento de dar clic al  boton se guarde la informacion ingresada en la base de datos 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (label11.Text == "Registrar Rol")
@@ -108,11 +171,11 @@ namespace ProyectoHCL.Formularios
 
                 if (txtRol.Text.Trim() == "" || txtNumero.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
                 {
-                    MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
+                    MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");//mensaje de av¿dvertencia si los campos no han sido llenado 
                     DialogResult dR = m.ShowDialog();
 
                 }
-                else if (modelo.existeRol(txtRol.Text))
+                else if (modelo.existeRol(txtRol.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
                 {
                     MsgB m = new MsgB("advertencia", "El Rol ya existe");
                     DialogResult dR = m.ShowDialog();
@@ -121,17 +184,21 @@ namespace ProyectoHCL.Formularios
                 {
                     try
                     {
+                        //conecion a la base de datos 
                         MySqlConnection conn;
                         MySqlCommand cmd;
                         conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                         conn.Open();
 
+                        //inserta los datos en la tabla rol  
                         cmd = new MySqlCommand("insertarRol", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@nombrerol", txtRol.Text);
                         cmd.Parameters.AddWithValue("@descripcion", txtNumero.Text);
                         cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
 
+
+                        //mensaje de confirmacion de que el registro se ha realizado 
                         cmd.ExecuteNonQuery();
                         MsgB m = new MsgB("informacion", "Registro creado con éxito");
                         DialogResult dR = m.ShowDialog();
@@ -145,7 +212,7 @@ namespace ProyectoHCL.Formularios
                     }
                 }
             }
-            else if (label11.Text == "Editar Rol")
+            else if (label11.Text == "Editar Rol")// etiqueta para editar al momento de dar clic enviara a otro formulario donde permitira editar
             {
                 Control control = new Control();
 
@@ -158,27 +225,29 @@ namespace ProyectoHCL.Formularios
                 {
                     try
                     {
-                        control.editarR(idRol, txtRol.Text, txtNumero.Text, cmbEstado.Text);
+                        control.editarR(idRol, txtRol.Text, txtNumero.Text, cmbEstado.Text);//campos los cuales podra editar 
 
-                        MsgB m = new MsgB("informacion", "Registro modificado");
+                        MsgB m = new MsgB("informacion", "Registro modificado");//mensaje de confirmacion de que la edicion se llevo a cabo 
                         DialogResult dR = m.ShowDialog();
                         this.Close();
                     }
                     catch (Exception ex)
                     {
                         MsgB m = new MsgB("Error: ", ex.Message);
-                        DialogResult dR = m.ShowDialog();
+                        DialogResult dR = m.ShowDialog();// en dado caso que no se guarde o que haya un error enviara este mensaje 
                     }
                 }
             }
 
         }
 
+        //esta funcion validara que el texbox se ingresen letras
         private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidarTxt.TxtLetras(e);
         }
 
+        //validara que este texbox no este vacio
         private void txtNumero_Leave(object sender, EventArgs e)
         {
             if (ValidarTxt.txtVacio(txtNumero))
