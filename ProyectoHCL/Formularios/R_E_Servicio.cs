@@ -10,6 +10,56 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//-----------------------------------------------------------------------
+//    Universidad Nacional Autonoma de Honduras (UNAH)
+//		Facultad de Ciencias Economicas
+//	Departamento de Informatica administrativa
+//         Analisis, Programacion y Evaluacion de Sistemas
+//                    Tercer Periodo 2023
+
+
+//Equipo:
+//GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+//HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+//NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+//JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+//OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+//Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+//catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+//catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+//---------------------------------------------------------------------
+
+//Programa:         Registrar y editar servicios
+//Fecha:            25 - 09 - 2023
+//Programador:      Hildegard Montalván
+//descripcion:      Formulario que permite registrar o editar los servicios
+
+//-----------------------------------------------------------------------
+
+//                Historial de Cambio
+
+//-----------------------------------------------------------------------
+
+//Programador               Fecha                      Descripcion
+//GABRIELA  MANCIA  
+
+//HILDEGARD  MONTALVAN   
+
+//NELSON SALGADO  
+
+//JOEL  GODOY 
+
+//OLMAN  DOMÍNGUEZ 
+
+//-----------------------------------------------------------------------
+
 namespace ProyectoHCL.Formularios
 {
     public partial class R_E_Servicio : Form
@@ -18,42 +68,43 @@ namespace ProyectoHCL.Formularios
         {
             InitializeComponent();
             cmbEstado.SelectedIndex = -1;
-            txtPrecio.KeyPress += txtPrecio_KeyPress;
+            txtPrecio.KeyPress += txtPrecio_KeyPress; //llamar evento que valida que solo se ingresen números
         }
 
         public string idS = null;
         MsgB msgB = new MsgB();
 
-        public void limpiarCampos()
+        public void limpiarCampos() //limpiar los campos del formulario
         {
             txtServ.Clear();
             txtPrecio.Clear();
             cmbEstado.SelectedIndex = -1;
         }
 
-        public void limpiarError()
+        public void limpiarError() //limpiar los errorProvider del formulario
         {
             errorT.SetError(txtServ, "");
             errorT.SetError(txtPrecio, "");
             errorT.SetError(cmbEstado, "");
         }
 
-        private void btnMin_Click(object sender, EventArgs e)
+        private void btnMin_Click(object sender, EventArgs e)  //botón para minimizar
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
+        private void btnCerrar_Click(object sender, EventArgs e) //botón para cerrar
         {
             this.Close();
             limpiarCampos();
             limpiarError();
         }
 
+        //coordenadas para arrastrar formulario
         int posY = 0;
         int posX = 0;
 
-        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        private void panel2_MouseMove(object sender, MouseEventArgs e) //evento del panel que permite arrastrar el formulario
         {
             if (e.Button != MouseButtons.Left)
             {
@@ -67,14 +118,14 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e) //botón para cancelar
         {
             this.Close();
             limpiarCampos();
             limpiarError();
         }
 
-        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e) //validar que se ingresen sólo numeros y puntos '.'
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
@@ -86,7 +137,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtServ_Leave(object sender, EventArgs e)
+        private void txtServ_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (ValidarTxt.txtVacio(txtServ))
             {
@@ -98,7 +149,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtPrecio_Leave(object sender, EventArgs e)
+        private void txtPrecio_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (ValidarTxt.txtVacio(txtPrecio))
             {
@@ -110,21 +161,21 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e) //botón para guardar un nuevo registro o una modificación
         {
             if (lblTitulo.Text == "Registrar Servicio")
             {
                 Modelo modelo = new Modelo();
 
-                if (txtServ.Text.Trim() == "" || txtPrecio.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
+                if (txtServ.Text.Trim() == "" || txtPrecio.Text.Trim() == "" || cmbEstado.Text.Trim() == "")  //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
 
                 }
-                else if (modelo.existeServicio(txtServ.Text))
+                else if (modelo.existeServicio(txtServ.Text)) //validar si ya existe el registro
                 {
-                    MsgB m = new MsgB("advertencia", "El servicio ya existe");
+                    MsgB m = new MsgB("advertencia", "El servicio ya existe"); 
                     DialogResult dR = m.ShowDialog();
                 }
                 else
@@ -138,6 +189,7 @@ namespace ProyectoHCL.Formularios
 
                         cmd = new MySqlCommand("insertServicio", conn);
                         cmd.CommandType = CommandType.StoredProcedure;
+                        //parametros que recibe el procedimiento almacenado
                         cmd.Parameters.AddWithValue("@descripcion", txtServ.Text);
                         cmd.Parameters.AddWithValue("@precio", txtPrecio.Text);
                         cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
@@ -159,7 +211,7 @@ namespace ProyectoHCL.Formularios
             {
                 Control control = new Control();
 
-                if (txtServ.Text.Trim() == "" || txtPrecio.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
+                if (txtServ.Text.Trim() == "" || txtPrecio.Text.Trim() == "" || cmbEstado.Text.Trim() == "") //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
@@ -168,6 +220,7 @@ namespace ProyectoHCL.Formularios
                 {
                     try
                     {
+                        //llamar función para editar 
                         control.editarServ(idS, txtServ.Text, txtPrecio.Text, cmbEstado.Text);
 
                         MsgB m = new MsgB("informacion", "Registro modificado");
@@ -183,7 +236,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void cmbEstado_Leave(object sender, EventArgs e)
+        private void cmbEstado_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (ValidarTxt.cmbVacio(cmbEstado))
             {

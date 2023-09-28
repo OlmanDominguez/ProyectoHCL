@@ -8,12 +8,62 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//-----------------------------------------------------------------------
+//    Universidad Nacional Autonoma de Honduras (UNAH)
+//		Facultad de Ciencias Economicas
+//	Departamento de Informatica administrativa
+//         Analisis, Programacion y Evaluacion de Sistemas
+//                    Tercer Periodo 2023
+
+
+//Equipo:
+//GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+//HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+//NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+//JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+//OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+//Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+//catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+//catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+//---------------------------------------------------------------------
+
+//Programa:         Clase modelo
+//Fecha:            25 - 09 - 2023
+//Programador:      Hildegard Montalván, Olman Domínguez, Andrés Osorto
+//descripcion:      Clase con las funciones para validar la existencia de un registro
+
+//-----------------------------------------------------------------------
+
+//                Historial de Cambio
+
+//-----------------------------------------------------------------------
+
+//Programador               Fecha                      Descripcion
+//GABRIELA  MANCIA  
+
+//HILDEGARD  MONTALVAN   
+
+//NELSON SALGADO  
+
+//JOEL  GODOY 
+
+//OLMAN  DOMÍNGUEZ 
+
+//-----------------------------------------------------------------------
+
 namespace ProyectoHCL.clases
 {
     public class Modelo
     {
 
-        public bool existeUsuario(string usuario)
+        public bool existeUsuario(string usuario) //función para validar si existe el usuario
         {
             MySqlDataReader reader;
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
@@ -41,7 +91,7 @@ namespace ProyectoHCL.clases
         }
 
 
-        public bool existeObjeto(string objeto)
+        public bool existeObjeto(string objeto) //función para validar si existe el objeto
         {
             MySqlDataReader reader;
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
@@ -66,7 +116,7 @@ namespace ProyectoHCL.clases
             }
         }
 
-        public bool existeTipHab(string tipo)
+        public bool existeTipHab(string tipo) //función para validar si existe el tipo de habitación
         {
             MySqlDataReader reader;
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
@@ -91,7 +141,7 @@ namespace ProyectoHCL.clases
             }
         }
 
-        public bool existeHabitacion(string hab)
+        public bool existeHabitacion(string hab) //función para validar si existe la habitación
         {
             MySqlDataReader reader;
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
@@ -116,7 +166,7 @@ namespace ProyectoHCL.clases
             }
         }
 
-        public bool existeServicio(string desc)
+        public bool existeServicio(string desc) //función para validar si existe el servicio
         {
             MySqlDataReader reader;
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
@@ -141,7 +191,7 @@ namespace ProyectoHCL.clases
             }
         }
 
-        public bool existeDescuento(string descuento)
+        public bool existeDescuento(string descuento) //función para validar si existe el descuento
         {
             MySqlDataReader reader;
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
@@ -166,7 +216,7 @@ namespace ProyectoHCL.clases
             }
         }
 
-        public bool existeCliente(string identi)
+        public bool existeCliente(string identi) //función para validar si existe el cliente
         {
             MySqlDataReader reader;
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
@@ -193,7 +243,7 @@ namespace ProyectoHCL.clases
             }
         }
 
-        public bool existePermiso(int rol)
+        public bool existePermiso(int rol) //función para validar si existe el permiso
         {
             MySqlCommand cmd;
             MySqlDataReader reader;
@@ -223,7 +273,7 @@ namespace ProyectoHCL.clases
 
 
 
-        public bool existeParametro(string rol)
+        public bool existeParametro(string rol) //función para validar si existe el parámetro
         {
 
 
@@ -250,7 +300,7 @@ namespace ProyectoHCL.clases
             }
         }
 
-        public bool existeRol(string tipo)
+        public bool existeRol(string tipo) //función para validar si existe el rol
         {
             MySqlDataReader reader;
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();

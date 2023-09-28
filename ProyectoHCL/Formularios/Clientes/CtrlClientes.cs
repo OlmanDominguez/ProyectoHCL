@@ -1,27 +1,78 @@
-﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-using MySql.Data.MySqlClient;
-using ProyectoHCL.clases;
+﻿/*-----------------------------------------------------------------------
+    //Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                    tercer Periodo 2023
+
+
+Equipo:
+GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+JOEL ENRIQUE GODOY BONILLA---------(joel.godoy@unah.hn)
+
+OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla de clientes
+Fecha:             27 - septiembre - 2023
+Programador:      Joel
+descripcion:       Pantalla que contrala las validaciones del cliente
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+GABRIELA  MANCIA  
+
+HILDEGARD  MONTALVAN   
+
+NELSON SALGADO  
+
+JOEL  GODOY 
+
+OLMAN  DOMÍNGUEZ 
+
+----------------------------------------------------------------------- */
+
+/* librerias utilizadas para facilitar el proceso */
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;   
+using MySql.Data.MySqlClient; /* libreria para conectar a la BD */
+using ProyectoHCL.clases; /* hacer uso de las clases dentro del proyecto */
 using ProyectoHCL.Properties;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System; /* directiva para identificar los bloques de codigo */
+using System.Collections.Generic;  /* libreria para lectura*/
+using System.ComponentModel; /* jerarguia de los componentes funcionales */
+using System.Data; /* Conexion a la BD*/
+using System.Drawing; /* impresion de archivos en excel */
+using System.Linq; /* libreria para clases e interfaces */
+using System.Text; /* manipular informacion dentro de la aplicacion */
+using System.Threading.Tasks; /* libreria para impresion */
 using System.Windows.Forms;
-using ProyectoHCL.clases;
+using ProyectoHCL.clases; 
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using DocumentFormat.OpenXml.Office2013.Excel;
 using SpreadsheetLight;
 using SpreadsheetLight.Drawing;
 
-namespace ProyectoHCL.Formularios
+namespace ProyectoHCL.Formularios   
 {
-    public partial class CtrlClientes : Form
+    public partial class CtrlClientes : Form  
     {
-        clases.Clientes clien = new clases.Clientes();
+        clases.Clientes clien = new clases.Clientes();  /* Referencias y declaracion de valores en variable*/
         AdmonClientes admonClientes = new AdmonClientes();
         DataSet ds = new DataSet();
         CDatos cDatos = new CDatos();
@@ -29,7 +80,7 @@ namespace ProyectoHCL.Formularios
 
         public CtrlClientes()
         {
-            InitializeComponent();
+            InitializeComponent(); 
             pagFinal = numFilas;
             CargarDGCl();
         }
@@ -41,7 +92,7 @@ namespace ProyectoHCL.Formularios
 
             foreach (var obj in LsObj)
             {
-                switch (obj.IdPermiso)
+                switch (obj.IdPermiso)  /* Evaluacion de patrones */
                 {
                     case 2:
                         if (obj.ObjetoN == "CLIENTES" && !obj.Permitido) //Validar pantalla y el permiso
@@ -72,15 +123,15 @@ namespace ProyectoHCL.Formularios
             ds = clien.PaginacionClientes();
             dgvClientes.DataSource = ds.Tables[1];
 
-            int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;
+            int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;  /* Convertidor de variables a otros valores*/
 
-            if (Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) % numFilas > 0) cantidad++;
+            if (Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) % numFilas > 0) cantidad++; /* condicional IF */
 
             txtPagCl.Text = cantidad.ToString();
 
             cmbPagCl.Items.Clear();
 
-            for (int x = 1; x <= cantidad; x++)
+            for (int x = 1; x <= cantidad; x++)  /*ciclo for */
                 cmbPagCl.Items.Add(x.ToString());
 
             cmbPagCl.SelectedIndex = indice;
@@ -90,7 +141,7 @@ namespace ProyectoHCL.Formularios
 
         private void CtrlClientes_Load(object sender, EventArgs e)
         {
-            DataGridViewButtonColumn btnShow = new DataGridViewButtonColumn();
+            DataGridViewButtonColumn btnShow = new DataGridViewButtonColumn();  /* vista de botones */
             btnShow.Name = "VER";
             dgvClientes.Columns.Add(btnShow);
 
@@ -112,7 +163,7 @@ namespace ProyectoHCL.Formularios
             try
             {
 
-                MySqlConnection conn;
+                MySqlConnection conn;  /*conexion a la BD*/
                 MySqlCommand cmd;
 
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
@@ -129,7 +180,7 @@ namespace ProyectoHCL.Formularios
 
 
             }
-            catch (Exception)
+            catch (Exception)  /*para captar errores en ejecucion */
             {
 
                 throw;
@@ -180,7 +231,7 @@ namespace ProyectoHCL.Formularios
                     formulario.ShowDialog();
 
                 }
-                catch (Exception)
+                catch (Exception) 
                 {
                     MessageBox.Show("Se produjo un error");
                 }
@@ -218,7 +269,7 @@ namespace ProyectoHCL.Formularios
                 }
             }
 
-            if (this.dgvClientes.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            if (this.dgvClientes.Columns[e.ColumnIndex].Name == "ELIMINAR")  
             {
                 bool elimino = admonClientes.EliminarCliente(dgvClientes.CurrentRow.Cells["CODIGO"].Value.ToString());
 
@@ -353,7 +404,7 @@ namespace ProyectoHCL.Formularios
         private void cmbMostrarCl_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbIndice = cmbMostrarCl.SelectedIndex;
-            switch (cmbIndice)
+            switch (cmbIndice)     /* realizar las respectivas validaciones valor por valor */
             {
                 case 0:
                     numFilas = 5;
@@ -421,7 +472,7 @@ namespace ProyectoHCL.Formularios
 
             int celdaCabecera = 6, celdaInicial = 6;
 
-            sl.RenameWorksheet(SLDocument.DefaultFirstSheetName, "TBL_CLIENTE");
+            sl.RenameWorksheet(SLDocument.DefaultFirstSheetName, "TBL_CLIENTE");  
             sl.SetCellValue("B" + celdaCabecera, "Codigo");
             sl.SetCellValue("C" + celdaCabecera, "Nombre");
             sl.SetCellValue("D" + celdaCabecera, "Apellido");
@@ -443,9 +494,9 @@ namespace ProyectoHCL.Formularios
             estiloCa.Fill.SetPattern(DocumentFormat.OpenXml.Spreadsheet.PatternValues.Solid, System.Drawing.Color.Blue, System.Drawing.Color.Blue);
             sl.SetCellStyle("B" + celdaCabecera, "M" + celdaCabecera, estiloCa);
 
-            string sql = "SELECT c.CODIGO, c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, c.ID_TIPOCLIENTE, t.DESCRIPCION, c.NOMBRE_RTN, c.RTN, c.TELEFONO, c.TELEFONO2, c.EMAIL, c.EMAIL2 FROM TBL_CLIENTE c INNER JOIN TBL_TIPOCLIENTE t ON c.ID_TIPOCLIENTE = t.ID_TIPOCLIENTE";
+            string sql = "SELECT c.CODIGO, c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, c.ID_TIPOCLIENTE, t.DESCRIPCION, c.NOMBRE_RTN, c.RTN, c.TELEFONO, c.TELEFONO2, c.EMAIL, c.EMAIL2 FROM TBL_CLIENTE c INNER JOIN TBL_TIPOCLIENTE t ON c.ID_TIPOCLIENTE = t.ID_TIPOCLIENTE";  /* declaracion y llamada de valores de variables en las tablas en BD */ 
 
-            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion(); /* proceso de conexion a BD */
 
             MySqlCommand comando = new MySqlCommand(sql, conexionBD);
             MySqlDataReader reader = comando.ExecuteReader();

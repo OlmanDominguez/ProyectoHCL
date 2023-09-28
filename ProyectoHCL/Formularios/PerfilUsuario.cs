@@ -16,6 +16,58 @@ using System.Windows.Media.TextFormatting;
 using static ProyectoHCL.RecuContra;
 using DocumentFormat.OpenXml.Bibliography;
 
+//-----------------------------------------------------------------------
+//    Universidad Nacional Autonoma de Honduras (UNAH)
+//		Facultad de Ciencias Economicas
+//	Departamento de Informatica administrativa
+//         Analisis, Programacion y Evaluacion de Sistemas
+//                    Tercer Periodo 2023
+
+
+//Equipo:
+//GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+//HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+//NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+//JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+//OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+//Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+//catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+//catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+//---------------------------------------------------------------------
+
+//Programa:         Perfil de usuario
+//Fecha:            25 - 09 - 2023
+//Programador:      Gabriela Mancia
+//descripcion:      Pantalla donde se muestran los datos del usario que ingresa al sistema
+
+//-----------------------------------------------------------------------
+
+//                Historial de Cambio
+
+//-----------------------------------------------------------------------
+
+//Programador               Fecha                      Descripcion
+//GABRIELA  MANCIA  
+
+//HILDEGARD  MONTALVAN   
+
+//NELSON SALGADO  
+
+//JOEL  GODOY 
+
+//OLMAN  DOMÍNGUEZ 
+
+//-----------------------------------------------------------------------
+
+
+
 namespace ProyectoHCL.Formularios
 {
     public partial class PerfilUsuario : Form
@@ -35,9 +87,10 @@ namespace ProyectoHCL.Formularios
 
             try
             {
+                //Conexión a la base de datos
                 using (BaseDatosHCL.ObtenerConexion())
                 {
-                    //Consulta
+                    //Consulta a la base de datos
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
                     comando.CommandText = ("select * from TBL_USUARIO WHERE USUARIO");
@@ -62,14 +115,14 @@ namespace ProyectoHCL.Formularios
         {
         }
 
-        //Enlace que redirige para cambiar la contraseña
+        //Enlace que redirige a pantalla para cambiar la contraseña
         private void linkLabelContraseña_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Form PerfilUsuario = new RestaContra();
             PerfilUsuario.Show();
         }
 
-        //Enlace que redirige para cambiar preguntas de seguridad
+        //Enlace que redirige a pantalla para cambiar preguntas de seguridad
         private void linkLabelPreguntas_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Form PerfilUsuario = new PreguntasRecuContra();

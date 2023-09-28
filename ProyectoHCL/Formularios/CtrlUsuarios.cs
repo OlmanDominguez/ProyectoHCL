@@ -26,6 +26,57 @@ using static ProyectoHCL.RecuContra; //Para uso del user y IDUser iniciado
 using System.Windows.Controls;
 using Point = System.Drawing.Point;
 
+//-----------------------------------------------------------------------
+//    Universidad Nacional Autonoma de Honduras (UNAH)
+//		Facultad de Ciencias Economicas
+//	Departamento de Informatica administrativa
+//         Analisis, Programacion y Evaluacion de Sistemas
+//                    Tercer Periodo 2023
+
+
+//Equipo:
+//GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+//HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+//NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+//JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+//OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+//Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+//catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+//catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+//---------------------------------------------------------------------
+
+//Programa:         Control Usuarios
+//Fecha:            25 - 09 - 2023
+//Programador:      Hildegard Montalván
+//descripcion:      Pantalla ABC donde se muestran los registros, se crean, editan y eliminan
+
+//-----------------------------------------------------------------------
+
+//                Historial de Cambio
+
+//-----------------------------------------------------------------------
+
+//Programador               Fecha                      Descripcion
+//GABRIELA  MANCIA  
+
+//HILDEGARD  MONTALVAN   
+
+//NELSON SALGADO  
+
+//JOEL  GODOY 
+
+//OLMAN  DOMÍNGUEZ 
+
+//-----------------------------------------------------------------------
+
+
 namespace ProyectoHCL.Formularios
 {
     public partial class CtrlUsuarios : Form
@@ -42,36 +93,36 @@ namespace ProyectoHCL.Formularios
         {
             InitializeComponent();
             pagFinal = numFilas;
-            CargarDG();
+            CargarDG(); //mostrar registros en datagridview
         }
 
-        private void Permisos()
+        private void Permisos() //función para asignar permisos a la pantalla
         {
-            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
+            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs); //lista de objetos que recibe el rol para validar el permiso
 
-            foreach (var obj in LsObj)
+            foreach (var obj in LsObj) //recorrer los objetos en la lista
             {
-                switch (obj.IdPermiso)
+                switch (obj.IdPermiso) //restringir acceso según el permiso
                 {
-                    case 2:
-                        if (obj.ObjetoN == "USUARIOS" && !obj.Permitido)
+                    case 2:  //permiso crear
+                        if (obj.ObjetoN == "USUARIOS" && !obj.Permitido) //Validar pantalla y el permiso
                         {
-                            btnNuevo.Visible = false;
+                            btnNuevo.Visible = false; //Ocultar botón para crear
                             label4.Location = new Point(28, 24);
                             txtBuscar.Location = new Point(84, 22);
                         }
                         break;
-                    case 3:
+                    case 3: //permiso editar
                         if (obj.ObjetoN == "USUARIOS" && !obj.Permitido)
                         {
-                            dgvUsuarios.Columns["EDITAR"].Visible = false;
+                            dgvUsuarios.Columns["EDITAR"].Visible = false; //Ocultar columna del botón para editar en datagrid
                         }
                         break;
                 }
             }
         }
 
-        private void CargarDG()
+        private void CargarDG() //Cargar datagrid con registros utilizando la función de paginación
         {
             user.Inicio1 = pagInicio;
             user.Final1 = pagFinal;
@@ -109,7 +160,7 @@ namespace ProyectoHCL.Formularios
             btnUpdate.Name = "EDITAR"; //Nombre del boton 
             dgvUsuarios.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
 
-            Permisos();
+            Permisos(); //Llamar la función permisos al cargar formulario
 
         }
 
@@ -124,7 +175,7 @@ namespace ProyectoHCL.Formularios
 
                 cmd = new MySqlCommand("buscarUsuarios", conn); //recibe proc almacenado
                 cmd.CommandType = CommandType.StoredProcedure; //se especifica que es un proc almacenado
-                cmd.Parameters.Add("@nombreU", MySqlDbType.VarChar, 50).Value = buscarU; //recibe el parametro nombreU definido en el parametro almacenado
+                cmd.Parameters.Add("@nombreU", MySqlDbType.VarChar, 50).Value = buscarU; //recibe el parametro nombreU definido en el procedimiento almacenado
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable(); //Se crea tabla
@@ -149,7 +200,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        public string ParametroDias()
+        public string ParametroDias() //función para obtener el valor del parámetro días vencimiento usuario de la tabla TBL_PARAMETRO
         {
             MySqlConnection conn;
             MySqlCommand cmd;
@@ -174,7 +225,7 @@ namespace ProyectoHCL.Formularios
             conn.Close();
         }
 
-        private void btnNuevo_Click_1(object sender, EventArgs e)
+        private void btnNuevo_Click_1(object sender, EventArgs e) //botón que abre el formulario para crear nuevo resgistro
         {
             int diasV = Convert.ToInt32(ParametroDias());
             R_E_user.lblTitulo.Text = "Registrar Usuario";
@@ -188,7 +239,7 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        private void dgvUsuarios_CellPainting_1(object sender, DataGridViewCellPaintingEventArgs e)
+        private void dgvUsuarios_CellPainting_1(object sender, DataGridViewCellPaintingEventArgs e) //Configurar datagrid para mostrar los botones de editar y eliminar que se agregaron
         {
             if (e.ColumnIndex >= 0 && this.dgvUsuarios.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
             {
@@ -207,7 +258,7 @@ namespace ProyectoHCL.Formularios
 
         private void dgvUsuarios_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvUsuarios.Columns[e.ColumnIndex].Name == "EDITAR")
+            if (this.dgvUsuarios.Columns[e.ColumnIndex].Name == "EDITAR") //si se dio click en el botón editar hacer lo siguiente
             {
                 R_E_user.lblTitulo.Text = "Editar Usuario";
 
@@ -230,6 +281,7 @@ namespace ProyectoHCL.Formularios
                 R_E_user.lblEstado.Visible = true;
                 R_E_user.label9.Visible = false;
                 R_E_user.label14.Visible = true;
+                //obtener los datos del datagrid del registro seleccionado
                 R_E_user.idUs = dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString();
                 R_E_user.txtUsuario.Text = dgvUsuarios.CurrentRow.Cells["USUARIO"].Value.ToString(); //Traer los datos del dataGrid al form para editar
                 R_E_user.txtNombre.Text = dgvUsuarios.CurrentRow.Cells["NOMBRE"].Value.ToString();
@@ -242,6 +294,7 @@ namespace ProyectoHCL.Formularios
                 string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                 conn.Close();
+                //registrar accción(editar) en bitácora
                 sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
                     "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'INGRESO', 'INGRESO A EDITAR USUARIO " +
                     R_E_user.idUs + " " + R_E_user.txtUsuario.Text + "');";
@@ -258,7 +311,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void cmbPaginacion_SelectionChangeCommitted(object sender, EventArgs e)
+        private void cmbPaginacion_SelectionChangeCommitted(object sender, EventArgs e)  //Seleccionar página para mostrar registros
         {
             int pagina = Convert.ToInt32(cmbPaginacion.Text);
             indice = pagina - 1;
@@ -267,7 +320,7 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e) //Seleccionar la cantidad de registros a mostrar
         {
             cmbIndice = cmbMostrar.SelectedIndex;
             switch (cmbIndice)
@@ -297,7 +350,7 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        private void btnAnterior_Click(object sender, EventArgs e)
+        private void btnAnterior_Click(object sender, EventArgs e) //botón anterior paginación
         {
             int pagina = Convert.ToInt32(cmbPaginacion.Text) - 1;
             indice = pagina - 1;
@@ -306,7 +359,7 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        private void btnSiguiente_Click(object sender, EventArgs e)
+        private void btnSiguiente_Click(object sender, EventArgs e) //botón siguiente paginación
         {
             int pagina = Convert.ToInt32(cmbPaginacion.Text) + 1;
             indice = pagina - 1;
@@ -315,7 +368,8 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        private void HabilitarBotones()
+        private void HabilitarBotones()//mostrar los botones de anterior o siguiente
+                                       //verificando si se está en la primera o ultima pagina
         {
             if (pagInicio == 1)
             {
@@ -340,10 +394,10 @@ namespace ProyectoHCL.Formularios
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Close();  //cerrar formulario
         }
 
-        private void crearPDF()
+        private void crearPDF() //función para crear pdf
         {
             PdfWriter pdfWriter = new PdfWriter("Reporte.pdf");
             PdfDocument pdf = new PdfDocument(pdfWriter);
@@ -441,7 +495,7 @@ namespace ProyectoHCL.Formularios
             DialogResult dR = mbox.ShowDialog();
         }
 
-        private void crearExcel()
+        private void crearExcel() //función para crear excel
         {
             SLDocument sl = new SLDocument();
 

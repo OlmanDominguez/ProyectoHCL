@@ -1,4 +1,40 @@
-﻿using DocumentFormat.OpenXml.Office2010.Excel;
+﻿/*
+ * -----------------------------------------------------------------------
+	Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                    Tercer Periodo 2023
+
+
+Equipo:
+GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+Catedratico analisis y diseño:             Lic. Giancarlo Martini Scalici Aguilar 
+catedratico programacion e implementacion: Lic. Karla Melisa Garcia Pineda 
+catedratico evaluacion de sistemas:        Lic. Karla Melisa Garcia Pineda 
+
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla para registrar nuevas reservaciones
+Fecha:             25-09-2023
+Programador:       Nelson Salgado
+descripcion:       Pantalla en la que se registran nuenas reservaciones
+
+-----------------------------------------------------------------------
+
+ */
+
+using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
 using iText.Layout.Renderer;
 using MySql.Data.MySqlClient;
@@ -30,7 +66,7 @@ namespace ProyectoHCL
 
         }
 
-
+        //codigo que trae el id del empleado desde el login
         public void id_empleado()
         {
             string valor = Dato.valor;
@@ -83,10 +119,6 @@ namespace ProyectoHCL
                     cmd.Parameters.AddWithValue("@num_habitacion_vieja", txt_habi_vieja.Text);
 
                     cmd.ExecuteNonQuery();
-
-                    /*MsgB m = new MsgB("informacion", "Reserva agregada con exito");
-                    DialogResult dR = m.ShowDialog();
-                    limpiarCampos();*/
                     conn.Close();
                 }
                 catch (Exception ex)
@@ -112,9 +144,6 @@ namespace ProyectoHCL
 
                 cmd.ExecuteNonQuery();
 
-                /*MsgB m = new MsgB("informacion", "Reserva agregada con exito");
-                DialogResult dR = m.ShowDialog();
-                limpiarCampos();*/
                 conn.Close();
             }
             catch (Exception ex)
@@ -141,9 +170,6 @@ namespace ProyectoHCL
 
                 cmd.ExecuteNonQuery();
 
-                /*MsgB m = new MsgB("informacion", "Reserva agregada con exito");
-                DialogResult dR = m.ShowDialog();
-                limpiarCampos();*/
                 conn.Close();
             }
             catch (Exception ex)
@@ -172,9 +198,6 @@ namespace ProyectoHCL
 
                 cmd.ExecuteNonQuery();
 
-                /*MsgB m = new MsgB("informacion", "Reserva agregada con exito");
-                DialogResult dR = m.ShowDialog();
-                limpiarCampos();*/
                 conn.Close();
             }
             catch (Exception ex)
@@ -366,44 +389,6 @@ namespace ProyectoHCL
 
         }
 
-        /* private void combo_cliente()
-         {
-
-             try
-             {
-                 using (BaseDatosHCL.ObtenerConexion())
-                 {
-                     MySqlCommand comando = new MySqlCommand();
-                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                     comando.CommandText = ("select NOMBRE,APELLIDO from TBL_CLIENTE;");
-
-                     MySqlDataAdapter adapter = new MySqlDataAdapter();
-                     adapter.SelectCommand = comando;
-                     DataTable dt = new DataTable();
-                     adapter.Fill(dt);
-
-                     DataRow fila = dt.NewRow();
-                     fila["NOMBRE"] = "Seleccione un cliente";
-                     dt.Rows.InsertAt(fila, 0);
-
-                     //combobox estado reserva
-                     cb_cliente.DataSource = dt;
-                     cb_cliente.DisplayMember = "TBL_CLIENTE";
-                     cb_cliente.ValueMember = "NOMBRE";
-
-                     cb_cliente.AutoCompleteMode = AutoCompleteMode.Suggest;
-                     cb_cliente.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-
-                 }
-
-             }
-             catch (Exception a)
-             {
-                 MessageBox.Show(a.Message);
-             }
-
-         }*/
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -418,36 +403,7 @@ namespace ProyectoHCL
         }
 
         private void cb_cliente_SelectedIndexChanged_1(object sender, EventArgs e)
-        {/*
-
-            String nombre = cb_cliente.SelectedValue.ToString();
-            //lbl_cliente.Text = nombre;
-            try
-            {
-                using (BaseDatosHCL.ObtenerConexion())
-                {
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("select CODIGO from TBL_CLIENTE where NOMBRE='" + nombre + "';");
-
-                    MySqlDataReader leer = comando.ExecuteReader();
-                    if (leer.Read() == true)
-                    {
-                        txt_cod_cliente.Text = leer["CODIGO"].ToString();
-                    }
-                    else
-                    {
-
-                    }
-                }
-
-            }
-            catch (Exception a)
-            {
-                MessageBox.Show(a.Message);
-            }
-
-            */
+        {
         }
 
         private void NuevaReservacion_Load(object sender, EventArgs e)
@@ -856,20 +812,7 @@ namespace ProyectoHCL
 
         private void txt_monto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            /*if (Char.IsNumber(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (Char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-                MsgB m = new MsgB("advertencia", "Por favor, sólo ingrese números");
-                DialogResult dR = m.ShowDialog();
-            }*/
+
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;

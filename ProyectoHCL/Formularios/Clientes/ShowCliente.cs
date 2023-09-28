@@ -1,19 +1,70 @@
-﻿using MySql.Data.MySqlClient;
-using ProyectoHCL.clases;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*-----------------------------------------------------------------------
+    Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                    Tercer Periodo 2013
+
+
+Equipo:
+GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+JOEL ENRIQUE GODOY BONILLA---------(joel.godoy@unah.hn)
+
+OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla de Ingreso de mostrar cliente
+Fecha:             27 - septiembre - 2023
+Programador:      Joel
+descripcion:       Pantalla que contrala las validaciones de mostrar cliente
+
+-----------------------------------------------------------------------
+
+                Historial de Cambio
+
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+GABRIELA  MANCIA  
+
+HILDEGARD  MONTALVAN   
+
+NELSON SALGADO  
+
+JOEL  GODOY 
+
+OLMAN  DOMÍNGUEZ 
+
+----------------------------------------------------------------------- */
+
+/* librerias utilizadas para facilitar el proceso */
+using MySql.Data.MySqlClient; /* libreria para conectar a la BD */
+using ProyectoHCL.clases; /* hacer uso de las clases dentro del proyecto */
+using System; /* directiva para identificar los bloques de codigo */
+using System.Collections.Generic; /* libreria para lectura*/
+using System.ComponentModel; /* jerarguia de los componentes funcionales */
+using System.Data; /* Conexion a la BD*/
+using System.Drawing; /* impresion de archivos en excel */
+using System.Linq; /* libreria para clases e interfaces */
+using System.Text; /* manipular informacion dentro de la aplicacion */
+using System.Threading.Tasks; /* libreria para impresion */
 using System.Windows.Forms;
 using static ProyectoHCL.Formularios.CtrlClientes;
 
 namespace ProyectoHCL.Formularios
 {
-    public partial class ShowCliente : Form
+    public partial class ShowCliente : Form  /* clase publica mostrar cliente */
     {
         public ShowCliente()
         {
@@ -29,12 +80,12 @@ namespace ProyectoHCL.Formularios
 
 
 
-        int posY = 0;
+        int posY = 0;   /* declaracion de variables */
         int posX = 0;
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Left)
+            if (e.Button != MouseButtons.Left)  /* validacion mediante condicional IF*/
             {
                 posX = e.X;
                 posY = e.Y;

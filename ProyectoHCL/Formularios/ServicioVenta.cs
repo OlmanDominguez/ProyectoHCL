@@ -18,6 +18,56 @@ using static ProyectoHCL.Formularios.ShowFactura;
 using DocumentFormat.OpenXml.ExtendedProperties;
 using SpreadsheetLight;
 
+//-----------------------------------------------------------------------
+//    Universidad Nacional Autonoma de Honduras (UNAH)
+//		Facultad de Ciencias Economicas
+//	Departamento de Informatica administrativa
+//         Analisis, Programacion y Evaluacion de Sistemas
+//                    Tercer Periodo 2023
+
+
+//Equipo:
+//GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
+
+//HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
+
+//NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
+
+//JOEL ENRIQUE GODOY BONILLA---------(joel.bonilla@unah.hn)
+
+//OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
+
+//Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
+//catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
+//catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
+
+
+//---------------------------------------------------------------------
+
+//Programa:         Venta de servicios
+//Fecha:            25 - 09 - 2023
+//Programador:      Hildegard Montalván
+//descripcion:      Pantalla para registrar los servicios de habitación
+
+//-----------------------------------------------------------------------
+
+//                Historial de Cambio
+
+//-----------------------------------------------------------------------
+
+//Programador               Fecha                      Descripcion
+//GABRIELA  MANCIA  
+
+//HILDEGARD  MONTALVAN   
+
+//NELSON SALGADO  
+
+//JOEL  GODOY 
+
+//OLMAN  DOMÍNGUEZ 
+
+//-----------------------------------------------------------------------
+
 namespace ProyectoHCL.Formularios
 {
     public partial class ServicioVenta : Form
@@ -27,6 +77,7 @@ namespace ProyectoHCL.Formularios
             InitializeComponent();
             cargarServicios();
             cmbServicio.SelectedIndex = -1;
+            //deshabilitar botones mientras no se elija una habitación
             btnAgregar.Enabled = false;
             btnAgregar.BackColor = Color.DarkGray;
             btnEliminar.Enabled = false;
@@ -36,7 +87,7 @@ namespace ProyectoHCL.Formularios
             cmbServicio.Enabled = false;
         }
 
-        private void limpiarCampos()
+        private void limpiarCampos() //limpiar campos de formulario
         {
             txtTotal.Clear();
             cmbServicio.SelectedIndex = -1;
@@ -48,13 +99,13 @@ namespace ProyectoHCL.Formularios
             txtSalida.Clear();
         }
 
-        public void limpiarError()
+        public void limpiarError() //limpiar los errorProvider
         {
             errorT.SetError(cmbServicio, "");
             errorT.SetError(txt_cantidad, "");
         }
 
-        private void cargarServicios()
+        private void cargarServicios() //llenar combobox con los registros de la base de datos
         {
             MySqlConnection conn;
             MySqlCommand cmd;
@@ -86,7 +137,7 @@ namespace ProyectoHCL.Formularios
             finally { conn.Close(); }
         }
 
-        public decimal Precio()
+        public decimal Precio() //obtener precio del servicio seleccionado en el combobox
         {
             MySqlCommand comando = new MySqlCommand();
             comando.Connection = BaseDatosHCL.ObtenerConexion();
@@ -105,20 +156,21 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnAgregar_Click(object sender, EventArgs e)
+        private void btnAgregar_Click(object sender, EventArgs e) //función para agregar un nuevo servicio 
         {
-            if (cmbServicio.Text == "")
+            if (cmbServicio.Text == "") //validar campo vacío
             {
                 MsgB Mbox = new MsgB("advertencia", "Seleccione un servicio");
                 DialogResult DR = Mbox.ShowDialog();
             }
-            else if (txt_cantidad.Text == "")
+            else if (txt_cantidad.Text == "") //validar campo vacío
             {
                 MsgB Mbox = new MsgB("advertencia", "Indique cantidad");
                 DialogResult DR = Mbox.ShowDialog();
             }
             else
             {
+                //agregar los servicios al listview
                 ListViewItem lista = new ListViewItem(cmbServicio.Text);
                 lista.SubItems.Add(txtPrecio.Text);
                 lista.SubItems.Add(txt_cantidad.Text);
@@ -126,7 +178,7 @@ namespace ProyectoHCL.Formularios
                 lista.SubItems.Add(Convert.ToString(subt));
                 listView.Items.Add(lista);
 
-
+                //calcular total de la suma de los servicios agregados
                 decimal resultadoActual = decimal.Parse(txtTotal.Text);
                 resultadoActual += subt;
 
@@ -136,6 +188,7 @@ namespace ProyectoHCL.Formularios
                 {
                     using (BaseDatosHCL.ObtenerConexion())
                     {
+                        //insertar en la tabla TBL_DETALLESERVICIO el registro de los servicios agregados
                         MySqlCommand comando = new MySqlCommand();
                         comando.Connection = BaseDatosHCL.ObtenerConexion();
                         comando.CommandText = "SELECT * FROM TBL_SERVICIO WHERE DESCRIPCION = '" + cmbServicio.Text + "';";
@@ -173,15 +226,15 @@ namespace ProyectoHCL.Formularios
         }
 
 
-        private void btnEliminar_Click(object sender, EventArgs e)
+        private void btnEliminar_Click(object sender, EventArgs e) //botón para eliminar un elemento del listview
         {
             if (listView.SelectedItems.Count > 0)
             {
                 ListViewItem item = listView.SelectedItems[0];
 
-
                 decimal precio = decimal.Parse(item.SubItems[1].Text);
                 decimal resultadoActual = decimal.Parse(txtTotal.Text);
+                //restar precio del elemento eliminado
                 resultadoActual -= precio;
                 txtTotal.Text = resultadoActual.ToString();
 
@@ -193,6 +246,7 @@ namespace ProyectoHCL.Formularios
                     {
                         using (BaseDatosHCL.ObtenerConexion())
                         {
+                            //borrar en la tabla TBL_DETALLESERVICIO el registro de los servicios eliminados
                             MySqlCommand comando = new MySqlCommand();
                             comando.Connection = BaseDatosHCL.ObtenerConexion();
                             comando.CommandText = "SELECT * FROM TBL_SERVICIO WHERE DESCRIPCION = '" + item.SubItems[0].Text + "';";
@@ -348,12 +402,12 @@ namespace ProyectoHCL.Formularios
             }
             else
             {
-                MsgB Mbox = new MsgB("advertencia", "Seleccione un item de la lista");
+                MsgB Mbox = new MsgB("advertencia", "Seleccione un item de la lista"); //validar que se haya seleccionado un elemento de la lista
                 DialogResult DR = Mbox.ShowDialog();
             }
         }
 
-        private void btnVenta_Click(object sender, EventArgs e)
+        private void btnVenta_Click(object sender, EventArgs e) //validar si el listview está vacío
         {
             if (listView.Items.Count == 0)
             {
@@ -362,7 +416,7 @@ namespace ProyectoHCL.Formularios
             }
             else
             {
-                listView.Items.Clear();
+                listView.Items.Clear(); //limpiar listview al guardar
                 limpiarCampos();
                 this.Close();
             }
@@ -370,25 +424,22 @@ namespace ProyectoHCL.Formularios
 
         private void cmbServicio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtPrecio.Text = Precio().ToString();
+            txtPrecio.Text = Precio().ToString(); //asignar valor del precio del servicio al textbox
         }
 
-        private void ActualizarResultado()
+        private void ActualizarResultado() //actualizar total
         {
             decimal resultado = 0;
             foreach (ListViewItem item in listView.Items)
             {
-
-
                 resultado += decimal.Parse(item.SubItems[1].Text);
-
             }
             txtTotal.Text = resultado.ToString();
         }
 
         private void btnReservacion_Click(object sender, EventArgs e)
         {
-            using (ServicioHab servHab = new ServicioHab())
+            using (ServicioHab servHab = new ServicioHab()) //llenar los textbox al elegir la reservación
             {
                 servHab.ShowDialog(this);
             }
@@ -398,7 +449,7 @@ namespace ProyectoHCL.Formularios
             txtSalida.Text = clases.CDatos.salida.ToString();
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
+        private void btnCerrar_Click(object sender, EventArgs e) //cerrar formulario
         {
             this.Close();
             limpiarError();
@@ -406,7 +457,7 @@ namespace ProyectoHCL.Formularios
 
         private void txtHab_TextChanged(object sender, EventArgs e)
         {
-            if (txtHab.Text == "")
+            if (txtHab.Text == "") //deshabilitar controles si el textbox está vacío
             {
                 btnAgregar.Enabled = false;
                 btnAgregar.BackColor = Color.DarkGray;
@@ -416,7 +467,7 @@ namespace ProyectoHCL.Formularios
                 btnVenta.BackColor = Color.DarkGray;
                 cmbServicio.Enabled = false;
             }
-            else
+            else //habilitar controles si el textbox tiene datos
             {
                 btnAgregar.Enabled = true;
                 btnAgregar.BackColor = Color.CadetBlue;
@@ -428,7 +479,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void cmbServicio_Leave(object sender, EventArgs e)
+        private void cmbServicio_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (ValidarTxt.cmbVacio(cmbServicio))
             {
@@ -440,7 +491,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void cmbEstado_Leave(object sender, EventArgs e)
+        private void cmbEstado_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (txt_cantidad.Text == "")
             {
@@ -456,18 +507,17 @@ namespace ProyectoHCL.Formularios
         {
             if (info.est == 2)
             {
+                //llenar los textbox al elegir la reservación
                 btnReservacion.Visible = false;
                 txtHab.Text = clases.CDatos.numeroHab.ToString();
                 txtCliente.Text = CDatos.nombre.ToString();
                 txtEntrada.Text = info.ingreso.ToString();
                 txtSalida.Text = info.salida.ToString();
 
-
                 DataTable st = new DataTable();
 
                 try
                 {
-
 
                     string stri = "SELECT s.DESCRIPCION, ds.CANTIDAD, s.PRECIO " +
                                   "FROM TBL_DETALLESERVICIO ds " +
@@ -500,8 +550,6 @@ namespace ProyectoHCL.Formularios
                 {
                     while (i < s)
                     {
-
-
                         ListViewItem lista = new ListViewItem(st.Rows[i]["DESCRIPCION"].ToString());
                         lista.SubItems.Add(st.Rows[i]["PRECIO"].ToString());
                         lista.SubItems.Add(st.Rows[i]["CANTIDAD"].ToString());
@@ -515,7 +563,6 @@ namespace ProyectoHCL.Formularios
                 }
 
                 txtTotal.Text = total.ToString();
-
             }
             else
             {
