@@ -71,6 +71,7 @@ namespace ProyectoHCL.Formularios
         private MySqlConnection conn;
         private DateTime mesAnio;
         private string habitacion;
+        public static int static_anio, static_mes;
 
         public CalendarioReservas()
         {
@@ -117,9 +118,9 @@ namespace ProyectoHCL.Formularios
                 string query = "SELECT INGRESO, SALIDA FROM TBL_SOLICITUDRESERVA WHERE NUMEROHABITACION = @habitacion AND ID_ESTADORESERVA = 1 AND MONTH(INGRESO) = @mes AND YEAR(INGRESO) = @anio";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 //parámetros que recibe la consulta select
-                cmd.Parameters.AddWithValue("@mes", fechaActual.Month); 
-                cmd.Parameters.AddWithValue("@anio", fechaActual.Year); 
-                cmd.Parameters.AddWithValue("@habitacion", habitacionS); 
+                cmd.Parameters.AddWithValue("@mes", fechaActual.Month);
+                cmd.Parameters.AddWithValue("@anio", fechaActual.Year);
+                cmd.Parameters.AddWithValue("@habitacion", habitacionS);
 
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -128,7 +129,7 @@ namespace ProyectoHCL.Formularios
                         Reserva reserva = new Reserva //objeto de la clase Reserva
                         {
                             //fechas de ingreso y salida obtenidas de la consulta select
-                            FechaIngreso = reader.GetDateTime("INGRESO"), 
+                            FechaIngreso = reader.GetDateTime("INGRESO"),
                             FechaSalida = reader.GetDateTime("SALIDA")
                         };
                         reservas.Add(reserva); //se agrega la reserva a la lista
@@ -148,6 +149,9 @@ namespace ProyectoHCL.Formularios
 
             mesAnio = mesAño;
 
+            static_mes = mes;
+            static_anio = año;
+
             string hab = habitacion;
 
             int dias = DateTime.DaysInMonth(año, mes);
@@ -158,7 +162,7 @@ namespace ProyectoHCL.Formularios
             //restar 8 al valor actual. 
             if (diaSemana >= 8)
             {
-                diaSemana -= 8; 
+                diaSemana -= 8;
             }
 
             for (int i = 1; i < diaSemana; i++)

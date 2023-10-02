@@ -64,7 +64,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(897, 62);
+            panel1.Size = new Size(796, 46);
             panel1.TabIndex = 3;
             // 
             // btnC
@@ -76,7 +76,7 @@
             btnC.FlatAppearance.BorderSize = 0;
             btnC.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnC.FlatStyle = FlatStyle.Flat;
-            btnC.Location = new Point(871, 12);
+            btnC.Location = new Point(770, 9);
             btnC.Name = "btnC";
             btnC.Size = new Size(14, 17);
             btnC.TabIndex = 34;
@@ -92,7 +92,7 @@
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnCerrar.FlatStyle = FlatStyle.Flat;
-            btnCerrar.Location = new Point(1755, 12);
+            btnCerrar.Location = new Point(1654, 12);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(14, 17);
             btnCerrar.TabIndex = 44;
@@ -104,7 +104,7 @@
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(24, 16);
+            label11.Location = new Point(248, 9);
             label11.Name = "label11";
             label11.Size = new Size(318, 32);
             label11.TabIndex = 31;
@@ -120,16 +120,16 @@
             panel2.Controls.Add(btnAnt);
             panel2.Controls.Add(ContenedorDias);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(0, 62);
+            panel2.Location = new Point(0, 46);
             panel2.Name = "panel2";
-            panel2.Size = new Size(897, 654);
+            panel2.Size = new Size(796, 641);
             panel2.TabIndex = 4;
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Symbol", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.Location = new Point(88, 29);
+            label8.Location = new Point(40, 21);
             label8.Name = "label8";
             label8.Size = new Size(185, 20);
             label8.TabIndex = 6;
@@ -138,16 +138,17 @@
             // cmbHabitacion
             // 
             cmbHabitacion.FormattingEnabled = true;
-            cmbHabitacion.Location = new Point(279, 29);
+            cmbHabitacion.Location = new Point(234, 22);
             cmbHabitacion.Name = "cmbHabitacion";
-            cmbHabitacion.Size = new Size(121, 23);
+            cmbHabitacion.Size = new Size(105, 23);
             cmbHabitacion.TabIndex = 5;
             cmbHabitacion.SelectedIndexChanged += cmbHabitacion_SelectedIndexChanged;
             // 
             // panel46
             // 
+            panel46.BackColor = Color.White;
             panel46.Controls.Add(LBLMES);
-            panel46.Location = new Point(88, 77);
+            panel46.Location = new Point(41, 67);
             panel46.Name = "panel46";
             panel46.Size = new Size(715, 37);
             panel46.TabIndex = 4;
@@ -173,7 +174,7 @@
             panel38.Controls.Add(label3);
             panel38.Controls.Add(label2);
             panel38.Controls.Add(label1);
-            panel38.Location = new Point(88, 116);
+            panel38.Location = new Point(41, 106);
             panel38.Name = "panel38";
             panel38.Size = new Size(715, 35);
             panel38.TabIndex = 3;
@@ -262,7 +263,7 @@
             btnSig.BackgroundImageLayout = ImageLayout.Zoom;
             btnSig.FlatAppearance.BorderSize = 0;
             btnSig.FlatStyle = FlatStyle.Flat;
-            btnSig.Location = new Point(760, 596);
+            btnSig.Location = new Point(713, 21);
             btnSig.Name = "btnSig";
             btnSig.Size = new Size(43, 34);
             btnSig.TabIndex = 2;
@@ -276,7 +277,7 @@
             btnAnt.BackgroundImageLayout = ImageLayout.Zoom;
             btnAnt.FlatAppearance.BorderSize = 0;
             btnAnt.FlatStyle = FlatStyle.Flat;
-            btnAnt.Location = new Point(703, 596);
+            btnAnt.Location = new Point(664, 21);
             btnAnt.Name = "btnAnt";
             btnAnt.Size = new Size(43, 34);
             btnAnt.TabIndex = 1;
@@ -286,7 +287,7 @@
             // ContenedorDias
             // 
             ContenedorDias.BackColor = Color.LightGray;
-            ContenedorDias.Location = new Point(88, 157);
+            ContenedorDias.Location = new Point(41, 147);
             ContenedorDias.Name = "ContenedorDias";
             ContenedorDias.Size = new Size(715, 423);
             ContenedorDias.TabIndex = 0;
@@ -296,7 +297,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(897, 716);
+            ClientSize = new Size(796, 687);
             Controls.Add(panel2);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -334,6 +335,6 @@
         private Panel panel46;
         private Label LBLMES;
         private Label label8;
-        private ComboBox cmbHabitacion;
+        public ComboBox cmbHabitacion;
     }
 }

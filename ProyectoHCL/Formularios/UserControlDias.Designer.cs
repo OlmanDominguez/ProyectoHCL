@@ -65,6 +65,7 @@
             Name = "UserControlDias";
             Size = new Size(96, 64);
             Load += UserControlDias_Load;
+            MouseClick += UserControlDias_MouseClick;
             ((System.ComponentModel.ISupportInitialize)pboxReservado).EndInit();
             ResumeLayout(false);
             PerformLayout();

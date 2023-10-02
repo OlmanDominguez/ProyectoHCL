@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using ProyectoHCL.clases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ProyectoHCL.Formularios.CalendarioReservas;
 
 //-----------------------------------------------------------------------
 //    Universidad Nacional Autonoma de Honduras (UNAH)
@@ -62,6 +65,9 @@ namespace ProyectoHCL.Formularios
 {
     public partial class UserControlDias : UserControl
     {
+        public static string static_dia;
+        string fecha;
+
         public UserControlDias()
         {
             InitializeComponent();
@@ -75,6 +81,17 @@ namespace ProyectoHCL.Formularios
         public void Dias(int numDia)
         {
             lblDias.Text = numDia + ""; //mostrar el número de día en el control
+        }
+
+
+        private void UserControlDias_MouseClick(object sender, MouseEventArgs e)
+        {
+            static_dia = lblDias.Text;
+
+            using (DatosReserva dReserva = new DatosReserva()) 
+            {
+                dReserva.ShowDialog(this);
+            }
         }
     }
 }
