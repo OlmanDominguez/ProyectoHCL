@@ -701,6 +701,7 @@ namespace ProyectoHCL
             {
                 MessageBox.Show(a.Message);
             }
+            
 
         }
 
