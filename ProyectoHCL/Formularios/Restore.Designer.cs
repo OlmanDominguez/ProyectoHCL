@@ -54,7 +54,7 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1067, 73);
+            panel2.Size = new Size(1065, 73);
             panel2.TabIndex = 25;
             // 
             // btnCerrar
@@ -90,7 +90,7 @@
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(477, 14);
+            label11.Location = new Point(476, 14);
             label11.Name = "label11";
             label11.Size = new Size(115, 37);
             label11.TabIndex = 19;
@@ -117,7 +117,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Century Gothic", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(396, 134);
+            label6.Location = new Point(392, 85);
             label6.Name = "label6";
             label6.Size = new Size(296, 28);
             label6.TabIndex = 26;
@@ -126,7 +126,7 @@
             // txtRuta
             // 
             txtRuta.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtRuta.Location = new Point(224, 283);
+            txtRuta.Location = new Point(257, 268);
             txtRuta.Name = "txtRuta";
             txtRuta.Size = new Size(577, 29);
             txtRuta.TabIndex = 27;
@@ -141,7 +141,7 @@
             btnRestaurar.FlatStyle = FlatStyle.Flat;
             btnRestaurar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             btnRestaurar.ForeColor = Color.White;
-            btnRestaurar.Location = new Point(815, 346);
+            btnRestaurar.Location = new Point(815, 303);
             btnRestaurar.Name = "btnRestaurar";
             btnRestaurar.Size = new Size(0, 41);
             btnRestaurar.TabIndex = 28;
@@ -159,7 +159,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Century Gothic", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(224, 255);
+            label1.Location = new Point(257, 231);
             label1.Name = "label1";
             label1.Size = new Size(221, 25);
             label1.TabIndex = 29;
@@ -171,7 +171,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             BackColor = Color.Gainsboro;
-            ClientSize = new Size(1067, 644);
+            ClientSize = new Size(1065, 558);
             Controls.Add(label1);
             Controls.Add(btnRestaurar);
             Controls.Add(txtRuta);
