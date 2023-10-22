@@ -273,7 +273,7 @@ namespace ProyectoHCL.clases
 
 
 
-        public bool existeParametro(string rol) //función para validar si existe el parámetro
+        public bool existeParametro(string parametro) //función para validar si existe el parámetro
         {
 
 
@@ -285,9 +285,9 @@ namespace ProyectoHCL.clases
                 conectar.Open();
             }
 
-            String sql = "SELECT ID_ROL FROM TBL_ROL WHERE ID_ROL LIKE @ID_ROL";
+            String sql = "SELECT ID_PARAMETRO FROM TBL_PARAMETRO WHERE PARAMETRO LIKE @PARAMETRO";
             MySqlCommand comando = new MySqlCommand(sql, conectar);
-            comando.Parameters.AddWithValue("@ID_ROL", rol);
+            comando.Parameters.AddWithValue("@PARAMETRO", parametro);
             reader = comando.ExecuteReader();
 
             if (reader.HasRows)

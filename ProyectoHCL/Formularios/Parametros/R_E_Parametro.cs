@@ -79,6 +79,29 @@ namespace ProyectoHCL.Formularios
             {
                 errorp.Clear();
             }
+            if (Char.IsLetter(e.KeyChar))
+            {
+
+                e.Handled = false;
+
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+
+                e.Handled = false;
+
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+                MsgB m = new MsgB("advertencia", "Por favor, sólo ingrese letras");
+                DialogResult dR = m.ShowDialog();
+            }
         }
 
 
@@ -217,7 +240,7 @@ namespace ProyectoHCL.Formularios
 
         private void R_E_Parametro_Load(object sender, EventArgs e)
         {
-            if(parame.p == 1)
+            if (parame.p == 1)
             {
                 txtValor.Text = parame.valor;
                 texPa.Text = parame.parametro;
