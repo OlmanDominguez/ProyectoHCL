@@ -16,6 +16,7 @@ namespace ProyectoHCL
 {
     public partial class FORMULARIO : Form
     {
+        MsgB msgB = new MsgB();
 
         public FORMULARIO()
         {
@@ -105,7 +106,7 @@ namespace ProyectoHCL
 
                         clasecompartida.estado = (int)leer["ID_ESTADO"];
 
-                        if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text & clasecompartida.estado != 3)
+                        if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text & clasecompartida.estado == 1)
                         {
                             clasecompartida.iduser = (int)leer["ID_USUARIO"];
                             clasecompartida.user = UsuarioBox1.Text;
@@ -139,6 +140,20 @@ namespace ProyectoHCL
                             ContraseñaBox2.Text = "";
                             Form formulario = new RestaContra();
                             formulario.Show();
+                        }
+                        else if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text & clasecompartida.estado == 2)
+                        {
+                            MsgB mbox = new MsgB("advertencia", "El usuario está inactivo, por favor contacte al administrador");
+                            DialogResult dR = mbox.ShowDialog();
+                            UsuarioBox1.Clear();
+                            ContraseñaBox2.Clear();
+                        }
+                        else if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text & clasecompartida.estado == 4)
+                        {
+                            MsgB mbox = new MsgB("advertencia", "Acceso denegado, el usuario está bloqueado");
+                            DialogResult dR = mbox.ShowDialog();
+                            UsuarioBox1.Clear();
+                            ContraseñaBox2.Clear();
                         }
                         else
                         {
