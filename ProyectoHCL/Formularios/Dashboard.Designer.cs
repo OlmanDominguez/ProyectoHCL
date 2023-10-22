@@ -147,7 +147,7 @@
             iconButton7.TextAlign = ContentAlignment.MiddleLeft;
             iconButton7.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton7.UseVisualStyleBackColor = true;
-            iconButton7.Click += iconButton7_Click;
+            //iconButton7.Click += iconButton7_Click;
             // 
             // iconButton5
             // 
@@ -687,7 +687,7 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 17;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            //pictureBox1.Click += pictureBox1_Click;
             // 
             // lbl_titulo
             // 
