@@ -108,8 +108,6 @@ namespace ProyectoHCL.Formularios
                         if (obj.ObjetoN == "DESCUENTOS" && !obj.Permitido) //Validar pantalla y el permiso
                         {
                             btnNuevo.Visible = false; //Ocultar botón para crear
-                            label4.Location = new Point(28, 24);
-                            txtBuscar.Location = new Point(84, 22);
                         }
                         break;
                     case 3: //permiso editar
@@ -140,7 +138,7 @@ namespace ProyectoHCL.Formularios
 
             txtDesc.Text = cantidad.ToString();
 
-            cmbDesc.Items.Clear(); 
+            cmbDesc.Items.Clear();
 
             for (int x = 1; x <= cantidad; x++)
                 cmbDesc.Items.Add(x.ToString());
@@ -258,7 +256,7 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        private void dgvDesc_CellClick(object sender, DataGridViewCellEventArgs e) 
+        private void dgvDesc_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dgvDesc.Columns[e.ColumnIndex].Name == "ELIMINAR") //si se dio click en el botón eliminar hacer lo siguiente
             {

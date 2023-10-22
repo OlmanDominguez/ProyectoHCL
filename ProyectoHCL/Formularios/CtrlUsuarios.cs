@@ -108,8 +108,6 @@ namespace ProyectoHCL.Formularios
                         if (obj.ObjetoN == "USUARIOS" && !obj.Permitido) //Validar pantalla y el permiso
                         {
                             btnNuevo.Visible = false; //Ocultar botón para crear
-                            label4.Location = new Point(28, 24);
-                            txtBuscar.Location = new Point(84, 22);
                         }
                         break;
                     case 3: //permiso editar

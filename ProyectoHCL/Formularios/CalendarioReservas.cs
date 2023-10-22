@@ -267,6 +267,7 @@ namespace ProyectoHCL.Formularios
             //Asignar valor a habSeleccionada con el valor seleccionado en combobox
             string habSeleccionada = cmbHabitacion.SelectedItem.ToString();
             habitacion = habSeleccionada;
+            clases.CDatos.numHabDR = habSeleccionada;
             DateTime fecha = mesAnio;
             LlenarCalendario(fecha, habSeleccionada);
         }

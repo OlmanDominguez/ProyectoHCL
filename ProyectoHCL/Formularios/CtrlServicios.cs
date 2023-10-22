@@ -102,8 +102,6 @@ namespace ProyectoHCL.Formularios
                         if (obj.ObjetoN == "SERVICIOS" && !obj.Permitido)
                         {
                             btnNuevo.Visible = false; //Ocultar botón para crear
-                            label4.Location = new Point(28, 24);
-                            txtBuscar.Location = new Point(84, 22);
                         }
                         break;
                     case 3: //permiso editar

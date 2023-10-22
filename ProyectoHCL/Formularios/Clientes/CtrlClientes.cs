@@ -49,7 +49,7 @@ OLMAN  DOMÍNGUEZ
 ----------------------------------------------------------------------- */
 
 /* librerias utilizadas para facilitar el proceso */
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;   
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using MySql.Data.MySqlClient; /* libreria para conectar a la BD */
 using ProyectoHCL.clases; /* hacer uso de las clases dentro del proyecto */
 using ProyectoHCL.Properties;
@@ -62,15 +62,15 @@ using System.Linq; /* libreria para clases e interfaces */
 using System.Text; /* manipular informacion dentro de la aplicacion */
 using System.Threading.Tasks; /* libreria para impresion */
 using System.Windows.Forms;
-using ProyectoHCL.clases; 
+using ProyectoHCL.clases;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using DocumentFormat.OpenXml.Office2013.Excel;
 using SpreadsheetLight;
 using SpreadsheetLight.Drawing;
 
-namespace ProyectoHCL.Formularios   
+namespace ProyectoHCL.Formularios
 {
-    public partial class CtrlClientes : Form  
+    public partial class CtrlClientes : Form
     {
         clases.Clientes clien = new clases.Clientes();  /* Referencias y declaracion de valores en variable*/
         AdmonClientes admonClientes = new AdmonClientes();
@@ -80,12 +80,12 @@ namespace ProyectoHCL.Formularios
 
         public CtrlClientes()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             pagFinal = numFilas;
             CargarDGCl();
         }
 
-        
+
         private void Permisos()
         {
             var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
@@ -97,7 +97,7 @@ namespace ProyectoHCL.Formularios
                     case 2:
                         if (obj.ObjetoN == "CLIENTES" && !obj.Permitido) //Validar pantalla y el permiso
                         {
-                            btnNuevo.Enabled = false; //Deshabilitar botón para crear
+                            btnNuevo.Visible = false; //Deshabilitar botón para crear
                         }
                         break;
                     case 3:
@@ -231,7 +231,7 @@ namespace ProyectoHCL.Formularios
                     formulario.ShowDialog();
 
                 }
-                catch (Exception) 
+                catch (Exception)
                 {
                     MessageBox.Show("Se produjo un error");
                 }
@@ -269,7 +269,7 @@ namespace ProyectoHCL.Formularios
                 }
             }
 
-            if (this.dgvClientes.Columns[e.ColumnIndex].Name == "ELIMINAR")  
+            if (this.dgvClientes.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
                 bool elimino = admonClientes.EliminarCliente(dgvClientes.CurrentRow.Cells["CODIGO"].Value.ToString());
 
@@ -472,7 +472,7 @@ namespace ProyectoHCL.Formularios
 
             int celdaCabecera = 6, celdaInicial = 6;
 
-            sl.RenameWorksheet(SLDocument.DefaultFirstSheetName, "TBL_CLIENTE");  
+            sl.RenameWorksheet(SLDocument.DefaultFirstSheetName, "TBL_CLIENTE");
             sl.SetCellValue("B" + celdaCabecera, "Codigo");
             sl.SetCellValue("C" + celdaCabecera, "Nombre");
             sl.SetCellValue("D" + celdaCabecera, "Apellido");
@@ -494,7 +494,7 @@ namespace ProyectoHCL.Formularios
             estiloCa.Fill.SetPattern(DocumentFormat.OpenXml.Spreadsheet.PatternValues.Solid, System.Drawing.Color.Blue, System.Drawing.Color.Blue);
             sl.SetCellStyle("B" + celdaCabecera, "M" + celdaCabecera, estiloCa);
 
-            string sql = "SELECT c.CODIGO, c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, c.ID_TIPOCLIENTE, t.DESCRIPCION, c.NOMBRE_RTN, c.RTN, c.TELEFONO, c.TELEFONO2, c.EMAIL, c.EMAIL2 FROM TBL_CLIENTE c INNER JOIN TBL_TIPOCLIENTE t ON c.ID_TIPOCLIENTE = t.ID_TIPOCLIENTE";  /* declaracion y llamada de valores de variables en las tablas en BD */ 
+            string sql = "SELECT c.CODIGO, c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, c.ID_TIPOCLIENTE, t.DESCRIPCION, c.NOMBRE_RTN, c.RTN, c.TELEFONO, c.TELEFONO2, c.EMAIL, c.EMAIL2 FROM TBL_CLIENTE c INNER JOIN TBL_TIPOCLIENTE t ON c.ID_TIPOCLIENTE = t.ID_TIPOCLIENTE";  /* declaracion y llamada de valores de variables en las tablas en BD */
 
             MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion(); /* proceso de conexion a BD */
 

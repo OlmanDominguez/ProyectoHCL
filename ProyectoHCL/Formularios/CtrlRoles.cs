@@ -110,8 +110,6 @@ namespace ProyectoHCL.Formularios
                         if (obj.ObjetoN == "ROLES" && !obj.Permitido)//en esta condicion esta crear para que el usuario solo puede ver 
                         {
                             btnNuevo.Visible = false;
-                            label1.Location = new Point(28, 24);
-                            txtBuscarR.Location = new Point(84, 22);
                         }
                         break;
                     case 3://en este caso se creo para poder dar acceso al usuario de editar 

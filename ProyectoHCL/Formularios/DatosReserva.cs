@@ -23,14 +23,7 @@ namespace ProyectoHCL.Formularios
         public DatosReserva()
         {
             InitializeComponent();
-
-            //txtHab.Text = "hola";
-            //txtCliente.Text = "hola";
-            //txtEntrada.Text = static_dia;
-            //txtSalida.Text = "hola";
         }
-
-
 
         private void btnC_Click(object sender, EventArgs e)
         {
@@ -39,42 +32,64 @@ namespace ProyectoHCL.Formularios
 
         private void DatosReserva_Load(object sender, EventArgs e)
         {
-            fecha = CalendarioReservas.static_mes + "/" + UserControlDias.static_dia + "/" + CalendarioReservas.static_anio;
+            fecha = CalendarioReservas.static_anio + "-" + CalendarioReservas.static_mes + "-" + UserControlDias.static_dia;
+            lblHab.Text = clases.CDatos.numHabDR;
+            ObtenerDatos();
+            lblCliente.Text = clases.CDatos.cliente;
+            lblEntrada.Text = clases.CDatos.entrada.ToString();
+            lblSalida.Text = clases.CDatos.salida.ToString();
+        }
 
-            //SELECT habitacion.numero_habitacion, cliente.nombre, reserva.fecha_inicio, reserva.fecha_final
-            //FROM reserva
-            //JOIN habitacion ON reserva.id_habitacion = habitacion.id
-            //JOIN cliente ON reserva.id_cliente = cliente.id
-            //WHERE '2023-10-01' BETWEEN reserva.fecha_inicio AND reserva.fecha_final;
-            string habitacion = calendario.cmbHabitacion.Text;
-            txtHab.Text = habitacion; //****Crear variable para guaardar valor*************************************************************************
+        public void ObtenerDatos()
+        {
+            using (MySqlConnection conn = new MySqlConnection(connection))
+            {
+                conn.Open();
 
-            //string sql = $"SELECT NUMEROHABITACION, CONCAT(TBL_CLIENTE.NOMBRE, ' ', TBL_CLIENTE.APELLIDO) AS NOMBRE," +
-            //       $" INGRESO, SALIDA\r\nFROM TBL_SOLICITUDRESERVA\r\nINNER JOIN TBL_CLIENTE ON " +
-            //       $"TBL_SOLICITUDRESERVA.COD_CLIENTE = \r\nTBL_CLIENTE.CODIGO\r\nWHERE NUMEROHABITACION = @habitacion " +
-            //       $"AND @fechaC BETWEEN INGRESO AND SALIDA";
-            //MySqlCommand cmd = new MySqlCommand(sql, connection);
-            //cmd.Parameters.AddWithValue("@fechaC", fecha);
+                // Consulta SQL para recuperar los datos
+                string sqlQuery = "SELECT CONCAT(TBL_CLIENTE.NOMBRE, ' ', TBL_CLIENTE.APELLIDO) AS NOMBRE," +
+                                  " INGRESO, SALIDA\r\nFROM TBL_SOLICITUDRESERVA\r\nINNER JOIN TBL_CLIENTE ON " +
+                                  "TBL_SOLICITUDRESERVA.COD_CLIENTE = \r\nTBL_CLIENTE.CODIGO\r\n" +
+                                  " WHERE NUMEROHABITACION = @numeroHabitacion " +
+                                  "AND @fechaSeleccionada BETWEEN INGRESO AND SALIDA";
 
-            //using (MySqlConnection conn = new MySqlConnection(connection))
-            //{
-            //    using (MySqlCommand command = new MySqlCommand(sql, conn))
-            //    {
-            //        conn.Open();
-            //        using (MySqlDataReader reader = command.ExecuteReader())
-            //        {
-            //            if (reader.Read())
-            //            {
-            //                clases.CDatos.numeroHab = Convert.ToInt32(reader["NUMEROHABITACION"].ToString());
-            //                clases.CDatos.cliente = reader["NOMBRE"].ToString();
-            //                clases.CDatos.entrada = Convert.ToDateTime(reader["INGRESO"].ToString());
-            //                clases.CDatos.salida = Convert.ToDateTime(reader["SALIDA"].ToString());
-            //            }
-            //        }
-            //        conn.Close();
-            //    }
-            //}
+                using (MySqlCommand command = new MySqlCommand(sqlQuery, conn))
+                {
+                    // Parámetros para la consulta
+                    command.Parameters.AddWithValue("@numeroHabitacion", clases.CDatos.numHabDR);
+                    command.Parameters.AddWithValue("@fechaSeleccionada", fecha);
 
+                    // Ejecutar la consulta y leer los resultados
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            clases.CDatos.cliente = reader.GetString("NOMBRE");
+                            clases.CDatos.entrada = (DateTime)reader["INGRESO"];
+                            clases.CDatos.salida = (DateTime)reader["SALIDA"];
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+        }
+
+        //coordenadas para arrastrar formulario
+        int posY = 0;
+        int posX = 0;
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+            {
+                posX = e.X;
+                posY = e.Y;
+            }
+            else
+            {
+                Left = Left + (e.X - posX);
+                Top = Top + (e.Y - posY);
+            }
         }
     }
 }

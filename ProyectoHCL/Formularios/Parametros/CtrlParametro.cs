@@ -228,7 +228,7 @@ namespace ProyectoHCL.Formularios.Parametros
                     cmd = new MySqlCommand("DeleteParametro", conn);//llamamos al procedimiento almacenado creado 
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@id", dgvParametros.CurrentRow.Cells["IDPARAMETRO"].Value.ToString());
-                    
+
                     cmd.ExecuteNonQuery();
                     MsgB m = new MsgB("informacion", "Registro eliminado con éxito");
                     DialogResult dR = m.ShowDialog();//mensaje de confirmacion que se ha eliminado el parametro 
@@ -247,7 +247,7 @@ namespace ProyectoHCL.Formularios.Parametros
 
 
                     CargarDGP();
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -421,7 +421,7 @@ namespace ProyectoHCL.Formularios.Parametros
             sl.SetCellValue("F" + celdaCabecera, "Valor");
             sl.SetCellValue("G" + celdaCabecera, "Creacion");
             sl.SetCellValue("H" + celdaCabecera, "Modificacion");
-            
+
 
             SLStyle estiloCa = sl.CreateStyle();//Fuente y orden de como se mostrara el encabezado del pdf 
             estiloT.Font.FontName = "Arial";
@@ -449,7 +449,7 @@ namespace ProyectoHCL.Formularios.Parametros
                 sl.SetCellValue("F" + celdaCabecera, reader["VALOR"].ToString());
                 sl.SetCellValue("G" + celdaCabecera, reader["FECHACRE"].ToString());
                 sl.SetCellValue("H" + celdaCabecera, reader["FECHAMODIFI"].ToString());
-                
+
             }
 
             SLStyle EstiloB = sl.CreateStyle();

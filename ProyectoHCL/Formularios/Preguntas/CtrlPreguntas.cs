@@ -23,6 +23,7 @@ namespace ProyectoHCL.Formularios
         DataSet ds = new DataSet();
         MsgB msgB = new MsgB();
         int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
+        CDatos cDatos = new CDatos();
 
         public CtrlPreguntas()
         {
@@ -265,6 +266,36 @@ namespace ProyectoHCL.Formularios
             }
         }
 
+        private void Permisos() //función para asignar permisos a la pantalla
+        {
+            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs); //lista de objetos que recibe el rol para validar el permiso
+
+            foreach (var obj in LsObj) //recorrer los objetos en la lista
+            {
+                switch (obj.IdPermiso) //restringir acceso según el permiso
+                {
+                    case 2: //permiso crear
+                        if (obj.ObjetoN == "PREGUNTAS" && !obj.Permitido) //Validar pantalla y el permiso
+                        {
+                            btnNuevo.Visible = false; //Ocultar botón para crear
+                        }
+                        break;
+                    case 3: //permiso editar
+                        if (obj.ObjetoN == "PREGUNTAS" && !obj.Permitido)
+                        {
+                            dgvPreguntas.Columns["EDITAR"].Visible = false; //Ocultar columna del botón para editar en datagrid
+                        }
+                        break;
+                    case 4: //permiso eliminar
+                        if (obj.ObjetoN == "PREGUNTAS" && !obj.Permitido)
+                        {
+                            dgvPreguntas.Columns["ELIMINAR"].Visible = false; //Ocultar columna del botón para eliminar en datagrid
+                        }
+                        break;
+                }
+            }
+        }
+
         private void CtrlPreguntas_Load_1(object sender, EventArgs e)
         {
             DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
@@ -274,6 +305,8 @@ namespace ProyectoHCL.Formularios
             DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
             btnDelete.Name = "ELIMINAR";
             dgvPreguntas.Columns.Add(btnDelete);
+
+            Permisos();
         }
 
         private void btnNuevo_Click_1(object sender, EventArgs e)

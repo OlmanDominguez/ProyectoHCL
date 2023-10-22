@@ -37,10 +37,6 @@
             panel2 = new Panel();
             btnCerrar = new Button();
             label11 = new Label();
-            button2 = new Button();
-            button5 = new Button();
-            btnPerfil = new Button();
-            btnCerrarSesion = new Button();
             btnNuevo = new Button();
             panel5 = new Panel();
             btnPdf = new Button();
@@ -57,10 +53,6 @@
             label6 = new Label();
             label7 = new Label();
             cmbPaginacion = new ComboBox();
-            label2 = new Label();
-            label5 = new Label();
-            txtPag = new TextBox();
-            cmbPag = new ComboBox();
             panel4 = new Panel();
             dgvUsuarios = new DataGridView();
             panel2.SuspendLayout();
@@ -75,10 +67,6 @@
             panel2.BackColor = Color.WhiteSmoke;
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(label11);
-            panel2.Controls.Add(button2);
-            panel2.Controls.Add(button5);
-            panel2.Controls.Add(btnPerfil);
-            panel2.Controls.Add(btnCerrarSesion);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
@@ -113,62 +101,6 @@
             label11.TabIndex = 41;
             label11.Text = "Usuarios Registrados";
             // 
-            // button2
-            // 
-            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button2.BackColor = Color.Transparent;
-            button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
-            button2.BackgroundImageLayout = ImageLayout.Stretch;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(2089, 74);
-            button2.Name = "button2";
-            button2.Size = new Size(30, 29);
-            button2.TabIndex = 38;
-            button2.UseVisualStyleBackColor = false;
-            // 
-            // button5
-            // 
-            button5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button5.BackColor = Color.Transparent;
-            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
-            button5.BackgroundImageLayout = ImageLayout.Stretch;
-            button5.FlatAppearance.BorderSize = 0;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.Location = new Point(2136, 72);
-            button5.Name = "button5";
-            button5.Size = new Size(35, 33);
-            button5.TabIndex = 39;
-            button5.UseVisualStyleBackColor = false;
-            // 
-            // btnPerfil
-            // 
-            btnPerfil.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnPerfil.BackColor = Color.Transparent;
-            btnPerfil.BackgroundImage = (Image)resources.GetObject("btnPerfil.BackgroundImage");
-            btnPerfil.BackgroundImageLayout = ImageLayout.Stretch;
-            btnPerfil.FlatAppearance.BorderSize = 0;
-            btnPerfil.FlatStyle = FlatStyle.Flat;
-            btnPerfil.Location = new Point(2804, 73);
-            btnPerfil.Name = "btnPerfil";
-            btnPerfil.Size = new Size(30, 29);
-            btnPerfil.TabIndex = 34;
-            btnPerfil.UseVisualStyleBackColor = false;
-            // 
-            // btnCerrarSesion
-            // 
-            btnCerrarSesion.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCerrarSesion.BackColor = Color.Transparent;
-            btnCerrarSesion.BackgroundImage = (Image)resources.GetObject("btnCerrarSesion.BackgroundImage");
-            btnCerrarSesion.BackgroundImageLayout = ImageLayout.Stretch;
-            btnCerrarSesion.FlatAppearance.BorderSize = 0;
-            btnCerrarSesion.FlatStyle = FlatStyle.Flat;
-            btnCerrarSesion.Location = new Point(2851, 71);
-            btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Size = new Size(35, 33);
-            btnCerrarSesion.TabIndex = 35;
-            btnCerrarSesion.UseVisualStyleBackColor = false;
-            // 
             // btnNuevo
             // 
             btnNuevo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -180,7 +112,7 @@
             btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnNuevo.ForeColor = SystemColors.ButtonFace;
             btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.Location = new Point(29, 17);
+            btnNuevo.Location = new Point(379, 17);
             btnNuevo.Name = "btnNuevo";
             btnNuevo.Size = new Size(50, 35);
             btnNuevo.TabIndex = 40;
@@ -241,7 +173,7 @@
             // 
             txtBuscar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             txtBuscar.BackColor = SystemColors.Info;
-            txtBuscar.Location = new Point(173, 22);
+            txtBuscar.Location = new Point(88, 22);
             txtBuscar.Margin = new Padding(2);
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(252, 23);
@@ -255,7 +187,7 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(113, 24);
+            label4.Location = new Point(29, 24);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(55, 20);
@@ -317,11 +249,7 @@
             panel3.Controls.Add(label1);
             panel3.Controls.Add(cmbMostrar);
             panel3.Controls.Add(cmbPaginacion);
-            panel3.Controls.Add(label2);
             panel3.Controls.Add(label3);
-            panel3.Controls.Add(label5);
-            panel3.Controls.Add(txtPag);
-            panel3.Controls.Add(cmbPag);
             panel3.Dock = DockStyle.Bottom;
             panel3.Location = new Point(0, 485);
             panel3.Name = "panel3";
@@ -406,46 +334,6 @@
             cmbPaginacion.TabIndex = 48;
             cmbPaginacion.SelectionChangeCommitted += cmbPaginacion_SelectionChangeCommitted;
             // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Right;
-            label2.AutoSize = true;
-            label2.Location = new Point(1782, 7);
-            label2.Name = "label2";
-            label2.Size = new Size(21, 15);
-            label2.TabIndex = 47;
-            label2.Text = "De";
-            // 
-            // label5
-            // 
-            label5.Anchor = AnchorStyles.Right;
-            label5.AutoSize = true;
-            label5.Location = new Point(1654, 7);
-            label5.Name = "label5";
-            label5.Size = new Size(43, 15);
-            label5.TabIndex = 46;
-            label5.Text = "Página";
-            // 
-            // txtPag
-            // 
-            txtPag.Anchor = AnchorStyles.Right;
-            txtPag.Location = new Point(1809, 4);
-            txtPag.Name = "txtPag";
-            txtPag.Size = new Size(65, 23);
-            txtPag.TabIndex = 45;
-            // 
-            // cmbPag
-            // 
-            cmbPag.Anchor = AnchorStyles.Right;
-            cmbPag.BackColor = SystemColors.Info;
-            cmbPag.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbPag.FormattingEnabled = true;
-            cmbPag.Location = new Point(1702, 4);
-            cmbPag.Margin = new Padding(2);
-            cmbPag.Name = "cmbPag";
-            cmbPag.Size = new Size(65, 23);
-            cmbPag.TabIndex = 44;
-            // 
             // panel4
             // 
             panel4.BackColor = SystemColors.Window;
@@ -519,6 +407,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.SlateGray;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1084, 561);
@@ -545,10 +435,6 @@
 
         #endregion
         private Panel panel2;
-        private Button button2;
-        private Button button5;
-        private Button btnPerfil;
-        private Button btnCerrarSesion;
         private Label label11;
         private Panel panel5;
         private Button btnPdf;
@@ -559,10 +445,6 @@
         private Label label3;
         private Label label4;
         private Panel panel3;
-        private Label label2;
-        private Label label5;
-        private TextBox txtPag;
-        private ComboBox cmbPag;
         private Panel panel4;
         private Label label6;
         private Label label7;

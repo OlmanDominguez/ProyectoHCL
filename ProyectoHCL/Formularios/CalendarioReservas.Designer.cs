@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalendarioReservas));
             panel1 = new Panel();
-            btnC = new Button();
             btnCerrar = new Button();
             label11 = new Label();
             panel2 = new Panel();
@@ -38,6 +37,8 @@
             cmbHabitacion = new ComboBox();
             panel46 = new Panel();
             LBLMES = new Label();
+            btnSig = new Button();
+            btnAnt = new Button();
             panel38 = new Panel();
             label7 = new Label();
             label6 = new Label();
@@ -46,8 +47,6 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            btnSig = new Button();
-            btnAnt = new Button();
             ContenedorDias = new FlowLayoutPanel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -58,7 +57,6 @@
             // panel1
             // 
             panel1.BackColor = Color.SteelBlue;
-            panel1.Controls.Add(btnC);
             panel1.Controls.Add(btnCerrar);
             panel1.Controls.Add(label11);
             panel1.Dock = DockStyle.Top;
@@ -66,22 +64,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(796, 46);
             panel1.TabIndex = 3;
-            // 
-            // btnC
-            // 
-            btnC.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnC.BackColor = Color.Transparent;
-            btnC.BackgroundImage = (Image)resources.GetObject("btnC.BackgroundImage");
-            btnC.BackgroundImageLayout = ImageLayout.Stretch;
-            btnC.FlatAppearance.BorderSize = 0;
-            btnC.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            btnC.FlatStyle = FlatStyle.Flat;
-            btnC.Location = new Point(770, 9);
-            btnC.Name = "btnC";
-            btnC.Size = new Size(14, 17);
-            btnC.TabIndex = 34;
-            btnC.UseVisualStyleBackColor = false;
-            btnC.Click += btnC_Click;
             // 
             // btnCerrar
             // 
@@ -116,13 +98,11 @@
             panel2.Controls.Add(cmbHabitacion);
             panel2.Controls.Add(panel46);
             panel2.Controls.Add(panel38);
-            panel2.Controls.Add(btnSig);
-            panel2.Controls.Add(btnAnt);
             panel2.Controls.Add(ContenedorDias);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 46);
             panel2.Name = "panel2";
-            panel2.Size = new Size(796, 641);
+            panel2.Size = new Size(796, 593);
             panel2.TabIndex = 4;
             // 
             // label8
@@ -146,27 +126,57 @@
             // 
             // panel46
             // 
-            panel46.BackColor = Color.White;
+            panel46.BackColor = Color.FromArgb(45, 66, 91);
             panel46.Controls.Add(LBLMES);
+            panel46.Controls.Add(btnSig);
+            panel46.Controls.Add(btnAnt);
             panel46.Location = new Point(41, 67);
             panel46.Name = "panel46";
-            panel46.Size = new Size(715, 37);
+            panel46.Size = new Size(715, 38);
             panel46.TabIndex = 4;
             // 
             // LBLMES
             // 
             LBLMES.Font = new Font("Century Gothic", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            LBLMES.ForeColor = SystemColors.ActiveCaptionText;
-            LBLMES.Location = new Point(193, 8);
+            LBLMES.ForeColor = Color.White;
+            LBLMES.Location = new Point(13, 10);
             LBLMES.Name = "LBLMES";
             LBLMES.Size = new Size(332, 21);
             LBLMES.TabIndex = 7;
             LBLMES.Text = "MES";
-            LBLMES.TextAlign = ContentAlignment.MiddleCenter;
+            LBLMES.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // btnSig
+            // 
+            btnSig.BackColor = Color.Transparent;
+            btnSig.BackgroundImage = (Image)resources.GetObject("btnSig.BackgroundImage");
+            btnSig.BackgroundImageLayout = ImageLayout.Zoom;
+            btnSig.FlatAppearance.BorderSize = 0;
+            btnSig.FlatStyle = FlatStyle.Flat;
+            btnSig.Location = new Point(660, 6);
+            btnSig.Name = "btnSig";
+            btnSig.Size = new Size(39, 27);
+            btnSig.TabIndex = 2;
+            btnSig.UseVisualStyleBackColor = false;
+            btnSig.Click += btnSig_Click;
+            // 
+            // btnAnt
+            // 
+            btnAnt.BackColor = Color.Transparent;
+            btnAnt.BackgroundImage = (Image)resources.GetObject("btnAnt.BackgroundImage");
+            btnAnt.BackgroundImageLayout = ImageLayout.Zoom;
+            btnAnt.FlatAppearance.BorderSize = 0;
+            btnAnt.FlatStyle = FlatStyle.Flat;
+            btnAnt.Location = new Point(622, 6);
+            btnAnt.Name = "btnAnt";
+            btnAnt.Size = new Size(39, 27);
+            btnAnt.TabIndex = 1;
+            btnAnt.UseVisualStyleBackColor = false;
+            btnAnt.Click += btnAnt_Click;
             // 
             // panel38
             // 
-            panel38.BackColor = Color.DarkOrange;
+            panel38.BackColor = Color.FromArgb(45, 66, 91);
             panel38.Controls.Add(label7);
             panel38.Controls.Add(label6);
             panel38.Controls.Add(label5);
@@ -228,7 +238,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.ControlLightLight;
-            label3.Location = new Point(228, 10);
+            label3.Location = new Point(228, 8);
             label3.Name = "label3";
             label3.Size = new Size(57, 18);
             label3.TabIndex = 2;
@@ -239,7 +249,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = SystemColors.ControlLightLight;
-            label2.Location = new Point(130, 10);
+            label2.Location = new Point(130, 8);
             label2.Name = "label2";
             label2.Size = new Size(49, 18);
             label2.TabIndex = 1;
@@ -250,39 +260,11 @@
             label1.AutoSize = true;
             label1.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(13, 10);
+            label1.Location = new Point(13, 8);
             label1.Name = "label1";
             label1.Size = new Size(76, 18);
             label1.TabIndex = 0;
             label1.Text = "Domingo";
-            // 
-            // btnSig
-            // 
-            btnSig.BackColor = Color.Transparent;
-            btnSig.BackgroundImage = (Image)resources.GetObject("btnSig.BackgroundImage");
-            btnSig.BackgroundImageLayout = ImageLayout.Zoom;
-            btnSig.FlatAppearance.BorderSize = 0;
-            btnSig.FlatStyle = FlatStyle.Flat;
-            btnSig.Location = new Point(713, 21);
-            btnSig.Name = "btnSig";
-            btnSig.Size = new Size(43, 34);
-            btnSig.TabIndex = 2;
-            btnSig.UseVisualStyleBackColor = false;
-            btnSig.Click += btnSig_Click;
-            // 
-            // btnAnt
-            // 
-            btnAnt.BackColor = Color.Transparent;
-            btnAnt.BackgroundImage = (Image)resources.GetObject("btnAnt.BackgroundImage");
-            btnAnt.BackgroundImageLayout = ImageLayout.Zoom;
-            btnAnt.FlatAppearance.BorderSize = 0;
-            btnAnt.FlatStyle = FlatStyle.Flat;
-            btnAnt.Location = new Point(664, 21);
-            btnAnt.Name = "btnAnt";
-            btnAnt.Size = new Size(43, 34);
-            btnAnt.TabIndex = 1;
-            btnAnt.UseVisualStyleBackColor = false;
-            btnAnt.Click += btnAnt_Click;
             // 
             // ContenedorDias
             // 
@@ -296,8 +278,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             BackColor = Color.White;
-            ClientSize = new Size(796, 687);
+            ClientSize = new Size(796, 639);
             Controls.Add(panel2);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -319,7 +302,6 @@
         private Panel panel1;
         private Button btnCerrar;
         private Label label11;
-        private Button btnC;
         private Panel panel2;
         private FlowLayoutPanel ContenedorDias;
         private Panel panel38;

@@ -88,7 +88,7 @@ namespace ProyectoHCL.Formularios
         {
             static_dia = lblDias.Text;
 
-            using (DatosReserva dReserva = new DatosReserva()) 
+            using (DatosReserva dReserva = new DatosReserva())
             {
                 dReserva.ShowDialog(this);
             }

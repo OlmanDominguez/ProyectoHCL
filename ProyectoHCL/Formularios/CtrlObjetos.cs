@@ -102,8 +102,6 @@ namespace ProyectoHCL.Formularios
                         if (obj.ObjetoN == "OBJETOS" && !obj.Permitido) //Validar pantalla y el permiso
                         {
                             btnNuevo.Visible = false;  //Ocultar botón para crear
-                            label1.Location = new Point(28, 24);
-                            txtBuscar.Location = new Point(84, 22); 
                         }
                         break;
                     case 3: //permiso editar
@@ -220,7 +218,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void dgvObjetos_CellClick_1(object sender, DataGridViewCellEventArgs e) 
+        private void dgvObjetos_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dgvObjetos.Columns[e.ColumnIndex].Name == "EDITAR") //si se dio click en el botón editar hacer lo siguiente
             {

@@ -37,10 +37,10 @@
             // lblDias
             // 
             lblDias.AutoSize = true;
-            lblDias.Font = new Font("Century Gothic", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblDias.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblDias.Location = new Point(13, 12);
             lblDias.Name = "lblDias";
-            lblDias.Size = new Size(25, 20);
+            lblDias.Size = new Size(24, 18);
             lblDias.TabIndex = 0;
             lblDias.Text = "00";
             // 

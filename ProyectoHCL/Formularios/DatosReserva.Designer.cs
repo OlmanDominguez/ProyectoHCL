@@ -30,37 +30,62 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DatosReserva));
             panel3 = new Panel();
-            btnC = new Button();
+            panel1 = new Panel();
             lblDatosR = new Label();
-            txtSalida = new TextBox();
+            btnC = new Button();
+            lblSalida = new Label();
+            lblEntrada = new Label();
+            lblCliente = new Label();
+            lblHab = new Label();
             label13 = new Label();
-            txtEntrada = new TextBox();
             label12 = new Label();
-            txtCliente = new TextBox();
             label10 = new Label();
-            txtHab = new TextBox();
             label9 = new Label();
             panel3.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel3
             // 
-            panel3.BackColor = Color.WhiteSmoke;
-            panel3.Controls.Add(btnC);
-            panel3.Controls.Add(lblDatosR);
-            panel3.Controls.Add(txtSalida);
+            panel3.BackColor = Color.White;
+            panel3.Controls.Add(panel1);
+            panel3.Controls.Add(lblSalida);
+            panel3.Controls.Add(lblEntrada);
+            panel3.Controls.Add(lblCliente);
+            panel3.Controls.Add(lblHab);
             panel3.Controls.Add(label13);
-            panel3.Controls.Add(txtEntrada);
             panel3.Controls.Add(label12);
-            panel3.Controls.Add(txtCliente);
             panel3.Controls.Add(label10);
-            panel3.Controls.Add(txtHab);
             panel3.Controls.Add(label9);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(475, 318);
+            panel3.Size = new Size(426, 196);
             panel3.TabIndex = 8;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(45, 66, 91);
+            panel1.Controls.Add(lblDatosR);
+            panel1.Controls.Add(btnC);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(426, 32);
+            panel1.TabIndex = 40;
+            panel1.MouseMove += panel1_MouseMove;
+            // 
+            // lblDatosR
+            // 
+            lblDatosR.AutoSize = true;
+            lblDatosR.BackColor = Color.Transparent;
+            lblDatosR.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            lblDatosR.ForeColor = Color.White;
+            lblDatosR.Location = new Point(147, 7);
+            lblDatosR.Name = "lblDatosR";
+            lblDatosR.Size = new Size(135, 20);
+            lblDatosR.TabIndex = 8;
+            lblDatosR.Text = "Datos Reservación";
             // 
             // btnC
             // 
@@ -71,100 +96,86 @@
             btnC.FlatAppearance.BorderSize = 0;
             btnC.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnC.FlatStyle = FlatStyle.Flat;
-            btnC.Location = new Point(449, 12);
+            btnC.Location = new Point(400, 9);
             btnC.Name = "btnC";
             btnC.Size = new Size(14, 17);
             btnC.TabIndex = 35;
             btnC.UseVisualStyleBackColor = false;
             btnC.Click += btnC_Click;
             // 
-            // lblDatosR
+            // lblSalida
             // 
-            lblDatosR.AutoSize = true;
-            lblDatosR.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            lblDatosR.Location = new Point(162, 22);
-            lblDatosR.Name = "lblDatosR";
-            lblDatosR.Size = new Size(136, 20);
-            lblDatosR.TabIndex = 8;
-            lblDatosR.Text = "Datos reservación:";
+            lblSalida.AutoSize = true;
+            lblSalida.Location = new Point(123, 155);
+            lblSalida.Name = "lblSalida";
+            lblSalida.Size = new Size(38, 15);
+            lblSalida.TabIndex = 39;
+            lblSalida.Text = "label4";
             // 
-            // txtSalida
+            // lblEntrada
             // 
-            txtSalida.BackColor = Color.White;
-            txtSalida.BorderStyle = BorderStyle.FixedSingle;
-            txtSalida.Location = new Point(41, 255);
-            txtSalida.Name = "txtSalida";
-            txtSalida.ReadOnly = true;
-            txtSalida.Size = new Size(385, 23);
-            txtSalida.TabIndex = 7;
+            lblEntrada.AutoSize = true;
+            lblEntrada.Location = new Point(135, 119);
+            lblEntrada.Name = "lblEntrada";
+            lblEntrada.Size = new Size(38, 15);
+            lblEntrada.TabIndex = 38;
+            lblEntrada.Text = "label3";
+            // 
+            // lblCliente
+            // 
+            lblCliente.AutoSize = true;
+            lblCliente.Location = new Point(93, 85);
+            lblCliente.Name = "lblCliente";
+            lblCliente.Size = new Size(38, 15);
+            lblCliente.TabIndex = 37;
+            lblCliente.Text = "label2";
+            // 
+            // lblHab
+            // 
+            lblHab.AutoSize = true;
+            lblHab.Location = new Point(115, 53);
+            lblHab.Name = "lblHab";
+            lblHab.Size = new Size(38, 15);
+            lblHab.TabIndex = 36;
+            lblHab.Text = "label1";
             // 
             // label13
             // 
             label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label13.Location = new Point(41, 234);
+            label13.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label13.Location = new Point(33, 153);
             label13.Name = "label13";
-            label13.Size = new Size(85, 19);
+            label13.Size = new Size(84, 17);
             label13.TabIndex = 6;
             label13.Text = "Fecha salida:";
-            // 
-            // txtEntrada
-            // 
-            txtEntrada.BackColor = Color.White;
-            txtEntrada.BorderStyle = BorderStyle.FixedSingle;
-            txtEntrada.Location = new Point(41, 198);
-            txtEntrada.Name = "txtEntrada";
-            txtEntrada.ReadOnly = true;
-            txtEntrada.Size = new Size(385, 23);
-            txtEntrada.TabIndex = 5;
             // 
             // label12
             // 
             label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label12.Location = new Point(41, 177);
+            label12.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label12.Location = new Point(33, 117);
             label12.Name = "label12";
-            label12.Size = new Size(98, 19);
+            label12.Size = new Size(96, 17);
             label12.TabIndex = 4;
             label12.Text = "Fecha entrada:";
-            // 
-            // txtCliente
-            // 
-            txtCliente.BackColor = Color.White;
-            txtCliente.BorderStyle = BorderStyle.FixedSingle;
-            txtCliente.Location = new Point(41, 141);
-            txtCliente.Name = "txtCliente";
-            txtCliente.ReadOnly = true;
-            txtCliente.Size = new Size(385, 23);
-            txtCliente.TabIndex = 3;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label10.Location = new Point(41, 120);
+            label10.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label10.Location = new Point(33, 83);
             label10.Name = "label10";
-            label10.Size = new Size(54, 19);
+            label10.Size = new Size(54, 17);
             label10.TabIndex = 2;
             label10.Text = "Cliente:";
-            // 
-            // txtHab
-            // 
-            txtHab.BackColor = Color.White;
-            txtHab.BorderStyle = BorderStyle.FixedSingle;
-            txtHab.Location = new Point(41, 84);
-            txtHab.Name = "txtHab";
-            txtHab.ReadOnly = true;
-            txtHab.Size = new Size(385, 23);
-            txtHab.TabIndex = 1;
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label9.Location = new Point(41, 63);
+            label9.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label9.Location = new Point(33, 51);
             label9.Name = "label9";
-            label9.Size = new Size(77, 19);
+            label9.Size = new Size(76, 17);
             label9.TabIndex = 0;
             label9.Text = "Habitación:";
             // 
@@ -172,16 +183,18 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(475, 318);
+            ClientSize = new Size(426, 196);
             Controls.Add(panel3);
             FormBorderStyle = FormBorderStyle.None;
             Name = "DatosReserva";
-            Opacity = 0.9D;
+            Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "DatosReserva";
             Load += DatosReserva_Load;
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -189,14 +202,15 @@
 
         private Panel panel3;
         private Label lblDatosR;
-        public TextBox txtSalida;
         private Label label13;
-        public TextBox txtEntrada;
         private Label label12;
-        public TextBox txtCliente;
         private Label label10;
-        public TextBox txtHab;
         private Label label9;
         private Button btnC;
+        private Label lblSalida;
+        private Label lblEntrada;
+        private Label lblCliente;
+        private Label lblHab;
+        private Panel panel1;
     }
 }

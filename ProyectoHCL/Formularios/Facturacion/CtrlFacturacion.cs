@@ -91,7 +91,7 @@ namespace ProyectoHCL.Formularios
 
             foreach (var obj in LsObj)
             {
-                switch (obj.IdPermiso)   /* realiza las respectivas validaciones de permisos */     
+                switch (obj.IdPermiso)   /* realiza las respectivas validaciones de permisos */
                 {
                     case 2:
                         if (obj.ObjetoN == "FACTURACION" && !obj.Permitido) //Validar pantalla y el permiso
@@ -105,12 +105,6 @@ namespace ProyectoHCL.Formularios
                             dgvFacturas.Columns["EDITAR"].Visible = false; //Ocultar columna del botón para editar en datagrid
                         }
                         break;
-                    case 4:
-                        if (obj.ObjetoN == "FACTURACION" && !obj.Permitido)
-                        {
-                            dgvFacturas.Columns["ELIMINAR"].Visible = false; //Ocultar columna del botón para eliminar en datagrid
-                        }
-                        break;
                 }
             }
         }
@@ -122,7 +116,7 @@ namespace ProyectoHCL.Formularios
             ds = user.PaginacionFacturas();
             dgvFacturas.DataSource = ds.Tables[1];
 
-            int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;   /* declaracion de variable y conversion de valores  */   
+            int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;   /* declaracion de variable y conversion de valores  */
 
             if (Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) % numFilas > 0) cantidad++; /* condicional IF */
 
@@ -199,7 +193,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnNuevo_Click_1(object sender, EventArgs e)   
+        private void btnNuevo_Click_1(object sender, EventArgs e)
         {
             Form formulario = new Formularios.NuevaFact();
             formulario.ShowDialog();
@@ -236,9 +230,9 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        public static class info    
+        public static class info
         {
-            public static string factura;  
+            public static string factura;
             public static string fecha;
             public static string ingreso;
             public static string salida;

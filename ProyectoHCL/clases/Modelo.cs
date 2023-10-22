@@ -62,10 +62,8 @@ namespace ProyectoHCL.clases
 {
     public class Modelo
     {
-
-        public bool existeUsuario(string usuario) //función para validar si existe el usuario
+        public bool existeUsuario(string usuario)
         {
-            MySqlDataReader reader;
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
 
             if (conectar.State == ConnectionState.Closed)
@@ -73,23 +71,72 @@ namespace ProyectoHCL.clases
                 conectar.Open();
             }
 
-            String sql = "SELECT ID_USUARIO FROM TBL_USUARIO WHERE USUARIO LIKE @USUARIO";
-            MySqlCommand comando = new MySqlCommand(sql, conectar);
-            comando.Parameters.AddWithValue("@USUARIO", usuario);
-            reader = comando.ExecuteReader();
-
-            if (reader.HasRows)
+            using (conectar)
             {
+                string consultaUsuario = "SELECT COUNT(*) FROM TBL_USUARIO WHERE USUARIO = @usuario";
+                using (MySqlCommand cmdUsuario = new MySqlCommand(consultaUsuario, conectar))
+                {
+                    cmdUsuario.Parameters.AddWithValue("@usuario", usuario);
+                    int countUsuario = Convert.ToInt32(cmdUsuario.ExecuteScalar());
+                    if (countUsuario > 0)
+                    {
+                        // El usuario ya está en uso
+                        return true;
+                    }
+                }
 
-                return true;
-
-            }
-            else
-            {
-                return false;
+                return false; 
             }
         }
 
+        public bool existeNombre(string nombreUsuario) //función para validar si existe el usuario
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            if (conectar.State == ConnectionState.Closed)
+            {
+                conectar.Open();
+            }
+
+            // Verificar si el nombre de usuario ya existe
+            string consultaNombre = "SELECT COUNT(*) FROM TBL_USUARIO WHERE NOMBRE_USUARIO = @nombreUsuario";
+            using (MySqlCommand cmdNombre = new MySqlCommand(consultaNombre, conectar))
+            {
+                cmdNombre.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+                int countNombre = Convert.ToInt32(cmdNombre.ExecuteScalar());
+                if (countNombre > 0)
+                {
+                    // El nombre de usuario ya está en uso
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool existeCorreo(string correo) //función para validar si existe el usuario
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            if (conectar.State == ConnectionState.Closed)
+            {
+                conectar.Open();
+            }
+            // Verificar si el correo electrónico ya existe
+            string consultaCorreo = "SELECT COUNT(*) FROM TBL_USUARIO WHERE EMAIL = @correo";
+            using (MySqlCommand cmdCorreo = new MySqlCommand(consultaCorreo, conectar))
+            {
+                cmdCorreo.Parameters.AddWithValue("@correo", correo);
+                int countCorreo = Convert.ToInt32(cmdCorreo.ExecuteScalar());
+                if (countCorreo > 0)
+                {
+                    // El correo electrónico ya está en uso
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         public bool existeObjeto(string objeto) //función para validar si existe el objeto
         {
