@@ -45,6 +45,7 @@
             // 
             // panel2
             // 
+            panel2.AutoSize = true;
             panel2.BackColor = Color.SteelBlue;
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(pictureBox5);
@@ -168,6 +169,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             BackColor = Color.Gainsboro;
             ClientSize = new Size(1067, 644);
             Controls.Add(label1);
