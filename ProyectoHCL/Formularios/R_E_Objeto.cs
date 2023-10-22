@@ -75,6 +75,25 @@ namespace ProyectoHCL.Formularios
 
         MsgB msgB = new MsgB();
 
+        public int IdObjeto() //obtener el id del objeto
+        {
+            MySqlCommand comando = new MySqlCommand();
+            comando.Connection = BaseDatosHCL.ObtenerConexion();
+            comando.CommandText = ("SELECT ID_OBJETO FROM TBL_OBJETO WHERE OBJETO = '"
+                + txtObj.Text + "';");
+
+            MySqlDataReader leer = comando.ExecuteReader();
+
+            if (leer.Read())
+            {
+                return (int)leer["ID_OBJETO"];
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         public void limpiarCampos() //limpiar los campos del formulario
         {
             txtObj.Clear();
@@ -128,9 +147,16 @@ namespace ProyectoHCL.Formularios
 
         private void txtObj_Leave(object sender, EventArgs e) //validar campo vacío
         {
+            string texto = txtObj.Text;
+
             if (ValidarTxt.txtVacio(txtObj))
             {
                 errorT.SetError(txtObj, "Introduzca un nombre");
+            }
+            else if (texto.Length < 5)
+            {
+                errorT.SetError(txtObj, "El nombre debe contener al menos 5 letras");
+                txtObj.Focus();
             }
             else
             {
@@ -167,6 +193,16 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "El objeto ya existe"); //validar si ya existe el registro
                     DialogResult dR = m.ShowDialog();
                 }
+                else if (txtObj.TextLength < 5) //validar que el objeto no tenga menos de 5 caracteres
+                {
+                    MsgB m = new MsgB("advertencia", "El nombre debe contener al menos 5 letras");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (rTxtDesc.TextLength < 10) //validar que la descripción no tenga menos de 10 caracteres
+                {
+                    MsgB m = new MsgB("advertencia", "La descripción debe contener al menos 10 letras");
+                    DialogResult dR = m.ShowDialog();
+                }
                 else
                 {
                     try
@@ -201,10 +237,27 @@ namespace ProyectoHCL.Formularios
             else if (lblTitulo.Text == "Editar Objeto")
             {
                 Control control = new Control();
+                string nuevoNombre = txtObj.Text;
+                int idRegistroActual = IdObjeto(); 
 
                 if (txtObj.Text.Trim() == "" || cmbEstado.Text.Trim() == "" || rTxtDesc.Text.Trim() == "") //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (txtObj.TextLength < 5) //validar que el objeto no tenga menos de 5 caracteres
+                {
+                    MsgB m = new MsgB("advertencia", "El nombre debe contener al menos 5 letras");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (rTxtDesc.TextLength < 10) //validar que la descripción no tenga menos de 10 caracteres
+                {
+                    MsgB m = new MsgB("advertencia", "La descripción debe contener al menos 10 letras");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (NombreExiste(nuevoNombre, idRegistroActual))
+                {
+                    MsgB m = new MsgB("advertencia", "El objeto ya existe, ingrese otro nombre");
                     DialogResult dR = m.ShowDialog();
                 }
                 else
@@ -234,9 +287,16 @@ namespace ProyectoHCL.Formularios
 
         private void rTxtDesc_Leave_1(object sender, EventArgs e)  //validar campo vacío
         {
+            string texto = rTxtDesc.Text;
+
             if (ValidarTxt.txtVacio(rTxtDesc))
             {
                 errorT.SetError(rTxtDesc, "Introduzca una descripción");
+            }
+            else if (texto.Length < 10)
+            {
+                errorT.SetError(rTxtDesc, "La descripción debe contener al menos 10 letras");
+                rTxtDesc.Focus();
             }
             else
             {
@@ -244,19 +304,28 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtObj_TextChanged(object sender, EventArgs e)
+        private void txtObj_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Cancela la entrada de números
+            }
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
+        private bool NombreExiste(string nuevoNombre, int idRegistro)
         {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
 
-        }
+            string query = "SELECT COUNT(*) FROM TBL_OBJETO WHERE OBJETO = @NuevoNombre AND ID_OBJETO != @IDRegistro";
+            using (MySqlCommand cmd = new MySqlCommand(query, conectar))
+            {
+                cmd.Parameters.AddWithValue("@NuevoNombre", nuevoNombre);
+                cmd.Parameters.AddWithValue("@IDRegistro", idRegistro);
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
 
-        private void rTxtDesc_TextChanged(object sender, EventArgs e)
-        {
-
+                return count > 0;
+            }
+            
         }
     }
 }

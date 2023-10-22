@@ -54,8 +54,6 @@ namespace ProyectoHCL.Formularios
                         if (obj.ObjetoN == "TIPO HABITACION" && !obj.Permitido)
                         {
                             btnNuevo.Visible = false;
-                            label4.Location = new Point(28, 24);
-                            txtBuscar.Location = new Point(84, 22);
                         }
                         break;
                     case 3:

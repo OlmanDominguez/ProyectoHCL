@@ -114,6 +114,15 @@ namespace ProyectoHCL.Formularios
 
         }
 
+        private bool ContrasenaRobusta(string password)
+        {
+            return password.Length >= 5 &&
+                   password.Any(char.IsUpper) &&
+                   password.Any(char.IsLower) &&
+                   password.Any(char.IsDigit) &&
+                   password.Any(c => !char.IsLetterOrDigit(c));
+        }
+
         public string Pass() //obtener la contraseña del usuario
         {
             MySqlCommand comando = new MySqlCommand();
@@ -201,15 +210,11 @@ namespace ProyectoHCL.Formularios
         private void btnCerrar_Click(object sender, EventArgs e) //botón para cerrar
         {
             this.Close();
-            limpiarCampos();
-            limpiarError();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e) //botón para cancelar
         {
             this.Close();
-            limpiarCampos();
-            limpiarError();
         }
 
         //coordenadas para arrastrar formulario
@@ -245,8 +250,6 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-
-
         private void btnGuardar_Click(object sender, EventArgs e) //botón para guardar un nuevo registro o una modificación
         {
             if (lblTitulo.Text == "Registrar Usuario")
@@ -259,9 +262,19 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (modelo.existeUsuario(txtUsuario.Text)) //validar si ya existe el registro
+                else if (modelo.existeUsuario(txtUsuario.Text)) //validar si ya existe el usuario
                 {
                     MsgB m = new MsgB("advertencia", "El usuario ya existe");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (modelo.existeNombre(txtNombre.Text)) //validar si ya existe el nombre de usuario
+                {
+                    MsgB m = new MsgB("advertencia", "El nombre de usuario ya existe");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (modelo.existeCorreo(txtCorreo.Text)) //validar si ya existe el correo
+                {
+                    MsgB m = new MsgB("advertencia", "El correo proporcionado ya está registrado");
                     DialogResult dR = m.ShowDialog();
                 }
                 else if (DateTime.Today > dtpVencimiento.Value) //validar la fecha de vencimiento
@@ -277,6 +290,22 @@ namespace ProyectoHCL.Formularios
                 else if (txtContraseña.TextLength < 5) //validar que la contraseña no tenga menos de 5 caracteres
                 {
                     MsgB m = new MsgB("advertencia", "La contraseña es muy corta");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (!ContrasenaRobusta(txtContraseña.Text))
+                {
+                    MsgB m = new MsgB("advertencia", "La contraseña debe contener al menos una letra minúscula, una mayúscula, " +
+                    "un número y un caracter especial");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (txtNombre.TextLength < 5) //validar que el nombre no tenga menos de 5 caracteres
+                {
+                    MsgB m = new MsgB("advertencia", "El nombre debe contener al menos 5 letras");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (txtUsuario.TextLength < 5) //validar que el usuario no tenga menos de 5 caracteres
+                {
+                    MsgB m = new MsgB("advertencia", "El usuario debe contener al menos 5 letras");
                     DialogResult dR = m.ShowDialog();
                 }
                 else
@@ -353,6 +382,22 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "La contraseña es muy corta");
                     DialogResult dR = m.ShowDialog();
                 }
+                else if (!ContrasenaRobusta(txtContraseña.Text) && txtContraseña.Text != "")
+                {
+                    MsgB m = new MsgB("advertencia", "La contraseña debe contener al menos una letra minúscula, una mayúscula, " +
+                    "un número y un caracter especial");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (txtNombre.TextLength < 5) //validar que el nombre no tenga menos de 5 caracteres
+                {
+                    MsgB m = new MsgB("advertencia", "El nombre debe contener al menos 5 letras");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (txtUsuario.TextLength < 5) //validar que el usuario no tenga menos de 5 caracteres
+                {
+                    MsgB m = new MsgB("advertencia", "El usuario debe contener al menos 5 letras");
+                    DialogResult dR = m.ShowDialog();
+                }
                 else
                 {
                     try
@@ -363,10 +408,10 @@ namespace ProyectoHCL.Formularios
                             control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
                             Pass(), dtpVencimiento.Text, txtCorreo.Text);
                         }
-                        else{
-
-                           control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
-                           txtContraseña.Text, dtpVencimiento.Text, txtCorreo.Text);
+                        else
+                        {
+                            control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
+                            txtContraseña.Text, dtpVencimiento.Text, txtCorreo.Text);
                         }
                         string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
@@ -407,7 +452,6 @@ namespace ProyectoHCL.Formularios
             else
             {
                 errorT.Clear();
-
             }
         }
 
@@ -426,9 +470,16 @@ namespace ProyectoHCL.Formularios
 
         private void txtUsuario_Leave(object sender, EventArgs e) //validar campo vacío
         {
+            string texto = txtUsuario.Text;
+
             if (ValidarTxt.txtVacio(txtUsuario))
             {
                 errorT.SetError(txtUsuario, "Introduzca un usuario");
+            }
+            else if (texto.Length < 5)
+            {
+                errorT.SetError(txtUsuario, "El usuario debe contener al menos 5 letras");
+                txtUsuario.Focus();
             }
             else
             {
@@ -438,9 +489,16 @@ namespace ProyectoHCL.Formularios
 
         private void txtNombre_Leave(object sender, EventArgs e) //validar campo vacío
         {
+            string texto = txtNombre.Text;
+
             if (ValidarTxt.txtVacio(txtNombre))
             {
                 errorT.SetError(txtNombre, "Introduzca un nombre");
+            }
+            else if (texto.Length < 5)
+            {
+                errorT.SetError(txtNombre, "El nombre debe contener al menos 5 letras");
+                txtNombre.Focus();
             }
             else
             {
@@ -509,6 +567,33 @@ namespace ProyectoHCL.Formularios
                 MsgB m = new MsgB("advertencia", "No se permiten espacios");
                 DialogResult dR = m.ShowDialog();
             }
+            else if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtContraseña_Validating(object sender, CancelEventArgs e)
+        {
+            string contra = txtContraseña.Text;
+            bool valida = ContrasenaRobusta(contra);
+
+            if (!valida)
+            {
+                errorT.SetError(txtContraseña, "La contraseña debe contener al menos una letra minúscula, una mayúscula, " +
+                    "un número y un caracter especial");
+                txtContraseña.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+            }
+        }
+
+        private void R_E_Usuario_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            limpiarCampos();
+            limpiarError();
         }
     }
 }

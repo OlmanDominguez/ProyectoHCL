@@ -33,7 +33,6 @@
             panel2 = new Panel();
             btnCerrar = new Button();
             btnMin = new Button();
-            pictureBox5 = new PictureBox();
             lblTitulo = new Label();
             panel3 = new Panel();
             label14 = new Label();
@@ -65,7 +64,6 @@
             label2 = new Label();
             errorT = new ErrorProvider(components);
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MostrarBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)OcultarBox4).BeginInit();
@@ -77,7 +75,6 @@
             panel2.BackColor = Color.SteelBlue;
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(btnMin);
-            panel2.Controls.Add(pictureBox5);
             panel2.Controls.Add(lblTitulo);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
@@ -116,26 +113,15 @@
             btnMin.UseVisualStyleBackColor = false;
             btnMin.Click += btnMin_Click;
             // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(12, 12);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(50, 48);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 19;
-            pictureBox5.TabStop = false;
-            // 
             // lblTitulo
             // 
-            lblTitulo.AutoSize = true;
+            lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.BackColor = Color.Transparent;
             lblTitulo.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
             lblTitulo.ForeColor = Color.White;
-            lblTitulo.Location = new Point(345, 21);
+            lblTitulo.Location = new Point(258, 21);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(38, 30);
+            lblTitulo.Size = new Size(361, 30);
             lblTitulo.TabIndex = 9;
             lblTitulo.Text = "lbl";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -178,6 +164,7 @@
             // 
             // label14
             // 
+            label14.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label14.ForeColor = Color.Red;
@@ -189,6 +176,7 @@
             // 
             // label13
             // 
+            label13.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label13.AutoSize = true;
             label13.BackColor = Color.Transparent;
             label13.FlatStyle = FlatStyle.Flat;
@@ -202,6 +190,7 @@
             // 
             // label11
             // 
+            label11.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = Color.Red;
@@ -213,6 +202,7 @@
             // 
             // label10
             // 
+            label10.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label10.ForeColor = Color.Red;
@@ -224,6 +214,7 @@
             // 
             // label9
             // 
+            label9.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label9.ForeColor = Color.Red;
@@ -235,6 +226,7 @@
             // 
             // label4
             // 
+            label4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.Red;
@@ -246,10 +238,11 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.Red;
-            label1.Location = new Point(162, 26);
+            label1.Location = new Point(162, 23);
             label1.Name = "label1";
             label1.Size = new Size(23, 30);
             label1.TabIndex = 28;
@@ -285,7 +278,7 @@
             // 
             // dtpVencimiento
             // 
-            dtpVencimiento.Anchor = AnchorStyles.Top;
+            dtpVencimiento.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dtpVencimiento.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             dtpVencimiento.Format = DateTimePickerFormat.Short;
             dtpVencimiento.Location = new Point(463, 205);
@@ -296,7 +289,7 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Anchor = AnchorStyles.Top;
+            btnCancelar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnCancelar.BackColor = Color.Red;
             btnCancelar.FlatAppearance.BorderSize = 0;
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.Firebrick;
@@ -313,7 +306,7 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Anchor = AnchorStyles.Top;
+            btnGuardar.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             btnGuardar.BackColor = Color.Green;
             btnGuardar.FlatAppearance.BorderSize = 0;
             btnGuardar.FlatAppearance.MouseOverBackColor = Color.DarkGreen;
@@ -330,6 +323,7 @@
             // 
             // txtFechaC
             // 
+            txtFechaC.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtFechaC.BackColor = Color.White;
             txtFechaC.BorderStyle = BorderStyle.FixedSingle;
             txtFechaC.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
@@ -343,6 +337,7 @@
             // 
             // cmbEstado
             // 
+            cmbEstado.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             cmbEstado.BackColor = Color.White;
             cmbEstado.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbEstado.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
@@ -355,6 +350,7 @@
             // 
             // cmbRol
             // 
+            cmbRol.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             cmbRol.BackColor = Color.White;
             cmbRol.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbRol.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
@@ -367,6 +363,7 @@
             // 
             // txtCorreo
             // 
+            txtCorreo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtCorreo.BackColor = Color.White;
             txtCorreo.BorderStyle = BorderStyle.FixedSingle;
             txtCorreo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
@@ -379,6 +376,7 @@
             // 
             // txtContraseña
             // 
+            txtContraseña.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtContraseña.BackColor = Color.White;
             txtContraseña.BorderStyle = BorderStyle.FixedSingle;
             txtContraseña.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
@@ -390,9 +388,11 @@
             txtContraseña.TabIndex = 11;
             txtContraseña.KeyPress += txtContraseña_KeyPress;
             txtContraseña.Leave += txtContraseña_Leave;
+            txtContraseña.Validating += txtContraseña_Validating;
             // 
             // txtNombre
             // 
+            txtNombre.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtNombre.BackColor = Color.White;
             txtNombre.BorderStyle = BorderStyle.FixedSingle;
             txtNombre.CharacterCasing = CharacterCasing.Upper;
@@ -407,6 +407,7 @@
             // 
             // txtUsuario
             // 
+            txtUsuario.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtUsuario.BackColor = Color.White;
             txtUsuario.BorderStyle = BorderStyle.FixedSingle;
             txtUsuario.CharacterCasing = CharacterCasing.Upper;
@@ -421,6 +422,7 @@
             // 
             // lblEstado
             // 
+            lblEstado.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblEstado.AutoSize = true;
             lblEstado.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblEstado.ForeColor = Color.Black;
@@ -432,6 +434,7 @@
             // 
             // label8
             // 
+            label8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label8.AutoSize = true;
             label8.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = Color.Black;
@@ -443,6 +446,7 @@
             // 
             // label7
             // 
+            label7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label7.AutoSize = true;
             label7.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.Black;
@@ -454,6 +458,7 @@
             // 
             // label6
             // 
+            label6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label6.AutoSize = true;
             label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.Black;
@@ -465,6 +470,7 @@
             // 
             // label5
             // 
+            label5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label5.AutoSize = true;
             label5.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.Black;
@@ -476,6 +482,7 @@
             // 
             // lblContraseña
             // 
+            lblContraseña.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblContraseña.AutoSize = true;
             lblContraseña.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblContraseña.ForeColor = Color.Black;
@@ -487,6 +494,7 @@
             // 
             // label3
             // 
+            label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.Black;
@@ -498,14 +506,15 @@
             // 
             // label2
             // 
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
             label2.Location = new Point(98, 34);
             label2.Name = "label2";
-            label2.Size = new Size(69, 19);
+            label2.Size = new Size(73, 19);
             label2.TabIndex = 1;
-            label2.Text = "Usuario:";
+            label2.Text = "Usuario: ";
             // 
             // errorT
             // 
@@ -515,6 +524,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             ClientSize = new Size(886, 491);
             Controls.Add(panel3);
             Controls.Add(panel2);
@@ -524,9 +534,8 @@
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "R_E_Usuario";
+            FormClosing += R_E_Usuario_FormClosing;
             panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)MostrarBox3).EndInit();
@@ -540,7 +549,6 @@
         private Panel panel2;
         private Button btnCerrar;
         private Button btnMin;
-        private PictureBox pictureBox5;
         private Panel panel3;
         private Button btnCancelar;
         private Button btnGuardar;

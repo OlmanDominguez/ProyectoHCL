@@ -72,7 +72,7 @@ namespace ProyectoHCL.Formularios
         {
             InitializeComponent();
             cargarRoles();
-            dgvRolPermiso.CellValueChanged += dgvRolPermiso_CellValueChanged; 
+            dgvRolPermiso.CellValueChanged += dgvRolPermiso_CellValueChanged;
         }
 
         RolUsuario rolUs = new RolUsuario();
@@ -175,6 +175,8 @@ namespace ProyectoHCL.Formularios
         public void limpiarCampos() //limpiar las casillas marcadas en el datagrid
         {
             cmbRol.SelectedIndex = -1;
+            rBtnDeshabilitar.Checked = false;
+            rbtnHabilitar.Checked = false;
 
             foreach (DataGridViewRow row in dgvRolPermiso.Rows) //recorrer las filas del datagrid
             {
@@ -246,17 +248,14 @@ namespace ProyectoHCL.Formularios
 
         private void RolesPermisos_Load(object sender, EventArgs e)
         {
-            ListarObjetos(); 
+            ListarObjetos();
             cmbRol.SelectedIndex = -1;
-            CargarDG(); 
+            CargarDG();
             Permisos();
-            //pictureBox1.Image = Image.FromFile(@"C:\Users\jmont\OneDrive\Documentos\HM\reloj-de-arena.gif");
-            //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void GuardarPermisoRol() //función para guardar los permisos
         {
-            panel6.Visible = true; //mostrar panel con mensaje de espera
 
             foreach (DataGridViewRow row in dgvRolPermiso.Rows)//Recorrer el datagridview para obtener los valores de las casillas y asignar los permisos
             {
@@ -315,8 +314,6 @@ namespace ProyectoHCL.Formularios
                     cDatos.GuardarPermiso(permiso);
                 }
             }
-
-            panel6.Visible = false; //ocultar panel con mensaje de espera
         }
 
         private void btnGuardar_Click(object sender, EventArgs e) //botón para guardar un nuevo registro o una modificación
@@ -330,17 +327,13 @@ namespace ProyectoHCL.Formularios
                 }
                 else
                 {
-                    btnGuardar.Enabled = false;
-                    btnCancelar.Enabled = false;
                     GuardarPermisoRol();
                     MsgB Mbox = new MsgB("informacion", "Permisos registrados");
                     DialogResult DR = Mbox.ShowDialog();
                     limpiarCampos();
-                    btnGuardar.Enabled = true;
-                    btnCancelar.Enabled = true;
                 }
             }
-            else if (lblTitulo.Text == "Editar Permisos") 
+            else if (lblTitulo.Text == "Editar Permisos")
             {
                 if (cmbRol.Text == "") //validar campo vacío
                 {
@@ -349,14 +342,10 @@ namespace ProyectoHCL.Formularios
                 }
                 else
                 {
-                    btnGuardar.Enabled = false;
-                    btnCancelar.Enabled = false;
                     ActualizarPermisoRol();
                     MsgB Mbox = new MsgB("informacion", "Permisos actualizados");
                     DialogResult DR = Mbox.ShowDialog();
                     limpiarCampos();
-                    btnGuardar.Enabled = true;
-                    btnCancelar.Enabled = true;
                 }
             }
 
@@ -372,6 +361,7 @@ namespace ProyectoHCL.Formularios
             lblTitulo.Text = "Editar Permisos";
             btnEditar.Visible = false;
             btnNuevo.Visible = true;
+            limpiarCampos();
         }
 
         private void cargarPermisos() //Marcar los combobox del datagridview al obtener los permisos del rol a editar
@@ -434,9 +424,6 @@ namespace ProyectoHCL.Formularios
 
         private void ActualizarPermisoRol() //función para actualizar permisos 
         {
-            label1.Text = "Actualizando permisos";
-            panel6.Visible = true;
-
             foreach (DataGridViewRow row in dgvRolPermiso.Rows) //Recorrer el datagridview para obtener los valores de las casillas y asignar los permisos
             {
                 permiso.IdRol = cmbRol.Text;
@@ -494,8 +481,6 @@ namespace ProyectoHCL.Formularios
                     cDatos.ActualizarPermiso(permiso);
                 }
             }
-
-            panel6.Visible = false;
         }
 
         private void cmbRol_SelectedValueChanged(object sender, EventArgs e) //Validar los permisos por rol al cambiar el valor del combobox
@@ -519,11 +504,12 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnNuevo_Click(object sender, EventArgs e) 
+        private void btnNuevo_Click(object sender, EventArgs e)
         {
             lblTitulo.Text = "Registrar Permisos";
             btnEditar.Visible = true;
             btnNuevo.Visible = false;
+            limpiarCampos();
         }
 
         public int ExisteRol() //Validar que existe el rol obteniendo el Id de rol según el rol en el combobox
@@ -555,6 +541,62 @@ namespace ProyectoHCL.Formularios
                 if (check)
                 {
                     dgvRolPermiso.Rows[e.RowIndex].Cells[2].Value = true;
+                }
+            }
+        }
+
+        private void rbtnHabilitar_CheckedChanged(object sender, EventArgs e)
+        {
+            rBtnDeshabilitar.Checked = false;
+
+            if (rbtnHabilitar.Checked)
+            {
+                foreach (DataGridViewRow row in dgvRolPermiso.Rows) //recorrer las filas del datagrid
+                {
+                    if (!Convert.ToBoolean(row.Cells["VER"].Value))
+                    {
+                        row.Cells["VER"].Value = true;
+                    }
+                    if (!Convert.ToBoolean(row.Cells["CREAR"].Value))
+                    {
+                        row.Cells["CREAR"].Value = true;
+                    }
+                    if (!Convert.ToBoolean(row.Cells["EDITAR"].Value))
+                    {
+                        row.Cells["EDITAR"].Value = true;
+                    }
+                    if (!Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                    {
+                        row.Cells["ELIMINAR"].Value = true;
+                    }
+                }
+            }
+        }
+
+        private void rBtnDeshabilitar_CheckedChanged(object sender, EventArgs e)
+        {
+            rbtnHabilitar.Checked = false;
+
+            if (rBtnDeshabilitar.Checked)
+            {
+                foreach (DataGridViewRow row in dgvRolPermiso.Rows) //recorrer las filas del datagrid
+                {
+                    if (Convert.ToBoolean(row.Cells["VER"].Value))
+                    {
+                        row.Cells["VER"].Value = false;
+                    }
+                    if (Convert.ToBoolean(row.Cells["CREAR"].Value))
+                    {
+                        row.Cells["CREAR"].Value = false;
+                    }
+                    if (Convert.ToBoolean(row.Cells["EDITAR"].Value))
+                    {
+                        row.Cells["EDITAR"].Value = false;
+                    }
+                    if (Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                    {
+                        row.Cells["ELIMINAR"].Value = false;
+                    }
                 }
             }
         }

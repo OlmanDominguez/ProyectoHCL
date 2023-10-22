@@ -45,7 +45,7 @@ namespace ProyectoHCL.clases
 
             try
             {
-                string sql = "DELETE FROM TBL_SOLICITUDRESERVA WHERE ID_SOLICITUDRESERVA = @ID_SOLICITUDRESERVA;"; //sentencia sql para eliminar el usuario
+                string sql = "CALL EliminarRegistrosConReferencia(@ID_SOLICITUDRESERVA);"; //sentencia sql para eliminar el usuario
 
                 conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                 conn.Open();
