@@ -38,15 +38,18 @@
             Generar_Backup = new Button();
             label6 = new Label();
             saveFileDialog1 = new SaveFileDialog();
+            pictureBox1 = new PictureBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel2
             // 
             panel2.AutoSize = true;
             panel2.BackColor = Color.SteelBlue;
+            panel2.Controls.Add(pictureBox1);
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(pictureBox5);
             panel2.Controls.Add(label11);
@@ -54,13 +57,12 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1672, 73);
+            panel2.Size = new Size(1672, 72);
             panel2.TabIndex = 24;
             // 
             // btnCerrar
             // 
             btnCerrar.BackColor = Color.Transparent;
-            btnCerrar.BackgroundImage = (Image)resources.GetObject("btnCerrar.BackgroundImage");
             btnCerrar.BackgroundImageLayout = ImageLayout.Stretch;
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
@@ -75,8 +77,7 @@
             // pictureBox5
             // 
             pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(3, 1);
+            pictureBox5.Location = new Point(0, 0);
             pictureBox5.Name = "pictureBox5";
             pictureBox5.Size = new Size(73, 69);
             pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -99,7 +100,6 @@
             // btnMin
             // 
             btnMin.BackColor = Color.Transparent;
-            btnMin.BackgroundImage = (Image)resources.GetObject("btnMin.BackgroundImage");
             btnMin.BackgroundImageLayout = ImageLayout.Stretch;
             btnMin.FlatAppearance.BorderSize = 0;
             btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
@@ -118,9 +118,9 @@
             panel3.Controls.Add(Generar_Backup);
             panel3.Controls.Add(label6);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(0, 73);
+            panel3.Location = new Point(0, 72);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1672, 595);
+            panel3.Size = new Size(1672, 596);
             panel3.TabIndex = 26;
             // 
             // Generar_Backup
@@ -133,7 +133,7 @@
             Generar_Backup.FlatStyle = FlatStyle.Flat;
             Generar_Backup.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             Generar_Backup.ForeColor = Color.White;
-            Generar_Backup.Location = new Point(789, 242);
+            Generar_Backup.Location = new Point(789, 243);
             Generar_Backup.Name = "Generar_Backup";
             Generar_Backup.Size = new Size(203, 47);
             Generar_Backup.TabIndex = 21;
@@ -147,12 +147,23 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(673, 187);
+            label6.Location = new Point(673, 188);
             label6.Name = "label6";
             label6.Size = new Size(431, 32);
             label6.TabIndex = 5;
             label6.Text = "Generar la base de datos del sistema";
             label6.Click += label6_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(0, 1);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(69, 67);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 35;
+            pictureBox1.TabStop = false;
             // 
             // Backup
             // 
@@ -178,6 +189,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -193,5 +205,6 @@
         public Button Generar_Backup;
         private Label label6;
         private SaveFileDialog saveFileDialog1;
+        private PictureBox pictureBox1;
     }
 }
