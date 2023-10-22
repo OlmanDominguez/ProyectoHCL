@@ -57,7 +57,6 @@
             panel_logo = new Panel();
             pictureBox5 = new PictureBox();
             panel2 = new Panel();
-            pictureBox1 = new PictureBox();
             lbl_titulo = new Label();
             panelChildForm = new Panel();
             lbl_anuladas = new Label();
@@ -80,7 +79,6 @@
             panel_logo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelChildForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -147,7 +145,7 @@
             iconButton7.TextAlign = ContentAlignment.MiddleLeft;
             iconButton7.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton7.UseVisualStyleBackColor = true;
-            //iconButton7.Click += iconButton7_Click;
+            iconButton7.Click += iconButton7_Click;
             // 
             // iconButton5
             // 
@@ -669,7 +667,6 @@
             // panel2
             // 
             panel2.BackColor = Color.Transparent;
-            panel2.Controls.Add(pictureBox1);
             panel2.Controls.Add(lbl_titulo);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(351, 0);
@@ -677,17 +674,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1012, 117);
             panel2.TabIndex = 2;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(1400, 3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(59, 39);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 17;
-            pictureBox1.TabStop = false;
-            //pictureBox1.Click += pictureBox1_Click;
             // 
             // lbl_titulo
             // 
@@ -932,7 +918,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Dashboard";
             WindowState = FormWindowState.Maximized;
-            FormClosed += Dashboard_FormClosed;
+           // FormClosed += Dashboard_FormClosed;
             Load += Dashboard_Load;
             panel1.ResumeLayout(false);
             panelmanteSubMenu.ResumeLayout(false);
@@ -941,7 +927,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panelChildForm.ResumeLayout(false);
             panelChildForm.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
@@ -993,7 +978,6 @@
         private FontAwesome.Sharp.IconButton iconButton5;
         private FontAwesome.Sharp.IconButton iconButton4;
         private FontAwesome.Sharp.IconButton iconButton6;
-        private PictureBox pictureBox1;
         private FontAwesome.Sharp.IconButton iconButton7;
     }
 }
