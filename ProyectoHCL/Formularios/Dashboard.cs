@@ -229,7 +229,7 @@ namespace ProyectoHCL
         {
             Permisos();
             //panelChildForm.Visible = false;
-          
+
 
             try
             {
@@ -444,6 +444,11 @@ namespace ProyectoHCL
         {
             panelChildForm.Visible = true;
             openChildFormInPanel(new CalendarioReservas());
+        }
+
+        private void Dashboard_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -147,14 +147,14 @@ namespace ProyectoHCL.Formularios.Parametros
                 da.Fill(dt);
                 dgvParametros.DataSource = dt;
 
-               
+
 
             }
             catch (Exception)
             {
 
                 throw;
-                
+
             }
 
         }

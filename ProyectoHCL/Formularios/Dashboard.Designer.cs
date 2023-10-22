@@ -849,6 +849,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Dashboard";
             WindowState = FormWindowState.Maximized;
+            FormClosed += Dashboard_FormClosed;
             Load += Dashboard_Load;
             panel1.ResumeLayout(false);
             panelmanteSubMenu.ResumeLayout(false);

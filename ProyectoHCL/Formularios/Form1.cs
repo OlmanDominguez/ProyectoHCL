@@ -116,6 +116,7 @@ namespace ProyectoHCL
                             ContraseñaBox2.Text = "";
                             Form formulario = new Dashboard();
                             formulario.Show();
+                            this.Hide();
                         }
                         else if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text & clasecompartida.estado == 3)
                         {
