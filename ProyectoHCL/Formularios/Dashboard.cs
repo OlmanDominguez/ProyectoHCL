@@ -446,18 +446,9 @@ namespace ProyectoHCL
             openChildFormInPanel(new CalendarioReservas());
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)//
+        private void Dashboard_FormClosed(object sender, FormClosedEventArgs e)
         {
-            {
-                Application.Exit();
-            }
-        }
-
-        private void iconButton7_Click(object sender, EventArgs e)
-        {
-     
-                Application.Exit();
-
+            Application.Exit();
         }
     }
 }
