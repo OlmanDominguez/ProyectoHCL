@@ -56,7 +56,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.SteelBlue;
+            panel1.BackColor = Color.WhiteSmoke;
             panel1.Controls.Add(btnCerrar);
             panel1.Controls.Add(label11);
             panel1.Dock = DockStyle.Top;
@@ -84,9 +84,9 @@
             // 
             label11.AutoSize = true;
             label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.ForeColor = Color.White;
-            label11.Location = new Point(248, 9);
+            label11.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label11.ForeColor = Color.Black;
+            label11.Location = new Point(34, 7);
             label11.Name = "label11";
             label11.Size = new Size(318, 32);
             label11.TabIndex = 31;
@@ -94,6 +94,7 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.White;
             panel2.Controls.Add(label8);
             panel2.Controls.Add(cmbHabitacion);
             panel2.Controls.Add(panel46);
@@ -109,7 +110,8 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Symbol", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.Location = new Point(40, 21);
+            label8.ForeColor = Color.Black;
+            label8.Location = new Point(39, 15);
             label8.Name = "label8";
             label8.Size = new Size(185, 20);
             label8.TabIndex = 6;
@@ -118,7 +120,7 @@
             // cmbHabitacion
             // 
             cmbHabitacion.FormattingEnabled = true;
-            cmbHabitacion.Location = new Point(234, 22);
+            cmbHabitacion.Location = new Point(230, 15);
             cmbHabitacion.Name = "cmbHabitacion";
             cmbHabitacion.Size = new Size(105, 23);
             cmbHabitacion.TabIndex = 5;
@@ -130,7 +132,7 @@
             panel46.Controls.Add(LBLMES);
             panel46.Controls.Add(btnSig);
             panel46.Controls.Add(btnAnt);
-            panel46.Location = new Point(41, 67);
+            panel46.Location = new Point(40, 51);
             panel46.Name = "panel46";
             panel46.Size = new Size(715, 38);
             panel46.TabIndex = 4;
@@ -184,7 +186,7 @@
             panel38.Controls.Add(label3);
             panel38.Controls.Add(label2);
             panel38.Controls.Add(label1);
-            panel38.Location = new Point(41, 106);
+            panel38.Location = new Point(40, 90);
             panel38.Name = "panel38";
             panel38.Size = new Size(715, 35);
             panel38.TabIndex = 3;
@@ -269,7 +271,7 @@
             // ContenedorDias
             // 
             ContenedorDias.BackColor = Color.LightGray;
-            ContenedorDias.Location = new Point(41, 147);
+            ContenedorDias.Location = new Point(40, 131);
             ContenedorDias.Name = "ContenedorDias";
             ContenedorDias.Size = new Size(715, 423);
             ContenedorDias.TabIndex = 0;
@@ -279,7 +281,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            BackColor = Color.White;
+            BackColor = Color.WhiteSmoke;
             ClientSize = new Size(796, 639);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -287,6 +289,7 @@
             Name = "CalendarioReservas";
             StartPosition = FormStartPosition.CenterScreen;
             Text = " ";
+            TransparencyKey = Color.WhiteSmoke;
             Load += CalendarioReservas_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

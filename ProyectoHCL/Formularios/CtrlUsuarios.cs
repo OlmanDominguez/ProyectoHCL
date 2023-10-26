@@ -227,6 +227,7 @@ namespace ProyectoHCL.Formularios
         {
             int diasV = Convert.ToInt32(ParametroDias());
             R_E_user.lblTitulo.Text = "Registrar Usuario";
+            R_E_user.cargarRolesR();
             R_E_user.cmbEstado.Visible = false;
             R_E_user.lblEstado.Visible = false;
             R_E_user.label14.Visible = false;
@@ -259,6 +260,7 @@ namespace ProyectoHCL.Formularios
             if (this.dgvUsuarios.Columns[e.ColumnIndex].Name == "EDITAR") //si se dio click en el botón editar hacer lo siguiente
             {
                 R_E_user.lblTitulo.Text = "Editar Usuario";
+                R_E_user.cargarRolesE();
 
                 MySqlConnection conn;
                 MySqlCommand cmd;

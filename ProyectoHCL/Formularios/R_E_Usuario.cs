@@ -73,7 +73,6 @@ namespace ProyectoHCL.Formularios
         {
             InitializeComponent();
             cargarEstado(); //lenar combobox con los estados
-            cargarRoles(); //lenar combobox con los roles
             cmbRol.SelectedIndex = -1; //inicializar combobox sin opción seleccionada
             cmbEstado.SelectedIndex = -1; //inicializar combobox sin opción seleccionada
         }
@@ -81,40 +80,71 @@ namespace ProyectoHCL.Formularios
         public string idUs = null;
         MsgB msgB = new MsgB();
 
-        private void cargarRoles() //cargar combobox con los registros de los roles en la base de datos
+        public void cargarRolesR() //cargar combobox con los registros de los roles en la base de datos
         {
-            MySqlConnection conn;
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
             MySqlCommand cmd;
 
             cmbRol.DataSource = null;
             cmbRol.Items.Clear();
-            string sql = "SELECT ID_ROL, ROL FROM TBL_ROL;";
 
-            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-            conn.Open();
-
-            try
+            using (conectar)
             {
-                cmd = new MySqlCommand(sql, conn);
-                MySqlDataAdapter data = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                data.Fill(dt);
-
-                cmbRol.ValueMember = "ID_ROL";
-                cmbRol.DisplayMember = "ROL";
-                cmbRol.DataSource = dt;
-
+                string sql = "SELECT ROL FROM TBL_ROL WHERE ESTADO_ROL = 'ACTIVO';";
+                try
+                {
+                    cmd = new MySqlCommand(sql, conectar);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string nombreRol = reader["ROL"].ToString();
+                            cmbRol.Items.Add(nombreRol);
+                        }
+                    }
+                }
+                catch (MySqlException e)
+                {
+                    MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
+                    DialogResult dR = m.ShowDialog();
+                }
+                finally { conectar.Close(); }
             }
-            catch (MySqlException e)
-            {
-                MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
-                DialogResult dR = m.ShowDialog();
-            }
-            finally { conn.Close(); }
-
         }
 
-        private bool ContrasenaRobusta(string password)
+        public void cargarRolesE() //cargar combobox con los registros de los roles en la base de datos
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+            MySqlCommand cmd;
+
+            cmbRol.DataSource = null;
+            cmbRol.Items.Clear();
+
+            using (conectar)
+            {
+                string sql = "SELECT ROL FROM TBL_ROL;";
+                try
+                {
+                    cmd = new MySqlCommand(sql, conectar);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string nombreRol = reader["ROL"].ToString();
+                            cmbRol.Items.Add(nombreRol);
+                        }
+                    }
+                }
+                catch (MySqlException e)
+                {
+                    MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
+                    DialogResult dR = m.ShowDialog();
+                }
+                finally { conectar.Close(); }
+            }
+        }
+
+        private bool ContrasenaRobusta(string password) //validar contraseña robusta
         {
             return password.Length >= 5 &&
                    password.Any(char.IsUpper) &&
@@ -144,41 +174,36 @@ namespace ProyectoHCL.Formularios
 
         private void cargarEstado() //cargar combobox con los registros de los estados en la base de datos
         {
-            MySqlConnection conn;
-            MySqlCommand cmd;
-
-            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-            conn.Open();
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
 
             cmbEstado.DataSource = null;
             cmbEstado.Items.Clear();
-            string sql = "SELECT DESCRIPCION FROM TBL_ESTADO;";
 
-            try
+            using (conectar)
             {
-                cmd = new MySqlCommand(sql, conn);
-                MySqlDataAdapter data = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                data.Fill(dt);
-
-                foreach (DataRow dr in dt.Rows)
+                string sql = "SELECT ID_ESTADO, DESCRIPCION FROM TBL_ESTADO;";
+                using (MySqlCommand cmd = new MySqlCommand(sql, conectar))
                 {
-                    string nombreEstado = dr["DESCRIPCION"].ToString();
-
-                    if (nombreEstado != "NUEVO")
+                    try
                     {
-                        cmbEstado.Items.Add(nombreEstado);
+                        MySqlDataAdapter data = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        data.Fill(dt);
+
+                        cmbEstado.ValueMember = "ID_ESTADO";
+                        cmbEstado.DisplayMember = "DESCRIPCION";
+                        cmbEstado.DataSource = dt;
+
                     }
+                    catch (MySqlException e)
+                    {
+                        MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
+                        DialogResult dR = m.ShowDialog();
+                    }
+                    finally { conectar.Close(); }
+
                 }
-
             }
-            catch (MySqlException e)
-            {
-                MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
-                DialogResult dR = m.ShowDialog();
-            }
-            finally { conn.Close(); }
-
         }
 
         public void limpiarCampos() //limpiar los campos del formulario
@@ -594,6 +619,10 @@ namespace ProyectoHCL.Formularios
         {
             limpiarCampos();
             limpiarError();
+        }
+
+        private void cmbRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
         }
     }
 }

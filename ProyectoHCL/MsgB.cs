@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ProyectoHCL.RecuContra;
 
 //-----------------------------------------------------------------------
 //    Universidad Nacional Autonoma de Honduras (UNAH)
@@ -102,6 +103,13 @@ namespace ProyectoHCL
                     lblTitulo.ForeColor = Color.FromArgb(244, 67, 54);
                     panel1.BackColor = Color.FromArgb(244, 67, 54);
                     pbError.Visible = true;
+                    btnAOk.Visible = true;
+                    break;
+                case "bienvenida": //Si es error, se muestra la imagen correspondiente y el boton de aceptar
+                    lblTitulo.Text = "Bienvenido(a), " + clasecompartida.user;
+                    lblTitulo.ForeColor = Color.FromArgb(33, 150, 243);
+                    panel1.BackColor = Color.FromArgb(33, 150, 243);
+                    pbBienvenido.Visible = true; 
                     btnAOk.Visible = true;
                     break;
                 default: //si no es ninguno de los anteriores se muestra el mensaje "Error al seleccionar"

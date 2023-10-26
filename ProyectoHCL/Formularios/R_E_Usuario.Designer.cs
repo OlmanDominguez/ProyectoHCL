@@ -359,6 +359,7 @@
             cmbRol.Name = "cmbRol";
             cmbRol.Size = new Size(316, 28);
             cmbRol.TabIndex = 15;
+            cmbRol.SelectedIndexChanged += cmbRol_SelectedIndexChanged;
             cmbRol.Leave += cmbRol_Leave;
             // 
             // txtCorreo

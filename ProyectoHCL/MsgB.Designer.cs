@@ -39,6 +39,7 @@
             btnOk = new Button();
             btnCancelar = new Button();
             panel3 = new Panel();
+            pbBienvenido = new PictureBox();
             pbInfo = new PictureBox();
             btnCerrar = new Button();
             btnAOk = new Button();
@@ -46,6 +47,7 @@
             ((System.ComponentModel.ISupportInitialize)pbAdvertencia).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbError).BeginInit();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbBienvenido).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbInfo).BeginInit();
             SuspendLayout();
             // 
@@ -153,6 +155,7 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(pbBienvenido);
             panel3.Controls.Add(pbInfo);
             panel3.Controls.Add(btnCerrar);
             panel3.Controls.Add(pbPregunta);
@@ -165,6 +168,17 @@
             panel3.Size = new Size(420, 65);
             panel3.TabIndex = 9;
             panel3.MouseMove += panel3_MouseMove;
+            // 
+            // pbBienvenido
+            // 
+            pbBienvenido.Image = (Image)resources.GetObject("pbBienvenido.Image");
+            pbBienvenido.Location = new Point(12, 12);
+            pbBienvenido.Name = "pbBienvenido";
+            pbBienvenido.Size = new Size(45, 45);
+            pbBienvenido.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbBienvenido.TabIndex = 36;
+            pbBienvenido.TabStop = false;
+            pbBienvenido.Visible = false;
             // 
             // pbInfo
             // 
@@ -229,6 +243,7 @@
             ((System.ComponentModel.ISupportInitialize)pbError).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbBienvenido).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbInfo).EndInit();
             ResumeLayout(false);
         }
@@ -248,5 +263,6 @@
         private Button btnCerrar;
         private PictureBox pbInfo;
         private Button btnAOk;
+        private PictureBox pbBienvenido;
     }
 }
