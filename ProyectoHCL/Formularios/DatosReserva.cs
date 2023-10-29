@@ -17,7 +17,7 @@ namespace ProyectoHCL.Formularios
     public partial class DatosReserva : Form
     {
         string fecha;
-        CalendarioReservas calendario = new CalendarioReservas();
+        //Dashboard calendario = new Dashboard();
         private const string connection = "server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;";
 
         public DatosReserva()
@@ -32,7 +32,7 @@ namespace ProyectoHCL.Formularios
 
         private void DatosReserva_Load(object sender, EventArgs e)
         {
-            fecha = CalendarioReservas.static_anio + "-" + CalendarioReservas.static_mes + "-" + UserControlDias.static_dia;
+            fecha = Dashboard.static_anio + "-" + Dashboard.static_mes + "-" + UserControlDias.static_dia;
             lblHab.Text = clases.CDatos.numHabDR;
             ObtenerDatos();
             lblCliente.Text = clases.CDatos.cliente;

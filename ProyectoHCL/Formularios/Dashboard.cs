@@ -225,6 +225,7 @@ namespace ProyectoHCL
                 conn.Open();
 
                 string query = "SELECT INGRESO, SALIDA FROM TBL_SOLICITUDRESERVA WHERE NUMEROHABITACION = @habitacion AND ID_ESTADORESERVA = 1 AND MONTH(INGRESO) = @mes AND YEAR(INGRESO) = @anio";
+
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 //parámetros que recibe la consulta select
                 cmd.Parameters.AddWithValue("@mes", fechaActual.Month);
@@ -293,11 +294,11 @@ namespace ProyectoHCL
             LlenarCalendario(mesAño, hab); //Se llama función para mostrar las reservas, recibiendo la fecha actual y la habitación seleccionada del combobox
         }
 
-        public void LlenarCalendario(DateTime fechaActual, string habitacionS) //función para llenar el calendario con las reservas programadas
+        public void LlenarCalendario(DateTime fechaActual, string habitacionS)
         {
-            List<Reserva> reservas = ObtenerReservas(fechaActual, habitacionS); //Llamar lista de reservas obtenidas
+            List<Reserva> reservas = ObtenerReservas(fechaActual, habitacionS);
 
-            foreach (var control in ContenedorDias.Controls) //recorrer los controles en el contenedorDias
+            foreach (var control in ContenedorDias.Controls)
             {
                 if (control is UserControl userControl)
                 {
@@ -305,11 +306,19 @@ namespace ProyectoHCL
                     {
                         int dia = int.Parse(lblDias.Text);
 
-                        bool reservaEnEsteDia = reservas.Any(r => dia >= r.FechaIngreso.Day && dia <= r.FechaSalida.Day); //validar las reservas en el rango de fecha ingreso y fecha salida en la lista
+                        bool reservaEnEsteDia = false;
+
+                        foreach (var reserva in reservas)
+                        {
+                            if (reserva.FechaIngreso <= fechaActual.AddDays(dia - 1) && reserva.FechaSalida >= fechaActual.AddDays(dia - 1))
+                            {
+                                reservaEnEsteDia = true;
+                                break;
+                            }
+                        }
 
                         if (reservaEnEsteDia)
                         {
-                            //si hay reservas, se muestra el picturebox en el userControlDias
                             if (userControl.Controls.Find("pboxReservado", true).FirstOrDefault() is PictureBox pboxReservado)
                             {
                                 pboxReservado.Visible = true;
@@ -317,7 +326,6 @@ namespace ProyectoHCL
                         }
                         else
                         {
-                            //si no hay reservas, se oculta el picturebox en el userControlDias
                             if (userControl.Controls.Find("pboxReservado", false).FirstOrDefault() is PictureBox pboxReservado)
                             {
                                 pboxReservado.Visible = false;
@@ -327,6 +335,7 @@ namespace ProyectoHCL
                 }
             }
         }
+
 
 
         //codigo de los submenu del dashboard

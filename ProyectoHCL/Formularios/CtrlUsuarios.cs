@@ -25,6 +25,12 @@ using SpreadsheetLight.Drawing;
 using static ProyectoHCL.RecuContra; //Para uso del user y IDUser iniciado
 using System.Windows.Controls;
 using Point = System.Drawing.Point;
+using iText.IO.Image;
+using Image = iText.Layout.Element.Image;
+using iText.Kernel.Events;
+using iText.Kernel.Pdf.Canvas;
+using Rectangle = iText.Kernel.Geom.Rectangle;
+using System.Reflection;
 
 //-----------------------------------------------------------------------
 //    Universidad Nacional Autonoma de Honduras (UNAH)
@@ -397,96 +403,146 @@ namespace ProyectoHCL.Formularios
             this.Close();  //cerrar formulario
         }
 
-        private void crearPDF() //función para crear pdf
+        private void crearPDF()
         {
-            PdfWriter pdfWriter = new PdfWriter("Reporte.pdf");
-            PdfDocument pdf = new PdfDocument(pdfWriter);
-            //1 pulgada = 72 pt (8 1/2 x 11) (612 x 792)
-            PageSize tamanioH = new PageSize(792, 612);
-            Document documento = new Document(pdf, tamanioH);
-            // Document documento = new Document(pdf, PageSize.LETTER);
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Archivos PDF|*.pdf";
+            saveFileDialog.Title = "Guardar archivo PDF";
 
-            documento.SetMargins(70, 20, 55, 20);
-
-            PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
-            PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
-
-            string[] columnas = { "Id", "Nombre", "Usuario", "Correo", "Estado", "Rol", "Creacion", "Vencimiento" };
-
-            float[] tamanios = { 1, 3, 2, 3, 2, 2, 2, 2 };
-            Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
-            tabla.SetWidth(UnitValue.CreatePercentValue(100));
-
-            foreach (string columna in columnas)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+                string filePath = saveFileDialog.FileName;
+
+                PdfWriter pdfWriter = new PdfWriter(filePath);
+                PdfDocument pdf = new PdfDocument(pdfWriter);
+                PageSize tamanioH = new PageSize(792, 612);
+                Document documento = new Document(pdf, tamanioH);
+                documento.SetMargins(70, 20, 55, 20);
+
+                PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+                PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+
+                //pdf.AddEventHandler(PdfDocumentEvent.START_PAGE, new HeaderEventHandler());
+
+                var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/jmont/OneDrive/Documentos/HM/ProyectoIP/logoCL.png")).SetWidth(50);
+                var plogo = new Paragraph("").Add(logo);
+
+                var nombre = new Paragraph("Hotel Casa Lomas");
+                nombre.SetFontSize(12);
+
+                var titulo = new Paragraph("Usuarios");
+                titulo.SetTextAlignment(TextAlignment.CENTER);
+                titulo.SetFontSize(14).SetBold();
+
+                var dfecha = DateTime.Now.ToString("dd.MM.yyy");
+                var dhora = DateTime.Now.ToString("hh:mm:ss");
+                var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
+                fecha.SetTextAlignment(TextAlignment.RIGHT);
+                fecha.SetFontSize(12);
+
+                documento.ShowTextAligned(plogo, 30, 600, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(nombre, 100, 580, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
+
+                string[] columnas = { "Id", "Nombre", "Usuario", "Correo", "Estado", "Rol", "Creacion", "Vencimiento" };
+
+                float[] tamanios = { 1, 3, 2, 3, 2, 2, 2, 2 };
+                Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
+                tabla.SetWidth(UnitValue.CreatePercentValue(100));
+
+                foreach (string columna in columnas)
+                {
+                    tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+                }
+
+                string sql = "SELECT ID_USUARIO AS ID, NOMBRE_USUARIO AS NOMBRE, USUARIO, EMAIL AS CORREO, TBL_ESTADO.DESCRIPCION AS ESTADO, " +
+                    "TBL_ROL.DESCRIPCION AS ROL, PRIMERINGRESO AS CREACION, FECHAVENCIMIENTO AS VENCIMIENTO FROM TBL_USUARIO INNER JOIN " +
+                    "TBL_ESTADO ON TBL_USUARIO.ID_ESTADO = TBL_ESTADO.ID_ESTADO INNER JOIN TBL_ROL ON TBL_USUARIO.ID_ROL = " +
+                    "TBL_ROL.ID_ROL";
+
+                MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+                // conexionBD.Open();
+
+                MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+                MySqlDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Id"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Nombre"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Usuario"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Correo"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Estado"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Rol"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Creacion"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Vencimiento"].ToString()).SetFont(fontContenido)));
+                }
+
+                documento.Add(tabla);
+
+                pdf.AddEventHandler(PdfDocumentEvent.END_PAGE, new HeaderFooterEventHandler());
+
+                documento.Close();
             }
-
-            string sql = "SELECT ID_USUARIO AS ID, NOMBRE_USUARIO AS NOMBRE, USUARIO, EMAIL AS CORREO, TBL_ESTADO.DESCRIPCION AS ESTADO, " +
-                "TBL_ROL.DESCRIPCION AS ROL, PRIMERINGRESO AS CREACION, FECHAVENCIMIENTO AS VENCIMIENTO FROM TBL_USUARIO INNER JOIN " +
-                "TBL_ESTADO ON TBL_USUARIO.ID_ESTADO = TBL_ESTADO.ID_ESTADO INNER JOIN TBL_ROL ON TBL_USUARIO.ID_ROL = " +
-                "TBL_ROL.ID_ROL";
-
-            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
-            // conexionBD.Open();
-
-            MySqlCommand comando = new MySqlCommand(sql, conexionBD);
-            MySqlDataReader reader = comando.ExecuteReader();
-
-            while (reader.Read())
-            {
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Id"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Nombre"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Usuario"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Correo"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Estado"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Rol"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Creacion"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Vencimiento"].ToString()).SetFont(fontContenido)));
-            }
-
-            documento.Add(tabla);
-            documento.Close();
-
-            var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/jmont/OneDrive/Documentos/HM/ProyectoIP/logoCL.png")).SetWidth(50);
-            var plogo = new Paragraph("").Add(logo);
-
-            var nombre = new Paragraph("Hotel Casa Lomas");
-            nombre.SetTextAlignment(TextAlignment.CENTER);
-            nombre.SetFontSize(12);
-
-            var titulo = new Paragraph("Reporte Usuarios");
-            titulo.SetTextAlignment(TextAlignment.CENTER);
-            titulo.SetFontSize(14);
-            titulo.SetBold();
-
-            var dfecha = DateTime.Now.ToString("dd.MM.yyy");
-            var dhora = DateTime.Now.ToString("hh:mm:ss");
-            var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
-            fecha.SetFontSize(12);
-
-            PdfDocument pdfDoc = new PdfDocument(new PdfReader("Reporte.pdf"), new PdfWriter
-                ("ReporteUsuarios.pdf"));
-            Document doc = new Document(pdfDoc);
-
-            int numeros = pdfDoc.GetNumberOfPages();
-
-            for (int i = 1; i <= numeros; i++)
-            {
-                PdfPage pagina = pdfDoc.GetPage(i);
-
-                float y = (pdfDoc.GetPage(i).GetPageSize().GetTop() - 15);
-                doc.ShowTextAligned(plogo, 40, y, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(nombre, 115, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(titulo, 396, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(fecha, 700, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-
-                doc.ShowTextAligned(new Paragraph(String.Format("pagina {0} de {1}", i, numeros)), pdfDoc.GetPage
-                    (i).GetPageSize().GetWidth() / 2, pdfDoc.GetPage(i).GetPageSize().GetBottom() + 30, i,
-                    TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-            }
-            doc.Close();
         }
+
+        private class HeaderFooterEventHandler : IEventHandler
+        {
+            public void HandleEvent(Event currentEvent)
+            {
+                PdfDocumentEvent docEvent = (PdfDocumentEvent)currentEvent;
+                PdfDocument pdfDoc = docEvent.GetDocument();
+                PdfPage page = docEvent.GetPage();
+                int pageNumber = pdfDoc.GetPageNumber(page);
+                PdfCanvas pdfCanvas = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
+
+                Rectangle pageSize = page.GetPageSize();
+                pdfCanvas.BeginText()
+                    .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA), 12)
+                    .MoveText(pageSize.GetLeft() + 396, 20)
+                    .ShowText("Página " + pageNumber)
+                    .EndText();
+                pdfCanvas.Release();
+            }
+        }
+
+        //private class HeaderEventHandler : IEventHandler
+        //{
+        //    public void HandleEvent(Event currentEvent)
+        //    {
+        //        PdfDocumentEvent docEvent = (PdfDocumentEvent)currentEvent;
+        //        PdfDocument pdfDoc = docEvent.GetDocument();
+        //        PdfPage page = docEvent.GetPage();
+        //        int pageNumber = pdfDoc.GetPageNumber(page);
+        //        PdfCanvas pdfCanvas = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
+
+        //        Rectangle pageSize = page.GetPageSize();
+
+        //        // Logo y nombre de la empresa a la izquierda
+        //        pdfCanvas.BeginText()
+        //            .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA), 12)
+        //            .MoveText(pageSize.GetLeft() + 72, pageSize.GetTop() - 35)
+        //            .ShowText("Hotel Casa Lomas")
+        //            .EndText();
+
+        //        // Título del documento en el centro
+        //        pdfCanvas.BeginText()
+        //            .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA), 14)
+        //            .MoveText(((pageSize.GetLeft() + pageSize.GetRight()) / 2) - 5, pageSize.GetTop() - 35)
+        //            .ShowText("Usuarios")
+        //            .EndText();
+
+        //        // Fecha y hora a la derecha
+        //        pdfCanvas.BeginText()
+        //            .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA), 12)
+        //            .MoveText(pageSize.GetRight() - 100, pageSize.GetTop() - 35)
+        //            .ShowText("Fecha: " + DateTime.Now.ToString("dd.MM.yyy"))
+        //            .EndText();
+
+        //        pdfCanvas.Release();
+        //    }
+        //}
 
         private void btnPdf_Click(object sender, EventArgs e)
         {
