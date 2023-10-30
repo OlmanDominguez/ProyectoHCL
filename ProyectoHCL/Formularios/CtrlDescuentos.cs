@@ -25,6 +25,9 @@ using static iText.Kernel.Pdf.Colorspace.PdfDeviceCs;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using DocumentFormat.OpenXml.Office2013.Excel;
 using Point = System.Drawing.Point;
+using iText.Kernel.Events;
+using iText.Kernel.Pdf.Canvas;
+using Rectangle = iText.Kernel.Geom.Rectangle;
 
 //-----------------------------------------------------------------------
 //    Universidad Nacional Autonoma de Honduras (UNAH)
@@ -368,113 +371,98 @@ namespace ProyectoHCL.Formularios
 
         private void crearPDF() //función para crear pdf
         {
-            PdfWriter pdfWriter = new PdfWriter("Reporte.pdf");
-            PdfDocument pdf = new PdfDocument(pdfWriter);
-            //1 pulgada = 72 pt (8 1/2 x 11) (612 x 792) 
-            PageSize tamanioH = new PageSize(792, 612);
-            Document documento = new Document(pdf, tamanioH);
-            // Document documento = new Document(pdf, PageSize.LETTER);
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Archivos PDF|*.pdf";
+            saveFileDialog.Title = "Guardar archivo PDF";
 
-            documento.SetMargins(70, 20, 55, 20);
-
-            PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
-            PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
-
-            string[] columnas = { "Id", "Descripcion", "Porcentaje", "Creado_Por", "Actualizado_Por" };
-
-            float[] tamanios = { 1, 2, 2, 3, 3 };
-            Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
-            tabla.SetWidth(UnitValue.CreatePercentValue(100));
-
-            foreach (string columna in columnas)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+                string filePath = saveFileDialog.FileName;
+
+                PdfWriter pdfWriter = new PdfWriter(filePath);
+                PdfDocument pdf = new PdfDocument(pdfWriter);
+                PageSize tamanioH = new PageSize(792, 612);
+                Document documento = new Document(pdf, tamanioH);
+                documento.SetMargins(70, 20, 55, 20);
+
+                PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+                PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+
+                var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/jmont/OneDrive/Documentos/HM/ProyectoIP/logoCL.png")).SetWidth(50);
+                var plogo = new Paragraph("").Add(logo);
+
+                var nombre = new Paragraph("Hotel Casa Lomas");
+                nombre.SetFontSize(12);
+
+                var titulo = new Paragraph("Descuentos");
+                titulo.SetTextAlignment(TextAlignment.CENTER);
+                titulo.SetFontSize(14).SetBold();
+
+                var dfecha = DateTime.Now.ToString("dd.MM.yyy");
+                var dhora = DateTime.Now.ToString("hh:mm:ss");
+                var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
+                fecha.SetTextAlignment(TextAlignment.RIGHT);
+                fecha.SetFontSize(12);
+
+                documento.ShowTextAligned(plogo, 30, 600, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(nombre, 100, 580, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
+
+                string[] columnas = { "Id", "Descripcion", "Porcentaje", "Creado_Por", "Actualizado_Por" };
+
+                float[] tamanios = { 1, 2, 2, 3, 3 };
+                Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
+                tabla.SetWidth(UnitValue.CreatePercentValue(100));
+
+                foreach (string columna in columnas)
+                {
+                    tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+                }
+
+                string sql = "SELECT id_descuento as id, descripcion, porcentaje, creado_por, actualizado_por FROM TBL_DESCUENTO";
+
+                MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+                // conexionBD.Open();
+
+                MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+                MySqlDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["id"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["descripcion"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["porcentaje"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["creado_por"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["actualizado_por"].ToString()).SetFont(fontContenido)));
+                }
+
+                documento.Add(tabla);
+
+                pdf.AddEventHandler(PdfDocumentEvent.END_PAGE, new HeaderFooterEventHandler());
+
+                documento.Close();
             }
+        }
 
-            string sql = "SELECT id_descuento as id, descripcion, porcentaje, creado_por, actualizado_por FROM TBL_DESCUENTO";
-
-            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
-            // conexionBD.Open();
-
-            MySqlCommand comando = new MySqlCommand(sql, conexionBD);
-            MySqlDataReader reader = comando.ExecuteReader();
-
-            while (reader.Read())
+        private class HeaderFooterEventHandler : IEventHandler
+        {
+            public void HandleEvent(Event currentEvent)
             {
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["id"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["descripcion"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["porcentaje"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["creado_por"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["actualizado_por"].ToString()).SetFont(fontContenido)));
+                PdfDocumentEvent docEvent = (PdfDocumentEvent)currentEvent;
+                PdfDocument pdfDoc = docEvent.GetDocument();
+                PdfPage page = docEvent.GetPage();
+                int pageNumber = pdfDoc.GetPageNumber(page);
+                PdfCanvas pdfCanvas = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
+
+                Rectangle pageSize = page.GetPageSize();
+                pdfCanvas.BeginText()
+                    .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA), 12)
+                    .MoveText(pageSize.GetLeft() + 396, 20)
+                    .ShowText("Página " + pageNumber)
+                    .EndText();
+                pdfCanvas.Release();
             }
-
-            documento.Add(tabla);
-            documento.Close();
-
-            var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/jmont/OneDrive/Documentos/HM/ProyectoIP/logoCL.png")).SetWidth(50);
-            var plogo = new Paragraph("").Add(logo);
-
-            var nombre = new Paragraph("Hotel Casa Lomas");
-            nombre.SetTextAlignment(TextAlignment.CENTER);
-            nombre.SetFontSize(12);
-
-            var titulo = new Paragraph("Reporte Descuentos");
-            titulo.SetTextAlignment(TextAlignment.CENTER);
-            titulo.SetFontSize(14);
-            titulo.SetBold();
-
-            var dfecha = DateTime.Now.ToString("dd.MM.yyy");
-            var dhora = DateTime.Now.ToString("hh:mm:ss");
-            var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
-            fecha.SetFontSize(12);
-
-            PdfDocument pdfDoc = new PdfDocument(new PdfReader("Reporte.pdf"), new PdfWriter
-                ("ReporteDescuentos.pdf"));
-            Document doc = new Document(pdfDoc);
-
-            int numeros = pdfDoc.GetNumberOfPages();
-
-            for (int i = 1; i <= numeros; i++)
-            {
-                PdfPage pagina = pdfDoc.GetPage(i);
-
-                float y = (pdfDoc.GetPage(i).GetPageSize().GetTop() - 15);
-                doc.ShowTextAligned(plogo, 40, y, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(nombre, 115, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(titulo, 396, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(fecha, 700, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-
-                doc.ShowTextAligned(new Paragraph(String.Format("pagina {0} de {1}", i, numeros)), pdfDoc.GetPage
-                    (i).GetPageSize().GetWidth() / 2, pdfDoc.GetPage(i).GetPageSize().GetBottom() + 30, i,
-                    TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-            }
-
-            SaveFileDialog sf = new SaveFileDialog();
-            sf.Filter = "PDF document (*.pdf)|*.pdf";
-
-            if (sf.ShowDialog() == DialogResult.OK)
-            {
-                string fileName = sf.FileName;
-
-
-            }
-
-            //sfd.Title = "Save As PDF";
-            //sfd.Filter = "(*.pdf)|*.pdf";
-            //sfd.InitialDirectory = @"C:\";
-            //if (sfd.ShowDialog() == DialogResult.OK)
-            //{
-            //   dialog.Title = "Generate PDF";
-            //dialog.Filter = "PDF document (*.pdf)|*.pdf";
-            //DialogResult result = dialog.ShowDialog();
-            //string fileName = dialog.FileName;
-            //if (result == DialogResult.OK)
-            //{
-            //    document.Save(fileName);
-            //}
-            //}
-
-            doc.Close();
         }
 
         private void btnPDF_Click(object sender, EventArgs e)

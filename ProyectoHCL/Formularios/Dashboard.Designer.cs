@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             panel1 = new Panel();
+            iconButton6 = new FontAwesome.Sharp.IconButton();
             panelmanteSubMenu = new Panel();
             iconButton5 = new FontAwesome.Sharp.IconButton();
             iconButton4 = new FontAwesome.Sharp.IconButton();
@@ -87,7 +88,6 @@
             label3 = new Label();
             pictureBox4 = new PictureBox();
             pictureBox3 = new PictureBox();
-            iconButton6 = new FontAwesome.Sharp.IconButton();
             panel1.SuspendLayout();
             panelmanteSubMenu.SuspendLayout();
             paneladminSubMenu.SuspendLayout();
@@ -120,6 +120,28 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(246, 687);
             panel1.TabIndex = 1;
+            // 
+            // iconButton6
+            // 
+            iconButton6.Dock = DockStyle.Top;
+            iconButton6.FlatAppearance.BorderSize = 0;
+            iconButton6.FlatStyle = FlatStyle.Flat;
+            iconButton6.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            iconButton6.IconChar = FontAwesome.Sharp.IconChar.SignOutAlt;
+            iconButton6.IconColor = Color.Black;
+            iconButton6.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButton6.IconSize = 25;
+            iconButton6.ImageAlign = ContentAlignment.MiddleLeft;
+            iconButton6.Location = new Point(0, 953);
+            iconButton6.Name = "iconButton6";
+            iconButton6.Padding = new Padding(15, 0, 0, 0);
+            iconButton6.Size = new Size(246, 45);
+            iconButton6.TabIndex = 36;
+            iconButton6.Text = "Cerrar Sesión";
+            iconButton6.TextAlign = ContentAlignment.MiddleLeft;
+            iconButton6.TextImageRelation = TextImageRelation.ImageBeforeText;
+            iconButton6.UseVisualStyleBackColor = true;
+            iconButton6.Click += iconButton6_Click_1;
             // 
             // panelmanteSubMenu
             // 
@@ -635,6 +657,7 @@
             // panelChildForm
             // 
             panelChildForm.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelChildForm.AutoSize = true;
             panelChildForm.BackColor = Color.Transparent;
             panelChildForm.Controls.Add(label1);
             panelChildForm.Controls.Add(cmbHabitacion);
@@ -663,11 +686,12 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI Symbol", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(86, 48);
+            label1.Location = new Point(63, 56);
             label1.Name = "label1";
             label1.Size = new Size(185, 20);
             label1.TabIndex = 46;
@@ -676,9 +700,9 @@
             // cmbHabitacion
             // 
             cmbHabitacion.FormattingEnabled = true;
-            cmbHabitacion.Location = new Point(277, 48);
+            cmbHabitacion.Location = new Point(254, 56);
             cmbHabitacion.Name = "cmbHabitacion";
-            cmbHabitacion.Size = new Size(105, 23);
+            cmbHabitacion.Size = new Size(114, 23);
             cmbHabitacion.TabIndex = 45;
             cmbHabitacion.SelectedIndexChanged += cmbHabitacion_SelectedIndexChanged;
             // 
@@ -688,7 +712,7 @@
             panel46.Controls.Add(LBLMES);
             panel46.Controls.Add(btnSig);
             panel46.Controls.Add(btnAnt);
-            panel46.Location = new Point(87, 84);
+            panel46.Location = new Point(64, 92);
             panel46.Name = "panel46";
             panel46.Size = new Size(715, 38);
             panel46.TabIndex = 44;
@@ -701,7 +725,6 @@
             LBLMES.Name = "LBLMES";
             LBLMES.Size = new Size(332, 21);
             LBLMES.TabIndex = 7;
-            LBLMES.Text = "MES";
             LBLMES.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // btnSig
@@ -742,7 +765,7 @@
             panel38.Controls.Add(label2);
             panel38.Controls.Add(label9);
             panel38.Controls.Add(label10);
-            panel38.Location = new Point(87, 123);
+            panel38.Location = new Point(64, 131);
             panel38.Name = "panel38";
             panel38.Size = new Size(715, 35);
             panel38.TabIndex = 43;
@@ -827,18 +850,19 @@
             // ContenedorDias
             // 
             ContenedorDias.BackColor = Color.LightGray;
-            ContenedorDias.Location = new Point(87, 164);
+            ContenedorDias.Location = new Point(64, 172);
             ContenedorDias.Name = "ContenedorDias";
             ContenedorDias.Size = new Size(715, 423);
             ContenedorDias.TabIndex = 42;
             // 
             // label11
             // 
+            label11.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label11.AutoSize = true;
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(86, 11);
+            label11.Location = new Point(63, 19);
             label11.Name = "label11";
             label11.Size = new Size(318, 32);
             label11.TabIndex = 47;
@@ -851,7 +875,7 @@
             lbl_anuladas.BackColor = Color.FromArgb(20, 100, 150);
             lbl_anuladas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_anuladas.ForeColor = SystemColors.ButtonFace;
-            lbl_anuladas.Location = new Point(939, 300);
+            lbl_anuladas.Location = new Point(916, 308);
             lbl_anuladas.Name = "lbl_anuladas";
             lbl_anuladas.Size = new Size(13, 17);
             lbl_anuladas.TabIndex = 41;
@@ -864,7 +888,7 @@
             lbl_anu.BackColor = Color.FromArgb(20, 100, 150);
             lbl_anu.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_anu.ForeColor = SystemColors.ButtonFace;
-            lbl_anu.Location = new Point(853, 299);
+            lbl_anu.Location = new Point(830, 307);
             lbl_anu.Name = "lbl_anu";
             lbl_anu.Size = new Size(69, 17);
             lbl_anu.TabIndex = 40;
@@ -877,7 +901,7 @@
             lbl_confirmadas.BackColor = Color.FromArgb(20, 100, 150);
             lbl_confirmadas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_confirmadas.ForeColor = SystemColors.ButtonFace;
-            lbl_confirmadas.Location = new Point(939, 276);
+            lbl_confirmadas.Location = new Point(916, 284);
             lbl_confirmadas.Name = "lbl_confirmadas";
             lbl_confirmadas.Size = new Size(13, 17);
             lbl_confirmadas.TabIndex = 39;
@@ -890,7 +914,7 @@
             lbl_pendientes.BackColor = Color.FromArgb(20, 100, 150);
             lbl_pendientes.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_pendientes.ForeColor = SystemColors.ButtonFace;
-            lbl_pendientes.Location = new Point(939, 251);
+            lbl_pendientes.Location = new Point(916, 259);
             lbl_pendientes.Name = "lbl_pendientes";
             lbl_pendientes.Size = new Size(13, 17);
             lbl_pendientes.TabIndex = 38;
@@ -903,7 +927,7 @@
             lbl_confirma.BackColor = Color.FromArgb(20, 100, 150);
             lbl_confirma.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_confirma.ForeColor = SystemColors.ButtonFace;
-            lbl_confirma.Location = new Point(852, 274);
+            lbl_confirma.Location = new Point(829, 282);
             lbl_confirma.Name = "lbl_confirma";
             lbl_confirma.Size = new Size(90, 17);
             lbl_confirma.TabIndex = 37;
@@ -916,7 +940,7 @@
             lbl_confir.BackColor = Color.FromArgb(20, 100, 150);
             lbl_confir.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_confir.ForeColor = SystemColors.ButtonFace;
-            lbl_confir.Location = new Point(852, 250);
+            lbl_confir.Location = new Point(829, 258);
             lbl_confir.Name = "lbl_confir";
             lbl_confir.Size = new Size(80, 17);
             lbl_confir.TabIndex = 36;
@@ -929,7 +953,7 @@
             label8.BackColor = Color.FromArgb(20, 100, 150);
             label8.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = SystemColors.ButtonFace;
-            label8.Location = new Point(862, 217);
+            label8.Location = new Point(839, 225);
             label8.Name = "label8";
             label8.Size = new Size(137, 25);
             label8.TabIndex = 35;
@@ -942,7 +966,7 @@
             lbl_disponible.BackColor = Color.FromArgb(20, 100, 150);
             lbl_disponible.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_disponible.ForeColor = SystemColors.ButtonFace;
-            lbl_disponible.Location = new Point(935, 154);
+            lbl_disponible.Location = new Point(912, 162);
             lbl_disponible.Name = "lbl_disponible";
             lbl_disponible.Size = new Size(13, 17);
             lbl_disponible.TabIndex = 34;
@@ -955,7 +979,7 @@
             lbl_reservadas.BackColor = Color.FromArgb(20, 100, 150);
             lbl_reservadas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_reservadas.ForeColor = SystemColors.ButtonFace;
-            lbl_reservadas.Location = new Point(935, 129);
+            lbl_reservadas.Location = new Point(912, 137);
             lbl_reservadas.Name = "lbl_reservadas";
             lbl_reservadas.Size = new Size(13, 17);
             lbl_reservadas.TabIndex = 33;
@@ -968,7 +992,7 @@
             lbl_disp.BackColor = Color.FromArgb(20, 100, 150);
             lbl_disp.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_disp.ForeColor = SystemColors.ButtonFace;
-            lbl_disp.Location = new Point(848, 153);
+            lbl_disp.Location = new Point(825, 161);
             lbl_disp.Name = "lbl_disp";
             lbl_disp.Size = new Size(85, 17);
             lbl_disp.TabIndex = 32;
@@ -981,7 +1005,7 @@
             lbl_reserva.BackColor = Color.FromArgb(20, 100, 150);
             lbl_reserva.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_reserva.ForeColor = SystemColors.ButtonFace;
-            lbl_reserva.Location = new Point(848, 128);
+            lbl_reserva.Location = new Point(825, 136);
             lbl_reserva.Name = "lbl_reserva";
             lbl_reserva.Size = new Size(81, 17);
             lbl_reserva.TabIndex = 31;
@@ -994,7 +1018,7 @@
             label3.BackColor = Color.FromArgb(20, 100, 150);
             label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.ButtonFace;
-            label3.Location = new Point(862, 96);
+            label3.Location = new Point(839, 104);
             label3.Name = "label3";
             label3.Size = new Size(127, 25);
             label3.TabIndex = 30;
@@ -1002,9 +1026,9 @@
             // 
             // pictureBox4
             // 
-            pictureBox4.Anchor = AnchorStyles.Top;
+            pictureBox4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox4.BackColor = Color.FromArgb(20, 100, 150);
-            pictureBox4.Location = new Point(838, 213);
+            pictureBox4.Location = new Point(815, 221);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(199, 113);
             pictureBox4.TabIndex = 29;
@@ -1012,40 +1036,19 @@
             // 
             // pictureBox3
             // 
-            pictureBox3.Anchor = AnchorStyles.Top;
+            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox3.BackColor = Color.FromArgb(20, 100, 150);
-            pictureBox3.Location = new Point(838, 84);
+            pictureBox3.Location = new Point(815, 92);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(199, 100);
             pictureBox3.TabIndex = 28;
             pictureBox3.TabStop = false;
             // 
-            // iconButton6
-            // 
-            iconButton6.Dock = DockStyle.Top;
-            iconButton6.FlatAppearance.BorderSize = 0;
-            iconButton6.FlatStyle = FlatStyle.Flat;
-            iconButton6.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            iconButton6.IconChar = FontAwesome.Sharp.IconChar.SignOutAlt;
-            iconButton6.IconColor = Color.Black;
-            iconButton6.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton6.IconSize = 25;
-            iconButton6.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton6.Location = new Point(0, 953);
-            iconButton6.Name = "iconButton6";
-            iconButton6.Padding = new Padding(15, 0, 0, 0);
-            iconButton6.Size = new Size(246, 45);
-            iconButton6.TabIndex = 36;
-            iconButton6.Text = "Cerrar Sesión";
-            iconButton6.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton6.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton6.UseVisualStyleBackColor = true;
-            iconButton6.Click += iconButton6_Click_1;
-            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             BackgroundImage = Properties.Resources.fondo;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1313, 687);
@@ -1073,6 +1076,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

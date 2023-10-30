@@ -65,7 +65,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(45, 66, 91);
+            panel1.BackColor = Color.FromArgb(20, 100, 150);
             panel1.Controls.Add(lblDatosR);
             panel1.Controls.Add(btnC);
             panel1.Dock = DockStyle.Top;
