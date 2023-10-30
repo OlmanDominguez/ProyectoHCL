@@ -347,6 +347,30 @@ namespace ProyectoHCL.clases
             }
         }
 
+        public bool existeContraseña(string contraseña) //función para validar si existe la contraseña 
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            if (conectar.State == ConnectionState.Closed)
+            {
+                conectar.Open();
+            }
+
+            // Verificar si la contraseña existe 
+            string consultaContraseña = "SELECT COUNT(*) FROM TBL_USUARIO WHERE CONTRASENA = @contraseña";
+            using (MySqlCommand cmdContraseña = new MySqlCommand(consultaContraseña, conectar))
+            {
+                cmdContraseña.Parameters.AddWithValue("@contraseña", contraseña);
+                int countNombre = Convert.ToInt32(cmdContraseña.ExecuteScalar());
+                if (countNombre > 0)
+                {
+                    // esta contraseña ya existe
+                    return true;
+                }
+            }
+
+            return false;
+        }
         public bool existeRol(string tipo) //función para validar si existe el rol
         {
             MySqlDataReader reader;

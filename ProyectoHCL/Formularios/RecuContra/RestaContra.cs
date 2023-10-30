@@ -87,6 +87,7 @@ namespace ProyectoHCL.Formularios
                 {
                     using (BaseDatosHCL.ObtenerConexion())
                     {
+
                         //Conexion y comando
                         MySqlCommand comando = new MySqlCommand();
                         comando.Connection = BaseDatosHCL.ObtenerConexion();
@@ -101,6 +102,19 @@ namespace ProyectoHCL.Formularios
                         this.Close();
 
                     }
+                    Modelo modelo = new Modelo();
+
+                    /*if (Modelo.existeContraseña(TXT_Contra.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
+                     {
+                         MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
+                         DialogResult d = l.ShowDialog();
+                     }
+                     if (Modelo.existeContraseña(TXT_Confi.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
+                     {
+                         MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
+                         DialogResult d = l.ShowDialog();
+                     }*/
+
 
                 }
                 catch (Exception a)
