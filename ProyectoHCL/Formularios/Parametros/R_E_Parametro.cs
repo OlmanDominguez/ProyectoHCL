@@ -187,11 +187,16 @@ namespace ProyectoHCL.Formularios
             else if (parame.p == 1)
             {
                 Control control = new Control();
-                Modelo mode = new Modelo();
+                Modelo modelo = new Modelo();
 
                 if (texPa.Text.Trim() == "" || txtValor.Text.Trim() == "")//|| textPar.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (modelo.existeditarPBD(texPa.Text))
+                {
+                    MsgB m = new MsgB("advertencia", "El parametro ya existe");
                     DialogResult dR = m.ShowDialog();
                 }
                 else

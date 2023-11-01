@@ -343,7 +343,7 @@ namespace ProyectoHCL.clases
                 return false;
             }
         }
-        public bool existeeditParametro(string parametro) //función para validar si existe el parámetro
+        public bool existeditarPBD(string parametro) //función para validar si existe el parámetro
         {
 
 
@@ -369,7 +369,6 @@ namespace ProyectoHCL.clases
                 return false;
             }
         }
-
         public bool existeContraseña(string contraseña) //función para validar si existe la contraseña 
         {
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
@@ -418,7 +417,54 @@ namespace ProyectoHCL.clases
                 return false;
             }
         }
+        public bool existeditarRol(string rol) //función para validar si existe el rol
+        {
+            MySqlDataReader reader;
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
 
+            if (conectar.State == ConnectionState.Closed)
+            {
+                conectar.Open();
+            }
+
+            String sql = "SELECT ID_ROL FROM TBL_ROL WHERE ROL LIKE @ROL";
+            MySqlCommand comando = new MySqlCommand(sql, conectar);
+            comando.Parameters.AddWithValue("@ROL", rol);
+            reader = comando.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool existeditarDR(string descripcion) //función para validar si existe el rol
+        {
+            MySqlDataReader reader;
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            if (conectar.State == ConnectionState.Closed)
+            {
+                conectar.Open();
+            }
+
+            String sql = "SELECT ID_ROL FROM TBL_ROL WHERE DESCRIPCION LIKE @DESCRIPCION";
+            MySqlCommand comando = new MySqlCommand(sql, conectar);
+            comando.Parameters.AddWithValue("@DESCRIPCION", descripcion);
+            reader = comando.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public string ObtenerUsuario(string idRegistro)
         {
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();

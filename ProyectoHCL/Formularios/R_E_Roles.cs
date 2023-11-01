@@ -215,10 +215,21 @@ namespace ProyectoHCL.Formularios
             else if (label11.Text == "Editar Rol")// etiqueta para editar al momento de dar clic enviara a otro formulario donde permitira editar
             {
                 Control control = new Control();
+                Modelo modelo = new Modelo();
 
                 if (txtRol.Text.Trim() == "" || txtNumero.Text.Trim() == "" || cmbEstado.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (modelo.existeditarRol(txtRol.Text))
+                {
+                    MsgB m = new MsgB("advertencia", "El rol ya existe");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (modelo.existeditarDR(txtNumero.Text))
+                {
+                    MsgB m = new MsgB("advertencia", "La descripcion ya existe");
                     DialogResult dR = m.ShowDialog();
                 }
                 else

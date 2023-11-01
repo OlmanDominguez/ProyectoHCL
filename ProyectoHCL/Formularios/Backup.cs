@@ -72,6 +72,8 @@ namespace ProyectoHCL.Formularios
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
+
     }
 }
 
