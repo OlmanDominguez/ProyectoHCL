@@ -207,10 +207,10 @@
         private Label label10;
         private Label label9;
         private Button btnC;
-        private Label lblSalida;
-        private Label lblEntrada;
-        private Label lblCliente;
-        private Label lblHab;
         private Panel panel1;
+        public Label lblSalida;
+        public Label lblEntrada;
+        public Label lblCliente;
+        public Label lblHab;
     }
 }
