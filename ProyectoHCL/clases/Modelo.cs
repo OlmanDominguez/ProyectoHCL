@@ -138,6 +138,30 @@ namespace ProyectoHCL.clases
             return false;
         }
 
+        public bool existeEmail(string correo) //función para validar si existe el correo en pantalla cliente
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            if (conectar.State == ConnectionState.Closed)
+            {
+                conectar.Open();
+            }
+            // Verificar si el correo electrónico ya existe
+            string consultaCorreo = "SELECT COUNT(*) FROM TBL_CLIENTE WHERE EMAIL = @correo";
+            using (MySqlCommand cmdCorreo = new MySqlCommand(consultaCorreo, conectar))
+            {
+                cmdCorreo.Parameters.AddWithValue("@correo", correo);
+                int countCorreo = Convert.ToInt32(cmdCorreo.ExecuteScalar());
+                if (countCorreo > 0)
+                {
+                    // El correo electrónico ya está en uso
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public bool existeObjeto(string objeto) //función para validar si existe el objeto
         {
             MySqlDataReader reader;
@@ -317,6 +341,9 @@ namespace ProyectoHCL.clases
             }
         }
 
+
+
+
         public bool existeParametro(string parametro) //función para validar si existe el parámetro
         {
 
@@ -343,57 +370,7 @@ namespace ProyectoHCL.clases
                 return false;
             }
         }
-        public bool existeeditParametro(string parametro) //función para validar si existe el parámetro
-        {
 
-
-            MySqlDataReader reader;
-            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
-
-            if (conectar.State == ConnectionState.Closed)
-            {
-                conectar.Open();
-            }
-
-            String sql = "SELECT ID_PARAMETRO FROM TBL_PARAMETRO WHERE PARAMETRO LIKE @PARAMETRO";
-            MySqlCommand comando = new MySqlCommand(sql, conectar);
-            comando.Parameters.AddWithValue("@PARAMETRO", parametro);
-            reader = comando.ExecuteReader();
-
-            if (reader.HasRows)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool existeContraseña(string contraseña) //función para validar si existe la contraseña 
-        {
-            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
-
-            if (conectar.State == ConnectionState.Closed)
-            {
-                conectar.Open();
-            }
-
-            // Verificar si la contraseña existe 
-            string consultaContraseña = "SELECT COUNT(*) FROM TBL_USUARIO WHERE CONTRASENA = @contraseña";
-            using (MySqlCommand cmdContraseña = new MySqlCommand(consultaContraseña, conectar))
-            {
-                cmdContraseña.Parameters.AddWithValue("@contraseña", contraseña);
-                int countNombre = Convert.ToInt32(cmdContraseña.ExecuteScalar());
-                if (countNombre > 0)
-                {
-                    // esta contraseña ya existe
-                    return true;
-                }
-            }
-
-            return false;
-        }
         public bool existeRol(string tipo) //función para validar si existe el rol
         {
             MySqlDataReader reader;
@@ -416,150 +393,6 @@ namespace ProyectoHCL.clases
             else
             {
                 return false;
-            }
-        }
-
-        public string ObtenerUsuario(string idRegistro)
-        {
-            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
-
-            using (conectar)
-            {
-                using (MySqlCommand cmd = new MySqlCommand("SELECT USUARIO FROM TBL_USUARIO WHERE ID_USUARIO = @IDActual", conectar))
-                {
-                    cmd.Parameters.AddWithValue("@IDActual", idRegistro);
-                    return cmd.ExecuteScalar().ToString();
-                }
-            }
-        }
-
-        public string ObtenerNombreUsuario(string idRegistro)
-        {
-            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
-
-            using (conectar)
-            {
-                using (MySqlCommand cmd = new MySqlCommand("SELECT NOMBRE_USUARIO FROM TBL_USUARIO WHERE ID_USUARIO = @IDActual", conectar))
-                {
-                    cmd.Parameters.AddWithValue("@IDActual", idRegistro);
-                    return cmd.ExecuteScalar().ToString();
-                }
-            }
-        }
-
-        public string ObtenerCorreo(string idRegistro)
-        {
-            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
-
-            using (conectar)
-            {
-                using (MySqlCommand cmd = new MySqlCommand("SELECT EMAIL FROM TBL_USUARIO WHERE ID_USUARIO = @IDActual", conectar))
-                {
-                    cmd.Parameters.AddWithValue("@IDActual", idRegistro);
-                    return cmd.ExecuteScalar().ToString();
-                }
-            }
-        }
-
-        public string ObtenerDescuento(string idRegistro)
-        {
-            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
-
-            using (conectar)
-            {
-                using (MySqlCommand cmd = new MySqlCommand("SELECT DESCRIPCION FROM TBL_DESCUENTO WHERE ID_DESCUENTO = @IDActual", conectar))
-                {
-                    cmd.Parameters.AddWithValue("@IDActual", idRegistro);
-                    return cmd.ExecuteScalar().ToString();
-                }
-            }
-        }
-
-        public bool UsuarioEditarBD(string nuevoNombre, string idRegistroActual)
-        {
-            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
-
-            using (conectar)
-            {
-                if (nuevoNombre == ObtenerUsuario(idRegistroActual))
-                {
-                    return false; 
-                }
-
-                using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_USUARIO WHERE USUARIO = @NuevoNombre", conectar))
-                {
-                    cmd.Parameters.AddWithValue("@NuevoNombre", nuevoNombre);
-
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    return count > 0;
-                }
-            }
-        }
-
-        public bool NombreUsEditarBD(string nuevoNombre, string idRegistroActual)
-        {
-            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
-
-            using (conectar)
-            {
-                if (nuevoNombre == ObtenerNombreUsuario(idRegistroActual))
-                {
-                    return false;
-                }
-                using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_USUARIO WHERE NOMBRE_USUARIO = @NuevoNombre AND ID_USUARIO != @IDActual", conectar))
-                {
-                    cmd.Parameters.AddWithValue("@NuevoNombre", nuevoNombre);
-                    cmd.Parameters.AddWithValue("@IDActual", idRegistroActual);
-
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    return count > 0;
-                }
-            }
-        }
-
-        public bool CorreoEditarBD(string nuevoCorreo, string idRegistroActual)
-        {
-            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
-
-            if (nuevoCorreo == ObtenerCorreo(idRegistroActual))
-            {
-                return false;
-            }
-            using (conectar)
-            {
-                using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_USUARIO WHERE EMAIL = @NuevoCorreo AND ID_USUARIO != @IDActual", conectar))
-                {
-                    cmd.Parameters.AddWithValue("@NuevoCorreo", nuevoCorreo);
-                    cmd.Parameters.AddWithValue("@IDActual", idRegistroActual);
-
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    return count > 0;
-                }
-            }
-        }
-
-        public bool DescuentoEditarBD(string nuevoNombre, string idRegistroActual)
-        {
-            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
-
-            using (conectar)
-            {
-                if (nuevoNombre == ObtenerDescuento(idRegistroActual))
-                {
-                    return false;
-                }
-
-                using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_DESCUENTO WHERE DESCRIPCION = @NuevoNombre", conectar))
-                {
-                    cmd.Parameters.AddWithValue("@NuevoNombre", nuevoNombre);
-
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    return count > 0;
-                }
             }
         }
 

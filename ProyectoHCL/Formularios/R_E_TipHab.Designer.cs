@@ -274,9 +274,11 @@
             txtTipo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtTipo.Location = new Point(63, 66);
             txtTipo.MaxLength = 100;
+            txtTipo.MinimumSize = new Size(5, 5);
             txtTipo.Name = "txtTipo";
             txtTipo.Size = new Size(316, 27);
             txtTipo.TabIndex = 24;
+            txtTipo.KeyPress += txtTipo_KeyPress;
             txtTipo.Leave += txtTipo_Leave;
             // 
             // btnCancelar
