@@ -78,7 +78,7 @@ namespace ProyectoHCL
             {
                 case "pregunta": //Si es pregunta, se muestra la imagen correspondiente y los botones de aceptar o cancelar
                     lblTitulo.Text = "Pregunta";
-                    lblTitulo.ForeColor = Color.FromArgb(33, 150, 243);
+                    //lblTitulo.ForeColor = Color.FromArgb(33, 150, 243);
                     panel1.BackColor = Color.FromArgb(33, 150, 243);
                     pbPregunta.Visible = true;
                     btnOk.Visible = true;
@@ -86,34 +86,35 @@ namespace ProyectoHCL
                     break;
                 case "informacion": //Si es información, se muestra la imagen correspondiente y el boton de aceptar
                     lblTitulo.Text = "Información";
-                    lblTitulo.ForeColor = Color.FromArgb(33, 150, 243);
+                    //lblTitulo.ForeColor = Color.FromArgb(33, 150, 243);
                     panel1.BackColor = Color.FromArgb(33, 150, 243);
                     pbInfo.Visible = true;
                     btnAOk.Visible = true;
                     break;
                 case "advertencia": //Si es advertencia, se muestra la imagen correspondiente y el boton de aceptar
                     lblTitulo.Text = "Advertencia";
-                    lblTitulo.ForeColor = Color.FromArgb(255, 193, 7);
-                    panel1.BackColor = Color.FromArgb(255, 193, 7);
+                    //lblTitulo.ForeColor = Color.FromArgb(255, 193, 7);
+                    panel1.BackColor = Color.FromArgb(255, 173, 7);
                     pbAdvertencia.Visible = true;
                     btnAOk.Visible = true;
                     break;
                 case "error": //Si es error, se muestra la imagen correspondiente y el boton de aceptar
                     lblTitulo.Text = "Error";
-                    lblTitulo.ForeColor = Color.FromArgb(244, 67, 54);
+                    //lblTitulo.ForeColor = Color.FromArgb(244, 67, 54);
                     panel1.BackColor = Color.FromArgb(244, 67, 54);
                     pbError.Visible = true;
                     btnAOk.Visible = true;
                     break;
                 case "bienvenida": //Si es error, se muestra la imagen correspondiente y el boton de aceptar
                     lblTitulo.Text = "Bienvenido(a), " + clasecompartida.user;
-                    lblTitulo.ForeColor = Color.FromArgb(33, 150, 243);
+                    //lblTitulo.ForeColor = Color.FromArgb(33, 150, 243);
                     panel1.BackColor = Color.FromArgb(33, 150, 243);
                     pbBienvenido.Visible = true; 
                     btnAOk.Visible = true;
                     break;
-                default: //si no es ninguno de los anteriores se muestra el mensaje "Error al seleccionar"
-                    lblTitulo.Text = "Error al seleccionar";
+                default: //si no es ninguno de los anteriores se muestra el mensaje "Error"
+                    lblTitulo.Text = "Error";
+                    pbError.Visible = true;
                     break;
             }
         }

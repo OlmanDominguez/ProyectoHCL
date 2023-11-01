@@ -644,9 +644,9 @@ namespace ProyectoHCL
                     {
                         if (dt_fecha_coti.Value.Date >= DateTime.Today)
                         {
-                            if (dt_fecha_entrada.Value.Date >= DateTime.Today)
+                            if (dt_fecha_entrada.Value.Date >= DateTime.Today & dt_fecha_entrada.Value.Date<dt_fecha_salida.Value.Date)
                             {
-                                if (dt_fecha_salida.Value.Date >= DateTime.Today)
+                                if (dt_fecha_salida.Value.Date >= DateTime.Today & dt_fecha_salida.Value.Date> dt_fecha_entrada.Value.Date)
                                 {
                                     try
                                     {
@@ -686,6 +686,18 @@ namespace ProyectoHCL
                                         DialogResult dR = m.ShowDialog();
                                     }
                                 }
+                                else
+                                {
+                                    MsgB m = new MsgB("advertencia", "Fechas de salida no puede ser menor o igual a la de entrada");
+                                    DialogResult dR = m.ShowDialog();
+
+                                }
+                            }
+                            else
+                            {
+                                MsgB m = new MsgB("advertencia", "Fechas de entrada no puede ser mayor o igual a la de salida");
+                                DialogResult dR = m.ShowDialog();
+
                             }
                         }//cierre del if 
                         else
@@ -748,9 +760,9 @@ namespace ProyectoHCL
         {
             if (dt_fecha_coti.Value.Date >= DateTime.Today)
             {
-                if (dt_fecha_entrada.Value.Date >= DateTime.Today)
+                if (dt_fecha_entrada.Value.Date >= DateTime.Today & dt_fecha_entrada.Value.Date < dt_fecha_salida.Value.Date)
                 {
-                    if (dt_fecha_salida.Value.Date >= DateTime.Today)
+                    if (dt_fecha_salida.Value.Date >= DateTime.Today & dt_fecha_salida.Value.Date > dt_fecha_entrada.Value.Date)
                     {
                         try
                         {
@@ -793,6 +805,18 @@ namespace ProyectoHCL
                             DialogResult dR = m.ShowDialog();
                         }
                     }
+                    else
+                    {
+                        MsgB m = new MsgB("advertencia", "Fechas de salida no puede ser menor a la de entrada");
+                        DialogResult dR = m.ShowDialog();
+
+                    }
+                }
+                else
+                {
+                    MsgB m = new MsgB("advertencia", "Fechas de entrada no puede ser mayor a la de salida");
+                    DialogResult dR = m.ShowDialog();
+
                 }
             }//cierre if 
             else

@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Wordprocessing;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
@@ -134,6 +135,7 @@ namespace ProyectoHCL.Formularios
 
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e) //validar que se ingresen sólo numeros y puntos '.'
         {
+            ValidarTxt.TxtNumeros(e);
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 e.Handled = true;
@@ -197,6 +199,11 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "El tipo de habitación ya existe");
                     DialogResult dR = m.ShowDialog();
                 }
+                else if (txtTipo.TextLength < 5) //validar que el campo tipo no tenga menos de 5 caracteres
+                {
+                    MsgB m = new MsgB("advertencia", "El campo debe tener al menos 5 letras");
+                    DialogResult dR = m.ShowDialog();
+                }
                 else
                 {
                     try
@@ -231,10 +238,22 @@ namespace ProyectoHCL.Formularios
             {
                 Control control = new Control();
 
-                if (txtTipo.Text.Trim() == "" || txtCapacidad.Text.Trim() == "" || txtPrecio.Text.Trim() == ""
-                    || cmbEstado.Text.Trim() == "") //validar campos vacíos
+                Modelo modelo = new Modelo();
+
+                if (txtTipo.Text.Trim() == "" || txtCapacidad.Text.Trim() == "" || txtPrecio.Text.Trim() == "" //validar campos vacíos
+                    || cmbEstado.Text.Trim() == "")
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (modelo.existeTipHab(txtTipo.Text))
+                {
+                    MsgB mbox1 = new MsgB("advertencia", "El tipo de habitación ya existe");
+                    DialogResult dR1 = mbox1.ShowDialog();
+                }
+                else if (txtTipo.TextLength < 5) //validar que el campo tipo no tenga menos de 5 caracteres
+                {
+                    MsgB m = new MsgB("advertencia", "El campo no debe tener menos de 5 letras");
                     DialogResult dR = m.ShowDialog();
                 }
                 else
@@ -257,6 +276,7 @@ namespace ProyectoHCL.Formularios
             }
         }
 
+
         private void cmbEstado_Leave(object sender, EventArgs e) //validar campo vacío
         {
             if (ValidarTxt.cmbVacio(cmbEstado))
@@ -267,6 +287,11 @@ namespace ProyectoHCL.Formularios
             {
                 errorT.Clear();
             }
+        }
+
+        private void txtTipo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtLetras(e);
         }
     }
 }

@@ -186,6 +186,7 @@ namespace ProyectoHCL.Formularios
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             R_E_hab.lblTitulo.Text = "Registrar Habitación";
+            R_E_hab.cargarTiposR();
             R_E_hab.ShowDialog();
             CargarDG();
         }
@@ -288,6 +289,7 @@ namespace ProyectoHCL.Formularios
             if (this.dgvHab.Columns[e.ColumnIndex].Name == "EDITAR") //si se dio click en el botón editar hacer lo siguiente
             {
                 R_E_hab.lblTitulo.Text = "Editar Habitación";
+                R_E_hab.cargarTiposE();
                 //obtener los datos del datagrid del registro seleccionado
                 R_E_hab.idH = dgvHab.CurrentRow.Cells["ID"].Value.ToString();
                 R_E_hab.cmbTipo.Text = dgvHab.CurrentRow.Cells["TIPO"].Value.ToString();
