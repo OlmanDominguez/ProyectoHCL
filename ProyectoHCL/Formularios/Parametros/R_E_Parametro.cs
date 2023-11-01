@@ -187,6 +187,7 @@ namespace ProyectoHCL.Formularios
             else if (parame.p == 1)
             {
                 Control control = new Control();
+                Modelo mode = new Modelo();
 
                 if (texPa.Text.Trim() == "" || txtValor.Text.Trim() == "")//|| textPar.Text.Trim() == "")
                 {
@@ -228,7 +229,9 @@ namespace ProyectoHCL.Formularios
                         MsgB m = new MsgB("informacion", "Registro modificado");
                         DialogResult dR = m.ShowDialog();
                         this.Close();
+
                     }
+
                     catch (Exception ex)
                     {
                         MsgB m = new MsgB("Error: ", ex.Message);
