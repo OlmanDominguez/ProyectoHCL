@@ -27,7 +27,7 @@ catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda
 Programa:         Pantalla de Ingreso de agregar cliente
 Fecha:             27 - septiembre - 2023
 Programador:      Joel
-descripcion:       Pantalla que contrala las validaciones de Facturacion
+descripcion:       Pantalla que controla las validaciones de Facturacion
 
 -----------------------------------------------------------------------
 
@@ -63,7 +63,7 @@ using System.Windows.Forms;
 using static ProyectoHCL.Formularios.CtrlClientes;
 using ProyectoHCL.Formularios;
 
-namespace ProyectoHCL.Formularios   
+namespace ProyectoHCL.Formularios
 {
     public partial class AgregarCliente : Form  /* clase publica agregar cliente */
     {
@@ -120,21 +120,46 @@ namespace ProyectoHCL.Formularios
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             Modelo modelo = new Modelo();
-            if (VCamposVacios() == false)
+            if (VCamposVacios() == false) //Validar campos vacios
             {
                 MsgB mbox = new MsgB("advertencia", "Favor llene todos los campos");
                 DialogResult dR = mbox.ShowDialog();
+            }
+            else if (modelo.existeCliente(txtID.Text)) //Validar que el cliente ya existe
+            {
+                MsgB mbox1 = new MsgB("advertencia", "El cliente ya existe");
+                DialogResult dR1 = mbox1.ShowDialog();
+            }
+            else if (modelo.existeNombre(txtNombre.Text)) //validar si ya existe el nombre del cliente
+            {
+                MsgB m = new MsgB("advertencia", "El nombre de usuario ya existe");
+                DialogResult dR = m.ShowDialog();
+            }
+            else if (modelo.existeEmail(txtEmail1.Text)) //validar si ya existe el correo del cliente
+            {
+                MsgB m = new MsgB("advertencia", "El correo proporcionado ya está registrado");
+                DialogResult dR = m.ShowDialog();
+            }
+            else if (!ValidarTxt.CorreoValido(txtEmail1.Text)) //validar correo
+            {
+                MsgB m = new MsgB("advertencia", "Dirección de correo no válido");
+                DialogResult dR = m.ShowDialog();
+            }
+            else if (txtNombre.TextLength < 5) //validar que el nombre del cliente no tenga menos de 5 caracteres
+            {
+                MsgB m = new MsgB("advertencia", "El nombre debe contener al menos 5 letras");
+                DialogResult dR = m.ShowDialog();
+            }
+            else if (txtApellido.TextLength < 5) //validar que el apellido del cliente no tenga menos de 5 caracteres
+            {
+                MsgB m = new MsgB("advertencia", "El apellido debe contener al menos 5 letras");
+                DialogResult dR = m.ShowDialog();
             }
             else
             {
                 try
                 {
-                    if (modelo.existeCliente(txtID.Text))
-                    {
-                        MsgB mbox1 = new MsgB("advertencia", "El cliente ya existe");
-                        DialogResult dR1 = mbox1.ShowDialog();
-                    }
-                    int tip = 0;  
+                    int tip = 0;
                     string nombre;
                     if (txtEmpresa.Text.Trim() == "") { txtEmpresa.Text = "N/A"; }
                     if (txtRTN.Text.Trim() == "") { txtRTN.Text = "N/A"; }
@@ -158,10 +183,8 @@ namespace ProyectoHCL.Formularios
                     DialogResult dR = mbox.ShowDialog();
                     conn.Close();
                     this.Close();
-
-
                 }
-                catch (Exception ex)   /* detectar errores en ejecucion */ 
+                catch (Exception ex)   /* detectar errores en ejecucion */
                 {
                     MessageBox.Show(ex.Message);
                 }
@@ -253,6 +276,73 @@ namespace ProyectoHCL.Formularios
             cbTipo.SelectedIndex = 0;
             cbTipo.Items.Add("Juridico");
             cbTipo.Items.Add("Natural");
+        }
+
+        private void txtID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtNumeros(e);
+        }
+
+        private void txtApellido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtLetras(e);
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtLetras(e);
+        }
+
+        private void txtTele1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtNumeros(e);
+        }
+
+        private void txtTele2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtNumeros(e);
+        }
+
+        private void txtRTN_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtNumeros(e);
+        }
+
+        private void txtEmpresa_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtLetras(e);
+        }
+
+        private void txtEmail1_TextChanged(object sender, EventArgs e)
+        { }
+
+        private void txtEmail1_Leave(object sender, EventArgs e)
+        {
+
+            if (!ValidarTxt.CorreoValido(txtEmail1.Text))
+            {
+                errorT.SetError(txtEmail1, "Dirección de correo no válida");
+                txtEmail1.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+            }
+
+        }
+
+        private void txtEmail2_Leave(object sender, EventArgs e)
+        {
+            if (!ValidarTxt.CorreoValido(txtEmail2.Text))
+            {
+                errorT.SetError(txtEmail2, "Dirección de correo no válida");
+                txtEmail2.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+            }
+
         }
     }
 }

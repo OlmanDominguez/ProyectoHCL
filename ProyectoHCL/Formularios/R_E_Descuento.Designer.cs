@@ -33,7 +33,6 @@
             panel2 = new Panel();
             btnCerrar = new Button();
             btnMin = new Button();
-            pictureBox5 = new PictureBox();
             lblTitulo = new Label();
             panel3 = new Panel();
             cmbEstado = new ComboBox();
@@ -49,7 +48,6 @@
             label2 = new Label();
             errorT = new ErrorProvider(components);
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorT).BeginInit();
             SuspendLayout();
@@ -59,7 +57,6 @@
             panel2.BackColor = Color.SteelBlue;
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(btnMin);
-            panel2.Controls.Add(pictureBox5);
             panel2.Controls.Add(lblTitulo);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
@@ -98,26 +95,14 @@
             btnMin.UseVisualStyleBackColor = false;
             btnMin.Click += btnMin_Click;
             // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(12, 12);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(50, 48);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 19;
-            pictureBox5.TabStop = false;
-            // 
             // lblTitulo
             // 
-            lblTitulo.AutoSize = true;
             lblTitulo.BackColor = Color.Transparent;
             lblTitulo.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
             lblTitulo.ForeColor = Color.White;
-            lblTitulo.Location = new Point(295, 21);
+            lblTitulo.Location = new Point(198, 21);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(38, 30);
+            lblTitulo.Size = new Size(397, 30);
             lblTitulo.TabIndex = 9;
             lblTitulo.Text = "lbl";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -243,6 +228,7 @@
             txtPorcentaje.Name = "txtPorcentaje";
             txtPorcentaje.Size = new Size(316, 27);
             txtPorcentaje.TabIndex = 10;
+            txtPorcentaje.TextChanged += txtPorcentaje_TextChanged;
             txtPorcentaje.KeyPress += txtPorcentaje_KeyPress;
             txtPorcentaje.Leave += txtPorcentaje_Leave;
             // 
@@ -257,6 +243,7 @@
             txtDesc.Name = "txtDesc";
             txtDesc.Size = new Size(316, 27);
             txtDesc.TabIndex = 9;
+            txtDesc.KeyPress += txtDesc_KeyPress;
             txtDesc.Leave += txtNombre_Leave;
             // 
             // label3
@@ -298,9 +285,8 @@
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "R_E_Descuento";
+            FormClosing += R_E_Descuento_FormClosing;
             panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)errorT).EndInit();
@@ -312,7 +298,6 @@
         private Panel panel2;
         private Button btnCerrar;
         private Button btnMin;
-        private PictureBox pictureBox5;
         public Label lblTitulo;
         private Panel panel3;
         private Button btnCancelar;

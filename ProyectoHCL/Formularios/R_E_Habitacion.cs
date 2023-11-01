@@ -67,44 +67,75 @@ namespace ProyectoHCL.Formularios
         public R_E_Habitacion()
         {
             InitializeComponent();
-            cargarTipos(); //llenar combobox 
             cmbTipo.SelectedIndex = -1; //inicializar combobox vacío
         }
 
         public string idH = null;
         MsgB msgB = new MsgB();
+        Modelo modelo = new Modelo();
 
-        private void cargarTipos() //cargar combobox con los registros de la base de datos
+        public void cargarTiposR() //cargar combobox con los registros de los tipos de habitación activos en la base de datos
         {
-            MySqlConnection conn;
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
             MySqlCommand cmd;
 
             cmbTipo.DataSource = null;
-            cmbTipo.Items.Clear(); //limpiar combobox
-            string sql = "SELECT ID_TIPOHABITACION, TIPO FROM TBL_TIPOHABITACION;";
+            cmbTipo.Items.Clear();
 
-            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-            conn.Open();
-
-            try
+            using (conectar)
             {
-                cmd = new MySqlCommand(sql, conn);
-                MySqlDataAdapter data = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                data.Fill(dt);
-
-                cmbTipo.ValueMember = "ID_TIPOHABITACION";
-                cmbTipo.DisplayMember = "TIPO";
-                cmbTipo.DataSource = dt;
-
+                string sql = "SELECT TIPO FROM TBL_TIPOHABITACION WHERE ESTADO = 'ACTIVO';";
+                try
+                {
+                    cmd = new MySqlCommand(sql, conectar);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string tipo = reader["TIPO"].ToString();
+                            cmbTipo.Items.Add(tipo);
+                        }
+                    }
+                }
+                catch (MySqlException e)
+                {
+                    MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
+                    DialogResult dR = m.ShowDialog();
+                }
+                finally { conectar.Close(); }
             }
-            catch (MySqlException e)
+        }
+
+        public void cargarTiposE()
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+            MySqlCommand cmd;
+
+            cmbTipo.DataSource = null;
+            cmbTipo.Items.Clear();
+
+            using (conectar)
             {
-                MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
-                DialogResult dR = m.ShowDialog();
+                string sql = "SELECT TIPO FROM TBL_TIPOHABITACION;";
+                try
+                {
+                    cmd = new MySqlCommand(sql, conectar);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string tipo = reader["TIPO"].ToString();
+                            cmbTipo.Items.Add(tipo);
+                        }
+                    }
+                }
+                catch (MySqlException e)
+                {
+                    MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
+                    DialogResult dR = m.ShowDialog();
+                }
+                finally { conectar.Close(); }
             }
-            finally { conn.Close(); }
-
         }
 
         public void limpiarCampos() //limpiar los campos del formulario
@@ -162,8 +193,6 @@ namespace ProyectoHCL.Formularios
         {
             if (lblTitulo.Text == "Registrar Habitación")
             {
-                Modelo modelo = new Modelo();
-
                 if (cmbTipo.Text.Trim() == "" || txtNumero.Text.Trim() == "" || cmbEstado.Text.Trim() == "") //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
@@ -205,11 +234,18 @@ namespace ProyectoHCL.Formularios
             }
             else if (lblTitulo.Text == "Editar Habitación")
             {
+                string nuevoNumero = txtNumero.Text;
+                string idRegistro = idH;
                 Control control = new Control();
 
                 if (cmbTipo.Text.Trim() == "" || txtNumero.Text.Trim() == "" || cmbEstado.Text.Trim() == "") //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (modelo.HabitacionEditarBD(nuevoNumero, idRegistro))
+                {
+                    MsgB m = new MsgB("advertencia", "El número de habitación ya está registrado");
                     DialogResult dR = m.ShowDialog();
                 }
                 else
@@ -276,6 +312,75 @@ namespace ProyectoHCL.Formularios
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void txtNumero_TextChanged(object sender, EventArgs e)
+        {
+            if (int.TryParse(txtNumero.Text, out int numero))
+            {
+                if (numero > 0)
+                {
+                    // El valor es válido
+                }
+                else
+                {
+                    errorT.SetError(txtNumero, "Ingrese un número mayor a 0");
+                    txtNumero.Text = "";
+                }
+            }
+        }
+
+        private string ObtenerEstadoTipoHab(string tipo)
+        {
+            string estado = "DESCONOCIDO";
+
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+            MySqlCommand cmd;
+
+            using (conectar)
+            {
+                string sql = "SELECT ESTADO FROM TBL_TIPOHABITACION WHERE TIPO = @tipo";
+                try
+                {
+                    cmd = new MySqlCommand(sql, conectar);
+                    cmd.Parameters.AddWithValue("@tipo", tipo);
+
+                    estado = cmd.ExecuteScalar()?.ToString();
+                }
+                catch (MySqlException e)
+                {
+                    MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
+                    DialogResult dR = m.ShowDialog();
+                }
+                finally
+                {
+                    conectar.Close();
+                }
+            }
+
+            return estado;
+        }
+
+        private void cmbTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbTipo.SelectedItem != null)
+            {
+                string tipo = cmbTipo.SelectedItem.ToString(); // Obtener el tipo de habitacion seleccionado
+
+                // Realizar una consulta para obtener el estado del tipo de habitacion desde la base de datos
+                string estado = ObtenerEstadoTipoHab(tipo);
+
+                // Validar si el tipo de habitacion está inactivo
+                if (estado == "INACTIVO")
+                {
+                    errorT.SetError(cmbTipo, "Seleccione un tipo de habitación activo");
+
+                    if (cmbTipo.SelectedIndex != -1)
+                    {
+                        cmbTipo.SelectedIndex = -1; // Deseleccionar el tipo de habitacion
+                    }
+                }
+            }
         }
     }
 }

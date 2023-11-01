@@ -31,11 +31,13 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(R_E_Habitacion));
             panel2 = new Panel();
-            pictureBox5 = new PictureBox();
             lblTitulo = new Label();
             btnCerrar = new Button();
             btnMin = new Button();
             panel3 = new Panel();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
             cmbTipo = new ComboBox();
             cmbEstado = new ComboBox();
             btnCancelar = new Button();
@@ -45,11 +47,7 @@
             label1 = new Label();
             label2 = new Label();
             errorT = new ErrorProvider(components);
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorT).BeginInit();
             SuspendLayout();
@@ -57,7 +55,6 @@
             // panel2
             // 
             panel2.BackColor = Color.SteelBlue;
-            panel2.Controls.Add(pictureBox5);
             panel2.Controls.Add(lblTitulo);
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(btnMin);
@@ -68,28 +65,16 @@
             panel2.TabIndex = 22;
             panel2.MouseMove += panel2_MouseMove;
             // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(12, 12);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(50, 48);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 34;
-            pictureBox5.TabStop = false;
-            // 
             // lblTitulo
             // 
             lblTitulo.Anchor = AnchorStyles.Top;
-            lblTitulo.AutoSize = true;
             lblTitulo.BackColor = Color.Transparent;
             lblTitulo.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
             lblTitulo.ForeColor = Color.White;
-            lblTitulo.Location = new Point(302, 21);
+            lblTitulo.Location = new Point(179, 21);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.RightToLeft = RightToLeft.No;
-            lblTitulo.Size = new Size(38, 30);
+            lblTitulo.Size = new Size(448, 30);
             lblTitulo.TabIndex = 19;
             lblTitulo.Text = "lbl";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -145,6 +130,39 @@
             panel3.TabIndex = 24;
             panel3.Paint += panel3_Paint;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.ForeColor = Color.Red;
+            label5.Location = new Point(302, 180);
+            label5.Name = "label5";
+            label5.Size = new Size(23, 30);
+            label5.TabIndex = 31;
+            label5.Text = "*";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.Red;
+            label4.Location = new Point(316, 102);
+            label4.Name = "label4";
+            label4.Size = new Size(23, 30);
+            label4.TabIndex = 30;
+            label4.Text = "*";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.Red;
+            label3.Location = new Point(283, 24);
+            label3.Name = "label3";
+            label3.Size = new Size(23, 30);
+            label3.TabIndex = 29;
+            label3.Text = "*";
+            // 
             // cmbTipo
             // 
             cmbTipo.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -154,6 +172,7 @@
             cmbTipo.Name = "cmbTipo";
             cmbTipo.Size = new Size(316, 28);
             cmbTipo.TabIndex = 24;
+            cmbTipo.SelectedIndexChanged += cmbTipo_SelectedIndexChanged;
             cmbTipo.Leave += cmbTipo_Leave;
             // 
             // cmbEstado
@@ -210,10 +229,11 @@
             txtNumero.BorderStyle = BorderStyle.FixedSingle;
             txtNumero.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtNumero.Location = new Point(243, 138);
-            txtNumero.MaxLength = 50;
+            txtNumero.MaxLength = 4;
             txtNumero.Name = "txtNumero";
             txtNumero.Size = new Size(316, 27);
             txtNumero.TabIndex = 12;
+            txtNumero.TextChanged += txtNumero_TextChanged;
             txtNumero.KeyPress += txtNumero_KeyPress;
             txtNumero.Leave += txtNumero_Leave;
             // 
@@ -254,39 +274,6 @@
             // 
             errorT.ContainerControl = this;
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.ForeColor = Color.Red;
-            label3.Location = new Point(283, 24);
-            label3.Name = "label3";
-            label3.Size = new Size(23, 30);
-            label3.TabIndex = 29;
-            label3.Text = "*";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.ForeColor = Color.Red;
-            label4.Location = new Point(316, 102);
-            label4.Name = "label4";
-            label4.Size = new Size(23, 30);
-            label4.TabIndex = 30;
-            label4.Text = "*";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.ForeColor = Color.Red;
-            label5.Location = new Point(302, 180);
-            label5.Name = "label5";
-            label5.Size = new Size(23, 30);
-            label5.TabIndex = 31;
-            label5.Text = "*";
-            // 
             // R_E_Habitacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -301,8 +288,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "R_E_Habitacion";
             panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)errorT).EndInit();
@@ -312,7 +297,6 @@
         #endregion
 
         private Panel panel2;
-        private PictureBox pictureBox5;
         private Button btnCerrar;
         private Button btnMin;
         public Panel panel3;

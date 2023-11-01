@@ -172,15 +172,47 @@ namespace ProyectoHCL.Formularios
         Control control = new Control();
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (VCamposVacios() == false)
+            Modelo modelo = new Modelo();
+            if (VCamposVacios() == false) //Validar campos vacios
             {
-                MsgB mbox1 = new MsgB("advertencia", "Favor llene todos los campos");
+                MsgB mbox = new MsgB("advertencia", "Favor llene todos los campos");
+                DialogResult dR = mbox.ShowDialog();
+            }
+            else if (modelo.existeCliente(txtID.Text)) //Validar que el cliente ya existe
+            {
+                MsgB mbox1 = new MsgB("advertencia", "El cliente ya existe");
                 DialogResult dR1 = mbox1.ShowDialog();
+            }
+            else if (modelo.existeNombre(txtNombre.Text)) //validar si ya existe el nombre del cliente
+            {
+                MsgB m = new MsgB("advertencia", "El nombre de usuario ya existe");
+                DialogResult dR = m.ShowDialog();
+            }
+            else if (modelo.existeEmail(txtEmail1.Text)) //validar si ya existe el correo del cliente
+            {
+                MsgB m = new MsgB("advertencia", "El correo proporcionado ya está registrado");
+                DialogResult dR = m.ShowDialog();
+            }
+            else if (!ValidarTxt.CorreoValido(txtEmail1.Text)) //validar correo
+            {
+                MsgB m = new MsgB("advertencia", "Dirección de correo no válido");
+                DialogResult dR = m.ShowDialog();
+            }
+            else if (txtNombre.TextLength < 5) //validar que el nombre del cliente no tenga menos de 5 caracteres
+            {
+                MsgB m = new MsgB("advertencia", "El nombre debe contener al menos 5 letras");
+                DialogResult dR = m.ShowDialog();
+            }
+            else if (txtApellido.TextLength < 5) //validar que el apellido del cliente no tenga menos de 5 caracteres
+            {
+                MsgB m = new MsgB("advertencia", "El apellido debe contener al menos 5 letras");
+                DialogResult dR = m.ShowDialog();
             }
             else
             {
                 try
                 {
+
                     int tip = 0;
                     string nombre;
                     if (txtEmpresa.Text.Trim() == "") { txtEmpresa.Text = "N/A"; }
@@ -285,6 +317,67 @@ namespace ProyectoHCL.Formularios
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void txtID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtNumeros(e);
+        }
+
+        private void txtTele1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtNumeros(e);
+        }
+
+        private void txtTele2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtNumeros(e);
+        }
+
+        private void txtRTN_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtNumeros(e);
+        }
+
+        private void txtEmpresa_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtLetras(e);
+        }
+
+        private void txtApellido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtLetras(e);
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidarTxt.TxtLetras(e);
+        }
+
+        private void txtEmail1_Leave(object sender, EventArgs e)
+        {
+            if (!ValidarTxt.CorreoValido(txtEmail1.Text))
+            {
+                errorT.SetError(txtEmail1, "Dirección de correo no válida");
+                txtEmail1.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+            }
+        }
+
+        private void txtEmail2_Leave(object sender, EventArgs e)
+        {
+            if (!ValidarTxt.CorreoValido(txtEmail2.Text))
+            {
+                errorT.SetError(txtEmail2, "Dirección de correo no válida");
+                txtEmail2.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+            }
         }
     }
 }

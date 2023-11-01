@@ -74,6 +74,7 @@ namespace ProyectoHCL.Formularios
 
         public string idDesc = null;
         MsgB msgB = new MsgB();
+        Modelo modelo = new Modelo();
 
         public void limpiarCampos() //limpiar los campos del formulario
         {
@@ -97,15 +98,15 @@ namespace ProyectoHCL.Formularios
         private void btnCerrar_Click(object sender, EventArgs e) //botón para cerrar
         {
             this.Close();
-            limpiarCampos();
-            limpiarError();
+            //limpiarCampos();
+            //limpiarError();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e) //botón para cancelar
         {
             this.Close();
-            limpiarCampos();
-            limpiarError();
+            //limpiarCampos();
+            //limpiarError();
         }
 
         //coordenadas para arrastrar formulario
@@ -145,9 +146,16 @@ namespace ProyectoHCL.Formularios
 
         private void txtNombre_Leave(object sender, EventArgs e) //validar campo vacío
         {
+            string texto = txtDesc.Text;
+
             if (ValidarTxt.txtVacio(txtDesc))
             {
                 errorT.SetError(txtDesc, "Introduzca un nombre");
+            }
+            else if (texto.Length < 5)
+            {
+                errorT.SetError(txtDesc, "El nombre del descuento debe contener al menos 5 letras");
+                txtDesc.Focus();
             }
             else
             {
@@ -169,15 +177,18 @@ namespace ProyectoHCL.Formularios
 
         private void btnGuardar_Click(object sender, EventArgs e) //botón para guardar un nuevo registro o una modificación
         {
-            if (lblTitulo.Text == "Registrar Descuento") 
+            if (lblTitulo.Text == "Registrar Descuento")
             {
-                Modelo modelo = new Modelo();
-
                 if (txtDesc.Text.Trim() == "" || txtPorcentaje.Text.Trim() == "" || cmbEstado.Text.Trim() == "") //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
 
+                }
+                else if (txtDesc.TextLength < 5) //validar que el nombre no tenga menos de 5 caracteres
+                {
+                    MsgB m = new MsgB("advertencia", "El nombre del descuento debe contener al menos 5 letras");
+                    DialogResult dR = m.ShowDialog();
                 }
                 else if (modelo.existeDescuento(txtDesc.Text)) //validar si ya existe el registro
                 {
@@ -218,10 +229,22 @@ namespace ProyectoHCL.Formularios
             else if (lblTitulo.Text == "Editar Descuento")
             {
                 Control control = new Control();
+                string nuevoDescuento = txtDesc.Text;
+                string idRegistro = idDesc;
 
                 if (txtDesc.Text.Trim() == "" || txtPorcentaje.Text.Trim() == "" || cmbEstado.Text.Trim() == "") //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (txtDesc.TextLength < 5) //validar que el nombre no tenga menos de 5 caracteres
+                {
+                    MsgB m = new MsgB("advertencia", "El nombre del descuento debe contener al menos 5 letras");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (modelo.DescuentoEditarBD(nuevoDescuento, idRegistro))
+                {
+                    MsgB m = new MsgB("advertencia", "El descuento ya está registrado");
                     DialogResult dR = m.ShowDialog();
                 }
                 else
@@ -254,6 +277,36 @@ namespace ProyectoHCL.Formularios
             {
                 errorT.Clear();
             }
+        }
+
+        private void txtDesc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPorcentaje_TextChanged(object sender, EventArgs e)
+        {
+            if (double.TryParse(txtPorcentaje.Text, out double porcentaje))
+            {
+                if (porcentaje > 0 && porcentaje <= 100)
+                {
+                    // El valor es válido
+                }
+                else
+                {
+                    errorT.SetError(txtPorcentaje, "El porcentaje debe estar entre 1 y 100");
+                    txtPorcentaje.Text = "";
+                }
+            }
+        }
+
+        private void R_E_Descuento_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            limpiarCampos();
+            limpiarError();
         }
     }
 }
