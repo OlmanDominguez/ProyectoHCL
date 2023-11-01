@@ -21,7 +21,7 @@ namespace ProyectoHCL
     
     public partial class RecuContra : Form
     {
-        const string correo = "sistemahcasalomas@gmail.com";
+        //const string correo = "sistemahcasalomas@gmail.com";
         const string pass = "wvldqmeolycahxwd";
         private object sec;
 
@@ -33,8 +33,79 @@ namespace ProyectoHCL
             this.DoubleBuffered = true;
         }
 
-        //Boton cerrar
+        public static string ParametroSMTP() 
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
 
+            string sql = "SELECT VALOR FROM TBL_PARAMETRO WHERE PARAMETRO = 'SMTPCLIENT';";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["VALOR"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+            conn.Close();
+        }
+
+        public static string ParametroPuerto()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            string sql = "SELECT VALOR FROM TBL_PARAMETRO WHERE PARAMETRO = 'PUERTO CORREO';";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["VALOR"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+            conn.Close();
+        }
+
+        public static string ParametroCorreo()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            string sql = "SELECT VALOR FROM TBL_PARAMETRO WHERE PARAMETRO = 'CORREO HOTEL';";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["VALOR"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+            conn.Close();
+        }
+
+        //Boton cerrar
         private void BTN_Cancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -155,9 +226,12 @@ namespace ProyectoHCL
         public static void sendemail(string mensaje, DateTime fechaenvio, string de, string para, out string Error)
         {
             Error = "";
+            string correo = ParametroCorreo();
+            string puerto = ParametroPuerto();
+            string smtpC = ParametroSMTP();
+
             try
             {
-                
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress(de);
                 mail.To.Add(para);
@@ -168,8 +242,8 @@ namespace ProyectoHCL
 
 
                
-                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-                smtp.Port = 587;
+                SmtpClient smtp = new SmtpClient(smtpC);
+                smtp.Port = Convert.ToInt32(puerto);
                 smtp.UseDefaultCredentials = false;
                 smtp.Credentials = new System.Net.NetworkCredential(correo, pass);
                 smtp.EnableSsl = true;

@@ -228,6 +228,7 @@
             txtPorcentaje.Name = "txtPorcentaje";
             txtPorcentaje.Size = new Size(316, 27);
             txtPorcentaje.TabIndex = 10;
+            txtPorcentaje.TextChanged += txtPorcentaje_TextChanged;
             txtPorcentaje.KeyPress += txtPorcentaje_KeyPress;
             txtPorcentaje.Leave += txtPorcentaje_Leave;
             // 
@@ -242,6 +243,7 @@
             txtDesc.Name = "txtDesc";
             txtDesc.Size = new Size(316, 27);
             txtDesc.TabIndex = 9;
+            txtDesc.KeyPress += txtDesc_KeyPress;
             txtDesc.Leave += txtNombre_Leave;
             // 
             // label3
@@ -283,6 +285,7 @@
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "R_E_Descuento";
+            FormClosing += R_E_Descuento_FormClosing;
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();

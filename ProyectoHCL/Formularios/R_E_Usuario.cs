@@ -683,8 +683,7 @@ namespace ProyectoHCL.Formularios
                 // Validar si el rol está inactivo
                 if (estado == "INACTIVO")
                 {
-                    MsgB m = new MsgB("advertencia", "El rol está inactivo, no puede seleccionarlo");
-                    DialogResult dR = m.ShowDialog();
+                    errorT.SetError(cmbRol, "Seleccione un rol activo");
 
                     if (cmbRol.SelectedIndex != -1)
                     {
