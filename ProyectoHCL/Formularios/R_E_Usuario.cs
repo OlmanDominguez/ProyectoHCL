@@ -79,6 +79,7 @@ namespace ProyectoHCL.Formularios
 
         public string idUs = null;
         MsgB msgB = new MsgB();
+        Modelo modelo = new Modelo();
 
         public void cargarRolesR() //cargar combobox con los registros de los roles en la base de datos
         {
@@ -279,7 +280,6 @@ namespace ProyectoHCL.Formularios
         {
             if (lblTitulo.Text == "Registrar Usuario")
             {
-                Modelo modelo = new Modelo();
 
                 if (txtNombre.Text.Trim() == "" || txtUsuario.Text.Trim() == "" || txtContraseña.Text.Trim() == "" ||
                     cmbRol.Text.Trim() == "" || txtCorreo.Text.Trim() == "") //validar campos vacíos
@@ -384,12 +384,31 @@ namespace ProyectoHCL.Formularios
             }
             else if (lblTitulo.Text == "Editar Usuario")
             {
+                string nuevoUsuario = txtUsuario.Text;
+                string nuevoNombre = txtNombre.Text;
+                string nuevoCorreo = txtCorreo.Text;
+                string idRegistro = idUs;
                 Control control = new Control();
 
                 if (txtNombre.Text.Trim() == "" || txtUsuario.Text.Trim() == "" || cmbRol.Text.Trim() == "" ||
                     txtCorreo.Text.Trim() == "" || cmbEstado.Text.Trim() == "") //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (modelo.UsuarioEditarBD(nuevoUsuario, idRegistro))
+                {
+                    MsgB m = new MsgB("advertencia", "El usuario ya está registrado");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (modelo.NombreUsEditarBD(nuevoNombre, idRegistro))
+                {
+                    MsgB m = new MsgB("advertencia", "El nombre de usuario ya está registrado");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (modelo.CorreoEditarBD(nuevoCorreo, idRegistro))
+                {
+                    MsgB m = new MsgB("advertencia", "El correo ya está registrado");
                     DialogResult dR = m.ShowDialog();
                 }
                 else if (DateTime.Today > dtpVencimiento.Value) //validar la fecha de vencimiento
@@ -621,8 +640,58 @@ namespace ProyectoHCL.Formularios
             limpiarError();
         }
 
+        private string ObtenerEstadoRol(string rol)
+        {
+            string estado = "DESCONOCIDO"; 
+
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+            MySqlCommand cmd;
+
+            using (conectar)
+            {
+                string sql = "SELECT ESTADO_ROL FROM TBL_ROL WHERE ROL = @nombreRol";
+                try
+                {
+                    cmd = new MySqlCommand(sql, conectar);
+                    cmd.Parameters.AddWithValue("@nombreRol", rol);
+
+                    estado = cmd.ExecuteScalar()?.ToString();
+                }
+                catch (MySqlException e)
+                {
+                    MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
+                    DialogResult dR = m.ShowDialog();
+                }
+                finally
+                {
+                    conectar.Close();
+                }
+            }
+
+            return estado;
+        }
+
         private void cmbRol_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbRol.SelectedItem != null)
+            {
+                string rol = cmbRol.SelectedItem.ToString(); // Obtener el nombre del rol seleccionado
+
+                // Realizar una consulta para obtener el estado del rol desde la base de datos
+                string estado = ObtenerEstadoRol(rol);
+
+                // Validar si el rol está inactivo
+                if (estado == "INACTIVO")
+                {
+                    MsgB m = new MsgB("advertencia", "El rol está inactivo, no puede seleccionarlo");
+                    DialogResult dR = m.ShowDialog();
+
+                    if (cmbRol.SelectedIndex != -1)
+                    {
+                        cmbRol.SelectedIndex = -1; // Deseleccionar el rol
+                    }
+                }
+            }
         }
     }
 }

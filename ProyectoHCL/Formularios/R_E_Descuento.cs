@@ -74,6 +74,7 @@ namespace ProyectoHCL.Formularios
 
         public string idDesc = null;
         MsgB msgB = new MsgB();
+        Modelo modelo = new Modelo();
 
         public void limpiarCampos() //limpiar los campos del formulario
         {
@@ -169,10 +170,8 @@ namespace ProyectoHCL.Formularios
 
         private void btnGuardar_Click(object sender, EventArgs e) //botón para guardar un nuevo registro o una modificación
         {
-            if (lblTitulo.Text == "Registrar Descuento") 
+            if (lblTitulo.Text == "Registrar Descuento")
             {
-                Modelo modelo = new Modelo();
-
                 if (txtDesc.Text.Trim() == "" || txtPorcentaje.Text.Trim() == "" || cmbEstado.Text.Trim() == "") //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
@@ -218,10 +217,17 @@ namespace ProyectoHCL.Formularios
             else if (lblTitulo.Text == "Editar Descuento")
             {
                 Control control = new Control();
+                string nuevoDescuento = txtDesc.Text;
+                string idRegistro = idDesc;
 
                 if (txtDesc.Text.Trim() == "" || txtPorcentaje.Text.Trim() == "" || cmbEstado.Text.Trim() == "") //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (modelo.DescuentoEditarBD(nuevoDescuento, idRegistro))
+                {
+                    MsgB m = new MsgB("advertencia", "El nombre de usuario ya está registrado");
                     DialogResult dR = m.ShowDialog();
                 }
                 else
