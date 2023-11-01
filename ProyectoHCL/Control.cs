@@ -71,10 +71,10 @@ namespace ProyectoHCL
         AdmonDescuento admonDescuento = new AdmonDescuento();   
 
         public void editarUs(string id, string estado, string rol, string usuario, string nombre, //editar usuarios
-            string contraseña, string vencimiento, string email)
+            string contraseña, string vencimiento, string email, string idEditor)
         {
             admonUsuario.modificarUsuario(Convert.ToInt32(id), estado, rol, usuario, nombre,
-               contraseña, Convert.ToDateTime(vencimiento), email);
+               contraseña, Convert.ToDateTime(vencimiento), email, Convert.ToInt32(idEditor));
         }
 
         public void editarObj(string id, string nombreObj, string descObj, string estadoObj, string actP) //editar objetos
@@ -103,12 +103,12 @@ namespace ProyectoHCL
             admonDescuento.modificarDescuento(Convert.ToInt32(id), descripcion, Convert.ToDecimal(porcentaje), est, Convert.ToInt32(idU));
         }
 
-        public void editarClie(string NOMBRECL, int ID_TIPOCLIENTECL, string APELLIDOCL, //editar cliente
-             string NOMBRE_RTNCL, string RTNCL, string TELEFONOCL, string EMAILCL, int CODIGOCL,
+        public void editarClie(string CODIGOCL, string NOMBRECL, int ID_TIPOCLIENTECL, string APELLIDOCL, //editar cliente
+             string NOMBRE_RTNCL, string RTNCL, string TELEFONOCL, string EMAILCL,
              string DNI_PASAPORTECL, string TELEFONO2CL, string EMAIL2CL)
         {
-            admonClientes.modificarCliente(NOMBRECL, ID_TIPOCLIENTECL, APELLIDOCL, NOMBRE_RTNCL,
-                RTNCL, TELEFONOCL, EMAILCL, CODIGOCL, DNI_PASAPORTECL, TELEFONO2CL, EMAIL2CL);
+            admonClientes.modificarCliente(Convert.ToInt32(CODIGOCL), NOMBRECL, ID_TIPOCLIENTECL, APELLIDOCL, NOMBRE_RTNCL,
+                RTNCL, TELEFONOCL, EMAILCL, DNI_PASAPORTECL, TELEFONO2CL, EMAIL2CL);
         }
 
         public void editarR(string  id, string nombrerol, string descripcion, string estado_rol)// string fecha_creacion,string fecha_actualizacion)

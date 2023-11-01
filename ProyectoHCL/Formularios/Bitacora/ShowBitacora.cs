@@ -44,11 +44,11 @@ namespace ProyectoHCL.Formularios.Bitacora
         {
             lb_idBitacora.Text = preg.id;
             lb_user.Text = preg.user;
-            lb_modulo.Text = preg.submenu;
             lb_pantalla.Text = preg.pantalla;
             lb_accion.Text = preg.accion;
             lb_fecha.Text = preg.fecha;
             lb_descripcion.Text = preg.descripcion;
+
         }
     }
 }

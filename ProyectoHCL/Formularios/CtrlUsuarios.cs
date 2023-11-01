@@ -301,15 +301,15 @@ namespace ProyectoHCL.Formularios
 
                 conn.Close();
                 //registrar accción(editar) en bitácora
-                sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
-                    "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'INGRESO', 'INGRESO A EDITAR USUARIO " +
-                    R_E_user.idUs + " " + R_E_user.txtUsuario.Text + "');";
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
+                //sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
+                //    "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'INGRESO', 'INGRESO A EDITAR USUARIO " +
+                //    R_E_user.idUs + " " + R_E_user.txtUsuario.Text + "');";
+                //conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                //conn.Open();
 
-                cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                //cmd = new MySqlCommand(sql, conn);
+                //cmd.ExecuteNonQuery();
+                //conn.Close();
 
                 R_E_user.ShowDialog();
                 R_E_user.limpiarCampos();
