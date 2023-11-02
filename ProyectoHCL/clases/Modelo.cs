@@ -395,9 +395,9 @@ namespace ProyectoHCL.clases
                 return false;
             }
         }
-
-        public bool existeContraseña(string contraseña) //función para validar si existe la contraseña 
+        public bool existeContraseña(string contraseña) //función para validar si existe el rol
         {
+            MySqlDataReader reader;
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
 
             if (conectar.State == ConnectionState.Closed)
@@ -405,21 +405,21 @@ namespace ProyectoHCL.clases
                 conectar.Open();
             }
 
-            // Verificar si la contraseña existe 
-            string consultaContraseña = "SELECT COUNT(*) FROM TBL_USUARIO WHERE CONTRASENA = @contraseña";
-            using (MySqlCommand cmdContraseña = new MySqlCommand(consultaContraseña, conectar))
-            {
-                cmdContraseña.Parameters.AddWithValue("@contraseña", contraseña);
-                int countNombre = Convert.ToInt32(cmdContraseña.ExecuteScalar());
-                if (countNombre > 0)
-                {
-                    // esta contraseña ya existe
-                    return true;
-                }
-            }
+            String sql = "SELECT ID_USUARIO FROM TBL_USUARIO WHERE CONTRASENA LIKE @CONTRASENA";
+            MySqlCommand comando = new MySqlCommand(sql, conectar);
+            comando.Parameters.AddWithValue("@CONTRASENA", contraseña);
+            reader = comando.ExecuteReader();
 
-            return false;
+            if (reader.HasRows)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+
         public bool existeRol(string tipo) //función para validar si existe el rol
         {
             MySqlDataReader reader;
