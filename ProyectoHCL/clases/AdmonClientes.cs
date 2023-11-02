@@ -94,8 +94,8 @@ namespace ProyectoHCL.clases
         }
 
         
-        public void modificarCliente( string NOMBRECL, int ID_TIPOCLIENTECL, string APELLIDOCL,
-             string NOMBRE_RTNCL, string RTNCL, string TELEFONOCL, string EMAILCL, int CODIGOCL, 
+        public void modificarCliente(int CODIGOCL, string NOMBRECL, int ID_TIPOCLIENTECL, string APELLIDOCL,
+             string NOMBRE_RTNCL, string RTNCL, string TELEFONOCL, string EMAILCL, 
              string DNI_PASAPORTECL, string TELEFONO2CL, string EMAIL2CL)
         {
 
@@ -108,6 +108,7 @@ namespace ProyectoHCL.clases
 
                 cmd = new MySqlCommand("EditarCliente", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@CODIGOCL", CODIGOCL);
                 cmd.Parameters.AddWithValue("@NOMBRECL", NOMBRECL);
                 cmd.Parameters.AddWithValue("@ID_TIPOCLIENTECL", ID_TIPOCLIENTECL);
                 cmd.Parameters.AddWithValue("@APELLIDOCL", APELLIDOCL);
@@ -115,7 +116,6 @@ namespace ProyectoHCL.clases
                 cmd.Parameters.AddWithValue("@RTNCL", RTNCL);
                 cmd.Parameters.AddWithValue("@TELEFONOCL", TELEFONOCL);
                 cmd.Parameters.AddWithValue("@EMAILCL", EMAILCL);
-                cmd.Parameters.AddWithValue("@CODIGOCL", CODIGOCL);
                 cmd.Parameters.AddWithValue("@DNI_PASAPORTECL", DNI_PASAPORTECL);
                 cmd.Parameters.AddWithValue("@TELEFONO2CL", TELEFONO2CL);
                 cmd.Parameters.AddWithValue("@EMAIL2CL", EMAIL2CL);

@@ -90,7 +90,7 @@ namespace ProyectoHCL.clases
         }
 
         public void modificarUsuario(int id, string estado, string rol, string usuario, string nombre,
-            string contraseña, DateTime vencimiento, string email) //función para editar usuarios
+            string contraseña, DateTime vencimiento, string email, int idEditor) //función para editar usuarios
         {
 
             try
@@ -111,6 +111,7 @@ namespace ProyectoHCL.clases
                 cmd.Parameters.AddWithValue("@contraseña", contraseña);
                 cmd.Parameters.AddWithValue("@vencimiento", vencimiento);
                 cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@usuarioEditor", idEditor);
 
                 cmd.ExecuteNonQuery();
                 conn.Close();

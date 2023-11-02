@@ -22,7 +22,7 @@ namespace ProyectoHCL.Formularios
         clases.Bitacora bitacora = new clases.Bitacora();
         DataSet ds = new DataSet();
         MsgB msgB = new MsgB();
-        int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
+        int pagInicio = 1, indice = 0, numFilas = 10, pagFinal, cmbIndice = 0;
 
         public CtrlBitacora()
         {
@@ -113,19 +113,19 @@ namespace ProyectoHCL.Formularios
             switch (cmbIndice)
             {
                 case 0:
-                    numFilas = 5;
-                    break;
-                case 1:
                     numFilas = 10;
                     break;
-                case 2:
+                case 1:
                     numFilas = 20;
                     break;
-                case 3:
+                case 2:
                     numFilas = 30;
                     break;
-                case 4:
+                case 3:
                     numFilas = 40;
+                    break;
+                case 4:
+                    numFilas = 50;
                     break;
             }
             pagFinal = numFilas;
@@ -134,7 +134,7 @@ namespace ProyectoHCL.Formularios
 
         public static class preg
         {
-            public static string id, user, submenu, pantalla, accion, fecha, descripcion;
+            public static string id, user, pantalla, accion, fecha, descripcion;
 
         }
 
@@ -145,7 +145,6 @@ namespace ProyectoHCL.Formularios
             {
                 preg.id = dgvBitacora.CurrentRow.Cells["ID"].Value.ToString();
                 preg.user = dgvBitacora.CurrentRow.Cells["USUARIO"].Value.ToString();
-                preg.submenu = dgvBitacora.CurrentRow.Cells["SUBMENU"].Value.ToString();
                 preg.pantalla = dgvBitacora.CurrentRow.Cells["PANTALLA"].Value.ToString();
                 preg.accion = dgvBitacora.CurrentRow.Cells["ACCION"].Value.ToString();
                 preg.fecha = dgvBitacora.CurrentRow.Cells["FECHA"].Value.ToString();
@@ -243,7 +242,7 @@ namespace ProyectoHCL.Formularios
             pic.ResizeInPixels(80, 80);
             sl.InsertPicture(pic);
 
-            sl.SetCellValue("C2", "Reporte de Bitacora");
+            sl.SetCellValue("C2", "Bitacora");
             SLStyle estiloT = sl.CreateStyle();
             estiloT.Font.FontName = "Arial";
             estiloT.Font.FontSize = 14;
@@ -263,7 +262,6 @@ namespace ProyectoHCL.Formularios
             sl.SetCellValue("H" + celdaCabecera, "Objeto");
             sl.SetCellValue("I" + celdaCabecera, "Fecha");
             sl.SetCellValue("J" + celdaCabecera, "Accion");
-            sl.SetCellValue("K" + celdaCabecera, "Descripcion");
 
             SLStyle estiloCa = sl.CreateStyle();
             estiloT.Font.FontName = "Arial";
@@ -271,10 +269,10 @@ namespace ProyectoHCL.Formularios
             estiloT.Font.Bold = true;
             estiloCa.Font.FontColor = System.Drawing.Color.White;
             estiloCa.Fill.SetPattern(DocumentFormat.OpenXml.Spreadsheet.PatternValues.Solid, System.Drawing.Color.Blue, System.Drawing.Color.Blue);
-            sl.SetCellStyle("B" + celdaCabecera, "K" + celdaCabecera, estiloCa);
+            sl.SetCellStyle("B" + celdaCabecera, "J" + celdaCabecera, estiloCa);
 
             string sql = "SELECT b.ID_BITACORA, u.ID_USUARIO, u.USUARIO, m.ID_MODULO, m.NOMBRE_MODULO, o.ID_OBJETO, o.OBJETO, b.FECHA, b.ACCION, " +
-                "b.DESCRIPCION FROM TBL_BITACORA b INNER JOIN TBL_USUARIO u ON b.ID_USUARIO = u.ID_USUARIO INNER JOIN PT_OBJETO o ON b.ID_OBJETO = o.ID_OBJETO " +
+                "FROM TBL_BITACORA b INNER JOIN TBL_USUARIO u ON b.ID_USUARIO = u.ID_USUARIO INNER JOIN PT_OBJETO o ON b.ID_OBJETO = o.ID_OBJETO " +
                 "INNER JOIN PT_MODULO m ON o.ID_MODULO = m.ID_MODULO;";
 
             MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
@@ -294,7 +292,7 @@ namespace ProyectoHCL.Formularios
                 sl.SetCellValue("H" + celdaCabecera, reader["OBJETO"].ToString());
                 sl.SetCellValue("I" + celdaCabecera, reader["FECHA"].ToString());
                 sl.SetCellValue("J" + celdaCabecera, reader["ACCION"].ToString());
-                sl.SetCellValue("K" + celdaCabecera, reader["DESCRIPCION"].ToString());
+                //sl.SetCellValue("K" + celdaCabecera, reader["DESCRIPCION"].ToString());
             }
 
             SLStyle EstiloB = sl.CreateStyle();
@@ -303,9 +301,9 @@ namespace ProyectoHCL.Formularios
             EstiloB.Border.TopBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
             EstiloB.Border.RightBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
             EstiloB.Border.BottomBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
-            sl.SetCellStyle("B" + celdaInicial, "K" + celdaCabecera, EstiloB);
+            sl.SetCellStyle("B" + celdaInicial, "J" + celdaCabecera, EstiloB);
 
-            sl.AutoFitColumn("B", "K");
+            sl.AutoFitColumn("B", "J");
 
             SaveFileDialog sf = new SaveFileDialog();
 

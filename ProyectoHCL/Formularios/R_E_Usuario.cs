@@ -450,28 +450,28 @@ namespace ProyectoHCL.Formularios
                         {
                             //llamar función para editar 
                             control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
-                            Pass(), dtpVencimiento.Text, txtCorreo.Text);
+                            Pass(), dtpVencimiento.Text, txtCorreo.Text, clasecompartida.iduser.ToString());
                         }
                         else
                         {
                             control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
-                            txtContraseña.Text, dtpVencimiento.Text, txtCorreo.Text);
+                            txtContraseña.Text, dtpVencimiento.Text, txtCorreo.Text, clasecompartida.iduser.ToString());
                         }
                         string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-                        MySqlConnection conn;
-                        MySqlCommand cmd;
+                        //MySqlConnection conn;
+                        //MySqlCommand cmd;
 
                         //registrar acción(editar) en bitacóra
-                        string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
-                            "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'EDICION', 'EDICION USUARIO " +
-                            idUs + " " + txtUsuario.Text + "');";
-                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                        conn.Open();
+                        //string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
+                        //    "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'EDICION', 'EDICION USUARIO " +
+                        //    idUs + " " + txtUsuario.Text + "');";
+                        //conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                        //conn.Open();
 
-                        cmd = new MySqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        conn.Close();
+                        //cmd = new MySqlCommand(sql, conn);
+                        //cmd.ExecuteNonQuery();
+                        //conn.Close();
 
                         MsgB m = new MsgB("informacion", "Registro modificado");
                         DialogResult dR = m.ShowDialog();
