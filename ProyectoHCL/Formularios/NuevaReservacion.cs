@@ -475,7 +475,7 @@ namespace ProyectoHCL
                             lbl_tipo_habitacion.Visible = true;
                             tbl_resultado_habitacion.Text = leer["TIPO"].ToString();
                             //cb_tipo.Text = leer["TIPO"].ToString();
-                            dt_fecha_coti.Value = Convert.ToDateTime(leer["FECHACOTI"].ToString());
+                            dt_fecha_coti.Value = DateTime.Today;
                             dt_fecha_entrada.Value = Convert.ToDateTime(leer["INGRESO"].ToString());
                             dt_fecha_salida.Value = Convert.ToDateTime(leer["SALIDA"].ToString());
                             if (txt_vehiculo.Text != "0")
