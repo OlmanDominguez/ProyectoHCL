@@ -58,6 +58,8 @@
             panel2 = new Panel();
             lbl_titulo = new Label();
             panelChildForm = new Panel();
+            lbl_facturadas = new Label();
+            label13 = new Label();
             label1 = new Label();
             cmbHabitacion = new ComboBox();
             panel46 = new Panel();
@@ -81,8 +83,8 @@
             lbl_confirma = new Label();
             lbl_confir = new Label();
             label8 = new Label();
-            lbl_disponible = new Label();
-            lbl_reservadas = new Label();
+            lbl_inactivas = new Label();
+            lbl_activas = new Label();
             lbl_disp = new Label();
             lbl_reserva = new Label();
             label3 = new Label();
@@ -659,6 +661,8 @@
             panelChildForm.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panelChildForm.AutoSize = true;
             panelChildForm.BackColor = Color.Transparent;
+            panelChildForm.Controls.Add(lbl_facturadas);
+            panelChildForm.Controls.Add(label13);
             panelChildForm.Controls.Add(label1);
             panelChildForm.Controls.Add(cmbHabitacion);
             panelChildForm.Controls.Add(panel46);
@@ -672,8 +676,8 @@
             panelChildForm.Controls.Add(lbl_confirma);
             panelChildForm.Controls.Add(lbl_confir);
             panelChildForm.Controls.Add(label8);
-            panelChildForm.Controls.Add(lbl_disponible);
-            panelChildForm.Controls.Add(lbl_reservadas);
+            panelChildForm.Controls.Add(lbl_inactivas);
+            panelChildForm.Controls.Add(lbl_activas);
             panelChildForm.Controls.Add(lbl_disp);
             panelChildForm.Controls.Add(lbl_reserva);
             panelChildForm.Controls.Add(label3);
@@ -683,6 +687,30 @@
             panelChildForm.Name = "panelChildForm";
             panelChildForm.Size = new Size(1067, 617);
             panelChildForm.TabIndex = 25;
+            // 
+            // lbl_facturadas
+            // 
+            lbl_facturadas.AutoSize = true;
+            lbl_facturadas.BackColor = Color.FromArgb(20, 100, 150);
+            lbl_facturadas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_facturadas.ForeColor = SystemColors.ButtonFace;
+            lbl_facturadas.Location = new Point(957, 361);
+            lbl_facturadas.Name = "lbl_facturadas";
+            lbl_facturadas.Size = new Size(13, 17);
+            lbl_facturadas.TabIndex = 49;
+            lbl_facturadas.Text = "-";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.BackColor = Color.FromArgb(20, 100, 150);
+            label13.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label13.ForeColor = SystemColors.ButtonFace;
+            label13.Location = new Point(831, 360);
+            label13.Name = "label13";
+            label13.Size = new Size(78, 17);
+            label13.TabIndex = 48;
+            label13.Text = "Facturadas:";
             // 
             // label1
             // 
@@ -870,12 +898,11 @@
             // 
             // lbl_anuladas
             // 
-            lbl_anuladas.Anchor = AnchorStyles.Top;
             lbl_anuladas.AutoSize = true;
             lbl_anuladas.BackColor = Color.FromArgb(20, 100, 150);
             lbl_anuladas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_anuladas.ForeColor = SystemColors.ButtonFace;
-            lbl_anuladas.Location = new Point(916, 308);
+            lbl_anuladas.Location = new Point(957, 338);
             lbl_anuladas.Name = "lbl_anuladas";
             lbl_anuladas.Size = new Size(13, 17);
             lbl_anuladas.TabIndex = 41;
@@ -883,12 +910,11 @@
             // 
             // lbl_anu
             // 
-            lbl_anu.Anchor = AnchorStyles.Top;
             lbl_anu.AutoSize = true;
             lbl_anu.BackColor = Color.FromArgb(20, 100, 150);
             lbl_anu.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_anu.ForeColor = SystemColors.ButtonFace;
-            lbl_anu.Location = new Point(830, 307);
+            lbl_anu.Location = new Point(831, 337);
             lbl_anu.Name = "lbl_anu";
             lbl_anu.Size = new Size(69, 17);
             lbl_anu.TabIndex = 40;
@@ -896,12 +922,11 @@
             // 
             // lbl_confirmadas
             // 
-            lbl_confirmadas.Anchor = AnchorStyles.Top;
             lbl_confirmadas.AutoSize = true;
             lbl_confirmadas.BackColor = Color.FromArgb(20, 100, 150);
             lbl_confirmadas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_confirmadas.ForeColor = SystemColors.ButtonFace;
-            lbl_confirmadas.Location = new Point(916, 284);
+            lbl_confirmadas.Location = new Point(957, 314);
             lbl_confirmadas.Name = "lbl_confirmadas";
             lbl_confirmadas.Size = new Size(13, 17);
             lbl_confirmadas.TabIndex = 39;
@@ -909,12 +934,11 @@
             // 
             // lbl_pendientes
             // 
-            lbl_pendientes.Anchor = AnchorStyles.Top;
             lbl_pendientes.AutoSize = true;
             lbl_pendientes.BackColor = Color.FromArgb(20, 100, 150);
             lbl_pendientes.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_pendientes.ForeColor = SystemColors.ButtonFace;
-            lbl_pendientes.Location = new Point(916, 259);
+            lbl_pendientes.Location = new Point(957, 289);
             lbl_pendientes.Name = "lbl_pendientes";
             lbl_pendientes.Size = new Size(13, 17);
             lbl_pendientes.TabIndex = 38;
@@ -922,12 +946,11 @@
             // 
             // lbl_confirma
             // 
-            lbl_confirma.Anchor = AnchorStyles.Top;
             lbl_confirma.AutoSize = true;
             lbl_confirma.BackColor = Color.FromArgb(20, 100, 150);
             lbl_confirma.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_confirma.ForeColor = SystemColors.ButtonFace;
-            lbl_confirma.Location = new Point(829, 282);
+            lbl_confirma.Location = new Point(830, 312);
             lbl_confirma.Name = "lbl_confirma";
             lbl_confirma.Size = new Size(90, 17);
             lbl_confirma.TabIndex = 37;
@@ -935,85 +958,78 @@
             // 
             // lbl_confir
             // 
-            lbl_confir.Anchor = AnchorStyles.Top;
             lbl_confir.AutoSize = true;
             lbl_confir.BackColor = Color.FromArgb(20, 100, 150);
             lbl_confir.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_confir.ForeColor = SystemColors.ButtonFace;
-            lbl_confir.Location = new Point(829, 258);
+            lbl_confir.Location = new Point(830, 288);
             lbl_confir.Name = "lbl_confir";
-            lbl_confir.Size = new Size(80, 17);
+            lbl_confir.Size = new Size(66, 17);
             lbl_confir.TabIndex = 36;
-            lbl_confir.Text = "Pendientes:";
+            lbl_confir.Text = "Reservas:";
             // 
             // label8
             // 
-            label8.Anchor = AnchorStyles.Top;
             label8.AutoSize = true;
             label8.BackColor = Color.FromArgb(20, 100, 150);
             label8.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = SystemColors.ButtonFace;
-            label8.Location = new Point(839, 225);
+            label8.Location = new Point(840, 255);
             label8.Name = "label8";
             label8.Size = new Size(137, 25);
             label8.TabIndex = 35;
             label8.Text = "Reservaciones";
             // 
-            // lbl_disponible
+            // lbl_inactivas
             // 
-            lbl_disponible.Anchor = AnchorStyles.Top;
-            lbl_disponible.AutoSize = true;
-            lbl_disponible.BackColor = Color.FromArgb(20, 100, 150);
-            lbl_disponible.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_disponible.ForeColor = SystemColors.ButtonFace;
-            lbl_disponible.Location = new Point(912, 162);
-            lbl_disponible.Name = "lbl_disponible";
-            lbl_disponible.Size = new Size(13, 17);
-            lbl_disponible.TabIndex = 34;
-            lbl_disponible.Text = "-";
+            lbl_inactivas.AutoSize = true;
+            lbl_inactivas.BackColor = Color.FromArgb(20, 100, 150);
+            lbl_inactivas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_inactivas.ForeColor = SystemColors.ButtonFace;
+            lbl_inactivas.Location = new Point(912, 162);
+            lbl_inactivas.Name = "lbl_inactivas";
+            lbl_inactivas.Size = new Size(13, 17);
+            lbl_inactivas.TabIndex = 34;
+            lbl_inactivas.Text = "-";
             // 
-            // lbl_reservadas
+            // lbl_activas
             // 
-            lbl_reservadas.Anchor = AnchorStyles.Top;
-            lbl_reservadas.AutoSize = true;
-            lbl_reservadas.BackColor = Color.FromArgb(20, 100, 150);
-            lbl_reservadas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_reservadas.ForeColor = SystemColors.ButtonFace;
-            lbl_reservadas.Location = new Point(912, 137);
-            lbl_reservadas.Name = "lbl_reservadas";
-            lbl_reservadas.Size = new Size(13, 17);
-            lbl_reservadas.TabIndex = 33;
-            lbl_reservadas.Text = "-";
+            lbl_activas.AutoSize = true;
+            lbl_activas.BackColor = Color.FromArgb(20, 100, 150);
+            lbl_activas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_activas.ForeColor = SystemColors.ButtonFace;
+            lbl_activas.Location = new Point(912, 137);
+            lbl_activas.Name = "lbl_activas";
+            lbl_activas.Size = new Size(13, 17);
+            lbl_activas.TabIndex = 33;
+            lbl_activas.Text = "-";
             // 
             // lbl_disp
             // 
-            lbl_disp.Anchor = AnchorStyles.Top;
             lbl_disp.AutoSize = true;
             lbl_disp.BackColor = Color.FromArgb(20, 100, 150);
             lbl_disp.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_disp.ForeColor = SystemColors.ButtonFace;
             lbl_disp.Location = new Point(825, 161);
             lbl_disp.Name = "lbl_disp";
-            lbl_disp.Size = new Size(85, 17);
+            lbl_disp.Size = new Size(66, 17);
             lbl_disp.TabIndex = 32;
-            lbl_disp.Text = "Disponibles:";
+            lbl_disp.Text = "Inactivas:";
             // 
             // lbl_reserva
             // 
-            lbl_reserva.Anchor = AnchorStyles.Top;
             lbl_reserva.AutoSize = true;
             lbl_reserva.BackColor = Color.FromArgb(20, 100, 150);
             lbl_reserva.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_reserva.ForeColor = SystemColors.ButtonFace;
             lbl_reserva.Location = new Point(825, 136);
             lbl_reserva.Name = "lbl_reserva";
-            lbl_reserva.Size = new Size(81, 17);
+            lbl_reserva.Size = new Size(56, 17);
             lbl_reserva.TabIndex = 31;
-            lbl_reserva.Text = "Reservadas:";
+            lbl_reserva.Text = "Activas:";
             // 
             // label3
             // 
-            label3.Anchor = AnchorStyles.Top;
             label3.AutoSize = true;
             label3.BackColor = Color.FromArgb(20, 100, 150);
             label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -1026,17 +1042,15 @@
             // 
             // pictureBox4
             // 
-            pictureBox4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox4.BackColor = Color.FromArgb(20, 100, 150);
-            pictureBox4.Location = new Point(815, 221);
+            pictureBox4.Location = new Point(816, 251);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(199, 113);
+            pictureBox4.Size = new Size(199, 140);
             pictureBox4.TabIndex = 29;
             pictureBox4.TabStop = false;
             // 
             // pictureBox3
             // 
-            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox3.BackColor = Color.FromArgb(20, 100, 150);
             pictureBox3.Location = new Point(815, 92);
             pictureBox3.Name = "pictureBox3";
@@ -1101,8 +1115,8 @@
         private Label lbl_confirma;
         private Label lbl_confir;
         private Label label8;
-        private Label lbl_disponible;
-        private Label lbl_reservadas;
+        private Label lbl_inactivas;
+        private Label lbl_activas;
         private Label lbl_disp;
         private Label lbl_reserva;
         private Label label3;
@@ -1140,5 +1154,7 @@
         private FlowLayoutPanel ContenedorDias;
         private Label label11;
         private FontAwesome.Sharp.IconButton iconButton6;
+        private Label lbl_facturadas;
+        private Label label13;
     }
 }

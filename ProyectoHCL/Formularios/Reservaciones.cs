@@ -138,6 +138,12 @@ namespace ProyectoHCL
                             dgv_reservaciones.Columns["ELIMINAR"].Visible = false;
                         }
                         break;
+                    case 5:
+                        if (obj.ObjetoN == "RESERVACION" && !obj.Permitido)
+                        {
+                            dgv_reservaciones.Columns["VER"].Visible = false;
+                        }
+                        break;
                 }
             }
         }
@@ -320,6 +326,7 @@ namespace ProyectoHCL
                 reservacion.lbl_1c.Visible = true;
                 reservacion.lbl_cliente.Visible = true;             
                 reservacion.lbl_cliente.Text= dgv_reservaciones.CurrentRow.Cells["NOMBRE"].Value.ToString();
+                
                 reservacion.ShowDialog();
 
                 CargarDG();
@@ -329,7 +336,7 @@ namespace ProyectoHCL
                 Form formulario = new DatosReserva();
                 formulario.Show();
 
-                //CargarDG();
+                CargarDG();
             }
         }
 

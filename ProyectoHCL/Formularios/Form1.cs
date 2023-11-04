@@ -157,7 +157,9 @@ namespace ProyectoHCL
                         }
                         else
                         {
-                            MessageBox.Show("USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VALIDOS");
+                            // MessageBox.Show("USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VALIDOS");
+                            MsgB mbox = new MsgB("advertencia", "USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VALIDOS");
+                            DialogResult dR = mbox.ShowDialog();
                         }
 
                        
@@ -165,7 +167,9 @@ namespace ProyectoHCL
                     }
                     else
                     {
-                        MessageBox.Show("USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VALIDOS");
+                        // MessageBox.Show("USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VALIDOS");
+                        MsgB mbox = new MsgB("advertencia", "USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VALIDOS");
+                        DialogResult dR = mbox.ShowDialog();
                     }
                     
                   
@@ -192,7 +196,10 @@ namespace ProyectoHCL
         {
             if (UsuarioBox1.Text.Contains(" "))
             {
-                MessageBox.Show("No se permite espacios.");
+                // MessageBox.Show("No se permite espacios.");
+                MsgB m = new MsgB("informacion", "No se permite espacios");
+                DialogResult dR = m.ShowDialog();
+                UsuarioBox1.Clear();
                 return;  //Sale
 
             }
@@ -204,7 +211,10 @@ namespace ProyectoHCL
          
             if (ContraseñaBox2.Text.Contains(" "))
             {
-                MessageBox.Show("No se permite espacios.");
+                //MessageBox.Show("No se permite espacios.");
+                MsgB m = new MsgB("informacion", "No se permite espacios");
+                DialogResult dR = m.ShowDialog();
+                ContraseñaBox2.Clear();
                 return;  //Salekk
             }
            

@@ -397,16 +397,17 @@ namespace ProyectoHCL
                 {
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("call estado_reserva(1,2,3,'RESERVADO','DISPONIBLE')");
+                    comando.CommandText = ("call estado_reserva(1,2,3,4,'ACTIVO','INACTIVO')");
 
                     MySqlDataReader leer = comando.ExecuteReader();
                     if (leer.Read() == true)
                     {
                         lbl_pendientes.Text = leer["pendientes"].ToString();
-                        lbl_reservadas.Text = leer["reservadas"].ToString();
-                        lbl_disponible.Text = leer["disponibles"].ToString();
+                        lbl_activas.Text = leer["activas"].ToString();
+                        lbl_inactivas.Text = leer["inactivas"].ToString();
                         lbl_confirmadas.Text = leer["confirmadas"].ToString();
                         lbl_anuladas.Text = leer["anuladas"].ToString();
+                        lbl_facturadas.Text = leer["facturadas"].ToString();
 
                     }
                     else

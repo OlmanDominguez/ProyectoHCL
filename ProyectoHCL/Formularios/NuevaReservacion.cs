@@ -39,6 +39,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using iText.Layout.Renderer;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
+using ProyectoHCL.Formularios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,7 +57,6 @@ namespace ProyectoHCL
 {
     public partial class NuevaReservacion : Form
     {
-
         public NuevaReservacion()
         {
 
@@ -65,7 +65,7 @@ namespace ProyectoHCL
 
 
         }
-
+       
         //codigo que trae el id del empleado desde el login
         public void id_empleado()
         {
@@ -96,6 +96,8 @@ namespace ProyectoHCL
             }
 
         }
+
+
 
         public void updatenumero()
         {
@@ -210,7 +212,7 @@ namespace ProyectoHCL
         }
 
         public void limpiarCampos()
-        {
+        {/*
             txt_codigo.Clear();
             txt_cod_cliente.Clear();
             txt_estado.Clear();
@@ -221,9 +223,9 @@ namespace ProyectoHCL
             txt_tipo_habitacion.Clear();
             txt_vehiculo.Clear();
             cb_metodo.SelectedIndex = 0;
-            cb_numero.SelectedIndex = 0;
+            cb_numero.SelectedIndex = 0;*/
             cb_tipo.SelectedIndex = 0;
-            cb_estado.SelectedIndex = 0;
+           // cb_estado.SelectedIndex = 0;
 
 
         }
@@ -329,8 +331,8 @@ namespace ProyectoHCL
                     adapter.Fill(dt);
 
                     DataRow fila = dt.NewRow();
-                    fila["NUMEROHABITACION"] = 0;
-                    dt.Rows.InsertAt(fila, 0);
+                    //fila["NUMEROHABITACION"] = 0;
+                    //dt.Rows.InsertAt(fila, 0);
 
                     cb_numero.ValueMember = "ID_TIPOHABITACION";
                     cb_numero.DisplayMember = "NUMEROHABITACION";
@@ -423,8 +425,8 @@ namespace ProyectoHCL
                     {
                         MySqlCommand comando = new MySqlCommand();
                         comando.Connection = BaseDatosHCL.ObtenerConexion();
-                        comando.CommandText = ("select * from TBL_SOLICITUDRESERVA where ID_SOLICITUDRESERVA='" + id + "';");
-
+                        //comando.CommandText = ("select * from TBL_SOLICITUDRESERVA where ID_SOLICITUDRESERVA='" + id + "';");
+                        comando.CommandText = ("call llenado('" + id + "')");
                         MySqlDataReader leer = comando.ExecuteReader();
                         if (leer.Read() == true)
                         {
@@ -446,6 +448,7 @@ namespace ProyectoHCL
                                     cb_estado.Text = "FACTURADA";
                                     break;
                             }
+
                             txt_metodo_reserva.Text = leer["ID_METODORESERVA"].ToString();
                             switch (Convert.ToInt16(txt_metodo_reserva.Text))
                             {
@@ -462,11 +465,16 @@ namespace ProyectoHCL
                                     cb_metodo.Text = "Presencial o llamada celular";
                                     break;
                             }
+                            //txt_tipo_habitacion.Text = leer[""].ToString();
+                            cb_numero.Text = leer["NUMEROHABITACION"].ToString();
                             txt_monto.Text = leer["MONTORESERVAR"].ToString();
                             txt_vehiculo.Text = leer["VEHICULO"].ToString();
                             txt_huespedes.Text = leer["NHUESPEDES"].ToString();
                             txt_habi_vieja.Text = leer["NUMEROHABITACION"].ToString();
-                            cb_numero.Text = leer["NUMEROHABITACION"].ToString();
+                            tbl_resultado_habitacion.Visible = true;
+                            lbl_tipo_habitacion.Visible = true;
+                            tbl_resultado_habitacion.Text = leer["TIPO"].ToString();
+                            //cb_tipo.Text = leer["TIPO"].ToString();
                             dt_fecha_coti.Value = Convert.ToDateTime(leer["FECHACOTI"].ToString());
                             dt_fecha_entrada.Value = Convert.ToDateTime(leer["INGRESO"].ToString());
                             dt_fecha_salida.Value = Convert.ToDateTime(leer["SALIDA"].ToString());
@@ -494,6 +502,8 @@ namespace ProyectoHCL
                 {
                     MessageBox.Show(a.Message);
                 }
+
+
             }
             else
             {
@@ -503,7 +513,11 @@ namespace ProyectoHCL
                 //combo_estado();
 
             }
+
         }
+
+
+
 
         private void cb_metodo_SelectedIndexChanged_1(object sender, EventArgs e)
         {
@@ -625,14 +639,14 @@ namespace ProyectoHCL
             string fecha1 = dt_fecha_entrada.Text;
             string fecha2 = dt_fecha_salida.Text;
 
-
             try
             {
                 using (BaseDatosHCL.ObtenerConexion())
                 {
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("select * from TBL_SOLICITUDRESERVA where NUMEROHABITACION='" + b + "' and INGRESO and SALIDA between '" + fecha1 + "' and '" + fecha2 + "';");
+                    //comando.CommandText = ("select * from TBL_SOLICITUDRESERVA where NUMEROHABITACION='" + b + "' and INGRESO and SALIDA between '" + fecha1 + "' and '" + fecha2 + "';");
+                    comando.CommandText = ("CALL Validar_disponibilidad('" + b + "','" + fecha1 + "', '" + fecha2 + "');");
 
                     MySqlDataReader leer = comando.ExecuteReader();
                     if (leer.Read() == true)
@@ -644,9 +658,9 @@ namespace ProyectoHCL
                     {
                         if (dt_fecha_coti.Value.Date >= DateTime.Today)
                         {
-                            if (dt_fecha_entrada.Value.Date >= DateTime.Today & dt_fecha_entrada.Value.Date<dt_fecha_salida.Value.Date)
+                            if (dt_fecha_entrada.Value.Date >= DateTime.Today & dt_fecha_entrada.Value.Date < dt_fecha_salida.Value.Date)
                             {
-                                if (dt_fecha_salida.Value.Date >= DateTime.Today & dt_fecha_salida.Value.Date> dt_fecha_entrada.Value.Date)
+                                if (dt_fecha_salida.Value.Date >= DateTime.Today & dt_fecha_salida.Value.Date > dt_fecha_entrada.Value.Date)
                                 {
                                     try
                                     {
@@ -672,9 +686,10 @@ namespace ProyectoHCL
 
                                         cmd.ExecuteNonQuery();
                                         inserdetalle();
-                                        updatehabitacion();
+                                        //updatehabitacion();
                                         MsgB m = new MsgB("informacion", "Reserva agregada con exito");
                                         DialogResult dR = m.ShowDialog();
+                                        //CargarDG();
                                         //limpiarCampos();
                                         conn.Close();
 
@@ -705,6 +720,7 @@ namespace ProyectoHCL
                             MsgB m = new MsgB("advertencia", "Fechas ingresadas invalidas");
                             DialogResult dR = m.ShowDialog();
                         }
+
                     }
                 }
 
@@ -713,7 +729,7 @@ namespace ProyectoHCL
             {
                 MessageBox.Show(a.Message);
             }
-            
+
 
         }
 
@@ -789,12 +805,13 @@ namespace ProyectoHCL
 
                             cmd.ExecuteNonQuery();
                             updatedetalle();
-                            updatehabitacion();
-                            updatenumero();
+                            //updatehabitacion();
+                            //updatenumero();
 
                             MsgB m = new MsgB("informacion", "Reserva actualizada con exito");
                             DialogResult dR = m.ShowDialog();
                             //limpiarCampos();
+                            
 
                             conn.Close();
                             this.Close();
@@ -825,6 +842,7 @@ namespace ProyectoHCL
                 DialogResult dR = m.ShowDialog();
 
             }
+
         }
 
         private void txt_codigo_TextChanged(object sender, EventArgs e)
@@ -841,6 +859,8 @@ namespace ProyectoHCL
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
+                MsgB m = new MsgB("advertencia", "Solo se pueden ingresar numeros ");
+                DialogResult dR = m.ShowDialog();
             }
 
             // solo 1 punto decimal
@@ -863,7 +883,7 @@ namespace ProyectoHCL
             else
             {
                 e.Handled = true;
-                MsgB m = new MsgB("advertencia", "Por favor, sólo ingrese números");
+                MsgB m = new MsgB("advertencia", "Solo se pueden ingresar numeros ");
                 DialogResult dR = m.ShowDialog();
             }
         }
