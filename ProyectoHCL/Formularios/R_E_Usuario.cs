@@ -353,6 +353,7 @@ namespace ProyectoHCL.Formularios
                         cmd.Parameters.AddWithValue("@primerIngreso", Convert.ToDateTime(txtFechaC.Text));
                         cmd.Parameters.AddWithValue("@vencimiento", Convert.ToDateTime(dtpVencimiento.Text));
                         cmd.Parameters.AddWithValue("@email", txtCorreo.Text);
+                        cmd.Parameters.AddWithValue("@usuarioEditor", clasecompartida.iduser.ToString());
 
                         cmd.ExecuteNonQuery();
 
@@ -361,7 +362,7 @@ namespace ProyectoHCL.Formularios
                         conn.Close();
                         //registrar acción (crear) en bitácora
                         string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
-                            "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'CREACION', 'CREACION USUARIO " +
+                            "('" + clasecompartida.iduser + "', '1', '" + ahora + "', 'CREACIÓN', 'CREACIÓN USUARIO " +
                             txtUsuario.Text + "');";
                         conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                         conn.Open();
@@ -457,7 +458,7 @@ namespace ProyectoHCL.Formularios
                             control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
                             txtContraseña.Text, dtpVencimiento.Text, txtCorreo.Text, clasecompartida.iduser.ToString());
                         }
-                        string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        //string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                         //MySqlConnection conn;
                         //MySqlCommand cmd;
@@ -642,7 +643,7 @@ namespace ProyectoHCL.Formularios
 
         private string ObtenerEstadoRol(string rol)
         {
-            string estado = "DESCONOCIDO"; 
+            string estado = "DESCONOCIDO";
 
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
             MySqlCommand cmd;
