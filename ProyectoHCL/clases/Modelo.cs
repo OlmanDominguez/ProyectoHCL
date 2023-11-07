@@ -212,6 +212,30 @@ namespace ProyectoHCL.clases
             }
         }
 
+        public bool existePRC(string preguntarc) //función para validar si existe la recuperacion por pregunta
+        {
+            MySqlDataReader reader;
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            if (conectar.State == ConnectionState.Closed)
+            {
+                conectar.Open();
+            }
+
+            String sql = "SELECT ID_PREGUNTAU FROM TBL_PREGUNTAUSUARIO WHERE RESPUESTA LIKE @RESPUESTA";
+            MySqlCommand comando = new MySqlCommand(sql, conectar);
+            comando.Parameters.AddWithValue("@RESPUESTA", preguntarc);
+            reader = comando.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public bool existeHabitacion(string hab) //función para validar si existe la habitación
         {
             MySqlDataReader reader;
@@ -395,7 +419,7 @@ namespace ProyectoHCL.clases
                 return false;
             }
         }
-        public bool existeContraseña(string contraseña) //función para validar si existe el rol
+        public bool existeContraseña(string contraseña) //función para validar si existe el contraseña
         {
             MySqlDataReader reader;
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();

@@ -46,10 +46,9 @@
             BTN_Cancelar.BackColor = SystemColors.ButtonFace;
             BTN_Cancelar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             BTN_Cancelar.ForeColor = SystemColors.ActiveCaptionText;
-            BTN_Cancelar.Location = new Point(276, 318);
-            BTN_Cancelar.Margin = new Padding(2);
+            BTN_Cancelar.Location = new Point(394, 530);
             BTN_Cancelar.Name = "BTN_Cancelar";
-            BTN_Cancelar.Size = new Size(185, 33);
+            BTN_Cancelar.Size = new Size(264, 55);
             BTN_Cancelar.TabIndex = 11;
             BTN_Cancelar.Text = "Cancelar";
             BTN_Cancelar.UseVisualStyleBackColor = false;
@@ -61,10 +60,9 @@
             BTN_Aceptar.BackColor = SystemColors.GradientActiveCaption;
             BTN_Aceptar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             BTN_Aceptar.ForeColor = SystemColors.ActiveCaptionText;
-            BTN_Aceptar.Location = new Point(45, 318);
-            BTN_Aceptar.Margin = new Padding(2);
+            BTN_Aceptar.Location = new Point(64, 530);
             BTN_Aceptar.Name = "BTN_Aceptar";
-            BTN_Aceptar.Size = new Size(185, 33);
+            BTN_Aceptar.Size = new Size(264, 55);
             BTN_Aceptar.TabIndex = 10;
             BTN_Aceptar.Text = "Aceptar";
             BTN_Aceptar.UseVisualStyleBackColor = false;
@@ -75,21 +73,22 @@
             TXT_Respuesta.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             TXT_Respuesta.BackColor = Color.DeepSkyBlue;
             TXT_Respuesta.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            TXT_Respuesta.Location = new Point(45, 231);
-            TXT_Respuesta.Margin = new Padding(2);
+            TXT_Respuesta.Location = new Point(64, 385);
             TXT_Respuesta.Name = "TXT_Respuesta";
-            TXT_Respuesta.Size = new Size(423, 27);
+            TXT_Respuesta.Size = new Size(603, 37);
             TXT_Respuesta.TabIndex = 12;
             TXT_Respuesta.TextChanged += TXT_Respuesta_TextChanged;
+            TXT_Respuesta.KeyPress += TXT_Respuesta_KeyPress;
             // 
             // COBPREG
             // 
             COBPREG.DropDownStyle = ComboBoxStyle.DropDownList;
             COBPREG.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             COBPREG.FormattingEnabled = true;
-            COBPREG.Location = new Point(45, 151);
+            COBPREG.Location = new Point(64, 252);
+            COBPREG.Margin = new Padding(4, 5, 4, 5);
             COBPREG.Name = "COBPREG";
-            COBPREG.Size = new Size(423, 28);
+            COBPREG.Size = new Size(603, 39);
             COBPREG.TabIndex = 13;
             COBPREG.KeyPress += COBPREG_KeyPress;
             // 
@@ -97,9 +96,10 @@
             // 
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(43, 36);
+            label1.Location = new Point(61, 60);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(418, 54);
+            label1.Size = new Size(597, 90);
             label1.TabIndex = 14;
             label1.Text = "Responde a una de tus preguntas de seguridad para restablecer tu contraseña.";
             label1.TextAlign = ContentAlignment.TopCenter;
@@ -109,9 +109,10 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(45, 122);
+            label2.Location = new Point(64, 203);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(76, 21);
+            label2.Size = new Size(115, 32);
             label2.TabIndex = 15;
             label2.Text = "Pregunta:";
             // 
@@ -120,9 +121,10 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.ButtonHighlight;
-            label3.Location = new Point(45, 203);
+            label3.Location = new Point(64, 338);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(84, 21);
+            label3.Size = new Size(126, 32);
             label3.TabIndex = 16;
             label3.Text = "Respuesta:";
             // 
@@ -132,10 +134,10 @@
             // 
             // PreguntasRecuContra
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(513, 411);
+            ClientSize = new Size(733, 685);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -144,6 +146,7 @@
             Controls.Add(BTN_Cancelar);
             Controls.Add(BTN_Aceptar);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(4, 5, 4, 5);
             Name = "PreguntasRecuContra";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "PreguntasRecuContra";
