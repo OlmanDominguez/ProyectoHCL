@@ -401,7 +401,7 @@
             dgvUsuarios.Size = new Size(1027, 341);
             dgvUsuarios.TabIndex = 2;
             dgvUsuarios.CellClick += dgvUsuarios_CellClick_1;
-            dgvUsuarios.CellPainting += dgvUsuarios_CellPainting_1;
+            dgvUsuarios.CellFormatting += dgvUsuarios_CellFormatting;
             // 
             // CtrlUsuarios
             // 

@@ -74,6 +74,8 @@
             txt_estado = new TextBox();
             txt_id_solicitud = new TextBox();
             txt_habi_vieja = new TextBox();
+            lbl_tipo_habitacion = new Label();
+            tbl_resultado_habitacion = new Label();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
@@ -243,6 +245,8 @@
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
+            panel3.Controls.Add(tbl_resultado_habitacion);
+            panel3.Controls.Add(lbl_tipo_habitacion);
             panel3.Controls.Add(button1);
             panel3.Controls.Add(lbl_cliente);
             panel3.Controls.Add(lbl_1c);
@@ -511,7 +515,7 @@
             // cb_tipo
             // 
             cb_tipo.FormattingEnabled = true;
-            cb_tipo.Location = new Point(686, 275);
+            cb_tipo.Location = new Point(685, 275);
             cb_tipo.Name = "cb_tipo";
             cb_tipo.Size = new Size(163, 23);
             cb_tipo.TabIndex = 53;
@@ -610,6 +614,29 @@
             txt_habi_vieja.Size = new Size(91, 23);
             txt_habi_vieja.TabIndex = 79;
             // 
+            // lbl_tipo_habitacion
+            // 
+            lbl_tipo_habitacion.AutoSize = true;
+            lbl_tipo_habitacion.BackColor = Color.Gainsboro;
+            lbl_tipo_habitacion.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_tipo_habitacion.Location = new Point(745, 368);
+            lbl_tipo_habitacion.Name = "lbl_tipo_habitacion";
+            lbl_tipo_habitacion.Size = new Size(146, 17);
+            lbl_tipo_habitacion.TabIndex = 87;
+            lbl_tipo_habitacion.Text = "Tipo habitacion actual";
+            // 
+            // tbl_resultado_habitacion
+            // 
+            tbl_resultado_habitacion.AutoSize = true;
+            tbl_resultado_habitacion.BackColor = Color.Gainsboro;
+            tbl_resultado_habitacion.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            tbl_resultado_habitacion.Location = new Point(745, 391);
+            tbl_resultado_habitacion.Name = "tbl_resultado_habitacion";
+            tbl_resultado_habitacion.Size = new Size(13, 17);
+            tbl_resultado_habitacion.TabIndex = 88;
+            tbl_resultado_habitacion.Text = "-";
+            tbl_resultado_habitacion.Visible = false;
+            // 
             // NuevaReservacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -679,5 +706,7 @@
         public Label lbl_cliente;
         public Label lbl_1c;
         public Button button1;
+        private Label lbl_tipo_habitacion;
+        public Label tbl_resultado_habitacion;
     }
 }

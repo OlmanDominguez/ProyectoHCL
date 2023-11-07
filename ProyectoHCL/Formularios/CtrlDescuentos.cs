@@ -28,6 +28,7 @@ using Point = System.Drawing.Point;
 using iText.Kernel.Events;
 using iText.Kernel.Pdf.Canvas;
 using Rectangle = iText.Kernel.Geom.Rectangle;
+using Image = System.Drawing.Image;
 
 //-----------------------------------------------------------------------
 //    Universidad Nacional Autonoma de Honduras (UNAH)
@@ -153,13 +154,13 @@ namespace ProyectoHCL.Formularios
 
         private void CtrlDescuentos_Load(object sender, EventArgs e)
         {
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //agregar botón de editar en datagrid
+            DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn();
             btnUpdate.Name = "EDITAR";
             dgvDesc.Columns.Add(btnUpdate);
 
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn(); //agregar botón de eliminar en datagrid
-            btnDelete.Name = "ELIMINAR";
-            dgvDesc.Columns.Add(btnDelete);
+            DataGridViewImageColumn btnEliminar = new DataGridViewImageColumn();
+            btnEliminar.Name = "ELIMINAR";
+            dgvDesc.Columns.Add(btnEliminar);
 
             Permisos(); //Llamar la función permisos al cargar formulario
         }
@@ -194,37 +195,6 @@ namespace ProyectoHCL.Formularios
             R_E_desc.ShowDialog();
             CargarDG();
         }
-
-        private void dgvDesc_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) //Configurar datagrid para mostrar los botones de editar y eliminar que se agregaron
-        {
-            if (e.ColumnIndex >= 0 && this.dgvDesc.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvDesc.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvDesc.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvDesc.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
-            if (e.ColumnIndex >= 0 && this.dgvDesc.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvDesc.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvDesc.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvDesc.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
-        }
-
         private void cmbDesc_SelectionChangeCommitted(object sender, EventArgs e) //Seleccionar página para mostrar registros
         {
             int pagina = Convert.ToInt32(cmbDesc.Text);
@@ -563,6 +533,28 @@ namespace ProyectoHCL.Formularios
         private void btnNuevo_EnabledChanged(object sender, EventArgs e)
         {
             btnNuevo.BackColor = Color.DarkGray;
+        }
+
+        private void dgvDesc_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvDesc.Columns[e.ColumnIndex].Name == "EDITAR")
+            {
+                Image imagen = Properties.Resources.editar;
+
+                dgvDesc.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvDesc.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvDesc.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            {
+                Image imagen = Properties.Resources.eliminar;
+
+                dgvDesc.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvDesc.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
         }
     }
 }

@@ -190,22 +190,21 @@ namespace ProyectoHCL.Formularios.Parametros
                     parame.p = 1;
                     Form formulario = new Formularios.R_E_Parametro();
 
-                    string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");//le decimos que la fecha se la actual 
+                    //string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");//le decimos que la fecha se la actual 
 
-                    MySqlConnection conn;
-                    MySqlCommand cmd;
+                    //MySqlConnection conn;
+                    //MySqlCommand cmd;
 
-                    //Creamos la consulta  para editar                  
-                    string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
-                        "('" + clasecompartida.iduser + "', '7', '" + ahora + "', 'INGRESO', 'INGRESO A EDITAR PARAMETRO " +
-                        parame.idparametro + " " + parame.parametro + "');";
-                    conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                    conn.Open();
+                    ////Creamos la consulta  para editar                  
+                    //string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
+                    //    "('" + clasecompartida.iduser + "', '7', '" + ahora + "', 'INGRESO', 'INGRESO A EDITAR PARAMETRO " +
+                    //    parame.idparametro + " " + parame.parametro + "');";
+                    //conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                    //conn.Open();
 
-                    cmd = new MySqlCommand(sql, conn);
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-
+                    //cmd = new MySqlCommand(sql, conn);
+                    //cmd.ExecuteNonQuery();
+                    //conn.Close();
 
                     formulario.ShowDialog();
                     CargarDGP();
@@ -237,9 +236,10 @@ namespace ProyectoHCL.Formularios.Parametros
                     conn.Close();
 
                     string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");//muestra todo el datagrip ya con el objeto eliminado 
-                    string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
-                        "('" + clasecompartida.iduser + "', '7', '" + ahora + "', 'ELIMINACION', 'ELIMINACION PARAMETRO " +
-                        dgvParametros.CurrentRow.Cells["PARAMETRO"].Value.ToString() + " " + dgvParametros.CurrentRow.Cells["VALOR"].Value.ToString() + "');";
+                    string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION, REGISTRO) VALUES " +
+                        "('" + clasecompartida.iduser + "', '13', '" + ahora + "', 'ELIMINACIÓN', 'ELIMINACIÓN PARÁMETRO " +
+                        dgvParametros.CurrentRow.Cells["PARAMETRO"].Value.ToString() + /*" " + dgvParametros.CurrentRow.Cells["VALOR"].Value.ToString() +*/ "', " +
+                        dgvParametros.CurrentRow.Cells["IDPARAMETRO"].Value.ToString() + ");";
                     conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                     conn.Open();
 

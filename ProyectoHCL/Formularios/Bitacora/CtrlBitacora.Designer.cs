@@ -374,6 +374,7 @@
             dgvBitacora.GridColor = Color.FromArgb(45, 66, 91);
             dgvBitacora.Location = new Point(27, 6);
             dgvBitacora.Name = "dgvBitacora";
+            dgvBitacora.ReadOnly = true;
             dgvBitacora.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = Color.Gainsboro;
@@ -394,7 +395,7 @@
             dgvBitacora.Size = new Size(1027, 341);
             dgvBitacora.TabIndex = 4;
             dgvBitacora.CellClick += dgvBitacora_CellClick_1;
-            dgvBitacora.CellPainting += dgvBitacora_CellPainting;
+            dgvBitacora.CellFormatting += dgvBitacora_CellFormatting;
             // 
             // CtrlBitacora
             // 
@@ -408,7 +409,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "CtrlBitacora";
             Text = "CtrlPreguntas";
-            Load += CtrlBitacora_Load_1;
+            Load += CtrlBitacora_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel5.ResumeLayout(false);

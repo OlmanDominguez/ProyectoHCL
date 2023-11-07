@@ -122,5 +122,35 @@ namespace ProyectoHCL.clases
             }
 
         }
+
+        public bool EliminarBitacora(string idBitacora)
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+
+            bool elimino = false;
+
+            try
+            {
+                string sql = "DELETE FROM TBL_BITACORA WHERE ID_BITACORA = @ID_BITACORA;";
+
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
+                cmd = new MySqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@ID_BITACORA", idBitacora);
+
+                cmd.ExecuteNonQuery();
+                elimino = true;
+                conn.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return elimino;
+        }
     }
 }

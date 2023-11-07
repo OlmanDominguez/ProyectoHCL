@@ -14,14 +14,17 @@ using System.Windows.Forms;
 using ProyectoHCL.Formularios.Bitacora;
 using SpreadsheetLight.Drawing;
 using SpreadsheetLight;
+using FontAwesome.Sharp;
 
 namespace ProyectoHCL.Formularios
 {
     public partial class CtrlBitacora : Form
     {
         clases.Bitacora bitacora = new clases.Bitacora();
+        AdmonUsuarios admonU = new AdmonUsuarios();
         DataSet ds = new DataSet();
         MsgB msgB = new MsgB();
+        CDatos cDatos = new CDatos();
         int pagInicio = 1, indice = 0, numFilas = 10, pagFinal, cmbIndice = 0;
 
         public CtrlBitacora()
@@ -54,7 +57,23 @@ namespace ProyectoHCL.Formularios
             HabilitarBotones();
         }
 
+        private void Permisos() //función para asignar permisos a la pantalla
+        {
+            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs); //lista de objetos que recibe el rol para validar el permiso
 
+            foreach (var obj in LsObj) //recorrer los objetos en la lista
+            {
+                switch (obj.IdPermiso) //restringir acceso según el permiso
+                {
+                    case 4: //permiso eliminar
+                        if (obj.ObjetoN == "BITACORA" && !obj.Permitido)
+                        {
+                            dgvBitacora.Columns["ELIMINAR"].Visible = false; //Ocultar columna del botón para eliminar en datagrid
+                        }
+                        break;
+                }
+            }
+        }
         public void BuscarServicio(string buscarS)
         {
             try
@@ -77,25 +96,6 @@ namespace ProyectoHCL.Formularios
             {
                 throw;
             }
-        }
-
-
-        private void dgvBitacora_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            if (e.ColumnIndex >= 0 && this.dgvBitacora.Columns[e.ColumnIndex].Name == "VER" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvBitacora.Rows[e.RowIndex].Cells["VER"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\ver.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvBitacora.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvBitacora.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
-
         }
 
         private void cmbPreg_SelectionChangeCommitted_1(object sender, EventArgs e)
@@ -140,7 +140,6 @@ namespace ProyectoHCL.Formularios
 
         private void dgvBitacora_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
-
             if (this.dgvBitacora.Columns[e.ColumnIndex].Name == "VER")
             {
                 preg.id = dgvBitacora.CurrentRow.Cells["ID"].Value.ToString();
@@ -152,9 +151,33 @@ namespace ProyectoHCL.Formularios
 
                 Form form = new Formularios.Bitacora.ShowBitacora();
                 form.ShowDialog();
-
             }
+            if (this.dgvBitacora.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            {
+                MsgB m = new MsgB("pregunta", "¿Está seguro que desea eliminar el registro?");
+                DialogResult dg = m.ShowDialog();
 
+                if (dg == DialogResult.OK)
+                {
+                    bool elimino = admonU.EliminarBitacora(dgvBitacora.CurrentRow.Cells["ID"].Value.ToString());
+
+                    if (elimino)
+                    {
+                        MsgB mbox = new MsgB("informacion", "Registro eliminado");
+                        DialogResult dR = mbox.ShowDialog();
+                        CargarDG();
+                    }
+                    else
+                    {
+                        MsgB mbox = new MsgB("informacion", "Registro no eliminado");
+                        DialogResult dR = mbox.ShowDialog();
+                    }
+                }
+                else if (dg == DialogResult.Cancel)
+                {
+
+                }
+            }
 
         }
 
@@ -210,15 +233,6 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void CtrlBitacora_Load_1(object sender, EventArgs e)
-        {
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
-            btnUpdate.Name = "VER";
-            dgvBitacora.Columns.Add(btnUpdate);
-
-        }
-
-
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -256,12 +270,13 @@ namespace ProyectoHCL.Formularios
             sl.SetCellValue("B" + celdaCabecera, "Id Bitacora");
             sl.SetCellValue("C" + celdaCabecera, "Id Usuario");
             sl.SetCellValue("D" + celdaCabecera, "Usuario");
-            sl.SetCellValue("E" + celdaCabecera, "Id Modulo");
-            sl.SetCellValue("F" + celdaCabecera, "Modulo");
-            sl.SetCellValue("G" + celdaCabecera, "Id Objeto");
-            sl.SetCellValue("H" + celdaCabecera, "Objeto");
-            sl.SetCellValue("I" + celdaCabecera, "Fecha");
-            sl.SetCellValue("J" + celdaCabecera, "Accion");
+            sl.SetCellValue("E" + celdaCabecera, "Id Objeto");
+            sl.SetCellValue("F" + celdaCabecera, "Objeto");
+            sl.SetCellValue("G" + celdaCabecera, "Fecha");
+            sl.SetCellValue("H" + celdaCabecera, "Descripcion");
+            sl.SetCellValue("I" + celdaCabecera, "Valor Anterior");
+            sl.SetCellValue("J" + celdaCabecera, "Valor Nuevo");
+            sl.SetCellValue("K" + celdaCabecera, "Registro");
 
             SLStyle estiloCa = sl.CreateStyle();
             estiloT.Font.FontName = "Arial";
@@ -269,11 +284,11 @@ namespace ProyectoHCL.Formularios
             estiloT.Font.Bold = true;
             estiloCa.Font.FontColor = System.Drawing.Color.White;
             estiloCa.Fill.SetPattern(DocumentFormat.OpenXml.Spreadsheet.PatternValues.Solid, System.Drawing.Color.Blue, System.Drawing.Color.Blue);
-            sl.SetCellStyle("B" + celdaCabecera, "J" + celdaCabecera, estiloCa);
+            sl.SetCellStyle("B" + celdaCabecera, "K" + celdaCabecera, estiloCa);
 
-            string sql = "SELECT b.ID_BITACORA, u.ID_USUARIO, u.USUARIO, m.ID_MODULO, m.NOMBRE_MODULO, o.ID_OBJETO, o.OBJETO, b.FECHA, b.ACCION, " +
-                "FROM TBL_BITACORA b INNER JOIN TBL_USUARIO u ON b.ID_USUARIO = u.ID_USUARIO INNER JOIN PT_OBJETO o ON b.ID_OBJETO = o.ID_OBJETO " +
-                "INNER JOIN PT_MODULO m ON o.ID_MODULO = m.ID_MODULO;";
+            string sql = "SELECT b.ID_BITACORA, u.ID_USUARIO, u.USUARIO, o.ID_OBJETO, o.OBJETO, b.FECHA, b.DESCRIPCION, " +
+                "b.VALOR_ANTERIOR, b.VALOR_NUEVO, b.REGISTRO " +
+                "FROM TBL_BITACORA b INNER JOIN TBL_USUARIO u ON b.ID_USUARIO = u.ID_USUARIO INNER JOIN TBL_OBJETO o ON b.ID_OBJETO = o.ID_OBJETO;";
 
             MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
 
@@ -286,13 +301,13 @@ namespace ProyectoHCL.Formularios
                 sl.SetCellValue("B" + celdaCabecera, reader["ID_BITACORA"].ToString());
                 sl.SetCellValue("C" + celdaCabecera, reader["ID_USUARIO"].ToString());
                 sl.SetCellValue("D" + celdaCabecera, reader["USUARIO"].ToString());
-                sl.SetCellValue("E" + celdaCabecera, reader["ID_MODULO"].ToString());
-                sl.SetCellValue("F" + celdaCabecera, reader["NOMBRE_MODULO"].ToString());
-                sl.SetCellValue("G" + celdaCabecera, reader["ID_OBJETO"].ToString());
-                sl.SetCellValue("H" + celdaCabecera, reader["OBJETO"].ToString());
-                sl.SetCellValue("I" + celdaCabecera, reader["FECHA"].ToString());
-                sl.SetCellValue("J" + celdaCabecera, reader["ACCION"].ToString());
-                //sl.SetCellValue("K" + celdaCabecera, reader["DESCRIPCION"].ToString());
+                sl.SetCellValue("E" + celdaCabecera, reader["ID_OBJETO"].ToString());
+                sl.SetCellValue("F" + celdaCabecera, reader["OBJETO"].ToString());
+                sl.SetCellValue("G" + celdaCabecera, reader["FECHA"].ToString());
+                sl.SetCellValue("H" + celdaCabecera, reader["DESCRIPCION"].ToString());
+                sl.SetCellValue("I" + celdaCabecera, reader["VALOR_ANTERIOR"].ToString());
+                sl.SetCellValue("J" + celdaCabecera, reader["VALOR_NUEVO"].ToString());
+                sl.SetCellValue("K" + celdaCabecera, reader["REGISTRO"].ToString());
             }
 
             SLStyle EstiloB = sl.CreateStyle();
@@ -301,9 +316,9 @@ namespace ProyectoHCL.Formularios
             EstiloB.Border.TopBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
             EstiloB.Border.RightBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
             EstiloB.Border.BottomBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
-            sl.SetCellStyle("B" + celdaInicial, "J" + celdaCabecera, EstiloB);
+            sl.SetCellStyle("B" + celdaInicial, "K" + celdaCabecera, EstiloB);
 
-            sl.AutoFitColumn("B", "J");
+            sl.AutoFitColumn("B", "K");
 
             SaveFileDialog sf = new SaveFileDialog();
 
@@ -322,6 +337,41 @@ namespace ProyectoHCL.Formularios
         private void button11_Click(object sender, EventArgs e)
         {
             crearExcel();
+        }
+
+        private void CtrlBitacora_Load(object sender, EventArgs e)
+        {
+            DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn();
+            btnUpdate.Name = "VER";
+            dgvBitacora.Columns.Add(btnUpdate);
+
+            DataGridViewImageColumn btnEliminar = new DataGridViewImageColumn();
+            btnEliminar.Name = "ELIMINAR";
+            dgvBitacora.Columns.Add(btnEliminar);
+
+            Permisos();
+        }
+
+        private void dgvBitacora_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvBitacora.Columns[e.ColumnIndex].Name == "VER")
+            {
+                Image imagen = Properties.Resources.ojo;
+
+                dgvBitacora.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvBitacora.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvBitacora.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            {
+                Image imagen = Properties.Resources.eliminar;
+
+                dgvBitacora.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvBitacora.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
         }
     }
 }
