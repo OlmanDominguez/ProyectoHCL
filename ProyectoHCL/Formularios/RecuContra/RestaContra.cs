@@ -82,9 +82,20 @@ namespace ProyectoHCL.Formularios
 
         private void BTN_Aceptar_Click(object sender, EventArgs e)
         {
-
+            Modelo modelo = new Modelo();
             if (TXT_Contra.Text == TXT_Confi.Text)
             {
+                if (modelo.existeContraseña(TXT_Contra.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
+                {
+                    MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
+                    DialogResult d = l.ShowDialog();
+                }
+                if (modelo.existeContraseña(TXT_Confi.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
+                {
+                    MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
+                    DialogResult d = l.ShowDialog();
+                }
+
                 try
                 {
                     using (BaseDatosHCL.ObtenerConexion())
@@ -102,12 +113,12 @@ namespace ProyectoHCL.Formularios
                         DialogResult dR = m.ShowDialog();
                         comando.Connection.Close();
                         this.Close();
-                        Modelo modelo = new Modelo();
+                      /*  Modelo modelo = new Modelo();
                         if (modelo.existeContraseña(TXT_Contra.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
                         {
                             MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
                             DialogResult d = l.ShowDialog();
-                        }
+                        }*/
 
                     }
                 }

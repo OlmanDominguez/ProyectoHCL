@@ -395,7 +395,7 @@ namespace ProyectoHCL.clases
             }
         }
 
-        public bool existeditarPBD(string parametro) //función para validar si existe el rol
+        public bool existeditarPBD(string parametro) //función para validar si existe al editar parametro.
         {
             MySqlDataReader reader;
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
@@ -405,7 +405,7 @@ namespace ProyectoHCL.clases
                 conectar.Open();
             }
 
-            String sql = "SELECT ID_ROL FROM TBL_PARAMETRO WHERE PARAMETRO LIKE @PARAMETRO";
+            String sql = "SELECT ID_PARAMETRO FROM TBL_PARAMETRO WHERE PARAMETRO LIKE @PARAMETRO";
             MySqlCommand comando = new MySqlCommand(sql, conectar);
             comando.Parameters.AddWithValue("@PARAMETRO", parametro);
             reader = comando.ExecuteReader();
@@ -417,6 +417,76 @@ namespace ProyectoHCL.clases
             else
             {
                 return false;
+            }
+        }
+
+        /*public string ObtenerParametro(string idRegistro)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                using (MySqlCommand cmd = new MySqlCommand("SELECT PARAMETRO FROM TBL_PARAMETRO WHERE ID_PARAMETRO = @IDActual", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@IDActual", idRegistro);
+                    return cmd.ExecuteScalar().ToString();
+                }
+            }
+        }*/
+       /* public bool ParametroEditarBD(string nuevoParametro, string idRegistroActual)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                if (nuevoParametro == ObtenerParametro(idRegistroActual))
+                {
+                    return false;
+                }
+
+                using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_PARAMETRO WHERE PARAMETRO = @NuevoParametro", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@NuevoParametro", nuevoParametro);
+
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    return count > 0;
+                }
+            }
+        }*/
+
+        public string ObtenerValor(string idRegistro)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                using (MySqlCommand cmd = new MySqlCommand("SELECT VALOR FROM TBL_PARAMETRO WHERE ID_PARAMETRO = @IDActual", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@IDActual", idRegistro);
+                    return cmd.ExecuteScalar().ToString();
+                }
+            }
+        }
+        public bool ValorEditarBD(string nuevoValor, string idRegistroActual)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                if (nuevoValor == ObtenerValor(idRegistroActual))
+                {
+                    return false;
+                }
+
+                using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_PARAMETRO WHERE VALOR = @NuevoValor", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@NuevoValor", nuevoValor);
+
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    return count > 0;
+                }
             }
         }
         public bool existeContraseña(string contraseña) //función para validar si existe el contraseña
@@ -492,7 +562,7 @@ namespace ProyectoHCL.clases
                 return false;
             }
         }
-        public bool existeditarDR(string descripcion) //función para validar si existe el rol
+        public bool existeditarDR(string descripcion) //función para validar si existe el rol en editar 
         {
             MySqlDataReader reader;
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
@@ -516,6 +586,78 @@ namespace ProyectoHCL.clases
                 return false;
             }
         }
+
+        public string ObtenerRol(string idRegistro)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                using (MySqlCommand cmd = new MySqlCommand("SELECT ROl FROM TBL_ROL WHERE ID_ROL = @IDActual", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@IDActual", idRegistro);
+                    return cmd.ExecuteScalar().ToString();
+                }
+            }
+        }
+
+        public string ObtenerDescripcion(string idRegistro)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                using (MySqlCommand cmd = new MySqlCommand("SELECT DESCRIPCION FROM TBL_ROL WHERE ID_ROL = @IDActual", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@IDActual", idRegistro);
+                    return cmd.ExecuteScalar().ToString();
+                }
+            }
+        }
+
+        public bool RolEditarBD(string nuevoRol, string idRegistroActual)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                if (nuevoRol == ObtenerRol(idRegistroActual))
+                {
+                    return false;
+                }
+
+                using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_ROL WHERE ROL = @NuevoRol", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@NuevoNombre", nuevoRol);
+
+
+                    return false;
+                }
+            }
+        }
+
+        public bool DescripcionEditarBD(string nuevoDescripcion, string idRegistroActual)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                if (nuevoDescripcion == ObtenerDescripcion(idRegistroActual))
+                {
+                    return false;
+                }
+
+                using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_ROL WHERE DESCRIPCION = @NuevoDescripcion", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@NuevoDescripcion", nuevoDescripcion);
+
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    return count > 0;
+                }
+            }
+        }
+       
         public string ObtenerUsuario(string idRegistro)
         {
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();

@@ -138,6 +138,7 @@ namespace ProyectoHCL.Formularios
             if (TXT_Respuesta.Text != "" & COBPREG.SelectedItem != "0")
             {
 
+                Modelo modelo = new Modelo();
                 errorProvider1.SetError(TXT_Respuesta, "");
                 errorProvider1.SetError(COBPREG, "");
                 string pregunta = COBPREG.SelectedItem.ToString();
@@ -145,6 +146,11 @@ namespace ProyectoHCL.Formularios
 
                 if (clasecompartida.estado == 3)
                 {
+                    if (modelo.existeContraseña(TXT_Respuesta.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
+                    {
+                        MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
+                        DialogResult d = l.ShowDialog();
+                    }
                     try
                     {
                         using (BaseDatosHCL.ObtenerConexion())
