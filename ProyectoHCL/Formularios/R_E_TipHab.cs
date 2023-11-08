@@ -69,9 +69,12 @@ namespace ProyectoHCL.Formularios
         public R_E_TipHab()
         {
             InitializeComponent();
+            cmbEstado.SelectedIndex = -1;
             txtPrecio.KeyPress += txtPrecio_KeyPress; //llamar evento que valida que solo se ingresen números
+           
         }
 
+      
         public string idTH = null;
         MsgB msgB = new MsgB();
 
@@ -182,7 +185,8 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e) //botón para guardar un nuevo registro o una modificación
+
+    private void btnGuardar_Click(object sender, EventArgs e) //botón para guardar un nuevo registro o una modificación
         {
             if (lblTitulo.Text == "Registrar Tipo de Habitación")
             {
@@ -192,11 +196,6 @@ namespace ProyectoHCL.Formularios
                     || cmbEstado.Text.Trim() == "")  //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
-                    DialogResult dR = m.ShowDialog();
-                }
-                else if (modelo.existeTipHab(txtTipo.Text)) //validar si ya existe el registro
-                {
-                    MsgB m = new MsgB("advertencia", "El tipo de habitación ya existe");
                     DialogResult dR = m.ShowDialog();
                 }
                 else if (txtTipo.TextLength < 5) //validar que el campo tipo no tenga menos de 5 caracteres
@@ -222,6 +221,7 @@ namespace ProyectoHCL.Formularios
                         cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
 
                         cmd.ExecuteNonQuery();
+
                         MsgB m = new MsgB("informacion", "Registro creado con éxito");
                         DialogResult dR = m.ShowDialog();
                         limpiarCampos();
@@ -236,7 +236,10 @@ namespace ProyectoHCL.Formularios
             }
             else if (lblTitulo.Text == "Editar Tipo de Habitación")
             {
+                string nuevoTipo = txtTipo.Text;
+                string idRegistro = idTH;
                 Control control = new Control();
+
 
                 Modelo modelo = new Modelo();
 
@@ -246,7 +249,7 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (modelo.existeTipHab(txtTipo.Text))
+                else if (modelo.TipoHabEditarBD(nuevoTipo, idRegistro)) //Validar que el tipo de habitación ya existe
                 {
                     MsgB mbox1 = new MsgB("advertencia", "El tipo de habitación ya existe");
                     DialogResult dR1 = mbox1.ShowDialog();
@@ -289,9 +292,43 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtTipo_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtTipo_KeyPress(object sender, KeyPressEventArgs e) //Validar solo ingresar letras
         {
             ValidarTxt.TxtLetras(e);
         }
-    }
-}
+
+       // private void cargarEstado() //cargar combobox con los registros de los estados en la base de datos
+       // {
+          //  MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+          //  cmbEstado.DataSource = null;
+           // cmbEstado.Items.Clear();
+
+           // using (conectar)
+           // {
+              //  string sql = "SELECT ESTADO FROM TBL_TIPOHABITACION";
+               // using (MySqlCommand cmd = new MySqlCommand(sql, conectar))
+                //{
+                   // try
+                   // {
+                       // MySqlDataAdapter data = new MySqlDataAdapter(cmd);
+                       // DataTable dt = new DataTable();
+                       // data.Fill(dt);
+
+                       // cmbEstado.ValueMember = "ESTADO";
+                       // cmbEstado.DisplayMember = "DESCRIPCION";
+                       // cmbEstado.DataSource = dt;
+                   // }
+                   // catch (MySqlException e)
+                   // {
+                       // MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
+                       // DialogResult dR = m.ShowDialog();
+                   // }
+                   // finally { conectar.Close(); }//
+
+               // }
+
+            }
+        }
+   // }
+//}

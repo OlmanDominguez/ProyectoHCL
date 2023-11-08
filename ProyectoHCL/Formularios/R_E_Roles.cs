@@ -131,9 +131,6 @@ namespace ProyectoHCL.Formularios
                 Left = Left + (e.X - posX);
                 Top = Top + (e.Y - posY);
             }
-
-
-
         }
 
         //validar que los texbox esten llenos y no queden vacios 
