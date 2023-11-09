@@ -44,6 +44,9 @@
             btnCerrar = new Button();
             btnMin = new Button();
             panel3 = new Panel();
+            nueva_habitacion = new Button();
+            tbl_resultado_habitacion = new Label();
+            lbl_tipo_habitacion = new Label();
             button1 = new Button();
             lbl_cliente = new Label();
             lbl_1c = new Label();
@@ -74,8 +77,6 @@
             txt_estado = new TextBox();
             txt_id_solicitud = new TextBox();
             txt_habi_vieja = new TextBox();
-            lbl_tipo_habitacion = new Label();
-            tbl_resultado_habitacion = new Label();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
@@ -245,6 +246,7 @@
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
+            panel3.Controls.Add(nueva_habitacion);
             panel3.Controls.Add(tbl_resultado_habitacion);
             panel3.Controls.Add(lbl_tipo_habitacion);
             panel3.Controls.Add(button1);
@@ -290,6 +292,47 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(949, 531);
             panel3.TabIndex = 52;
+            // 
+            // nueva_habitacion
+            // 
+            nueva_habitacion.Anchor = AnchorStyles.Top;
+            nueva_habitacion.BackColor = Color.SteelBlue;
+            nueva_habitacion.FlatAppearance.BorderSize = 0;
+            nueva_habitacion.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
+            nueva_habitacion.FlatStyle = FlatStyle.Flat;
+            nueva_habitacion.Font = new Font("Century Gothic", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            nueva_habitacion.ForeColor = Color.White;
+            nueva_habitacion.Location = new Point(855, 324);
+            nueva_habitacion.Name = "nueva_habitacion";
+            nueva_habitacion.Size = new Size(65, 23);
+            nueva_habitacion.TabIndex = 89;
+            nueva_habitacion.Text = "Agregar";
+            nueva_habitacion.UseVisualStyleBackColor = false;
+            nueva_habitacion.Click += button2_Click;
+            // 
+            // tbl_resultado_habitacion
+            // 
+            tbl_resultado_habitacion.AutoSize = true;
+            tbl_resultado_habitacion.BackColor = Color.Gainsboro;
+            tbl_resultado_habitacion.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            tbl_resultado_habitacion.Location = new Point(745, 391);
+            tbl_resultado_habitacion.Name = "tbl_resultado_habitacion";
+            tbl_resultado_habitacion.Size = new Size(13, 17);
+            tbl_resultado_habitacion.TabIndex = 88;
+            tbl_resultado_habitacion.Text = "-";
+            tbl_resultado_habitacion.Visible = false;
+            // 
+            // lbl_tipo_habitacion
+            // 
+            lbl_tipo_habitacion.AutoSize = true;
+            lbl_tipo_habitacion.BackColor = Color.Gainsboro;
+            lbl_tipo_habitacion.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_tipo_habitacion.Location = new Point(745, 368);
+            lbl_tipo_habitacion.Name = "lbl_tipo_habitacion";
+            lbl_tipo_habitacion.Size = new Size(146, 17);
+            lbl_tipo_habitacion.TabIndex = 87;
+            lbl_tipo_habitacion.Text = "Tipo habitacion actual";
+            lbl_tipo_habitacion.Visible = false;
             // 
             // button1
             // 
@@ -614,29 +657,6 @@
             txt_habi_vieja.Size = new Size(91, 23);
             txt_habi_vieja.TabIndex = 79;
             // 
-            // lbl_tipo_habitacion
-            // 
-            lbl_tipo_habitacion.AutoSize = true;
-            lbl_tipo_habitacion.BackColor = Color.Gainsboro;
-            lbl_tipo_habitacion.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_tipo_habitacion.Location = new Point(745, 368);
-            lbl_tipo_habitacion.Name = "lbl_tipo_habitacion";
-            lbl_tipo_habitacion.Size = new Size(146, 17);
-            lbl_tipo_habitacion.TabIndex = 87;
-            lbl_tipo_habitacion.Text = "Tipo habitacion actual";
-            // 
-            // tbl_resultado_habitacion
-            // 
-            tbl_resultado_habitacion.AutoSize = true;
-            tbl_resultado_habitacion.BackColor = Color.Gainsboro;
-            tbl_resultado_habitacion.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            tbl_resultado_habitacion.Location = new Point(745, 391);
-            tbl_resultado_habitacion.Name = "tbl_resultado_habitacion";
-            tbl_resultado_habitacion.Size = new Size(13, 17);
-            tbl_resultado_habitacion.TabIndex = 88;
-            tbl_resultado_habitacion.Text = "-";
-            tbl_resultado_habitacion.Visible = false;
-            // 
             // NuevaReservacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -708,5 +728,6 @@
         public Button button1;
         private Label lbl_tipo_habitacion;
         public Label tbl_resultado_habitacion;
+        public Button nueva_habitacion;
     }
 }

@@ -65,7 +65,7 @@ namespace ProyectoHCL
 
 
         }
-       
+
         //codigo que trae el id del empleado desde el login
         public void id_empleado()
         {
@@ -225,7 +225,7 @@ namespace ProyectoHCL
             cb_metodo.SelectedIndex = 0;
             cb_numero.SelectedIndex = 0;*/
             cb_tipo.SelectedIndex = 0;
-           // cb_estado.SelectedIndex = 0;
+            // cb_estado.SelectedIndex = 0;
 
 
         }
@@ -417,6 +417,7 @@ namespace ProyectoHCL
 
             if (txt_id_solicitud.Text != "")
             {
+                nueva_habitacion.Visible = false;
                 btn_guardar2.Visible = true;
                 string id = txt_id_solicitud.Text;
                 try
@@ -811,7 +812,7 @@ namespace ProyectoHCL
                             MsgB m = new MsgB("informacion", "Reserva actualizada con exito");
                             DialogResult dR = m.ShowDialog();
                             //limpiarCampos();
-                            
+
 
                             conn.Close();
                             this.Close();
@@ -913,6 +914,107 @@ namespace ProyectoHCL
         {
             Form nuevo = new Buscar();
             nuevo.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            object adb = cb_numero.SelectedItem;
+            object b = cb_numero.GetItemText(adb);
+
+            string fecha1 = dt_fecha_entrada.Text;
+            string fecha2 = dt_fecha_salida.Text;
+
+            try
+            {
+                using (BaseDatosHCL.ObtenerConexion())
+                {
+                    MySqlCommand comando = new MySqlCommand();
+                    comando.Connection = BaseDatosHCL.ObtenerConexion();
+                    //comando.CommandText = ("select * from TBL_SOLICITUDRESERVA where NUMEROHABITACION='" + b + "' and INGRESO and SALIDA between '" + fecha1 + "' and '" + fecha2 + "';");
+                    comando.CommandText = ("CALL Validar_disponibilidad('" + b + "','" + fecha1 + "', '" + fecha2 + "');");
+
+                    MySqlDataReader leer = comando.ExecuteReader();
+                    if (leer.Read() == true)
+                    {
+                        MsgB m = new MsgB("advertencia", "Ya existe una reserva para esta habitacion en el mismo rango de fechas");
+                        DialogResult dR = m.ShowDialog();
+                    }
+                    else
+                    {
+                        if (dt_fecha_coti.Value.Date >= DateTime.Today)
+                        {
+                            if (dt_fecha_entrada.Value.Date >= DateTime.Today & dt_fecha_entrada.Value.Date < dt_fecha_salida.Value.Date)
+                            {
+                                if (dt_fecha_salida.Value.Date >= DateTime.Today & dt_fecha_salida.Value.Date > dt_fecha_entrada.Value.Date)
+                                {
+                                    try
+                                    {
+                                        MySqlConnection conn;
+                                        MySqlCommand cmd;
+                                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                                        conn.Open();
+
+                                        cmd = new MySqlCommand("InsertarReserva", conn);
+                                        cmd.CommandType = CommandType.StoredProcedure;
+                                        cmd.Parameters.AddWithValue("@id_estado", txt_estado.Text);
+                                        cmd.Parameters.AddWithValue("@id_metodo", txt_metodo_reserva.Text);
+                                        cmd.Parameters.AddWithValue("@id_usuaio", txt_codigo.Text);
+                                        cmd.Parameters.AddWithValue("@fecha_coti", Convert.ToDateTime(dt_fecha_coti.Text));
+                                        cmd.Parameters.AddWithValue("@fecha_ingreso", Convert.ToDateTime(dt_fecha_entrada.Text));
+                                        cmd.Parameters.AddWithValue("@fecha_salida", Convert.ToDateTime(dt_fecha_salida.Text));
+                                        cmd.Parameters.AddWithValue("@n_huespedes", txt_huespedes.Text);
+                                        cmd.Parameters.AddWithValue("@vehiculo", txt_vehiculo.Text);
+                                        cmd.Parameters.AddWithValue("@monto", txt_monto.Text);
+                                        cmd.Parameters.AddWithValue("@cod_cliente", txt_cod_cliente.Text);
+                                        cmd.Parameters.AddWithValue("@num_habitacion", cb_numero.Text);
+
+
+                                        cmd.ExecuteNonQuery();
+                                        inserdetalle();
+                                        //updatehabitacion();
+                                        MsgB m = new MsgB("informacion", "Reserva agregada con exito");
+                                        DialogResult dR = m.ShowDialog();
+                                       
+                                        //CargarDG();
+                                        //limpiarCampos();
+                                        conn.Close();
+
+                                        //this.Close();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MsgB m = new MsgB("advertencia", "Validar datos ingresados");
+                                        DialogResult dR = m.ShowDialog();
+                                    }
+                                }
+                                else
+                                {
+                                    MsgB m = new MsgB("advertencia", "Fechas de salida no puede ser menor o igual a la de entrada");
+                                    DialogResult dR = m.ShowDialog();
+
+                                }
+                            }
+                            else
+                            {
+                                MsgB m = new MsgB("advertencia", "Fechas de entrada no puede ser mayor o igual a la de salida");
+                                DialogResult dR = m.ShowDialog();
+
+                            }
+                        }//cierre del if 
+                        else
+                        {
+                            MsgB m = new MsgB("advertencia", "Fechas ingresadas invalidas");
+                            DialogResult dR = m.ShowDialog();
+                        }
+
+                    }
+                }
+
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show(a.Message);
+            }
         }
     }
 }
