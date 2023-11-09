@@ -67,20 +67,19 @@ namespace ProyectoHCL.Formularios
 {
     public partial class EditarCliente : Form  /* clase publica editar cliente */
     {
-        MsgB msgB = new MsgB();
+        
         public EditarCliente()
         {
             InitializeComponent();
         }
 
-
+        public string id = null;
+        MsgB msgB = new MsgB();
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-
 
         int posY = 0; /* declaracion de variables */
         int posX = 0;
@@ -169,28 +168,53 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        Control control = new Control();
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            string nuevoDNI = txtID.Text;
+            string nuevoNombre1 = txtNombre.Text;
+            string nuevoEmail = txtEmail1.Text;
+            string nuevoEmail1 = txtEmail2.Text;
+            string nuevoTelefono = txtTele1.Text;
+            string nuevoTelefono1 = txtTele2.Text;
+            string idRegistro = id;
+            Control control = new Control();
+
+
             Modelo modelo = new Modelo();
-            if (VCamposVacios() == false) //Validar campos vacios
+
+            if (VCamposVacios() == false) // Validar campos vacios
             {
                 MsgB mbox = new MsgB("advertencia", "Favor llene todos los campos");
                 DialogResult dR = mbox.ShowDialog();
             }
-            else if (modelo.existeCliente(txtID.Text)) //Validar que el cliente ya existe
+            else if (modelo.DNIEditarBD(txtID.Text, claseCod.id)) //Validar que el DNI del usuario ya existe
             {
-                MsgB mbox1 = new MsgB("advertencia", "El cliente ya existe");
+                MsgB mbox1 = new MsgB("advertencia", "El DNI de usuario ya está registrado");
                 DialogResult dR1 = mbox1.ShowDialog();
             }
-            else if (modelo.existeNombre(txtNombre.Text)) //validar si ya existe el nombre del cliente
-            {
-                MsgB m = new MsgB("advertencia", "El nombre de usuario ya existe");
+            else if (modelo.NombreClienteEditarBD(txtNombre.Text, claseCod.id)) //validar si ya existe el nombre del cliente
+            { 
+                MsgB m = new MsgB("advertencia", "El nombre de cliente ya está registrado");
                 DialogResult dR = m.ShowDialog();
             }
-            else if (modelo.existeEmail(txtEmail1.Text)) //validar si ya existe el correo del cliente
+            else if (modelo.EmailEditarBD(txtEmail1.Text, claseCod.id)) //validar si ya está registrado el correo del cliente
             {
                 MsgB m = new MsgB("advertencia", "El correo proporcionado ya está registrado");
+                DialogResult dR = m.ShowDialog();
+            }
+            else if (modelo.EmailDosEditarBD(txtEmail2.Text, claseCod.id)) //validar si ya está registrado el correo del cliente
+            {
+                MsgB m = new MsgB("advertencia", "El correo proporcionado ya está registrado");
+                DialogResult dR = m.ShowDialog();
+            }
+            else if (modelo.TelefonoEditarBD(txtTele1.Text, claseCod.id)) //validar si ya está registrado el teléfono del cliente
+            {
+                MsgB m = new MsgB("advertencia", "El teléfono proporcionado ya está registrado");
+                DialogResult dR = m.ShowDialog();
+            }
+            else if (modelo.TelefonoDosEditarBD(txtTele2.Text, claseCod.id)) //validar si ya está registrado el teléfono del cliente
+            {
+                MsgB m = new MsgB("advertencia", "El teléfono proporcionado ya está registrado");
                 DialogResult dR = m.ShowDialog();
             }
             else if (!ValidarTxt.CorreoValido(txtEmail1.Text)) //validar correo
@@ -220,9 +244,11 @@ namespace ProyectoHCL.Formularios
                     if (txtTele2.Text.Trim() == "") { txtTele2.Text = "N/A"; }
                     if (txtEmail2.Text.Trim() == "") { txtEmail2.Text = "N/A"; }
                     if (cbTipo.SelectedItem.ToString() == "Juridico") { tip = 2; } else { tip = 1; }
+
                     control.editarClie(claseCod.id, txtNombre.Text, tip, txtApellido.Text, txtEmpresa.Text,
                         txtRTN.Text, txtTele1.Text, txtEmail1.Text,
                         txtID.Text, txtTele2.Text, txtEmail2.Text);
+
                     MsgB mbox = new MsgB("informacion", "Cliente Agregado");
                     DialogResult dR = mbox.ShowDialog();
                     this.Close();

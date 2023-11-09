@@ -158,14 +158,12 @@ namespace ProyectoHCL.Formularios
                         cmd.Parameters.AddWithValue("@fecha", ahora);
 
                         cmd.ExecuteNonQuery();
-                        MsgB m = new MsgB("informacion", "Registro creado con éxito");
-                        DialogResult dR = m.ShowDialog();
-                        limpiarCampos();
+                     
                         conn.Close();
 
                         string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
-                        "('" + clasecompartida.iduser + "', '7', '" + ahora + "', 'CREACION', 'CREACION PARAMETRO " +
-                        texPa.Text + " " + txtValor.Text + "');";
+                        "('" + clasecompartida.iduser + "', '13', '" + ahora + "', 'CREACIÓN', 'CREACIÓN PARÁMETRO " +
+                        texPa.Text /*+ " " + txtValor.Text*/ + "');";
                         conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
                         conn.Open();
 
@@ -173,7 +171,9 @@ namespace ProyectoHCL.Formularios
                         cmd.ExecuteNonQuery();
                         conn.Close();
 
-
+                        MsgB m = new MsgB("informacion", "Registro creado con éxito");
+                        DialogResult dR = m.ShowDialog();
+                        limpiarCampos();
 
                         this.Close();
                     }
@@ -186,7 +186,10 @@ namespace ProyectoHCL.Formularios
             }
             else if (parame.p == 1)
             {
+                string nuevoParametro = texPa.Text;
+                string nuevoValor = txtValor.Text;
                 Control control = new Control();
+                string idRegistro =idpar ;
                 Modelo modelo = new Modelo();
 
                 if (texPa.Text.Trim() == "" || txtValor.Text.Trim() == "")//|| textPar.Text.Trim() == "")
@@ -194,11 +197,11 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (modelo.existeditarPBD(texPa.Text))
+               /* else if (modelo.ParametroEditarBD(nuevoParametro, idRegistro))
                 {
-                    MsgB m = new MsgB("advertencia", "El parametro ya existe");
+                    MsgB m = new MsgB("advertencia", "El usuario ya está registrado");
                     DialogResult dR = m.ShowDialog();
-                }
+                }*/
                 else
                 {
                     try
@@ -220,21 +223,9 @@ namespace ProyectoHCL.Formularios
                         cmd.ExecuteNonQuery();
                         conn.Close();
 
-                        string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
-                        "('" + clasecompartida.iduser + "', '7', '" + ahora + "', 'EDICION', 'EDICION PARAMETRO " +
-                        parame.idparametro + " " + texPa.Text + "');";
-                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                        conn.Open();
-
-                        cmd = new MySqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        conn.Close();
-
-
                         MsgB m = new MsgB("informacion", "Registro modificado");
                         DialogResult dR = m.ShowDialog();
                         this.Close();
-
                     }
 
                     catch (Exception ex)

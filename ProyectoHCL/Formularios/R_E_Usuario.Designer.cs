@@ -382,7 +382,7 @@
             txtContraseña.BorderStyle = BorderStyle.FixedSingle;
             txtContraseña.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtContraseña.Location = new Point(98, 205);
-            txtContraseña.MaxLength = 10;
+            txtContraseña.MaxLength = 15;
             txtContraseña.Name = "txtContraseña";
             txtContraseña.PasswordChar = '*';
             txtContraseña.Size = new Size(316, 27);
@@ -399,7 +399,7 @@
             txtNombre.CharacterCasing = CharacterCasing.Upper;
             txtNombre.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtNombre.Location = new Point(98, 134);
-            txtNombre.MaxLength = 150;
+            txtNombre.MaxLength = 250;
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(316, 27);
             txtNombre.TabIndex = 10;
@@ -414,7 +414,7 @@
             txtUsuario.CharacterCasing = CharacterCasing.Upper;
             txtUsuario.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtUsuario.Location = new Point(98, 62);
-            txtUsuario.MaxLength = 150;
+            txtUsuario.MaxLength = 200;
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(316, 27);
             txtUsuario.TabIndex = 9;

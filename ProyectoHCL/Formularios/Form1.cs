@@ -52,10 +52,10 @@ namespace ProyectoHCL
 
         }
 
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
             try
 
             {
@@ -90,7 +90,7 @@ namespace ProyectoHCL
 
                     if (leer.Read() == true)
                     {
-                        
+
 
                         string usuario = (string)leer["USUARIO"];
 
@@ -132,7 +132,7 @@ namespace ProyectoHCL
 
                             Form formu = new PreguntasRecuContra();
                             formu.ShowDialog();
-                            
+
                         }
                         else if (usuario == UsuarioBox1.Text & pass == ContraseñaBox2.Text & tiempo.Hours < 2)
                         {
@@ -162,7 +162,7 @@ namespace ProyectoHCL
                             DialogResult dR = mbox.ShowDialog();
                         }
 
-                       
+
 
                     }
                     else
@@ -171,13 +171,13 @@ namespace ProyectoHCL
                         MsgB mbox = new MsgB("advertencia", "USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VALIDOS");
                         DialogResult dR = mbox.ShowDialog();
                     }
-                    
-                  
-                
+
+
+
                     comando.Connection.Close();
                 }
 
-               
+
             }
             catch (Exception a)
             {
@@ -208,7 +208,7 @@ namespace ProyectoHCL
 
         private void ContraseñaBox2_TextChanged(object sender, EventArgs e)
         {
-         
+
             if (ContraseñaBox2.Text.Contains(" "))
             {
                 //MessageBox.Show("No se permite espacios.");
@@ -217,7 +217,7 @@ namespace ProyectoHCL
                 ContraseñaBox2.Clear();
                 return;  //Salekk
             }
-           
+
         }
 
         private void MostrarBox3_Click(object sender, EventArgs e)
@@ -280,6 +280,37 @@ namespace ProyectoHCL
             WindowState = FormWindowState.Minimized;
         }
 
+        private void UsuarioBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsLetter(e.KeyChar))
+            {
+
+                e.Handled = false;
+
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+
+                e.Handled = false;
+
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+                MsgB m = new MsgB("advertencia", "Por favor, sólo ingrese letras");
+                DialogResult dR = m.ShowDialog();
+            }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
 

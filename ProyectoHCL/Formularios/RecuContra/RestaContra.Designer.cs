@@ -37,12 +37,12 @@
             label3 = new Label();
             BTN_Cancelar = new Button();
             BTN_Aceptar = new Button();
-            errorProvider1 = new ErrorProvider(components);
+            errorRC = new ErrorProvider(components);
             MostrarBox3 = new PictureBox();
             OcultarBox4 = new PictureBox();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorRC).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MostrarBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)OcultarBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -72,6 +72,8 @@
             TXT_Contra.Size = new Size(603, 37);
             TXT_Contra.TabIndex = 16;
             TXT_Contra.KeyPress += TXT_Contra_KeyPress;
+            TXT_Contra.Leave += TXT_Contra_Leave;
+            TXT_Contra.Validating += TXT_Contra_Validating;
             // 
             // TXT_Confi
             // 
@@ -85,6 +87,8 @@
             TXT_Confi.TabIndex = 17;
             TXT_Confi.TextChanged += TXT_Confi_TextChanged;
             TXT_Confi.KeyPress += TXT_Confi_KeyPress;
+            TXT_Confi.Leave += TXT_Confi_Leave;
+            TXT_Confi.Validating += TXT_Confi_Validating;
             // 
             // label2
             // 
@@ -138,9 +142,9 @@
             BTN_Aceptar.UseVisualStyleBackColor = false;
             BTN_Aceptar.Click += BTN_Aceptar_Click;
             // 
-            // errorProvider1
+            // errorRC
             // 
-            errorProvider1.ContainerControl = this;
+            errorRC.ContainerControl = this;
             // 
             // MostrarBox3
             // 
@@ -217,7 +221,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "RestaContra";
             Load += RestaContra_Load;
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorRC).EndInit();
             ((System.ComponentModel.ISupportInitialize)MostrarBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)OcultarBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -240,5 +244,6 @@
         private PictureBox OcultarBox4;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
+        private ErrorProvider errorRC;
     }
 }

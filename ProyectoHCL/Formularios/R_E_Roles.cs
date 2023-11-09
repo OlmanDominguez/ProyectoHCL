@@ -131,9 +131,6 @@ namespace ProyectoHCL.Formularios
                 Left = Left + (e.X - posX);
                 Top = Top + (e.Y - posY);
             }
-
-
-
         }
 
         //validar que los texbox esten llenos y no queden vacios 
@@ -214,6 +211,9 @@ namespace ProyectoHCL.Formularios
             }
             else if (label11.Text == "Editar Rol")// etiqueta para editar al momento de dar clic enviara a otro formulario donde permitira editar
             {
+                string nuevoRol = txtRol.Text;
+                string nuevoDescripcion = txtNumero.Text;
+                string idRegistro = idRol;
                 Control control = new Control();
                 Modelo modelo = new Modelo();
 
@@ -222,14 +222,24 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (modelo.existeditarRol(txtRol.Text))
+                /* else if (modelo.existeditarRol(txtRol.Text))
+                 {
+                     MsgB m = new MsgB("advertencia", "El rol ya existe");
+                     DialogResult dR = m.ShowDialog();
+                 }
+                 else if (modelo.existeditarDR(txtNumero.Text))
+                 {
+                     MsgB m = new MsgB("advertencia", "La descripcion ya existe");
+                     DialogResult dR = m.ShowDialog();
+                 }*/
+                else if (modelo.RolEditarBD(nuevoRol, idRegistro))
                 {
-                    MsgB m = new MsgB("advertencia", "El rol ya existe");
+                    MsgB m = new MsgB("advertencia", "El usuario ya está registrado");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (modelo.existeditarDR(txtNumero.Text))
+                else if (modelo.DescripcionEditarBD(nuevoDescripcion, idRegistro))
                 {
-                    MsgB m = new MsgB("advertencia", "La descripcion ya existe");
+                    MsgB m = new MsgB("advertencia", "El usuario ya está registrado");
                     DialogResult dR = m.ShowDialog();
                 }
                 else

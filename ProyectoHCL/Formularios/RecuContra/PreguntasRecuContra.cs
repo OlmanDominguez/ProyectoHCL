@@ -17,6 +17,7 @@ namespace ProyectoHCL.Formularios
 {
     public partial class PreguntasRecuContra : Form
     {
+        Modelo modelo = new Modelo();
         public PreguntasRecuContra()
         {
             InitializeComponent();
@@ -136,6 +137,8 @@ namespace ProyectoHCL.Formularios
         {
             if (TXT_Respuesta.Text != "" & COBPREG.SelectedItem != "0")
             {
+
+                Modelo modelo = new Modelo();
                 errorProvider1.SetError(TXT_Respuesta, "");
                 errorProvider1.SetError(COBPREG, "");
                 string pregunta = COBPREG.SelectedItem.ToString();
@@ -143,6 +146,11 @@ namespace ProyectoHCL.Formularios
 
                 if (clasecompartida.estado == 3)
                 {
+                    if (modelo.existeContraseña(TXT_Respuesta.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
+                    {
+                        MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
+                        DialogResult d = l.ShowDialog();
+                    }
                     try
                     {
                         using (BaseDatosHCL.ObtenerConexion())
@@ -224,6 +232,7 @@ namespace ProyectoHCL.Formularios
                             comando.Connection.Close();
                         }
                     }
+
                     catch (Exception a)
                     {
 
@@ -308,7 +317,6 @@ namespace ProyectoHCL.Formularios
                                     MessageBox.Show("Favor contesta otra pregunta");
                                     TXT_Respuesta.Text = "";
                                 }
-
                             }
                             comando.Connection.Close();
                         }
@@ -320,7 +328,7 @@ namespace ProyectoHCL.Formularios
                     }
 
                 }
-                else
+
                 {
                     try
                     {
@@ -359,8 +367,6 @@ namespace ProyectoHCL.Formularios
                         MessageBox.Show(a.Message + a.StackTrace);
                     }
                 }
-
-
             }
             else if (COBPREG.SelectedIndex.Equals(0) & TXT_Respuesta.Text == "")
             {
@@ -372,13 +378,49 @@ namespace ProyectoHCL.Formularios
                 errorProvider1.SetError(COBPREG, "");
                 errorProvider1.SetError(TXT_Respuesta, "Ingrese su respuesta");
             }
-
         }
 
         private void TXT_Respuesta_TextChanged(object sender, EventArgs e)
         {
             TXT_Respuesta.CharacterCasing = CharacterCasing.Upper; //Bloquea minusculas
             errorProvider1.SetError(TXT_Respuesta, "");
+        }
+
+        private void TXT_Respuesta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsLetter(e.KeyChar))
+            {
+
+                e.Handled = false;
+
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+
+                e.Handled = false;
+
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+                MsgB m = new MsgB("advertencia", "Por favor, sólo ingrese letras");
+                DialogResult dR = m.ShowDialog();
+            }
+            if (char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+                MsgB m = new MsgB("advertencia", "No se permiten espacios");
+                DialogResult dR = m.ShowDialog();
+            }
+            else if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

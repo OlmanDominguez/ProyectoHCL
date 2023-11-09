@@ -61,8 +61,17 @@ namespace ProyectoHCL.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a &lt;!doctype html&gt;&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xmlns:v=&quot;urn:schemas-microsoft-com:vml&quot; xmlns:o=&quot;urn:schemas-microsoft-com:office:office&quot;&gt;&lt;head&gt;&lt;title&gt;Reset&lt;/title&gt;&lt;!--[if !mso]&gt;&lt;!--&gt;&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;&lt;!--&lt;![endif]--&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;style type=&quot;text/css&quot;&gt;#outlook a { padding:0; }
-        ///      body { margin:0;padding:0;-webkit-text-size-adjust:100%;-ms-t [resto de la cadena truncado]&quot;;.
+        ///   Busca una cadena traducida similar a &lt;!doctype html&gt;
+        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xmlns:v=&quot;urn:schemas-microsoft-com:vml&quot; xmlns:o=&quot;urn:schemas-microsoft-com:office:office&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Reset&lt;/title&gt;&lt;!--[if !mso]&gt;&lt;!--&gt;
+        ///    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;&lt;!--&lt;![endif]--&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
+        ///    &lt;style type=&quot;text/css&quot;&gt;
+        ///        #outlook a {
+        ///            padding: 0;
+        ///        }        /// [resto de la cadena truncado]&quot;;.
         /// </summary>
         internal static string Contrasena {
             get {
@@ -146,6 +155,16 @@ namespace ProyectoHCL.Properties {
         internal static System.Drawing.Bitmap ocupado_ {
             get {
                 object obj = ResourceManager.GetObject("ocupado_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ojo {
+            get {
+                object obj = ResourceManager.GetObject("ojo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

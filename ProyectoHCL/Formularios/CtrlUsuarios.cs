@@ -26,11 +26,11 @@ using static ProyectoHCL.RecuContra; //Para uso del user y IDUser iniciado
 using System.Windows.Controls;
 using Point = System.Drawing.Point;
 using iText.IO.Image;
-using Image = iText.Layout.Element.Image;
 using iText.Kernel.Events;
 using iText.Kernel.Pdf.Canvas;
 using Rectangle = iText.Kernel.Geom.Rectangle;
 using System.Reflection;
+using Image = System.Drawing.Image;
 
 //-----------------------------------------------------------------------
 //    Universidad Nacional Autonoma de Honduras (UNAH)
@@ -160,12 +160,11 @@ namespace ProyectoHCL.Formularios
 
         private void CtrlUsuarios_Load(object sender, EventArgs e)
         {
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
+            DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn(); //se crea el boton en el dataGrid
             btnUpdate.Name = "EDITAR"; //Nombre del boton 
             dgvUsuarios.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
 
             Permisos(); //Llamar la función permisos al cargar formulario
-
         }
 
         public void BuscarUsuarios(string buscarU) //Recibe string para buscar usuarios
@@ -244,44 +243,12 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        private void dgvUsuarios_CellPainting_1(object sender, DataGridViewCellPaintingEventArgs e) //Configurar datagrid para mostrar los botones de editar y eliminar que se agregaron
-        {
-            if (e.ColumnIndex >= 0 && this.dgvUsuarios.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvUsuarios.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico"); //Se define la carpeta en la que está guardado el ícono del boton
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvUsuarios.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvUsuarios.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
-        }
-
         private void dgvUsuarios_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dgvUsuarios.Columns[e.ColumnIndex].Name == "EDITAR") //si se dio click en el botón editar hacer lo siguiente
             {
                 R_E_user.lblTitulo.Text = "Editar Usuario";
                 R_E_user.cargarRolesE();
-
-                MySqlConnection conn;
-                MySqlCommand cmd;
-
-                string sql = "SELECT CONTRASENA FROM TBL_USUARIO WHERE ID_USUARIO = '" + dgvUsuarios.CurrentRow.Cells["ID"].Value.ToString() + "'";
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
-
-                cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader read = cmd.ExecuteReader();
-
-                if (read.Read() == true)
-                {
-                    // R_E_user.txtContraseña.Text = read["CONTRASENA"].ToString();
-                }
 
                 R_E_user.cmbEstado.Visible = true;
                 R_E_user.lblEstado.Visible = true;
@@ -296,21 +263,6 @@ namespace ProyectoHCL.Formularios
                 R_E_user.cmbRol.Text = dgvUsuarios.CurrentRow.Cells["ROL"].Value.ToString();
                 R_E_user.txtFechaC.Text = dgvUsuarios.CurrentRow.Cells["CREACION"].Value.ToString();
                 R_E_user.dtpVencimiento.Text = dgvUsuarios.CurrentRow.Cells["VENCIMIENTO"].Value.ToString();
-
-                string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-                conn.Close();
-                //registrar accción(editar) en bitácora
-                //sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
-                //    "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'INGRESO', 'INGRESO A EDITAR USUARIO " +
-                //    R_E_user.idUs + " " + R_E_user.txtUsuario.Text + "');";
-                //conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                //conn.Open();
-
-                //cmd = new MySqlCommand(sql, conn);
-                //cmd.ExecuteNonQuery();
-                //conn.Close();
-
                 R_E_user.ShowDialog();
                 R_E_user.limpiarCampos();
                 CargarDG(); //Se llama el metodo Mostrar usuarios para actualizar el DataGrid al editar 
@@ -457,7 +409,7 @@ namespace ProyectoHCL.Formularios
                 }
 
                 string sql = "SELECT ID_USUARIO AS ID, NOMBRE_USUARIO AS NOMBRE, USUARIO, EMAIL AS CORREO, TBL_ESTADO.DESCRIPCION AS ESTADO, " +
-                    "TBL_ROL.DESCRIPCION AS ROL, PRIMERINGRESO AS CREACION, FECHAVENCIMIENTO AS VENCIMIENTO FROM TBL_USUARIO INNER JOIN " +
+                    "TBL_ROL.ROL AS ROL, PRIMERINGRESO AS CREACION, FECHAVENCIMIENTO AS VENCIMIENTO FROM TBL_USUARIO INNER JOIN " +
                     "TBL_ESTADO ON TBL_USUARIO.ID_ESTADO = TBL_ESTADO.ID_ESTADO INNER JOIN TBL_ROL ON TBL_USUARIO.ID_ROL = " +
                     "TBL_ROL.ID_ROL";
 
@@ -651,6 +603,19 @@ namespace ProyectoHCL.Formularios
         private void btnNuevo_EnabledChanged(object sender, EventArgs e)
         {
             btnNuevo.BackColor = Color.DarkGray;
+        }
+
+        private void dgvUsuarios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvUsuarios.Columns[e.ColumnIndex].Name == "EDITAR")
+            {
+                Image imagen = Properties.Resources.editar;
+
+                dgvUsuarios.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvUsuarios.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
         }
     }
 }

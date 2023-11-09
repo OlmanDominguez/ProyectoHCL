@@ -224,7 +224,7 @@
             txtPorcentaje.CharacterCasing = CharacterCasing.Upper;
             txtPorcentaje.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtPorcentaje.Location = new Point(242, 140);
-            txtPorcentaje.MaxLength = 100;
+            txtPorcentaje.MaxLength = 3;
             txtPorcentaje.Name = "txtPorcentaje";
             txtPorcentaje.Size = new Size(316, 27);
             txtPorcentaje.TabIndex = 10;

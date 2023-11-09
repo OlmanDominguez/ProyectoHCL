@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DocumentFormat.OpenXml.Drawing.Diagrams;
+using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
 using System.Collections.Generic;
@@ -41,11 +42,11 @@ namespace ProyectoHCL.Formularios
         {
             if (TXT_Contra.Text.Equals(TXT_Confi.Text) == false)
             {
-                errorProvider1.SetError(TXT_Confi, "Contraseña no coincide");
+                errorRC.SetError(TXT_Confi, "Contraseña no coincide");
             }
             else
             {
-                errorProvider1.SetError(TXT_Confi, "");
+                errorRC.SetError(TXT_Confi, "");
             }
         }
 
@@ -81,8 +82,20 @@ namespace ProyectoHCL.Formularios
 
         private void BTN_Aceptar_Click(object sender, EventArgs e)
         {
+            Modelo modelo = new Modelo();
             if (TXT_Contra.Text == TXT_Confi.Text)
             {
+                if (modelo.existeContraseña(TXT_Contra.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
+                {
+                    MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
+                    DialogResult d = l.ShowDialog();
+                }
+                if (modelo.existeContraseña(TXT_Confi.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
+                {
+                    MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
+                    DialogResult d = l.ShowDialog();
+                }
+
                 try
                 {
                     using (BaseDatosHCL.ObtenerConexion())
@@ -100,36 +113,96 @@ namespace ProyectoHCL.Formularios
                         DialogResult dR = m.ShowDialog();
                         comando.Connection.Close();
                         this.Close();
+                      /*  Modelo modelo = new Modelo();
+                        if (modelo.existeContraseña(TXT_Contra.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
+                        {
+                            MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
+                            DialogResult d = l.ShowDialog();
+                        }*/
 
                     }
-                    Modelo modelo = new Modelo();
-
-                    /*if (Modelo.existeContraseña(TXT_Contra.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
-                     {
-                         MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
-                         DialogResult d = l.ShowDialog();
-                     }
-                     if (Modelo.existeContraseña(TXT_Confi.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
-                     {
-                         MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
-                         DialogResult d = l.ShowDialog();
-                     }*/
-
-
                 }
                 catch (Exception a)
                 {
                     MessageBox.Show(a.Message + a.StackTrace);
                 }
+
             }
             else
             {
                 MsgB m = new MsgB("advertencia", "Contraseñas no coinciden");
                 DialogResult dR = m.ShowDialog();
+
             }
+        }
 
+        private void TXT_Contra_Leave(object sender, EventArgs e)
+        {
+            if (TXT_Contra.TextLength < 5)
+            {
+                errorRC.SetError(TXT_Contra, "La contraseña es muy corta");
+                TXT_Contra.Focus();
+            }
+            else
+            {
+                errorRC.Clear();
+            }
+        }
 
+        private bool ContrasenaRobusta(string password) //validar contraseña robusta
+        {
+            return password.Length >= 5 &&
+                   password.Any(char.IsUpper) &&
+                   password.Any(char.IsLower) &&
+                   password.Any(char.IsDigit) &&
+                   password.Any(c => !char.IsLetterOrDigit(c));
+        }
 
+        private void TXT_Confi_Leave(object sender, EventArgs e)
+        {
+            if (TXT_Confi.TextLength < 5)
+            {
+                errorRC.SetError(TXT_Confi, "La contraseña es muy corta");
+                TXT_Confi.Focus();
+            }
+            else
+            {
+                errorRC.Clear();
+            }
+        }
+
+        private void TXT_Contra_Validating(object sender, CancelEventArgs e)
+        {
+            string contra = TXT_Contra.Text;
+            bool valida = ContrasenaRobusta(contra);
+
+            if (!valida)
+            {
+                errorRC.SetError(TXT_Contra, "La contraseña debe contener al menos una letra minúscula, una mayúscula, " +
+                    "un número y un caracter especial");
+                TXT_Contra.Focus();
+            }
+            else
+            {
+                errorRC.Clear();
+            }
+        }
+
+        private void TXT_Confi_Validating(object sender, CancelEventArgs e)
+        {
+            string contra = TXT_Confi.Text;
+            bool valida = ContrasenaRobusta(contra);
+
+            if (!valida)
+            {
+                errorRC.SetError(TXT_Confi, "La contraseña debe contener al menos una letra minúscula, una mayúscula, " +
+                    "un número y un caracter especial");
+                TXT_Confi.Focus();
+            }
+            else
+            {
+                errorRC.Clear();
+            }
         }
     }
 }
