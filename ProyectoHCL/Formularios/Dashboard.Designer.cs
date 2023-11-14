@@ -776,11 +776,11 @@
             label8.BackColor = Color.FromArgb(20, 100, 150);
             label8.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = SystemColors.ButtonFace;
-            label8.Location = new Point(43, 20);
+            label8.Location = new Point(16, 21);
             label8.Name = "label8";
-            label8.Size = new Size(137, 25);
+            label8.Size = new Size(176, 25);
             label8.TabIndex = 35;
-            label8.Text = "Reservaciones";
+            label8.Text = "Reservas en el mes";
             // 
             // lbl_confir
             // 

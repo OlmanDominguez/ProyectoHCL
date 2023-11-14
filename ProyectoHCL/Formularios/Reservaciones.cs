@@ -169,6 +169,7 @@ namespace ProyectoHCL
             CB_PAGINACION_R.SelectedIndex = indice;
 
 
+
         }
         public void BuscarReserva(string buscarU) //Recibe string para buscar usuarios
         {
@@ -203,7 +204,9 @@ namespace ProyectoHCL
 
         private void Reservaciones_Load(object sender, EventArgs e)
         {
-                        
+            DataGridViewButtonColumn btnVer = new DataGridViewButtonColumn();
+            btnVer.Name = "VER";
+            dgv_reservaciones.Columns.Add(btnVer);
             DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
             btnUpdate.Name = "EDITAR";//Nombre del boton 
             dgv_reservaciones.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
@@ -211,9 +214,8 @@ namespace ProyectoHCL
             DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
             btnDelete.Name = "ELIMINAR";
             dgv_reservaciones.Columns.Add(btnDelete);
-            DataGridViewButtonColumn btnVer = new DataGridViewButtonColumn();
-            btnVer.Name = "VER";
-            dgv_reservaciones.Columns.Add(btnVer);
+
+
             Permisos();
         }
 
@@ -324,9 +326,9 @@ namespace ProyectoHCL
                 reservacion.lbl_titulo.Text = "Editar Reservacion";
                 reservacion.txt_id_solicitud.Text = dgv_reservaciones.CurrentRow.Cells["ID"].Value.ToString();
                 reservacion.lbl_1c.Visible = true;
-                reservacion.lbl_cliente.Visible = true;             
-                reservacion.lbl_cliente.Text= dgv_reservaciones.CurrentRow.Cells["NOMBRE"].Value.ToString();
-                
+                reservacion.lbl_cliente.Visible = true;
+                reservacion.lbl_cliente.Text = dgv_reservaciones.CurrentRow.Cells["NOMBRE"].Value.ToString();
+
                 reservacion.ShowDialog();
 
                 CargarDG();

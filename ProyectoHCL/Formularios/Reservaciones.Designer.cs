@@ -63,8 +63,8 @@
             button5 = new Button();
             btnPerfil = new Button();
             btnCerrarSesion = new Button();
-            btnNuevo = new Button();
             label11 = new Label();
+            btnNuevo = new Button();
             panel5 = new Panel();
             button3 = new Button();
             button4 = new Button();
@@ -131,7 +131,7 @@
             dgv_reservaciones.DefaultCellStyle = dataGridViewCellStyle3;
             dgv_reservaciones.EnableHeadersVisualStyles = false;
             dgv_reservaciones.GridColor = Color.FromArgb(45, 66, 91);
-            dgv_reservaciones.Location = new Point(2, 213);
+            dgv_reservaciones.Location = new Point(29, 181);
             dgv_reservaciones.Name = "dgv_reservaciones";
             dgv_reservaciones.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -150,7 +150,7 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
             dgv_reservaciones.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgv_reservaciones.RowTemplate.Height = 25;
-            dgv_reservaciones.Size = new Size(896, 306);
+            dgv_reservaciones.Size = new Size(842, 306);
             dgv_reservaciones.TabIndex = 37;
             dgv_reservaciones.CellClick += dgv_reservaciones_CellClick;
             dgv_reservaciones.CellContentClick += dgv_reservaciones_CellContentClick;
@@ -443,12 +443,11 @@
             panel2.Controls.Add(button5);
             panel2.Controls.Add(btnPerfil);
             panel2.Controls.Add(btnCerrarSesion);
-            panel2.Controls.Add(btnNuevo);
             panel2.Controls.Add(label11);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(896, 125);
+            panel2.Size = new Size(896, 76);
             panel2.TabIndex = 35;
             // 
             // button2
@@ -507,26 +506,6 @@
             btnCerrarSesion.TabIndex = 35;
             btnCerrarSesion.UseVisualStyleBackColor = false;
             // 
-            // btnNuevo
-            // 
-            btnNuevo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnNuevo.BackColor = Color.RoyalBlue;
-            btnNuevo.BackgroundImageLayout = ImageLayout.Stretch;
-            btnNuevo.FlatAppearance.BorderSize = 0;
-            btnNuevo.FlatAppearance.MouseOverBackColor = Color.MidnightBlue;
-            btnNuevo.FlatStyle = FlatStyle.Flat;
-            btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            btnNuevo.ForeColor = SystemColors.ButtonFace;
-            btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNuevo.Location = new Point(29, 64);
-            btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(40, 39);
-            btnNuevo.TabIndex = 40;
-            btnNuevo.TextAlign = ContentAlignment.MiddleRight;
-            btnNuevo.UseVisualStyleBackColor = false;
-            btnNuevo.Click += btnNuevo_Click_2;
-            // 
             // label11
             // 
             label11.AutoSize = true;
@@ -539,6 +518,26 @@
             label11.TabIndex = 41;
             label11.Text = "Reservaciones";
             // 
+            // btnNuevo
+            // 
+            btnNuevo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnNuevo.BackColor = Color.RoyalBlue;
+            btnNuevo.BackgroundImageLayout = ImageLayout.Stretch;
+            btnNuevo.FlatAppearance.BorderSize = 0;
+            btnNuevo.FlatAppearance.MouseOverBackColor = Color.MidnightBlue;
+            btnNuevo.FlatStyle = FlatStyle.Flat;
+            btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnNuevo.ForeColor = SystemColors.ButtonFace;
+            btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
+            btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
+            btnNuevo.Location = new Point(364, 20);
+            btnNuevo.Name = "btnNuevo";
+            btnNuevo.Size = new Size(40, 39);
+            btnNuevo.TabIndex = 40;
+            btnNuevo.TextAlign = ContentAlignment.MiddleRight;
+            btnNuevo.UseVisualStyleBackColor = false;
+            btnNuevo.Click += btnNuevo_Click_2;
+            // 
             // panel5
             // 
             panel5.BackColor = Color.Gainsboro;
@@ -546,12 +545,13 @@
             panel5.Controls.Add(button4);
             panel5.Controls.Add(button7);
             panel5.Controls.Add(button9);
+            panel5.Controls.Add(btnNuevo);
             panel5.Controls.Add(btn_pdf);
             panel5.Controls.Add(btn_excel);
             panel5.Controls.Add(txtBuscar_reservas);
             panel5.Controls.Add(label4);
             panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(0, 125);
+            panel5.Location = new Point(0, 76);
             panel5.Name = "panel5";
             panel5.Size = new Size(896, 85);
             panel5.TabIndex = 36;
