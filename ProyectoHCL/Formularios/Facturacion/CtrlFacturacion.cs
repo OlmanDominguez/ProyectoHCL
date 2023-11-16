@@ -144,13 +144,13 @@ namespace ProyectoHCL.Formularios
         {
             //MostrarUsuarios(); 
 
-            DataGridViewButtonColumn btnVer = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
-            btnVer.Name = "VER"; //Nombre del boton 
-            dgvFacturas.Columns.Add(btnVer); //Se especifica el nombre de dataGrid para agregar boton
+            DataGridViewImageColumn btnVer = new DataGridViewImageColumn();//se crea el boton en el dataGrid
+            btnVer.Name = "VER";//Nombre del boton 
+            dgvFacturas.Columns.Add(btnVer);//Se especifica el nombre de dataGrid para agregar boton
 
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
-            btnDelete.Name = "EDITAR";
-            dgvFacturas.Columns.Add(btnDelete);
+            DataGridViewImageColumn btnEditar = new DataGridViewImageColumn();
+            btnEditar.Name = "EDITAR";
+            dgvFacturas.Columns.Add(btnEditar);
 
             Permisos();
         }
@@ -200,36 +200,6 @@ namespace ProyectoHCL.Formularios
             CargarDG();
         }
 
-        private void dgvFacturas_CellPainting_1(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            if (e.ColumnIndex >= 0 && this.dgvFacturas.Columns[e.ColumnIndex].Name == "VER" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvFacturas.Rows[e.RowIndex].Cells["VER"] as DataGridViewButtonCell;
-                Icon icoVer = new Icon(Environment.CurrentDirectory + "\\ver.ico"); //Se define la carpeta en la que está guardado el ícono del boton
-                e.Graphics.DrawIcon(icoVer, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvFacturas.Rows[e.RowIndex].Height = icoVer.Height + 8;
-                this.dgvFacturas.Columns[e.ColumnIndex].Width = icoVer.Width + 58;
-
-                e.Handled = true;
-            }
-            if (e.ColumnIndex >= 0 && this.dgvFacturas.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvFacturas.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvFacturas.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvFacturas.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
-        }
-
         public static class info
         {
             public static string factura;
@@ -269,29 +239,28 @@ namespace ProyectoHCL.Formularios
                 }
 
             }
+            //if (this.dgvFacturas.Columns[e.ColumnIndex].Name == "EDITAR")
+            //{
+            //    try
+            //    {
+            //        info.factura = dgvFacturas.CurrentRow.Cells["FACTURA"].Value.ToString();
+            //        DateTime ingreso = Convert.ToDateTime(dgvFacturas.CurrentRow.Cells["INGRESO"].Value.ToString());
+            //        string ingreso1 = ingreso.ToString("dd/MM/yyyy");
+            //        info.ingreso = ingreso1;
+            //        DateTime salida = Convert.ToDateTime(dgvFacturas.CurrentRow.Cells["SALIDA"].Value.ToString());
+            //        string salida1 = salida.ToString("dd/MM/yyyy");
+            //        info.salida = salida1;
+            //        info.reserva = dgvFacturas.CurrentRow.Cells["RESERVA"].Value.ToString();
+            //        info.est = 0;
+            //        Form form = new Formularios.ShowFactura();
+            //        form.ShowDialog();
 
-            if (this.dgvFacturas.Columns[e.ColumnIndex].Name == "EDITAR")
-            {
-                try
-                {
-                    info.factura = dgvFacturas.CurrentRow.Cells["FACTURA"].Value.ToString();
-                    DateTime ingreso = Convert.ToDateTime(dgvFacturas.CurrentRow.Cells["INGRESO"].Value.ToString());
-                    string ingreso1 = ingreso.ToString("dd/MM/yyyy");
-                    info.ingreso = ingreso1;
-                    DateTime salida = Convert.ToDateTime(dgvFacturas.CurrentRow.Cells["SALIDA"].Value.ToString());
-                    string salida1 = salida.ToString("dd/MM/yyyy");
-                    info.salida = salida1;
-                    info.reserva = dgvFacturas.CurrentRow.Cells["RESERVA"].Value.ToString();
-                    info.est = 0;
-                    Form form = new Formularios.ShowFactura();
-                    form.ShowDialog();
-
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Se produjo un error");
-                }
-            }
+            //    }
+            //    catch (Exception)
+            //    {
+            //        MessageBox.Show("Se produjo un error");
+            //    }
+            //}
         }
 
         private void cmbPaginacion_SelectionChangeCommitted(object sender, EventArgs e)
@@ -309,19 +278,19 @@ namespace ProyectoHCL.Formularios
             switch (cmbIndice) /* realizar las respectivas validaciones valor por valor */
             {
                 case 0:
-                    numFilas = 5;
-                    break;
-                case 1:
                     numFilas = 10;
                     break;
-                case 2:
+                case 1:
                     numFilas = 20;
                     break;
-                case 3:
+                case 2:
                     numFilas = 30;
                     break;
-                case 4:
+                case 3:
                     numFilas = 40;
+                    break;
+                case 4:
+                    numFilas = 50;
                     break;
             }
             pagFinal = numFilas;
@@ -469,6 +438,28 @@ namespace ProyectoHCL.Formularios
         private void button9_Click(object sender, EventArgs e)
         {
             crearExcel();
+        }
+
+        private void dgvFacturas_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvFacturas.Columns[e.ColumnIndex].Name == "VER")
+            {
+                Image imagen = Properties.Resources.ojo;
+
+                dgvFacturas.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvFacturas.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvFacturas.Columns[e.ColumnIndex].Name == "EDITAR")
+            {
+                Image imagen = Properties.Resources.editar;
+
+                dgvFacturas.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvFacturas.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
         }
     }
 }

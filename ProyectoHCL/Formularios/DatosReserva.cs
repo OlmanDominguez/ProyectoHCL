@@ -16,6 +16,7 @@ namespace ProyectoHCL.Formularios
 {
     public partial class DatosReserva : Form
     {
+        NuevaReservacion reservacion = new NuevaReservacion();
         string fecha;
         //Dashboard calendario = new Dashboard();
         private const string connection = "server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;";
@@ -90,6 +91,17 @@ namespace ProyectoHCL.Formularios
                 Left = Left + (e.X - posX);
                 Top = Top + (e.Y - posY);
             }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            reservacion.lbl_titulo.Text = "Editar Reservacion";
+            reservacion.lbl_1c.Visible = true;
+            reservacion.lbl_cliente.Visible = true;
+            reservacion.lbl_cliente.Text = clases.CDatos.cliente;
+            reservacion.ShowDialog();
+            
         }
     }
 }

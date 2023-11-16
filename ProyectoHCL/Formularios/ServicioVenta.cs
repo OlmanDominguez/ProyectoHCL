@@ -78,13 +78,13 @@ namespace ProyectoHCL.Formularios
             cargarServicios();
             cmbServicio.SelectedIndex = -1;
             //deshabilitar botones mientras no se elija una habitación
-            btnAgregar.Enabled = false;
-            btnAgregar.BackColor = Color.DarkGray;
-            btnEliminar.Enabled = false;
-            btnEliminar.BackColor = Color.DarkGray;
-            btnVenta.Enabled = false;
-            btnVenta.BackColor = Color.DarkGray;
-            cmbServicio.Enabled = false;
+            //btnAgregar.Enabled = false;
+            //btnAgregar.BackColor = Color.DarkGray;
+            //btnEliminar.Enabled = false;
+            //btnEliminar.BackColor = Color.DarkGray;
+            //btnVenta.Enabled = false;
+            //btnVenta.BackColor = Color.DarkGray;
+            //cmbServicio.Enabled = false;
         }
 
         private void limpiarCampos() //limpiar campos de formulario
@@ -93,10 +93,10 @@ namespace ProyectoHCL.Formularios
             cmbServicio.SelectedIndex = -1;
             txtPrecio.Clear();
             txt_cantidad.Clear();
-            txtHab.Clear();
-            txtCliente.Clear();
-            txtEntrada.Clear();
-            txtSalida.Clear();
+            lblHabitacion.Text = "";
+            lblCliente.Text = "";
+            lblEntrada.Text = "";
+            lblSalida.Text = "";
         }
 
         public void limpiarError() //limpiar los errorProvider
@@ -165,7 +165,7 @@ namespace ProyectoHCL.Formularios
             }
             else if (txt_cantidad.Text == "") //validar campo vacío
             {
-                MsgB Mbox = new MsgB("advertencia", "Indique cantidad");
+                MsgB Mbox = new MsgB("advertencia", "Ingrese una cantidad");
                 DialogResult DR = Mbox.ShowDialog();
             }
             else
@@ -218,9 +218,7 @@ namespace ProyectoHCL.Formularios
                     MessageBox.Show(a.Message + a.StackTrace);
                 }
 
-
-
-
+                txt_cantidad.Text = "";
                 ActualizarResultado();
             }
         }
@@ -278,8 +276,8 @@ namespace ProyectoHCL.Formularios
                         MessageBox.Show(a.Message + a.StackTrace);
                     }
 
-                                     
-                    
+
+
                 }
                 else
                 {
@@ -395,10 +393,6 @@ namespace ProyectoHCL.Formularios
 
 
                 }
-
-
-
-
             }
             else
             {
@@ -411,16 +405,68 @@ namespace ProyectoHCL.Formularios
         {
             if (listView.Items.Count == 0)
             {
-                MsgB Mbox = new MsgB("advertencia", "No se guardó, no hay items en la lista");
-                DialogResult DR = Mbox.ShowDialog();
+                MsgB m = new MsgB("pregunta", "No hay items en la lista. ¿Desea continuar?");
+                DialogResult dg = m.ShowDialog();
+
+                if (dg == DialogResult.OK)
+                {
+                    MsgB mbox = new MsgB("informacion", "Servicios registrados exitosamente");
+                    DialogResult dR = mbox.ShowDialog();
+                    listView.Items.Clear(); //limpiar listview al guardar
+                    limpiarCampos();
+                    this.Close();
+                }
+                else if (dg == DialogResult.Cancel)
+                {
+
+                }
             }
             else
             {
+                MsgB mbox = new MsgB("informacion", "Servicios registrados exitosamente");
+                DialogResult dR = mbox.ShowDialog();
                 listView.Items.Clear(); //limpiar listview al guardar
                 limpiarCampos();
                 this.Close();
             }
         }
+
+        public int NumeroHabitacion(string nombre, string apellido, DateTime fechaIngreso, DateTime fechaSalida)
+        {
+            int numeroHabitacion = -1; // Valor por defecto si no se encuentra ninguna coincidencia
+
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                // Consulta SQL para obtener el número de habitación
+                string query = "SELECT s.NUMEROHABITACION FROM TBL_SOLICITUDRESERVA s " +
+                               "INNER JOIN TBL_CLIENTE c ON s.COD_CLIENTE = c.CODIGO " +
+                               "WHERE c.NOMBRE = @Nombre AND c.APELLIDO = @Apellido " +
+                               "AND s.INGRESO <= @FechaIngreso " +
+                               "AND s.SALIDA >= @FechaSalida";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, conectar))
+                {
+                    // Parámetros para la consulta
+                    cmd.Parameters.AddWithValue("@Nombre", nombre);
+                    cmd.Parameters.AddWithValue("@Apellido", apellido);
+                    cmd.Parameters.AddWithValue("@FechaIngreso", fechaIngreso);
+                    cmd.Parameters.AddWithValue("@FechaSalida", fechaSalida);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            numeroHabitacion = reader.GetInt32("NUMEROHABITACION");
+                        }
+                    }
+                }
+            }
+
+            return numeroHabitacion;
+        }
+
 
         private void cmbServicio_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -443,10 +489,10 @@ namespace ProyectoHCL.Formularios
             {
                 servHab.ShowDialog(this);
             }
-            txtHab.Text = clases.CDatos.numeroHab.ToString();
-            txtCliente.Text = clases.CDatos.cliente.ToString();
-            txtEntrada.Text = clases.CDatos.entrada.ToString();
-            txtSalida.Text = clases.CDatos.salida.ToString();
+            //txtHab.Text = clases.CDatos.numeroHab.ToString();
+            //txtCliente.Text = clases.CDatos.cliente.ToString();
+            //txtEntrada.Text = clases.CDatos.entrada.ToString();
+            //txtSalida.Text = clases.CDatos.salida.ToString();
         }
 
         private void btnCerrar_Click(object sender, EventArgs e) //cerrar formulario
@@ -457,7 +503,7 @@ namespace ProyectoHCL.Formularios
 
         private void txtHab_TextChanged(object sender, EventArgs e)
         {
-            if (txtHab.Text == "") //deshabilitar controles si el textbox está vacío
+            if (lblHabitacion.Text == "") //deshabilitar controles si el textbox está vacío
             {
                 btnAgregar.Enabled = false;
                 btnAgregar.BackColor = Color.DarkGray;
@@ -509,10 +555,10 @@ namespace ProyectoHCL.Formularios
             {
                 //llenar los textbox al elegir la reservación
                 btnReservacion.Visible = false;
-                txtHab.Text = clases.CDatos.numeroHab.ToString();
-                txtCliente.Text = CDatos.nombre.ToString();
-                txtEntrada.Text = info.ingreso.ToString();
-                txtSalida.Text = info.salida.ToString();
+                lblHabitacion.Text = NumeroHabitacion(CDatos.nombreCliente, CDatos.apellidoCliente, Convert.ToDateTime(info.ingreso), Convert.ToDateTime(info.salida)).ToString();
+                lblCliente.Text = CDatos.nombre.ToString();
+                lblEntrada.Text = info.ingreso.ToString();
+                lblSalida.Text = info.salida.ToString();
 
                 DataTable st = new DataTable();
 
@@ -568,6 +614,29 @@ namespace ProyectoHCL.Formularios
             {
                 btnReservacion.Visible = true;
             }
+        }
+
+        //coordenadas para arrastrar formulario
+        int posY = 0;
+        int posX = 0;
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+            {
+                posX = e.X;
+                posY = e.Y;
+            }
+            else
+            {
+                Left = Left + (e.X - posX);
+                Top = Top + (e.Y - posY);
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

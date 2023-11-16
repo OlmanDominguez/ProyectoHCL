@@ -57,12 +57,12 @@ using System.ComponentModel; /* jerarguia de componentes funcionales */
 using System.ComponentModel.Design;
 using System.Data; /*conexion a la BD */
 using System.Drawing;/* impresion de archivos en excel */
-using System.Globalization; 
+using System.Globalization;
 using System.Linq;/* clases e interfaces */
-using System.Runtime.CompilerServices; 
+using System.Runtime.CompilerServices;
 using System.Text;/* manipular informacion dentro de la aplicacion */
 using System.Threading.Tasks;/* libreria para impresion */
-using System.Windows.Controls; 
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static ProyectoHCL.RecuContra;
@@ -309,6 +309,8 @@ namespace ProyectoHCL.Formularios
                         lb_nombres.Text = dt.Rows[0]["NOMBRE"].ToString() + " " + dt.Rows[0]["APELLIDO"].ToString();
                         CDatos.nombre = dt.Rows[0]["NOMBRE"].ToString() + " " + dt.Rows[0]["APELLIDO"].ToString();
                         lb_ID.Text = dt.Rows[0]["DNI_PASAPORTE"].ToString();
+                        CDatos.nombreCliente = dt.Rows[0]["NOMBRE"].ToString();
+                        CDatos.apellidoCliente = dt.Rows[0]["APELLIDO"].ToString();
                         lb_fecha.Text = hoy;
                         lb_ingreso.Text = info.ingreso;
                         lb_Salida.Text = info.salida;
@@ -789,7 +791,7 @@ namespace ProyectoHCL.Formularios
             {
                 filas += "<tr>";
                 filas += "<td>1</td>";
-                filas += "<td>" + ht.Rows[i]["DESCRIPCION"].ToString()+ "</td>";
+                filas += "<td>" + ht.Rows[i]["DESCRIPCION"].ToString() + "</td>";
                 filas += "<td>" + ht.Rows[i]["PRECIO"].ToString() + "</td>";
                 filas += "<td>" + Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])) + "</td>";
                 filas += "</tr>";
@@ -861,13 +863,14 @@ namespace ProyectoHCL.Formularios
 
         private void lbl_servicios_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            this.Hide();
             Form nuevo = new ServicioVenta();
             nuevo.ShowDialog();
 
             this.dgvDetalleFact.Rows.Clear();
             this.dgvMontos.Rows.Clear();
             CargarDGV();
-
+            this.Show();
         }
     }
 }

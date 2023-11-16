@@ -49,7 +49,7 @@ OLMAN  DOMÍNGUEZ
 ----------------------------------------------------------------------- */
 
 /* librerias utilizadas para facilitar el proceso */
-using DocumentFormat.OpenXml.Bibliography; 
+using DocumentFormat.OpenXml.Bibliography;
 using MySql.Data.MySqlClient; /* libreria para conectar a la BD */
 using ProyectoHCL.clases;/* hacer uso de las clases dentro del proyecto */
 using System; /* directiva para identificar los bloques de codigo */
@@ -73,14 +73,10 @@ namespace ProyectoHCL.Formularios
             CargarDGFact();
         }
 
-
-
         private void btnCerrar_Click(object sender, EventArgs e) // Botón cerrar
         {
             this.Close();
         }
-
-
 
         int posY = 0;
         int posX = 0;
@@ -133,26 +129,9 @@ namespace ProyectoHCL.Formularios
 
         private void NuevaFact_Load(object sender, EventArgs e)
         {
-            DataGridViewButtonColumn btnVer = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
-            btnVer.Name = "VER"; //Nombre del boton 
-            dgvReservas.Columns.Add(btnVer); //Se especifica el nombre de dataGrid para agregar boton
-        }
-
-        private void dgvReservas_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            if (e.ColumnIndex >= 0 && this.dgvReservas.Columns[e.ColumnIndex].Name == "VER" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvReservas.Rows[e.RowIndex].Cells["VER"] as DataGridViewButtonCell;
-                Icon icoVer = new Icon(Environment.CurrentDirectory + "\\ver.ico"); //Se define la carpeta en la que está guardado el ícono del boton
-                e.Graphics.DrawIcon(icoVer, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvReservas.Rows[e.RowIndex].Height = icoVer.Height + 8;
-                this.dgvReservas.Columns[e.ColumnIndex].Width = icoVer.Width + 58;
-
-                e.Handled = true;
-            }
+            DataGridViewImageColumn btnFacturar = new DataGridViewImageColumn(); //se crea el boton en el dataGrid
+            btnFacturar.Name = "FACTURAR"; //Nombre del boton 
+            dgvReservas.Columns.Add(btnFacturar); //Se especifica el nombre de dataGrid para agregar boton
         }
 
         private void buscarReserva(string buscarF)
@@ -177,7 +156,6 @@ namespace ProyectoHCL.Formularios
             }
             catch (Exception)  /* detectar errores en ejecucion  */
             {
-
                 throw;
             }
         }
@@ -200,10 +178,11 @@ namespace ProyectoHCL.Formularios
 
         private void dgvReservas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvReservas.Columns[e.ColumnIndex].Name == "VER")
+            if (this.dgvReservas.Columns[e.ColumnIndex].Name == "FACTURAR")
             {
                 try
                 {
+                    this.Hide();
                     info.factura = "0";
                     info.reserva = dgvReservas.CurrentRow.Cells["CODIGO"].Value.ToString();
                     DateTime ingreso = Convert.ToDateTime(dgvReservas.CurrentRow.Cells["INGRESO"].Value.ToString());
@@ -212,6 +191,7 @@ namespace ProyectoHCL.Formularios
                     DateTime salida = Convert.ToDateTime(dgvReservas.CurrentRow.Cells["SALIDA"].Value.ToString());
                     string salida1 = salida.ToString("dd/MM/yyyy");
                     info.salida = salida1;
+                    //this.Hide();
                     Form formulario = new Formularios.ShowFactura();
                     info.est = 2;
                     formulario.ShowDialog();
@@ -230,6 +210,17 @@ namespace ProyectoHCL.Formularios
             nuevo.ShowDialog();
         }
 
+        private void dgvReservas_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvReservas.Columns[e.ColumnIndex].Name == "FACTURAR")
+            {
+                Image imagen = Properties.Resources.caja;
 
+                dgvReservas.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvReservas.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+        }
     }
 }
