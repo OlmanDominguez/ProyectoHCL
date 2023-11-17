@@ -65,7 +65,7 @@ namespace ProyectoHCL
 
 
         }
-       
+
         //codigo que trae el id del empleado desde el login
         public void id_empleado()
         {
@@ -225,7 +225,7 @@ namespace ProyectoHCL
             cb_metodo.SelectedIndex = 0;
             cb_numero.SelectedIndex = 0;*/
             cb_tipo.SelectedIndex = 0;
-           // cb_estado.SelectedIndex = 0;
+            // cb_estado.SelectedIndex = 0;
 
 
         }
@@ -277,7 +277,7 @@ namespace ProyectoHCL
                 {
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("select ID_TIPOHABITACION, TIPO from TBL_TIPOHABITACION;");
+                    comando.CommandText = ("select ID_TIPOHABITACION, TIPO from TBL_TIPOHABITACION where ESTADO='ACTIVO';");
 
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
                     adapter.SelectCommand = comando;
@@ -323,7 +323,7 @@ namespace ProyectoHCL
                 {
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("select ID_TIPOHABITACION, NUMEROHABITACION from TBL_HABITACION where ID_TIPOHABITACION=@ID_TIPOHABITACION;");
+                    comando.CommandText = ("select ID_TIPOHABITACION, NUMEROHABITACION from TBL_HABITACION where ID_TIPOHABITACION=@ID_TIPOHABITACION AND ESTADOHABITACION='ACTIVO';");
                     comando.Parameters.AddWithValue("ID_TIPOHABITACION", ID_TIPOHABITACION);
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
                     adapter.SelectCommand = comando;
@@ -417,6 +417,7 @@ namespace ProyectoHCL
 
             if (txt_id_solicitud.Text != "")
             {
+                nueva_habitacion.Visible = false;
                 btn_guardar2.Visible = true;
                 string id = txt_id_solicitud.Text;
                 try
@@ -426,7 +427,7 @@ namespace ProyectoHCL
                         MySqlCommand comando = new MySqlCommand();
                         comando.Connection = BaseDatosHCL.ObtenerConexion();
                         //comando.CommandText = ("select * from TBL_SOLICITUDRESERVA where ID_SOLICITUDRESERVA='" + id + "';");
-                        comando.CommandText = ("call llenado('" + id + "')");
+                        comando.CommandText = ("call prueba_datos('" + id + "')");
                         MySqlDataReader leer = comando.ExecuteReader();
                         if (leer.Read() == true)
                         {
@@ -466,15 +467,22 @@ namespace ProyectoHCL
                                     break;
                             }
                             //txt_tipo_habitacion.Text = leer[""].ToString();
+                            cb_tipo.Text = leer["TIPO"].ToString();
                             cb_numero.Text = leer["NUMEROHABITACION"].ToString();
                             txt_monto.Text = leer["MONTORESERVAR"].ToString();
                             txt_vehiculo.Text = leer["VEHICULO"].ToString();
                             txt_huespedes.Text = leer["NHUESPEDES"].ToString();
                             txt_habi_vieja.Text = leer["NUMEROHABITACION"].ToString();
-                            tbl_resultado_habitacion.Visible = true;
-                            lbl_tipo_habitacion.Visible = true;
-                            tbl_resultado_habitacion.Text = leer["TIPO"].ToString();
-                            //cb_tipo.Text = leer["TIPO"].ToString();
+                            txt_motivo.Text = leer["MOTIVORESERVA"].ToString();
+                            // tbl_resultado_habitacion.Visible = true;
+                            //lbl_tipo_habitacion.Visible = true;
+                            //tbl_resultado_habitacion.Text = leer["TIPO"].ToString();
+                            lbl_correo.Visible = true;
+                            lbl_telefono.Visible = true;
+                            lbl_correonum.Visible = true;
+                            lbl_telefononum.Visible = true;
+                            lbl_correonum.Text = leer["EMAIL"].ToString();
+                            lbl_telefononum.Text = leer["TELEFONO"].ToString();
                             dt_fecha_coti.Value = DateTime.Today;
                             dt_fecha_entrada.Value = Convert.ToDateTime(leer["INGRESO"].ToString());
                             dt_fecha_salida.Value = Convert.ToDateTime(leer["SALIDA"].ToString());
@@ -575,12 +583,14 @@ namespace ProyectoHCL
                 {
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("select ID_TIPOHABITACION from TBL_TIPOHABITACION where ID_TIPOHABITACION='" + nombre + "';");
+                    comando.CommandText = ("select ID_TIPOHABITACION,CAPACIDAD from TBL_TIPOHABITACION where ID_TIPOHABITACION='" + nombre + "';");
 
                     MySqlDataReader leer = comando.ExecuteReader();
                     if (leer.Read() == true)
                     {
                         txt_tipo_habitacion.Text = leer["ID_TIPOHABITACION"].ToString();
+                        txt_capacidad.Text = leer["CAPACIDAD"].ToString();
+
 
                     }
                     else
@@ -632,6 +642,16 @@ namespace ProyectoHCL
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            Int32 C = Convert.ToInt32(txt_capacidad.Text);
+            Int32 H = Convert.ToInt32(txt_huespedes.Text);
+            /* if (C >= H)
+             {
+                 MessageBox.Show("correcto");
+             }
+             else
+             {
+                 MessageBox.Show("incorrecto");
+             }*/
 
             object adb = cb_numero.SelectedItem;
             object b = cb_numero.GetItemText(adb);
@@ -662,42 +682,50 @@ namespace ProyectoHCL
                             {
                                 if (dt_fecha_salida.Value.Date >= DateTime.Today & dt_fecha_salida.Value.Date > dt_fecha_entrada.Value.Date)
                                 {
-                                    try
+                                    if (C >= H)
                                     {
-                                        MySqlConnection conn;
-                                        MySqlCommand cmd;
-                                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                                        conn.Open();
+                                        try
+                                        {
+                                            MySqlConnection conn;
+                                            MySqlCommand cmd;
+                                            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                                            conn.Open();
 
-                                        cmd = new MySqlCommand("InsertarReserva", conn);
-                                        cmd.CommandType = CommandType.StoredProcedure;
-                                        cmd.Parameters.AddWithValue("@id_estado", txt_estado.Text);
-                                        cmd.Parameters.AddWithValue("@id_metodo", txt_metodo_reserva.Text);
-                                        cmd.Parameters.AddWithValue("@id_usuaio", txt_codigo.Text);
-                                        cmd.Parameters.AddWithValue("@fecha_coti", Convert.ToDateTime(dt_fecha_coti.Text));
-                                        cmd.Parameters.AddWithValue("@fecha_ingreso", Convert.ToDateTime(dt_fecha_entrada.Text));
-                                        cmd.Parameters.AddWithValue("@fecha_salida", Convert.ToDateTime(dt_fecha_salida.Text));
-                                        cmd.Parameters.AddWithValue("@n_huespedes", txt_huespedes.Text);
-                                        cmd.Parameters.AddWithValue("@vehiculo", txt_vehiculo.Text);
-                                        cmd.Parameters.AddWithValue("@monto", txt_monto.Text);
-                                        cmd.Parameters.AddWithValue("@cod_cliente", txt_cod_cliente.Text);
-                                        cmd.Parameters.AddWithValue("@num_habitacion", cb_numero.Text);
+                                            cmd = new MySqlCommand("InsertarReserva", conn);
+                                            cmd.CommandType = CommandType.StoredProcedure;
+                                            cmd.Parameters.AddWithValue("@id_estado", txt_estado.Text);
+                                            cmd.Parameters.AddWithValue("@id_metodo", txt_metodo_reserva.Text);
+                                            cmd.Parameters.AddWithValue("@id_usuaio", txt_codigo.Text);
+                                            cmd.Parameters.AddWithValue("@fecha_coti", Convert.ToDateTime(dt_fecha_coti.Text));
+                                            cmd.Parameters.AddWithValue("@fecha_ingreso", Convert.ToDateTime(dt_fecha_entrada.Text));
+                                            cmd.Parameters.AddWithValue("@fecha_salida", Convert.ToDateTime(dt_fecha_salida.Text));
+                                            cmd.Parameters.AddWithValue("@n_huespedes", txt_huespedes.Text);
+                                            cmd.Parameters.AddWithValue("@vehiculo", txt_vehiculo.Text);
+                                            cmd.Parameters.AddWithValue("@monto", txt_monto.Text);
+                                            cmd.Parameters.AddWithValue("@cod_cliente", txt_cod_cliente.Text);
+                                            cmd.Parameters.AddWithValue("@num_habitacion", cb_numero.Text);
+                                            cmd.Parameters.AddWithValue("@motivo", txt_motivo.Text);
 
+                                            cmd.ExecuteNonQuery();
+                                            inserdetalle();
+                                            //updatehabitacion();
+                                            MsgB m = new MsgB("informacion", "Reserva agregada con exito");
+                                            DialogResult dR = m.ShowDialog();
+                                            //CargarDG();
+                                            //limpiarCampos();
+                                            conn.Close();
 
-                                        cmd.ExecuteNonQuery();
-                                        inserdetalle();
-                                        //updatehabitacion();
-                                        MsgB m = new MsgB("informacion", "Reserva agregada con exito");
-                                        DialogResult dR = m.ShowDialog();
-                                        //CargarDG();
-                                        //limpiarCampos();
-                                        conn.Close();
-
-                                        this.Close();
+                                            this.Close();
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            MsgB m = new MsgB("advertencia", "Validar datos ingresados");
+                                            DialogResult dR = m.ShowDialog();
+                                        }
                                     }
-                                    catch (Exception ex)
+                                    else
                                     {
-                                        MsgB m = new MsgB("advertencia", "Validar datos ingresados");
+                                        MsgB m = new MsgB("advertencia", "El numero de huespedes a reservar excede el numero maximo de la habitacion");
                                         DialogResult dR = m.ShowDialog();
                                     }
                                 }
@@ -774,52 +802,64 @@ namespace ProyectoHCL
 
         private void btn_guardar2_Click(object sender, EventArgs e)
         {
+            Int32 C = Convert.ToInt32(txt_capacidad.Text);
+            Int32 H = Convert.ToInt32(txt_huespedes.Text);
+
             if (dt_fecha_coti.Value.Date >= DateTime.Today)
             {
                 if (dt_fecha_entrada.Value.Date >= DateTime.Today & dt_fecha_entrada.Value.Date < dt_fecha_salida.Value.Date)
                 {
                     if (dt_fecha_salida.Value.Date >= DateTime.Today & dt_fecha_salida.Value.Date > dt_fecha_entrada.Value.Date)
                     {
-                        try
+                        if (C >= H)
                         {
-                            MySqlConnection conn;
-                            MySqlCommand cmd;
-                            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                            conn.Open();
+                            try
+                            {
+                                MySqlConnection conn;
+                                MySqlCommand cmd;
+                                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                                conn.Open();
 
-                            cmd = new MySqlCommand("UpdateReserva", conn);
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@id_solicitud", txt_id_solicitud.Text);
-                            cmd.Parameters.AddWithValue("@id_estado", txt_estado.Text);
-                            cmd.Parameters.AddWithValue("@id_metodo", txt_metodo_reserva.Text);
-                            cmd.Parameters.AddWithValue("@id_usuaio", txt_codigo.Text);
-                            cmd.Parameters.AddWithValue("@fecha_coti", Convert.ToDateTime(dt_fecha_coti.Text));
-                            cmd.Parameters.AddWithValue("@fecha_ingreso", Convert.ToDateTime(dt_fecha_entrada.Text));
-                            cmd.Parameters.AddWithValue("@fecha_salida", Convert.ToDateTime(dt_fecha_salida.Text));
-                            cmd.Parameters.AddWithValue("@n_huespedes", txt_huespedes.Text);
-                            cmd.Parameters.AddWithValue("@vehiculo", txt_vehiculo.Text);
-                            cmd.Parameters.AddWithValue("@monto", txt_monto.Text);
-                            cmd.Parameters.AddWithValue("@cod_cliente", txt_cod_cliente.Text);
-                            cmd.Parameters.AddWithValue("@num_habitacion", cb_numero.Text);
+                                cmd = new MySqlCommand("UpdateReserva", conn);
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@id_solicitud", txt_id_solicitud.Text);
+                                cmd.Parameters.AddWithValue("@id_estado", txt_estado.Text);
+                                cmd.Parameters.AddWithValue("@id_metodo", txt_metodo_reserva.Text);
+                                cmd.Parameters.AddWithValue("@id_usuaio", txt_codigo.Text);
+                                cmd.Parameters.AddWithValue("@fecha_coti", Convert.ToDateTime(dt_fecha_coti.Text));
+                                cmd.Parameters.AddWithValue("@fecha_ingreso", Convert.ToDateTime(dt_fecha_entrada.Text));
+                                cmd.Parameters.AddWithValue("@fecha_salida", Convert.ToDateTime(dt_fecha_salida.Text));
+                                cmd.Parameters.AddWithValue("@n_huespedes", txt_huespedes.Text);
+                                cmd.Parameters.AddWithValue("@vehiculo", txt_vehiculo.Text);
+                                cmd.Parameters.AddWithValue("@monto", txt_monto.Text);
+                                cmd.Parameters.AddWithValue("@cod_cliente", txt_cod_cliente.Text);
+                                cmd.Parameters.AddWithValue("@num_habitacion", cb_numero.Text);
+                                cmd.Parameters.AddWithValue("@motivo", txt_motivo.Text);
+
+                                cmd.ExecuteNonQuery();
+                                updatedetalle();
+                                //updatehabitacion();
+                                //updatenumero();
+
+                                MsgB m = new MsgB("informacion", "Reserva actualizada con exito");
+                                DialogResult dR = m.ShowDialog();
+                                //limpiarCampos();
 
 
-                            cmd.ExecuteNonQuery();
-                            updatedetalle();
-                            //updatehabitacion();
-                            //updatenumero();
-
-                            MsgB m = new MsgB("informacion", "Reserva actualizada con exito");
-                            DialogResult dR = m.ShowDialog();
-                            //limpiarCampos();
-                            
-
-                            conn.Close();
-                            this.Close();
+                                conn.Close();
+                                this.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                MsgB m = new MsgB("advertencia", "Validar los datos Ingresados");
+                                DialogResult dR = m.ShowDialog();
+                            }
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            MsgB m = new MsgB("advertencia", "Validar los datos Ingresados");
+                            MsgB m = new MsgB("advertencia", "El numero de huespedes a reservar excede el numero maximo de la habitacion");
                             DialogResult dR = m.ShowDialog();
+
                         }
                     }
                     else
@@ -886,6 +926,45 @@ namespace ProyectoHCL
                 MsgB m = new MsgB("advertencia", "Solo se pueden ingresar numeros ");
                 DialogResult dR = m.ShowDialog();
             }
+            /*
+            String nombre = cb_tipo.SelectedValue.ToString();
+            string num =txt_huespedes.Text;
+            try
+            {
+                using (BaseDatosHCL.ObtenerConexion())
+                {
+                    MySqlCommand comando = new MySqlCommand();
+                    comando.Connection = BaseDatosHCL.ObtenerConexion();
+                    // comando.CommandText = ("select CAPACIDAD from TBL_TIPOHABITACION where TIPO='" + nombre + "';");
+                    comando.CommandText = ("call capacidad('" +num + "','" + nombre + "');");
+
+                    MySqlDataReader leer = comando.ExecuteReader();
+                    if (leer.Read() == true)
+                    {
+                        Int32 capacidad = Convert.ToInt32( leer["resultado"].ToString());
+                        
+                        if (capacidad ==1)
+                        {
+
+                        }
+                        else
+                        {
+                            MsgB m = new MsgB("advertencia", "El numero de huespedes exede la capacidad maxima de la habitacion ");
+                            DialogResult dR = m.ShowDialog();
+                            txt_huespedes.Clear();
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                }
+
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show(a.Message);
+            }*/
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -913,6 +992,127 @@ namespace ProyectoHCL
         {
             Form nuevo = new Buscar();
             nuevo.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            object adb = cb_numero.SelectedItem;
+            object b = cb_numero.GetItemText(adb);
+
+            string fecha1 = dt_fecha_entrada.Text;
+            string fecha2 = dt_fecha_salida.Text;
+
+            try
+            {
+                using (BaseDatosHCL.ObtenerConexion())
+                {
+                    MySqlCommand comando = new MySqlCommand();
+                    comando.Connection = BaseDatosHCL.ObtenerConexion();
+                    //comando.CommandText = ("select * from TBL_SOLICITUDRESERVA where NUMEROHABITACION='" + b + "' and INGRESO and SALIDA between '" + fecha1 + "' and '" + fecha2 + "';");
+                    comando.CommandText = ("CALL Validar_disponibilidad('" + b + "','" + fecha1 + "', '" + fecha2 + "');");
+
+                    MySqlDataReader leer = comando.ExecuteReader();
+                    if (leer.Read() == true)
+                    {
+                        MsgB m = new MsgB("advertencia", "Ya existe una reserva para esta habitacion en el mismo rango de fechas");
+                        DialogResult dR = m.ShowDialog();
+                    }
+                    else
+                    {
+                        if (dt_fecha_coti.Value.Date >= DateTime.Today)
+                        {
+                            if (dt_fecha_entrada.Value.Date >= DateTime.Today & dt_fecha_entrada.Value.Date < dt_fecha_salida.Value.Date)
+                            {
+                                if (dt_fecha_salida.Value.Date >= DateTime.Today & dt_fecha_salida.Value.Date > dt_fecha_entrada.Value.Date)
+                                {
+                                    try
+                                    {
+                                        MySqlConnection conn;
+                                        MySqlCommand cmd;
+                                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                                        conn.Open();
+
+                                        cmd = new MySqlCommand("InsertarReserva", conn);
+                                        cmd.CommandType = CommandType.StoredProcedure;
+                                        cmd.Parameters.AddWithValue("@id_estado", txt_estado.Text);
+                                        cmd.Parameters.AddWithValue("@id_metodo", txt_metodo_reserva.Text);
+                                        cmd.Parameters.AddWithValue("@id_usuaio", txt_codigo.Text);
+                                        cmd.Parameters.AddWithValue("@fecha_coti", Convert.ToDateTime(dt_fecha_coti.Text));
+                                        cmd.Parameters.AddWithValue("@fecha_ingreso", Convert.ToDateTime(dt_fecha_entrada.Text));
+                                        cmd.Parameters.AddWithValue("@fecha_salida", Convert.ToDateTime(dt_fecha_salida.Text));
+                                        cmd.Parameters.AddWithValue("@n_huespedes", txt_huespedes.Text);
+                                        cmd.Parameters.AddWithValue("@vehiculo", txt_vehiculo.Text);
+                                        cmd.Parameters.AddWithValue("@monto", txt_monto.Text);
+                                        cmd.Parameters.AddWithValue("@cod_cliente", txt_cod_cliente.Text);
+                                        cmd.Parameters.AddWithValue("@num_habitacion", cb_numero.Text);
+
+
+                                        cmd.ExecuteNonQuery();
+                                        inserdetalle();
+                                        //updatehabitacion();
+                                        MsgB m = new MsgB("informacion", "Reserva agregada con exito");
+                                        DialogResult dR = m.ShowDialog();
+
+                                        //CargarDG();
+                                        //limpiarCampos();
+                                        conn.Close();
+
+                                        //this.Close();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MsgB m = new MsgB("advertencia", "Validar datos ingresados");
+                                        DialogResult dR = m.ShowDialog();
+                                    }
+                                }
+                                else
+                                {
+                                    MsgB m = new MsgB("advertencia", "Fechas de salida no puede ser menor o igual a la de entrada");
+                                    DialogResult dR = m.ShowDialog();
+
+                                }
+                            }
+                            else
+                            {
+                                MsgB m = new MsgB("advertencia", "Fechas de entrada no puede ser mayor o igual a la de salida");
+                                DialogResult dR = m.ShowDialog();
+
+                            }
+                        }//cierre del if 
+                        else
+                        {
+                            MsgB m = new MsgB("advertencia", "Fechas ingresadas invalidas");
+                            DialogResult dR = m.ShowDialog();
+                        }
+
+                    }
+                }
+
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show(a.Message);
+            }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dt_fecha_entrada_ValueChanged(object sender, EventArgs e)
+        {
+            TimeSpan noches = dt_fecha_salida.Value - dt_fecha_entrada.Value;
+            int days = (int)noches.TotalDays;
+            lbl_noches.Text = Convert.ToString(days);
+
+        }
+
+        private void dt_fecha_salida_ValueChanged(object sender, EventArgs e)
+        {
+            TimeSpan noches = dt_fecha_salida.Value - dt_fecha_entrada.Value;
+            int days = (int)noches.TotalDays;
+            lbl_noches.Text = Convert.ToString(days);
         }
     }
 }

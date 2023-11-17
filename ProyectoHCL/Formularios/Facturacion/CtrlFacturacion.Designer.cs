@@ -282,7 +282,7 @@
             cmbMostrar.BackColor = SystemColors.Info;
             cmbMostrar.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbMostrar.FormattingEnabled = true;
-            cmbMostrar.Items.AddRange(new object[] { "2", "3", "4", "5", "6" });
+            cmbMostrar.Items.AddRange(new object[] { "10", "20", "30", "40", "50" });
             cmbMostrar.Location = new Point(90, 17);
             cmbMostrar.Margin = new Padding(2);
             cmbMostrar.Name = "cmbMostrar";
@@ -523,7 +523,7 @@
             dgvFacturas.Size = new Size(1027, 341);
             dgvFacturas.TabIndex = 4;
             dgvFacturas.CellClick += dgvFacturas_CellClick_1;
-            dgvFacturas.CellPainting += dgvFacturas_CellPainting_1;
+            dgvFacturas.CellFormatting += dgvFacturas_CellFormatting;
             // 
             // CtrlFacturacion
             // 

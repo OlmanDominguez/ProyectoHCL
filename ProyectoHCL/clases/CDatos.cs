@@ -68,6 +68,8 @@ namespace ProyectoHCL.clases
         public static string correo;
         public static string contraseña;
         public static string cliente;
+        public static string nombreCliente;
+        public static string apellidoCliente;
         public static DateTime entrada;
         public static DateTime salida;
         public static string numHabDR;

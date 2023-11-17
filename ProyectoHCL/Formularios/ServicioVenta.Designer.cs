@@ -33,6 +33,7 @@
             panelPrincipal = new Panel();
             panel3 = new Panel();
             panel5 = new Panel();
+            btnCancelar = new Button();
             btnEliminar = new Button();
             btnVenta = new Button();
             txtTotal = new TextBox();
@@ -42,6 +43,7 @@
             columnHeader2 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
+            columnHeader4 = new ColumnHeader();
             panel4 = new Panel();
             txt_cantidad = new TextBox();
             btnAgregar = new Button();
@@ -52,21 +54,20 @@
             label7 = new Label();
             label6 = new Label();
             panel2 = new Panel();
+            lblSalida = new Label();
+            lblEntrada = new Label();
+            lblCliente = new Label();
+            lblHabitacion = new Label();
             btnReservacion = new Button();
             label5 = new Label();
-            txtSalida = new TextBox();
-            txtEntrada = new TextBox();
             label3 = new Label();
             label4 = new Label();
-            txtCliente = new TextBox();
-            txtHab = new TextBox();
             label2 = new Label();
             label1 = new Label();
             panel1 = new Panel();
             btnCerrar = new Button();
             label11 = new Label();
             errorT = new ErrorProvider(components);
-            columnHeader4 = new ColumnHeader();
             panelPrincipal.SuspendLayout();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
@@ -103,6 +104,7 @@
             // 
             panel5.BackColor = SystemColors.Control;
             panel5.BorderStyle = BorderStyle.FixedSingle;
+            panel5.Controls.Add(btnCancelar);
             panel5.Controls.Add(btnEliminar);
             panel5.Controls.Add(btnVenta);
             panel5.Controls.Add(txtTotal);
@@ -112,6 +114,25 @@
             panel5.Name = "panel5";
             panel5.Size = new Size(1084, 216);
             panel5.TabIndex = 1;
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnCancelar.BackColor = Color.Red;
+            btnCancelar.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCancelar.FlatAppearance.BorderSize = 0;
+            btnCancelar.FlatAppearance.MouseOverBackColor = Color.DarkRed;
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCancelar.ForeColor = Color.White;
+            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCancelar.Location = new Point(909, 153);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(92, 32);
+            btnCancelar.TabIndex = 89;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnEliminar
             // 
@@ -125,7 +146,7 @@
             btnEliminar.ForeColor = Color.White;
             btnEliminar.Image = (Image)resources.GetObject("btnEliminar.Image");
             btnEliminar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEliminar.Location = new Point(721, 32);
+            btnEliminar.Location = new Point(760, 32);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(38, 32);
             btnEliminar.TabIndex = 88;
@@ -136,21 +157,19 @@
             // btnVenta
             // 
             btnVenta.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnVenta.BackColor = Color.CadetBlue;
+            btnVenta.BackColor = Color.Green;
             btnVenta.BackgroundImageLayout = ImageLayout.Stretch;
             btnVenta.FlatAppearance.BorderSize = 0;
-            btnVenta.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            btnVenta.FlatAppearance.MouseOverBackColor = Color.DarkGreen;
             btnVenta.FlatStyle = FlatStyle.Flat;
             btnVenta.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            btnVenta.ForeColor = Color.Black;
-            btnVenta.Image = (Image)resources.GetObject("btnVenta.Image");
+            btnVenta.ForeColor = Color.White;
             btnVenta.ImageAlign = ContentAlignment.MiddleLeft;
-            btnVenta.Location = new Point(909, 84);
+            btnVenta.Location = new Point(909, 98);
             btnVenta.Name = "btnVenta";
             btnVenta.Size = new Size(92, 32);
             btnVenta.TabIndex = 86;
             btnVenta.Text = "Guardar";
-            btnVenta.TextAlign = ContentAlignment.MiddleRight;
             btnVenta.UseVisualStyleBackColor = false;
             btnVenta.Click += btnVenta_Click;
             // 
@@ -158,18 +177,19 @@
             // 
             txtTotal.BackColor = SystemColors.ButtonHighlight;
             txtTotal.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTotal.Location = new Point(867, 33);
+            txtTotal.Location = new Point(889, 33);
             txtTotal.Name = "txtTotal";
             txtTotal.ReadOnly = true;
-            txtTotal.Size = new Size(169, 25);
+            txtTotal.Size = new Size(134, 25);
             txtTotal.TabIndex = 83;
+            txtTotal.TextAlign = HorizontalAlignment.Right;
             // 
             // label9
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label9.ForeColor = Color.Black;
-            label9.Location = new Point(816, 35);
+            label9.Location = new Point(838, 35);
             label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
             label9.Size = new Size(46, 18);
@@ -186,7 +206,7 @@
             listView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             listView.Location = new Point(30, 32);
             listView.Name = "listView";
-            listView.Size = new Size(672, 153);
+            listView.Size = new Size(702, 153);
             listView.TabIndex = 0;
             listView.TileSize = new Size(228, 36);
             listView.UseCompatibleStateImageBehavior = false;
@@ -200,17 +220,24 @@
             // columnHeader2
             // 
             columnHeader2.Text = "Precio";
+            columnHeader2.TextAlign = HorizontalAlignment.Right;
             columnHeader2.Width = 150;
             // 
             // columnHeader5
             // 
             columnHeader5.Text = "Cantid.";
+            columnHeader5.TextAlign = HorizontalAlignment.Right;
             columnHeader5.Width = 150;
             // 
             // columnHeader3
             // 
             columnHeader3.Text = "SubTotal";
+            columnHeader3.TextAlign = HorizontalAlignment.Right;
             columnHeader3.Width = 150;
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "Codigo";
             // 
             // panel4
             // 
@@ -224,24 +251,25 @@
             panel4.Controls.Add(cmbServicio);
             panel4.Controls.Add(label7);
             panel4.Controls.Add(label6);
-            panel4.Location = new Point(0, 156);
+            panel4.Location = new Point(0, 147);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1084, 121);
+            panel4.Size = new Size(1084, 130);
             panel4.TabIndex = 1;
             // 
             // txt_cantidad
             // 
             txt_cantidad.BackColor = SystemColors.ButtonHighlight;
             txt_cantidad.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txt_cantidad.Location = new Point(614, 71);
+            txt_cantidad.Location = new Point(614, 77);
             txt_cantidad.Name = "txt_cantidad";
             txt_cantidad.Size = new Size(184, 25);
             txt_cantidad.TabIndex = 87;
+            txt_cantidad.TextAlign = HorizontalAlignment.Right;
             // 
             // btnAgregar
             // 
             btnAgregar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnAgregar.BackColor = Color.CadetBlue;
+            btnAgregar.BackColor = Color.RoyalBlue;
             btnAgregar.BackgroundImageLayout = ImageLayout.Stretch;
             btnAgregar.FlatAppearance.BorderSize = 0;
             btnAgregar.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
@@ -249,12 +277,10 @@
             btnAgregar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnAgregar.ForeColor = SystemColors.ActiveCaptionText;
             btnAgregar.Image = (Image)resources.GetObject("btnAgregar.Image");
-            btnAgregar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAgregar.Location = new Point(909, 64);
+            btnAgregar.Location = new Point(925, 72);
             btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(92, 32);
+            btnAgregar.Size = new Size(54, 32);
             btnAgregar.TabIndex = 85;
-            btnAgregar.Text = "Agregar";
             btnAgregar.TextAlign = ContentAlignment.MiddleRight;
             btnAgregar.UseVisualStyleBackColor = false;
             btnAgregar.Click += btnAgregar_Click;
@@ -263,18 +289,19 @@
             // 
             txtPrecio.BackColor = SystemColors.ButtonHighlight;
             txtPrecio.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txtPrecio.Location = new Point(379, 71);
+            txtPrecio.Location = new Point(379, 77);
             txtPrecio.Name = "txtPrecio";
             txtPrecio.ReadOnly = true;
             txtPrecio.Size = new Size(184, 25);
             txtPrecio.TabIndex = 82;
+            txtPrecio.TextAlign = HorizontalAlignment.Right;
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = Color.Black;
-            label8.Location = new Point(379, 50);
+            label8.Location = new Point(379, 56);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
             label8.Size = new Size(55, 18);
@@ -286,7 +313,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label10.ForeColor = Color.Black;
-            label10.Location = new Point(614, 50);
+            label10.Location = new Point(614, 56);
             label10.Margin = new Padding(2, 0, 2, 0);
             label10.Name = "label10";
             label10.Size = new Size(77, 18);
@@ -298,7 +325,7 @@
             cmbServicio.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbServicio.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             cmbServicio.FormattingEnabled = true;
-            cmbServicio.Location = new Point(30, 71);
+            cmbServicio.Location = new Point(30, 77);
             cmbServicio.Name = "cmbServicio";
             cmbServicio.Size = new Size(292, 25);
             cmbServicio.TabIndex = 83;
@@ -310,7 +337,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(30, 50);
+            label7.Location = new Point(30, 56);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
             label7.Size = new Size(67, 18);
@@ -321,7 +348,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.ForeColor = Color.SteelBlue;
+            label6.ForeColor = Color.MidnightBlue;
             label6.Location = new Point(30, 22);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
@@ -333,20 +360,68 @@
             // 
             panel2.BackColor = SystemColors.Control;
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(lblSalida);
+            panel2.Controls.Add(lblEntrada);
+            panel2.Controls.Add(lblCliente);
+            panel2.Controls.Add(lblHabitacion);
             panel2.Controls.Add(btnReservacion);
             panel2.Controls.Add(label5);
-            panel2.Controls.Add(txtSalida);
-            panel2.Controls.Add(txtEntrada);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(label4);
-            panel2.Controls.Add(txtCliente);
-            panel2.Controls.Add(txtHab);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1084, 157);
+            panel2.Size = new Size(1084, 150);
             panel2.TabIndex = 0;
+            // 
+            // lblSalida
+            // 
+            lblSalida.AutoSize = true;
+            lblSalida.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            lblSalida.ForeColor = Color.Black;
+            lblSalida.Location = new Point(553, 99);
+            lblSalida.Margin = new Padding(2, 0, 2, 0);
+            lblSalida.Name = "lblSalida";
+            lblSalida.Size = new Size(48, 20);
+            lblSalida.TabIndex = 93;
+            lblSalida.Text = "salida";
+            // 
+            // lblEntrada
+            // 
+            lblEntrada.AutoSize = true;
+            lblEntrada.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            lblEntrada.ForeColor = Color.Black;
+            lblEntrada.Location = new Point(567, 52);
+            lblEntrada.Margin = new Padding(2, 0, 2, 0);
+            lblEntrada.Name = "lblEntrada";
+            lblEntrada.Size = new Size(60, 20);
+            lblEntrada.TabIndex = 92;
+            lblEntrada.Text = "entrada";
+            // 
+            // lblCliente
+            // 
+            lblCliente.AutoSize = true;
+            lblCliente.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            lblCliente.ForeColor = Color.Black;
+            lblCliente.Location = new Point(99, 99);
+            lblCliente.Margin = new Padding(2, 0, 2, 0);
+            lblCliente.Name = "lblCliente";
+            lblCliente.Size = new Size(53, 20);
+            lblCliente.TabIndex = 91;
+            lblCliente.Text = "cliente";
+            // 
+            // lblHabitacion
+            // 
+            lblHabitacion.AutoSize = true;
+            lblHabitacion.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            lblHabitacion.ForeColor = Color.Black;
+            lblHabitacion.Location = new Point(127, 51);
+            lblHabitacion.Margin = new Padding(2, 0, 2, 0);
+            lblHabitacion.Name = "lblHabitacion";
+            lblHabitacion.Size = new Size(79, 20);
+            lblHabitacion.TabIndex = 90;
+            lblHabitacion.Text = "habitacion";
             // 
             // btnReservacion
             // 
@@ -360,46 +435,27 @@
             btnReservacion.ForeColor = Color.Black;
             btnReservacion.Image = (Image)resources.GetObject("btnReservacion.Image");
             btnReservacion.ImageAlign = ContentAlignment.MiddleLeft;
-            btnReservacion.Location = new Point(909, 46);
+            btnReservacion.Location = new Point(909, 39);
             btnReservacion.Name = "btnReservacion";
             btnReservacion.Size = new Size(92, 32);
             btnReservacion.TabIndex = 89;
             btnReservacion.Text = "Buscar";
             btnReservacion.TextAlign = ContentAlignment.MiddleRight;
             btnReservacion.UseVisualStyleBackColor = false;
+            btnReservacion.Visible = false;
             btnReservacion.Click += btnReservacion_Click;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.ForeColor = Color.SteelBlue;
+            label5.ForeColor = Color.MidnightBlue;
             label5.Location = new Point(30, 20);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
             label5.Size = new Size(144, 18);
             label5.TabIndex = 81;
             label5.Text = "Datos reservación:";
-            // 
-            // txtSalida
-            // 
-            txtSalida.BackColor = SystemColors.ButtonHighlight;
-            txtSalida.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txtSalida.Location = new Point(568, 100);
-            txtSalida.Name = "txtSalida";
-            txtSalida.ReadOnly = true;
-            txtSalida.Size = new Size(278, 25);
-            txtSalida.TabIndex = 80;
-            // 
-            // txtEntrada
-            // 
-            txtEntrada.BackColor = SystemColors.ButtonHighlight;
-            txtEntrada.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txtEntrada.Location = new Point(568, 51);
-            txtEntrada.Name = "txtEntrada";
-            txtEntrada.ReadOnly = true;
-            txtEntrada.Size = new Size(278, 25);
-            txtEntrada.TabIndex = 77;
             // 
             // label3
             // 
@@ -424,27 +480,6 @@
             label4.Size = new Size(120, 18);
             label4.TabIndex = 78;
             label4.Text = "Fecha entrada:";
-            // 
-            // txtCliente
-            // 
-            txtCliente.BackColor = SystemColors.ButtonHighlight;
-            txtCliente.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txtCliente.Location = new Point(127, 98);
-            txtCliente.Name = "txtCliente";
-            txtCliente.ReadOnly = true;
-            txtCliente.Size = new Size(278, 25);
-            txtCliente.TabIndex = 76;
-            // 
-            // txtHab
-            // 
-            txtHab.BackColor = SystemColors.ButtonHighlight;
-            txtHab.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txtHab.Location = new Point(127, 51);
-            txtHab.Name = "txtHab";
-            txtHab.ReadOnly = true;
-            txtHab.Size = new Size(278, 25);
-            txtHab.TabIndex = 0;
-            txtHab.TextChanged += txtHab_TextChanged;
             // 
             // label2
             // 
@@ -472,7 +507,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(45, 66, 91);
+            panel1.BackColor = Color.SteelBlue;
             panel1.Controls.Add(btnCerrar);
             panel1.Controls.Add(label11);
             panel1.Dock = DockStyle.Top;
@@ -480,6 +515,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1084, 71);
             panel1.TabIndex = 2;
+            panel1.MouseMove += panel1_MouseMove;
             // 
             // btnCerrar
             // 
@@ -512,10 +548,6 @@
             // errorT
             // 
             errorT.ContainerControl = this;
-            // 
-            // columnHeader4
-            // 
-            columnHeader4.Text = "Codigo";
             // 
             // ServicioVenta
             // 
@@ -575,13 +607,14 @@
         public ListView listView;
         public Button btnEliminar;
         public Button btnReservacion;
-        public TextBox txtHab;
-        public TextBox txtSalida;
-        public TextBox txtEntrada;
-        public TextBox txtCliente;
         private ErrorProvider errorT;
         private ColumnHeader columnHeader5;
         private TextBox txt_cantidad;
         private ColumnHeader columnHeader4;
+        public Label lblSalida;
+        public Label lblEntrada;
+        public Label lblCliente;
+        public Label lblHabitacion;
+        public Button btnCancelar;
     }
 }

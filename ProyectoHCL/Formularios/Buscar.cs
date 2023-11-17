@@ -117,7 +117,7 @@ namespace ProyectoHCL
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
                 DataGridViewButtonCell celBoton = this.dgv_clientes.Rows[e.RowIndex].Cells["SELECCIONAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\ver.ico"); //Se define la carpeta en la que está guardado el ícono del boton
+                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\check.ico"); //Se define la carpeta en la que está guardado el ícono del boton
                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
                 this.dgv_clientes.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
@@ -139,8 +139,14 @@ namespace ProyectoHCL
             {
                 reservacion.lbl_1c.Visible = true;
                 reservacion.lbl_cliente.Visible = true;
+                reservacion.lbl_correonum.Visible = true;
+                reservacion.lbl_telefononum.Visible = true;
+                reservacion.lbl_correo.Visible = true;
+                reservacion.lbl_telefono.Visible = true;
                 reservacion.lbl_cliente.Text = dgv_clientes.CurrentRow.Cells["NOMBRE"].Value.ToString();
                 reservacion.txt_cod_cliente.Text = dgv_clientes.CurrentRow.Cells["ID"].Value.ToString();
+                reservacion.lbl_correonum.Text = dgv_clientes.CurrentRow.Cells["EMAIL"].Value.ToString();
+                reservacion.lbl_telefononum.Text = dgv_clientes.CurrentRow.Cells["TELEFONOS"].Value.ToString();
                 reservacion.ShowDialog();
                 Buscar.ActiveForm.Close();
                 NuevaReservacion.ActiveForm.Close();

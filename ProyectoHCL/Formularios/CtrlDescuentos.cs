@@ -379,9 +379,9 @@ namespace ProyectoHCL.Formularios
                 documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
                 documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
 
-                string[] columnas = { "Id", "Descripcion", "Porcentaje", "Creado_Por", "Actualizado_Por" };
+                string[] columnas = { "Id", "Descripcion", "Porcentaje", "Estado" };
 
-                float[] tamanios = { 1, 2, 2, 3, 3 };
+                float[] tamanios = { 1, 2, 2, 2 };
                 Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
                 tabla.SetWidth(UnitValue.CreatePercentValue(100));
 
@@ -390,7 +390,7 @@ namespace ProyectoHCL.Formularios
                     tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
                 }
 
-                string sql = "SELECT id_descuento as id, descripcion, porcentaje, creado_por, actualizado_por FROM TBL_DESCUENTO";
+                string sql = "SELECT id_descuento as id, descripcion, porcentaje, estado FROM TBL_DESCUENTO";
 
                 MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
                 // conexionBD.Open();
@@ -403,8 +403,7 @@ namespace ProyectoHCL.Formularios
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["id"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["descripcion"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["porcentaje"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["creado_por"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["actualizado_por"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["estado"].ToString()).SetFont(fontContenido)));
                 }
 
                 documento.Add(tabla);
@@ -459,7 +458,7 @@ namespace ProyectoHCL.Formularios
             pic.ResizeInPixels(80, 80);
             sl.InsertPicture(pic);
 
-            sl.SetCellValue("C2", "Reporte de Descuentos");
+            sl.SetCellValue("C2", "Descuentos");
             SLStyle estiloT = sl.CreateStyle();
             estiloT.Font.FontName = "Arial";
             estiloT.Font.FontSize = 14;
@@ -473,8 +472,7 @@ namespace ProyectoHCL.Formularios
             sl.SetCellValue("B" + celdaCabecera, "Id");
             sl.SetCellValue("C" + celdaCabecera, "Descripcion");
             sl.SetCellValue("D" + celdaCabecera, "Porcentaje");
-            sl.SetCellValue("E" + celdaCabecera, "Creado por");
-            sl.SetCellValue("F" + celdaCabecera, "Actualizado por");
+            sl.SetCellValue("E" + celdaCabecera, "Estado");
 
             SLStyle estiloCa = sl.CreateStyle();
             estiloT.Font.FontName = "Arial";
@@ -482,9 +480,9 @@ namespace ProyectoHCL.Formularios
             estiloT.Font.Bold = true;
             estiloCa.Font.FontColor = System.Drawing.Color.White;
             estiloCa.Fill.SetPattern(DocumentFormat.OpenXml.Spreadsheet.PatternValues.Solid, System.Drawing.Color.Blue, System.Drawing.Color.Blue);
-            sl.SetCellStyle("B" + celdaCabecera, "F" + celdaCabecera, estiloCa);
+            sl.SetCellStyle("B" + celdaCabecera, "E" + celdaCabecera, estiloCa);
 
-            string sql = "SELECT id_descuento as id, descripcion, porcentaje, creado_por, actualizado_por FROM TBL_DESCUENTO";
+            string sql = "SELECT id_descuento as id, descripcion, porcentaje, estado FROM TBL_DESCUENTO";
 
             MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
 
@@ -497,8 +495,7 @@ namespace ProyectoHCL.Formularios
                 sl.SetCellValue("B" + celdaCabecera, reader["id"].ToString());
                 sl.SetCellValue("C" + celdaCabecera, reader["descripcion"].ToString());
                 sl.SetCellValue("D" + celdaCabecera, reader["porcentaje"].ToString());
-                sl.SetCellValue("E" + celdaCabecera, reader["creado_por"].ToString());
-                sl.SetCellValue("F" + celdaCabecera, reader["actualizado_por"].ToString());
+                sl.SetCellValue("E" + celdaCabecera, reader["estado"].ToString());
             }
 
             SLStyle EstiloB = sl.CreateStyle();
@@ -507,14 +504,14 @@ namespace ProyectoHCL.Formularios
             EstiloB.Border.TopBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
             EstiloB.Border.RightBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
             EstiloB.Border.BottomBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
-            sl.SetCellStyle("B" + celdaInicial, "F" + celdaCabecera, EstiloB);
+            sl.SetCellStyle("B" + celdaInicial, "E" + celdaCabecera, EstiloB);
 
-            sl.AutoFitColumn("B", "F");
+            sl.AutoFitColumn("B", "E");
 
             SaveFileDialog sf = new SaveFileDialog();
 
             sf.DefaultExt = "*.xlsx";
-            sf.FileName = "ExcelDescuentos";
+            sf.FileName = "Descuentos Registrados";
             sf.Filter = " Libro de Excel (*.xlsx) | *.xlsx";
 
             if (sf.ShowDialog() == DialogResult.OK)

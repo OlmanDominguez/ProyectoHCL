@@ -323,7 +323,7 @@ namespace ProyectoHCL.Formularios
             SaveFileDialog sf = new SaveFileDialog();
 
             sf.DefaultExt = "*.xlsx";
-            sf.FileName = "ExcelBitacora";
+            sf.FileName = "Registro Bitacora";
             sf.Filter = " Libro de Excel (*.xlsx) | *.xlsx";
 
             if (sf.ShowDialog() == DialogResult.OK)

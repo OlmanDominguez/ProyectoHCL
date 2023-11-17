@@ -98,9 +98,9 @@ namespace ProyectoHCL
             admonServicios.modificarServicio(Convert.ToInt32(id), descripcion, Convert.ToDecimal(precio), est);
         }
 
-        public void editarDesc(string id, string descripcion, string porcentaje, string est, string idU) //editar descuento
+        public void editarDesc(string id, string descripcion, string porcentaje, string est) //editar descuento
         {
-            admonDescuento.modificarDescuento(Convert.ToInt32(id), descripcion, Convert.ToDecimal(porcentaje), est, Convert.ToInt32(idU));
+            admonDescuento.modificarDescuento(Convert.ToInt32(id), descripcion, Convert.ToDecimal(porcentaje), est);
         }
 
         public void editarClie(string CODIGOCL, string NOMBRECL, int ID_TIPOCLIENTECL, string APELLIDOCL, //editar cliente

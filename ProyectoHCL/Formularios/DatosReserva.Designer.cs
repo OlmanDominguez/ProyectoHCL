@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DatosReserva));
             panel3 = new Panel();
+            btnEditar = new Button();
             panel1 = new Panel();
             lblDatosR = new Label();
             btnC = new Button();
@@ -48,6 +49,7 @@
             // panel3
             // 
             panel3.BackColor = Color.White;
+            panel3.Controls.Add(btnEditar);
             panel3.Controls.Add(panel1);
             panel3.Controls.Add(lblSalida);
             panel3.Controls.Add(lblEntrada);
@@ -60,8 +62,26 @@
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(426, 196);
+            panel3.Size = new Size(426, 238);
             panel3.TabIndex = 8;
+            // 
+            // btnEditar
+            // 
+            btnEditar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnEditar.BackColor = Color.Teal;
+            btnEditar.BackgroundImageLayout = ImageLayout.Center;
+            btnEditar.FlatAppearance.BorderSize = 0;
+            btnEditar.FlatAppearance.MouseOverBackColor = Color.DarkSlateGray;
+            btnEditar.FlatStyle = FlatStyle.Flat;
+            btnEditar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnEditar.ForeColor = Color.White;
+            btnEditar.Location = new Point(160, 191);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(102, 26);
+            btnEditar.TabIndex = 41;
+            btnEditar.Text = "Editar";
+            btnEditar.UseVisualStyleBackColor = false;
+            btnEditar.Click += btnEditar_Click;
             // 
             // panel1
             // 
@@ -183,7 +203,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(426, 196);
+            ClientSize = new Size(426, 238);
             Controls.Add(panel3);
             FormBorderStyle = FormBorderStyle.None;
             Name = "DatosReserva";
@@ -212,5 +232,6 @@
         public Label lblEntrada;
         public Label lblCliente;
         public Label lblHab;
+        public Button btnEditar;
     }
 }

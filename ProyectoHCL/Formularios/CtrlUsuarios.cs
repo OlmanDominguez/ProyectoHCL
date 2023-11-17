@@ -520,7 +520,7 @@ namespace ProyectoHCL.Formularios
             pic.ResizeInPixels(80, 80);
             sl.InsertPicture(pic);
 
-            sl.SetCellValue("C2", "Reporte de Usuarios");
+            sl.SetCellValue("C2", "Usuarios");
             SLStyle estiloT = sl.CreateStyle();
             estiloT.Font.FontName = "Arial";
             estiloT.Font.FontSize = 14;
@@ -584,7 +584,7 @@ namespace ProyectoHCL.Formularios
             SaveFileDialog sf = new SaveFileDialog();
 
             sf.DefaultExt = "*.xlsx";
-            sf.FileName = "ExcelUsuarios";
+            sf.FileName = "Usuarios Registrados";
             sf.Filter = " Libro de Excel (*.xlsx) | *.xlsx";
 
             if (sf.ShowDialog() == DialogResult.OK)

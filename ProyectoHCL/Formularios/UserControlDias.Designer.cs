@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlDias));
             lblDias = new Label();
             pboxReservado = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pboxReservado).BeginInit();
@@ -46,7 +45,7 @@
             // 
             // pboxReservado
             // 
-            pboxReservado.Image = (Image)resources.GetObject("pboxReservado.Image");
+            pboxReservado.Image = Properties.Resources.Reservada_;
             pboxReservado.Location = new Point(46, 14);
             pboxReservado.Name = "pboxReservado";
             pboxReservado.Size = new Size(40, 39);

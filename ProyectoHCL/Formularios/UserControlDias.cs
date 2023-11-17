@@ -90,7 +90,15 @@ namespace ProyectoHCL.Formularios
 
             using (DatosReserva dReserva = new DatosReserva())
             {
-                dReserva.ShowDialog(this);
+                if (pboxReservado.Visible == true)
+                {
+                    dReserva.ShowDialog(this);
+                }
+                else
+                {
+                    MsgB mbox = new MsgB("informacion", "La habitación seleccionada no tiene reservaciones para esta fecha");
+                    DialogResult dR = mbox.ShowDialog();
+                }              
             }
         }
     }

@@ -210,8 +210,6 @@ namespace ProyectoHCL.Formularios
                         cmd.Parameters.AddWithValue("@descripcion", txtDesc.Text);
                         cmd.Parameters.AddWithValue("@porcentaje", txtPorcentaje.Text);
                         cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
-                        cmd.Parameters.AddWithValue("@creadoPor", clasecompartida.iduser);
-                        cmd.Parameters.AddWithValue("@actualizadoPor", clasecompartida.iduser);
 
                         cmd.ExecuteNonQuery();
                         MsgB m = new MsgB("informacion", "Registro creado con éxito");
@@ -252,7 +250,7 @@ namespace ProyectoHCL.Formularios
                     try
                     {
                         //llamar función para editar 
-                        control.editarDesc(idDesc, txtDesc.Text, txtPorcentaje.Text, cmbEstado.Text, clasecompartida.iduser.ToString());
+                        control.editarDesc(idDesc, txtDesc.Text, txtPorcentaje.Text, cmbEstado.Text);
 
                         MsgB m = new MsgB("informacion", "Registro modificado");
                         DialogResult dR = m.ShowDialog();
@@ -297,7 +295,7 @@ namespace ProyectoHCL.Formularios
                 }
                 else
                 {
-                    errorT.SetError(txtPorcentaje, "El porcentaje debe estar entre 1 y 100");
+                    errorT.SetError(txtPorcentaje, "El porcentaje no es válido");
                     txtPorcentaje.Text = "";
                 }
             }
