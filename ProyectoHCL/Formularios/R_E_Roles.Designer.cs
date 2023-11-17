@@ -37,7 +37,6 @@
             panel2 = new Panel();
             btnMin = new Button();
             cerrar = new Button();
-            pictureBox5 = new PictureBox();
             btnCerrar = new Button();
             label11 = new Label();
             panel1 = new Panel();
@@ -55,7 +54,6 @@
             label4 = new Label();
             error1 = new ErrorProvider(components);
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)error1).BeginInit();
@@ -124,7 +122,6 @@
             panel2.BackColor = Color.SteelBlue;
             panel2.Controls.Add(btnMin);
             panel2.Controls.Add(cerrar);
-            panel2.Controls.Add(pictureBox5);
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(label11);
             panel2.Dock = DockStyle.Top;
@@ -166,18 +163,6 @@
             cerrar.TabIndex = 63;
             cerrar.UseVisualStyleBackColor = false;
             cerrar.Click += cerrar_Click;
-            // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(13, 13);
-            pictureBox5.Margin = new Padding(4, 5, 4, 5);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(71, 80);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 61;
-            pictureBox5.TabStop = false;
             // 
             // btnCerrar
             // 
@@ -414,7 +399,6 @@
             Text = "EditarRoles";
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel3.ResumeLayout(false);
@@ -432,7 +416,6 @@
         private Panel panel2;
         private Button btnCerrar;
         private Panel panel1;
-        private PictureBox pictureBox5;
         public Panel panel3;
         public ComboBox cmbEstado;
         public Button btnCancelar;

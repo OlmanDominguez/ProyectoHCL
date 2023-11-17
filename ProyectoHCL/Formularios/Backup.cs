@@ -20,21 +20,8 @@ namespace ProyectoHCL.Formularios
         {
             InitializeComponent();
         }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Backup_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
         private void Generar_Backup_Click(object sender, EventArgs e)
         {
-
             SaveFileDialog selecciona = new SaveFileDialog();
             selecciona.Filter = "Archivo SQL (*.sql)|*.sql";
             selecciona.InitialDirectory = @"C:\Users\DAOdo\Desktop\SEGUNDO PERIODO 2023\Programacion he implementacion de Sistemas\ProyectoHotelCasaLomas\Backup\HotelCl.sql";
@@ -62,18 +49,67 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            this.Close();
 
-        }
 
         private void btnMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
+        private void btnCerrar_Click_2(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog selecciona = new SaveFileDialog();
+            selecciona.Filter = "Archivo SQL (*.sql)|*.sql";
+            selecciona.InitialDirectory = @"C:\Users\DAOdo\Desktop\SEGUNDO PERIODO 2023\Programacion he implementacion de Sistemas\ProyectoHotelCasaLomas\Backup\HotelCl.sql";
+            selecciona.Title = "Seleccionar archivo de respaldo";
+
+            if (selecciona.ShowDialog() == DialogResult.OK)
+
+            {
+                string ruta = selecciona.FileName;
+
+                string cadena = "server=containers-us-west-29.railway.app;port=6844; user=root; database = railway; ; pwd = LpxjPRi2Ckkz7FiKNUHn;";
+                cadena += "charset=utf8; convertzerodatetime=true";
+
+                // string ruta = @"C:\Users\DAOdo\Desktop\SEGUNDO PERIODO 2023\Programacion he implementacion de Sistemas\ProyectoHotelCasaLomas\Backup\HotelCl.sql";
+                MySqlConnection conexion = new MySqlConnection(cadena);
+                MySqlCommand comando = new MySqlCommand();
+                MySqlBackup bk = new MySqlBackup(comando);
+
+                comando.Connection = conexion;
+                conexion.Open();
+                bk.ExportToFile(ruta);
+                conexion.Close();
+
+                MessageBox.Show("Respaldo Generado");
+            }
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnMin_Click_1(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
 

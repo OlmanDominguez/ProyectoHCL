@@ -158,7 +158,7 @@ namespace ProyectoHCL.Formularios
                         cmd.Parameters.AddWithValue("@fecha", ahora);
 
                         cmd.ExecuteNonQuery();
-                     
+
                         conn.Close();
 
                         string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
@@ -189,7 +189,7 @@ namespace ProyectoHCL.Formularios
                 string nuevoParametro = texPa.Text;
                 string nuevoValor = txtValor.Text;
                 Control control = new Control();
-                string idRegistro =idpar ;
+                string idRegistro = idpar;
                 Modelo modelo = new Modelo();
 
                 if (texPa.Text.Trim() == "" || txtValor.Text.Trim() == "")//|| textPar.Text.Trim() == "")
@@ -197,11 +197,11 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
                 }
-               /* else if (modelo.ParametroEditarBD(nuevoParametro, idRegistro))
-                {
-                    MsgB m = new MsgB("advertencia", "El usuario ya está registrado");
-                    DialogResult dR = m.ShowDialog();
-                }*/
+                /* else if (modelo.ParametroEditarBD(nuevoParametro, idRegistro))
+                 {
+                     MsgB m = new MsgB("advertencia", "El usuario ya está registrado");
+                     DialogResult dR = m.ShowDialog();
+                 }*/
                 else
                 {
                     try
@@ -249,6 +249,11 @@ namespace ProyectoHCL.Formularios
                 limpiarCampos();
                 limpiarError();
             }
+        }
+
+        private void cerrar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

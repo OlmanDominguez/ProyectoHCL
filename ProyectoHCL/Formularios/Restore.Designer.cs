@@ -35,10 +35,10 @@
             btnRestaurar = new Button();
             openFileDialog1 = new OpenFileDialog();
             label1 = new Label();
-            panel1 = new Panel();
             panel3 = new Panel();
-            panel1.SuspendLayout();
+            panel1 = new Panel();
             panel3.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // label11
@@ -80,15 +80,6 @@
             label1.ForeColor = Color.Black;
             label1.Name = "label1";
             // 
-            // panel1
-            // 
-            panel1.BackColor = Color.WhiteSmoke;
-            panel1.Controls.Add(btnRestaurar);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(txtRuta);
-            resources.ApplyResources(panel1, "panel1");
-            panel1.Name = "panel1";
-            // 
             // panel3
             // 
             panel3.BackColor = Color.SteelBlue;
@@ -96,19 +87,28 @@
             resources.ApplyResources(panel3, "panel3");
             panel3.Name = "panel3";
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.Gainsboro;
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(txtRuta);
+            panel1.Controls.Add(btnRestaurar);
+            resources.ApplyResources(panel1, "panel1");
+            panel1.Name = "panel1";
+            // 
             // Restore
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gainsboro;
-            Controls.Add(panel3);
             Controls.Add(panel1);
+            Controls.Add(panel3);
             Controls.Add(label6);
             Name = "Restore";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -120,7 +120,7 @@
         public Button btnRestaurar;
         private OpenFileDialog openFileDialog1;
         private Label label1;
-        private Panel panel1;
         private Panel panel3;
+        private Panel panel1;
     }
 }

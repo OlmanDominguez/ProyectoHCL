@@ -15,17 +15,17 @@ namespace ProyectoHCL
             // see https://aka.ms/applicationconfiguration.
             //ApplicationConfiguration.Initialize();
             // Application.Run(new CtrlFacturacion());
-             Application.Run(new FORMULARIO()); 
-           // Application.Run(new Buscar());
+            Application.Run(new FORMULARIO()); // este es el master 
+            // Application.Run(new Buscar());
             //  Application.Run(new CtrlUsuarios());
-
+            //Application.Run(new imprimir());
 
             //Application.Run(new Dashboard());
             //Application.Run(new NuevaReservacion());
-          // Application.Run(new CtrlObjetos());
+            // Application.Run(new CtrlObjetos());
 
             //Application.Run(new CtrlClientes());
-            //Application.Run(new Backup());
+            //Application.Run(new Restore());
             // Application.Run(new CtrlUsuarios());
             // Application.Run(new CtrlParametro()); 
             // Application.Run(new CtrlPreguntas());

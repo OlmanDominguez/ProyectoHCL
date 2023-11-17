@@ -43,7 +43,6 @@
             MostrarBox3 = new PictureBox();
             OcultarBox4 = new PictureBox();
             pictureBox2 = new PictureBox();
-            BarraSuperior = new Panel();
             pictureBox1 = new PictureBox();
             btnMax = new PictureBox();
             btnExit = new PictureBox();
@@ -66,7 +65,7 @@
             Usuariolabel1.AutoSize = true;
             Usuariolabel1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             Usuariolabel1.ForeColor = SystemColors.Control;
-            Usuariolabel1.Location = new Point(212, 449);
+            Usuariolabel1.Location = new Point(314, 449);
             Usuariolabel1.Name = "Usuariolabel1";
             Usuariolabel1.Size = new Size(102, 32);
             Usuariolabel1.TabIndex = 0;
@@ -78,7 +77,7 @@
             Contraseñalabel2.AutoSize = true;
             Contraseñalabel2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             Contraseñalabel2.ForeColor = SystemColors.Control;
-            Contraseñalabel2.Location = new Point(198, 568);
+            Contraseñalabel2.Location = new Point(300, 568);
             Contraseñalabel2.Name = "Contraseñalabel2";
             Contraseñalabel2.Size = new Size(143, 32);
             Contraseñalabel2.TabIndex = 1;
@@ -90,7 +89,7 @@
             UsuarioBox1.BackColor = Color.DeepSkyBlue;
             UsuarioBox1.CharacterCasing = CharacterCasing.Upper;
             UsuarioBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            UsuarioBox1.Location = new Point(119, 513);
+            UsuarioBox1.Location = new Point(221, 513);
             UsuarioBox1.MaxLength = 8;
             UsuarioBox1.Name = "UsuarioBox1";
             UsuarioBox1.Size = new Size(318, 37);
@@ -103,7 +102,7 @@
             ContraseñaBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             ContraseñaBox2.BackColor = Color.DeepSkyBlue;
             ContraseñaBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            ContraseñaBox2.Location = new Point(116, 613);
+            ContraseñaBox2.Location = new Point(218, 613);
             ContraseñaBox2.MaxLength = 8;
             ContraseñaBox2.Name = "ContraseñaBox2";
             ContraseñaBox2.PasswordChar = '*';
@@ -118,7 +117,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(60, 880);
+            label3.Location = new Point(162, 883);
             label3.Name = "label3";
             label3.Size = new Size(445, 32);
             label3.TabIndex = 4;
@@ -150,7 +149,7 @@
             Ingresarbutton1.BackColor = SystemColors.ButtonFace;
             Ingresarbutton1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             Ingresarbutton1.ForeColor = SystemColors.ActiveCaptionText;
-            Ingresarbutton1.Location = new Point(116, 718);
+            Ingresarbutton1.Location = new Point(218, 721);
             Ingresarbutton1.Name = "Ingresarbutton1";
             Ingresarbutton1.Size = new Size(321, 55);
             Ingresarbutton1.TabIndex = 7;
@@ -164,7 +163,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Lucida Bright", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = SystemColors.Control;
-            label6.Location = new Point(165, 247);
+            label6.Location = new Point(267, 247);
             label6.Name = "label6";
             label6.Size = new Size(284, 41);
             label6.TabIndex = 8;
@@ -177,7 +176,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Lucida Bright", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = SystemColors.Control;
-            label7.Location = new Point(55, 322);
+            label7.Location = new Point(157, 322);
             label7.Name = "label7";
             label7.Size = new Size(440, 41);
             label7.TabIndex = 11;
@@ -188,7 +187,7 @@
             MostrarBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             MostrarBox3.BackColor = Color.DeepSkyBlue;
             MostrarBox3.Image = (Image)resources.GetObject("MostrarBox3.Image");
-            MostrarBox3.Location = new Point(393, 617);
+            MostrarBox3.Location = new Point(495, 617);
             MostrarBox3.Name = "MostrarBox3";
             MostrarBox3.Size = new Size(44, 32);
             MostrarBox3.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -201,7 +200,7 @@
             OcultarBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             OcultarBox4.BackColor = Color.DeepSkyBlue;
             OcultarBox4.Image = (Image)resources.GetObject("OcultarBox4.Image");
-            OcultarBox4.Location = new Point(393, 615);
+            OcultarBox4.Location = new Point(495, 615);
             OcultarBox4.Name = "OcultarBox4";
             OcultarBox4.Size = new Size(44, 32);
             OcultarBox4.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -213,7 +212,7 @@
             // 
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(184, 40);
+            pictureBox2.Location = new Point(286, 40);
             pictureBox2.Margin = new Padding(4, 5, 4, 5);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(177, 187);
@@ -221,22 +220,11 @@
             pictureBox2.TabIndex = 14;
             pictureBox2.TabStop = false;
             // 
-            // BarraSuperior
-            // 
-            BarraSuperior.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            BarraSuperior.BackColor = Color.Transparent;
-            BarraSuperior.Location = new Point(706, 2);
-            BarraSuperior.Margin = new Padding(4, 5, 4, 5);
-            BarraSuperior.Name = "BarraSuperior";
-            BarraSuperior.Size = new Size(637, 42);
-            BarraSuperior.TabIndex = 15;
-            BarraSuperior.MouseDown += BarraSuperior_MouseDown;
-            // 
             // pictureBox1
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(530, 7);
+            pictureBox1.Location = new Point(632, 7);
             pictureBox1.Margin = new Padding(4, 5, 4, 5);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(29, 30);
@@ -250,7 +238,7 @@
             btnMax.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnMax.BackgroundImageLayout = ImageLayout.Center;
             btnMax.Image = (Image)resources.GetObject("btnMax.Image");
-            btnMax.Location = new Point(493, 7);
+            btnMax.Location = new Point(595, 7);
             btnMax.Margin = new Padding(4, 5, 4, 5);
             btnMax.Name = "btnMax";
             btnMax.Size = new Size(29, 30);
@@ -264,7 +252,7 @@
             btnExit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnExit.BackgroundImageLayout = ImageLayout.Stretch;
             btnExit.Image = (Image)resources.GetObject("btnExit.Image");
-            btnExit.Location = new Point(567, 5);
+            btnExit.Location = new Point(669, 5);
             btnExit.Margin = new Padding(4, 5, 4, 5);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(29, 30);
@@ -279,8 +267,7 @@
             // 
             // panel1
             // 
-            panel1.BackgroundImageLayout = ImageLayout.Center;
-            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.BackgroundImageLayout = ImageLayout.Stretch;
             panel1.Controls.Add(btnMax);
             panel1.Controls.Add(Ingresarbutton1);
             panel1.Controls.Add(pictureBox1);
@@ -296,9 +283,9 @@
             panel1.Controls.Add(ContraseñaBox2);
             panel1.Controls.Add(Contraseñalabel2);
             errorProvider1.SetIconAlignment(panel1, ErrorIconAlignment.TopLeft);
-            panel1.Location = new Point(589, 22);
+            panel1.Location = new Point(622, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(602, 968);
+            panel1.Size = new Size(702, 969);
             panel1.TabIndex = 16;
             panel1.Paint += panel1_Paint;
             // 
@@ -312,14 +299,14 @@
             BackColor = SystemColors.ActiveCaptionText;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(1179, 968);
+            ClientSize = new Size(1323, 968);
             Controls.Add(panel1);
-            Controls.Add(BarraSuperior);
             Controls.Add(label5);
             Controls.Add(label4);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "FORMULARIO";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "HOTEL CASA LOMAS";
@@ -352,7 +339,6 @@
         private PictureBox MostrarBox3;
         private PictureBox OcultarBox4;
         private PictureBox pictureBox2;
-        private Panel BarraSuperior;
         private PictureBox btnExit;
         private PictureBox pictureBox1;
         private PictureBox btnMax;

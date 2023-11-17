@@ -78,6 +78,11 @@ using DocumentFormat.OpenXml.Vml;//libreria utilizada para el momento de crear u
 using Point = System.Drawing.Point;//para definir el punto de una clase unica
 using iTextSharp.tool.xml;//libreria para dar formato al exportar el archivo 
 using System.IO;//Libreria que se utiliza para verificar la existencia de archivos
+using Image = System.Drawing.Image;
+using Rectangle = iText.Kernel.Geom.Rectangle;//para crear los iconos 
+using System.Net.NetworkInformation;
+using iText.Kernel.Events;
+using iText.Kernel.Pdf.Canvas;
 
 namespace ProyectoHCL.Formularios
 {
@@ -156,17 +161,17 @@ namespace ProyectoHCL.Formularios
 
         private void CtrlRoles_Load(object sender, EventArgs e)
         {
+            
 
+             DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn(); //se crea el boton en el dataGrid
+             btnUpdate.Name = "EDITAR"; //Nombre del boton 
+             dgvRoles.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
 
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
-            btnUpdate.Name = "EDITAR"; //Nombre del boton 
-            dgvRoles.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
+             DataGridViewImageColumn btnDelete = new DataGridViewImageColumn();
+             btnDelete.Name = "ELIMINAR";
+             dgvRoles.Columns.Add(btnDelete);
 
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
-            btnDelete.Name = "ELIMINAR";
-            dgvRoles.Columns.Add(btnDelete);
-
-            Permisos();
+             Permisos();
         }
 
 
@@ -262,48 +267,130 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        private void dgvRoles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {// es el ensayo basado en imagenes 
-            if (e.ColumnIndex >= 0 && this.dgvRoles.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)//crea la colunna junto al icono 
+        private void dgvRoles_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvRoles.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                Image imagen = Properties.Resources.editar;
 
-                DataGridViewButtonCell celBoton = this.dgvRoles.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico"); //Se define la carpeta en la que está guardado el ícono del boton
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
+                dgvRoles.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvRoles.Columns[e.ColumnIndex].Width = imagen.Width + 58;
 
-                this.dgvRoles.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvRoles.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
+                e.Value = imagen;
             }
-            if (e.ColumnIndex >= 0 && this.dgvRoles.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)//crea la columna eliminar 
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvRoles.Columns[e.ColumnIndex].Name == "ELIMINAR")
             {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-                //
-                DataGridViewButtonCell celBoton = this.dgvRoles.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");//definicion de la carpeta donde esta el iconoo
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
+                Image imagen = Properties.Resources.eliminar;
 
-                this.dgvRoles.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvRoles.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
+                dgvRoles.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvRoles.Columns[e.ColumnIndex].Width = imagen.Width + 58;
 
-                e.Handled = true;
+                e.Value = imagen;
             }
         }
+
+
+
         private void pdf_Click(object sender, EventArgs e)//creacionde la funcion pdf
         {
             crearPDF();
-            SaveFileDialog guardar = new SaveFileDialog();
-            guardar.ShowDialog();//donde se guardara el pdf
-            //encabezado del pdf
-            guardar.FileName = DateTime.Now.ToString("ddMMYYYYHHmmss") + ".pdf";
             MsgB mbox = new MsgB("informacion", "PDF creado con éxito");//mensaje de confirmacion
             DialogResult dR = mbox.ShowDialog();
         }
         private void crearPDF()
         {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Archivos PDF|*.pdf";
+            saveFileDialog.Title = "Guardar archivo PDF";
 
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+
+                PdfWriter pdfWriter = new PdfWriter(filePath);
+                PdfDocument pdf = new PdfDocument(pdfWriter);
+                PageSize tamanioH = new PageSize(792, 612);
+                Document documento = new Document(pdf, tamanioH);
+                documento.SetMargins(70, 20, 55, 20);
+
+                PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+                PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+
+                var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/DAOdo/Desktop/SEGUNDO PERIODO 2023/Programacion he implementacion de Sistemas/logo.jpeg")).SetWidth(50);
+                var plogo = new Paragraph("").Add(logo);
+
+                var nombre = new Paragraph("Hotel Casa Lomas");
+                nombre.SetFontSize(12);
+
+                var titulo = new Paragraph("Roles");
+                titulo.SetTextAlignment(TextAlignment.CENTER);
+                titulo.SetFontSize(14).SetBold();
+
+                var dfecha = DateTime.Now.ToString("dd.MM.yyy");
+                var dhora = DateTime.Now.ToString("hh:mm:ss");
+                var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
+                fecha.SetTextAlignment(TextAlignment.RIGHT);
+                fecha.SetFontSize(12);
+
+                documento.ShowTextAligned(plogo, 30, 600, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(nombre, 100, 580, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
+
+                string[] columnas = { "id_rol", "rol", "descripcion", "estado_rol",  "fecha_creacion","fecha_actualizacion"  };
+
+                float[] tamanios = { 1, 2, 2, 3, 3 };
+                Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
+                tabla.SetWidth(UnitValue.CreatePercentValue(100));
+
+                foreach (string columna in columnas)
+                {
+                    tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+                }
+
+                string sql = "SELECT id_rol, rol, descripcion, estado_rol,  fecha_creacion, fecha_actualizacion FROM TBL_ROL";
+
+                MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+                // conexionBD.Open();
+
+                MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+                MySqlDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["id_rol"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["rol"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["descripcion"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_creacion"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_actualizacion"].ToString()).SetFont(fontContenido)));
+                }
+
+                documento.Add(tabla);
+
+                pdf.AddEventHandler(PdfDocumentEvent.END_PAGE, new HeaderFooterEventHandler());
+
+                documento.Close();
+            }
+        }
+
+        private class HeaderFooterEventHandler : IEventHandler
+        {
+            public void HandleEvent(Event currentEvent)
+            {
+                PdfDocumentEvent docEvent = (PdfDocumentEvent)currentEvent;
+                PdfDocument pdfDoc = docEvent.GetDocument();
+                PdfPage page = docEvent.GetPage();
+                int pageNumber = pdfDoc.GetPageNumber(page);
+                PdfCanvas pdfCanvas = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
+
+                Rectangle pageSize = page.GetPageSize();
+                pdfCanvas.BeginText()
+                    .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA), 12)
+                    .MoveText(pageSize.GetLeft() + 396, 20)
+                    .ShowText("Página " + pageNumber)
+                    .EndText();
+                pdfCanvas.Release();
+            }
         }
 
         //funcion que se utilizara para crear pdf
@@ -489,5 +576,7 @@ namespace ProyectoHCL.Formularios
         {
             btnNuevo.BackColor = Color.DarkGray;
         }
+
+       
     }
 }

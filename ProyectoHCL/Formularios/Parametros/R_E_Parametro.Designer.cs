@@ -31,8 +31,6 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(R_E_Parametro));
             panel2 = new Panel();
-            btnCerrar = new Button();
-            pictureBox5 = new PictureBox();
             lbPar = new Label();
             panel3 = new Panel();
             txtValor = new TextBox();
@@ -42,8 +40,9 @@
             label6 = new Label();
             label2 = new Label();
             errorp = new ErrorProvider(components);
+            btnMin = new Button();
+            cerrar = new Button();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorp).BeginInit();
             SuspendLayout();
@@ -51,8 +50,8 @@
             // panel2
             // 
             panel2.BackColor = Color.SteelBlue;
-            panel2.Controls.Add(btnCerrar);
-            panel2.Controls.Add(pictureBox5);
+            panel2.Controls.Add(btnMin);
+            panel2.Controls.Add(cerrar);
             panel2.Controls.Add(lbPar);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
@@ -61,34 +60,6 @@
             panel2.Size = new Size(824, 122);
             panel2.TabIndex = 23;
             panel2.MouseMove += panel2_MouseMove;
-            // 
-            // btnCerrar
-            // 
-            btnCerrar.BackColor = Color.Transparent;
-            btnCerrar.BackgroundImage = (Image)resources.GetObject("btnCerrar.BackgroundImage");
-            btnCerrar.BackgroundImageLayout = ImageLayout.Stretch;
-            btnCerrar.FlatAppearance.BorderSize = 0;
-            btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            btnCerrar.FlatStyle = FlatStyle.Flat;
-            btnCerrar.Location = new Point(754, 20);
-            btnCerrar.Margin = new Padding(4, 5, 4, 5);
-            btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(20, 28);
-            btnCerrar.TabIndex = 33;
-            btnCerrar.UseVisualStyleBackColor = false;
-            btnCerrar.Click += btnCerrar_Click;
-            // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(17, 20);
-            pictureBox5.Margin = new Padding(4, 5, 4, 5);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(71, 80);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 34;
-            pictureBox5.TabStop = false;
             // 
             // lbPar
             // 
@@ -201,6 +172,37 @@
             // 
             errorp.ContainerControl = this;
             // 
+            // btnMin
+            // 
+            btnMin.BackColor = Color.Transparent;
+            btnMin.BackgroundImage = (Image)resources.GetObject("btnMin.BackgroundImage");
+            btnMin.BackgroundImageLayout = ImageLayout.Stretch;
+            btnMin.FlatAppearance.BorderSize = 0;
+            btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            btnMin.FlatStyle = FlatStyle.Flat;
+            btnMin.Location = new Point(756, 3);
+            btnMin.Margin = new Padding(4, 5, 4, 5);
+            btnMin.Name = "btnMin";
+            btnMin.Size = new Size(27, 33);
+            btnMin.TabIndex = 66;
+            btnMin.UseVisualStyleBackColor = false;
+            // 
+            // cerrar
+            // 
+            cerrar.BackColor = Color.Transparent;
+            cerrar.BackgroundImage = (Image)resources.GetObject("cerrar.BackgroundImage");
+            cerrar.BackgroundImageLayout = ImageLayout.Stretch;
+            cerrar.FlatAppearance.BorderSize = 0;
+            cerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            cerrar.FlatStyle = FlatStyle.Flat;
+            cerrar.Location = new Point(791, 5);
+            cerrar.Margin = new Padding(4, 5, 4, 5);
+            cerrar.Name = "cerrar";
+            cerrar.Size = new Size(20, 28);
+            cerrar.TabIndex = 65;
+            cerrar.UseVisualStyleBackColor = false;
+            cerrar.Click += cerrar_Click;
+            // 
             // R_E_Parametro
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -214,7 +216,6 @@
             Load += R_E_Parametro_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)errorp).EndInit();
@@ -224,8 +225,6 @@
         #endregion
 
         private Panel panel2;
-        private PictureBox pictureBox5;
-        private Button btnCerrar;
         public Panel panel3;
         private ErrorProvider errorp;
         public Button btnCancelar;
@@ -235,5 +234,7 @@
         public Label label2;
         public TextBox texPa;
         public TextBox txtValor;
+        private Button btnMin;
+        private Button cerrar;
     }
 }

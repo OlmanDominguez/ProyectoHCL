@@ -222,7 +222,7 @@ namespace ProyectoHCL.clases
                 conectar.Open();
             }
 
-            String sql = "SELECT ID_PREGUNTAU FROM TBL_PREGUNTAUSUARIO WHERE RESPUESTA LIKE @RESPUESTA";
+            String sql = "SELECT ID_PREGUNTA FROM TBL_PREGUNTAUSUARIO WHERE RESPUESTA LIKE @RESPUESTA";
             MySqlCommand comando = new MySqlCommand(sql, conectar);
             comando.Parameters.AddWithValue("@RESPUESTA", preguntarc);
             reader = comando.ExecuteReader();
