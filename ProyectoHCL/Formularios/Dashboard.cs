@@ -225,7 +225,7 @@ namespace ProyectoHCL
                 conn.Open();
 
                 string query = "SELECT INGRESO, SALIDA FROM TBL_SOLICITUDRESERVA WHERE NUMEROHABITACION = @habitacion " +
-                    "AND (ID_ESTADORESERVA = 1 OR ID_ESTADORESERVA = 2 " +
+                    "AND (ID_ESTADORESERVA = 1 OR ID_ESTADORESERVA = 2) " +
                     "AND MONTH(INGRESO) = @mes AND YEAR(INGRESO) = @anio";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
