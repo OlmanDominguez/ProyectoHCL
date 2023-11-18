@@ -96,13 +96,13 @@ namespace ProyectoHCL
                     case "HABITACIONES":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_habitaciones.Visible = false;
+                            Ibtn_usuarios.Visible = false;
                         }
                         break;
                     case "DESCUENTOS":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_descuentos.Visible = false;
+                            iconButton1.Visible = false;
                         }
                         break;
                     case "USUARIOS":
@@ -114,7 +114,7 @@ namespace ProyectoHCL
                     case "SERVICIOS":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_servicios.Visible = false;
+                            Ibtn_habitaciones.Visible = false;
                         }
                         break;
                     case "OBJETOS":
@@ -126,7 +126,7 @@ namespace ProyectoHCL
                     case "TIPO HABITACION":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            iconButton1.Visible = false;
+                            lbtn_descuentos.Visible = false;
                         }
                         break;
                     case "FACTURACION":
@@ -162,7 +162,7 @@ namespace ProyectoHCL
                     case "CLIENTES":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_usuarios.Visible = false;
+                            Ibtn_servicios.Visible = false;
                         }
                         break;
                     case "BITACORA":
@@ -224,7 +224,9 @@ namespace ProyectoHCL
             {
                 conn.Open();
 
-                string query = "SELECT INGRESO, SALIDA FROM TBL_SOLICITUDRESERVA WHERE NUMEROHABITACION = @habitacion AND ID_ESTADORESERVA = 1 AND MONTH(INGRESO) = @mes AND YEAR(INGRESO) = @anio";
+                string query = "SELECT INGRESO, SALIDA FROM TBL_SOLICITUDRESERVA WHERE NUMEROHABITACION = @habitacion " +
+                    "AND (ID_ESTADORESERVA = 1 OR ID_ESTADORESERVA = 2 " +
+                    "AND MONTH(INGRESO) = @mes AND YEAR(INGRESO) = @anio";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 //parámetros que recibe la consulta select
@@ -432,38 +434,6 @@ namespace ProyectoHCL
             showSubMenu(paneladminSubMenu);
         }
 
-        private void Ibtn_habitaciones_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario 
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlHabitaciones());
-            hideSubMenu2();
-        }
-
-        private void Ibtn_servicios_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario 
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlServicios());
-            hideSubMenu2();
-        }
-
-        private void Ibtn_descuentos_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlDescuentos());
-            hideSubMenu2();
-        }
-
-        private void Ibtn_usuarios_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario 
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlClientes());
-            hideSubMenu2();
-        }
-
         private void Ibtn_mantenimiento_Click_2(object sender, EventArgs e)
         {
             showSubMenu(panelmanteSubMenu);
@@ -662,6 +632,41 @@ namespace ProyectoHCL
         private void iconButton6_Click_1(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Ibtn_usuarios_Click_1(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlClientes());
+            hideSubMenu2();
+        }
+
+        private void Ibtn_habitaciones_Click_1(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlHabitaciones());
+            hideSubMenu2();
+        }
+
+        private void iconButton1_Click_2(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlTipoHabitacion());
+            hideSubMenu2();
+        }
+
+        private void Ibtn_servicios_Click_1(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlServicios());
+            hideSubMenu2();
+        }
+
+        private void lbtn_descuentos_Click(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlDescuentos());
+            hideSubMenu2();
         }
     }
 }

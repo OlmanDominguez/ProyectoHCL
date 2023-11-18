@@ -86,7 +86,7 @@
             // 
             lblVA.AutoSize = true;
             lblVA.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblVA.Location = new Point(401, 155);
+            lblVA.Location = new Point(405, 155);
             lblVA.Name = "lblVA";
             lblVA.Size = new Size(0, 21);
             lblVA.TabIndex = 52;
@@ -99,7 +99,7 @@
             lblRegistro.BackColor = Color.Transparent;
             lblRegistro.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lblRegistro.ForeColor = Color.Black;
-            lblRegistro.Location = new Point(106, 200);
+            lblRegistro.Location = new Point(110, 200);
             lblRegistro.Name = "lblRegistro";
             lblRegistro.Size = new Size(0, 21);
             lblRegistro.TabIndex = 51;
@@ -112,7 +112,7 @@
             label10.BackColor = Color.Transparent;
             label10.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label10.ForeColor = Color.Black;
-            label10.Location = new Point(28, 200);
+            label10.Location = new Point(32, 200);
             label10.Name = "label10";
             label10.Size = new Size(72, 19);
             label10.TabIndex = 50;
@@ -123,7 +123,7 @@
             // 
             lblVN.AutoSize = true;
             lblVN.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblVN.Location = new Point(391, 110);
+            lblVN.Location = new Point(395, 110);
             lblVN.Name = "lblVN";
             lblVN.Size = new Size(0, 21);
             lblVN.TabIndex = 49;
@@ -136,7 +136,7 @@
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = Color.Black;
-            label8.Location = new Point(284, 111);
+            label8.Location = new Point(288, 111);
             label8.Name = "label8";
             label8.Size = new Size(107, 19);
             label8.TabIndex = 47;
@@ -150,7 +150,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(284, 156);
+            label1.Location = new Point(288, 156);
             label1.Name = "label1";
             label1.Size = new Size(117, 19);
             label1.TabIndex = 46;
@@ -163,9 +163,9 @@
             lb_descripcion.BackColor = Color.Transparent;
             lb_descripcion.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lb_descripcion.ForeColor = Color.Black;
-            lb_descripcion.Location = new Point(394, 66);
+            lb_descripcion.Location = new Point(398, 66);
             lb_descripcion.Name = "lb_descripcion";
-            lb_descripcion.Size = new Size(266, 43);
+            lb_descripcion.Size = new Size(267, 43);
             lb_descripcion.TabIndex = 45;
             // 
             // label7
@@ -175,7 +175,7 @@
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(284, 66);
+            label7.Location = new Point(288, 66);
             label7.Name = "label7";
             label7.Size = new Size(104, 19);
             label7.TabIndex = 44;
@@ -188,7 +188,7 @@
             lb_accion.BackColor = Color.Transparent;
             lb_accion.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lb_accion.ForeColor = Color.Black;
-            lb_accion.Location = new Point(353, 24);
+            lb_accion.Location = new Point(357, 24);
             lb_accion.Name = "lb_accion";
             lb_accion.Size = new Size(0, 21);
             lb_accion.TabIndex = 43;
@@ -200,7 +200,7 @@
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(284, 24);
+            label6.Location = new Point(288, 24);
             label6.Name = "label6";
             label6.Size = new Size(69, 19);
             label6.TabIndex = 42;
@@ -213,7 +213,7 @@
             lb_fecha.BackColor = Color.Transparent;
             lb_fecha.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lb_fecha.ForeColor = Color.Black;
-            lb_fecha.Location = new Point(96, 66);
+            lb_fecha.Location = new Point(100, 66);
             lb_fecha.Name = "lb_fecha";
             lb_fecha.Size = new Size(0, 21);
             lb_fecha.TabIndex = 41;
@@ -225,7 +225,7 @@
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.Black;
-            label5.Location = new Point(28, 66);
+            label5.Location = new Point(32, 66);
             label5.Name = "label5";
             label5.Size = new Size(62, 19);
             label5.TabIndex = 40;
@@ -238,7 +238,7 @@
             lb_pantalla.BackColor = Color.Transparent;
             lb_pantalla.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lb_pantalla.ForeColor = Color.Black;
-            lb_pantalla.Location = new Point(111, 110);
+            lb_pantalla.Location = new Point(115, 110);
             lb_pantalla.Name = "lb_pantalla";
             lb_pantalla.Size = new Size(0, 21);
             lb_pantalla.TabIndex = 39;
@@ -250,7 +250,7 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(28, 110);
+            label4.Location = new Point(32, 110);
             label4.Name = "label4";
             label4.Size = new Size(77, 19);
             label4.TabIndex = 38;
@@ -263,7 +263,7 @@
             lb_user.BackColor = Color.Transparent;
             lb_user.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lb_user.ForeColor = Color.Black;
-            lb_user.Location = new Point(103, 156);
+            lb_user.Location = new Point(107, 156);
             lb_user.Name = "lb_user";
             lb_user.Size = new Size(0, 21);
             lb_user.TabIndex = 35;
@@ -275,7 +275,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(28, 156);
+            label3.Location = new Point(32, 156);
             label3.Name = "label3";
             label3.Size = new Size(69, 19);
             label3.TabIndex = 34;
@@ -288,7 +288,7 @@
             lb_idBitacora.BackColor = Color.Transparent;
             lb_idBitacora.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lb_idBitacora.ForeColor = Color.Black;
-            lb_idBitacora.Location = new Point(131, 24);
+            lb_idBitacora.Location = new Point(135, 24);
             lb_idBitacora.Name = "lb_idBitacora";
             lb_idBitacora.Size = new Size(0, 21);
             lb_idBitacora.TabIndex = 33;
@@ -300,11 +300,11 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(28, 24);
+            label2.Location = new Point(32, 24);
             label2.Name = "label2";
             label2.Size = new Size(96, 19);
             label2.TabIndex = 29;
-            label2.Text = "ID Bitacora:";
+            label2.Text = "ID Bitácora:";
             // 
             // panel2
             // 

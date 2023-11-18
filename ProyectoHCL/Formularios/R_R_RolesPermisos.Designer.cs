@@ -36,7 +36,6 @@
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             panel2 = new Panel();
             btnCerrar = new Button();
-            btnMin = new Button();
             lblTitulo = new Label();
             panel5 = new Panel();
             label1 = new Label();
@@ -65,7 +64,6 @@
             // 
             panel2.BackColor = Color.SteelBlue;
             panel2.Controls.Add(btnCerrar);
-            panel2.Controls.Add(btnMin);
             panel2.Controls.Add(lblTitulo);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
@@ -89,22 +87,6 @@
             btnCerrar.TabIndex = 43;
             btnCerrar.UseVisualStyleBackColor = false;
             btnCerrar.Click += btnCerrar_Click;
-            // 
-            // btnMin
-            // 
-            btnMin.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnMin.BackColor = Color.Transparent;
-            btnMin.BackgroundImage = (Image)resources.GetObject("btnMin.BackgroundImage");
-            btnMin.BackgroundImageLayout = ImageLayout.Stretch;
-            btnMin.FlatAppearance.BorderSize = 0;
-            btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            btnMin.FlatStyle = FlatStyle.Flat;
-            btnMin.Location = new Point(1039, 6);
-            btnMin.Name = "btnMin";
-            btnMin.Size = new Size(19, 20);
-            btnMin.TabIndex = 42;
-            btnMin.UseVisualStyleBackColor = false;
-            btnMin.Click += btnMin_Click;
             // 
             // lblTitulo
             // 
@@ -156,7 +138,7 @@
             btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnNuevo.ForeColor = SystemColors.ButtonFace;
             btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.Location = new Point(408, 15);
+            btnNuevo.Location = new Point(434, 14);
             btnNuevo.Name = "btnNuevo";
             btnNuevo.Size = new Size(46, 32);
             btnNuevo.TabIndex = 41;
@@ -177,7 +159,7 @@
             btnEditar.FlatStyle = FlatStyle.Flat;
             btnEditar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnEditar.ForeColor = Color.White;
-            btnEditar.Location = new Point(408, 15);
+            btnEditar.Location = new Point(434, 14);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(46, 30);
             btnEditar.TabIndex = 72;
@@ -401,6 +383,7 @@
             Name = "R_R_RolesPermisos";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "RolesPermisos";
+            FormClosing += R_R_RolesPermisos_FormClosing;
             Load += RolesPermisos_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -424,7 +407,6 @@
         public Button btnGuardar;
         private Panel panel1;
         private Button btnCerrar;
-        private Button btnMin;
         private Panel panel4;
         public Label label13;
         public Button btnEditar;

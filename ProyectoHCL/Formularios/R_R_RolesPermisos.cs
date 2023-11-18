@@ -207,13 +207,13 @@ namespace ProyectoHCL.Formularios
         private void btnCerrar_Click(object sender, EventArgs e) //botón para cerrar
         {
             this.Close();
-            limpiarCampos();
+            //limpiarCampos();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e) //botón para cancelar
         {
             this.Close();
-            limpiarCampos();
+            //limpiarCampos();
         }
 
         //coordenadas para arrastrar formulario
@@ -599,6 +599,11 @@ namespace ProyectoHCL.Formularios
                     }
                 }
             }
+        }
+
+        private void R_R_RolesPermisos_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            limpiarCampos();
         }
     }
 }

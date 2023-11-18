@@ -39,7 +39,6 @@
             label11 = new Label();
             btnCerrarSesion = new Button();
             panel5 = new Panel();
-            button10 = new Button();
             button11 = new Button();
             txtBuscar = new TextBox();
             label4 = new Label();
@@ -100,7 +99,7 @@
             label11.Name = "label11";
             label11.Size = new Size(208, 32);
             label11.TabIndex = 41;
-            label11.Text = "Historico Bitacora";
+            label11.Text = "Histórico Bitácora";
             // 
             // btnCerrarSesion
             // 
@@ -118,7 +117,6 @@
             // panel5
             // 
             panel5.BackColor = Color.Gainsboro;
-            panel5.Controls.Add(button10);
             panel5.Controls.Add(button11);
             panel5.Controls.Add(txtBuscar);
             panel5.Controls.Add(label4);
@@ -128,22 +126,6 @@
             panel5.Size = new Size(1084, 67);
             panel5.TabIndex = 38;
             // 
-            // button10
-            // 
-            button10.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button10.BackColor = Color.Red;
-            button10.FlatAppearance.BorderSize = 0;
-            button10.FlatStyle = FlatStyle.Flat;
-            button10.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button10.ForeColor = SystemColors.ButtonHighlight;
-            button10.Location = new Point(963, 22);
-            button10.Margin = new Padding(2);
-            button10.Name = "button10";
-            button10.Size = new Size(78, 25);
-            button10.TabIndex = 57;
-            button10.Text = "PDF";
-            button10.UseVisualStyleBackColor = false;
-            // 
             // button11
             // 
             button11.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -152,7 +134,7 @@
             button11.FlatStyle = FlatStyle.Flat;
             button11.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button11.ForeColor = SystemColors.ButtonHighlight;
-            button11.Location = new Point(872, 22);
+            button11.Location = new Point(964, 22);
             button11.Margin = new Padding(2);
             button11.Name = "button11";
             button11.Size = new Size(78, 25);
@@ -427,7 +409,6 @@
         private Label label11;
         private Button btnCerrarSesion;
         private Panel panel5;
-        private Button button10;
         private Button button11;
         private TextBox txtBuscar;
         private Label label4;

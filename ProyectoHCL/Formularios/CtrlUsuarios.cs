@@ -284,7 +284,7 @@ namespace ProyectoHCL.Formularios
             switch (cmbIndice)
             {
                 case 0:
-                    numFilas = 5;
+                    numFilas = 10;
                     break;
                 case 1:
                     numFilas = 20;
@@ -392,7 +392,7 @@ namespace ProyectoHCL.Formularios
                 fecha.SetTextAlignment(TextAlignment.RIGHT);
                 fecha.SetFontSize(12);
 
-                documento.ShowTextAligned(plogo, 30, 600, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+                //documento.ShowTextAligned(plogo, 30, 600, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
                 documento.ShowTextAligned(nombre, 100, 580, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
                 documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
                 documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
@@ -598,11 +598,6 @@ namespace ProyectoHCL.Formularios
         private void btnExcel_Click(object sender, EventArgs e)
         {
             crearExcel();
-        }
-
-        private void btnNuevo_EnabledChanged(object sender, EventArgs e)
-        {
-            btnNuevo.BackColor = Color.DarkGray;
         }
 
         private void dgvUsuarios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
