@@ -118,7 +118,6 @@
             btnNuevo.TabIndex = 40;
             btnNuevo.TextAlign = ContentAlignment.MiddleRight;
             btnNuevo.UseVisualStyleBackColor = false;
-            btnNuevo.EnabledChanged += btnNuevo_EnabledChanged;
             btnNuevo.Click += btnNuevo_Click_1;
             // 
             // panel5

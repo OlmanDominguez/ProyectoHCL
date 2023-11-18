@@ -45,11 +45,11 @@
             Ibtn_reservacion = new FontAwesome.Sharp.IconButton();
             Ibtn_facturacion = new FontAwesome.Sharp.IconButton();
             paneladminSubMenu = new Panel();
-            iconButton1 = new FontAwesome.Sharp.IconButton();
-            Ibtn_usuarios = new FontAwesome.Sharp.IconButton();
-            Ibtn_descuentos = new FontAwesome.Sharp.IconButton();
+            lbtn_descuentos = new FontAwesome.Sharp.IconButton();
             Ibtn_servicios = new FontAwesome.Sharp.IconButton();
+            iconButton1 = new FontAwesome.Sharp.IconButton();
             Ibtn_habitaciones = new FontAwesome.Sharp.IconButton();
+            Ibtn_usuarios = new FontAwesome.Sharp.IconButton();
             Ibtn_administracion = new FontAwesome.Sharp.IconButton();
             Ibtn_perfil = new FontAwesome.Sharp.IconButton();
             btn_perfil = new Button();
@@ -399,7 +399,7 @@
             Ibtn_reservacion.Padding = new Padding(15, 0, 0, 0);
             Ibtn_reservacion.Size = new Size(246, 45);
             Ibtn_reservacion.TabIndex = 33;
-            Ibtn_reservacion.Text = "Reservacion";
+            Ibtn_reservacion.Text = "Reservación";
             Ibtn_reservacion.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_reservacion.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_reservacion.UseVisualStyleBackColor = true;
@@ -421,7 +421,7 @@
             Ibtn_facturacion.Padding = new Padding(15, 0, 0, 0);
             Ibtn_facturacion.Size = new Size(246, 45);
             Ibtn_facturacion.TabIndex = 32;
-            Ibtn_facturacion.Text = "Facturacion";
+            Ibtn_facturacion.Text = "Facturación";
             Ibtn_facturacion.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_facturacion.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_facturacion.UseVisualStyleBackColor = true;
@@ -430,82 +430,38 @@
             // paneladminSubMenu
             // 
             paneladminSubMenu.BackColor = Color.FromArgb(74, 181, 221);
-            paneladminSubMenu.Controls.Add(iconButton1);
-            paneladminSubMenu.Controls.Add(Ibtn_usuarios);
-            paneladminSubMenu.Controls.Add(Ibtn_descuentos);
+            paneladminSubMenu.Controls.Add(lbtn_descuentos);
             paneladminSubMenu.Controls.Add(Ibtn_servicios);
+            paneladminSubMenu.Controls.Add(iconButton1);
             paneladminSubMenu.Controls.Add(Ibtn_habitaciones);
+            paneladminSubMenu.Controls.Add(Ibtn_usuarios);
             paneladminSubMenu.Dock = DockStyle.Top;
             paneladminSubMenu.Location = new Point(0, 177);
             paneladminSubMenu.Name = "paneladminSubMenu";
             paneladminSubMenu.Size = new Size(246, 232);
             paneladminSubMenu.TabIndex = 29;
             // 
-            // iconButton1
+            // lbtn_descuentos
             // 
-            iconButton1.Dock = DockStyle.Top;
-            iconButton1.FlatAppearance.BorderSize = 0;
-            iconButton1.FlatStyle = FlatStyle.Flat;
-            iconButton1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            iconButton1.IconChar = FontAwesome.Sharp.IconChar.HireAHelper;
-            iconButton1.IconColor = Color.Black;
-            iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton1.IconSize = 25;
-            iconButton1.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton1.Location = new Point(0, 180);
-            iconButton1.Name = "iconButton1";
-            iconButton1.Padding = new Padding(35, 0, 0, 0);
-            iconButton1.Size = new Size(246, 45);
-            iconButton1.TabIndex = 33;
-            iconButton1.Text = "Tipo de Habitacion";
-            iconButton1.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton1.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton1.UseVisualStyleBackColor = true;
-            iconButton1.Click += iconButton1_Click_1;
-            // 
-            // Ibtn_usuarios
-            // 
-            Ibtn_usuarios.Dock = DockStyle.Top;
-            Ibtn_usuarios.FlatAppearance.BorderSize = 0;
-            Ibtn_usuarios.FlatStyle = FlatStyle.Flat;
-            Ibtn_usuarios.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Ibtn_usuarios.IconChar = FontAwesome.Sharp.IconChar.Users;
-            Ibtn_usuarios.IconColor = Color.Black;
-            Ibtn_usuarios.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            Ibtn_usuarios.IconSize = 25;
-            Ibtn_usuarios.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_usuarios.Location = new Point(0, 135);
-            Ibtn_usuarios.Name = "Ibtn_usuarios";
-            Ibtn_usuarios.Padding = new Padding(35, 0, 0, 0);
-            Ibtn_usuarios.Size = new Size(246, 45);
-            Ibtn_usuarios.TabIndex = 32;
-            Ibtn_usuarios.Text = "Clientes";
-            Ibtn_usuarios.TextAlign = ContentAlignment.MiddleLeft;
-            Ibtn_usuarios.TextImageRelation = TextImageRelation.ImageBeforeText;
-            Ibtn_usuarios.UseVisualStyleBackColor = true;
-            Ibtn_usuarios.Click += Ibtn_usuarios_Click;
-            // 
-            // Ibtn_descuentos
-            // 
-            Ibtn_descuentos.Dock = DockStyle.Top;
-            Ibtn_descuentos.FlatAppearance.BorderSize = 0;
-            Ibtn_descuentos.FlatStyle = FlatStyle.Flat;
-            Ibtn_descuentos.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Ibtn_descuentos.IconChar = FontAwesome.Sharp.IconChar.Percentage;
-            Ibtn_descuentos.IconColor = Color.Black;
-            Ibtn_descuentos.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            Ibtn_descuentos.IconSize = 25;
-            Ibtn_descuentos.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_descuentos.Location = new Point(0, 90);
-            Ibtn_descuentos.Name = "Ibtn_descuentos";
-            Ibtn_descuentos.Padding = new Padding(35, 0, 0, 0);
-            Ibtn_descuentos.Size = new Size(246, 45);
-            Ibtn_descuentos.TabIndex = 31;
-            Ibtn_descuentos.Text = "Descuentos ";
-            Ibtn_descuentos.TextAlign = ContentAlignment.MiddleLeft;
-            Ibtn_descuentos.TextImageRelation = TextImageRelation.ImageBeforeText;
-            Ibtn_descuentos.UseVisualStyleBackColor = true;
-            Ibtn_descuentos.Click += Ibtn_descuentos_Click;
+            lbtn_descuentos.Dock = DockStyle.Top;
+            lbtn_descuentos.FlatAppearance.BorderSize = 0;
+            lbtn_descuentos.FlatStyle = FlatStyle.Flat;
+            lbtn_descuentos.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lbtn_descuentos.IconChar = FontAwesome.Sharp.IconChar.Percentage;
+            lbtn_descuentos.IconColor = Color.Black;
+            lbtn_descuentos.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            lbtn_descuentos.IconSize = 25;
+            lbtn_descuentos.ImageAlign = ContentAlignment.MiddleLeft;
+            lbtn_descuentos.Location = new Point(0, 180);
+            lbtn_descuentos.Name = "lbtn_descuentos";
+            lbtn_descuentos.Padding = new Padding(35, 0, 0, 0);
+            lbtn_descuentos.Size = new Size(246, 45);
+            lbtn_descuentos.TabIndex = 33;
+            lbtn_descuentos.Text = "Descuentos";
+            lbtn_descuentos.TextAlign = ContentAlignment.MiddleLeft;
+            lbtn_descuentos.TextImageRelation = TextImageRelation.ImageBeforeText;
+            lbtn_descuentos.UseVisualStyleBackColor = true;
+            lbtn_descuentos.Click += lbtn_descuentos_Click;
             // 
             // Ibtn_servicios
             // 
@@ -518,16 +474,38 @@
             Ibtn_servicios.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_servicios.IconSize = 25;
             Ibtn_servicios.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_servicios.Location = new Point(0, 45);
+            Ibtn_servicios.Location = new Point(0, 135);
             Ibtn_servicios.Name = "Ibtn_servicios";
             Ibtn_servicios.Padding = new Padding(35, 0, 0, 0);
             Ibtn_servicios.Size = new Size(246, 45);
-            Ibtn_servicios.TabIndex = 30;
+            Ibtn_servicios.TabIndex = 32;
             Ibtn_servicios.Text = "Servicios";
             Ibtn_servicios.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_servicios.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_servicios.UseVisualStyleBackColor = true;
-            Ibtn_servicios.Click += Ibtn_servicios_Click;
+            Ibtn_servicios.Click += Ibtn_servicios_Click_1;
+            // 
+            // iconButton1
+            // 
+            iconButton1.Dock = DockStyle.Top;
+            iconButton1.FlatAppearance.BorderSize = 0;
+            iconButton1.FlatStyle = FlatStyle.Flat;
+            iconButton1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            iconButton1.IconChar = FontAwesome.Sharp.IconChar.City;
+            iconButton1.IconColor = Color.Black;
+            iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconButton1.IconSize = 25;
+            iconButton1.ImageAlign = ContentAlignment.MiddleLeft;
+            iconButton1.Location = new Point(0, 90);
+            iconButton1.Name = "iconButton1";
+            iconButton1.Padding = new Padding(35, 0, 0, 0);
+            iconButton1.Size = new Size(246, 45);
+            iconButton1.TabIndex = 31;
+            iconButton1.Text = "Tipos de Habitación";
+            iconButton1.TextAlign = ContentAlignment.MiddleLeft;
+            iconButton1.TextImageRelation = TextImageRelation.ImageBeforeText;
+            iconButton1.UseVisualStyleBackColor = true;
+            iconButton1.Click += iconButton1_Click_2;
             // 
             // Ibtn_habitaciones
             // 
@@ -535,21 +513,43 @@
             Ibtn_habitaciones.FlatAppearance.BorderSize = 0;
             Ibtn_habitaciones.FlatStyle = FlatStyle.Flat;
             Ibtn_habitaciones.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Ibtn_habitaciones.IconChar = FontAwesome.Sharp.IconChar.City;
+            Ibtn_habitaciones.IconChar = FontAwesome.Sharp.IconChar.Bed;
             Ibtn_habitaciones.IconColor = Color.Black;
             Ibtn_habitaciones.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_habitaciones.IconSize = 25;
             Ibtn_habitaciones.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_habitaciones.Location = new Point(0, 0);
+            Ibtn_habitaciones.Location = new Point(0, 45);
             Ibtn_habitaciones.Name = "Ibtn_habitaciones";
             Ibtn_habitaciones.Padding = new Padding(35, 0, 0, 0);
             Ibtn_habitaciones.Size = new Size(246, 45);
-            Ibtn_habitaciones.TabIndex = 29;
+            Ibtn_habitaciones.TabIndex = 30;
             Ibtn_habitaciones.Text = "Habitaciones";
             Ibtn_habitaciones.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_habitaciones.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_habitaciones.UseVisualStyleBackColor = true;
-            Ibtn_habitaciones.Click += Ibtn_habitaciones_Click;
+            Ibtn_habitaciones.Click += Ibtn_habitaciones_Click_1;
+            // 
+            // Ibtn_usuarios
+            // 
+            Ibtn_usuarios.Dock = DockStyle.Top;
+            Ibtn_usuarios.FlatAppearance.BorderSize = 0;
+            Ibtn_usuarios.FlatStyle = FlatStyle.Flat;
+            Ibtn_usuarios.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Ibtn_usuarios.IconChar = FontAwesome.Sharp.IconChar.Users;
+            Ibtn_usuarios.IconColor = Color.Black;
+            Ibtn_usuarios.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            Ibtn_usuarios.IconSize = 25;
+            Ibtn_usuarios.ImageAlign = ContentAlignment.MiddleLeft;
+            Ibtn_usuarios.Location = new Point(0, 0);
+            Ibtn_usuarios.Name = "Ibtn_usuarios";
+            Ibtn_usuarios.Padding = new Padding(35, 0, 0, 0);
+            Ibtn_usuarios.Size = new Size(246, 45);
+            Ibtn_usuarios.TabIndex = 29;
+            Ibtn_usuarios.Text = "Clientes";
+            Ibtn_usuarios.TextAlign = ContentAlignment.MiddleLeft;
+            Ibtn_usuarios.TextImageRelation = TextImageRelation.ImageBeforeText;
+            Ibtn_usuarios.UseVisualStyleBackColor = true;
+            Ibtn_usuarios.Click += Ibtn_usuarios_Click_1;
             // 
             // Ibtn_administracion
             // 
@@ -567,7 +567,7 @@
             Ibtn_administracion.Padding = new Padding(15, 0, 0, 0);
             Ibtn_administracion.Size = new Size(246, 45);
             Ibtn_administracion.TabIndex = 28;
-            Ibtn_administracion.Text = "Administracion";
+            Ibtn_administracion.Text = "Administración";
             Ibtn_administracion.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_administracion.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_administracion.UseVisualStyleBackColor = true;
@@ -663,8 +663,6 @@
             panelChildForm.BackColor = Color.Transparent;
             panelChildForm.Controls.Add(panel4);
             panelChildForm.Controls.Add(panel3);
-            panelChildForm.Controls.Add(label1);
-            panelChildForm.Controls.Add(cmbHabitacion);
             panelChildForm.Controls.Add(panel46);
             panelChildForm.Controls.Add(panel38);
             panelChildForm.Controls.Add(ContenedorDias);
@@ -683,7 +681,7 @@
             panel4.Controls.Add(lbl_disp);
             panel4.Controls.Add(lbl_activas);
             panel4.Controls.Add(lbl_inactivas);
-            panel4.Location = new Point(785, 92);
+            panel4.Location = new Point(785, 80);
             panel4.Name = "panel4";
             panel4.Size = new Size(216, 115);
             panel4.TabIndex = 46;
@@ -764,7 +762,7 @@
             panel3.Controls.Add(lbl_confirmadas);
             panel3.Controls.Add(label13);
             panel3.Controls.Add(lbl_facturadas);
-            panel3.Location = new Point(785, 251);
+            panel3.Location = new Point(785, 239);
             panel3.Name = "panel3";
             panel3.Size = new Size(216, 201);
             panel3.TabIndex = 45;
@@ -891,18 +889,18 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI Symbol", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(63, 56);
+            label1.Location = new Point(418, 10);
             label1.Name = "label1";
-            label1.Size = new Size(185, 20);
+            label1.Size = new Size(85, 20);
             label1.TabIndex = 46;
-            label1.Text = "Seleccione una habitación:";
+            label1.Text = "Habitación:";
             // 
             // cmbHabitacion
             // 
             cmbHabitacion.FormattingEnabled = true;
-            cmbHabitacion.Location = new Point(254, 56);
+            cmbHabitacion.Location = new Point(508, 8);
             cmbHabitacion.Name = "cmbHabitacion";
-            cmbHabitacion.Size = new Size(114, 23);
+            cmbHabitacion.Size = new Size(100, 23);
             cmbHabitacion.TabIndex = 45;
             cmbHabitacion.SelectedIndexChanged += cmbHabitacion_SelectedIndexChanged;
             // 
@@ -911,8 +909,10 @@
             panel46.BackColor = Color.FromArgb(20, 100, 150);
             panel46.Controls.Add(LBLMES);
             panel46.Controls.Add(btnSig);
+            panel46.Controls.Add(label1);
             panel46.Controls.Add(btnAnt);
-            panel46.Location = new Point(64, 92);
+            panel46.Controls.Add(cmbHabitacion);
+            panel46.Location = new Point(64, 80);
             panel46.Name = "panel46";
             panel46.Size = new Size(715, 38);
             panel46.TabIndex = 44;
@@ -965,7 +965,7 @@
             panel38.Controls.Add(label2);
             panel38.Controls.Add(label9);
             panel38.Controls.Add(label10);
-            panel38.Location = new Point(64, 131);
+            panel38.Location = new Point(64, 119);
             panel38.Name = "panel38";
             panel38.Size = new Size(715, 35);
             panel38.TabIndex = 43;
@@ -1050,7 +1050,7 @@
             // ContenedorDias
             // 
             ContenedorDias.BackColor = Color.LightGray;
-            ContenedorDias.Location = new Point(64, 172);
+            ContenedorDias.Location = new Point(64, 160);
             ContenedorDias.Name = "ContenedorDias";
             ContenedorDias.Size = new Size(715, 423);
             ContenedorDias.TabIndex = 42;
@@ -1062,7 +1062,7 @@
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(63, 19);
+            label11.Location = new Point(64, 30);
             label11.Name = "label11";
             label11.Size = new Size(318, 32);
             label11.TabIndex = 47;
@@ -1100,6 +1100,7 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel46.ResumeLayout(false);
+            panel46.PerformLayout();
             panel38.ResumeLayout(false);
             panel38.PerformLayout();
             ResumeLayout(false);
@@ -1116,10 +1117,10 @@
         private FontAwesome.Sharp.IconButton Ibtn_perfil;
         private FontAwesome.Sharp.IconButton Ibtn_administracion;
         private Panel paneladminSubMenu;
-        private FontAwesome.Sharp.IconButton Ibtn_descuentos;
-        private FontAwesome.Sharp.IconButton Ibtn_servicios;
+        private FontAwesome.Sharp.IconButton iconButton1;
         private FontAwesome.Sharp.IconButton Ibtn_habitaciones;
         private FontAwesome.Sharp.IconButton Ibtn_usuarios;
+        private FontAwesome.Sharp.IconButton Ibtn_servicios;
         private Panel panelChildForm;
         private Label lbl_anuladas;
         private Label lbl_anu;
@@ -1133,7 +1134,7 @@
         private Label lbl_disp;
         private Label lbl_reserva;
         private Label label3;
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton lbtn_descuentos;
         private FontAwesome.Sharp.IconButton Ibtn_facturacion;
         private Panel panelmanteSubMenu;
         private FontAwesome.Sharp.IconButton Ibtn_parametros;

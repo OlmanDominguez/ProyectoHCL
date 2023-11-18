@@ -100,16 +100,9 @@ namespace ProyectoHCL.Formularios
         }
 
         //Botón cerrar
-        private void btnCerrar_Click(object sender, EventArgs e)
+        private void btnCerrar_Click_1(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        //Botón minimizar
-        private void btnMin_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-
         }
     }
 }
