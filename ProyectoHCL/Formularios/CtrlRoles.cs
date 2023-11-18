@@ -400,7 +400,7 @@ namespace ProyectoHCL.Formularios
 
             SLDocument sl = new SLDocument();//objeto de documento
             //direcion donde guardar ael excel
-            System.Drawing.Bitmap bm = new System.Drawing.Bitmap("C:/Users/DAOdo/Desktop/SEGUNDO PERIODO 2023/Programacion he implementacion de Sistemas/ProyectoHotelCasaLomas/logo.jpeg");
+            System.Drawing.Bitmap bm = new System.Drawing.Bitmap(Properties.Resources.logo);
             Byte[] ba;
             using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
             {
