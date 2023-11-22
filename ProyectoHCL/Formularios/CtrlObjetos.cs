@@ -1,7 +1,9 @@
-﻿using iText.IO.Font.Constants;
+﻿using DocumentFormat.OpenXml.Vml;
+using iText.IO.Font.Constants;
 using iText.Kernel.Font;
 using iText.Kernel.Pdf;
 using iText.Layout.Properties;
+using Microsoft.VisualBasic;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
@@ -19,7 +21,14 @@ using iText.Kernel.Geom;
 using iText.Layout.Element;
 using SpreadsheetLight;
 using SpreadsheetLight.Drawing;
+using System.Windows.Controls;
 using Point = System.Drawing.Point;
+using iText.IO.Image;
+using Image = System.Drawing.Image;
+using iText.Kernel.Events;
+using iText.Kernel.Pdf.Canvas;
+using Rectangle = iText.Kernel.Geom.Rectangle;
+using System.Reflection;
 
 //-----------------------------------------------------------------------
 //    Universidad Nacional Autonoma de Honduras (UNAH)
@@ -146,11 +155,11 @@ namespace ProyectoHCL.Formularios
         private void CtrlObjetos_Load(object sender, EventArgs e)
         {
 
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //agregar botón de editar en datagrid
+            DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn(); //agregar botón de editar en datagrid
             btnUpdate.Name = "EDITAR";
             dgvObjetos.Columns.Add(btnUpdate);
 
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn(); //agregar botón de eliminar en datagrid
+            DataGridViewImageColumn btnDelete = new DataGridViewImageColumn(); //agregar botón de eliminar en datagrid
             btnDelete.Name = "ELIMINAR";
             dgvObjetos.Columns.Add(btnDelete);
 
@@ -262,36 +271,6 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void dgvObjetos_CellPainting_1(object sender, DataGridViewCellPaintingEventArgs e) //Configurar datagrid para mostrar los botones de editar y eliminar que se agregaron
-        {
-            if (e.ColumnIndex >= 0 && this.dgvObjetos.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvObjetos.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico"); //Se define la carpeta en la que está guardado el ícono del boton
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvObjetos.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvObjetos.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
-            if (e.ColumnIndex >= 0 && this.dgvObjetos.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvObjetos.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvObjetos.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvObjetos.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
-        }
-
         private void cmbPag_SelectionChangeCommitted(object sender, EventArgs e) //Seleccionar página para mostrar registros
         {
             int pagina = Convert.ToInt32(cmbPag.Text);
@@ -375,17 +354,43 @@ namespace ProyectoHCL.Formularios
 
         private void crearPDF() //función para crear pdf
         {
-            PdfWriter pdfWriter = new PdfWriter("Reporte.pdf");
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Archivos PDF|*.pdf";
+            saveFileDialog.Title = "Guardar archivo PDF";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+
+            PdfWriter pdfWriter = new PdfWriter(filePath);
             PdfDocument pdf = new PdfDocument(pdfWriter);
-            //1 pulgada = 72 pt (8 1/2 x 11) (612 x 792)
             PageSize tamanioH = new PageSize(792, 612);
             Document documento = new Document(pdf, tamanioH);
-            // Document documento = new Document(pdf, PageSize.LETTER);
-
             documento.SetMargins(70, 20, 55, 20);
 
             PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
             PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+
+            var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/HP TOUCH/source/repos/OlmanDominguez/ProyectoHCL/Logo HCL.jpeg")).SetWidth(50);
+            var plogo = new Paragraph("").Add(logo);
+
+            var nombre = new Paragraph("Hotel Casa Lomas");
+            nombre.SetFontSize(12);
+
+            var titulo = new Paragraph("Reporte Objetos");
+            titulo.SetTextAlignment(TextAlignment.CENTER);
+            titulo.SetFontSize(14).SetBold();
+
+            var dfecha = DateTime.Now.ToString("dd.MM.yyy");
+            var dhora = DateTime.Now.ToString("hh:mm:ss");
+            var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
+            fecha.SetTextAlignment(TextAlignment.RIGHT);
+            fecha.SetFontSize(12);
+
+            documento.ShowTextAligned(plogo, 30, 600, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+            documento.ShowTextAligned(nombre, 100, 580, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+            documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+            documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
 
             string[] columnas = { "Id", "Nombre", "Descripcion", "Estado", "Creacion", "Actualizacion" };
 
@@ -418,49 +423,33 @@ namespace ProyectoHCL.Formularios
             }
 
             documento.Add(tabla);
+            pdf.AddEventHandler(PdfDocumentEvent.END_PAGE, new HeaderFooterEventHandler());
             documento.Close();
 
-            var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/jmont/OneDrive/Documentos/HM/ProyectoIP/logoCL.png")).SetWidth(50);
-            var plogo = new Paragraph("").Add(logo);
-
-            var nombre = new Paragraph("Hotel Casa Lomas");
-            nombre.SetTextAlignment(TextAlignment.CENTER);
-            nombre.SetFontSize(12);
-
-            var titulo = new Paragraph("Reporte Objetos");
-            titulo.SetTextAlignment(TextAlignment.CENTER);
-            titulo.SetFontSize(14);
-            titulo.SetBold();
-
-            var dfecha = DateTime.Now.ToString("dd.MM.yyy");
-            var dhora = DateTime.Now.ToString("hh:mm:ss");
-            var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
-            fecha.SetFontSize(12);
-
-            PdfDocument pdfDoc = new PdfDocument(new PdfReader("Reporte.pdf"), new PdfWriter
-                ("ReporteObjetos.pdf"));
-            Document doc = new Document(pdfDoc);
-
-            int numeros = pdfDoc.GetNumberOfPages();
-
-            for (int i = 1; i <= numeros; i++)
-            {
-                PdfPage pagina = pdfDoc.GetPage(i);
-
-                float y = (pdfDoc.GetPage(i).GetPageSize().GetTop() - 15);
-                doc.ShowTextAligned(plogo, 40, y, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(nombre, 115, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(titulo, 396, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(fecha, 700, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-
-                doc.ShowTextAligned(new Paragraph(String.Format("pagina {0} de {1}", i, numeros)), pdfDoc.GetPage
-                    (i).GetPageSize().GetWidth() / 2, pdfDoc.GetPage(i).GetPageSize().GetBottom() + 30, i,
-                    TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-            }
-            doc.Close();
         }
+    }
 
-        private void button6_Click(object sender, EventArgs e)
+    private class HeaderFooterEventHandler : IEventHandler
+    {
+        public void HandleEvent(Event currentEvent)
+        {
+            PdfDocumentEvent docEvent = (PdfDocumentEvent)currentEvent;
+            PdfDocument pdfDoc = docEvent.GetDocument();
+            PdfPage page = docEvent.GetPage();
+            int pageNumber = pdfDoc.GetPageNumber(page);
+            PdfCanvas pdfCanvas = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
+
+            Rectangle pageSize = page.GetPageSize();
+            pdfCanvas.BeginText()
+                .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA), 12)
+                .MoveText(pageSize.GetLeft() + 396, 20)
+                .ShowText("Página " + pageNumber)
+                .EndText();
+            pdfCanvas.Release();
+        }
+    }
+
+    private void button6_Click(object sender, EventArgs e)
         {
             crearPDF();
             MsgB mbox = new MsgB("informacion", "PDF creado con éxito");
@@ -562,5 +551,30 @@ namespace ProyectoHCL.Formularios
         {
             btnNuevo.BackColor = Color.DarkGray;
         }
+
+        private void dgvObjeto_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvObjetos.Columns[e.ColumnIndex].Name == "EDITAR")
+            {
+                Image imagen = Properties.Resources.editar;
+
+                dgvObjetos.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvObjetos.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvObjetos.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            {
+                Image imagen = Properties.Resources.eliminar;
+
+                dgvObjetos.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvObjetos.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+        }
+
     }
+
 }

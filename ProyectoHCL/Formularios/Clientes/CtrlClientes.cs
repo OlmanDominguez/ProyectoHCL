@@ -67,6 +67,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using DocumentFormat.OpenXml.Office2013.Excel;
 using SpreadsheetLight;
 using SpreadsheetLight.Drawing;
+using System.Reflection;
+using Image = System.Drawing.Image;
+
 
 namespace ProyectoHCL.Formularios
 {
@@ -141,15 +144,15 @@ namespace ProyectoHCL.Formularios
 
         private void CtrlClientes_Load(object sender, EventArgs e)
         {
-            DataGridViewButtonColumn btnShow = new DataGridViewButtonColumn();  /* vista de botones */
-            btnShow.Name = "VER";
-            dgvClientes.Columns.Add(btnShow);
-
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
-            btnUpdate.Name = "EDITAR";
+            DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn();  /* vista de botones */
+            btnUpdate.Name = "VER";
             dgvClientes.Columns.Add(btnUpdate);
 
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+            DataGridViewImageColumn btnUpdate1 = new DataGridViewImageColumn();
+            btnUpdate1.Name = "EDITAR";
+            dgvClientes.Columns.Add(btnUpdate1);
+
+            DataGridViewImageColumn btnDelete = new DataGridViewImageColumn();
             btnDelete.Name = "ELIMINAR";
             dgvClientes.Columns.Add(btnDelete);
 
@@ -300,51 +303,6 @@ namespace ProyectoHCL.Formularios
 
 
 
-        }
-
-
-
-        private void dgvClientes_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            if (e.ColumnIndex >= 0 && this.dgvClientes.Columns[e.ColumnIndex].Name == "VER" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvClientes.Rows[e.RowIndex].Cells["VER"] as DataGridViewButtonCell;
-                Icon icoVer = new Icon(Environment.CurrentDirectory + "\\ver.ico"); //Se define la carpeta en la que está guardado el ícono del boton
-                e.Graphics.DrawIcon(icoVer, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvClientes.Rows[e.RowIndex].Height = icoVer.Height + 8;
-                this.dgvClientes.Columns[e.ColumnIndex].Width = icoVer.Width + 58;
-
-                e.Handled = true;
-            }
-            if (e.ColumnIndex >= 0 && this.dgvClientes.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvClientes.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoEditar = new Icon(Environment.CurrentDirectory + "\\editar.ico"); //Se define la carpeta en la que está guardado el ícono del boton
-                e.Graphics.DrawIcon(icoEditar, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvClientes.Rows[e.RowIndex].Height = icoEditar.Height + 8;
-                this.dgvClientes.Columns[e.ColumnIndex].Width = icoEditar.Width + 58;
-
-                e.Handled = true;
-            }
-            if (e.ColumnIndex >= 0 && this.dgvClientes.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvClientes.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvClientes.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvClientes.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
         }
 
 
@@ -542,6 +500,48 @@ namespace ProyectoHCL.Formularios
             }
         }
 
+        private void dgvClientes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvClientes.Columns[e.ColumnIndex].Name == "VER")
+            {
+                Image imagen = Properties.Resources.ojo;
 
+                dgvClientes.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvClientes.Columns[e.ColumnIndex].Width = imagen.Width + 40;
+
+                e.Value = imagen;
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvClientes.Columns[e.ColumnIndex].Name == "EDITAR")
+            {
+                Image imagen = Properties.Resources.editar;
+
+                dgvClientes.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvClientes.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvClientes.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            {
+                Image imagen = Properties.Resources.eliminar;
+
+                dgvClientes.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvClientes.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+        }
+
+        //Botón para formulario pdf
+        private void button6_Click(object sender, EventArgs e)
+        {
+            crearPDF();
+            MsgB mbox = new MsgB("informacion", "PDF creado con éxito");
+            DialogResult dR = mbox.ShowDialog();
+        }
+
+        private void crearPDF()
+        {
+   
+        }
     }
 }

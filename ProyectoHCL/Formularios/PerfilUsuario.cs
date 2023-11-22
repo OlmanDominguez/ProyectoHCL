@@ -80,9 +80,9 @@ namespace ProyectoHCL.Formularios
         private void PerfilUsuario_Load(object sender, EventArgs e)
         {
             //Clase que trae la información del usuario que ingresa al login
-            txtusuario.Text = clasecompartida.user;
-            txtnombre.Text = clases.CDatos.nombre;
-            txtcorreo.Text = clases.CDatos.correo;
+            lblusuario.Text = clasecompartida.user;
+            lblnom.Text = clases.CDatos.nombre;
+            lblemail.Text = clases.CDatos.correo;
             lblnombre.Text = clases.CDatos.nombre;
 
             try
@@ -148,6 +148,11 @@ namespace ProyectoHCL.Formularios
         private void bnMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void txtusuario_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

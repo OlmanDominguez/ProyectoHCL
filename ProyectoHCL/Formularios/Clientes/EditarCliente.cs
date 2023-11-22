@@ -67,7 +67,7 @@ namespace ProyectoHCL.Formularios
 {
     public partial class EditarCliente : Form  /* clase publica editar cliente */
     {
-        
+
         public EditarCliente()
         {
             InitializeComponent();
@@ -75,11 +75,6 @@ namespace ProyectoHCL.Formularios
 
         public string id = null;
         MsgB msgB = new MsgB();
-
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
         int posY = 0; /* declaracion de variables */
         int posX = 0;
@@ -193,7 +188,7 @@ namespace ProyectoHCL.Formularios
                 DialogResult dR1 = mbox1.ShowDialog();
             }
             else if (modelo.NombreClienteEditarBD(txtNombre.Text, claseCod.id)) //validar si ya existe el nombre del cliente
-            { 
+            {
                 MsgB m = new MsgB("advertencia", "El nombre de cliente ya está registrado");
                 DialogResult dR = m.ShowDialog();
             }
@@ -347,7 +342,7 @@ namespace ProyectoHCL.Formularios
 
         private void txtID_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidarTxt.TxtNumeros(e);
+          
         }
 
         private void txtTele1_KeyPress(object sender, KeyPressEventArgs e)
@@ -404,6 +399,173 @@ namespace ProyectoHCL.Formularios
             {
                 errorT.Clear();
             }
+        }
+
+        private void txtID_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtID))
+            {
+                errorT.SetError(txtID, "Introduzca la identificación");
+
+            }
+            else if (txtID.TextLength <= 13)
+            {
+                errorT.SetError(txtID, "La identificación debe contener al menos 13 números");
+                txtID.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+
+            }
+
+        }
+
+        private void txtNombre_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtNombre))
+            {
+                errorT.SetError(txtNombre, "Introduzca un nombre");
+
+            }
+            else if (txtNombre.TextLength <= 4)
+            {
+                errorT.SetError(txtNombre, "El nombre es muy corto");
+                txtNombre.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+
+            }
+
+        }
+
+        private void txtApellido_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtApellido))
+            {
+                errorT.SetError(txtApellido, "Introduzca un apellido");
+
+            }
+            else if (txtApellido.TextLength <= 4)
+            {
+                errorT.SetError(txtApellido, "El apellido es muy corto");
+                txtApellido.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+
+            }
+
+        }
+
+        private void cbTipo_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.cmbVacio(cbTipo))
+            {
+                errorT.SetError(cbTipo, "Seleccione el tipo de cliente");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+
+        }
+
+        private void txtRTN_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtRTN))
+            {
+                errorT.SetError(txtRTN, "Introduzca un RTN");
+
+            }
+            else if (txtTele2.TextLength < 14)
+            {
+                errorT.SetError(txtRTN, "El RTN debe contener al menos 14 dígitos");
+                txtRTN.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+
+            }
+        }
+
+        private void txtTele1_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtTele1))
+            {
+                errorT.SetError(txtTele1, "Introduzca un teléfono");
+
+            }
+            else if (txtTele1.TextLength < 8)
+            {
+                errorT.SetError(txtTele1, "El teléfono debe contener al menos 8 números");
+                txtTele1.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+
+            }
+
+        }
+
+        private void txtTele2_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtTele2))
+            {
+                errorT.SetError(txtTele2, "Introduzca un teléfono");
+
+            }
+            else if (txtTele2.TextLength < 8)
+            {
+                errorT.SetError(txtTele2, "El teléfono debe contener al menos 8 números");
+                txtTele2.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+
+            }
+
+        }
+
+        private void txtEmpresa_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtEmpresa))
+            {
+                errorT.SetError(txtEmpresa, "Introduzca una Empresa");
+
+            }
+            else if (txtEmpresa.TextLength < 5)
+            {
+                errorT.SetError(txtEmpresa, "El nombre de la empresa es muy corta");
+                txtEmpresa.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+
+            }
+
+        }
+
+        private void label20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }
