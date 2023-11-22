@@ -118,29 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnEliminar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAZRJREFUSEvt
-        lL0vBFEUxZe1CqVCpdZo1CqFKIlsqFQalU5LM802GoVSQqVAgkSi04nKf6Ahk2G+MsmKiDB+d9wn69nZ
-        mZHo9iQn792559z73t2dqeUhTdPBIAgWwzBsyh4OR1G0T9xm3ZFnKq0OzA0KHcFUSKMzip6aWLmn8mrQ
-        4sfwVW6gt+gsbPiIdkht5SDXxignl+ILxDIW++TCII7jKbWVB8amFJBTly1OPI5uTcbI/hleauo3SC7D
-        D9/354uKo5khvrXyGWUSWUEbJOoILmyD0j75NFzqRuoMqOwnZCx6Vbv4O9wgN1uGuQ0Yy4FV+E8E3UdE
-        Un6krqYqzG3A9XY7hAH8ftmUMqqifX4DEnUZE42e5AdFvGVMPGuxzml8yL9oQvfXSZKMsrY1zm9ggKAh
-        K+LOBuuskxpvu647ovsT1XoaFzcwQNxv0BuI+w16A/G/N9g0Jhqcszoa32hD2d/xcq6wvmlcqcGqMVXg
-        g9qL4XneGAbfKlBER+3lIN8kxnGF8cUqZPMeOown+8x8oVb7BKfs5aJ7DQKvAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="btnAgregar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1
-        MAAA6mAAADqYAAAXcJy6UTwAAAAHdElNRQfnBhsONjhkTaBFAAAA/UlEQVRYR+2WUQqDQAxEvZyeqFD8
-        KAiFWug1PEnF4/QM2xkT+6GuRnbBj+bBsBjHMav7kcJxYoQQKugCXRPFjEpjbeCBDspNp/HbwMidkw/0
-        gp6JYgazSKmviQNTLd7w0FIyyGolMtRaigNTI97QaCkZZkmkIZMm8XoD+2Z4BqjXyyjMYiBXLcWhSbym
-        Bkb0Mgos3kCeBlDjP99jcSZQy9ZAL7c2eav9B2p5GpijPj+EpzbAM7H453OYxUCuWopDk3gNZiPMkkhv
-        wNbANJC0WkqGWRJpG0hK8Y5j1B1aGzSPiBn2kYzAeN5QOoEH+CVu0NqgeUTMsO3c+UOK4gvsyfrsibxY
-        NgAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="btnCerrar.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAI2JJREFUeF7t
@@ -298,10 +275,4 @@
         AAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="errorT.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
-  </metadata>
 </root>

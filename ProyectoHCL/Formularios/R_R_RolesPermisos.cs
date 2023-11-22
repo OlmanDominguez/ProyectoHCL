@@ -257,62 +257,50 @@ namespace ProyectoHCL.Formularios
         private void GuardarPermisoRol() //función para guardar los permisos
         {
 
-            foreach (DataGridViewRow row in dgvRolPermiso.Rows)//Recorrer el datagridview para obtener los valores de las casillas y asignar los permisos
+            foreach (DataGridViewRow row in dgvRolPermiso.Rows)
             {
-                permiso.IdRol = cmbRol.Text; //asignar valor seleccionado en combobox al atributo IdRol
-                permiso.IdObjeto = int.Parse(row.Cells["ID"].Value.ToString()); //asignar valor seleccionado (id pantalla) de la fila del datagrid al atributo IdObjeto
+                permiso.IdRol = cmbRol.Text;
+                permiso.IdObjeto = Convert.ToInt32(row.Cells["ID"].Value);
 
-                if (Convert.ToBoolean(row.Cells["VER"].Value)) //si se marcó la casilla del permiso...
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag); //asignar valor tag del checkbox al atributo IdPermiso
-                    permiso.Permitido = true; //asignar valor true al atributo Permitido
-                    cDatos.GuardarPermiso(permiso); //llamar función para guardar permiso
-                }
-                else if (!Convert.ToBoolean(row.Cells["VER"].Value)) //si no se marcó la casilla del permiso
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);//asignar valor tag del checkbox al atributo IdPermiso
-                    permiso.Permitido = false; //asignar valor false al atributo Permitido
-                    cDatos.GuardarPermiso(permiso); //llamar función para guardar permiso
-                }
+                //int idPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
 
-                if (Convert.ToBoolean(row.Cells["CREAR"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
-                    permiso.Permitido = true;
-                    cDatos.GuardarPermiso(permiso);
-                }
-                else if (!Convert.ToBoolean(row.Cells["CREAR"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
-                    permiso.Permitido = false;
-                    cDatos.GuardarPermiso(permiso);
-                }
+                bool ver = Convert.ToBoolean(row.Cells["VER"].Value);
+                bool crear = Convert.ToBoolean(row.Cells["CREAR"].Value);
+                bool editar = Convert.ToBoolean(row.Cells["EDITAR"].Value);
+                bool eliminar = Convert.ToBoolean(row.Cells["ELIMINAR"].Value);
 
-                if (Convert.ToBoolean(row.Cells["EDITAR"].Value))
+                // Llamar a la función para guardar permisos 
+                cDatos.GuardarPermiso(new PermisoRol
                 {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
-                    permiso.Permitido = true;
-                    cDatos.GuardarPermiso(permiso);
-                }
-                else if (!Convert.ToBoolean(row.Cells["EDITAR"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
-                    permiso.Permitido = false;
-                    cDatos.GuardarPermiso(permiso);
-                }
+                    IdRol = permiso.IdRol,
+                    IdObjeto = permiso.IdObjeto,
+                    IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag),
+                    Permitido = ver
+                });
 
-                if (Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                cDatos.GuardarPermiso(new PermisoRol
                 {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
-                    permiso.Permitido = true;
-                    cDatos.GuardarPermiso(permiso);
-                }
-                else if (!Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                    IdRol = permiso.IdRol,
+                    IdObjeto = permiso.IdObjeto,
+                    IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag),
+                    Permitido = crear
+                });
+
+                cDatos.GuardarPermiso(new PermisoRol
                 {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
-                    permiso.Permitido = false;
-                    cDatos.GuardarPermiso(permiso);
-                }
+                    IdRol = permiso.IdRol,
+                    IdObjeto = permiso.IdObjeto,
+                    IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag),
+                    Permitido = editar
+                });
+
+                cDatos.GuardarPermiso(new PermisoRol
+                {
+                    IdRol = permiso.IdRol,
+                    IdObjeto = permiso.IdObjeto,
+                    IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag),
+                    Permitido = eliminar
+                });
             }
         }
 

@@ -58,7 +58,6 @@
             lblEntrada = new Label();
             lblCliente = new Label();
             lblHabitacion = new Label();
-            btnReservacion = new Button();
             label5 = new Label();
             label3 = new Label();
             label4 = new Label();
@@ -205,6 +204,7 @@
             listView.GridLines = true;
             listView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             listView.Location = new Point(30, 32);
+            listView.MultiSelect = false;
             listView.Name = "listView";
             listView.Size = new Size(702, 153);
             listView.TabIndex = 0;
@@ -277,9 +277,9 @@
             btnAgregar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnAgregar.ForeColor = SystemColors.ActiveCaptionText;
             btnAgregar.Image = (Image)resources.GetObject("btnAgregar.Image");
-            btnAgregar.Location = new Point(925, 72);
+            btnAgregar.Location = new Point(932, 72);
             btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(54, 32);
+            btnAgregar.Size = new Size(44, 32);
             btnAgregar.TabIndex = 85;
             btnAgregar.TextAlign = ContentAlignment.MiddleRight;
             btnAgregar.UseVisualStyleBackColor = false;
@@ -364,7 +364,6 @@
             panel2.Controls.Add(lblEntrada);
             panel2.Controls.Add(lblCliente);
             panel2.Controls.Add(lblHabitacion);
-            panel2.Controls.Add(btnReservacion);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(label4);
@@ -422,28 +421,6 @@
             lblHabitacion.Size = new Size(79, 20);
             lblHabitacion.TabIndex = 90;
             lblHabitacion.Text = "habitacion";
-            // 
-            // btnReservacion
-            // 
-            btnReservacion.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnReservacion.BackColor = Color.CadetBlue;
-            btnReservacion.BackgroundImageLayout = ImageLayout.Stretch;
-            btnReservacion.FlatAppearance.BorderSize = 0;
-            btnReservacion.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
-            btnReservacion.FlatStyle = FlatStyle.Flat;
-            btnReservacion.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            btnReservacion.ForeColor = Color.Black;
-            btnReservacion.Image = (Image)resources.GetObject("btnReservacion.Image");
-            btnReservacion.ImageAlign = ContentAlignment.MiddleLeft;
-            btnReservacion.Location = new Point(909, 39);
-            btnReservacion.Name = "btnReservacion";
-            btnReservacion.Size = new Size(92, 32);
-            btnReservacion.TabIndex = 89;
-            btnReservacion.Text = "Buscar";
-            btnReservacion.TextAlign = ContentAlignment.MiddleRight;
-            btnReservacion.UseVisualStyleBackColor = false;
-            btnReservacion.Visible = false;
-            btnReservacion.Click += btnReservacion_Click;
             // 
             // label5
             // 
@@ -606,7 +583,6 @@
         private ColumnHeader columnHeader3;
         public ListView listView;
         public Button btnEliminar;
-        public Button btnReservacion;
         private ErrorProvider errorT;
         private ColumnHeader columnHeader5;
         private TextBox txt_cantidad;

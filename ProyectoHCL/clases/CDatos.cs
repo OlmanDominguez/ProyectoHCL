@@ -73,125 +73,149 @@ namespace ProyectoHCL.clases
         public static DateTime entrada;
         public static DateTime salida;
         public static string numHabDR;
+        public static decimal descuento = 0;
 
         public static int idUsu; //Almacenar id Usuario
         public static int idRolUs; //ALmacenar id Rol
         public static int numeroHab;
 
 
-        public DataTable listarObjetos() //función para listar los objetos almacenados en la tabla TBL_OBJETO
+        public DataTable listarObjetos()
         {
-            MySqlConnection conn;
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
             MySqlCommand cmd;
-            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-            conn.Open();
-
             DataTable dt = new DataTable();
 
             try
             {
-                string sql = "SELECT ID_OBJETO AS ID, OBJETO AS PANTALLA FROM TBL_OBJETO;";               
-                cmd = new MySqlCommand(sql, conn);
+                string sql = "SELECT ID_OBJETO AS ID, OBJETO AS PANTALLA FROM TBL_OBJETO;";
+                cmd = new MySqlCommand(sql, conectar);
 
                 MySqlDataReader reader = cmd.ExecuteReader();
                 dt.Load(reader);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MsgB m = new MsgB("error", "Error: " + ex.Message);
+                DialogResult dR = m.ShowDialog();
+            }
+            finally
+            {
+                if (conectar.State == ConnectionState.Open)
+                {
+                    conectar.Close();
+                }
             }
 
             return dt;
         }
 
-        public void GuardarPermiso(PermisoRol permisoR) //función que guarda los permisos recibiendo como parametro un objeto permiso
+        public void GuardarPermiso(PermisoRol permisoR)
         {
-            try
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+            using (conectar)
+            using (MySqlCommand cmd = new MySqlCommand("spInsertPermiso", conectar))
             {
-                MySqlConnection conn;
-                MySqlCommand cmd;
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
+                try
+                {
+                    if (conectar.State != ConnectionState.Open)
+                        conectar.Open();
 
-                cmd = new MySqlCommand("spInsertPermiso", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                //parametros que recibe el procedimiento almacenado
-                cmd.Parameters.Add(new MySqlParameter("@idRol", permisoR.IdRol));
-                cmd.Parameters.Add(new MySqlParameter("@idPermiso", permisoR.IdPermiso));
-                cmd.Parameters.Add(new MySqlParameter("@idObjeto", permisoR.IdObjeto));
-                cmd.Parameters.Add(new MySqlParameter("@permitido", permisoR.Permitido));
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idRol", permisoR.IdRol);
+                    cmd.Parameters.AddWithValue("@idPermiso", permisoR.IdPermiso);
+                    cmd.Parameters.AddWithValue("@idObjeto", permisoR.IdObjeto);
+                    cmd.Parameters.AddWithValue("@permitido", permisoR.Permitido);
 
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MsgB m = new MsgB("error", "Error: " + ex.Message);
+                    DialogResult dR = m.ShowDialog();
+                }
             }
         }
 
-        public List<PermisoRol> SelectObjeto(int idR) //lista que devuelve los objetos con sus respectivos permisos al recibir como parametro el id de Rol
+        public List<PermisoRol> SelectObjeto(int idR)
         {
-            MySqlConnection conn;
-            MySqlCommand cmd;
-            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            List<PermisoRol> objetos = new List<PermisoRol>();
 
-            DataTable dt = new DataTable();
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
 
-            try
+            using (conectar)
             {
-                cmd = new MySqlCommand("spSelectObjeto", conn);
-                conn.Open();
-                MySqlDataAdapter da = new MySqlDataAdapter();
-                cmd.CommandType = CommandType.StoredProcedure;
-                //parametro que recibe el procedimiento almacenado
-                cmd.Parameters.Add(new MySqlParameter("@idRol", idR));
-                da.SelectCommand = cmd;
-                da.Fill(dt);
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("spSelectObjeto", conectar))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@idRol", idR);
 
-                List<PermisoRol> Objeto =
-                    (from row in dt.AsEnumerable()
-                     select new PermisoRol()
-                     {
-                         //llenar lista con el id del permiso, el id del rol, el objeto y valor permitido(true or false)
-                         IdPermiso = int.Parse(row["ID_PERMISO"].ToString()),
-                         IdRol = row["ROL"].ToString(),
-                         ObjetoN = row["OBJETO"].ToString(),
-                         Permitido = Convert.ToBoolean(row["PERMITIDO"])
+                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
 
-                     }).ToList();
+                            objetos = (from row in dt.AsEnumerable()
+                                       select new PermisoRol()
+                                       {
+                                           IdPermiso = Convert.IsDBNull(row["ID_PERMISO"]) ? 0 : Convert.ToInt32(row["ID_PERMISO"]),
+                                           IdRol = row["ROL"].ToString(),
+                                           ObjetoN = row["OBJETO"].ToString(),
+                                           Permitido = Convert.ToBoolean(row["PERMITIDO"])
+                                       }).ToList();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MsgB m = new MsgB("error", "Error: " + ex.Message);
+                    DialogResult dR = m.ShowDialog();
+                }
+                finally
+                {
+                    if (conectar.State == ConnectionState.Open)
+                    {
+                        conectar.Close();
+                    }
+                }
 
-                return Objeto; //retornar lista
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null; //si hubo un error no retornar nada
+                return objetos;
             }
         }
 
-        public void ActualizarPermiso(PermisoRol permisoR) //función que actualiza los permisos recibiendo como parametro un objeto permiso
+        public void ActualizarPermiso(PermisoRol permisoR)
         {
-            try
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+            using (conectar)
             {
-                MySqlConnection conn;
-                MySqlCommand cmd;
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("EditarPermisos", conectar))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@idRol", permisoR.IdRol);
+                        cmd.Parameters.AddWithValue("@idPermiso", permisoR.IdPermiso);
+                        cmd.Parameters.AddWithValue("@idObjeto", permisoR.IdObjeto);
+                        cmd.Parameters.AddWithValue("@permitido", permisoR.Permitido);
 
-                cmd = new MySqlCommand("EditarPermisos", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                //parametros que recibe el procedimiento almacenado
-                cmd.Parameters.Add(new MySqlParameter("@idRol", permisoR.IdRol));
-                cmd.Parameters.Add(new MySqlParameter("@idPermiso", permisoR.IdPermiso));
-                cmd.Parameters.Add(new MySqlParameter("@idObjeto", permisoR.IdObjeto));
-                cmd.Parameters.Add(new MySqlParameter("@permitido", permisoR.Permitido));
-
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MsgB m = new MsgB("error", "Error: " + ex.Message);
+                    DialogResult dR = m.ShowDialog();
+                }
+                finally
+                {
+                    if (conectar.State == ConnectionState.Open)
+                    {
+                        conectar.Close();
+                    }
+                }
             }
         }
-     }
+    }
 }
