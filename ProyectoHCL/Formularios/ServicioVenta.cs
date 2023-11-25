@@ -99,6 +99,8 @@ namespace ProyectoHCL.Formularios
             lblSalida.Text = "";
         }
 
+        AdmonServicios aServ = new AdmonServicios();
+
         public void limpiarError() //limpiar los errorProvider
         {
             errorT.SetError(cmbServicio, "");
@@ -262,106 +264,8 @@ namespace ProyectoHCL.Formularios
 
                 listView.Items.Remove(item);
 
-                //if (Convert.ToInt32(item.SubItems[2].Text) == 1)
-                //{
-                try
-                {
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("DELETE FROM TBL_DETALLESERVICIO WHERE ID_SOLICITUDRESERVA = " +
-                    info.reserva + " and ID_SERVICIO = " + idServicio(item.SubItems[0].Text) + " and CANTIDAD = 1;");
-
-                    comando.ExecuteNonQuery();
-                    comando.Connection.Close();
-                    //listView.Items.Remove(item);
-                }
-                catch (Exception a)
-                {
-                    MessageBox.Show(a.Message + a.StackTrace);
-                }
-                //}
-                //else
-                //{
-                //int idds = 0;
-
-                //try
-                //{
-                //    using (BaseDatosHCL.ObtenerConexion())
-                //    {
-                //        MySqlCommand comando = new MySqlCommand();
-                //        comando.Connection = BaseDatosHCL.ObtenerConexion();
-                //        comando.CommandText = ("SELECT ID_DETALLESERVICIO, CANTIDAD FROM TBL_DETALLESERVICIO WHERE ID_SOLICITUDRESERVA = " +
-                //            info.reserva + " and ID_SERVICIO = " + idServicio(item.SubItems[0].Text) + "  ORDER BY CANTIDAD ASC;");
-
-                //        MySqlDataReader leer3 = comando.ExecuteReader();
-                //        if (leer3.Read())
-                //        {
-                //            idds = (int)leer3["ID_DETALLESERVICIO"];
-                //        }
-
-                //        comando.Connection.Close();
-
-                //        listView.Items.Remove(item);
-                //    }
-                //}
-                //catch (Exception a)
-                //{
-                //    MessageBox.Show(a.Message + a.StackTrace);
-                //}
-
-                //    try
-                //    {
-                //        using (BaseDatosHCL.ObtenerConexion())
-                //        {
-                //            MySqlCommand comando = new MySqlCommand();
-                //            comando.Connection = BaseDatosHCL.ObtenerConexion();
-                //            comando.CommandText = ("UPDATE TBL_DETALLESERVICIO SET CANTIDAD = " + (Convert.ToInt32(item.SubItems[2].Text) - 1) + " WHERE ID_SOLICITUDRESERVA = " +
-                //                info.reserva + " and ID_SERVICIO = " + idServicio(item.SubItems[0].Text) + " and ID_DETALLESERVICIO = " + idds + ";");
-
-                //            comando.ExecuteNonQuery();
-                //            comando.Connection.Close();
-
-                //            listView.Items.Remove(item);
-                //        }
-
-                //    }
-                //    catch (Exception a)
-                //    {
-                //        MessageBox.Show(a.Message + a.StackTrace);
-                //    }
-
-                //    try
-                //    {
-                //        using (BaseDatosHCL.ObtenerConexion())
-                //        {
-                //            MySqlCommand comando = new MySqlCommand();
-
-                //            comando.Connection = BaseDatosHCL.ObtenerConexion();
-                //            comando.CommandText = "SELECT ds.CANTIDAD, s.PRECIO, s.DESCRIPCION  FROM TBL_DETALLESERVICIO ds " +
-                //                "INNER JOIN TBL_SERVICIO s ON ds.ID_SERVICIO = s.ID_SERVICIO " +
-                //                "WHERE ds.ID_SERVICIO = " + idServicio(item.SubItems[0].Text) + " AND ds.ID_SOLICITUDRESERVA = " + info.reserva + " and ID_DETALLESERVICIO = " + idds + ";";
-                //            MySqlDataReader leer2 = comando.ExecuteReader();
-
-                //            if (leer2.Read())
-                //            {
-                //                ListViewItem lista = new ListViewItem(leer2["DESCRIPCION"].ToString());
-                //                lista.SubItems.Add(leer2["PRECIO"].ToString());
-                //                lista.SubItems.Add(leer2["CANTIDAD"].ToString());
-                //                decimal subt = Convert.ToDecimal(leer2["CANTIDAD"].ToString()) * Convert.ToDecimal(leer2["PRECIO"].ToString());
-                //                lista.SubItems.Add(subt.ToString());
-                //                listView.Items.Add(lista);
-                //            }
-                //            comando.Connection.Close();
-                //        }
-
-                //    }
-                //    catch (Exception a)
-                //    {
-                //        MessageBox.Show(a.Message + a.StackTrace);
-                //    }
-                //}
+                bool elimino = aServ.EliminarServicioHab(idServicio(item.SubItems[0].Text), info.reserva);
+               
             }
             else
             {
@@ -369,35 +273,6 @@ namespace ProyectoHCL.Formularios
                 DialogResult DR = Mbox.ShowDialog();
             }
         }
-
-        //private void InsertarServicio(int idServ, string idSR, string idDesc, string cant, string monto)
-        //{
-        //    try
-        //    {
-        //        MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
-
-        //        using (conectar)
-        //        {
-        //            string query = "INSERT INTO TBL_DETALLESERVICIO (ID_SERVICIO, ID_SOLICITUDRESERVA, ID_DESCUENTO, CANTIDAD, " +
-        //                "MONTODESCUENTO) VALUES(@idServicio, @idSR, @idDesc, @cant, @montDesc);";
-        //            MySqlCommand cmd = new MySqlCommand(query, conectar);
-
-        //            // Asignar los valores de los parámetros
-        //            cmd.Parameters.AddWithValue("@idServicio", idServ);
-        //            cmd.Parameters.AddWithValue("@idSR", idSR);
-        //            cmd.Parameters.AddWithValue("@idDesc", idDesc);
-        //            cmd.Parameters.AddWithValue("@cant", cant);
-        //            cmd.Parameters.AddWithValue("@montDesc", monto);
-
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MsgB m = new MsgB("error", "Error: " + ex.Message);
-        //        DialogResult dg = m.ShowDialog();
-        //    }
-        //}
 
         private void btnVenta_Click(object sender, EventArgs e) //validar si el listview está vacío
         {
@@ -421,32 +296,6 @@ namespace ProyectoHCL.Formularios
             }
             else
             {
-                //MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
-
-                //try
-                //{
-                //    foreach (ListViewItem item in listView.Items)
-                //    {
-                //        string descripcionServicio = item.SubItems[0].Text; 
-
-                //        // Buscar el idServicio en base a la descripción
-                //        int idServ = idServicio(descripcionServicio);
-
-                //        // Insertar el registro en la tabla deseada
-                //        //InsertarServicio(idServ, info.reserva, "1", item.SubItems[2].Text, "0"); 
-                //    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    MsgB mb = new MsgB("error", "Error: " + ex.Message);
-                //    DialogResult d = mb.ShowDialog();
-                //}
-                //finally
-                //{
-                //    if (conectar.State == ConnectionState.Open)
-                //        conectar.Close();
-                //}
-
                 MsgB mbox = new MsgB("informacion", "Servicios registrados exitosamente");
                 DialogResult dR = mbox.ShowDialog();
                 listView.Items.Clear(); //limpiar listview al guardar
@@ -509,46 +358,10 @@ namespace ProyectoHCL.Formularios
             txtTotal.Text = resultado.ToString();
         }
 
-        private void btnReservacion_Click(object sender, EventArgs e)
-        {
-            //using (ServicioHab servHab = new ServicioHab()) //llenar los textbox al elegir la reservación
-            //{
-            //    servHab.ShowDialog(this);
-            //}
-            //txtHab.Text = clases.CDatos.numeroHab.ToString();
-            //txtCliente.Text = clases.CDatos.cliente.ToString();
-            //txtEntrada.Text = clases.CDatos.entrada.ToString();
-            //txtSalida.Text = clases.CDatos.salida.ToString();
-        }
-
         private void btnCerrar_Click(object sender, EventArgs e) //cerrar formulario
         {
             this.Close();
             limpiarError();
-        }
-
-        private void txtHab_TextChanged(object sender, EventArgs e)
-        {
-            //if (lblHabitacion.Text == "") //deshabilitar controles si el textbox está vacío
-            //{
-            //    btnAgregar.Enabled = false;
-            //    btnAgregar.BackColor = Color.DarkGray;
-            //    btnEliminar.Enabled = false;
-            //    btnEliminar.BackColor = Color.DarkGray;
-            //    btnVenta.Enabled = false;
-            //    btnVenta.BackColor = Color.DarkGray;
-            //    cmbServicio.Enabled = false;
-            //}
-            //else //habilitar controles si el textbox tiene datos
-            //{
-            //    btnAgregar.Enabled = true;
-            //    btnAgregar.BackColor = Color.CadetBlue;
-            //    btnEliminar.Enabled = true;
-            //    btnEliminar.BackColor = Color.Red;
-            //    btnVenta.Enabled = true;
-            //    btnVenta.BackColor = Color.CadetBlue;
-            //    cmbServicio.Enabled = true;
-            //}
         }
 
         private void cmbServicio_Leave(object sender, EventArgs e) //validar campo vacío

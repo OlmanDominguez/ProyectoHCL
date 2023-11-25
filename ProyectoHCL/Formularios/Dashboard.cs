@@ -102,7 +102,7 @@ namespace ProyectoHCL
                     case "DESCUENTOS":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_descuentos.Visible = false;
+                            lbtn_descuentos.Visible = false;
                         }
                         break;
                     case "USUARIOS":
@@ -432,38 +432,6 @@ namespace ProyectoHCL
             showSubMenu(paneladminSubMenu);
         }
 
-        private void Ibtn_habitaciones_Click(object sender, EventArgs e)
-        {
-            //codigo para el formulario 
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlHabitaciones());
-            hideSubMenu2();
-        }
-
-        private void Ibtn_servicios_Click(object sender, EventArgs e)
-        {
-            //codigo para el formulario 
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlServicios());
-            hideSubMenu2();
-        }
-
-        private void Ibtn_descuentos_Click(object sender, EventArgs e)
-        {
-            //codigo para el formulario
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlDescuentos());
-            hideSubMenu2();
-        }
-
-        private void Ibtn_usuarios_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario 
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CtrlClientes());
-            hideSubMenu2();
-        }
-
         private void Ibtn_mantenimiento_Click_2(object sender, EventArgs e)
         {
             showSubMenu(panelmanteSubMenu);
@@ -573,12 +541,6 @@ namespace ProyectoHCL
             openChildFormInPanel(new Reservaciones());
         }
 
-        private void Ibtn_perfil_Click(object sender, EventArgs e)
-        {
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new PerfilUsuario());
-        }
-
         private void iconButton4_Click(object sender, EventArgs e)
         {
             panelChildForm.Visible = true;
@@ -592,22 +554,6 @@ namespace ProyectoHCL
             openChildFormInPanel(new Restore());
             hideSubMenu2();
         }
-
-        private void iconButton6_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CalendarioReservas());
-            hideSubMenu2();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CalendarioReservas());
-        }
-
-
 
         private void iconButton7_Click(object sender, EventArgs e)
         {
@@ -664,15 +610,53 @@ namespace ProyectoHCL
             Application.Exit();
         }
 
-       // private void iconButton7_Click_1(object sender, EventArgs e)
-       // {
 
-       // }
+        private void Ibtn_calendario_Click(object sender, EventArgs e)
+        {
+            if (activeForm != null)
+                activeForm.Close();
+        }
+
+        private void Ibtn_usuarios_Click_1(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlClientes());
+            hideSubMenu2();
+        }
+
+        private void Ibtn_habitaciones_Click_1(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlHabitaciones());
+            hideSubMenu2();
+        }
+
+        private void iconButton1_Click_2(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlTipoHabitacion());
+            hideSubMenu2();
+        }
+
+        private void Ibtn_servicios_Click_1(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlServicios());
+            hideSubMenu2();
+        }
+
+        private void lbtn_descuentos_Click(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new CtrlDescuentos());
+            hideSubMenu2();
+        }
 
         private void iconPerfil_Click(object sender, EventArgs e)
         {
             panelChildForm.Visible = true;
             openChildFormInPanel(new PerfilUsuario());
+            hideSubMenu2();
         }
     }
 }

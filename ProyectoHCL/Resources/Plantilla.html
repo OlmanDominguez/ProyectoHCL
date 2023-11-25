@@ -22,16 +22,23 @@
     <table style="width:100%">
         <tr>
             <td style="width:20%"></td>
-            <td style="width:60%" align="center" valign="top">
+            <td style="width:60%" align="left" valign="top">
                 <table>
-                    <tr><td align="center"><h4 style="margin:0px">HOTEL CASA LOMAS</h4></td></tr>
-                    <tr><td align="center">Direccion: Col. Lomas del Guijarro, sendero Llamarada del Bosque, Casa#530, Tegucigalpa, Honduras</td></tr>
-                    <tr><td align="center">Telefono: +504 9884-6939 / +504 9435-0016</td></tr>
+                    <tr><td align="left"><h4 style="margin:0px">HOTEL CASA LOMAS</h4></td></tr>
+                    <tr><td align="left">RTN:</td></tr>
+                    <tr><td align="left">@RTN</td></tr>
+                    <tr><td align="left">Direccion:</td></tr>
+                    <tr><td align="left">@DIRECCION</td></tr>
+                    <tr><td align="left">Telefono:</td></tr>
+                    <tr><td align="left">@TELEFONOS</td></tr>
                 </table>
             </td>
-            <td style="width:20%">
+            <td style="width:20%" align="right">
                 <table style="width:100%">
-                    <tr><td align="center">@FECHA1</td></tr>
+                    <tr><td style="width:20%" align="right">Factura:</td></tr>
+                    <tr><td align="right">@FACTURA</td></tr>
+                    <tr><td style="width:20%" align="right">Fecha:</td></tr>
+                    <tr><td align="right">@FECHA1</td></tr>
                 </table>
             </td>
         </tr>
@@ -42,22 +49,17 @@
             <td colspan="3">
                 <table style="width:100%">
                     <tr>
-                        <td colspan="1" style="width:0%">Cliente:</td>
-                        <td colspan="3" style="width:80%;border-bottom:1px solid black">@CLIENTE</td>
-                    </tr>
-                </table>
-                <table style="width:100%">
-                    <tr>
                         <td style="width:20%">Identificación:</td>
                         <td style="width:30%;border-bottom:1px solid black">@ID</td>
-                        <td style="width:10%">Factura:</td>
-                        <td style="width:40%;border-bottom:1px solid black">@FACTURA</td>
-                    </tr>
-                </table>
-                 <table style="width:100%">
-                    <tr>
                         <td style="width:20%">Ingreso:</td>
                         <td style="width:13%;border-bottom:1px solid black">@INGRESO</td>
+                    </tr>
+                    <tr>
+                        <td style="width:20%">Cliente:</td>
+                        <td colspan="3" style="width:80%;border-bottom:1px solid black">@CLIENTE</td>
+                    </tr>
+                    <tr>
+                        <td style="width:20%"></td>
                         <td style="width:20%">Salida:</td>
                         <td style="width:13%;border-bottom:1px solid black">@SALIDA</td>
                         <td style="width:20%">Noches:</td>
@@ -76,7 +78,7 @@
                     <thead>
                         <tr style="background-color:#A4C2DE">
                             <th>Cant.</th>
-                            <th>Descripcion</th>
+                            <th>Descripción</th>
                             <th style="width:20%;">P. Unitario</th>
                             <th>Importe</th>
                         </tr>
@@ -87,46 +89,46 @@
                             <td style="border: 0px !important"></td>
                             <td style="border: 0px !important"></td>
                             <td align="right">SubTotal:</td>
-                            <td>@SUBTOTAL</td>
+                            <td align="right">@SUBTOTAL</td>
                         </tr>
                         <tr>
                             <td style="border: 0px !important"></td>
                             <td style="border: 0px !important"></td>
                             <td align="right">Descuento:</td>
-                            <td>@DESCUENTO</td>
+                            <td align="right">@DESCUENTO</td>
                         </tr>
                         <tr>
                             <td style="border: 0px !important"></td>
                             <td style="border: 0px !important"></td>
                             <td align="right" style="background-color:#A4C2DE">SubTotal menos Descuento:</td>
-                            <td style="background-color:#A4C2DE">@STMD</td>
+                            <td align="right" style="background-color:#A4C2DE">@STMD</td>
                         </tr>
                         <tr>
                             <td style="border: 0px !important"></td>
                             <td style="border: 0px !important"></td>
                             <td align="right">Impuesto S/Venta:</td>
-                            <td>@ISV</td>
+                            <td align="right">@ISV</td>
                         </tr>
                         <tr>
                             <td style="border: 0px !important"></td>
                             <td style="border: 0px !important"></td>
                             <td align="right">Impuesto Turismo:</td>
-                            <td>@IST</td>
+                            <td align="right">@IST</td>
                         </tr>
                         <tr>
                             <td style="border: 0px !important"></td>
                             <td style="border: 0px !important"></td>
                             <td align="right" style="background-color:#A4C2DE">Total Impuesto:</td>
-                            <td style="background-color:#A4C2DE">@TOIM</td>
+                            <td align="right" style="background-color:#A4C2DE">@TOIM</td>
                         </tr>
                         <tr>
                             <td style="border: 0px !important"></td>
                             <td style="border: 0px !important"></td>
                             <td align="right" style="background-color:#849CB3">Total:</td>
-                            <td style="background-color:#849CB3">@TOTAL</td>
+                            <td align="right" style="background-color:#849CB3">@TOTAL</td>
                         </tr>
                     </tbody>
-                </table> 
+                </table>
             </td>
         </tr>
         <tr><td colspan="3" height="40"></td></tr>    
@@ -136,9 +138,9 @@
     
     <table>
         <tr>
-            <td style="width:100%;border-top:1px solid black">Cuenta Cheques BAC 730311161, INVERSIONES MAXIM / Maximo Junot Jerez Ulloa</td>
+            <td align="center" style="width:100%;border-top:1px solid black">@CUENTAH</td>
         </tr>
-        <tr><td style="width:100%" align="center">maximinversiones@gmail.com  RTN: 08011980151738</td></tr>
+        <tr align="center"><td style="width:100%">@CORREOF</td></tr>
     </table>
 </body>
 </html>

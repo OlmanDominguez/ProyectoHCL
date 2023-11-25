@@ -300,6 +300,7 @@
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "R_E_Objeto";
+            FormClosing += R_E_Objeto_FormClosing;
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();

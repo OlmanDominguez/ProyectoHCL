@@ -77,12 +77,13 @@ namespace ProyectoHCL.Formularios
         CDatos cDatos = new CDatos();
         int pagInicio = 1, indice = 0, numFilas = 10, pagFinal, cmbIndice = 0;
 
+
+
         public CtrlFacturacion()
         {
             InitializeComponent();
             pagFinal = numFilas;
             CargarDG();
-
         }
 
         private void Permisos()
@@ -96,13 +97,9 @@ namespace ProyectoHCL.Formularios
                     case 2:
                         if (obj.ObjetoN == "FACTURACION" && !obj.Permitido) //Validar pantalla y el permiso
                         {
-                            btnNuevo.Enabled = false; //Deshabilitar botón para crear
-                        }
-                        break;
-                    case 3:
-                        if (obj.ObjetoN == "FACTURACION" && !obj.Permitido)
-                        {
-                            dgvFacturas.Columns["EDITAR"].Visible = false; //Ocultar columna del botón para editar en datagrid
+                            btnNuevo.Visible = false; //Deshabilitar botón para crear
+                            button9.Visible = false;
+                            button7.Visible = false;
                         }
                         break;
                 }
@@ -148,9 +145,9 @@ namespace ProyectoHCL.Formularios
             btnVer.Name = "VER";//Nombre del boton 
             dgvFacturas.Columns.Add(btnVer);//Se especifica el nombre de dataGrid para agregar boton
 
-            DataGridViewImageColumn btnEditar = new DataGridViewImageColumn();
-            btnEditar.Name = "EDITAR";
-            dgvFacturas.Columns.Add(btnEditar);
+            //DataGridViewImageColumn btnEditar = new DataGridViewImageColumn();
+            //btnEditar.Name = "EDITAR";
+            //dgvFacturas.Columns.Add(btnEditar);
 
             Permisos();
         }
@@ -208,8 +205,8 @@ namespace ProyectoHCL.Formularios
             public static string salida;
             public static string reserva;
             public static int est = 0;
+            public static string estado;
         }
-
 
         private void dgvFacturas_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
@@ -226,16 +223,18 @@ namespace ProyectoHCL.Formularios
                     info.salida = salida1;
                     info.reserva = dgvFacturas.CurrentRow.Cells["RESERVA"].Value.ToString();
                     info.est = 1;
+                    info.estado = dgvFacturas.CurrentRow.Cells["ESTADO"].Value.ToString();
                     DateTime fecha2 = Convert.ToDateTime(dgvFacturas.CurrentRow.Cells["SALIDA"].Value.ToString());
                     string fecha1 = fecha2.ToString("dd/MM/yyyy");
                     info.fecha = fecha1;
-                    Form form = new Formularios.ShowFactura();
+                    Form form = new Formularios.Factura();
                     form.ShowDialog();
-
+                    CargarDG();
                 }
                 catch (Exception)    /* detectar errores en ejecucion */
                 {
-                    MessageBox.Show("Se produjo un error");
+                    MsgB Mbox = new MsgB("error", "Se produjo un error");
+                    DialogResult DR = Mbox.ShowDialog();
                 }
 
             }
@@ -445,15 +444,6 @@ namespace ProyectoHCL.Formularios
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvFacturas.Columns[e.ColumnIndex].Name == "VER")
             {
                 Image imagen = Properties.Resources.ojo;
-
-                dgvFacturas.Rows[e.RowIndex].Height = imagen.Height + 8;
-                dgvFacturas.Columns[e.ColumnIndex].Width = imagen.Width + 58;
-
-                e.Value = imagen;
-            }
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvFacturas.Columns[e.ColumnIndex].Name == "EDITAR")
-            {
-                Image imagen = Properties.Resources.editar;
 
                 dgvFacturas.Rows[e.RowIndex].Height = imagen.Height + 8;
                 dgvFacturas.Columns[e.ColumnIndex].Width = imagen.Width + 58;

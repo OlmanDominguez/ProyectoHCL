@@ -160,15 +160,15 @@ namespace ProyectoHCL.Formularios
         private void btnCerrar_Click(object sender, EventArgs e) //botón para cerrar
         {
             this.Close();
-            limpiarCampos();
-            limpiarError();
+            //limpiarCampos();
+            //limpiarError();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e) //botón para cancelar
         {
             this.Close();
-            limpiarCampos();
-            limpiarError();
+            //limpiarCampos();
+            //limpiarError();
         }
 
         //coordenadas para arrastrar formulario
@@ -381,6 +381,12 @@ namespace ProyectoHCL.Formularios
                     }
                 }
             }
+        }
+
+        private void R_E_Habitacion_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            limpiarCampos();
+            limpiarError();
         }
     }
 }

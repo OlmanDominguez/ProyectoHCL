@@ -152,7 +152,6 @@
             btnNuevo.TabIndex = 36;
             btnNuevo.TextAlign = ContentAlignment.MiddleRight;
             btnNuevo.UseVisualStyleBackColor = false;
-           // btnNuevo.EnabledChanged += btnNuevo_EnabledChanged;
             btnNuevo.Click += btnNuevo_Click_1;
             // 
             // panel4
@@ -341,8 +340,7 @@
             dgvObjetos.Size = new Size(1027, 341);
             dgvObjetos.TabIndex = 1;
             dgvObjetos.CellClick += dgvObjetos_CellClick_1;
-          //  dgvObjetos.CellFormatting += dgvObjetos_CellFormatting;
-          //  dgvObjetos.CellPainting += dgvObjetos_CellPainting_1;
+            dgvObjetos.CellFormatting += dgvObjetos_CellFormatting;
             // 
             // panel5
             // 

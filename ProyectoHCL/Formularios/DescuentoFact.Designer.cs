@@ -145,6 +145,7 @@
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "DescuentoFact";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "DescuentoFact";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

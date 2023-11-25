@@ -84,7 +84,7 @@
             panelPrincipal.Dock = DockStyle.Fill;
             panelPrincipal.Location = new Point(0, 0);
             panelPrincipal.Name = "panelPrincipal";
-            panelPrincipal.Size = new Size(1084, 561);
+            panelPrincipal.Size = new Size(1058, 541);
             panelPrincipal.TabIndex = 0;
             // 
             // panel3
@@ -96,7 +96,7 @@
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 71);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1084, 490);
+            panel3.Size = new Size(1058, 470);
             panel3.TabIndex = 4;
             // 
             // panel5
@@ -109,9 +109,10 @@
             panel5.Controls.Add(txtTotal);
             panel5.Controls.Add(label9);
             panel5.Controls.Add(listView);
-            panel5.Location = new Point(0, 276);
+            panel5.Dock = DockStyle.Top;
+            panel5.Location = new Point(0, 256);
             panel5.Name = "panel5";
-            panel5.Size = new Size(1084, 216);
+            panel5.Size = new Size(1058, 216);
             panel5.TabIndex = 1;
             // 
             // btnCancelar
@@ -251,9 +252,10 @@
             panel4.Controls.Add(cmbServicio);
             panel4.Controls.Add(label7);
             panel4.Controls.Add(label6);
-            panel4.Location = new Point(0, 147);
+            panel4.Dock = DockStyle.Top;
+            panel4.Location = new Point(0, 126);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1084, 130);
+            panel4.Size = new Size(1058, 130);
             panel4.TabIndex = 1;
             // 
             // txt_cantidad
@@ -369,9 +371,10 @@
             panel2.Controls.Add(label4);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
+            panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1084, 150);
+            panel2.Size = new Size(1058, 126);
             panel2.TabIndex = 0;
             // 
             // lblSalida
@@ -379,7 +382,7 @@
             lblSalida.AutoSize = true;
             lblSalida.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             lblSalida.ForeColor = Color.Black;
-            lblSalida.Location = new Point(553, 99);
+            lblSalida.Location = new Point(553, 82);
             lblSalida.Margin = new Padding(2, 0, 2, 0);
             lblSalida.Name = "lblSalida";
             lblSalida.Size = new Size(48, 20);
@@ -403,7 +406,7 @@
             lblCliente.AutoSize = true;
             lblCliente.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             lblCliente.ForeColor = Color.Black;
-            lblCliente.Location = new Point(99, 99);
+            lblCliente.Location = new Point(99, 82);
             lblCliente.Margin = new Padding(2, 0, 2, 0);
             lblCliente.Name = "lblCliente";
             lblCliente.Size = new Size(53, 20);
@@ -439,7 +442,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(443, 100);
+            label3.Location = new Point(443, 83);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
             label3.Size = new Size(106, 18);
@@ -463,7 +466,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(30, 100);
+            label2.Location = new Point(30, 83);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Size = new Size(65, 18);
@@ -490,7 +493,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1084, 71);
+            panel1.Size = new Size(1058, 71);
             panel1.TabIndex = 2;
             panel1.MouseMove += panel1_MouseMove;
             // 
@@ -503,7 +506,7 @@
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnCerrar.FlatStyle = FlatStyle.Flat;
-            btnCerrar.Location = new Point(1058, 12);
+            btnCerrar.Location = new Point(1032, 12);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(14, 17);
             btnCerrar.TabIndex = 44;
@@ -531,7 +534,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
-            ClientSize = new Size(1084, 561);
+            ClientSize = new Size(1058, 541);
             Controls.Add(panelPrincipal);
             FormBorderStyle = FormBorderStyle.None;
             MinimumSize = new Size(678, 446);

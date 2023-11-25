@@ -192,7 +192,7 @@ namespace ProyectoHCL.Formularios
                     string salida1 = salida.ToString("dd/MM/yyyy");
                     info.salida = salida1;
                     //this.Hide();
-                    Form formulario = new Formularios.ShowFactura();
+                    Form formulario = new Formularios.Factura();
                     info.est = 2;
                     formulario.ShowDialog();
                     CargarDGFact();

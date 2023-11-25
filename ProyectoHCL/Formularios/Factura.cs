@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.ExtendedProperties;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static ProyectoHCL.Formularios.CtrlFacturacion;
 using static ProyectoHCL.RecuContra;
+using Image = System.Drawing.Image;
 
 namespace ProyectoHCL.Formularios
 {
@@ -23,6 +25,27 @@ namespace ProyectoHCL.Formularios
         public Factura()
         {
             InitializeComponent();
+        }
+
+        CDatos cDatos = new CDatos();
+
+        private void Permisos()
+        {
+            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
+
+            foreach (var obj in LsObj)
+            {
+                switch (obj.IdPermiso)   /* realiza las respectivas validaciones de permisos */
+                {
+                    case 2:
+                        if (obj.ObjetoN == "FACTURACION" && !obj.Permitido) //Validar pantalla y el permiso
+                        {
+                            btnFacturar.Visible = false; //Deshabilitar botón para crear
+                            btnCancelar.Visible = false;
+                        }
+                        break;
+                }
+            }
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -35,6 +58,8 @@ namespace ProyectoHCL.Formularios
         Decimal st1, st2, st3, sth = 0;
         Decimal St1, St2, St3, StS = 0;
         Decimal isv, it, subt, total, desc, subtD;
+
+        ServicioVenta sv = new ServicioVenta();
 
         int posY = 0;
         int posX = 0;
@@ -53,9 +78,50 @@ namespace ProyectoHCL.Formularios
             }
         }
 
+        private void limpiarControles()
+        {
+            lblSubt.Text = "";
+            lblDesc.Text = "";
+            lblSubtD.Text = "";
+            lblSV.Text = "";
+            lblTur.Text = "";
+            lblTotal.Text = "";
+            this.dgvDetalleFact.Rows.Clear();
+        }
+
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (btnCancelar.Text == "Anular")
+            {
+                try
+                {
+                    MySqlCommand comando = new MySqlCommand();
+
+                    using (BaseDatosHCL.ObtenerConexion())
+                    {
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("UPDATE TBL_FACTURA SET ESTADO = 'ANULADA' " +
+                            "WHERE NFACTURA = " + info.factura + ";");
+
+                        comando.ExecuteNonQuery();
+                        comando.Connection.Close();
+
+                        MsgB Mbox = new MsgB("informacion", "Factura anulada");
+                        DialogResult DR = Mbox.ShowDialog();
+                        this.Close();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MsgB Mbox = new MsgB("error", "Error: " + ex.Message);
+                    DialogResult DR = Mbox.ShowDialog();
+                }
+            }
+            else
+            {
+                this.Close();
+            }
         }
 
         private void btnServicio_Click(object sender, EventArgs e)
@@ -64,9 +130,8 @@ namespace ProyectoHCL.Formularios
             Form nuevo = new ServicioVenta();
             nuevo.ShowDialog();
 
-            //this.dgvDetalleFact.Rows.Clear();
-            //this.dgvMontos.Rows.Clear();
-            //CargarDGV();
+            limpiarControles();
+            CargarDGV();
             this.Show();
         }
 
@@ -75,9 +140,8 @@ namespace ProyectoHCL.Formularios
             Form nuevo = new DescuentoFact();
             nuevo.ShowDialog();
 
-            //this.dgvDetalleFact.Rows.Clear();
-            //this.dgvMontos.Rows.Clear();
-            //CargarDGV();
+            limpiarControles();
+            CargarDGV();
         }
 
         private void Factura_FormClosing(object sender, FormClosingEventArgs e)
@@ -119,11 +183,12 @@ namespace ProyectoHCL.Formularios
             {
                 try
                 {
-                    string stri = "SELECT h.NUMEROHABITACION, th.TIPO, th.PRECIO " +
-                          "FROM TBL_DETALLERESERVA ds " +
-                          "INNER JOIN TBL_HABITACION h ON ds.ID_HABITACION = h.ID_HABITACION " +
-                          "INNER JOIN TBL_TIPOHABITACION th ON h.ID_TIPOHABITACION = th.ID_TIPOHABITACION " +
-                          "where ds.ID_SOLICITUDRESERVA = " + param + ";";
+                    string stri = "SELECT NUMEROHABITACION, " +
+                        "(SELECT TIPO FROM TBL_TIPOHABITACION WHERE ID_TIPOHABITACION = (SELECT ID_TIPOHABITACION FROM TBL_HABITACION WHERE NUMEROHABITACION = ds.NUMEROHABITACION)) AS TIPO, " +
+                        "(SELECT PRECIO FROM TBL_TIPOHABITACION WHERE ID_TIPOHABITACION = (SELECT ID_TIPOHABITACION FROM TBL_HABITACION WHERE NUMEROHABITACION = ds.NUMEROHABITACION)) AS PRECIO " +
+                        "FROM TBL_SOLICITUDRESERVA ds " +
+                        "WHERE ds.ID_SOLICITUDRESERVA = " + param + ";";
+
 
 
                     MySqlConnection conn;
@@ -293,23 +358,25 @@ namespace ProyectoHCL.Formularios
 
                         if (h > 0)
                         {
+                            //listView1.Items.Clear();
+
                             while (i < h)
                             {
-                                //dgvDetalleFact.Rows.Add("1", ("Habit. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString()),
-                                //    ht.Rows[i]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])));
+                                dgvDetalleFact.Rows.Add("1", ("Habit. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString()),
+                                    ht.Rows[i]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])));
 
                                 if (i == (h - 1))
                                 {
-                                    //query0 = query0 + "(1,'Habit. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString() +
-                                    //"'," + ht.Rows[i]["PRECIO"].ToString() + "," + Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])) +
-                                    //", " + info.reserva + ");";
+                                    query0 = query0 + "(1,'Habit. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString() +
+                                    "'," + ht.Rows[i]["PRECIO"].ToString() + "," + Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])) +
+                                    ", " + info.reserva + ");";
 
                                 }
                                 else
                                 {
-                                    //query0 = query0 + "(1,'Habit. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString() +
-                                    //"'," + ht.Rows[i]["PRECIO"].ToString() + "," + Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])) +
-                                    //", " + info.reserva + "), ";
+                                    query0 = query0 + "(1,'Habit. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString() +
+                                    "'," + ht.Rows[i]["PRECIO"].ToString() + "," + Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])) +
+                                    ", " + info.reserva + "), ";
 
                                 }
                                 sth = sth + Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"]);
@@ -325,21 +392,21 @@ namespace ProyectoHCL.Formularios
                         {
                             while (j < s)
                             {
-                                //dgvDetalleFact.Rows.Add(st.Rows[j]["CANTIDAD"].ToString(), st.Rows[j]["DESCRIPCION"].ToString(),
-                                //    st.Rows[j]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])));
+                                dgvDetalleFact.Rows.Add(st.Rows[j]["CANTIDAD"].ToString(), st.Rows[j]["DESCRIPCION"].ToString(),
+                                    st.Rows[j]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])));
 
                                 if (j == (s - 1))
                                 {
-                                    //query1 = query1 + "(" + st.Rows[j]["CANTIDAD"].ToString() + ",'" + st.Rows[j]["DESCRIPCION"].ToString() + "'," +
-                                    //    st.Rows[j]["PRECIO"].ToString() + "," + Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])) +
-                                    //    ", " + info.reserva + ");";
+                                    query1 = query1 + "(" + st.Rows[j]["CANTIDAD"].ToString() + ",'" + st.Rows[j]["DESCRIPCION"].ToString() + "'," +
+                                        st.Rows[j]["PRECIO"].ToString() + "," + Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])) +
+                                        ", " + info.reserva + ");";
 
                                 }
                                 else
                                 {
-                                    //query1 = query1 + "(" + st.Rows[j]["CANTIDAD"].ToString() + ",'" + st.Rows[j]["DESCRIPCION"].ToString() + "'," +
-                                    //     st.Rows[j]["PRECIO"].ToString() + "," + Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])) +
-                                    //     ", " + info.reserva + "), ";
+                                    query1 = query1 + "(" + st.Rows[j]["CANTIDAD"].ToString() + ",'" + st.Rows[j]["DESCRIPCION"].ToString() + "'," +
+                                         st.Rows[j]["PRECIO"].ToString() + "," + Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])) +
+                                         ", " + info.reserva + "), ";
 
                                 }
                                 StS = StS + Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"]);
@@ -356,31 +423,54 @@ namespace ProyectoHCL.Formularios
                         desc = 0;
                         subtD = 0;
 
+                        //Datos de impuestos y totales
                         if (sth != 0.00m & StS != 0.00m)
                         {
-                            isv = Decimal.Round(((sth / 1.19m) * 0.15m) + ((StS / 1.15m) * 0.15m), 2);
-                            it = Decimal.Round((sth / 1.19m) * 0.04m, 2);
-                            subt = Decimal.Round((sth / 1.19m) + (StS / 1.15m), 2);
+                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                            isv = Decimal.Round(isvHab + isvServ, 2);
+                            subt = Decimal.Round(valorHab4 + valorServ, 2);
                             desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
                             subtD = Decimal.Round(subt - desc, 2);
                             total = Decimal.Round(isv + it + subtD, 2);
-
                         }
                         else if (sth != 0.00m & StS == 0)
                         {
-                            isv = Decimal.Round((sth / 1.19m) * 0.15m, 2);
-                            it = Decimal.Round((sth / 1.19m) * 0.04m, 2);
-                            subt = Decimal.Round((sth / 1.19m) + (StS / 1.15m), 2);
+                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                            isv = Decimal.Round(isvHab + isvServ, 2);
+                            subt = Decimal.Round(valorHab4 + valorServ, 2);
                             desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
                             subtD = Decimal.Round(subt - desc, 2);
                             total = Decimal.Round(isv + it + subtD, 2);
-
                         }
                         else if (sth == 0 & StS != 0)
                         {
-                            isv = Decimal.Round((StS / 1.15m) * 0.15m, 2);
-                            it = 0;
-                            subt = Decimal.Round((StS / 1.15m), 2);
+                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                            isv = Decimal.Round(isvHab + isvServ, 2);
+                            subt = Decimal.Round(valorHab4 + valorServ, 2);
                             desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
                             subtD = Decimal.Round(subt - desc, 2);
                             total = Decimal.Round(isv + it + subtD, 2);
@@ -391,7 +481,6 @@ namespace ProyectoHCL.Formularios
                         lblSubtD.Text = subtD.ToString();
                         lblSV.Text = isv.ToString();
                         lblTur.Text = it.ToString();
-                        lblTImp.Text = (isv + it).ToString();
                         lblTotal.Text = total.ToString();
 
                     }
@@ -452,6 +541,7 @@ namespace ProyectoHCL.Formularios
                         lblSalida.Text = info.salida;
                         lblHuesp.Text = dt.Rows[0]["NHUESPEDES"].ToString();
                         lblNoches.Text = Convert.ToString(noches.Days);
+                        lblEstado.Text = info.estado;
 
                         ht = consulta(info.reserva, 5);
                         h = ht.Rows.Count;
@@ -462,14 +552,16 @@ namespace ProyectoHCL.Formularios
 
                         if (h > 0)
                         {
+                            //listView1.Items.Clear();
+
                             while (i < h)
                             {
-                                //dgvDetalleFact.Rows.Add("1", ht.Rows[i]["DESCRIPCION"].ToString(),
-                                //    ht.Rows[i]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])));
+                                dgvDetalleFact.Rows.Add("1", ht.Rows[i]["DESCRIPCION"].ToString(),
+                                    ht.Rows[i]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])));
 
-                                //sth = sth + Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"]);
+                                sth = sth + Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"]);
 
-                                //i = i + 1;
+                                i = i + 1;
                             }
                         }
 
@@ -480,11 +572,11 @@ namespace ProyectoHCL.Formularios
                         {
                             while (j < s)
                             {
-                                //dgvDetalleFact.Rows.Add(st.Rows[j]["CANTIDAD"].ToString(), st.Rows[j]["DESCRIPCION"].ToString(),
-                                //    st.Rows[j]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])));
+                                dgvDetalleFact.Rows.Add(st.Rows[j]["CANTIDAD"].ToString(), st.Rows[j]["DESCRIPCION"].ToString(),
+                                   st.Rows[j]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])));
 
-                                //StS = StS + Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"]);
-                                //j = j + 1;
+                                StS = StS + Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"]);
+                                j = j + 1;
                             }
                         }
 
@@ -492,9 +584,17 @@ namespace ProyectoHCL.Formularios
 
                         if (sth != 0.00m & StS != 0.00m)
                         {
-                            isv = Decimal.Round(((sth / 1.19m) * 0.15m) + ((StS / 1.15m) * 0.15m), 2);
-                            it = Decimal.Round((sth / 1.19m) * 0.04m, 2);
-                            subt = Decimal.Round((sth / 1.19m) + (StS / 1.15m), 2);
+                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                            isv = Decimal.Round(isvHab + isvServ, 2);
+                            subt = Decimal.Round(valorHab4 + valorServ, 2);
                             desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
                             subtD = Decimal.Round(subt - desc, 2);
                             total = Decimal.Round(isv + it + subtD, 2);
@@ -502,9 +602,17 @@ namespace ProyectoHCL.Formularios
                         }
                         else if (sth != 0.00m & StS == 0)
                         {
-                            isv = Decimal.Round((sth / 1.19m) * 0.15m, 2);
-                            it = Decimal.Round((sth / 1.19m) * 0.04m, 2);
-                            subt = Decimal.Round((sth / 1.19m) + (StS / 1.15m), 2);
+                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                            isv = Decimal.Round(isvHab + isvServ, 2);
+                            subt = Decimal.Round(valorHab4 + valorServ, 2);
                             desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
                             subtD = Decimal.Round(subt - desc, 2);
                             total = Decimal.Round(isv + it + subtD, 2);
@@ -512,13 +620,28 @@ namespace ProyectoHCL.Formularios
                         }
                         else if (sth == 0 & StS != 0)
                         {
-                            isv = Decimal.Round((StS / 1.15m) * 0.15m, 2);
-                            it = 0;
-                            subt = Decimal.Round((StS / 1.15m), 2);
+                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                            isv = Decimal.Round(isvHab + isvServ, 2);
+                            subt = Decimal.Round(valorHab4 + valorServ, 2);
                             desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
                             subtD = Decimal.Round(subt - desc, 2);
                             total = Decimal.Round(isv + it + subtD, 2);
                         }
+
+                        lblSubt.Text = subt.ToString();
+                        lblDesc.Text = desc.ToString();
+                        lblSubtD.Text = subtD.ToString();
+                        lblSV.Text = isv.ToString();
+                        lblTur.Text = it.ToString();
+                        lblTotal.Text = total.ToString();
                     }
                 }
                 catch (Exception a)
@@ -531,6 +654,19 @@ namespace ProyectoHCL.Formularios
 
         private void Factura_Load(object sender, EventArgs e)
         {
+            Permisos();
+            
+            dgvDetalleFact.Columns.Add("cant.", "Cant.");
+            dgvDetalleFact.Columns.Add("descripción", "Descripción");
+            dgvDetalleFact.Columns.Add("p. unitario", "P. Unitario");
+            dgvDetalleFact.Columns.Add("total", "Total");
+            dgvDetalleFact.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetalleFact.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            DataGridViewImageColumn btnEliminar = new DataGridViewImageColumn();
+            btnEliminar.Name = "Eliminar";
+            dgvDetalleFact.Columns.Add(btnEliminar);
+
             try
             {
                 //Carga del combobox de tipo de pago
@@ -568,7 +704,20 @@ namespace ProyectoHCL.Formularios
                 btnFacturar.Visible = true;
                 btnDescuento.Visible = false;
                 btnServicio.Visible = false;
-                btnFacturar.Text = "Generar";
+                dgvDetalleFact.Columns["Eliminar"].Visible = false;
+                label3.Visible = true;
+                lblEstado.Visible = true;
+
+                if (info.estado == "ANULADA")
+                {
+                    btnFacturar.Visible = false;
+                    btnCancelar.Visible = false;
+                }
+                else
+                {
+                    btnFacturar.Text = "Generar";
+                    btnCancelar.Text = "Anular";
+                }
             }
             else if (info.est == 2)
             {
@@ -582,16 +731,19 @@ namespace ProyectoHCL.Formularios
                 btnFacturar.Text = "Facturar";
             }
 
-            //this.dgvDetalleFact.Rows.Clear();
-            //this.dgvMontos.Rows.Clear();
-            //CargarDGV();
+            limpiarControles();
+            CargarDGV();
         }
 
         private void btnFacturar_Click(object sender, EventArgs e)
         {
-            if (info.est == 2)
+            if (cmbPago.Text == "--Seleccione--") //validar campo vacío
             {
-
+                MsgB Mbox = new MsgB("advertencia", "Seleccione un método de pago");
+                DialogResult DR = Mbox.ShowDialog();
+            }
+            else if (info.est == 2)
+            {
                 try
                 {
                     using (BaseDatosHCL.ObtenerConexion())
@@ -602,10 +754,10 @@ namespace ProyectoHCL.Formularios
                         comando.CommandText = ("insert into TBL_FACTURA(ID_SOLICITUDRESERVA, ID_TIPOPAGO, " +
                             "ID_USUARIO, FECHA, N_OCEXCENTA, NCONSTANCIAEXONERADO, NREGISTROSAR, SUBTOTAL, " +
                             "IMPOREXONERADO, IMPOREXCENTO, IMPORTEISV, IMPORTEALCOHOL, IMPORTETURISMO, " +
-                            "IMPUESISV, IMPUESALCOHOL, IMPUESTURIMOS, TOTAL) VALUES (" + info.reserva + ", " +
+                            "IMPUESISV, IMPUESALCOHOL, IMPUESTURIMOS, TOTAL, ESTADO) VALUES (" + info.reserva + ", " +
                             cmbPago.SelectedIndex + ", " + clasecompartida.iduser + ", '" + today.ToString("yyyy-MM-dd HH:mm:ss") + "', " + txtOC.Text + ", " +
                             txtConstEx.Text + ", " + txtSar.Text + ", " + subt + ", 0, 0, " +
-                            subt + ", 0, " + sth + ", " + isv + ", 0, " + it + ", " + total + ")");
+                            subt + ", 0, " + sth + ", " + isv + ", 0, " + it + ", " + total + ", 'VIGENTE' " + ")");
 
                         comando.ExecuteNonQuery();
                         comando.Connection.Close();
@@ -650,7 +802,9 @@ namespace ProyectoHCL.Formularios
             else if (info.est == 1)
             {
                 crearPDF();
-            }           
+                MsgB mbox = new MsgB("informacion", "Archivo PDF creado con éxito");
+                DialogResult dR = mbox.ShowDialog();
+            }
         }
 
         private void crearPDF()
@@ -659,6 +813,12 @@ namespace ProyectoHCL.Formularios
             guardar.FileName = DateTime.Now.ToString("ddMMyyyy") + ".pdf";
 
             string paginahtml_texto = Properties.Resources.Plantilla.ToString();
+            paginahtml_texto = paginahtml_texto.Replace("@DIRECCION", ParametroDireccionH());
+            paginahtml_texto = paginahtml_texto.Replace("@TELEFONOS", ParametroTelefonoH());
+            paginahtml_texto = paginahtml_texto.Replace("@CUENTAH", ParametroCtaH());
+            paginahtml_texto = paginahtml_texto.Replace("@RTN", ParametroRTNH());
+            paginahtml_texto = paginahtml_texto.Replace("@CORREOF", ParametroCorreoF());
+
             paginahtml_texto = paginahtml_texto.Replace("@FECHA1", info.fecha);
             paginahtml_texto = paginahtml_texto.Replace("@CLIENTE", lblNombre.Text);
             paginahtml_texto = paginahtml_texto.Replace("@ID", lblId.Text);
@@ -732,5 +892,169 @@ namespace ProyectoHCL.Formularios
             }
         }
 
+        private void cmbPago_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.cmbVacio(cmbPago))
+            {
+                errorT.SetError(cmbPago, "Seleccione un método de pago");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+        }
+
+        private void dgvDetalleFact_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvDetalleFact.Columns[e.ColumnIndex].Name == "Eliminar")
+            {
+                Image imagen = Properties.Resources.eliminar;
+
+                dgvDetalleFact.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvDetalleFact.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+        }
+
+        AdmonServicios aServ = new AdmonServicios();
+        private void dgvDetalleFact_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvDetalleFact.Columns[e.ColumnIndex].Name == "Eliminar") //si se dio click en el botón eliminar hacer lo siguiente
+            {
+                bool elimino = aServ.EliminarServicioHab(sv.idServicio(dgvDetalleFact.CurrentRow.Cells["Descripción"].Value.ToString()), info.reserva);
+
+                this.dgvDetalleFact.Rows.Clear();
+                CargarDGV();
+            }
+        }
+
+        private void dgvDetalleFact_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            if (e.Row.Index == 0)
+            {
+                e.Cancel = true; // Evitar la eliminación de la primera fila
+            }
+        }
+
+        public static string ParametroDireccionH()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            string sql = "SELECT VALOR FROM TBL_PARAMETRO WHERE PARAMETRO = 'DIRECCION HOTEL';";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["VALOR"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+            conn.Close();
+        }
+
+        public static string ParametroTelefonoH()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            string sql = "SELECT VALOR FROM TBL_PARAMETRO WHERE PARAMETRO = 'TELEFONOS';";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["VALOR"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+            conn.Close();
+        }
+
+        public static string ParametroCtaH()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            string sql = "SELECT VALOR FROM TBL_PARAMETRO WHERE PARAMETRO = 'CTA CHEQUE FACT';";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["VALOR"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+            conn.Close();
+        }
+
+        public static string ParametroRTNH()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            string sql = "SELECT VALOR FROM TBL_PARAMETRO WHERE PARAMETRO = 'RTN FACT';";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["VALOR"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+            conn.Close();
+        }
+
+        public static string ParametroCorreoF()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            string sql = "SELECT VALOR FROM TBL_PARAMETRO WHERE PARAMETRO = 'CORREO FACT';";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["VALOR"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+            conn.Close();
+        }
     }
 }

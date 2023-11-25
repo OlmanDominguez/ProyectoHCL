@@ -116,15 +116,15 @@ namespace ProyectoHCL.Formularios
         private void btnCerrar_Click(object sender, EventArgs e) //botón para cerrar
         {
             this.Close();
-            limpiarCampos();
-            limpiarError();
+            //limpiarCampos();
+            //limpiarError();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e) //botón para cancelar
         {
             this.Close();
-            limpiarCampos();
-            limpiarError();
+            //limpiarCampos();
+            //limpiarError();
         }
 
         //coordenadas para arrastrar formulario
@@ -238,7 +238,7 @@ namespace ProyectoHCL.Formularios
             {
                 Control control = new Control();
                 string nuevoNombre = txtObj.Text;
-                int idRegistroActual = IdObjeto(); 
+                int idRegistroActual = IdObjeto();
 
                 if (txtObj.Text.Trim() == "" || cmbEstado.Text.Trim() == "" || rTxtDesc.Text.Trim() == "") //validar campos vacíos
                 {
@@ -325,7 +325,13 @@ namespace ProyectoHCL.Formularios
 
                 return count > 0;
             }
-            
+
+        }
+
+        private void R_E_Objeto_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            limpiarCampos();
+            limpiarError();
         }
     }
 }
