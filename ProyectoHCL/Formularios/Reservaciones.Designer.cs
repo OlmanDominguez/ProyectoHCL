@@ -154,6 +154,7 @@
             dgv_reservaciones.TabIndex = 37;
             dgv_reservaciones.CellClick += dgv_reservaciones_CellClick;
             dgv_reservaciones.CellContentClick += dgv_reservaciones_CellContentClick;
+            dgv_reservaciones.CellFormatting += dgv_reservaciones_CellFormatting;
             dgv_reservaciones.CellPainting += dgv_reservaciones_CellPainting;
             // 
             // panel3
@@ -262,6 +263,7 @@
             CB_PAGINACION_R.Name = "CB_PAGINACION_R";
             CB_PAGINACION_R.Size = new Size(65, 23);
             CB_PAGINACION_R.TabIndex = 60;
+            CB_PAGINACION_R.SelectionChangeCommitted += CB_PAGINACION_R_SelectionChangeCommitted;
             // 
             // label10
             // 

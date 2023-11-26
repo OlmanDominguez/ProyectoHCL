@@ -93,6 +93,7 @@ using Rectangle = iText.Kernel.Geom.Rectangle;
 using iText.Layout.Element;
 using Point = System.Drawing.Point;
 using ProyectoHCL.Formularios;
+using DrawingImage = System.Drawing.Image;
 
 namespace ProyectoHCL
 {
@@ -124,6 +125,8 @@ namespace ProyectoHCL
                         if (obj.ObjetoN == "RESERVACION" && !obj.Permitido)
                         {
                             btnNuevo.Visible = false;
+                            btn_excel.Visible = false;
+                            btn_pdf.Visible = false;
                         }
                         break;
                     case 3:
@@ -148,6 +151,28 @@ namespace ProyectoHCL
             }
         }
 
+        private void HabilitarBotones()
+        {
+            if (pagInicio == 1)
+            {
+                btnAnterior.Enabled = false;
+                cmbMostrar.Enabled = true;
+            }
+            else
+            {
+                btnAnterior.Enabled = true;
+                cmbMostrar.Enabled = false;
+            }
+
+            if (indice == (Convert.ToInt32(TXT_PAGINACION_X.Text) - 1))
+            {
+                btnSiguiente.Enabled = false;
+            }
+            else
+            {
+                btnSiguiente.Enabled = true;
+            }
+        }
         private void CargarDG()
         {
             adminReserva.Inicio1 = pagInicio;
@@ -167,7 +192,7 @@ namespace ProyectoHCL
                 CB_PAGINACION_R.Items.Add(x.ToString());
 
             CB_PAGINACION_R.SelectedIndex = indice;
-
+            HabilitarBotones();
 
 
         }
@@ -203,10 +228,10 @@ namespace ProyectoHCL
 
 
         private void Reservaciones_Load(object sender, EventArgs e)
-        {
+        {/*
             DataGridViewButtonColumn btnVer = new DataGridViewButtonColumn();
             btnVer.Name = "VER";
-            dgv_reservaciones.Columns.Add(btnVer);
+            dgv_reservaciones.Columns.Add(btnVer);*/
             DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
             btnUpdate.Name = "EDITAR";//Nombre del boton 
             dgv_reservaciones.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
@@ -275,7 +300,7 @@ namespace ProyectoHCL
 
                 e.Handled = true;
             }
-            if (e.ColumnIndex >= 0 && this.dgv_reservaciones.Columns[e.ColumnIndex].Name == "VER" && e.RowIndex >= 0)
+           /* if (e.ColumnIndex >= 0 && this.dgv_reservaciones.Columns[e.ColumnIndex].Name == "VER" && e.RowIndex >= 0)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
@@ -287,7 +312,7 @@ namespace ProyectoHCL
                 this.dgv_reservaciones.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
 
                 e.Handled = true;
-            }
+            }*/
         }
 
         private void dgv_reservaciones_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -381,12 +406,24 @@ namespace ProyectoHCL
         }
 
         private void btnSiguiente_Click(object sender, EventArgs e)
-        {
+        {/*
+            object adb = CB_PAGINACION_R.SelectedItem;
+            object b = CB_PAGINACION_R.GetItemText(adb);
+            string num2 =txtPaginacion.Text;
+            if (b == num2)
+            {
+                MsgB mbox = new MsgB("informacion", "Esta es la ultima pagina");
+                DialogResult dR = mbox.ShowDialog();
+            }
+            else
+            {*/
             int pagina = Convert.ToInt32(CB_PAGINACION_R.Text) + 1;
             indice = pagina - 1;
             pagInicio = (pagina - 1) * numFilas + 1;
             pagFinal = pagina * numFilas;
             CargarDG();
+
+
         }
 
         private void btnAnterior_Click(object sender, EventArgs e)
@@ -690,6 +727,29 @@ namespace ProyectoHCL
         private void button1_Click(object sender, EventArgs e)
         {
             crearPDF();
+        }
+
+        private void CB_PAGINACION_R_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(CB_PAGINACION_R.Text);
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDG();
+
+        }
+
+        private void dgv_reservaciones_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {/*
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgv_reservaciones.Columns[e.ColumnIndex].Name == "VER")
+            {
+                DrawingImage imagen = Properties.Resources.ojo;
+
+                dgv_reservaciones.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgv_reservaciones.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }*/
         }
     }
 }
