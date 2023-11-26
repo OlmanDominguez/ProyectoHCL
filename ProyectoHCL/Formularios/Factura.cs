@@ -1,86 +1,51 @@
-﻿/* -----------------------------------------------------------------------
-    Universidad Nacional Autonoma de Honduras (UNAH)
-		Facultad de Ciencias Economicas
-	Departamento de Informatica administrativa
-         Analisis, Programacion y Evaluacion de Sistemas
-                    Tercer Periodo 2013
-
-
-Equipo:
-GABRIELA YISSELE MANCIA------------(gabriela.mancia@unah.hn)
-
-HILDEGARD BETSUA MONTALVAN SUAZO---(hildegard.montalvan@unah.hn)
-
-NELSON NOE SALGADO ALVARENGA-------(nelson.salgado@unah.hn)
-
-JOEL ENRIQUE GODOY BONILLA---------(joel.godoy@unah.hn)
-
-OLMAN ARIEL DOMÍNGUEZ--------------(olman.dominguez@unah.hn)
-
-Catedratico analisis y diseño:             Lic.Giancarlo Martini Scalici Aguilar 
-catedratico programacion e implementacion: Lic.Karla Melisa Garcia Pineda 
-catedratico evaluacion de sistemas:        Lic.Karla Melisa Garcia Pineda 
-
-
----------------------------------------------------------------------
-
-Programa:         Pantalla de Ingreso de mostrar Factura
-Fecha:             27 - septiembre - 2023
-Programador: Joel
-descripcion:       Pantalla que contrala las validaciones de mostrar Factura
-
------------------------------------------------------------------------
-
-                Historial de Cambio
-
------------------------------------------------------------------------
-
-Programador               Fecha                      Descripcion
-GABRIELA  MANCIA  
-
-HILDEGARD  MONTALVAN   
-
-NELSON SALGADO  
-
-JOEL  GODOY 
-
-OLMAN  DOMÍNGUEZ 
-
------------------------------------------------------------------------ */
-
-/* Librerias utilizadas para facilitar el proceso */
-using MySql.Data.MySqlClient;  /* libreria para conectar la BD */
-using ProyectoHCL.clases; /*hacer uso de las clases dentro del proyecto */
-using System;/* identificar los bloques de codigo */
-using System.Collections.Generic; /* libreria para lectura */
-using System.ComponentModel; /* jerarguia de componentes funcionales */
-using System.ComponentModel.Design;
-using System.Data; /*conexion a la BD */
-using System.Drawing;/* impresion de archivos en excel */
-using System.Globalization;
-using System.Linq;/* clases e interfaces */
-using System.Runtime.CompilerServices;
-using System.Text;/* manipular informacion dentro de la aplicacion */
-using System.Threading.Tasks;/* libreria para impresion */
-using System.Windows.Controls;
-using System.Windows.Forms;
-using System.Xml.Linq;
-using static ProyectoHCL.RecuContra;
-using static ProyectoHCL.Formularios.CtrlFacturacion;
-
+﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.ExtendedProperties;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
-using System.IO;
+using MySql.Data.MySqlClient;
+using ProyectoHCL.clases;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using static ProyectoHCL.Formularios.CtrlFacturacion;
+using static ProyectoHCL.RecuContra;
+using Image = System.Drawing.Image;
 
 namespace ProyectoHCL.Formularios
 {
-
-    public partial class ShowFactura : Form /* clase publica de mostrar factura */
+    public partial class Factura : Form
     {
-        public ShowFactura()
+        public Factura()
         {
             InitializeComponent();
+        }
+
+        CDatos cDatos = new CDatos();
+
+        private void Permisos()
+        {
+            var LsObj = cDatos.SelectObjeto(clases.CDatos.idRolUs);
+
+            foreach (var obj in LsObj)
+            {
+                switch (obj.IdPermiso)   /* realiza las respectivas validaciones de permisos */
+                {
+                    case 2:
+                        if (obj.ObjetoN == "FACTURACION" && !obj.Permitido) //Validar pantalla y el permiso
+                        {
+                            btnFacturar.Visible = false; //Deshabilitar botón para crear
+                            btnCancelar.Visible = false;
+                        }
+                        break;
+                }
+            }
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -94,10 +59,12 @@ namespace ProyectoHCL.Formularios
         Decimal St1, St2, St3, StS = 0;
         Decimal isv, it, subt, total, desc, subtD;
 
-        int posY = 0;     /* declaracion de variables */
+        ServicioVenta sv = new ServicioVenta();
+
+        int posY = 0;
         int posX = 0;
 
-        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left)   /* condicional IF */
             {
@@ -109,6 +76,77 @@ namespace ProyectoHCL.Formularios
                 Left = Left + (e.X - posX);
                 Top = Top + (e.Y - posY);
             }
+        }
+
+        private void limpiarControles()
+        {
+            lblSubt.Text = "";
+            lblDesc.Text = "";
+            lblSubtD.Text = "";
+            lblSV.Text = "";
+            lblTur.Text = "";
+            lblTotal.Text = "";
+            this.dgvDetalleFact.Rows.Clear();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            if (btnCancelar.Text == "Anular")
+            {
+                try
+                {
+                    MySqlCommand comando = new MySqlCommand();
+
+                    using (BaseDatosHCL.ObtenerConexion())
+                    {
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("UPDATE TBL_FACTURA SET ESTADO = 'ANULADA' " +
+                            "WHERE NFACTURA = " + info.factura + ";");
+
+                        comando.ExecuteNonQuery();
+                        comando.Connection.Close();
+
+                        MsgB Mbox = new MsgB("informacion", "Factura anulada");
+                        DialogResult DR = Mbox.ShowDialog();
+                        this.Close();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MsgB Mbox = new MsgB("error", "Error: " + ex.Message);
+                    DialogResult DR = Mbox.ShowDialog();
+                }
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private void btnServicio_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form nuevo = new ServicioVenta();
+            nuevo.ShowDialog();
+
+            limpiarControles();
+            CargarDGV();
+            this.Show();
+        }
+
+        private void btnDescuento_Click(object sender, EventArgs e)
+        {
+            Form nuevo = new DescuentoFact();
+            nuevo.ShowDialog();
+
+            limpiarControles();
+            CargarDGV();
+        }
+
+        private void Factura_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            clases.CDatos.descuento = 0;
         }
 
         //Procedimiento para generar consulta de info para la vista de factura
@@ -145,11 +183,12 @@ namespace ProyectoHCL.Formularios
             {
                 try
                 {
-                    string stri = "SELECT h.NUMEROHABITACION, th.TIPO, th.PRECIO " +
-                          "FROM TBL_DETALLERESERVA ds " +
-                          "INNER JOIN TBL_HABITACION h ON ds.ID_HABITACION = h.ID_HABITACION " +
-                          "INNER JOIN TBL_TIPOHABITACION th ON h.ID_TIPOHABITACION = th.ID_TIPOHABITACION " +
-                          "where ds.ID_SOLICITUDRESERVA = " + param + ";";
+                    string stri = "SELECT NUMEROHABITACION, " +
+                        "(SELECT TIPO FROM TBL_TIPOHABITACION WHERE ID_TIPOHABITACION = (SELECT ID_TIPOHABITACION FROM TBL_HABITACION WHERE NUMEROHABITACION = ds.NUMEROHABITACION)) AS TIPO, " +
+                        "(SELECT PRECIO FROM TBL_TIPOHABITACION WHERE ID_TIPOHABITACION = (SELECT ID_TIPOHABITACION FROM TBL_HABITACION WHERE NUMEROHABITACION = ds.NUMEROHABITACION)) AS PRECIO " +
+                        "FROM TBL_SOLICITUDRESERVA ds " +
+                        "WHERE ds.ID_SOLICITUDRESERVA = " + param + ";";
+
 
 
                     MySqlConnection conn;
@@ -297,16 +336,16 @@ namespace ProyectoHCL.Formularios
                     if (n != 0)
                     {
                         //Carga de datos generales en la vista
-                        lb_nombres.Text = dt.Rows[0]["NOMBRE"].ToString() + " " + dt.Rows[0]["APELLIDO"].ToString();
+                        lblNombre.Text = dt.Rows[0]["NOMBRE"].ToString() + " " + dt.Rows[0]["APELLIDO"].ToString();
                         CDatos.nombre = dt.Rows[0]["NOMBRE"].ToString() + " " + dt.Rows[0]["APELLIDO"].ToString();
-                        lb_ID.Text = dt.Rows[0]["DNI_PASAPORTE"].ToString();
+                        lblId.Text = dt.Rows[0]["DNI_PASAPORTE"].ToString();
                         CDatos.nombreCliente = dt.Rows[0]["NOMBRE"].ToString();
                         CDatos.apellidoCliente = dt.Rows[0]["APELLIDO"].ToString();
-                        lb_fecha.Text = hoy;
-                        lb_ingreso.Text = info.ingreso;
-                        lb_Salida.Text = info.salida;
-                        lb_huespedes.Text = dt.Rows[0]["NHUESPEDES"].ToString();
-                        lb_noches.Text = Convert.ToString(noches.Days);
+                        lblFecha.Text = hoy;
+                        lblIngreso.Text = info.ingreso;
+                        lblSalida.Text = info.salida;
+                        lblHuesp.Text = dt.Rows[0]["NHUESPEDES"].ToString();
+                        lblNoches.Text = Convert.ToString(noches.Days);
 
                         ht = consulta(info.reserva, 2);
                         h = ht.Rows.Count;
@@ -319,6 +358,8 @@ namespace ProyectoHCL.Formularios
 
                         if (h > 0)
                         {
+                            //listView1.Items.Clear();
+
                             while (i < h)
                             {
                                 dgvDetalleFact.Rows.Add("1", ("Habit. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString()),
@@ -382,43 +423,65 @@ namespace ProyectoHCL.Formularios
                         desc = 0;
                         subtD = 0;
 
+                        //Datos de impuestos y totales
                         if (sth != 0.00m & StS != 0.00m)
                         {
-                            isv = Decimal.Round(((sth / 1.19m) * 0.15m) + ((StS / 1.15m) * 0.15m), 2);
-                            it = Decimal.Round((sth / 1.19m) * 0.04m, 2);
-                            subt = Decimal.Round((sth / 1.19m) + (StS / 1.15m), 2);
+                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                            isv = Decimal.Round(isvHab + isvServ, 2);
+                            subt = Decimal.Round(valorHab4 + valorServ, 2);
                             desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
                             subtD = Decimal.Round(subt - desc, 2);
                             total = Decimal.Round(isv + it + subtD, 2);
-
                         }
                         else if (sth != 0.00m & StS == 0)
                         {
-                            isv = Decimal.Round((sth / 1.19m) * 0.15m, 2);
-                            it = Decimal.Round((sth / 1.19m) * 0.04m, 2);
-                            subt = Decimal.Round((sth / 1.19m) + (StS / 1.15m), 2);
+                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                            isv = Decimal.Round(isvHab + isvServ, 2);
+                            subt = Decimal.Round(valorHab4 + valorServ, 2);
                             desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
                             subtD = Decimal.Round(subt - desc, 2);
                             total = Decimal.Round(isv + it + subtD, 2);
-
                         }
                         else if (sth == 0 & StS != 0)
                         {
-                            isv = Decimal.Round((StS / 1.15m) * 0.15m, 2);
-                            it = 0;
-                            subt = Decimal.Round((StS / 1.15m), 2);
+                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                            isv = Decimal.Round(isvHab + isvServ, 2);
+                            subt = Decimal.Round(valorHab4 + valorServ, 2);
                             desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
                             subtD = Decimal.Round(subt - desc, 2);
                             total = Decimal.Round(isv + it + subtD, 2);
                         }
 
-                        //dgvMontos.Rows.Add("SubTotal", subt);
-                        //dgvMontos.Rows.Add("Descuento", desc);
-                        //dgvMontos.Rows.Add("SubTotal menos Descuento", subtD);
-                        //dgvMontos.Rows.Add("Impuesto S/Venta", isv);
-                        //dgvMontos.Rows.Add("Impuesto Turismo", it);
-                        //dgvMontos.Rows.Add("Total Impuesto", isv + it);
-                        //dgvMontos.Rows.Add("Total", subtD + isv + it);
+                        lblSubt.Text = subt.ToString();
+                        lblDesc.Text = desc.ToString();
+                        lblSubtD.Text = subtD.ToString();
+                        lblSV.Text = isv.ToString();
+                        lblTur.Text = it.ToString();
+                        lblTotal.Text = total.ToString();
 
                     }
                 }
@@ -446,7 +509,7 @@ namespace ProyectoHCL.Formularios
 
                         while (leer.Read())
                         {
-                            cb_MPago.SelectedIndex = Convert.ToInt32(leer["ID_TIPOPAGO"]);
+                            cmbPago.SelectedIndex = Convert.ToInt32(leer["ID_TIPOPAGO"]);
                         }
 
                         comando.Connection.Close();
@@ -459,41 +522,38 @@ namespace ProyectoHCL.Formularios
                 }
 
                 dt = consulta(info.reserva, 4);
-                txt_OCExenta.Text = dt.Rows[0]["N_OCEXCENTA"].ToString();
-                txt_ConsExone.Text = dt.Rows[0]["NCONSTANCIAEXONERADO"].ToString();
-                txt_RegSar.Text = dt.Rows[0]["NREGISTROSAR"].ToString();
+                txtOC.Text = dt.Rows[0]["N_OCEXCENTA"].ToString();
+                txtConstEx.Text = dt.Rows[0]["NCONSTANCIAEXONERADO"].ToString();
+                txtSar.Text = dt.Rows[0]["NREGISTROSAR"].ToString();
 
                 try
                 {
-
                     dt = consulta(info.reserva, 1);
 
                     int n = dt.Rows.Count;
 
-
                     if (n != 0)
                     {
-                        lb_nombres.Text = dt.Rows[0]["NOMBRE"].ToString() + " " + dt.Rows[0]["APELLIDO"].ToString();
-                        lb_ID.Text = dt.Rows[0]["DNI_PASAPORTE"].ToString();
-                        lb_fecha.Text = hoy;
-                        lb_ingreso.Text = info.ingreso;
-                        lb_Salida.Text = info.salida;
-                        lb_huespedes.Text = dt.Rows[0]["NHUESPEDES"].ToString();
-
-                        lb_noches.Text = Convert.ToString(noches.Days);
-
-
+                        lblNombre.Text = dt.Rows[0]["NOMBRE"].ToString() + " " + dt.Rows[0]["APELLIDO"].ToString();
+                        lblId.Text = dt.Rows[0]["DNI_PASAPORTE"].ToString();
+                        lblFecha.Text = hoy;
+                        lblIngreso.Text = info.ingreso;
+                        lblSalida.Text = info.salida;
+                        lblHuesp.Text = dt.Rows[0]["NHUESPEDES"].ToString();
+                        lblNoches.Text = Convert.ToString(noches.Days);
+                        lblEstado.Text = info.estado;
 
                         ht = consulta(info.reserva, 5);
                         h = ht.Rows.Count;
+
                         //DetalleHabitaciones
-
-
                         int i = 0;
                         int j = 0;
 
                         if (h > 0)
                         {
+                            //listView1.Items.Clear();
+
                             while (i < h)
                             {
                                 dgvDetalleFact.Rows.Add("1", ht.Rows[i]["DESCRIPCION"].ToString(),
@@ -505,7 +565,6 @@ namespace ProyectoHCL.Formularios
                             }
                         }
 
-
                         st = consulta(info.reserva, 6);
                         s = st.Rows.Count;
 
@@ -514,7 +573,7 @@ namespace ProyectoHCL.Formularios
                             while (j < s)
                             {
                                 dgvDetalleFact.Rows.Add(st.Rows[j]["CANTIDAD"].ToString(), st.Rows[j]["DESCRIPCION"].ToString(),
-                                    st.Rows[j]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])));
+                                   st.Rows[j]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])));
 
                                 StS = StS + Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"]);
                                 j = j + 1;
@@ -525,9 +584,17 @@ namespace ProyectoHCL.Formularios
 
                         if (sth != 0.00m & StS != 0.00m)
                         {
-                            isv = Decimal.Round(((sth / 1.19m) * 0.15m) + ((StS / 1.15m) * 0.15m), 2);
-                            it = Decimal.Round((sth / 1.19m) * 0.04m, 2);
-                            subt = Decimal.Round((sth / 1.19m) + (StS / 1.15m), 2);
+                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                            isv = Decimal.Round(isvHab + isvServ, 2);
+                            subt = Decimal.Round(valorHab4 + valorServ, 2);
                             desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
                             subtD = Decimal.Round(subt - desc, 2);
                             total = Decimal.Round(isv + it + subtD, 2);
@@ -535,9 +602,17 @@ namespace ProyectoHCL.Formularios
                         }
                         else if (sth != 0.00m & StS == 0)
                         {
-                            isv = Decimal.Round((sth / 1.19m) * 0.15m, 2);
-                            it = Decimal.Round((sth / 1.19m) * 0.04m, 2);
-                            subt = Decimal.Round((sth / 1.19m) + (StS / 1.15m), 2);
+                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                            isv = Decimal.Round(isvHab + isvServ, 2);
+                            subt = Decimal.Round(valorHab4 + valorServ, 2);
                             desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
                             subtD = Decimal.Round(subt - desc, 2);
                             total = Decimal.Round(isv + it + subtD, 2);
@@ -545,21 +620,28 @@ namespace ProyectoHCL.Formularios
                         }
                         else if (sth == 0 & StS != 0)
                         {
-                            isv = Decimal.Round((StS / 1.15m) * 0.15m, 2);
-                            it = 0;
-                            subt = Decimal.Round((StS / 1.15m), 2);
+                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                            isv = Decimal.Round(isvHab + isvServ, 2);
+                            subt = Decimal.Round(valorHab4 + valorServ, 2);
                             desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
                             subtD = Decimal.Round(subt - desc, 2);
                             total = Decimal.Round(isv + it + subtD, 2);
                         }
 
-                        //dgvMontos.Rows.Add("SubTotal", subt);
-                        //dgvMontos.Rows.Add("Descuento", desc);
-                        //dgvMontos.Rows.Add("SubTotal menos Descuento", subtD);
-                        //dgvMontos.Rows.Add("Impuesto S/Venta", isv);
-                        //dgvMontos.Rows.Add("Impuesto Turismo", it);
-                        //dgvMontos.Rows.Add("Total Impuesto", isv + it);
-                        //dgvMontos.Rows.Add("Total", subtD + isv + it);
+                        lblSubt.Text = subt.ToString();
+                        lblDesc.Text = desc.ToString();
+                        lblSubtD.Text = subtD.ToString();
+                        lblSV.Text = isv.ToString();
+                        lblTur.Text = it.ToString();
+                        lblTotal.Text = total.ToString();
                     }
                 }
                 catch (Exception a)
@@ -570,22 +652,20 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-
-        private void ShowFactura_Load(object sender, EventArgs e)
+        private void Factura_Load(object sender, EventArgs e)
         {
+            Permisos();
+            
+            dgvDetalleFact.Columns.Add("cant.", "Cant.");
+            dgvDetalleFact.Columns.Add("descripción", "Descripción");
+            dgvDetalleFact.Columns.Add("p. unitario", "P. Unitario");
+            dgvDetalleFact.Columns.Add("total", "Total");
+            dgvDetalleFact.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetalleFact.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            //dgvDetalleFact.Columns.Add("cant.", "Cant.");
-            //dgvDetalleFact.Columns.Add("descripción", "Descripción");
-            //dgvDetalleFact.Columns.Add("p. unitario", "P. Unitario");
-            //dgvDetalleFact.Columns.Add("importe", "Importe");
-            //dgvDetalleFact.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //dgvDetalleFact.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            //dgvMontos.Columns.Add("descripcion", "Descripcion");
-            //dgvMontos.Columns.Add("importe", "Importe");
-            //dgvMontos.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //dgvMontos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
+            DataGridViewImageColumn btnEliminar = new DataGridViewImageColumn();
+            btnEliminar.Name = "Eliminar";
+            dgvDetalleFact.Columns.Add(btnEliminar);
 
             try
             {
@@ -599,12 +679,12 @@ namespace ProyectoHCL.Formularios
 
                     MySqlDataReader leer = comando.ExecuteReader();
 
-                    cb_MPago.Items.Add("--Seleccione--");
-                    cb_MPago.SelectedIndex = 0;
+                    cmbPago.Items.Add("--Seleccione--");
+                    cmbPago.SelectedIndex = 0;
                     //Validación de la data obtenida
                     while (leer.Read())
                     {
-                        cb_MPago.Items.Add(leer["DESCRIPCION"].ToString());
+                        cmbPago.Items.Add(leer["DESCRIPCION"].ToString());
                     }
                     comando.Connection.Close();
                 }
@@ -617,51 +697,53 @@ namespace ProyectoHCL.Formularios
 
             if (info.est == 1)
             {
-                txt_ConsExone.Enabled = false;
-                txt_OCExenta.Enabled = false;
-                txt_RegSar.Enabled = false;
-                cb_MPago.Enabled = false;
+                txtConstEx.Enabled = false;
+                txtOC.Enabled = false;
+                txtSar.Enabled = false;
+                cmbPago.Enabled = false;
                 btnFacturar.Visible = true;
-                lbl_Descuento.Visible = false;
-                lbl_servicios.Visible = false;
-                btnFacturar.Text = "Generar";
-            }
-            //else if (info.est == 0)
-            //{
-            //    txt_ConsExone.Enabled = true;
-            //    txt_OCExenta.Enabled = true;
-            //    txt_RegSar.Enabled = true;
-            //    cb_MPago.Enabled = true;
-            //    btnFacturar.Visible = true;
-            //    lbl_Descuento.Visible = false;
-            //    lbl_servicios.Visible = false;
-            //    btnFacturar.Text = "Guardar";
+                btnDescuento.Visible = false;
+                btnServicio.Visible = false;
+                dgvDetalleFact.Columns["Eliminar"].Visible = false;
+                label3.Visible = true;
+                lblEstado.Visible = true;
 
-            //}
+                if (info.estado == "ANULADA")
+                {
+                    btnFacturar.Visible = false;
+                    btnCancelar.Visible = false;
+                }
+                else
+                {
+                    btnFacturar.Text = "Generar";
+                    btnCancelar.Text = "Anular";
+                }
+            }
             else if (info.est == 2)
             {
-                txt_ConsExone.Enabled = true;
-                txt_OCExenta.Enabled = true;
-                txt_RegSar.Enabled = true;
-                cb_MPago.Enabled = true;
+                txtConstEx.Enabled = true;
+                txtOC.Enabled = true;
+                txtSar.Enabled = true;
+                cmbPago.Enabled = true;
                 btnFacturar.Visible = true;
-                lbl_Descuento.Visible = true;
-                lbl_servicios.Visible = true;
+                btnDescuento.Visible = true;
+                btnServicio.Visible = true;
                 btnFacturar.Text = "Facturar";
             }
 
-
-            this.dgvDetalleFact.Rows.Clear();
-            this.dgvMontos.Rows.Clear();
+            limpiarControles();
             CargarDGV();
-
         }
 
         private void btnFacturar_Click(object sender, EventArgs e)
         {
-            if (info.est == 2)
+            if (cmbPago.Text == "--Seleccione--") //validar campo vacío
             {
-
+                MsgB Mbox = new MsgB("advertencia", "Seleccione un método de pago");
+                DialogResult DR = Mbox.ShowDialog();
+            }
+            else if (info.est == 2)
+            {
                 try
                 {
                     using (BaseDatosHCL.ObtenerConexion())
@@ -672,10 +754,10 @@ namespace ProyectoHCL.Formularios
                         comando.CommandText = ("insert into TBL_FACTURA(ID_SOLICITUDRESERVA, ID_TIPOPAGO, " +
                             "ID_USUARIO, FECHA, N_OCEXCENTA, NCONSTANCIAEXONERADO, NREGISTROSAR, SUBTOTAL, " +
                             "IMPOREXONERADO, IMPOREXCENTO, IMPORTEISV, IMPORTEALCOHOL, IMPORTETURISMO, " +
-                            "IMPUESISV, IMPUESALCOHOL, IMPUESTURIMOS, TOTAL) VALUES (" + info.reserva + ", " +
-                            cb_MPago.SelectedIndex + ", " + clasecompartida.iduser + ", '" + today.ToString("yyyy-MM-dd HH:mm:ss") + "', " + txt_OCExenta.Text + ", " +
-                            txt_ConsExone.Text + ", " + txt_RegSar.Text + ", " + subt + ", 0, 0, " +
-                            subt + ", 0, " + sth + ", " + isv + ", 0, " + it + ", " + total + ")");
+                            "IMPUESISV, IMPUESALCOHOL, IMPUESTURIMOS, TOTAL, ESTADO) VALUES (" + info.reserva + ", " +
+                            cmbPago.SelectedIndex + ", " + clasecompartida.iduser + ", '" + today.ToString("yyyy-MM-dd HH:mm:ss") + "', " + txtOC.Text + ", " +
+                            txtConstEx.Text + ", " + txtSar.Text + ", " + subt + ", 0, 0, " +
+                            subt + ", 0, " + sth + ", " + isv + ", 0, " + it + ", " + total + ", 'VIGENTE' " + ")");
 
                         comando.ExecuteNonQuery();
                         comando.Connection.Close();
@@ -687,7 +769,6 @@ namespace ProyectoHCL.Formularios
                         comando.ExecuteNonQuery();
                         comando.Connection.Close();
 
-
                         if (query0 != "")
                         {
                             comando.Connection = BaseDatosHCL.ObtenerConexion();
@@ -696,7 +777,6 @@ namespace ProyectoHCL.Formularios
                             comando.ExecuteNonQuery();
                             comando.Connection.Close();
                         }
-
 
                         if (query1 != "")
                         {
@@ -707,14 +787,11 @@ namespace ProyectoHCL.Formularios
                             comando.Connection.Close();
                         }
 
-
-
                         MsgB mbox = new MsgB("informacion", "Registro Agregado");
                         DialogResult dR = mbox.ShowDialog();
                         this.Close();
 
                     }
-
                 }
                 catch (Exception a)
                 {
@@ -725,36 +802,10 @@ namespace ProyectoHCL.Formularios
             else if (info.est == 1)
             {
                 crearPDF();
+                MsgB mbox = new MsgB("informacion", "Archivo PDF creado con éxito");
+                DialogResult dR = mbox.ShowDialog();
             }
-            //else if (info.est == 0)
-            //{
-            //    try
-            //    {
-            //        using (BaseDatosHCL.ObtenerConexion())
-            //        {
-            //            MySqlCommand comando = new MySqlCommand();
-            //            comando.Connection = BaseDatosHCL.ObtenerConexion();
-            //            comando.CommandText = ("UPDATE TBL_FACTURA SET ID_TIPOPAGO = " + cb_MPago.SelectedIndex +
-            //                " WHERE ID_SOLICITUDRESERVA = " + info.reserva + ";");
-
-            //            comando.ExecuteNonQuery();
-            //            comando.Connection.Close();
-
-
-            //            MsgB mbox = new MsgB("informacion", "Registro Modificado");
-            //            DialogResult dR = mbox.ShowDialog();
-            //            this.Close();
-
-            //        }
-
-            //    }
-            //    catch (Exception a)
-            //    {
-            //        MessageBox.Show(a.Message + a.StackTrace);
-            //    }
-            //}
         }
-
 
         private void crearPDF()
         {
@@ -762,13 +813,19 @@ namespace ProyectoHCL.Formularios
             guardar.FileName = DateTime.Now.ToString("ddMMyyyy") + ".pdf";
 
             string paginahtml_texto = Properties.Resources.Plantilla.ToString();
+            paginahtml_texto = paginahtml_texto.Replace("@DIRECCION", ParametroDireccionH());
+            paginahtml_texto = paginahtml_texto.Replace("@TELEFONOS", ParametroTelefonoH());
+            paginahtml_texto = paginahtml_texto.Replace("@CUENTAH", ParametroCtaH());
+            paginahtml_texto = paginahtml_texto.Replace("@RTN", ParametroRTNH());
+            paginahtml_texto = paginahtml_texto.Replace("@CORREOF", ParametroCorreoF());
+
             paginahtml_texto = paginahtml_texto.Replace("@FECHA1", info.fecha);
-            paginahtml_texto = paginahtml_texto.Replace("@CLIENTE", lb_nombres.Text);
-            paginahtml_texto = paginahtml_texto.Replace("@ID", lb_ID.Text);
+            paginahtml_texto = paginahtml_texto.Replace("@CLIENTE", lblNombre.Text);
+            paginahtml_texto = paginahtml_texto.Replace("@ID", lblId.Text);
             paginahtml_texto = paginahtml_texto.Replace("@FACTURA", info.factura);
-            paginahtml_texto = paginahtml_texto.Replace("@INGRESO", lb_ingreso.Text);
-            paginahtml_texto = paginahtml_texto.Replace("@SALIDA", lb_Salida.Text);
-            paginahtml_texto = paginahtml_texto.Replace("@NOCHES", lb_noches.Text);
+            paginahtml_texto = paginahtml_texto.Replace("@INGRESO", lblIngreso.Text);
+            paginahtml_texto = paginahtml_texto.Replace("@SALIDA", lblSalida.Text);
+            paginahtml_texto = paginahtml_texto.Replace("@NOCHES", lblNoches.Text);
 
             string filas = string.Empty;
 
@@ -829,52 +886,175 @@ namespace ProyectoHCL.Formularios
                         XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
                     }
 
-
                     pdfDoc.Close();
                     stream.Close();
                 }
+            }
+        }
 
+        private void cmbPago_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.cmbVacio(cmbPago))
+            {
+                errorT.SetError(cmbPago, "Seleccione un método de pago");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+        }
 
+        private void dgvDetalleFact_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvDetalleFact.Columns[e.ColumnIndex].Name == "Eliminar")
+            {
+                Image imagen = Properties.Resources.eliminar;
+
+                dgvDetalleFact.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvDetalleFact.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+        }
+
+        AdmonServicios aServ = new AdmonServicios();
+        private void dgvDetalleFact_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvDetalleFact.Columns[e.ColumnIndex].Name == "Eliminar") //si se dio click en el botón eliminar hacer lo siguiente
+            {
+                bool elimino = aServ.EliminarServicioHab(sv.idServicio(dgvDetalleFact.CurrentRow.Cells["Descripción"].Value.ToString()), info.reserva);
+
+                this.dgvDetalleFact.Rows.Clear();
+                CargarDGV();
+            }
+        }
+
+        private void dgvDetalleFact_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            if (e.Row.Index == 0)
+            {
+                e.Cancel = true; // Evitar la eliminación de la primera fila
+            }
+        }
+
+        public static string ParametroDireccionH()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            string sql = "SELECT VALOR FROM TBL_PARAMETRO WHERE PARAMETRO = 'DIRECCION HOTEL';";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["VALOR"].ToString();
+            }
+            else
+            {
+                return null;
 
             }
-
+            conn.Close();
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        public static string ParametroTelefonoH()
         {
-            this.Close();
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            string sql = "SELECT VALOR FROM TBL_PARAMETRO WHERE PARAMETRO = 'TELEFONOS';";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["VALOR"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+            conn.Close();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        public static string ParametroCtaH()
         {
+            MySqlConnection conn;
+            MySqlCommand cmd;
 
+            string sql = "SELECT VALOR FROM TBL_PARAMETRO WHERE PARAMETRO = 'CTA CHEQUE FACT';";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["VALOR"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+            conn.Close();
         }
 
-        private void lbl_servicios_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        public static string ParametroRTNH()
         {
-            this.Hide();
-            Form nuevo = new ServicioVenta();
-            nuevo.ShowDialog();
+            MySqlConnection conn;
+            MySqlCommand cmd;
 
-            this.dgvDetalleFact.Rows.Clear();
-            this.dgvMontos.Rows.Clear();
-            CargarDGV();
-            this.Show();
+            string sql = "SELECT VALOR FROM TBL_PARAMETRO WHERE PARAMETRO = 'RTN FACT';";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["VALOR"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+            conn.Close();
         }
 
-        private void lbl_Descuento_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        public static string ParametroCorreoF()
         {
-            Form nuevo = new DescuentoFact();
-            nuevo.ShowDialog();
+            MySqlConnection conn;
+            MySqlCommand cmd;
 
-            this.dgvDetalleFact.Rows.Clear();
-            this.dgvMontos.Rows.Clear();
-            CargarDGV();
-        }
+            string sql = "SELECT VALOR FROM TBL_PARAMETRO WHERE PARAMETRO = 'CORREO FACT';";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
 
-        private void ShowFactura_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            clases.CDatos.descuento = 0;
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["VALOR"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+            conn.Close();
         }
     }
 }

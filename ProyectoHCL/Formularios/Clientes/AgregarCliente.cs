@@ -74,13 +74,6 @@ namespace ProyectoHCL.Formularios
 
         MsgB msgB = new MsgB();
 
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-
-
         int posY = 0;   /* declaracion de variable */
         int posX = 0;
 
@@ -280,7 +273,6 @@ namespace ProyectoHCL.Formularios
 
         private void txtID_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ValidarTxt.TxtNumeros(e);
         }
 
         private void txtApellido_KeyPress(object sender, KeyPressEventArgs e)
@@ -314,12 +306,18 @@ namespace ProyectoHCL.Formularios
         }
 
         private void txtEmail1_TextChanged(object sender, EventArgs e)
-        { }
+        {
+        }
 
         private void txtEmail1_Leave(object sender, EventArgs e)
         {
 
-            if (!ValidarTxt.CorreoValido(txtEmail1.Text))
+            if (ValidarTxt.txtVacio(txtEmail1))
+            {
+                errorT.SetError(txtEmail1, "Introduzca un correo");
+
+            }
+            else if (ValidarTxt.CorreoValido(txtEmail1.Text))
             {
                 errorT.SetError(txtEmail1, "Dirección de correo no válida");
                 txtEmail1.Focus();
@@ -327,13 +325,19 @@ namespace ProyectoHCL.Formularios
             else
             {
                 errorT.Clear();
-            }
 
+            }
         }
 
         private void txtEmail2_Leave(object sender, EventArgs e)
         {
-            if (!ValidarTxt.CorreoValido(txtEmail2.Text))
+
+            if (ValidarTxt.txtVacio(txtEmail2))
+            {
+                errorT.SetError(txtEmail2, "Introduzca un correo");
+
+            }
+            else if (ValidarTxt.CorreoValido(txtEmail2.Text))
             {
                 errorT.SetError(txtEmail2, "Dirección de correo no válida");
                 txtEmail2.Focus();
@@ -341,8 +345,204 @@ namespace ProyectoHCL.Formularios
             else
             {
                 errorT.Clear();
-            }
 
+            }
+        }
+
+        private void txtID_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtID))
+            {
+                errorT.SetError(txtID, "Introduzca la identificación");
+
+            }
+            else if (txtID.TextLength <= 13)
+            {
+                errorT.SetError(txtID, "La identificación debe contener al menos 13 números");
+                txtID.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+
+            }
+        }
+
+        private void txtNombre_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtNombre))
+            {
+                errorT.SetError(txtNombre, "Introduzca un nombre");
+
+            }
+            else if (txtNombre.TextLength <= 4)
+            {
+                errorT.SetError(txtNombre, "El nombre es muy corto");
+                txtNombre.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+
+            }
+        }
+
+        private void txtApellido_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtApellido))
+            {
+                errorT.SetError(txtApellido, "Introduzca un apellido");
+
+            }
+            else if (txtApellido.TextLength <= 4)
+            {
+                errorT.SetError(txtApellido, "El apellido es muy corto");
+                txtApellido.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+
+            }
+        }
+
+        private void cbTipo_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.cmbVacio(cbTipo))
+            {
+                errorT.SetError(cbTipo, "Seleccione el tipo de cliente");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+        }
+
+        private void txtTele1_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtTele1))
+            {
+                errorT.SetError(txtTele1, "Introduzca un teléfono");
+
+            }
+            else if (txtTele1.TextLength < 8)
+            {
+                errorT.SetError(txtTele1, "El teléfono debe contener al menos 8 números");
+                txtTele1.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+
+            }
+        }
+
+        private void txtTele2_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtTele2))
+            {
+                errorT.SetError(txtTele2, "Introduzca un teléfono");
+
+            }
+            else if (txtTele2.TextLength < 8)
+            {
+                errorT.SetError(txtTele2, "El teléfono debe contener al menos 8 números");
+                txtTele2.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+
+            }
+        }
+
+        private void txtRTN_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtRTN))
+            {
+                errorT.SetError(txtRTN, "Introduzca un RTN");
+
+            }
+            else if (txtTele2.TextLength < 14)
+            {
+                errorT.SetError(txtRTN, "El RTN debe contener al menos 14 dígitos");
+                txtRTN.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+
+            }
+        }
+
+        private void txtEmpresa_Leave(object sender, EventArgs e)
+        {
+            if (ValidarTxt.txtVacio(txtEmpresa))
+            {
+                errorT.SetError(txtEmpresa, "Introduzca una Empresa");
+
+            }
+            else if (txtEmpresa.TextLength < 5)
+            {
+                errorT.SetError(txtEmpresa, "El nombre de la empresa es muy corta");
+                txtEmpresa.Focus();
+            }
+            else
+            {
+                errorT.Clear();
+
+            }
+        }
+
+        private void txtEmail1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+        }
+
+        private void label21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void label20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtEmail1_VisibleChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void txtEmail1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
         }
     }
 }

@@ -31,7 +31,6 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(R_E_TipHab));
             panel2 = new Panel();
-            pictureBox5 = new PictureBox();
             lblTitulo = new Label();
             btnCerrar = new Button();
             btnMin = new Button();
@@ -52,7 +51,6 @@
             label2 = new Label();
             errorT = new ErrorProvider(components);
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorT).BeginInit();
             SuspendLayout();
@@ -60,7 +58,6 @@
             // panel2
             // 
             panel2.BackColor = Color.SteelBlue;
-            panel2.Controls.Add(pictureBox5);
             panel2.Controls.Add(lblTitulo);
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(btnMin);
@@ -70,17 +67,6 @@
             panel2.Size = new Size(800, 73);
             panel2.TabIndex = 23;
             panel2.MouseMove += panel2_MouseMove;
-            // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(12, 12);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(50, 48);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 34;
-            pictureBox5.TabStop = false;
             // 
             // lblTitulo
             // 
@@ -105,7 +91,7 @@
             btnCerrar.FlatAppearance.BorderSize = 0;
             btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnCerrar.FlatStyle = FlatStyle.Flat;
-            btnCerrar.Location = new Point(774, 12);
+            btnCerrar.Location = new Point(774, 10);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(14, 17);
             btnCerrar.TabIndex = 33;
@@ -120,7 +106,7 @@
             btnMin.FlatAppearance.BorderSize = 0;
             btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             btnMin.FlatStyle = FlatStyle.Flat;
-            btnMin.Location = new Point(739, 10);
+            btnMin.Location = new Point(749, 8);
             btnMin.Name = "btnMin";
             btnMin.Size = new Size(19, 20);
             btnMin.TabIndex = 32;
@@ -156,7 +142,7 @@
             cmbEstado.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             cmbEstado.FormattingEnabled = true;
             cmbEstado.Items.AddRange(new object[] { "ACTIVO", "INACTIVO" });
-            cmbEstado.Location = new Point(414, 144);
+            cmbEstado.Location = new Point(63, 149);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(316, 28);
             cmbEstado.TabIndex = 34;
@@ -167,7 +153,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.Red;
-            label7.Location = new Point(471, 108);
+            label7.Location = new Point(515, 108);
             label7.Name = "label7";
             label7.Size = new Size(23, 30);
             label7.TabIndex = 33;
@@ -178,7 +164,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = Color.Black;
-            label8.Location = new Point(414, 116);
+            label8.Location = new Point(63, 116);
             label8.Name = "label8";
             label8.Size = new Size(63, 19);
             label8.TabIndex = 32;
@@ -200,7 +186,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.Red;
-            label4.Location = new Point(163, 108);
+            label4.Location = new Point(124, 108);
             label4.Name = "label4";
             label4.Size = new Size(23, 30);
             label4.TabIndex = 30;
@@ -228,6 +214,7 @@
             txtPrecio.Name = "txtPrecio";
             txtPrecio.Size = new Size(316, 27);
             txtPrecio.TabIndex = 28;
+            txtPrecio.TextAlign = HorizontalAlignment.Right;
             txtPrecio.KeyPress += txtPrecio_KeyPress;
             txtPrecio.Leave += txtPrecio_Leave;
             // 
@@ -247,11 +234,12 @@
             txtCapacidad.BackColor = Color.White;
             txtCapacidad.BorderStyle = BorderStyle.FixedSingle;
             txtCapacidad.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtCapacidad.Location = new Point(63, 144);
+            txtCapacidad.Location = new Point(414, 150);
             txtCapacidad.MaxLength = 50;
             txtCapacidad.Name = "txtCapacidad";
             txtCapacidad.Size = new Size(316, 27);
             txtCapacidad.TabIndex = 26;
+            txtCapacidad.TextAlign = HorizontalAlignment.Right;
             txtCapacidad.KeyPress += txtCapacidad_KeyPress;
             txtCapacidad.Leave += txtCapacidad_Leave;
             // 
@@ -260,7 +248,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(63, 116);
+            label6.Location = new Point(414, 119);
             label6.Name = "label6";
             label6.Size = new Size(105, 19);
             label6.TabIndex = 25;
@@ -347,7 +335,6 @@
             Text = "R_E_TipHab";
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)errorT).EndInit();
@@ -357,7 +344,6 @@
         #endregion
 
         private Panel panel2;
-        private PictureBox pictureBox5;
         public Label lblTitulo;
         private Button btnCerrar;
         private Button btnMin;

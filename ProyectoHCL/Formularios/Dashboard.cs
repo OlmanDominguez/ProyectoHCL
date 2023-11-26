@@ -96,13 +96,13 @@ namespace ProyectoHCL
                     case "HABITACIONES":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_usuarios.Visible = false;
+                            Ibtn_habitaciones.Visible = false;
                         }
                         break;
                     case "DESCUENTOS":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            iconButton1.Visible = false;
+                            lbtn_descuentos.Visible = false;
                         }
                         break;
                     case "USUARIOS":
@@ -114,7 +114,7 @@ namespace ProyectoHCL
                     case "SERVICIOS":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_habitaciones.Visible = false;
+                            Ibtn_servicios.Visible = false;
                         }
                         break;
                     case "OBJETOS":
@@ -126,7 +126,7 @@ namespace ProyectoHCL
                     case "TIPO HABITACION":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            lbtn_descuentos.Visible = false;
+                            iconButton1.Visible = false;
                         }
                         break;
                     case "FACTURACION":
@@ -162,7 +162,7 @@ namespace ProyectoHCL
                     case "CLIENTES":
                         if (obj.IdPermiso == 1 && !obj.Permitido)
                         {
-                            Ibtn_servicios.Visible = false;
+                            Ibtn_usuarios.Visible = false;
                         }
                         break;
                     case "BITACORA":
@@ -224,9 +224,7 @@ namespace ProyectoHCL
             {
                 conn.Open();
 
-                string query = "SELECT INGRESO, SALIDA FROM TBL_SOLICITUDRESERVA WHERE NUMEROHABITACION = @habitacion " +
-                    "AND (ID_ESTADORESERVA = 1 OR ID_ESTADORESERVA = 2) " +
-                    "AND MONTH(INGRESO) = @mes AND YEAR(INGRESO) = @anio";
+                string query = "SELECT INGRESO, SALIDA FROM TBL_SOLICITUDRESERVA WHERE NUMEROHABITACION = @habitacion AND ID_ESTADORESERVA = 1 AND MONTH(INGRESO) = @mes AND YEAR(INGRESO) = @anio";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 //parámetros que recibe la consulta select
@@ -543,12 +541,6 @@ namespace ProyectoHCL
             openChildFormInPanel(new Reservaciones());
         }
 
-        private void Ibtn_perfil_Click(object sender, EventArgs e)
-        {
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new PerfilUsuario());
-        }
-
         private void iconButton4_Click(object sender, EventArgs e)
         {
             panelChildForm.Visible = true;
@@ -562,22 +554,6 @@ namespace ProyectoHCL
             openChildFormInPanel(new Restore());
             hideSubMenu2();
         }
-
-        private void iconButton6_Click(object sender, EventArgs e)
-        {
-            //codigo para el formilario
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CalendarioReservas());
-            hideSubMenu2();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            panelChildForm.Visible = true;
-            openChildFormInPanel(new CalendarioReservas());
-        }
-
-
 
         private void iconButton7_Click(object sender, EventArgs e)
         {
@@ -634,6 +610,13 @@ namespace ProyectoHCL
             Application.Exit();
         }
 
+
+        private void Ibtn_calendario_Click(object sender, EventArgs e)
+        {
+            if (activeForm != null)
+                activeForm.Close();
+        }
+
         private void Ibtn_usuarios_Click_1(object sender, EventArgs e)
         {
             panelChildForm.Visible = true;
@@ -666,6 +649,13 @@ namespace ProyectoHCL
         {
             panelChildForm.Visible = true;
             openChildFormInPanel(new CtrlDescuentos());
+            hideSubMenu2();
+        }
+
+        private void iconPerfil_Click(object sender, EventArgs e)
+        {
+            panelChildForm.Visible = true;
+            openChildFormInPanel(new PerfilUsuario());
             hideSubMenu2();
         }
     }

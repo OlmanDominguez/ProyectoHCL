@@ -71,15 +71,6 @@ namespace ProyectoHCL.Formularios
             InitializeComponent();
         }
 
-
-
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-
-
         int posY = 0;   /* declaracion de variables */
         int posX = 0;
 
@@ -112,15 +103,17 @@ namespace ProyectoHCL.Formularios
                     MySqlDataReader leer = comando.ExecuteReader();
                     if (leer.Read())
                     {
+                        lb_ID.Text = (string)leer["DNI_PASAPORTE"];
                         lb_nombres.Text = (string)leer["NOMBRE"];
                         lb_apellidos.Text = (string)leer["APELLIDO"];
-                        lb_ID.Text = (string)leer["DNI_PASAPORTE"];
+                        lb_Tele1.Text = (string)leer["TELEFONO"];
+                        lb_Tele2.Text = (string)leer["TELEFONO2"];
+                        lb_RTN.Text = (string)leer["RTN"];
                         lb_email1.Text = (string)leer["EMAIL"];
                         lb_email2.Text = (string)leer["EMAIL2"];
                         lb_Empresa.Text = (string)leer["NOMBRE_RTN"];
-                        lb_RTN.Text = (string)leer["RTN"];
-                        lb_Tele1.Text = (string)leer["TELEFONO"];
-                        lb_Tele2.Text = (string)leer["TELEFONO2"];
+
+
                     }
 
 
@@ -133,6 +126,19 @@ namespace ProyectoHCL.Formularios
             }
         }
 
+        private void btnCerrar_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

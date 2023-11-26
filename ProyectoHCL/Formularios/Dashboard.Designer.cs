@@ -51,11 +51,12 @@
             Ibtn_habitaciones = new FontAwesome.Sharp.IconButton();
             Ibtn_usuarios = new FontAwesome.Sharp.IconButton();
             Ibtn_administracion = new FontAwesome.Sharp.IconButton();
-            Ibtn_perfil = new FontAwesome.Sharp.IconButton();
+            Ibtn_calendario = new FontAwesome.Sharp.IconButton();
             btn_perfil = new Button();
             panel_logo = new Panel();
             pictureBox5 = new PictureBox();
             panel2 = new Panel();
+            iconPerfil = new FontAwesome.Sharp.IconButton();
             lbl_titulo = new Label();
             panelChildForm = new Panel();
             panel4 = new Panel();
@@ -74,12 +75,12 @@
             lbl_confirmadas = new Label();
             label13 = new Label();
             lbl_facturadas = new Label();
-            label1 = new Label();
-            cmbHabitacion = new ComboBox();
             panel46 = new Panel();
             LBLMES = new Label();
             btnSig = new Button();
+            label1 = new Label();
             btnAnt = new Button();
+            cmbHabitacion = new ComboBox();
             panel38 = new Panel();
             label7 = new Label();
             label6 = new Label();
@@ -114,7 +115,7 @@
             panel1.Controls.Add(Ibtn_facturacion);
             panel1.Controls.Add(paneladminSubMenu);
             panel1.Controls.Add(Ibtn_administracion);
-            panel1.Controls.Add(Ibtn_perfil);
+            panel1.Controls.Add(Ibtn_calendario);
             panel1.Controls.Add(btn_perfil);
             panel1.Controls.Add(panel_logo);
             panel1.Dock = DockStyle.Left;
@@ -134,7 +135,7 @@
             iconButton6.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton6.IconSize = 25;
             iconButton6.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton6.Location = new Point(0, 953);
+            iconButton6.Location = new Point(0, 961);
             iconButton6.Name = "iconButton6";
             iconButton6.Padding = new Padding(15, 0, 0, 0);
             iconButton6.Size = new Size(246, 45);
@@ -158,7 +159,7 @@
             panelmanteSubMenu.Controls.Add(Ibtn_objetos);
             panelmanteSubMenu.Controls.Add(Ibtn_roles);
             panelmanteSubMenu.Dock = DockStyle.Top;
-            panelmanteSubMenu.Location = new Point(0, 544);
+            panelmanteSubMenu.Location = new Point(0, 552);
             panelmanteSubMenu.Name = "panelmanteSubMenu";
             panelmanteSubMenu.Size = new Size(246, 409);
             panelmanteSubMenu.TabIndex = 35;
@@ -223,7 +224,7 @@
             iconButton3.Padding = new Padding(35, 0, 0, 0);
             iconButton3.Size = new Size(246, 45);
             iconButton3.TabIndex = 38;
-            iconButton3.Text = "Bitacora";
+            iconButton3.Text = "Bitácora";
             iconButton3.TextAlign = ContentAlignment.MiddleLeft;
             iconButton3.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton3.UseVisualStyleBackColor = true;
@@ -289,7 +290,7 @@
             Ibtn_parametros.Padding = new Padding(35, 0, 0, 0);
             Ibtn_parametros.Size = new Size(246, 45);
             Ibtn_parametros.TabIndex = 35;
-            Ibtn_parametros.Text = "Parametros";
+            Ibtn_parametros.Text = "Parámetros";
             Ibtn_parametros.TextAlign = ContentAlignment.MiddleLeft;
             Ibtn_parametros.TextImageRelation = TextImageRelation.ImageBeforeText;
             Ibtn_parametros.UseVisualStyleBackColor = true;
@@ -367,12 +368,12 @@
             Ibtn_mantenimiento.FlatAppearance.BorderSize = 0;
             Ibtn_mantenimiento.FlatStyle = FlatStyle.Flat;
             Ibtn_mantenimiento.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            Ibtn_mantenimiento.IconChar = FontAwesome.Sharp.IconChar.Gear;
+            Ibtn_mantenimiento.IconChar = FontAwesome.Sharp.IconChar.UnlockKeyhole;
             Ibtn_mantenimiento.IconColor = Color.Black;
             Ibtn_mantenimiento.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_mantenimiento.IconSize = 25;
             Ibtn_mantenimiento.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_mantenimiento.Location = new Point(0, 499);
+            Ibtn_mantenimiento.Location = new Point(0, 507);
             Ibtn_mantenimiento.Name = "Ibtn_mantenimiento";
             Ibtn_mantenimiento.Padding = new Padding(15, 0, 0, 0);
             Ibtn_mantenimiento.Size = new Size(246, 45);
@@ -389,12 +390,12 @@
             Ibtn_reservacion.FlatAppearance.BorderSize = 0;
             Ibtn_reservacion.FlatStyle = FlatStyle.Flat;
             Ibtn_reservacion.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            Ibtn_reservacion.IconChar = FontAwesome.Sharp.IconChar.CalendarCheck;
+            Ibtn_reservacion.IconChar = FontAwesome.Sharp.IconChar.ClipboardCheck;
             Ibtn_reservacion.IconColor = Color.Black;
             Ibtn_reservacion.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_reservacion.IconSize = 25;
             Ibtn_reservacion.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_reservacion.Location = new Point(0, 454);
+            Ibtn_reservacion.Location = new Point(0, 462);
             Ibtn_reservacion.Name = "Ibtn_reservacion";
             Ibtn_reservacion.Padding = new Padding(15, 0, 0, 0);
             Ibtn_reservacion.Size = new Size(246, 45);
@@ -416,7 +417,7 @@
             Ibtn_facturacion.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_facturacion.IconSize = 25;
             Ibtn_facturacion.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_facturacion.Location = new Point(0, 409);
+            Ibtn_facturacion.Location = new Point(0, 417);
             Ibtn_facturacion.Name = "Ibtn_facturacion";
             Ibtn_facturacion.Padding = new Padding(15, 0, 0, 0);
             Ibtn_facturacion.Size = new Size(246, 45);
@@ -436,7 +437,7 @@
             paneladminSubMenu.Controls.Add(Ibtn_habitaciones);
             paneladminSubMenu.Controls.Add(Ibtn_usuarios);
             paneladminSubMenu.Dock = DockStyle.Top;
-            paneladminSubMenu.Location = new Point(0, 177);
+            paneladminSubMenu.Location = new Point(0, 185);
             paneladminSubMenu.Name = "paneladminSubMenu";
             paneladminSubMenu.Size = new Size(246, 232);
             paneladminSubMenu.TabIndex = 29;
@@ -491,7 +492,7 @@
             iconButton1.FlatAppearance.BorderSize = 0;
             iconButton1.FlatStyle = FlatStyle.Flat;
             iconButton1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            iconButton1.IconChar = FontAwesome.Sharp.IconChar.City;
+            iconButton1.IconChar = FontAwesome.Sharp.IconChar.Hotel;
             iconButton1.IconColor = Color.Black;
             iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton1.IconSize = 25;
@@ -501,7 +502,7 @@
             iconButton1.Padding = new Padding(35, 0, 0, 0);
             iconButton1.Size = new Size(246, 45);
             iconButton1.TabIndex = 31;
-            iconButton1.Text = "Tipos de Habitación";
+            iconButton1.Text = "Tipos de habitación ";
             iconButton1.TextAlign = ContentAlignment.MiddleLeft;
             iconButton1.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton1.UseVisualStyleBackColor = true;
@@ -557,12 +558,12 @@
             Ibtn_administracion.FlatAppearance.BorderSize = 0;
             Ibtn_administracion.FlatStyle = FlatStyle.Flat;
             Ibtn_administracion.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            Ibtn_administracion.IconChar = FontAwesome.Sharp.IconChar.Unlock;
+            Ibtn_administracion.IconChar = FontAwesome.Sharp.IconChar.Gear;
             Ibtn_administracion.IconColor = Color.Black;
             Ibtn_administracion.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_administracion.IconSize = 25;
             Ibtn_administracion.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_administracion.Location = new Point(0, 132);
+            Ibtn_administracion.Location = new Point(0, 140);
             Ibtn_administracion.Name = "Ibtn_administracion";
             Ibtn_administracion.Padding = new Padding(15, 0, 0, 0);
             Ibtn_administracion.Size = new Size(246, 45);
@@ -573,27 +574,27 @@
             Ibtn_administracion.UseVisualStyleBackColor = true;
             Ibtn_administracion.Click += Ibtn_administracion_Click;
             // 
-            // Ibtn_perfil
+            // Ibtn_calendario
             // 
-            Ibtn_perfil.Dock = DockStyle.Top;
-            Ibtn_perfil.FlatAppearance.BorderSize = 0;
-            Ibtn_perfil.FlatStyle = FlatStyle.Flat;
-            Ibtn_perfil.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            Ibtn_perfil.IconChar = FontAwesome.Sharp.IconChar.UserAlt;
-            Ibtn_perfil.IconColor = Color.Black;
-            Ibtn_perfil.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            Ibtn_perfil.IconSize = 25;
-            Ibtn_perfil.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_perfil.Location = new Point(0, 87);
-            Ibtn_perfil.Name = "Ibtn_perfil";
-            Ibtn_perfil.Padding = new Padding(15, 0, 0, 0);
-            Ibtn_perfil.Size = new Size(246, 45);
-            Ibtn_perfil.TabIndex = 27;
-            Ibtn_perfil.Text = "Perfil";
-            Ibtn_perfil.TextAlign = ContentAlignment.MiddleLeft;
-            Ibtn_perfil.TextImageRelation = TextImageRelation.ImageBeforeText;
-            Ibtn_perfil.UseVisualStyleBackColor = true;
-            Ibtn_perfil.Click += Ibtn_perfil_Click;
+            Ibtn_calendario.Dock = DockStyle.Top;
+            Ibtn_calendario.FlatAppearance.BorderSize = 0;
+            Ibtn_calendario.FlatStyle = FlatStyle.Flat;
+            Ibtn_calendario.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            Ibtn_calendario.IconChar = FontAwesome.Sharp.IconChar.CalendarDays;
+            Ibtn_calendario.IconColor = Color.Black;
+            Ibtn_calendario.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            Ibtn_calendario.IconSize = 25;
+            Ibtn_calendario.ImageAlign = ContentAlignment.MiddleLeft;
+            Ibtn_calendario.Location = new Point(0, 95);
+            Ibtn_calendario.Name = "Ibtn_calendario";
+            Ibtn_calendario.Padding = new Padding(15, 0, 0, 0);
+            Ibtn_calendario.Size = new Size(246, 45);
+            Ibtn_calendario.TabIndex = 27;
+            Ibtn_calendario.Text = "Calendario Reservaciones";
+            Ibtn_calendario.TextAlign = ContentAlignment.MiddleLeft;
+            Ibtn_calendario.TextImageRelation = TextImageRelation.ImageBeforeText;
+            Ibtn_calendario.UseVisualStyleBackColor = true;
+            Ibtn_calendario.Click += Ibtn_calendario_Click;
             // 
             // btn_perfil
             // 
@@ -618,7 +619,7 @@
             panel_logo.Dock = DockStyle.Top;
             panel_logo.Location = new Point(0, 0);
             panel_logo.Name = "panel_logo";
-            panel_logo.Size = new Size(246, 87);
+            panel_logo.Size = new Size(246, 95);
             panel_logo.TabIndex = 0;
             // 
             // pictureBox5
@@ -636,12 +637,37 @@
             // panel2
             // 
             panel2.BackColor = Color.Black;
+            panel2.Controls.Add(iconPerfil);
             panel2.Controls.Add(lbl_titulo);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(246, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1067, 70);
+            panel2.Size = new Size(1067, 64);
             panel2.TabIndex = 2;
+            // 
+            // iconPerfil
+            // 
+            iconPerfil.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            iconPerfil.BackColor = Color.Transparent;
+            iconPerfil.BackgroundImageLayout = ImageLayout.None;
+            iconPerfil.FlatAppearance.BorderColor = Color.Silver;
+            iconPerfil.FlatAppearance.BorderSize = 2;
+            iconPerfil.FlatStyle = FlatStyle.Popup;
+            iconPerfil.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            iconPerfil.ForeColor = Color.White;
+            iconPerfil.IconChar = FontAwesome.Sharp.IconChar.UserAlt;
+            iconPerfil.IconColor = Color.White;
+            iconPerfil.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconPerfil.IconSize = 30;
+            iconPerfil.ImageAlign = ContentAlignment.MiddleLeft;
+            iconPerfil.Location = new Point(975, 8);
+            iconPerfil.Name = "iconPerfil";
+            iconPerfil.Size = new Size(80, 48);
+            iconPerfil.TabIndex = 49;
+            iconPerfil.Text = "Perfil";
+            iconPerfil.TextImageRelation = TextImageRelation.ImageBeforeText;
+            iconPerfil.UseVisualStyleBackColor = false;
+            iconPerfil.Click += iconPerfil_Click;
             // 
             // lbl_titulo
             // 
@@ -650,7 +676,7 @@
             lbl_titulo.BackColor = Color.Transparent;
             lbl_titulo.Font = new Font("Lucida Bright", 24F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             lbl_titulo.ForeColor = Color.White;
-            lbl_titulo.Location = new Point(343, 18);
+            lbl_titulo.Location = new Point(343, 15);
             lbl_titulo.Name = "lbl_titulo";
             lbl_titulo.Size = new Size(362, 36);
             lbl_titulo.TabIndex = 16;
@@ -667,21 +693,20 @@
             panelChildForm.Controls.Add(panel38);
             panelChildForm.Controls.Add(ContenedorDias);
             panelChildForm.Controls.Add(label11);
-            panelChildForm.Location = new Point(246, 70);
+            panelChildForm.Location = new Point(246, 65);
             panelChildForm.Name = "panelChildForm";
-            panelChildForm.Size = new Size(1067, 617);
+            panelChildForm.Size = new Size(1067, 622);
             panelChildForm.TabIndex = 25;
             // 
             // panel4
             // 
-            panel4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             panel4.BackColor = Color.FromArgb(20, 100, 150);
             panel4.Controls.Add(label3);
             panel4.Controls.Add(lbl_reserva);
             panel4.Controls.Add(lbl_disp);
             panel4.Controls.Add(lbl_activas);
             panel4.Controls.Add(lbl_inactivas);
-            panel4.Location = new Point(785, 80);
+            panel4.Location = new Point(809, 83);
             panel4.Name = "panel4";
             panel4.Size = new Size(216, 115);
             panel4.TabIndex = 46;
@@ -751,7 +776,6 @@
             // 
             // panel3
             // 
-            panel3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             panel3.BackColor = Color.FromArgb(20, 100, 150);
             panel3.Controls.Add(label8);
             panel3.Controls.Add(lbl_confir);
@@ -762,7 +786,7 @@
             panel3.Controls.Add(lbl_confirmadas);
             panel3.Controls.Add(label13);
             panel3.Controls.Add(lbl_facturadas);
-            panel3.Location = new Point(785, 239);
+            panel3.Location = new Point(809, 242);
             panel3.Name = "panel3";
             panel3.Size = new Size(216, 201);
             panel3.TabIndex = 45;
@@ -774,11 +798,11 @@
             label8.BackColor = Color.FromArgb(20, 100, 150);
             label8.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = SystemColors.ButtonFace;
-            label8.Location = new Point(16, 21);
+            label8.Location = new Point(43, 20);
             label8.Name = "label8";
-            label8.Size = new Size(176, 25);
+            label8.Size = new Size(137, 25);
             label8.TabIndex = 35;
-            label8.Text = "Reservas en el mes";
+            label8.Text = "Reservaciones";
             // 
             // lbl_confir
             // 
@@ -882,28 +906,6 @@
             lbl_facturadas.TabIndex = 49;
             lbl_facturadas.Text = "-";
             // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI Symbol", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(418, 10);
-            label1.Name = "label1";
-            label1.Size = new Size(85, 20);
-            label1.TabIndex = 46;
-            label1.Text = "Habitación:";
-            // 
-            // cmbHabitacion
-            // 
-            cmbHabitacion.FormattingEnabled = true;
-            cmbHabitacion.Location = new Point(508, 8);
-            cmbHabitacion.Name = "cmbHabitacion";
-            cmbHabitacion.Size = new Size(100, 23);
-            cmbHabitacion.TabIndex = 45;
-            cmbHabitacion.SelectedIndexChanged += cmbHabitacion_SelectedIndexChanged;
-            // 
             // panel46
             // 
             panel46.BackColor = Color.FromArgb(20, 100, 150);
@@ -912,7 +914,7 @@
             panel46.Controls.Add(label1);
             panel46.Controls.Add(btnAnt);
             panel46.Controls.Add(cmbHabitacion);
-            panel46.Location = new Point(64, 80);
+            panel46.Location = new Point(64, 83);
             panel46.Name = "panel46";
             panel46.Size = new Size(715, 38);
             panel46.TabIndex = 44;
@@ -941,6 +943,19 @@
             btnSig.UseVisualStyleBackColor = false;
             btnSig.Click += btnSig_Click;
             // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI Symbol", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(415, 10);
+            label1.Name = "label1";
+            label1.Size = new Size(89, 20);
+            label1.TabIndex = 46;
+            label1.Text = " Habitación:";
+            // 
             // btnAnt
             // 
             btnAnt.BackColor = Color.Transparent;
@@ -955,6 +970,16 @@
             btnAnt.UseVisualStyleBackColor = false;
             btnAnt.Click += btnAnt_Click;
             // 
+            // cmbHabitacion
+            // 
+            cmbHabitacion.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbHabitacion.FormattingEnabled = true;
+            cmbHabitacion.Location = new Point(510, 8);
+            cmbHabitacion.Name = "cmbHabitacion";
+            cmbHabitacion.Size = new Size(102, 23);
+            cmbHabitacion.TabIndex = 45;
+            cmbHabitacion.SelectedIndexChanged += cmbHabitacion_SelectedIndexChanged;
+            // 
             // panel38
             // 
             panel38.BackColor = Color.FromArgb(20, 100, 150);
@@ -965,7 +990,7 @@
             panel38.Controls.Add(label2);
             panel38.Controls.Add(label9);
             panel38.Controls.Add(label10);
-            panel38.Location = new Point(64, 119);
+            panel38.Location = new Point(64, 122);
             panel38.Name = "panel38";
             panel38.Size = new Size(715, 35);
             panel38.TabIndex = 43;
@@ -1050,7 +1075,7 @@
             // ContenedorDias
             // 
             ContenedorDias.BackColor = Color.LightGray;
-            ContenedorDias.Location = new Point(64, 160);
+            ContenedorDias.Location = new Point(64, 163);
             ContenedorDias.Name = "ContenedorDias";
             ContenedorDias.Size = new Size(715, 423);
             ContenedorDias.TabIndex = 42;
@@ -1062,7 +1087,7 @@
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(64, 30);
+            label11.Location = new Point(64, 35);
             label11.Name = "label11";
             label11.Size = new Size(318, 32);
             label11.TabIndex = 47;
@@ -1114,7 +1139,6 @@
         private Panel panel_logo;
         private PictureBox pictureBox5;
         private Button btn_perfil;
-        private FontAwesome.Sharp.IconButton Ibtn_perfil;
         private FontAwesome.Sharp.IconButton Ibtn_administracion;
         private Panel paneladminSubMenu;
         private FontAwesome.Sharp.IconButton iconButton1;
@@ -1148,7 +1172,6 @@
         private FontAwesome.Sharp.IconButton iconButton3;
         private FontAwesome.Sharp.IconButton iconButton5;
         private FontAwesome.Sharp.IconButton iconButton4;
-        private FontAwesome.Sharp.IconButton iconButton7;
         private Label lbl_facturadas;
         private Label label13;
         private Label label1;
@@ -1170,5 +1193,7 @@
         private FontAwesome.Sharp.IconButton iconButton6;
         private Panel panel4;
         private Panel panel3;
+        private FontAwesome.Sharp.IconButton Ibtn_calendario;
+        private FontAwesome.Sharp.IconButton iconPerfil;
     }
 }

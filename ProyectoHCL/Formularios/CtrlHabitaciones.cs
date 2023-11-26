@@ -22,6 +22,7 @@ using SpreadsheetLight.Drawing;
 using iText.Kernel.Pdf.Canvas.Wmf;
 using iText.Layout.Renderer;
 using Point = System.Drawing.Point;
+using Image = System.Drawing.Image;
 
 //-----------------------------------------------------------------------
 //    Universidad Nacional Autonoma de Honduras (UNAH)
@@ -105,6 +106,8 @@ namespace ProyectoHCL.Formularios
                         if (obj.ObjetoN == "HABITACIONES" && !obj.Permitido) //Validar pantalla y el permiso
                         {
                             btnNuevo.Visible = false; //Ocultar botón para crear
+                            btnExcel.Visible = false;
+                            btnPDF.Visible = false;
                         }
                         break;
                     case 3: //permiso editar
@@ -148,13 +151,13 @@ namespace ProyectoHCL.Formularios
 
         private void CtrlHabitaciones_Load(object sender, EventArgs e)
         {
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //agregar botón de editar en datagrid
+            DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn();
             btnUpdate.Name = "EDITAR";
             dgvHab.Columns.Add(btnUpdate);
 
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn(); //agregar botón de eliminar en datagrid
-            btnDelete.Name = "ELIMINAR";
-            dgvHab.Columns.Add(btnDelete);
+            DataGridViewImageColumn btnEliminar = new DataGridViewImageColumn();
+            btnEliminar.Name = "ELIMINAR";
+            dgvHab.Columns.Add(btnEliminar);
 
             Permisos(); //Llamar la función permisos al cargar formulario
         }
@@ -189,36 +192,6 @@ namespace ProyectoHCL.Formularios
             R_E_hab.cargarTiposR();
             R_E_hab.ShowDialog();
             CargarDG();
-        }
-
-        private void dgvHab_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)  //Configurar datagrid para mostrar los botones de editar y eliminar que se agregaron
-        {
-            if (e.ColumnIndex >= 0 && this.dgvHab.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvHab.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvHab.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvHab.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
-            if (e.ColumnIndex >= 0 && this.dgvHab.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvHab.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvHab.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvHab.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
         }
 
         private void cmbPagH_SelectionChangeCommitted(object sender, EventArgs e) //Seleccionar página para mostrar registros
@@ -547,6 +520,28 @@ namespace ProyectoHCL.Formularios
         private void btnNuevo_EnabledChanged(object sender, EventArgs e)
         {
             btnNuevo.BackColor = Color.DarkGray;
+        }
+
+        private void dgvHab_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvHab.Columns[e.ColumnIndex].Name == "EDITAR")
+            {
+                Image imagen = Properties.Resources.editar;
+
+                dgvHab.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvHab.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvHab.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            {
+                Image imagen = Properties.Resources.eliminar;
+
+                dgvHab.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvHab.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
         }
     }
 }

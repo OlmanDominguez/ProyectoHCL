@@ -116,5 +116,34 @@ namespace ProyectoHCL.clases
 
             return elimino;
         }
+
+        public bool EliminarServicioHab(int idServH, string idSolR) //función para eliminar los servicios de habitación
+        {
+            bool elimino = false;
+
+            try
+            {
+                string sql = "DELETE FROM TBL_DETALLESERVICIO WHERE ID_SOLICITUDRESERVA = @ID_SOLICITUDRESERVA " +
+                    "AND ID_SERVICIO = @ID_SERVICIO;";
+
+                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                conn.Open();
+
+                cmd = new MySqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@ID_SOLICITUDRESERVA", idSolR);
+                cmd.Parameters.AddWithValue("@ID_SERVICIO", idServH);
+
+                cmd.ExecuteNonQuery();
+                elimino = true;
+                conn.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return elimino;
+        }
     }
 }

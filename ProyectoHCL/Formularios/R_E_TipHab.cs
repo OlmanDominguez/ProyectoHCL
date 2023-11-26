@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office2010.Excel;
-using DocumentFormat.OpenXml.Wordprocessing;
+﻿
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
@@ -11,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 //-----------------------------------------------------------------------
 //    Universidad Nacional Autonoma de Honduras (UNAH)
@@ -69,12 +70,11 @@ namespace ProyectoHCL.Formularios
         public R_E_TipHab()
         {
             InitializeComponent();
-            cmbEstado.SelectedIndex = -1;
+            //  cmbEstado.SelectedIndex = -1;
             txtPrecio.KeyPress += txtPrecio_KeyPress; //llamar evento que valida que solo se ingresen números
-           
+
         }
 
-      
         public string idTH = null;
         MsgB msgB = new MsgB();
 
@@ -186,7 +186,7 @@ namespace ProyectoHCL.Formularios
         }
 
 
-    private void btnGuardar_Click(object sender, EventArgs e) //botón para guardar un nuevo registro o una modificación
+        private void btnGuardar_Click(object sender, EventArgs e) //botón para guardar un nuevo registro o una modificación
         {
             if (lblTitulo.Text == "Registrar Tipo de Habitación")
             {
@@ -236,9 +236,9 @@ namespace ProyectoHCL.Formularios
             }
             else if (lblTitulo.Text == "Editar Tipo de Habitación")
             {
+                Control control = new Control();
                 string nuevoTipo = txtTipo.Text;
                 string idRegistro = idTH;
-                Control control = new Control();
 
 
                 Modelo modelo = new Modelo();
@@ -297,38 +297,38 @@ namespace ProyectoHCL.Formularios
             ValidarTxt.TxtLetras(e);
         }
 
-       // private void cargarEstado() //cargar combobox con los registros de los estados en la base de datos
-       // {
-          //  MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+        // private void cargarEstado() //cargar combobox con los registros de los estados en la base de datos
+        // {
+        //  MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
 
-          //  cmbEstado.DataSource = null;
-           // cmbEstado.Items.Clear();
+        //  cmbEstado.DataSource = null;
+        // cmbEstado.Items.Clear();
 
-           // using (conectar)
-           // {
-              //  string sql = "SELECT ESTADO FROM TBL_TIPOHABITACION";
-               // using (MySqlCommand cmd = new MySqlCommand(sql, conectar))
-                //{
-                   // try
-                   // {
-                       // MySqlDataAdapter data = new MySqlDataAdapter(cmd);
-                       // DataTable dt = new DataTable();
-                       // data.Fill(dt);
+        // using (conectar)
+        // {
+        //  string sql = "SELECT ESTADO FROM TBL_TIPOHABITACION";
+        // using (MySqlCommand cmd = new MySqlCommand(sql, conectar))
+        //{
+        // try
+        // {
+        // MySqlDataAdapter data = new MySqlDataAdapter(cmd);
+        // DataTable dt = new DataTable();
+        // data.Fill(dt);
 
-                       // cmbEstado.ValueMember = "ESTADO";
-                       // cmbEstado.DisplayMember = "DESCRIPCION";
-                       // cmbEstado.DataSource = dt;
-                   // }
-                   // catch (MySqlException e)
-                   // {
-                       // MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
-                       // DialogResult dR = m.ShowDialog();
-                   // }
-                   // finally { conectar.Close(); }//
+        // cmbEstado.ValueMember = "ESTADO";
+        // cmbEstado.DisplayMember = "DESCRIPCION";
+        // cmbEstado.DataSource = dt;
+        // }
+        // catch (MySqlException e)
+        // {
+        // MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
+        // DialogResult dR = m.ShowDialog();
+        // }
+        // finally { conectar.Close(); }//
 
-               // }
+        // }
 
-            }
-        }
-   // }
+    }
+}
+// }
 //}

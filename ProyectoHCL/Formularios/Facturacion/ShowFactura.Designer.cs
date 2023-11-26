@@ -194,6 +194,7 @@
             lbl_Descuento.TabIndex = 129;
             lbl_Descuento.TabStop = true;
             lbl_Descuento.Text = "Descuentos";
+            lbl_Descuento.LinkClicked += lbl_Descuento_LinkClicked;
             // 
             // txt_RegSar
             // 
@@ -657,6 +658,7 @@
             Opacity = 0.95D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "EditarObjeto";
+            FormClosing += ShowFactura_FormClosing;
             Load += ShowFactura_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
