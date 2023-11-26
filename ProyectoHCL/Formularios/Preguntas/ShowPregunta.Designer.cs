@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShowPregunta));
             panel2 = new Panel();
+            button1 = new Button();
             label11 = new Label();
             panel1 = new Panel();
             label1 = new Label();
             txtPregunta = new TextBox();
             btnCancelar = new Button();
             btnGuardar = new Button();
-            button1 = new Button();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -53,6 +53,23 @@
             panel2.Size = new Size(933, 122);
             panel2.TabIndex = 21;
             // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.BackColor = Color.Transparent;
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.BackgroundImageLayout = ImageLayout.Stretch;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(891, 20);
+            button1.Margin = new Padding(4, 5, 4, 5);
+            button1.Name = "button1";
+            button1.Size = new Size(20, 28);
+            button1.TabIndex = 81;
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // label11
             // 
             label11.Anchor = AnchorStyles.Top;
@@ -63,9 +80,9 @@
             label11.Location = new Point(331, 30);
             label11.Margin = new Padding(4, 0, 4, 0);
             label11.Name = "label11";
-            label11.Size = new Size(265, 45);
+            label11.Size = new Size(316, 45);
             label11.TabIndex = 28;
-            label11.Text = "Detalle Pregunta";
+            label11.Text = "Registrar Preguntas ";
             // 
             // panel1
             // 
@@ -138,22 +155,6 @@
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
-            // 
-            // button1
-            // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.BackColor = Color.Transparent;
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.BackgroundImageLayout = ImageLayout.Stretch;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(891, 20);
-            button1.Margin = new Padding(4, 5, 4, 5);
-            button1.Name = "button1";
-            button1.Size = new Size(20, 28);
-            button1.TabIndex = 81;
-            button1.UseVisualStyleBackColor = false;
             // 
             // ShowPregunta
             // 

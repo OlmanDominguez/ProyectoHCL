@@ -181,7 +181,7 @@ namespace ProyectoHCL.Formularios.Parametros
         private void btnNuevo_Click(object sender, EventArgs e)//Se crea el boton de un nuevo registro 
         {
             //Para form de nuevo
-            R_E_para.lbPar.Text = "Registrar Descuento";
+            R_E_para.lbPar.Text = "Registrar Parametro";
             parame.p = 2;
             Form formulario = new Formularios.R_E_Parametro();
             formulario.ShowDialog();
@@ -200,7 +200,7 @@ namespace ProyectoHCL.Formularios.Parametros
 
         private void dgvParametros_CellClick(object sender, DataGridViewCellEventArgs e)//creamos dos opciones 
         {
-            R_E_para.lbPar.Text = "Editar Descuento";
+            R_E_para.lbPar.Text = "Editar Parametro";
             if (this.dgvParametros.Columns[e.ColumnIndex].Name == "EDITAR")
             {
                 try

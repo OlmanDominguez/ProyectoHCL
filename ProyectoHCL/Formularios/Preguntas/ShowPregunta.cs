@@ -50,6 +50,7 @@ namespace ProyectoHCL.Formularios
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+
             if (CtrlPreguntas.preg.op == 1)
             {
                 using (BaseDatosHCL.ObtenerConexion())
@@ -88,6 +89,11 @@ namespace ProyectoHCL.Formularios
 
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
