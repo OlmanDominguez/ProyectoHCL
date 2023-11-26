@@ -35,21 +35,13 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             panel2 = new Panel();
-            button6 = new Button();
+            cerrar = new Button();
             btnCerrar = new Button();
             label11 = new Label();
-            button2 = new Button();
-            button5 = new Button();
-            btnPerfil = new Button();
-            btnCerrarSesion = new Button();
             panel5 = new Panel();
             pdf = new Button();
             Excel = new Button();
             btnNuevo = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button7 = new Button();
-            button9 = new Button();
             txtBuscarR = new TextBox();
             label4 = new Label();
             panel1 = new Panel();
@@ -59,11 +51,7 @@
             label7 = new Label();
             txtPagR = new TextBox();
             cmbPagR = new ComboBox();
-            label1 = new Label();
-            label3 = new Label();
-            txtPag = new TextBox();
             label2 = new Label();
-            cmbPag = new ComboBox();
             cmbMostrar = new ComboBox();
             label5 = new Label();
             dgvRoles = new DataGridView();
@@ -76,13 +64,9 @@
             // panel2
             // 
             panel2.BackColor = Color.WhiteSmoke;
-            panel2.Controls.Add(button6);
+            panel2.Controls.Add(cerrar);
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(label11);
-            panel2.Controls.Add(button2);
-            panel2.Controls.Add(button5);
-            panel2.Controls.Add(btnPerfil);
-            panel2.Controls.Add(btnCerrarSesion);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Margin = new Padding(4, 5, 4, 5);
@@ -90,22 +74,22 @@
             panel2.Size = new Size(1549, 108);
             panel2.TabIndex = 35;
             // 
-            // button6
+            // cerrar
             // 
-            button6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button6.BackColor = Color.Transparent;
-            button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
-            button6.BackgroundImageLayout = ImageLayout.Stretch;
-            button6.FlatAppearance.BorderSize = 0;
-            button6.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            button6.FlatStyle = FlatStyle.Flat;
-            button6.Location = new Point(1516, 13);
-            button6.Margin = new Padding(4, 5, 4, 5);
-            button6.Name = "button6";
-            button6.Size = new Size(20, 28);
-            button6.TabIndex = 43;
-            button6.UseVisualStyleBackColor = false;
-            button6.Click += button6_Click;
+            cerrar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            cerrar.BackColor = Color.Transparent;
+            cerrar.BackgroundImage = (Image)resources.GetObject("cerrar.BackgroundImage");
+            cerrar.BackgroundImageLayout = ImageLayout.Stretch;
+            cerrar.FlatAppearance.BorderSize = 0;
+            cerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            cerrar.FlatStyle = FlatStyle.Flat;
+            cerrar.Location = new Point(1516, 13);
+            cerrar.Margin = new Padding(4, 5, 4, 5);
+            cerrar.Name = "cerrar";
+            cerrar.Size = new Size(20, 28);
+            cerrar.TabIndex = 43;
+            cerrar.UseVisualStyleBackColor = false;
+            cerrar.Click += button6_Click;
             // 
             // btnCerrar
             // 
@@ -136,76 +120,12 @@
             label11.TabIndex = 41;
             label11.Text = "Roles Registrados";
             // 
-            // button2
-            // 
-            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button2.BackColor = Color.Transparent;
-            button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
-            button2.BackgroundImageLayout = ImageLayout.Stretch;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(5511, 123);
-            button2.Margin = new Padding(4, 5, 4, 5);
-            button2.Name = "button2";
-            button2.Size = new Size(43, 48);
-            button2.TabIndex = 38;
-            button2.UseVisualStyleBackColor = false;
-            // 
-            // button5
-            // 
-            button5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button5.BackColor = Color.Transparent;
-            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
-            button5.BackgroundImageLayout = ImageLayout.Stretch;
-            button5.FlatAppearance.BorderSize = 0;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.Location = new Point(5579, 120);
-            button5.Margin = new Padding(4, 5, 4, 5);
-            button5.Name = "button5";
-            button5.Size = new Size(50, 55);
-            button5.TabIndex = 39;
-            button5.UseVisualStyleBackColor = false;
-            // 
-            // btnPerfil
-            // 
-            btnPerfil.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnPerfil.BackColor = Color.Transparent;
-            btnPerfil.BackgroundImage = (Image)resources.GetObject("btnPerfil.BackgroundImage");
-            btnPerfil.BackgroundImageLayout = ImageLayout.Stretch;
-            btnPerfil.FlatAppearance.BorderSize = 0;
-            btnPerfil.FlatStyle = FlatStyle.Flat;
-            btnPerfil.Location = new Point(6533, 122);
-            btnPerfil.Margin = new Padding(4, 5, 4, 5);
-            btnPerfil.Name = "btnPerfil";
-            btnPerfil.Size = new Size(43, 48);
-            btnPerfil.TabIndex = 34;
-            btnPerfil.UseVisualStyleBackColor = false;
-            // 
-            // btnCerrarSesion
-            // 
-            btnCerrarSesion.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCerrarSesion.BackColor = Color.Transparent;
-            btnCerrarSesion.BackgroundImage = (Image)resources.GetObject("btnCerrarSesion.BackgroundImage");
-            btnCerrarSesion.BackgroundImageLayout = ImageLayout.Stretch;
-            btnCerrarSesion.FlatAppearance.BorderSize = 0;
-            btnCerrarSesion.FlatStyle = FlatStyle.Flat;
-            btnCerrarSesion.Location = new Point(6600, 118);
-            btnCerrarSesion.Margin = new Padding(4, 5, 4, 5);
-            btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Size = new Size(50, 55);
-            btnCerrarSesion.TabIndex = 35;
-            btnCerrarSesion.UseVisualStyleBackColor = false;
-            // 
             // panel5
             // 
             panel5.BackColor = Color.Gainsboro;
             panel5.Controls.Add(pdf);
             panel5.Controls.Add(Excel);
             panel5.Controls.Add(btnNuevo);
-            panel5.Controls.Add(button3);
-            panel5.Controls.Add(button4);
-            panel5.Controls.Add(button7);
-            panel5.Controls.Add(button9);
             panel5.Controls.Add(txtBuscarR);
             panel5.Controls.Add(label4);
             panel5.Dock = DockStyle.Top;
@@ -268,70 +188,6 @@
             btnNuevo.EnabledChanged += btnNuevo_EnabledChanged;
             btnNuevo.Click += btnNuevo_Click;
             // 
-            // button3
-            // 
-            button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button3.BackColor = Color.Red;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button3.ForeColor = SystemColors.ButtonHighlight;
-            button3.Location = new Point(1909, 28);
-            button3.Margin = new Padding(1, 2, 1, 2);
-            button3.Name = "button3";
-            button3.Size = new Size(111, 42);
-            button3.TabIndex = 53;
-            button3.Text = "PDF";
-            button3.UseVisualStyleBackColor = false;
-            // 
-            // button4
-            // 
-            button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button4.BackColor = Color.FromArgb(0, 192, 0);
-            button4.FlatAppearance.BorderSize = 0;
-            button4.FlatStyle = FlatStyle.Flat;
-            button4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button4.ForeColor = SystemColors.ButtonHighlight;
-            button4.Location = new Point(1817, 28);
-            button4.Margin = new Padding(1, 2, 1, 2);
-            button4.Name = "button4";
-            button4.Size = new Size(111, 42);
-            button4.TabIndex = 52;
-            button4.Text = "Excel ";
-            button4.UseVisualStyleBackColor = false;
-            // 
-            // button7
-            // 
-            button7.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button7.BackColor = Color.Red;
-            button7.FlatAppearance.BorderSize = 0;
-            button7.FlatStyle = FlatStyle.Flat;
-            button7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button7.ForeColor = SystemColors.ButtonHighlight;
-            button7.Location = new Point(2739, 2);
-            button7.Margin = new Padding(1, 2, 1, 2);
-            button7.Name = "button7";
-            button7.Size = new Size(111, 42);
-            button7.TabIndex = 51;
-            button7.Text = "PDF";
-            button7.UseVisualStyleBackColor = false;
-            // 
-            // button9
-            // 
-            button9.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button9.BackColor = Color.FromArgb(0, 192, 0);
-            button9.FlatAppearance.BorderSize = 0;
-            button9.FlatStyle = FlatStyle.Flat;
-            button9.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            button9.ForeColor = SystemColors.ButtonHighlight;
-            button9.Location = new Point(2649, 2);
-            button9.Margin = new Padding(1, 2, 1, 2);
-            button9.Name = "button9";
-            button9.Size = new Size(111, 42);
-            button9.TabIndex = 50;
-            button9.Text = "Excel ";
-            button9.UseVisualStyleBackColor = false;
-            // 
             // txtBuscarR
             // 
             txtBuscarR.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -366,11 +222,7 @@
             panel1.Controls.Add(label7);
             panel1.Controls.Add(txtPagR);
             panel1.Controls.Add(cmbPagR);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(label3);
-            panel1.Controls.Add(txtPag);
             panel1.Controls.Add(label2);
-            panel1.Controls.Add(cmbPag);
             panel1.Controls.Add(cmbMostrar);
             panel1.Controls.Add(label5);
             panel1.Dock = DockStyle.Bottom;
@@ -464,43 +316,6 @@
             cmbPagR.TabIndex = 65;
             cmbPagR.SelectionChangeCommitted += cmbPagR_SelectionChangeCommitted;
             // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Right;
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(2713, 52);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(36, 28);
-            label1.TabIndex = 47;
-            label1.Text = "De";
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.Right;
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(2526, 52);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(70, 28);
-            label3.TabIndex = 46;
-            label3.Text = "Página";
-            // 
-            // txtPag
-            // 
-            txtPag.Anchor = AnchorStyles.Right;
-            txtPag.BorderStyle = BorderStyle.FixedSingle;
-            txtPag.Location = new Point(2753, 47);
-            txtPag.Margin = new Padding(4, 5, 4, 5);
-            txtPag.Name = "txtPag";
-            txtPag.ReadOnly = true;
-            txtPag.Size = new Size(92, 31);
-            txtPag.TabIndex = 45;
-            // 
             // label2
             // 
             label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -513,18 +328,6 @@
             label2.Size = new Size(81, 28);
             label2.TabIndex = 39;
             label2.Text = "Mostrar";
-            // 
-            // cmbPag
-            // 
-            cmbPag.Anchor = AnchorStyles.Right;
-            cmbPag.BackColor = SystemColors.Info;
-            cmbPag.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbPag.FormattingEnabled = true;
-            cmbPag.Location = new Point(1820, 28);
-            cmbPag.Margin = new Padding(1, 2, 1, 2);
-            cmbPag.Name = "cmbPag";
-            cmbPag.Size = new Size(91, 33);
-            cmbPag.TabIndex = 44;
             // 
             // cmbMostrar
             // 
@@ -589,8 +392,8 @@
             dgvRoles.DefaultCellStyle = dataGridViewCellStyle3;
             dgvRoles.EnableHeadersVisualStyles = false;
             dgvRoles.GridColor = Color.FromArgb(45, 66, 91);
-            dgvRoles.Location = new Point(0, 220);
-            dgvRoles.Margin = new Padding(1, 2, 1, 2);
+            dgvRoles.Location = new Point(13, 230);
+            dgvRoles.Margin = new Padding(4, 5, 4, 5);
             dgvRoles.Name = "dgvRoles";
             dgvRoles.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -610,8 +413,8 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
             dgvRoles.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvRoles.RowTemplate.Height = 25;
-            dgvRoles.Size = new Size(1548, 589);
-            dgvRoles.TabIndex = 1;
+            dgvRoles.Size = new Size(1487, 568);
+            dgvRoles.TabIndex = 6;
             dgvRoles.CellClick += dgvRoles_CellClick;
             dgvRoles.CellFormatting += dgvRoles_CellFormatting_1;
             // 
@@ -620,14 +423,13 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1549, 935);
-            Controls.Add(dgvRoles);
             Controls.Add(panel1);
+            Controls.Add(dgvRoles);
             Controls.Add(panel5);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(1, 2, 1, 2);
             Name = "CtrlRoles";
-            StartPosition = FormStartPosition.CenterParent;
             Text = "CtrlRoles";
             Load += CtrlRoles_Load_1;
             panel2.ResumeLayout(false);
@@ -659,11 +461,7 @@
         private Button pdf;
         private Button Excel;
         private Panel panel1;
-        private Label label1;
-        private Label label3;
-        private TextBox txtPag;
         private Label label2;
-        private ComboBox cmbPag;
         private ComboBox cmbMostrar;
         private Label label5;
         private Button btSiguiente;
@@ -673,7 +471,7 @@
         private TextBox txtPagR;
         private ComboBox cmbPagR;
         public DataGridView dgvRoles;
-        private Button button6;
+        private Button cerrar;
         public TextBox txtBuscarR;
     }
 }

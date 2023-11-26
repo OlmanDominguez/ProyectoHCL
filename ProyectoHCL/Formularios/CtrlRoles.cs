@@ -115,6 +115,8 @@ namespace ProyectoHCL.Formularios
                         if (obj.ObjetoN == "ROLES" && !obj.Permitido)//en esta condicion esta crear para que el usuario solo puede ver 
                         {
                             btnNuevo.Visible = false;
+                            Excel.Visible = false;
+                            pdf.Visible = false;
                         }
                         break;
                     case 3://en este caso se creo para poder dar acceso al usuario de editar 
@@ -161,15 +163,15 @@ namespace ProyectoHCL.Formularios
 
         private void CtrlRoles_Load_1(object sender, EventArgs e)
         {
-            DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn(); //se crea el boton en el dataGrid
-            btnUpdate.Name = "EDITAR"; //Nombre del boton 
-            dgvRoles.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
+            DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn();
+            btnUpdate.Name = "EDITAR";
+            dgvRoles.Columns.Add(btnUpdate);
 
             DataGridViewImageColumn btnEliminar = new DataGridViewImageColumn();
             btnEliminar.Name = "ELIMINAR";
             dgvRoles.Columns.Add(btnEliminar);
 
-            Permisos();
+            Permisos(); //Llamar la función permisos al cargar formulario
         }
 
 
@@ -522,23 +524,23 @@ namespace ProyectoHCL.Formularios
         private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e)//texbox muestra un numero determinado de paginas 
         {
 
-            indice = cmbMostrar.SelectedIndex;
-            switch (indice)
+            cmbIndice = cmbMostrar.SelectedIndex;
+            switch (cmbIndice)
             {
                 case 0:
-                    numFilas = 5;
-                    break;
-                case 1:
                     numFilas = 10;
                     break;
-                case 2:
+                case 1:
                     numFilas = 20;
                     break;
-                case 3:
+                case 2:
                     numFilas = 30;
                     break;
-                case 4:
+                case 3:
                     numFilas = 40;
+                    break;
+                case 4:
+                    numFilas = 50;
                     break;
             }
             pagFinal = numFilas;
