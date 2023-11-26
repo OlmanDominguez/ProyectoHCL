@@ -44,11 +44,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 12.75F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(131, 48);
+            label1.Location = new Point(155, 45);
             label1.Name = "label1";
-            label1.Size = new Size(231, 25);
+            label1.Size = new Size(209, 23);
             label1.TabIndex = 0;
             label1.Text = "¿Olvidaste tu Contraseña?";
             // 

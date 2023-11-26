@@ -27,6 +27,7 @@ using iText.Kernel.Pdf;
 using Document = iText.Layout.Document;
 using iText.Kernel.Geom;
 using iText.Layout.Element;
+using Image = System.Drawing.Image;
 
 namespace ProyectoHCL
 {
@@ -91,9 +92,9 @@ namespace ProyectoHCL
         private void Buscar_Load(object sender, EventArgs e)
         {
             CargarClientes();
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
-            btnUpdate.Name = "SELECCIONAR";//Nombre del boton 
-            dgv_clientes.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
+            DataGridViewImageColumn btnFacturar = new DataGridViewImageColumn(); //se crea el boton en el dataGrid
+            btnFacturar.Name = "SELECCIONAR"; //Nombre del boton 
+            dgv_clientes.Columns.Add(btnFacturar); //Se especifica el nombre de dataGrid para agregar boton
         }
 
         private void txtBuscar_reservas_TextChanged(object sender, EventArgs e)
@@ -108,23 +109,6 @@ namespace ProyectoHCL
                 //CargarReservas(); //Si el textbox está vacio devuelve el metodo mostrar usuarios 
             }
 
-        }
-
-        private void dgv_clientes_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            if (e.ColumnIndex >= 0 && this.dgv_clientes.Columns[e.ColumnIndex].Name == "SELECCIONAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgv_clientes.Rows[e.RowIndex].Cells["SELECCIONAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\check.ico"); //Se define la carpeta en la que está guardado el ícono del boton
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgv_clientes.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgv_clientes.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -156,6 +140,19 @@ namespace ProyectoHCL
                 //CargarReservas(); //Se llama el metodo Mostrar usuarios para actualizar el DataGrid al editar 
             }
 
+        }
+
+        private void dgv_clientes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgv_clientes.Columns[e.ColumnIndex].Name == "SELECCIONAR")
+            {
+                Image imagen = Properties.Resources.caja;
+
+                dgv_clientes.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgv_clientes.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
         }
     }
 }

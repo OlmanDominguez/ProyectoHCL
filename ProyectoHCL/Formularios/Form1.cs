@@ -17,6 +17,10 @@ namespace ProyectoHCL
     public partial class FORMULARIO : Form
     {
         MsgB msgB = new MsgB();
+        AdmonUsuarios adU = new AdmonUsuarios();
+        int intentosFallidos = 0;
+        int maxIntentosFallidos = 3;
+
 
         public FORMULARIO()
         {
@@ -31,7 +35,6 @@ namespace ProyectoHCL
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
 
         }
 
@@ -52,19 +55,12 @@ namespace ProyectoHCL
 
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
-
             try
-
             {
-
                 using (BaseDatosHCL.ObtenerConexion())
-
                 {
-                    //Consulta
-
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
                     comando.CommandText = ("Select * From TBL_USUARIO where USUARIO = '"
@@ -72,8 +68,6 @@ namespace ProyectoHCL
 
                     MySqlDataReader leer = comando.ExecuteReader();
 
-
-                    //Validación de la data obtenida
                     if (UsuarioBox1.Text == String.Empty)
                     {
                         errorProvider1.SetError(UsuarioBox1, "Ingrese un Usuario");
@@ -81,6 +75,7 @@ namespace ProyectoHCL
                         return;
                     }
                     errorProvider1.Clear();
+
                     if (string.IsNullOrEmpty(ContraseñaBox2.Text))
                     {
                         errorProvider1.SetError(ContraseñaBox2, "Ingrese una clave");
@@ -90,100 +85,100 @@ namespace ProyectoHCL
 
                     if (leer.Read() == true)
                     {
-
-
                         string usuario = (string)leer["USUARIO"];
-
                         string contrasena = (string)leer["CONTRASENA"];
-
                         string pass = (string)leer["PASS"];
-
                         DateTime generado = (DateTime)leer["GENERADO"];
-
                         string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
                         var tiempo = Convert.ToDateTime(ahora) - generado;
-
                         clasecompartida.estado = (int)leer["ID_ESTADO"];
 
-                        if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text & clasecompartida.estado == 1)
+                        if (usuario == UsuarioBox1.Text && contrasena == ContraseñaBox2.Text)
                         {
-                            clasecompartida.iduser = (int)leer["ID_USUARIO"];
-                            clasecompartida.user = UsuarioBox1.Text;
-                            //clases.CDatos.idUsu = (int)leer["ID_USUARIO"];
-                            clases.CDatos.idRolUs = (int)leer["ID_ROL"];
-                            clases.CDatos.nombre = (string)leer["NOMBRE_USUARIO"];
-                            clases.CDatos.correo = (string)leer["EMAIL"];
-                            ContraseñaBox2.Text = "";
-                            Form formulario = new Dashboard();
-                            formulario.Show();
-                            this.Hide();
+                            if (clasecompartida.estado == 1)
+                            {
+                                this.Hide();
+                                clasecompartida.iduser = (int)leer["ID_USUARIO"];
+                                clasecompartida.user = UsuarioBox1.Text;
+                                clases.CDatos.idRolUs = (int)leer["ID_ROL"];
+                                clases.CDatos.nombre = (string)leer["NOMBRE_USUARIO"];
+                                clases.CDatos.correo = (string)leer["EMAIL"];
+                                ContraseñaBox2.Text = "";
+                                Form formulario = new Dashboard();
+                                formulario.Show();
+                            }
+                            else if (clasecompartida.estado == 3)
+                            {
+                                clasecompartida.iduser = (int)leer["ID_USUARIO"];
+                                clasecompartida.user = UsuarioBox1.Text;
+                                clases.CDatos.idRolUs = (int)leer["ID_ROL"];
+                                ContraseñaBox2.Text = "";
+
+                                Form contra = new RestaContra();
+                                contra.ShowDialog();
+
+                                Form formu = new PreguntasRecuContra();
+                                formu.ShowDialog();
+                            }
+                            else if (clasecompartida.estado == 2)
+                            {
+                                MsgB mbox = new MsgB("advertencia", "El usuario está inactivo, por favor contacte al administrador");
+                                DialogResult dR = mbox.ShowDialog();
+                                UsuarioBox1.Clear();
+                                ContraseñaBox2.Clear();
+                            }
+                            else if (clasecompartida.estado == 4)
+                            {
+                                MsgB mbox = new MsgB("advertencia", "Acceso denegado, el usuario está bloqueado");
+                                DialogResult dR = mbox.ShowDialog();
+                                UsuarioBox1.Clear();
+                                ContraseñaBox2.Clear();
+                            }
+                            else
+                            {
+                                MsgB mbox = new MsgB("advertencia", "USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VÁLIDOS");
+                                DialogResult dR = mbox.ShowDialog();
+                            }
                         }
-                        else if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text & clasecompartida.estado == 3)
-                        {
-                            clasecompartida.iduser = (int)leer["ID_USUARIO"];
-                            clasecompartida.user = UsuarioBox1.Text;
-                            //clases.CDatos.idUsu = (int)leer["ID_USUARIO"];
-                            clases.CDatos.idRolUs = (int)leer["ID_ROL"];
-                            ContraseñaBox2.Text = "";
-
-                            Form contra = new RestaContra();
-                            contra.ShowDialog();
-
-                            Form formu = new PreguntasRecuContra();
-                            formu.ShowDialog();
-
-                        }
-                        else if (usuario == UsuarioBox1.Text & pass == ContraseñaBox2.Text & tiempo.Hours < 2)
+                        else if (usuario == UsuarioBox1.Text && pass == ContraseñaBox2.Text && tiempo.Hours < 2)
                         {
                             clasecompartida.user = UsuarioBox1.Text;
                             ContraseñaBox2.Text = "";
                             Form formulario = new RestaContra();
                             formulario.Show();
                         }
-                        else if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text & clasecompartida.estado == 2)
-                        {
-                            MsgB mbox = new MsgB("advertencia", "El usuario está inactivo, por favor contacte al administrador");
-                            DialogResult dR = mbox.ShowDialog();
-                            UsuarioBox1.Clear();
-                            ContraseñaBox2.Clear();
-                        }
-                        else if (usuario == UsuarioBox1.Text & contrasena == ContraseñaBox2.Text & clasecompartida.estado == 4)
-                        {
-                            MsgB mbox = new MsgB("advertencia", "Acceso denegado, el usuario está bloqueado");
-                            DialogResult dR = mbox.ShowDialog();
-                            UsuarioBox1.Clear();
-                            ContraseñaBox2.Clear();
-                        }
                         else
                         {
-                            // MessageBox.Show("USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VALIDOS");
-                            MsgB mbox = new MsgB("advertencia", "USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VALIDOS");
+                            intentosFallidos++;
+
+                            // Mostrar mensaje de intento fallido
+                            MsgB mbox = new MsgB("advertencia", "USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VÁLIDOS");
                             DialogResult dR = mbox.ShowDialog();
+
+                            // Bloquear acceso si se exceden los intentos fallidos permitidos
+                            if (intentosFallidos >= maxIntentosFallidos)
+                            {
+                                MsgB mboxBloqueo = new MsgB("advertencia", "Demasiados intentos fallidos para este usuario. Acceso bloqueado.");
+                                DialogResult dRBloqueo = mboxBloqueo.ShowDialog();
+                                adU.UpdateUsuario(UsuarioBox1.Text);
+                                UsuarioBox1.Clear();
+                                ContraseñaBox2.Clear();
+                            }
                         }
-
-
-
                     }
                     else
                     {
-                        // MessageBox.Show("USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VALIDOS");
-                        MsgB mbox = new MsgB("advertencia", "USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VALIDOS");
+                        MsgB mbox = new MsgB("advertencia", "USUARIO Y/O CONTRASEÑA NO EXISTEN O NO SON VÁLIDOS");
                         DialogResult dR = mbox.ShowDialog();
                     }
-
-
-
                     comando.Connection.Close();
                 }
-
-
             }
             catch (Exception a)
             {
-                MessageBox.Show(a.Message + a.StackTrace);
+                MsgB mbox = new MsgB("error", "Error:" + a.Message + a.StackTrace);
+                DialogResult dR = mbox.ShowDialog();
             }
-
         }
 
 
@@ -311,6 +306,43 @@ namespace ProyectoHCL
         {
 
         }
+
+        private void FORMULARIO_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //GuardarIntentosFallidosEnArchivo();
+        }
+
+        //private void CargarIntentosFallidosDesdeArchivo()
+        //{
+        //    if (File.Exists(rutaArchivo))
+        //    {
+        //        string[] lineas = File.ReadAllLines(rutaArchivo);
+
+        //        foreach (string linea in lineas)
+        //        {
+        //            string[] partes = linea.Split(',');
+        //            if (partes.Length == 2)
+        //            {
+        //                string usuario = partes[0];
+        //                int intentosFallidosU = int.Parse(partes[1]);
+
+        //                intentosFallidos[usuario] = intentosFallidosU;
+        //            }
+        //        }
+        //    }
+        //}
+
+        //private void GuardarIntentosFallidosEnArchivo()
+        //{
+        //    List<string> lineas = new List<string>();
+
+        //    foreach (var par in intentosFallidos)
+        //    {
+        //        lineas.Add($"{par.Key},{par.Value}");
+        //    }
+
+        //    File.WriteAllLines(rutaArchivo, lineas.ToArray());
+        //}
     }
 }
 

@@ -25,20 +25,15 @@
             <td style="width:60%" align="left" valign="top">
                 <table>
                     <tr><td align="left"><h4 style="margin:0px">HOTEL CASA LOMAS</h4></td></tr>
-                    <tr><td align="left">RTN:</td></tr>
-                    <tr><td align="left">@RTN</td></tr>
-                    <tr><td align="left">Direccion:</td></tr>
-                    <tr><td align="left">@DIRECCION</td></tr>
-                    <tr><td align="left">Telefono:</td></tr>
-                    <tr><td align="left">@TELEFONOS</td></tr>
+                    <tr><td align="left">RTN:</td><td align="left">@RTN</td></tr>
+                    <tr><td align="left">Dirección:</td><td align="left">@DIRECCION</td></tr>
+                    <tr><td align="left">Teléfono:</td><td align="left">@TELEFONOS</td></tr>
                 </table>
             </td>
             <td style="width:20%" align="right">
                 <table style="width:100%">
-                    <tr><td style="width:20%" align="right">Factura:</td></tr>
-                    <tr><td align="right">@FACTURA</td></tr>
-                    <tr><td style="width:20%" align="right">Fecha:</td></tr>
-                    <tr><td align="right">@FECHA1</td></tr>
+                    <tr><td style="width:20%" align="right">Factura:</td><td align="right">@FACTURA</td></tr>
+                    <tr><td style="width:20%" align="right">Fecha:</td><td align="right">@FECHA1</td></tr>
                 </table>
             </td>
         </tr>
@@ -49,26 +44,28 @@
             <td colspan="3">
                 <table style="width:100%">
                     <tr>
-                        <td style="width:20%">Identificación:</td>
-                        <td style="width:30%;border-bottom:1px solid black">@ID</td>
-                        <td style="width:20%">Ingreso:</td>
-                        <td style="width:13%;border-bottom:1px solid black">@INGRESO</td>
+                        <td style="width:30%">Identificación:</td>
+                        <td style="width:60%;" colspan="2">@ID</td>
                     </tr>
                     <tr>
-                        <td style="width:20%">Cliente:</td>
-                        <td colspan="3" style="width:80%;border-bottom:1px solid black">@CLIENTE</td>
+                        <td style="width:30%">Cliente:</td>
+                        <td colspan="2" style="width:70%;">@CLIENTE</td>
                     </tr>
                     <tr>
-                        <td style="width:20%"></td>
-                        <td style="width:20%">Salida:</td>
-                        <td style="width:13%;border-bottom:1px solid black">@SALIDA</td>
-                        <td style="width:20%">Noches:</td>
-                        <td style="width:14%;border-bottom:1px solid black">@NOCHES</td>
+                        <td style="width:30%">Ingreso:</td>
+                        <td style="width:35%;">@INGRESO</td>
+                        <td style="width:35%">Salida:</td>
+                        <td style="width:35%;">@SALIDA</td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">Noches:</td>
+                        <td style="width:35%;" colspan="2">@NOCHES</td>
                     </tr>
                 </table>
             </td>
             <td></td>
         </tr>
+
 
         <tr><td colspan="3" height="30"></td></tr>
 
@@ -79,7 +76,7 @@
                         <tr style="background-color:#A4C2DE">
                             <th>Cant.</th>
                             <th>Descripción</th>
-                            <th style="width:20%;">P. Unitario</th>
+                            <th style="width: 20%;">P. Unitario</th>
                             <th>Importe</th>
                         </tr>
                     </thead>
@@ -118,12 +115,6 @@
                         <tr>
                             <td style="border: 0px !important"></td>
                             <td style="border: 0px !important"></td>
-                            <td align="right" style="background-color:#A4C2DE">Total Impuesto:</td>
-                            <td align="right" style="background-color:#A4C2DE">@TOIM</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 0px !important"></td>
-                            <td style="border: 0px !important"></td>
                             <td align="right" style="background-color:#849CB3">Total:</td>
                             <td align="right" style="background-color:#849CB3">@TOTAL</td>
                         </tr>
@@ -131,16 +122,17 @@
                 </table>
             </td>
         </tr>
-        <tr><td colspan="3" height="40"></td></tr>    
+        <tr><td colspan="3" height="40"></td></tr>
     </table>
-    
-    
-    
-    <table>
+
+    <table style="width:100%; text-align:center;">
         <tr>
-            <td align="center" style="width:100%;border-top:1px solid black">@CUENTAH</td>
+            <td style="border-top:1px solid black">@CUENTAH</td>
         </tr>
-        <tr align="center"><td style="width:100%">@CORREOF</td></tr>
+        <tr>
+            <td style="width:100%">@CORREOF</td>
+        </tr>
     </table>
+
 </body>
 </html>

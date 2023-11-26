@@ -114,6 +114,8 @@ namespace ProyectoHCL.Formularios
                         if (obj.ObjetoN == "USUARIOS" && !obj.Permitido) //Validar pantalla y el permiso
                         {
                             btnNuevo.Visible = false; //Ocultar botón para crear
+                            btnExcel.Visible = false;
+                            btnPdf.Visible = false;
                         }
                         break;
                     case 3: //permiso editar

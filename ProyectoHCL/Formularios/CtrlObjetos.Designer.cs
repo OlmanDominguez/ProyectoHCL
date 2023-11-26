@@ -37,8 +37,6 @@
             panel2 = new Panel();
             btnCerrar = new Button();
             label11 = new Label();
-            btnPerfil = new Button();
-            btnCerrarSesion = new Button();
             btnNuevo = new Button();
             panel4 = new Panel();
             button6 = new Button();
@@ -69,8 +67,6 @@
             panel2.BackColor = Color.WhiteSmoke;
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(label11);
-            panel2.Controls.Add(btnPerfil);
-            panel2.Controls.Add(btnCerrarSesion);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
@@ -108,31 +104,6 @@
             // 
             // btnPerfil
             // 
-            btnPerfil.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnPerfil.BackColor = Color.Transparent;
-            btnPerfil.BackgroundImage = (Image)resources.GetObject("btnPerfil.BackgroundImage");
-            btnPerfil.BackgroundImageLayout = ImageLayout.Stretch;
-            btnPerfil.FlatAppearance.BorderSize = 0;
-            btnPerfil.FlatStyle = FlatStyle.Flat;
-            btnPerfil.Location = new Point(1694, 73);
-            btnPerfil.Name = "btnPerfil";
-            btnPerfil.Size = new Size(30, 29);
-            btnPerfil.TabIndex = 34;
-            btnPerfil.UseVisualStyleBackColor = false;
-            // 
-            // btnCerrarSesion
-            // 
-            btnCerrarSesion.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCerrarSesion.BackColor = Color.Transparent;
-            btnCerrarSesion.BackgroundImage = (Image)resources.GetObject("btnCerrarSesion.BackgroundImage");
-            btnCerrarSesion.BackgroundImageLayout = ImageLayout.Stretch;
-            btnCerrarSesion.FlatAppearance.BorderSize = 0;
-            btnCerrarSesion.FlatStyle = FlatStyle.Flat;
-            btnCerrarSesion.Location = new Point(1741, 71);
-            btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Size = new Size(35, 33);
-            btnCerrarSesion.TabIndex = 35;
-            btnCerrarSesion.UseVisualStyleBackColor = false;
             // 
             // btnNuevo
             // 
@@ -470,8 +441,6 @@
 
         #endregion
         private Panel panel2;
-        private Button btnPerfil;
-        private Button btnCerrarSesion;
         private Panel panel4;
         private Panel panel3;
         private Label label11;

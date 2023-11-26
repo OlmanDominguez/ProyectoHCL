@@ -725,6 +725,20 @@ namespace ProyectoHCL.clases
             }
         }
 
+        public string ObtenerServicio(string idRegistro)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                using (MySqlCommand cmd = new MySqlCommand("SELECT DESCRIPCION FROM TBL_SERVICIO WHERE ID_SERVICIO = @IDActual", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@IDActual", idRegistro);
+                    return cmd.ExecuteScalar().ToString();
+                }
+            }
+        }
+
         public string ObtenerNumHabitacion(string idRegistro)
         {
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
@@ -1127,6 +1141,28 @@ namespace ProyectoHCL.clases
                 using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_HABITACION WHERE NUMEROHABITACION = @NuevoNumero", conectar))
                 {
                     cmd.Parameters.AddWithValue("@NuevoNumero", nuevoNumero);
+
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    return count > 0;
+                }
+            }
+        }
+
+        public bool ServicioEditarBD(string nuevoNombre, string idRegistroActual)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                if (nuevoNombre == ObtenerServicio(idRegistroActual))
+                {
+                    return false;
+                }
+
+                using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_SERVICIO WHERE DESCRIPCION = @NuevoNombre", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@NuevoNombre", nuevoNombre);
 
                     int count = Convert.ToInt32(cmd.ExecuteScalar());
 

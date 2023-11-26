@@ -152,5 +152,39 @@ namespace ProyectoHCL.clases
 
             return elimino;
         }
+
+        public void UpdateUsuario(string usuario)
+        {
+            string connectionString = "server=containers-us-west-29.railway.app;port=6844; database=railway; Uid=root; pwd=LpxjPRi2Ckkz7FiKNUHn;";
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    string sql = "UPDATE TBL_USUARIO SET ID_ESTADO = 4 WHERE USUARIO = @USUARIO;";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@USUARIO", usuario);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MsgB mbox = new MsgB("error", "Error: " + ex.Message);
+                    DialogResult dR = mbox.ShowDialog();
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    MsgB mbox = new MsgB("error", "Error: " + ex.Message);
+                    DialogResult dR = mbox.ShowDialog();
+                    throw;
+                }
+            }
+        }
     }
 }

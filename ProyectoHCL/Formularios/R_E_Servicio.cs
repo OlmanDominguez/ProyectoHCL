@@ -96,8 +96,8 @@ namespace ProyectoHCL.Formularios
         private void btnCerrar_Click(object sender, EventArgs e) //botón para cerrar
         {
             this.Close();
-            limpiarCampos();
-            limpiarError();
+            //limpiarCampos();
+            //limpiarError();
         }
 
         //coordenadas para arrastrar formulario
@@ -121,8 +121,8 @@ namespace ProyectoHCL.Formularios
         private void btnCancelar_Click(object sender, EventArgs e) //botón para cancelar
         {
             this.Close();
-            limpiarCampos();
-            limpiarError();
+            //limpiarCampos();
+            //limpiarError();
         }
 
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e) //validar que se ingresen sólo numeros y puntos '.'
@@ -139,9 +139,16 @@ namespace ProyectoHCL.Formularios
 
         private void txtServ_Leave(object sender, EventArgs e) //validar campo vacío
         {
+            string texto = txtServ.Text;
+
             if (ValidarTxt.txtVacio(txtServ))
             {
                 errorT.SetError(txtServ, "Introduzca un nombre");
+            }
+            else if (texto.Length < 5)
+            {
+                errorT.SetError(txtServ, "El nombre del servicio debe contener al menos 5 letras");
+                txtServ.Focus();
             }
             else
             {
@@ -163,19 +170,24 @@ namespace ProyectoHCL.Formularios
 
         private void btnGuardar_Click(object sender, EventArgs e) //botón para guardar un nuevo registro o una modificación
         {
+            Modelo modelo = new Modelo();
+
             if (lblTitulo.Text == "Registrar Servicio")
             {
-                Modelo modelo = new Modelo();
-
                 if (txtServ.Text.Trim() == "" || txtPrecio.Text.Trim() == "" || cmbEstado.Text.Trim() == "")  //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
 
                 }
+                else if (txtServ.TextLength < 5) //validar que el nombre no tenga menos de 5 caracteres
+                {
+                    MsgB m = new MsgB("advertencia", "El nombre del servicio debe contener al menos 5 letras");
+                    DialogResult dR = m.ShowDialog();
+                }
                 else if (modelo.existeServicio(txtServ.Text)) //validar si ya existe el registro
                 {
-                    MsgB m = new MsgB("advertencia", "El servicio ya existe"); 
+                    MsgB m = new MsgB("advertencia", "El servicio ya existe");
                     DialogResult dR = m.ShowDialog();
                 }
                 else
@@ -210,10 +222,22 @@ namespace ProyectoHCL.Formularios
             else if (lblTitulo.Text == "Editar Servicio")
             {
                 Control control = new Control();
+                string nuevoServicio = txtServ.Text;
+                string idRegistro = idS;
 
                 if (txtServ.Text.Trim() == "" || txtPrecio.Text.Trim() == "" || cmbEstado.Text.Trim() == "") //validar campos vacíos
                 {
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (txtServ.TextLength < 5) //validar que el nombre no tenga menos de 5 caracteres
+                {
+                    MsgB m = new MsgB("advertencia", "El nombre del servicio debe contener al menos 5 letras");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else if (modelo.ServicioEditarBD(nuevoServicio, idRegistro))
+                {
+                    MsgB m = new MsgB("advertencia", "El servicio ya está registrado");
                     DialogResult dR = m.ShowDialog();
                 }
                 else
@@ -246,6 +270,12 @@ namespace ProyectoHCL.Formularios
             {
                 errorT.Clear();
             }
+        }
+
+        private void R_E_Servicio_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            limpiarCampos();
+            limpiarError();
         }
     }
 }

@@ -436,7 +436,6 @@
         private Panel panel2;
         private Label label11;
         private Panel panel5;
-        private Button btnPdf;
         private Button btnExcel;
         private Label label1;
         private ComboBox cmbMostrar;
@@ -454,5 +453,6 @@
         private Button btnCerrar;
         public Button btnNuevo;
         public DataGridView dgvUsuarios;
+        public Button btnPdf;
     }
 }

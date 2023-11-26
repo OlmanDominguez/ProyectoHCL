@@ -34,7 +34,6 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            pictureBox5 = new PictureBox();
             panel2 = new Panel();
             lbl_titulo = new Label();
             btnCerrar = new Button();
@@ -45,33 +44,20 @@
             btn_guardar2 = new Button();
             btnCancelar = new Button();
             btnGuardar = new Button();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgv_clientes).BeginInit();
             SuspendLayout();
             // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(12, 12);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(50, 48);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 34;
-            pictureBox5.TabStop = false;
-            // 
             // panel2
             // 
             panel2.BackColor = Color.SteelBlue;
-            panel2.Controls.Add(pictureBox5);
             panel2.Controls.Add(lbl_titulo);
             panel2.Controls.Add(btnCerrar);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(815, 73);
+            panel2.Size = new Size(815, 59);
             panel2.TabIndex = 52;
             // 
             // lbl_titulo
@@ -81,11 +67,11 @@
             lbl_titulo.BackColor = Color.Transparent;
             lbl_titulo.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_titulo.ForeColor = Color.White;
-            lbl_titulo.Location = new Point(139, 30);
+            lbl_titulo.Location = new Point(14, 12);
             lbl_titulo.Name = "lbl_titulo";
-            lbl_titulo.Size = new Size(83, 30);
+            lbl_titulo.Size = new Size(93, 30);
             lbl_titulo.TabIndex = 19;
-            lbl_titulo.Text = "Buscar ";
+            lbl_titulo.Text = "Clientes";
             // 
             // btnCerrar
             // 
@@ -112,9 +98,9 @@
             panel3.Controls.Add(btnCancelar);
             panel3.Controls.Add(btnGuardar);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(0, 73);
+            panel3.Location = new Point(0, 59);
             panel3.Name = "panel3";
-            panel3.Size = new Size(815, 450);
+            panel3.Size = new Size(815, 464);
             panel3.TabIndex = 53;
             // 
             // dgv_clientes
@@ -152,7 +138,7 @@
             dgv_clientes.DefaultCellStyle = dataGridViewCellStyle3;
             dgv_clientes.EnableHeadersVisualStyles = false;
             dgv_clientes.GridColor = Color.FromArgb(45, 66, 91);
-            dgv_clientes.Location = new Point(12, 76);
+            dgv_clientes.Location = new Point(12, 59);
             dgv_clientes.Name = "dgv_clientes";
             dgv_clientes.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -171,16 +157,16 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
             dgv_clientes.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgv_clientes.RowTemplate.Height = 25;
-            dgv_clientes.Size = new Size(791, 362);
+            dgv_clientes.Size = new Size(791, 376);
             dgv_clientes.TabIndex = 84;
             dgv_clientes.CellClick += dgv_clientes_CellClick;
-            dgv_clientes.CellPainting += dgv_clientes_CellPainting;
+            dgv_clientes.CellFormatting += dgv_clientes_CellFormatting;
             // 
             // txtBuscar_Por_Nombre
             // 
             txtBuscar_Por_Nombre.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             txtBuscar_Por_Nombre.BackColor = SystemColors.Info;
-            txtBuscar_Por_Nombre.Location = new Point(129, 29);
+            txtBuscar_Por_Nombre.Location = new Point(129, 21);
             txtBuscar_Por_Nombre.Margin = new Padding(2);
             txtBuscar_Por_Nombre.Name = "txtBuscar_Por_Nombre";
             txtBuscar_Por_Nombre.Size = new Size(252, 23);
@@ -194,7 +180,7 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(14, 29);
+            label4.Location = new Point(14, 21);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(102, 20);
@@ -263,7 +249,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Buscar";
             Load += Buscar_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel3.ResumeLayout(false);
@@ -273,8 +258,6 @@
         }
 
         #endregion
-
-        private PictureBox pictureBox5;
         private Panel panel2;
         public Label lbl_titulo;
         private Button btnCerrar;

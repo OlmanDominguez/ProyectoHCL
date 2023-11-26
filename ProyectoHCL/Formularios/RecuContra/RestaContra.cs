@@ -113,12 +113,12 @@ namespace ProyectoHCL.Formularios
                         DialogResult dR = m.ShowDialog();
                         comando.Connection.Close();
                         this.Close();
-                      /*  Modelo modelo = new Modelo();
-                        if (modelo.existeContraseña(TXT_Contra.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
-                        {
-                            MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
-                            DialogResult d = l.ShowDialog();
-                        }*/
+                        /*  Modelo modelo = new Modelo();
+                          if (modelo.existeContraseña(TXT_Contra.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
+                          {
+                              MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
+                              DialogResult d = l.ShowDialog();
+                          }*/
 
                     }
                 }

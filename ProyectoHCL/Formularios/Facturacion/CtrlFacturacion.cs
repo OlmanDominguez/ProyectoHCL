@@ -145,6 +145,7 @@ namespace ProyectoHCL.Formularios
             btnVer.Name = "VER";//Nombre del boton 
             dgvFacturas.Columns.Add(btnVer);//Se especifica el nombre de dataGrid para agregar boton
 
+            dgvFacturas.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             //DataGridViewImageColumn btnEditar = new DataGridViewImageColumn();
             //btnEditar.Name = "EDITAR";
             //dgvFacturas.Columns.Add(btnEditar);

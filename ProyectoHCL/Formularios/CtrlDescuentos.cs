@@ -164,6 +164,8 @@ namespace ProyectoHCL.Formularios
             btnEliminar.Name = "ELIMINAR";
             dgvDesc.Columns.Add(btnEliminar);
 
+            dgvDesc.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
             Permisos(); //Llamar la función permisos al cargar formulario
         }
 
@@ -389,7 +391,14 @@ namespace ProyectoHCL.Formularios
 
                 foreach (string columna in columnas)
                 {
-                    tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+                    if (columna.Equals("Porcentaje"))
+                    {
+                        tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)).SetTextAlignment(TextAlignment.RIGHT));
+                    }
+                    else
+                    {
+                        tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+                    }
                 }
 
                 string sql = "SELECT id_descuento as id, descripcion, porcentaje, estado FROM TBL_DESCUENTO";
@@ -404,7 +413,11 @@ namespace ProyectoHCL.Formularios
                 {
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["id"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["descripcion"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["porcentaje"].ToString()).SetFont(fontContenido)));
+
+                    Cell porcentajeCell = new Cell().Add(new Paragraph(reader["porcentaje"].ToString()).SetFont(fontContenido));
+                    porcentajeCell.SetTextAlignment(TextAlignment.RIGHT);
+                    tabla.AddCell(porcentajeCell);
+
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["estado"].ToString()).SetFont(fontContenido)));
                 }
 

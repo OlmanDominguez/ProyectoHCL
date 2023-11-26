@@ -22,7 +22,8 @@ namespace ProyectoHCL.clases
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.ToString());
+                MsgB mbox = new MsgB("error", "Error: " + ex.ToString());
+                DialogResult dR = mbox.ShowDialog();
             }
 
             return conectar;

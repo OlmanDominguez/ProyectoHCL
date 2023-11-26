@@ -18,7 +18,7 @@ using iText.Bouncycastlefips.Tsp;
 
 namespace ProyectoHCL
 {
-    
+
     public partial class RecuContra : Form
     {
         //const string correo = "sistemahcasalomas@gmail.com";
@@ -33,7 +33,7 @@ namespace ProyectoHCL
             this.DoubleBuffered = true;
         }
 
-        public static string ParametroSMTP() 
+        public static string ParametroSMTP()
         {
             MySqlConnection conn;
             MySqlCommand cmd;
@@ -174,8 +174,8 @@ namespace ProyectoHCL
                                     {
                                         string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                                         comando.Connection = BaseDatosHCL.ObtenerConexion();
-                                        comando.CommandText = ("UPDATE TBL_USUARIO SET PASS = '" + 
-                                            tokenf + "', GENERADO = '" + ahora + 
+                                        comando.CommandText = ("UPDATE TBL_USUARIO SET PASS = '" +
+                                            tokenf + "', GENERADO = '" + ahora +
                                             "' WHERE USUARIO = '" + clasecompartida.user + "';");
 
                                         comando.ExecuteNonQuery();
@@ -241,7 +241,7 @@ namespace ProyectoHCL
                 mail.AlternateViews.Add(htmlView);
 
 
-               
+
                 SmtpClient smtp = new SmtpClient(smtpC);
                 smtp.Port = Convert.ToInt32(puerto);
                 smtp.UseDefaultCredentials = false;
@@ -250,11 +250,11 @@ namespace ProyectoHCL
                 smtp.Send(mail);
 
                 Error = "Se envio un correo de recuperación a tu email registrado";
-                              
+
 
             }
             catch (Exception ex)
-            { 
+            {
                 Error = "Error: " + ex.Message;
                 MessageBox.Show(Error);
                 return;

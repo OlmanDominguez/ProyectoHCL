@@ -195,7 +195,7 @@ namespace ProyectoHCL
 
         }
 
-        private void cargarHabitaciones() //Llenar el combobox con los roles almacenados en la tabla TBL_ROL
+        private void cargarHabitaciones() //Llenar el combobox con las habitaciones
         {
             string connectionString = "server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;";
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -224,7 +224,9 @@ namespace ProyectoHCL
             {
                 conn.Open();
 
-                string query = "SELECT INGRESO, SALIDA FROM TBL_SOLICITUDRESERVA WHERE NUMEROHABITACION = @habitacion AND ID_ESTADORESERVA = 1 AND MONTH(INGRESO) = @mes AND YEAR(INGRESO) = @anio";
+                string query = "SELECT INGRESO, SALIDA FROM TBL_SOLICITUDRESERVA WHERE NUMEROHABITACION = @habitacion " +
+    "AND (ID_ESTADORESERVA = 1 OR ID_ESTADORESERVA = 2) " +
+    "AND ((MONTH(INGRESO) = @mes AND YEAR(INGRESO) = @anio) OR (MONTH(SALIDA) = @mes AND YEAR(SALIDA) = @anio))";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 //parámetros que recibe la consulta select
@@ -310,7 +312,8 @@ namespace ProyectoHCL
 
                         foreach (var reserva in reservas)
                         {
-                            if (reserva.FechaIngreso <= fechaActual.AddDays(dia - 1) && reserva.FechaSalida >= fechaActual.AddDays(dia - 1))
+                            // Verificar si el día actual está dentro del rango de la reserva
+                            if ((fechaActual.AddDays(dia - 1) >= reserva.FechaIngreso) && (fechaActual.AddDays(dia - 1) <= reserva.FechaSalida))
                             {
                                 reservaEnEsteDia = true;
                                 break;

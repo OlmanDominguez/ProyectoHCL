@@ -206,6 +206,7 @@ namespace ProyectoHCL.Formularios
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Form nuevo = new NuevaReservacion();
             nuevo.ShowDialog();
         }

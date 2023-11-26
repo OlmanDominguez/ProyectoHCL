@@ -210,7 +210,8 @@ namespace ProyectoHCL.Formularios
                                 long cant = Convert.ToInt64(leer1["COUNT(*)"]);
                                 if (cant == 2 || cant > 2)
                                 {
-                                    MessageBox.Show("Gracias por responder");
+                                    MsgB l = new MsgB("informacion", "Gracias por responder");
+                                    DialogResult d = l.ShowDialog();
                                     comando.Connection.Close();
 
                                     comando.Connection = BaseDatosHCL.ObtenerConexion();
@@ -224,7 +225,8 @@ namespace ProyectoHCL.Formularios
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Favor contesta otra pregunta");
+                                    MsgB l = new MsgB("informacion", "Por favor contesta otra pregunta");
+                                    DialogResult d = l.ShowDialog();
                                     TXT_Respuesta.Text = "";
                                 }
 
@@ -300,7 +302,8 @@ namespace ProyectoHCL.Formularios
                                 long cant = Convert.ToInt64(leer1["COUNT(*)"]);
                                 if (cant == 2 || cant > 2)
                                 {
-                                    MessageBox.Show("Gracias por responder");
+                                    MsgB l = new MsgB("informacion", "Gracias por responder");
+                                    DialogResult d = l.ShowDialog();
                                     comando.Connection.Close();
 
                                     comando.Connection = BaseDatosHCL.ObtenerConexion();
@@ -314,7 +317,8 @@ namespace ProyectoHCL.Formularios
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Favor contesta otra pregunta");
+                                    MsgB l = new MsgB("informacion", "Por favor contesta otra pregunta");
+                                    DialogResult d = l.ShowDialog();
                                     TXT_Respuesta.Text = "";
                                 }
                             }
@@ -353,7 +357,8 @@ namespace ProyectoHCL.Formularios
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Respuesta Incorrecta.");
+                                    MsgB l = new MsgB("advertencia", "Respuesta incorrecta");
+                                    DialogResult d = l.ShowDialog();
                                 }
 
                             }

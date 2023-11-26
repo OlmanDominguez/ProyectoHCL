@@ -20,6 +20,10 @@ using iText.Layout.Element;
 using SpreadsheetLight;
 using SpreadsheetLight.Drawing;
 using Point = System.Drawing.Point;
+using Image = System.Drawing.Image;
+using iText.Kernel.Events;
+using iText.Kernel.Pdf.Canvas;
+using Rectangle = iText.Kernel.Geom.Rectangle;
 
 //-----------------------------------------------------------------------
 //    Universidad Nacional Autonoma de Honduras (UNAH)
@@ -102,6 +106,8 @@ namespace ProyectoHCL.Formularios
                         if (obj.ObjetoN == "SERVICIOS" && !obj.Permitido)
                         {
                             btnNuevo.Visible = false; //Ocultar botón para crear
+                            btnExcel.Visible = false;
+                            btnPdf.Visible = false;
                         }
                         break;
                     case 3: //permiso editar
@@ -145,13 +151,15 @@ namespace ProyectoHCL.Formularios
 
         private void CtrlServicios_Load(object sender, EventArgs e)
         {
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //agregar botón de editar en datagrid
+            DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn();
             btnUpdate.Name = "EDITAR";
             dgvServ.Columns.Add(btnUpdate);
 
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn(); //agregar botón de eliminar en datagrid
-            btnDelete.Name = "ELIMINAR";
-            dgvServ.Columns.Add(btnDelete);
+            DataGridViewImageColumn btnEliminar = new DataGridViewImageColumn();
+            btnEliminar.Name = "ELIMINAR";
+            dgvServ.Columns.Add(btnEliminar);
+
+            dgvServ.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             Permisos(); //Llamar la función permisos al cargar formulario
         }
@@ -185,38 +193,6 @@ namespace ProyectoHCL.Formularios
             R_E_serv.lblTitulo.Text = "Registrar Servicio";
             R_E_serv.ShowDialog();
             CargarDG();
-        }
-
-        private void dgvServ_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)  //Configurar datagrid para mostrar los botones de editar y eliminar que se agregaron
-        {
-            if (e.ColumnIndex >= 0 && this.dgvServ.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvServ.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvServ.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvServ.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
-            if (e.ColumnIndex >= 0 && this.dgvServ.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvServ.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvServ.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvServ.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
-
-
         }
 
         private void cmbServ_SelectionChangeCommitted(object sender, EventArgs e) //Seleccionar página para mostrar registros
@@ -360,86 +336,108 @@ namespace ProyectoHCL.Formularios
 
         private void crearPDF() //función para crear pdf
         {
-            PdfWriter pdfWriter = new PdfWriter("Reporte.pdf");
-            PdfDocument pdf = new PdfDocument(pdfWriter);
-            //1 pulgada = 72 pt (8 1/2 x 11) (612 x 792)
-            PageSize tamanioH = new PageSize(792, 612);
-            Document documento = new Document(pdf, tamanioH);
-            // Document documento = new Document(pdf, PageSize.LETTER);
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Archivos PDF|*.pdf";
+            saveFileDialog.Title = "Guardar archivo PDF";
 
-            documento.SetMargins(70, 20, 55, 20);
-
-            PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
-            PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
-
-            string[] columnas = { "Id", "Descripcion", "Precio", "Estado" };
-
-            float[] tamanios = { 1, 3, 2, 2 };
-            Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
-            tabla.SetWidth(UnitValue.CreatePercentValue(100));
-
-            foreach (string columna in columnas)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+                string filePath = saveFileDialog.FileName;
+
+                PdfWriter pdfWriter = new PdfWriter(filePath);
+                PdfDocument pdf = new PdfDocument(pdfWriter);
+                PageSize tamanioH = new PageSize(792, 612);
+                Document documento = new Document(pdf, tamanioH);
+                documento.SetMargins(70, 20, 55, 20);
+
+                PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+                PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+
+                var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/jmont/OneDrive/Documentos/HM/ProyectoIP/logoCL.png")).SetWidth(50);
+                var plogo = new Paragraph("").Add(logo);
+
+                var nombre = new Paragraph("Hotel Casa Lomas");
+                nombre.SetFontSize(12);
+
+                var titulo = new Paragraph("Descuentos");
+                titulo.SetTextAlignment(TextAlignment.CENTER);
+                titulo.SetFontSize(14).SetBold();
+
+                var dfecha = DateTime.Now.ToString("dd.MM.yyy");
+                var dhora = DateTime.Now.ToString("hh:mm:ss");
+                var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
+                fecha.SetTextAlignment(TextAlignment.RIGHT);
+                fecha.SetFontSize(12);
+
+                documento.ShowTextAligned(plogo, 30, 600, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(nombre, 100, 580, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
+
+                string[] columnas = { "Id", "Descripcion", "Precio", "Estado" };
+
+                float[] tamanios = { 1, 3, 2, 2 };
+                Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
+                tabla.SetWidth(UnitValue.CreatePercentValue(100));
+
+                foreach (string columna in columnas)
+                {
+                    if (columna.Equals("Precio"))
+                    {
+                        tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)).SetTextAlignment(TextAlignment.RIGHT));
+                    }
+                    else
+                    {
+                        tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+                    }
+                }
+
+                string sql = "SELECT ID_SERVICIO AS ID, DESCRIPCION, PRECIO, ESTADO_SERVICIO AS ESTADO FROM TBL_SERVICIO";
+
+                MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+                // conexionBD.Open();
+
+                MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+                MySqlDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Id"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Descripcion"].ToString()).SetFont(fontContenido)));
+
+                    Cell porcentajeCell = new Cell().Add(new Paragraph(reader["Precio"].ToString()).SetFont(fontContenido));
+                    porcentajeCell.SetTextAlignment(TextAlignment.RIGHT);
+                    tabla.AddCell(porcentajeCell);
+
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Estado"].ToString()).SetFont(fontContenido)));
+                }
+
+                documento.Add(tabla);
+
+                pdf.AddEventHandler(PdfDocumentEvent.END_PAGE, new HeaderFooterEventHandler());
+
+                documento.Close();
             }
+        }
 
-            string sql = "SELECT ID_SERVICIO AS ID, DESCRIPCION, PRECIO, ESTADO_SERVICIO AS ESTADO FROM TBL_SERVICIO";
-
-            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
-            // conexionBD.Open();
-
-            MySqlCommand comando = new MySqlCommand(sql, conexionBD);
-            MySqlDataReader reader = comando.ExecuteReader();
-
-            while (reader.Read())
+        private class HeaderFooterEventHandler : IEventHandler
+        {
+            public void HandleEvent(Event currentEvent)
             {
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Id"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Descripcion"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Precio"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Estado"].ToString()).SetFont(fontContenido)));
+                PdfDocumentEvent docEvent = (PdfDocumentEvent)currentEvent;
+                PdfDocument pdfDoc = docEvent.GetDocument();
+                PdfPage page = docEvent.GetPage();
+                int pageNumber = pdfDoc.GetPageNumber(page);
+                PdfCanvas pdfCanvas = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
+
+                Rectangle pageSize = page.GetPageSize();
+                pdfCanvas.BeginText()
+                    .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA), 12)
+                    .MoveText(pageSize.GetLeft() + 396, 20)
+                    .ShowText("Página " + pageNumber)
+                    .EndText();
+                pdfCanvas.Release();
             }
-
-            documento.Add(tabla);
-            documento.Close();
-
-            var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/jmont/OneDrive/Documentos/HM/ProyectoIP/logoCL.png")).SetWidth(50);
-            var plogo = new Paragraph("").Add(logo);
-
-            var nombre = new Paragraph("Hotel Casa Lomas");
-            nombre.SetTextAlignment(TextAlignment.CENTER);
-            nombre.SetFontSize(12);
-
-            var titulo = new Paragraph("Reporte Servicios");
-            titulo.SetTextAlignment(TextAlignment.CENTER);
-            titulo.SetFontSize(14);
-            titulo.SetBold();
-
-            var dfecha = DateTime.Now.ToString("dd.MM.yyy");
-            var dhora = DateTime.Now.ToString("hh:mm:ss");
-            var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
-            fecha.SetFontSize(12);
-
-            PdfDocument pdfDoc = new PdfDocument(new PdfReader("Reporte.pdf"), new PdfWriter
-                ("ReporteServicios.pdf"));
-            Document doc = new Document(pdfDoc);
-
-            int numeros = pdfDoc.GetNumberOfPages();
-
-            for (int i = 1; i <= numeros; i++)
-            {
-                PdfPage pagina = pdfDoc.GetPage(i);
-
-                float y = (pdfDoc.GetPage(i).GetPageSize().GetTop() - 15);
-                doc.ShowTextAligned(plogo, 40, y, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(nombre, 115, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(titulo, 396, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                doc.ShowTextAligned(fecha, 700, y - 15, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-
-                doc.ShowTextAligned(new Paragraph(String.Format("pagina {0} de {1}", i, numeros)), pdfDoc.GetPage
-                    (i).GetPageSize().GetWidth() / 2, pdfDoc.GetPage(i).GetPageSize().GetBottom() + 30, i,
-                    TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-            }
-            doc.Close();
         }
 
         private void btnPdf_Click(object sender, EventArgs e)
@@ -538,6 +536,28 @@ namespace ProyectoHCL.Formularios
         private void btnNuevo_EnabledChanged(object sender, EventArgs e)
         {
             btnNuevo.BackColor = Color.DarkGray;
+        }
+
+        private void dgvServ_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvServ.Columns[e.ColumnIndex].Name == "EDITAR")
+            {
+                Image imagen = Properties.Resources.editar;
+
+                dgvServ.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvServ.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvServ.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            {
+                Image imagen = Properties.Resources.eliminar;
+
+                dgvServ.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvServ.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
         }
     }
 }
