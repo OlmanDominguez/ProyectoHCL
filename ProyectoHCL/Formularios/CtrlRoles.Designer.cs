@@ -413,7 +413,7 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
             dgvRoles.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvRoles.RowTemplate.Height = 25;
-            dgvRoles.Size = new Size(1487, 568);
+            dgvRoles.Size = new Size(1511, 568);
             dgvRoles.TabIndex = 6;
             dgvRoles.CellClick += dgvRoles_CellClick;
             dgvRoles.CellFormatting += dgvRoles_CellFormatting_1;
