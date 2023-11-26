@@ -232,11 +232,11 @@ namespace ProyectoHCL
             DataGridViewButtonColumn btnVer = new DataGridViewButtonColumn();
             btnVer.Name = "VER";
             dgv_reservaciones.Columns.Add(btnVer);*/
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn(); //se crea el boton en el dataGrid
+            DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn(); //se crea el boton en el dataGrid
             btnUpdate.Name = "EDITAR";//Nombre del boton 
             dgv_reservaciones.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
 
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+            DataGridViewImageColumn btnDelete = new DataGridViewImageColumn();
             btnDelete.Name = "ELIMINAR";
             dgv_reservaciones.Columns.Add(btnDelete);
 
@@ -274,45 +274,45 @@ namespace ProyectoHCL
 
         private void dgv_reservaciones_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.ColumnIndex >= 0 && this.dgv_reservaciones.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+            /* if (e.ColumnIndex >= 0 && this.dgv_reservaciones.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)
+             {
+                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
-                DataGridViewButtonCell celBoton = this.dgv_reservaciones.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico"); //Se define la carpeta en la que está guardado el ícono del boton
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
+                 DataGridViewButtonCell celBoton = this.dgv_reservaciones.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
+                 Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\editar.ico"); //Se define la carpeta en la que está guardado el ícono del boton
+                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
-                this.dgv_reservaciones.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgv_reservaciones.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
+                 this.dgv_reservaciones.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
+                 this.dgv_reservaciones.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
 
-                e.Handled = true;
-            }
-            if (e.ColumnIndex >= 0 && this.dgv_reservaciones.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                 e.Handled = true;
+             }
+             if (e.ColumnIndex >= 0 && this.dgv_reservaciones.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)
+             {
+                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
-                DataGridViewButtonCell celBoton = this.dgv_reservaciones.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
+                 DataGridViewButtonCell celBoton = this.dgv_reservaciones.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
+                 Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");
+                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
-                this.dgv_reservaciones.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgv_reservaciones.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
+                 this.dgv_reservaciones.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
+                 this.dgv_reservaciones.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
 
-                e.Handled = true;
-            }
-           /* if (e.ColumnIndex >= 0 && this.dgv_reservaciones.Columns[e.ColumnIndex].Name == "VER" && e.RowIndex >= 0)
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                 e.Handled = true;
+             }
+             if (e.ColumnIndex >= 0 && this.dgv_reservaciones.Columns[e.ColumnIndex].Name == "VER" && e.RowIndex >= 0)
+             {
+                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
-                DataGridViewButtonCell celBoton = this.dgv_reservaciones.Rows[e.RowIndex].Cells["VER"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\ver.ico");
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
+                 DataGridViewButtonCell celBoton = this.dgv_reservaciones.Rows[e.RowIndex].Cells["VER"] as DataGridViewButtonCell;
+                 Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\ver.ico");
+                 e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
 
-                this.dgv_reservaciones.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgv_reservaciones.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
+                 this.dgv_reservaciones.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
+                 this.dgv_reservaciones.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
 
-                e.Handled = true;
-            }*/
+                 e.Handled = true;
+             }*/
         }
 
         private void dgv_reservaciones_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -740,16 +740,25 @@ namespace ProyectoHCL
         }
 
         private void dgv_reservaciones_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {/*
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgv_reservaciones.Columns[e.ColumnIndex].Name == "VER")
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgv_reservaciones.Columns[e.ColumnIndex].Name == "EDITAR")
             {
-                DrawingImage imagen = Properties.Resources.ojo;
+                DrawingImage imagen = Properties.Resources.editar;
 
                 dgv_reservaciones.Rows[e.RowIndex].Height = imagen.Height + 8;
                 dgv_reservaciones.Columns[e.ColumnIndex].Width = imagen.Width + 58;
 
                 e.Value = imagen;
-            }*/
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgv_reservaciones.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            {
+                DrawingImage imagen = Properties.Resources.eliminar;
+
+                dgv_reservaciones.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgv_reservaciones.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
         }
     }
 }
