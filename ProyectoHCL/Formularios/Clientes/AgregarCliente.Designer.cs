@@ -34,21 +34,22 @@
             btnMin = new Button();
             btnCerrar = new Button();
             label11 = new Label();
+            panel3 = new Panel();
+            txtEmail2 = new TextBox();
+            label7 = new Label();
+            label20 = new Label();
             cbTipo = new ComboBox();
             label10 = new Label();
             label15 = new Label();
             label2 = new Label();
             panel1 = new Panel();
-            label22 = new Label();
-            txtEmail2 = new TextBox();
-            label7 = new Label();
-            label14 = new Label();
-            label20 = new Label();
-            label12 = new Label();
-            label5 = new Label();
             txtEmail1 = new TextBox();
-            label18 = new Label();
             label16 = new Label();
+            label5 = new Label();
+            label22 = new Label();
+            label14 = new Label();
+            label12 = new Label();
+            label18 = new Label();
             label13 = new Label();
             btnCancelar = new Button();
             btnGuardar = new Button();
@@ -70,6 +71,7 @@
             label1 = new Label();
             errorT = new ErrorProvider(components);
             panel2.SuspendLayout();
+            panel3.SuspendLayout();
             panel1.SuspendLayout();
             gb_juridico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorT).BeginInit();
@@ -131,6 +133,56 @@
             label11.TabIndex = 28;
             label11.Text = "Registrar Cliente";
             // 
+            // panel3
+            // 
+            panel3.BackColor = Color.Gainsboro;
+            panel3.Controls.Add(txtEmail2);
+            panel3.Controls.Add(label7);
+            panel3.Controls.Add(label20);
+            panel3.Location = new Point(420, 210);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(332, 74);
+            panel3.TabIndex = 70;
+            panel3.Visible = false;
+            panel3.Paint += panel3_Paint;
+            // 
+            // txtEmail2
+            // 
+            txtEmail2.Anchor = AnchorStyles.Top;
+            txtEmail2.BackColor = Color.White;
+            txtEmail2.BorderStyle = BorderStyle.FixedSingle;
+            txtEmail2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtEmail2.Location = new Point(9, 39);
+            txtEmail2.MaxLength = 200;
+            txtEmail2.Name = "txtEmail2";
+            txtEmail2.ShortcutsEnabled = false;
+            txtEmail2.Size = new Size(309, 27);
+            txtEmail2.TabIndex = 54;
+            // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.Top;
+            label7.AutoSize = true;
+            label7.BackColor = Color.Transparent;
+            label7.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.ForeColor = Color.Black;
+            label7.Location = new Point(9, 11);
+            label7.Name = "label7";
+            label7.Size = new Size(74, 19);
+            label7.TabIndex = 42;
+            label7.Text = "E-Mail 2:";
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label20.ForeColor = Color.Red;
+            label20.Location = new Point(84, 6);
+            label20.Name = "label20";
+            label20.Size = new Size(23, 30);
+            label20.TabIndex = 69;
+            label20.Text = "*";
+            // 
             // cbTipo
             // 
             cbTipo.BackColor = Color.White;
@@ -184,19 +236,17 @@
             // panel1
             // 
             panel1.BackColor = Color.Gainsboro;
+            panel1.Controls.Add(txtEmail1);
+            panel1.Controls.Add(panel3);
+            panel1.Controls.Add(label16);
+            panel1.Controls.Add(label5);
             panel1.Controls.Add(label22);
-            panel1.Controls.Add(txtEmail2);
-            panel1.Controls.Add(label7);
             panel1.Controls.Add(label14);
-            panel1.Controls.Add(label20);
             panel1.Controls.Add(label15);
             panel1.Controls.Add(label10);
             panel1.Controls.Add(cbTipo);
             panel1.Controls.Add(label12);
-            panel1.Controls.Add(label5);
-            panel1.Controls.Add(txtEmail1);
             panel1.Controls.Add(label18);
-            panel1.Controls.Add(label16);
             panel1.Controls.Add(label13);
             panel1.Controls.Add(btnCancelar);
             panel1.Controls.Add(btnGuardar);
@@ -218,42 +268,56 @@
             panel1.Size = new Size(775, 407);
             panel1.TabIndex = 21;
             // 
+            // txtEmail1
+            // 
+            txtEmail1.Anchor = AnchorStyles.Top;
+            txtEmail1.BackColor = Color.White;
+            txtEmail1.BorderStyle = BorderStyle.FixedSingle;
+            txtEmail1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtEmail1.Location = new Point(429, 177);
+            txtEmail1.MaxLength = 200;
+            txtEmail1.Name = "txtEmail1";
+            txtEmail1.ShortcutsEnabled = false;
+            txtEmail1.Size = new Size(309, 27);
+            txtEmail1.TabIndex = 53;
+            txtEmail1.Click += txtEmail1_Click;
+            txtEmail1.TextChanged += txtEmail1_TextChanged;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label16.ForeColor = Color.Red;
+            label16.Location = new Point(499, 136);
+            label16.Name = "label16";
+            label16.Size = new Size(23, 30);
+            label16.TabIndex = 64;
+            label16.Text = "*";
+            // 
+            // label5
+            // 
+            label5.Anchor = AnchorStyles.Top;
+            label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
+            label5.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.ForeColor = Color.Black;
+            label5.Location = new Point(429, 144);
+            label5.Name = "label5";
+            label5.Size = new Size(74, 19);
+            label5.TabIndex = 41;
+            label5.Text = "E-Mail 1:";
+            label5.Click += label5_Click;
+            // 
             // label22
             // 
             label22.AutoSize = true;
             label22.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label22.ForeColor = Color.Red;
-            label22.Location = new Point(499, 68);
+            label22.Location = new Point(517, 3);
             label22.Name = "label22";
             label22.Size = new Size(23, 30);
             label22.TabIndex = 71;
             label22.Text = "*";
-            // 
-            // txtEmail2
-            // 
-            txtEmail2.Anchor = AnchorStyles.Top;
-            txtEmail2.BackColor = Color.White;
-            txtEmail2.BorderStyle = BorderStyle.FixedSingle;
-            txtEmail2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtEmail2.Location = new Point(429, 105);
-            txtEmail2.MaxLength = 200;
-            txtEmail2.Name = "txtEmail2";
-            txtEmail2.ShortcutsEnabled = false;
-            txtEmail2.Size = new Size(309, 27);
-            txtEmail2.TabIndex = 54;
-            // 
-            // label7
-            // 
-            label7.Anchor = AnchorStyles.Top;
-            label7.AutoSize = true;
-            label7.BackColor = Color.Transparent;
-            label7.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.ForeColor = Color.Black;
-            label7.Location = new Point(429, 83);
-            label7.Name = "label7";
-            label7.Size = new Size(74, 19);
-            label7.TabIndex = 42;
-            label7.Text = "E-Mail 2:";
             // 
             // label14
             // 
@@ -266,17 +330,6 @@
             label14.TabIndex = 70;
             label14.Text = "*";
             // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label20.ForeColor = Color.Red;
-            label20.Location = new Point(526, 211);
-            label20.Name = "label20";
-            label20.Size = new Size(23, 30);
-            label20.TabIndex = 69;
-            label20.Text = "*";
-            // 
             // label12
             // 
             label12.AutoSize = true;
@@ -288,55 +341,16 @@
             label12.TabIndex = 68;
             label12.Text = "*";
             // 
-            // label5
-            // 
-            label5.Anchor = AnchorStyles.Top;
-            label5.AutoSize = true;
-            label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.ForeColor = Color.Black;
-            label5.Location = new Point(429, 11);
-            label5.Name = "label5";
-            label5.Size = new Size(74, 19);
-            label5.TabIndex = 41;
-            label5.Text = "E-Mail 1:";
-            // 
-            // txtEmail1
-            // 
-            txtEmail1.Anchor = AnchorStyles.Top;
-            txtEmail1.BackColor = Color.White;
-            txtEmail1.BorderStyle = BorderStyle.FixedSingle;
-            txtEmail1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtEmail1.Location = new Point(429, 38);
-            txtEmail1.MaxLength = 200;
-            txtEmail1.Name = "txtEmail1";
-            txtEmail1.ShortcutsEnabled = false;
-            txtEmail1.Size = new Size(309, 27);
-            txtEmail1.TabIndex = 53;
-            txtEmail1.Click += txtEmail1_Click;
-            txtEmail1.TextChanged += txtEmail1_TextChanged;
-            // 
             // label18
             // 
             label18.AutoSize = true;
             label18.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label18.ForeColor = Color.Red;
-            label18.Location = new Point(526, 136);
+            label18.Location = new Point(517, 68);
             label18.Name = "label18";
             label18.Size = new Size(23, 30);
             label18.TabIndex = 66;
             label18.Text = "*";
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label16.ForeColor = Color.Red;
-            label16.Location = new Point(499, 5);
-            label16.Name = "label16";
-            label16.Size = new Size(23, 30);
-            label16.TabIndex = 64;
-            label16.Text = "*";
             // 
             // label13
             // 
@@ -403,19 +417,18 @@
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label21.ForeColor = Color.Red;
-            label21.Location = new Point(477, -4);
+            label21.Location = new Point(472, -2);
             label21.Name = "label21";
             label21.Size = new Size(23, 30);
             label21.TabIndex = 71;
             label21.Text = "*";
-            label21.Click += label21_Click;
             // 
             // label17
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label17.ForeColor = Color.Red;
-            label17.Location = new Point(57, 1);
+            label17.Location = new Point(57, -2);
             label17.Name = "label17";
             label17.Size = new Size(23, 30);
             label17.TabIndex = 69;
@@ -444,13 +457,12 @@
             txtRTN.BorderStyle = BorderStyle.FixedSingle;
             txtRTN.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtRTN.Location = new Point(22, 31);
-            txtRTN.MaxLength = 100;
+            txtRTN.MaxLength = 14;
             txtRTN.Name = "txtRTN";
             txtRTN.ShortcutsEnabled = false;
-            txtRTN.Size = new Size(307, 27);
+            txtRTN.Size = new Size(301, 27);
             txtRTN.TabIndex = 58;
             txtRTN.KeyPress += txtRTN_KeyPress;
-            txtRTN.Leave += txtRTN_Leave;
             // 
             // label8
             // 
@@ -489,7 +501,7 @@
             txtNombre.MaxLength = 100;
             txtNombre.Name = "txtNombre";
             txtNombre.ShortcutsEnabled = false;
-            txtNombre.Size = new Size(309, 27);
+            txtNombre.Size = new Size(303, 27);
             txtNombre.TabIndex = 48;
             txtNombre.KeyPress += txtNombre_KeyPress;
             txtNombre.Leave += txtNombre_Leave;
@@ -501,7 +513,7 @@
             txtTele2.BorderStyle = BorderStyle.FixedSingle;
             txtTele2.CharacterCasing = CharacterCasing.Upper;
             txtTele2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTele2.Location = new Point(429, 250);
+            txtTele2.Location = new Point(429, 106);
             txtTele2.MaxLength = 20;
             txtTele2.Name = "txtTele2";
             txtTele2.ShortcutsEnabled = false;
@@ -517,7 +529,7 @@
             txtTele1.BorderStyle = BorderStyle.FixedSingle;
             txtTele1.CharacterCasing = CharacterCasing.Upper;
             txtTele1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTele1.Location = new Point(429, 177);
+            txtTele1.Location = new Point(429, 38);
             txtTele1.MaxLength = 20;
             txtTele1.Name = "txtTele1";
             txtTele1.ShortcutsEnabled = false;
@@ -534,6 +546,7 @@
             txtID.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtID.Location = new Point(46, 38);
             txtID.MaxLength = 20;
+            txtID.MinimumSize = new Size(13, 0);
             txtID.Name = "txtID";
             txtID.ShortcutsEnabled = false;
             txtID.Size = new Size(309, 27);
@@ -552,7 +565,7 @@
             txtApellido.MaxLength = 100;
             txtApellido.Name = "txtApellido";
             txtApellido.ShortcutsEnabled = false;
-            txtApellido.Size = new Size(307, 27);
+            txtApellido.Size = new Size(301, 27);
             txtApellido.TabIndex = 49;
             txtApellido.KeyPress += txtApellido_KeyPress;
             txtApellido.Leave += txtApellido_Leave;
@@ -564,11 +577,11 @@
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(429, 228);
+            label6.Location = new Point(429, 79);
             label6.Name = "label6";
             label6.Size = new Size(91, 19);
             label6.TabIndex = 40;
-            label6.Text = "Telefono 2:";
+            label6.Text = "Teléfono 2:";
             // 
             // label4
             // 
@@ -577,11 +590,11 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(429, 152);
+            label4.Location = new Point(429, 14);
             label4.Name = "label4";
             label4.Size = new Size(91, 19);
             label4.TabIndex = 36;
-            label4.Text = "Telefono 1:";
+            label4.Text = "Teléfono 1:";
             // 
             // label3
             // 
@@ -630,6 +643,8 @@
             Load += AgregarCliente_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             gb_juridico.ResumeLayout(false);
@@ -675,11 +690,12 @@
         private Button btnMin;
         private Label label12;
         private Label label21;
-        private Label label17;
         public TextBox txtEmail2;
         private Label label7;
         private Label label20;
         private Label label14;
         private Label label22;
+        private Panel panel3;
+        private Label label17;
     }
 }
