@@ -76,7 +76,7 @@ namespace ProyectoHCL.Formularios
                     //Consulta
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("INSERT INTO TBL_PREGUNTA (PREGUNTA, ID_ESTADO) VALUES ('" + 
+                    comando.CommandText = ("INSERT INTO TBL_PREGUNTA (PREGUNTA, ID_ESTADO) VALUES ('" +
                         txtPregunta.Text + "', 1);");
 
                     comando.ExecuteNonQuery();

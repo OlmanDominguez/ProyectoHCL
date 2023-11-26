@@ -54,10 +54,6 @@
             label9 = new Label();
             btnSig = new Button();
             btnAnt = new Button();
-            label4 = new Label();
-            label3 = new Label();
-            txtPag = new TextBox();
-            cmbPag = new ComboBox();
             dgvParametros = new DataGridView();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
@@ -222,10 +218,6 @@
             panel5.Controls.Add(label9);
             panel5.Controls.Add(btnSig);
             panel5.Controls.Add(btnAnt);
-            panel5.Controls.Add(label4);
-            panel5.Controls.Add(label3);
-            panel5.Controls.Add(txtPag);
-            panel5.Controls.Add(cmbPag);
             panel5.Dock = DockStyle.Bottom;
             panel5.Location = new Point(0, 588);
             panel5.Margin = new Padding(4, 5, 4, 5);
@@ -236,7 +228,7 @@
             // txtPagP
             // 
             txtPagP.Anchor = AnchorStyles.Right;
-            txtPagP.Location = new Point(1399, 33);
+            txtPagP.Location = new Point(1412, 33);
             txtPagP.Margin = new Padding(4, 5, 4, 5);
             txtPagP.Name = "txtPagP";
             txtPagP.ReadOnly = true;
@@ -355,48 +347,6 @@
             btnAnt.UseVisualStyleBackColor = false;
             btnAnt.Click += btnAnt_Click;
             // 
-            // label4
-            // 
-            label4.Anchor = AnchorStyles.Right;
-            label4.AutoSize = true;
-            label4.Location = new Point(3809, -8);
-            label4.Margin = new Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(34, 25);
-            label4.TabIndex = 47;
-            label4.Text = "De";
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.Right;
-            label3.AutoSize = true;
-            label3.Location = new Point(3626, -8);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(64, 25);
-            label3.TabIndex = 46;
-            label3.Text = "Página";
-            // 
-            // txtPag
-            // 
-            txtPag.Anchor = AnchorStyles.Right;
-            txtPag.Location = new Point(3847, -13);
-            txtPag.Margin = new Padding(4, 5, 4, 5);
-            txtPag.Name = "txtPag";
-            txtPag.Size = new Size(91, 31);
-            txtPag.TabIndex = 45;
-            // 
-            // cmbPag
-            // 
-            cmbPag.Anchor = AnchorStyles.Right;
-            cmbPag.BackColor = SystemColors.Info;
-            cmbPag.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbPag.FormattingEnabled = true;
-            cmbPag.Location = new Point(3694, -13);
-            cmbPag.Name = "cmbPag";
-            cmbPag.Size = new Size(91, 33);
-            cmbPag.TabIndex = 44;
-            // 
             // dgvParametros
             // 
             dgvParametros.AllowUserToAddRows = false;
@@ -498,7 +448,6 @@
         private Panel panel1;
         private DataGridView dgvParametros;
         private Panel panel5;
-        private TextBox txtPagP;
         private Label label2;
         private Label label5;
         private ComboBox cmbPagP;
@@ -507,9 +456,6 @@
         private Label label9;
         private Button btnSig;
         private Button btnAnt;
-        private Label label4;
-        private Label label3;
-        private TextBox txtPag;
-        private ComboBox cmbPag;
+        private TextBox txtPagP;
     }
 }

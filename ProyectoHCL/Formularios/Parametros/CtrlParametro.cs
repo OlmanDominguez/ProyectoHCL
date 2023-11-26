@@ -92,6 +92,7 @@ namespace ProyectoHCL.Formularios.Parametros
 {
     public partial class CtrlParametro : Form
     {
+        R_E_Parametro R_E_para = new R_E_Parametro();
         clases.Parametros para = new clases.Parametros();// creamos el objeto para para utilizar sus funciones  
         DataSet ds = new DataSet();//creamos el objeto ds para usar sus funciones 
         CDatos cDatos = new CDatos();//creamos el objeto cdatos par autilizar sus funciones 
@@ -180,6 +181,7 @@ namespace ProyectoHCL.Formularios.Parametros
         private void btnNuevo_Click(object sender, EventArgs e)//Se crea el boton de un nuevo registro 
         {
             //Para form de nuevo
+            R_E_para.lbPar.Text = "Registrar Descuento";
             parame.p = 2;
             Form formulario = new Formularios.R_E_Parametro();
             formulario.ShowDialog();
@@ -198,6 +200,7 @@ namespace ProyectoHCL.Formularios.Parametros
 
         private void dgvParametros_CellClick(object sender, DataGridViewCellEventArgs e)//creamos dos opciones 
         {
+            R_E_para.lbPar.Text = "Editar Descuento";
             if (this.dgvParametros.Columns[e.ColumnIndex].Name == "EDITAR")
             {
                 try
@@ -464,6 +467,8 @@ namespace ProyectoHCL.Formularios.Parametros
                         if (obj.ObjetoN == "PARAMETROS" && !obj.Permitido) //Validar pantalla y el permiso
                         {
                             btnNuevo.Visible = false; //Deshabilitar botón para crear
+                            button5.Visible = false;
+                            button6.Visible = false;
                         }
                         break;
                     case 3:
@@ -551,7 +556,7 @@ namespace ProyectoHCL.Formularios.Parametros
                 documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
                 documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
 
-                string[] columnas = { "id_parametro", "id_usuario", "usuario", "parametro", "valor","fecha_creacion", "fecha_modificacion" };
+                string[] columnas = { "id_parametro", "id_usuario", "usuario", "parametro", "valor", "fecha_creacion", "fecha_modificacion" };
 
                 float[] tamanios = { 1, 2, 2, 2, 2, 3, 3 };
                 Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));

@@ -30,56 +30,28 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShowPregunta));
             panel2 = new Panel();
-            pictureBox5 = new PictureBox();
-            btnCerrar = new Button();
             label11 = new Label();
             panel1 = new Panel();
             label1 = new Label();
             txtPregunta = new TextBox();
             btnCancelar = new Button();
             btnGuardar = new Button();
+            button1 = new Button();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel2
             // 
             panel2.BackColor = Color.SteelBlue;
-            panel2.Controls.Add(pictureBox5);
-            panel2.Controls.Add(btnCerrar);
+            panel2.Controls.Add(button1);
             panel2.Controls.Add(label11);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
+            panel2.Margin = new Padding(4, 5, 4, 5);
             panel2.Name = "panel2";
-            panel2.Size = new Size(653, 73);
+            panel2.Size = new Size(933, 122);
             panel2.TabIndex = 21;
-            // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(25, 12);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(50, 48);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 60;
-            pictureBox5.TabStop = false;
-            // 
-            // btnCerrar
-            // 
-            btnCerrar.BackColor = Color.Transparent;
-            btnCerrar.BackgroundImage = (Image)resources.GetObject("btnCerrar.BackgroundImage");
-            btnCerrar.BackgroundImageLayout = ImageLayout.Stretch;
-            btnCerrar.FlatAppearance.BorderSize = 0;
-            btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            btnCerrar.FlatStyle = FlatStyle.Flat;
-            btnCerrar.Location = new Point(624, 12);
-            btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(14, 17);
-            btnCerrar.TabIndex = 31;
-            btnCerrar.UseVisualStyleBackColor = false;
-            btnCerrar.Click += btnCerrar_Click;
             // 
             // label11
             // 
@@ -88,9 +60,10 @@
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(232, 18);
+            label11.Location = new Point(331, 30);
+            label11.Margin = new Padding(4, 0, 4, 0);
             label11.Name = "label11";
-            label11.Size = new Size(181, 30);
+            label11.Size = new Size(265, 45);
             label11.TabIndex = 28;
             label11.Text = "Detalle Pregunta";
             // 
@@ -103,18 +76,20 @@
             panel1.Controls.Add(btnGuardar);
             panel1.Dock = DockStyle.Fill;
             panel1.ForeColor = Color.Black;
-            panel1.Location = new Point(0, 73);
+            panel1.Location = new Point(0, 122);
+            panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(653, 218);
+            panel1.Size = new Size(933, 363);
             panel1.TabIndex = 22;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(102, 49);
+            label1.Location = new Point(146, 82);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(75, 20);
+            label1.Size = new Size(118, 31);
             label1.TabIndex = 61;
             label1.Text = "Pregunta: ";
             // 
@@ -123,10 +98,9 @@
             txtPregunta.Anchor = AnchorStyles.Bottom;
             txtPregunta.BackColor = SystemColors.Info;
             txtPregunta.CharacterCasing = CharacterCasing.Upper;
-            txtPregunta.Location = new Point(99, 75);
-            txtPregunta.Margin = new Padding(2);
+            txtPregunta.Location = new Point(141, 125);
             txtPregunta.Name = "txtPregunta";
-            txtPregunta.Size = new Size(440, 23);
+            txtPregunta.Size = new Size(627, 31);
             txtPregunta.TabIndex = 60;
             // 
             // btnCancelar
@@ -138,9 +112,10 @@
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(386, 130);
+            btnCancelar.Location = new Point(551, 217);
+            btnCancelar.Margin = new Padding(4, 5, 4, 5);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(80, 32);
+            btnCancelar.Size = new Size(114, 53);
             btnCancelar.TabIndex = 59;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
@@ -155,29 +130,46 @@
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(174, 130);
+            btnGuardar.Location = new Point(249, 217);
+            btnGuardar.Margin = new Padding(4, 5, 4, 5);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(82, 32);
+            btnGuardar.Size = new Size(117, 53);
             btnGuardar.TabIndex = 58;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.BackColor = Color.Transparent;
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.BackgroundImageLayout = ImageLayout.Stretch;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(891, 20);
+            button1.Margin = new Padding(4, 5, 4, 5);
+            button1.Name = "button1";
+            button1.Size = new Size(20, 28);
+            button1.TabIndex = 81;
+            button1.UseVisualStyleBackColor = false;
+            // 
             // ShowPregunta
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(653, 291);
+            ClientSize = new Size(933, 485);
             Controls.Add(panel1);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(4, 5, 4, 5);
             Name = "ShowPregunta";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ShowPregunta";
             Load += ShowPregunta_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -186,13 +178,12 @@
         #endregion
 
         private Panel panel2;
-        private PictureBox pictureBox5;
-        private Button btnCerrar;
         private Label label11;
         private Panel panel1;
         private Button btnCancelar;
         private Button btnGuardar;
         private Label label1;
         private TextBox txtPregunta;
+        private Button button1;
     }
 }

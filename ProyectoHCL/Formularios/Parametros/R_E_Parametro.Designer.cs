@@ -31,6 +31,8 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(R_E_Parametro));
             panel2 = new Panel();
+            btnMin = new Button();
+            cerrar = new Button();
             lbPar = new Label();
             panel3 = new Panel();
             txtValor = new TextBox();
@@ -40,8 +42,8 @@
             label6 = new Label();
             label2 = new Label();
             errorp = new ErrorProvider(components);
-            btnMin = new Button();
-            cerrar = new Button();
+            label1 = new Label();
+            label3 = new Label();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorp).BeginInit();
@@ -61,6 +63,38 @@
             panel2.TabIndex = 23;
             panel2.MouseMove += panel2_MouseMove;
             // 
+            // btnMin
+            // 
+            btnMin.BackColor = Color.Transparent;
+            btnMin.BackgroundImage = (Image)resources.GetObject("btnMin.BackgroundImage");
+            btnMin.BackgroundImageLayout = ImageLayout.Stretch;
+            btnMin.FlatAppearance.BorderSize = 0;
+            btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            btnMin.FlatStyle = FlatStyle.Flat;
+            btnMin.Location = new Point(756, 3);
+            btnMin.Margin = new Padding(4, 5, 4, 5);
+            btnMin.Name = "btnMin";
+            btnMin.Size = new Size(27, 33);
+            btnMin.TabIndex = 66;
+            btnMin.UseVisualStyleBackColor = false;
+            btnMin.Click += btnMin_Click;
+            // 
+            // cerrar
+            // 
+            cerrar.BackColor = Color.Transparent;
+            cerrar.BackgroundImage = (Image)resources.GetObject("cerrar.BackgroundImage");
+            cerrar.BackgroundImageLayout = ImageLayout.Stretch;
+            cerrar.FlatAppearance.BorderSize = 0;
+            cerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            cerrar.FlatStyle = FlatStyle.Flat;
+            cerrar.Location = new Point(791, 5);
+            cerrar.Margin = new Padding(4, 5, 4, 5);
+            cerrar.Name = "cerrar";
+            cerrar.Size = new Size(20, 28);
+            cerrar.TabIndex = 65;
+            cerrar.UseVisualStyleBackColor = false;
+            cerrar.Click += cerrar_Click;
+            // 
             // lbPar
             // 
             lbPar.Anchor = AnchorStyles.Top;
@@ -71,13 +105,15 @@
             lbPar.Location = new Point(264, 50);
             lbPar.Margin = new Padding(4, 0, 4, 0);
             lbPar.Name = "lbPar";
-            lbPar.Size = new Size(283, 45);
+            lbPar.Size = new Size(320, 45);
             lbPar.TabIndex = 19;
-            lbPar.Text = "Detalle Parametro";
+            lbPar.Text = "Registrar  Parametro";
             // 
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
+            panel3.Controls.Add(label3);
+            panel3.Controls.Add(label1);
             panel3.Controls.Add(txtValor);
             panel3.Controls.Add(texPa);
             panel3.Controls.Add(btnCancelar);
@@ -172,36 +208,31 @@
             // 
             errorp.ContainerControl = this;
             // 
-            // btnMin
+            // label1
             // 
-            btnMin.BackColor = Color.Transparent;
-            btnMin.BackgroundImage = (Image)resources.GetObject("btnMin.BackgroundImage");
-            btnMin.BackgroundImageLayout = ImageLayout.Stretch;
-            btnMin.FlatAppearance.BorderSize = 0;
-            btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            btnMin.FlatStyle = FlatStyle.Flat;
-            btnMin.Location = new Point(756, 3);
-            btnMin.Margin = new Padding(4, 5, 4, 5);
-            btnMin.Name = "btnMin";
-            btnMin.Size = new Size(27, 33);
-            btnMin.TabIndex = 66;
-            btnMin.UseVisualStyleBackColor = false;
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Red;
+            label1.Location = new Point(295, 25);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(35, 45);
+            label1.TabIndex = 29;
+            label1.Text = "*";
             // 
-            // cerrar
+            // label3
             // 
-            cerrar.BackColor = Color.Transparent;
-            cerrar.BackgroundImage = (Image)resources.GetObject("cerrar.BackgroundImage");
-            cerrar.BackgroundImageLayout = ImageLayout.Stretch;
-            cerrar.FlatAppearance.BorderSize = 0;
-            cerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            cerrar.FlatStyle = FlatStyle.Flat;
-            cerrar.Location = new Point(791, 5);
-            cerrar.Margin = new Padding(4, 5, 4, 5);
-            cerrar.Name = "cerrar";
-            cerrar.Size = new Size(20, 28);
-            cerrar.TabIndex = 65;
-            cerrar.UseVisualStyleBackColor = false;
-            cerrar.Click += cerrar_Click;
+            label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.Red;
+            label3.Location = new Point(242, 192);
+            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(35, 45);
+            label3.TabIndex = 30;
+            label3.Text = "*";
             // 
             // R_E_Parametro
             // 
@@ -236,5 +267,7 @@
         public TextBox txtValor;
         private Button btnMin;
         private Button cerrar;
+        private Label label3;
+        private Label label1;
     }
 }

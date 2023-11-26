@@ -278,6 +278,8 @@ namespace ProyectoHCL.Formularios
                         if (obj.ObjetoN == "PREGUNTAS" && !obj.Permitido) //Validar pantalla y el permiso
                         {
                             btnNuevo.Visible = false; //Ocultar botón para crear
+                            button11.Visible = false;
+                            button10.Visible = false;
                         }
                         break;
                     case 3: //permiso editar
