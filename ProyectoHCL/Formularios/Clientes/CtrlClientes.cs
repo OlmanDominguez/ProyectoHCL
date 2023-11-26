@@ -101,6 +101,9 @@ namespace ProyectoHCL.Formularios
                         if (obj.ObjetoN == "CLIENTES" && !obj.Permitido) //Validar pantalla y el permiso
                         {
                             btnNuevo.Visible = false; //Deshabilitar botón para crear
+                            button6.Visible = false; // Deshabilitar botón PDF
+                            button5.Visible = false; // Deshabilitar botón Excel
+
                         }
                         break;
                     case 3:
@@ -541,7 +544,7 @@ namespace ProyectoHCL.Formularios
 
         private void crearPDF()
         {
-   
+
         }
     }
 }

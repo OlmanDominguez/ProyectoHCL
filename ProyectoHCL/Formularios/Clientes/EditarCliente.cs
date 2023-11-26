@@ -342,7 +342,7 @@ namespace ProyectoHCL.Formularios
 
         private void txtID_KeyPress(object sender, KeyPressEventArgs e)
         {
-          
+
         }
 
         private void txtTele1_KeyPress(object sender, KeyPressEventArgs e)
@@ -377,28 +377,28 @@ namespace ProyectoHCL.Formularios
 
         private void txtEmail1_Leave(object sender, EventArgs e)
         {
-            if (!ValidarTxt.CorreoValido(txtEmail1.Text))
-            {
-                errorT.SetError(txtEmail1, "Dirección de correo no válida");
-                txtEmail1.Focus();
-            }
-            else
-            {
-                errorT.Clear();
-            }
+            // if (!ValidarTxt.CorreoValido(txtEmail1.Text))
+            //{
+            // errorT.SetError(txtEmail1, "Dirección de correo no válida");
+            // txtEmail1.Focus();
+            // }
+            // else
+            // {
+            //  errorT.Clear();
+            // }
         }
 
         private void txtEmail2_Leave(object sender, EventArgs e)
         {
-            if (!ValidarTxt.CorreoValido(txtEmail2.Text))
-            {
-                errorT.SetError(txtEmail2, "Dirección de correo no válida");
-                txtEmail2.Focus();
-            }
-            else
-            {
-                errorT.Clear();
-            }
+            //  if (!ValidarTxt.CorreoValido(txtEmail2.Text))
+            // {
+            // errorT.SetError(txtEmail2, "Dirección de correo no válida");
+            // txtEmail2.Focus();
+            //   }
+            //  else
+            // {
+            //   errorT.Clear();
+            // }
         }
 
         private void txtID_Leave(object sender, EventArgs e)
