@@ -103,9 +103,6 @@
             label11.TabIndex = 41;
             label11.Text = "Facturas Registradas";
             // 
-            // button2
-            // 
-         
             // btnNuevo
             // 
             btnNuevo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -147,13 +144,14 @@
             button7.FlatStyle = FlatStyle.Flat;
             button7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button7.ForeColor = SystemColors.ButtonHighlight;
-            button7.Location = new Point(963, 22);
+            button7.Location = new Point(872, 22);
             button7.Margin = new Padding(2);
             button7.Name = "button7";
             button7.Size = new Size(78, 25);
             button7.TabIndex = 51;
             button7.Text = "PDF";
             button7.UseVisualStyleBackColor = false;
+            button7.Visible = false;
             // 
             // button9
             // 
@@ -163,7 +161,7 @@
             button9.FlatStyle = FlatStyle.Flat;
             button9.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             button9.ForeColor = SystemColors.ButtonHighlight;
-            button9.Location = new Point(872, 22);
+            button9.Location = new Point(964, 22);
             button9.Margin = new Padding(2);
             button9.Name = "button9";
             button9.Size = new Size(78, 25);
@@ -335,10 +333,6 @@
             cmbPaginacion.Size = new Size(65, 23);
             cmbPaginacion.TabIndex = 48;
             cmbPaginacion.SelectionChangeCommitted += cmbPaginacion_SelectionChangeCommitted;
-            // 
-            // label2
-            // 
-        
             // 
             // panel4
             // 

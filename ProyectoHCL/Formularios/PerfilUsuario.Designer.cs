@@ -33,24 +33,23 @@
             label4 = new Label();
             lblbienvenido = new Label();
             lblnombre = new Label();
-            linkLabelContraseña = new LinkLabel();
-            linkLabelPreguntas = new LinkLabel();
             lblcorreo = new Label();
             panel1 = new Panel();
             pbBienvenido = new PictureBox();
             panel6 = new Panel();
+            txtcontra = new Button();
+            txtpreguntas = new Button();
             lblemail = new Label();
             lblnom = new Label();
             lblusuario = new Label();
             label1 = new Label();
             bnCerrar = new Button();
             bnMin = new Button();
-            panel7 = new Panel();
-            panel3 = new Panel();
+            groupBox1 = new GroupBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbBienvenido).BeginInit();
             panel6.SuspendLayout();
-            panel7.SuspendLayout();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // label2
@@ -84,7 +83,7 @@
             lblbienvenido.AutoSize = true;
             lblbienvenido.Font = new Font("Ebrima", 18F, FontStyle.Bold, GraphicsUnit.Point);
             lblbienvenido.ForeColor = Color.White;
-            lblbienvenido.Location = new Point(33, 141);
+            lblbienvenido.Location = new Point(28, 123);
             lblbienvenido.Name = "lblbienvenido";
             lblbienvenido.Size = new Size(161, 32);
             lblbienvenido.TabIndex = 52;
@@ -95,37 +94,11 @@
             lblnombre.AutoSize = true;
             lblnombre.Font = new Font("Ebrima", 18F, FontStyle.Bold, GraphicsUnit.Point);
             lblnombre.ForeColor = Color.White;
-            lblnombre.Location = new Point(188, 141);
+            lblnombre.Location = new Point(195, 123);
             lblnombre.Name = "lblnombre";
             lblnombre.Size = new Size(100, 32);
             lblnombre.TabIndex = 53;
             lblnombre.Text = "usuario";
-            // 
-            // linkLabelContraseña
-            // 
-            linkLabelContraseña.AutoSize = true;
-            linkLabelContraseña.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            linkLabelContraseña.LinkColor = Color.Black;
-            linkLabelContraseña.Location = new Point(99, 212);
-            linkLabelContraseña.Name = "linkLabelContraseña";
-            linkLabelContraseña.Size = new Size(164, 21);
-            linkLabelContraseña.TabIndex = 54;
-            linkLabelContraseña.TabStop = true;
-            linkLabelContraseña.Text = "Cambiar Contraseña";
-            linkLabelContraseña.LinkClicked += linkLabelContraseña_LinkClicked_1;
-            // 
-            // linkLabelPreguntas
-            // 
-            linkLabelPreguntas.AutoSize = true;
-            linkLabelPreguntas.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            linkLabelPreguntas.LinkColor = Color.Black;
-            linkLabelPreguntas.Location = new Point(59, 233);
-            linkLabelPreguntas.Name = "linkLabelPreguntas";
-            linkLabelPreguntas.Size = new Size(241, 21);
-            linkLabelPreguntas.TabIndex = 56;
-            linkLabelPreguntas.TabStop = true;
-            linkLabelPreguntas.Text = "Editar Preguntas de Seguridad";
-            linkLabelPreguntas.LinkClicked += linkLabelPreguntas_LinkClicked;
             // 
             // lblcorreo
             // 
@@ -145,7 +118,7 @@
             panel1.Controls.Add(pbBienvenido);
             panel1.Controls.Add(lblbienvenido);
             panel1.Controls.Add(lblnombre);
-            panel1.Location = new Point(131, 54);
+            panel1.Location = new Point(106, 54);
             panel1.Name = "panel1";
             panel1.Size = new Size(346, 194);
             panel1.TabIndex = 58;
@@ -153,27 +126,52 @@
             // pbBienvenido
             // 
             pbBienvenido.Image = (Image)resources.GetObject("pbBienvenido.Image");
-            pbBienvenido.Location = new Point(99, 3);
+            pbBienvenido.Location = new Point(114, 3);
             pbBienvenido.Name = "pbBienvenido";
-            pbBienvenido.Size = new Size(137, 135);
+            pbBienvenido.Size = new Size(123, 117);
             pbBienvenido.SizeMode = PictureBoxSizeMode.StretchImage;
             pbBienvenido.TabIndex = 60;
             pbBienvenido.TabStop = false;
             // 
             // panel6
             // 
+            panel6.Controls.Add(txtcontra);
+            panel6.Controls.Add(txtpreguntas);
             panel6.Controls.Add(lblcorreo);
             panel6.Controls.Add(label4);
             panel6.Controls.Add(lblemail);
-            panel6.Controls.Add(linkLabelPreguntas);
             panel6.Controls.Add(lblnom);
             panel6.Controls.Add(label2);
             panel6.Controls.Add(lblusuario);
-            panel6.Controls.Add(linkLabelContraseña);
-            panel6.Location = new Point(131, 259);
+            panel6.Location = new Point(101, 254);
             panel6.Name = "panel6";
             panel6.Size = new Size(351, 276);
             panel6.TabIndex = 59;
+            // 
+            // txtcontra
+            // 
+            txtcontra.BackColor = Color.Gainsboro;
+            txtcontra.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtcontra.Location = new Point(3, 221);
+            txtcontra.Name = "txtcontra";
+            txtcontra.Size = new Size(165, 52);
+            txtcontra.TabIndex = 67;
+            txtcontra.Text = "Cambiar Contraseña";
+            txtcontra.UseVisualStyleBackColor = false;
+            txtcontra.Click += txtcontra_Click;
+            // 
+            // txtpreguntas
+            // 
+            txtpreguntas.BackColor = Color.Gainsboro;
+            txtpreguntas.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtpreguntas.ForeColor = Color.Black;
+            txtpreguntas.Location = new Point(183, 221);
+            txtpreguntas.Name = "txtpreguntas";
+            txtpreguntas.Size = new Size(165, 52);
+            txtpreguntas.TabIndex = 68;
+            txtpreguntas.Text = "Editar preguntas de seguridad";
+            txtpreguntas.UseVisualStyleBackColor = false;
+            txtpreguntas.Click += txtpreguntas_Click;
             // 
             // lblemail
             // 
@@ -214,7 +212,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Ebrima", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(230, 19);
+            label1.Location = new Point(200, 19);
             label1.Name = "label1";
             label1.Size = new Size(170, 32);
             label1.TabIndex = 58;
@@ -251,37 +249,26 @@
             bnMin.UseVisualStyleBackColor = false;
             bnMin.Click += bnMin_Click;
             // 
-            // panel7
+            // groupBox1
             // 
-            panel7.BackColor = Color.FromArgb(45, 66, 91);
-            panel7.BorderStyle = BorderStyle.FixedSingle;
-            panel7.Controls.Add(panel3);
-            panel7.Controls.Add(label1);
-            panel7.Controls.Add(panel6);
-            panel7.Controls.Add(panel1);
-            panel7.Location = new Point(240, 0);
-            panel7.Margin = new Padding(2);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(597, 557);
-            panel7.TabIndex = 56;
-            // 
-            // panel3
-            // 
-            panel3.BackColor = Color.Silver;
-            panel3.Location = new Point(0, 243);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(597, 10);
-            panel3.TabIndex = 2;
+            groupBox1.Controls.Add(panel6);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(panel1);
+            groupBox1.Location = new Point(286, 3);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(570, 543);
+            groupBox1.TabIndex = 66;
+            groupBox1.TabStop = false;
             // 
             // PerfilUsuario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
+            BackColor = Color.FromArgb(45, 66, 91);
             ClientSize = new Size(1084, 558);
+            Controls.Add(groupBox1);
             Controls.Add(bnCerrar);
             Controls.Add(bnMin);
-            Controls.Add(panel7);
             FormBorderStyle = FormBorderStyle.None;
             MaximumSize = new Size(1386, 788);
             Name = "PerfilUsuario";
@@ -293,8 +280,8 @@
             ((System.ComponentModel.ISupportInitialize)pbBienvenido).EndInit();
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
-            panel7.ResumeLayout(false);
-            panel7.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -304,19 +291,18 @@
         public Label lblcontraseña;
         private Label lblnombre;
         private Label lblbienvenido;
-        private LinkLabel linkLabelContraseña;
-        private LinkLabel linkLabelPreguntas;
         public Label lblcorreo;
         private Panel panel1;
         private Panel panel6;
         public Label label1;
         private Button bnCerrar;
         private Button bnMin;
-        private Panel panel7;
         private Label lblusuario;
         private Label lblnom;
         private Label lblemail;
         private PictureBox pbBienvenido;
-        private Panel panel3;
+        private GroupBox groupBox1;
+        private Button txtcontra;
+        private Button txtpreguntas;
     }
 }

@@ -70,6 +70,8 @@ namespace ProyectoHCL.Formularios
                         if (obj.ObjetoN == "TIPO HABITACION" && !obj.Permitido)
                         {
                             btnNuevo.Visible = false;
+                            btnExcel.Visible = false;
+                            btnPdf.Visible = false;
                         }
                         break;
                     case 3:

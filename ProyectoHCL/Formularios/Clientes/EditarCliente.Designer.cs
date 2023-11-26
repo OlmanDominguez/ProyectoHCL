@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarCliente));
             panel2 = new Panel();
+            btnMin = new Button();
             btnCerrar = new Button();
             label11 = new Label();
             label2 = new Label();
@@ -40,6 +41,7 @@
             label17 = new Label();
             label16 = new Label();
             label15 = new Label();
+            label10 = new Label();
             label14 = new Label();
             label13 = new Label();
             label12 = new Label();
@@ -53,7 +55,6 @@
             label8 = new Label();
             label9 = new Label();
             cbTipo = new ComboBox();
-            label10 = new Label();
             txtEmail2 = new TextBox();
             txtEmail1 = new TextBox();
             txtTele2 = new TextBox();
@@ -68,7 +69,6 @@
             label3 = new Label();
             label1 = new Label();
             errorT = new ErrorProvider(components);
-            btnMin = new Button();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             gb_juridico.SuspendLayout();
@@ -87,6 +87,21 @@
             panel2.Size = new Size(775, 67);
             panel2.TabIndex = 20;
             panel2.MouseMove += panel2_MouseMove;
+            // 
+            // btnMin
+            // 
+            btnMin.BackColor = Color.Transparent;
+            btnMin.BackgroundImage = (Image)resources.GetObject("btnMin.BackgroundImage");
+            btnMin.BackgroundImageLayout = ImageLayout.Stretch;
+            btnMin.FlatAppearance.BorderSize = 0;
+            btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            btnMin.FlatStyle = FlatStyle.Flat;
+            btnMin.Location = new Point(733, 1);
+            btnMin.Name = "btnMin";
+            btnMin.Size = new Size(19, 20);
+            btnMin.TabIndex = 70;
+            btnMin.UseVisualStyleBackColor = false;
+            btnMin.Click += btnMin_Click;
             // 
             // btnCerrar
             // 
@@ -123,7 +138,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(44, 98);
+            label2.Location = new Point(47, 161);
             label2.Name = "label2";
             label2.Size = new Size(83, 19);
             label2.TabIndex = 29;
@@ -137,6 +152,7 @@
             panel1.Controls.Add(label17);
             panel1.Controls.Add(label16);
             panel1.Controls.Add(label15);
+            panel1.Controls.Add(label10);
             panel1.Controls.Add(label14);
             panel1.Controls.Add(label13);
             panel1.Controls.Add(label12);
@@ -144,7 +160,6 @@
             panel1.Controls.Add(btnGuardar);
             panel1.Controls.Add(gb_juridico);
             panel1.Controls.Add(cbTipo);
-            panel1.Controls.Add(label10);
             panel1.Controls.Add(txtEmail2);
             panel1.Controls.Add(txtEmail1);
             panel1.Controls.Add(txtTele2);
@@ -183,7 +198,7 @@
             label18.AutoSize = true;
             label18.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label18.ForeColor = Color.Red;
-            label18.Location = new Point(91, 216);
+            label18.Location = new Point(94, 84);
             label18.Name = "label18";
             label18.Size = new Size(23, 30);
             label18.TabIndex = 67;
@@ -205,7 +220,7 @@
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label16.ForeColor = Color.Red;
-            label16.Location = new Point(124, 150);
+            label16.Location = new Point(127, 216);
             label16.Name = "label16";
             label16.Size = new Size(23, 30);
             label16.TabIndex = 65;
@@ -222,12 +237,25 @@
             label15.TabIndex = 64;
             label15.Text = "*";
             // 
+            // label10
+            // 
+            label10.Anchor = AnchorStyles.Top;
+            label10.AutoSize = true;
+            label10.BackColor = Color.Transparent;
+            label10.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label10.ForeColor = Color.Black;
+            label10.Location = new Point(43, 92);
+            label10.Name = "label10";
+            label10.Size = new Size(45, 19);
+            label10.TabIndex = 55;
+            label10.Text = "Tipo:";
+            // 
             // label14
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label14.ForeColor = Color.Red;
-            label14.Location = new Point(124, 80);
+            label14.Location = new Point(127, 153);
             label14.Name = "label14";
             label14.Size = new Size(23, 30);
             label14.TabIndex = 63;
@@ -238,7 +266,7 @@
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label13.ForeColor = Color.Red;
-            label13.Location = new Point(494, 17);
+            label13.Location = new Point(494, 3);
             label13.Name = "label13";
             label13.Size = new Size(23, 30);
             label13.TabIndex = 62;
@@ -249,7 +277,7 @@
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label12.ForeColor = Color.Red;
-            label12.Location = new Point(158, 17);
+            label12.Location = new Point(160, 3);
             label12.Name = "label12";
             label12.Size = new Size(23, 30);
             label12.TabIndex = 61;
@@ -390,32 +418,18 @@
             cbTipo.DropDownStyle = ComboBoxStyle.DropDownList;
             cbTipo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             cbTipo.FormattingEnabled = true;
-            cbTipo.Location = new Point(44, 249);
+            cbTipo.Location = new Point(43, 119);
             cbTipo.Name = "cbTipo";
             cbTipo.Size = new Size(310, 28);
             cbTipo.TabIndex = 56;
             cbTipo.SelectedValueChanged += cbTipo_SelectedValueChanged;
             cbTipo.Leave += cbTipo_Leave;
             // 
-            // label10
-            // 
-            label10.Anchor = AnchorStyles.Top;
-            label10.AutoSize = true;
-            label10.BackColor = Color.Transparent;
-            label10.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.ForeColor = Color.Black;
-            label10.Location = new Point(44, 224);
-            label10.Name = "label10";
-            label10.Size = new Size(45, 19);
-            label10.TabIndex = 55;
-            label10.Text = "Tipo:";
-            // 
             // txtEmail2
             // 
             txtEmail2.Anchor = AnchorStyles.Top;
             txtEmail2.BackColor = Color.White;
             txtEmail2.BorderStyle = BorderStyle.FixedSingle;
-            txtEmail2.CharacterCasing = CharacterCasing.Upper;
             txtEmail2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtEmail2.Location = new Point(426, 120);
             txtEmail2.MaxLength = 200;
@@ -430,7 +444,6 @@
             txtEmail1.Anchor = AnchorStyles.Top;
             txtEmail1.BackColor = Color.White;
             txtEmail1.BorderStyle = BorderStyle.FixedSingle;
-            txtEmail1.CharacterCasing = CharacterCasing.Upper;
             txtEmail1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtEmail1.Location = new Point(426, 50);
             txtEmail1.MaxLength = 200;
@@ -495,7 +508,7 @@
             txtApellido.BorderStyle = BorderStyle.FixedSingle;
             txtApellido.CharacterCasing = CharacterCasing.Upper;
             txtApellido.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtApellido.Location = new Point(44, 189);
+            txtApellido.Location = new Point(45, 252);
             txtApellido.MaxLength = 200;
             txtApellido.Name = "txtApellido";
             txtApellido.ShortcutsEnabled = false;
@@ -511,7 +524,7 @@
             txtNombre.BorderStyle = BorderStyle.FixedSingle;
             txtNombre.CharacterCasing = CharacterCasing.Upper;
             txtNombre.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNombre.Location = new Point(45, 120);
+            txtNombre.Location = new Point(45, 189);
             txtNombre.MaxLength = 200;
             txtNombre.Name = "txtNombre";
             txtNombre.ShortcutsEnabled = false;
@@ -592,7 +605,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(42, 164);
+            label1.Location = new Point(45, 227);
             label1.Name = "label1";
             label1.Size = new Size(85, 19);
             label1.TabIndex = 32;
@@ -601,21 +614,6 @@
             // errorT
             // 
             errorT.ContainerControl = this;
-            // 
-            // btnMin
-            // 
-            btnMin.BackColor = Color.Transparent;
-            btnMin.BackgroundImage = (Image)resources.GetObject("btnMin.BackgroundImage");
-            btnMin.BackgroundImageLayout = ImageLayout.Stretch;
-            btnMin.FlatAppearance.BorderSize = 0;
-            btnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
-            btnMin.FlatStyle = FlatStyle.Flat;
-            btnMin.Location = new Point(733, 1);
-            btnMin.Name = "btnMin";
-            btnMin.Size = new Size(19, 20);
-            btnMin.TabIndex = 70;
-            btnMin.UseVisualStyleBackColor = false;
-            btnMin.Click += btnMin_Click;
             // 
             // EditarCliente
             // 

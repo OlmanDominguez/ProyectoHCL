@@ -154,6 +154,19 @@ namespace ProyectoHCL.Formularios
         {
 
         }
+
+        private void txtcontra_Click(object sender, EventArgs e)
+        {
+            Form PerfilUsuario = new RestaContra();
+            PerfilUsuario.Show();
+        }
+
+        private void txtpreguntas_Click(object sender, EventArgs e)
+        {
+
+            Form PerfilUsuario = new PreguntasRecuContra();
+            PerfilUsuario.Show();
+        }
     }
 }
 

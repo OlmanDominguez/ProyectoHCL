@@ -34,18 +34,21 @@
             btnMin = new Button();
             btnCerrar = new Button();
             label11 = new Label();
+            cbTipo = new ComboBox();
+            label10 = new Label();
+            label15 = new Label();
             label2 = new Label();
             panel1 = new Panel();
-            label19 = new Label();
+            label22 = new Label();
             txtEmail2 = new TextBox();
             label7 = new Label();
+            label14 = new Label();
+            label20 = new Label();
             label12 = new Label();
             label5 = new Label();
             txtEmail1 = new TextBox();
             label18 = new Label();
             label16 = new Label();
-            label15 = new Label();
-            label14 = new Label();
             label13 = new Label();
             btnCancelar = new Button();
             btnGuardar = new Button();
@@ -56,9 +59,7 @@
             txtRTN = new TextBox();
             label8 = new Label();
             label9 = new Label();
-            cbTipo = new ComboBox();
             txtNombre = new TextBox();
-            label10 = new Label();
             txtTele2 = new TextBox();
             txtTele1 = new TextBox();
             txtID = new TextBox();
@@ -68,7 +69,6 @@
             label3 = new Label();
             label1 = new Label();
             errorT = new ErrorProvider(components);
-            label20 = new Label();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             gb_juridico.SuspendLayout();
@@ -130,7 +130,43 @@
             label11.Size = new Size(178, 30);
             label11.TabIndex = 28;
             label11.Text = "Registrar Cliente";
-            label11.Click += label11_Click;
+            // 
+            // cbTipo
+            // 
+            cbTipo.BackColor = Color.White;
+            cbTipo.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbTipo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            cbTipo.FormattingEnabled = true;
+            cbTipo.Location = new Point(48, 105);
+            cbTipo.Name = "cbTipo";
+            cbTipo.Size = new Size(307, 28);
+            cbTipo.TabIndex = 56;
+            cbTipo.SelectedValueChanged += cbTipo_SelectedValueChanged;
+            cbTipo.Leave += cbTipo_Leave;
+            // 
+            // label10
+            // 
+            label10.Anchor = AnchorStyles.Top;
+            label10.AutoSize = true;
+            label10.BackColor = Color.Transparent;
+            label10.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label10.ForeColor = Color.Black;
+            label10.Location = new Point(48, 79);
+            label10.Name = "label10";
+            label10.Size = new Size(45, 19);
+            label10.TabIndex = 55;
+            label10.Text = "Tipo:";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label15.ForeColor = Color.Red;
+            label15.Location = new Point(89, 68);
+            label15.Name = "label15";
+            label15.Size = new Size(23, 30);
+            label15.TabIndex = 63;
+            label15.Text = "*";
             // 
             // label2
             // 
@@ -139,7 +175,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(46, 84);
+            label2.Location = new Point(52, 147);
             label2.Name = "label2";
             label2.Size = new Size(83, 19);
             label2.TabIndex = 29;
@@ -148,24 +184,24 @@
             // panel1
             // 
             panel1.BackColor = Color.Gainsboro;
-            panel1.Controls.Add(label20);
-            panel1.Controls.Add(label19);
+            panel1.Controls.Add(label22);
             panel1.Controls.Add(txtEmail2);
             panel1.Controls.Add(label7);
+            panel1.Controls.Add(label14);
+            panel1.Controls.Add(label20);
+            panel1.Controls.Add(label15);
+            panel1.Controls.Add(label10);
+            panel1.Controls.Add(cbTipo);
             panel1.Controls.Add(label12);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(txtEmail1);
             panel1.Controls.Add(label18);
             panel1.Controls.Add(label16);
-            panel1.Controls.Add(label15);
-            panel1.Controls.Add(label14);
             panel1.Controls.Add(label13);
             panel1.Controls.Add(btnCancelar);
             panel1.Controls.Add(btnGuardar);
             panel1.Controls.Add(gb_juridico);
-            panel1.Controls.Add(cbTipo);
             panel1.Controls.Add(txtNombre);
-            panel1.Controls.Add(label10);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(txtTele2);
             panel1.Controls.Add(txtTele1);
@@ -182,31 +218,29 @@
             panel1.Size = new Size(775, 407);
             panel1.TabIndex = 21;
             // 
-            // label19
+            // label22
             // 
-            label19.AutoSize = true;
-            label19.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label19.ForeColor = Color.Red;
-            label19.Location = new Point(499, 76);
-            label19.Name = "label19";
-            label19.Size = new Size(23, 30);
-            label19.TabIndex = 67;
-            label19.Text = "*";
+            label22.AutoSize = true;
+            label22.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label22.ForeColor = Color.Red;
+            label22.Location = new Point(499, 68);
+            label22.Name = "label22";
+            label22.Size = new Size(23, 30);
+            label22.TabIndex = 71;
+            label22.Text = "*";
             // 
             // txtEmail2
             // 
             txtEmail2.Anchor = AnchorStyles.Top;
             txtEmail2.BackColor = Color.White;
             txtEmail2.BorderStyle = BorderStyle.FixedSingle;
-            txtEmail2.CharacterCasing = CharacterCasing.Upper;
             txtEmail2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtEmail2.Location = new Point(429, 106);
+            txtEmail2.Location = new Point(429, 105);
             txtEmail2.MaxLength = 200;
             txtEmail2.Name = "txtEmail2";
             txtEmail2.ShortcutsEnabled = false;
             txtEmail2.Size = new Size(309, 27);
             txtEmail2.TabIndex = 54;
-            txtEmail2.Leave += txtEmail2_Leave;
             // 
             // label7
             // 
@@ -215,18 +249,40 @@
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(429, 84);
+            label7.Location = new Point(429, 83);
             label7.Name = "label7";
             label7.Size = new Size(74, 19);
             label7.TabIndex = 42;
             label7.Text = "E-Mail 2:";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label14.ForeColor = Color.Red;
+            label14.Location = new Point(131, 208);
+            label14.Name = "label14";
+            label14.Size = new Size(23, 30);
+            label14.TabIndex = 70;
+            label14.Text = "*";
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label20.ForeColor = Color.Red;
+            label20.Location = new Point(526, 211);
+            label20.Name = "label20";
+            label20.Size = new Size(23, 30);
+            label20.TabIndex = 69;
+            label20.Text = "*";
             // 
             // label12
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label12.ForeColor = Color.Red;
-            label12.Location = new Point(162, 3);
+            label12.Location = new Point(171, 3);
             label12.Name = "label12";
             label12.Size = new Size(23, 30);
             label12.TabIndex = 68;
@@ -259,16 +315,13 @@
             txtEmail1.TabIndex = 53;
             txtEmail1.Click += txtEmail1_Click;
             txtEmail1.TextChanged += txtEmail1_TextChanged;
-            txtEmail1.VisibleChanged += txtEmail1_VisibleChanged;
-            txtEmail1.KeyPress += txtEmail1_KeyPress;
-            txtEmail1.Leave += txtEmail1_Leave;
             // 
             // label18
             // 
             label18.AutoSize = true;
             label18.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label18.ForeColor = Color.Red;
-            label18.Location = new Point(509, 136);
+            label18.Location = new Point(526, 136);
             label18.Name = "label18";
             label18.Size = new Size(23, 30);
             label18.TabIndex = 66;
@@ -285,34 +338,12 @@
             label16.TabIndex = 64;
             label16.Text = "*";
             // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label15.ForeColor = Color.Red;
-            label15.Location = new Point(89, 207);
-            label15.Name = "label15";
-            label15.Size = new Size(23, 30);
-            label15.TabIndex = 63;
-            label15.Text = "*";
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label14.ForeColor = Color.Red;
-            label14.Location = new Point(126, 136);
-            label14.Name = "label14";
-            label14.Size = new Size(23, 30);
-            label14.TabIndex = 62;
-            label14.Text = "*";
-            // 
             // label13
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label13.ForeColor = Color.Red;
-            label13.Location = new Point(126, 73);
+            label13.Location = new Point(131, 136);
             label13.Name = "label13";
             label13.Size = new Size(23, 30);
             label13.TabIndex = 61;
@@ -372,11 +403,12 @@
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label21.ForeColor = Color.Red;
-            label21.Location = new Point(477, 1);
+            label21.Location = new Point(477, -4);
             label21.Name = "label21";
             label21.Size = new Size(23, 30);
             label21.TabIndex = 71;
             label21.Text = "*";
+            label21.Click += label21_Click;
             // 
             // label17
             // 
@@ -410,7 +442,6 @@
             txtRTN.Anchor = AnchorStyles.Top;
             txtRTN.BackColor = Color.White;
             txtRTN.BorderStyle = BorderStyle.FixedSingle;
-            txtRTN.CharacterCasing = CharacterCasing.Upper;
             txtRTN.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtRTN.Location = new Point(22, 31);
             txtRTN.MaxLength = 100;
@@ -447,20 +478,6 @@
             label9.TabIndex = 47;
             label9.Text = "Empresa: ";
             // 
-            // cbTipo
-            // 
-            cbTipo.BackColor = Color.White;
-            cbTipo.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbTipo.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            cbTipo.FormattingEnabled = true;
-            cbTipo.Location = new Point(48, 249);
-            cbTipo.Name = "cbTipo";
-            cbTipo.Size = new Size(307, 28);
-            cbTipo.TabIndex = 56;
-            cbTipo.SelectedIndexChanged += cbTipo_SelectedIndexChanged;
-            cbTipo.SelectedValueChanged += cbTipo_SelectedValueChanged;
-            cbTipo.Leave += cbTipo_Leave;
-            // 
             // txtNombre
             // 
             txtNombre.Anchor = AnchorStyles.Top;
@@ -468,7 +485,7 @@
             txtNombre.BorderStyle = BorderStyle.FixedSingle;
             txtNombre.CharacterCasing = CharacterCasing.Upper;
             txtNombre.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNombre.Location = new Point(46, 106);
+            txtNombre.Location = new Point(52, 177);
             txtNombre.MaxLength = 100;
             txtNombre.Name = "txtNombre";
             txtNombre.ShortcutsEnabled = false;
@@ -477,19 +494,6 @@
             txtNombre.KeyPress += txtNombre_KeyPress;
             txtNombre.Leave += txtNombre_Leave;
             // 
-            // label10
-            // 
-            label10.Anchor = AnchorStyles.Top;
-            label10.AutoSize = true;
-            label10.BackColor = Color.Transparent;
-            label10.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.ForeColor = Color.Black;
-            label10.Location = new Point(48, 227);
-            label10.Name = "label10";
-            label10.Size = new Size(45, 19);
-            label10.TabIndex = 55;
-            label10.Text = "Tipo:";
-            // 
             // txtTele2
             // 
             txtTele2.Anchor = AnchorStyles.Top;
@@ -497,7 +501,7 @@
             txtTele2.BorderStyle = BorderStyle.FixedSingle;
             txtTele2.CharacterCasing = CharacterCasing.Upper;
             txtTele2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTele2.Location = new Point(429, 249);
+            txtTele2.Location = new Point(429, 250);
             txtTele2.MaxLength = 20;
             txtTele2.Name = "txtTele2";
             txtTele2.ShortcutsEnabled = false;
@@ -544,7 +548,7 @@
             txtApellido.BorderStyle = BorderStyle.FixedSingle;
             txtApellido.CharacterCasing = CharacterCasing.Upper;
             txtApellido.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtApellido.Location = new Point(46, 177);
+            txtApellido.Location = new Point(54, 249);
             txtApellido.MaxLength = 100;
             txtApellido.Name = "txtApellido";
             txtApellido.ShortcutsEnabled = false;
@@ -560,7 +564,7 @@
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(429, 227);
+            label6.Location = new Point(429, 228);
             label6.Name = "label6";
             label6.Size = new Size(91, 19);
             label6.TabIndex = 40;
@@ -573,7 +577,7 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(422, 147);
+            label4.Location = new Point(429, 152);
             label4.Name = "label4";
             label4.Size = new Size(91, 19);
             label4.TabIndex = 36;
@@ -599,7 +603,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(46, 149);
+            label1.Location = new Point(52, 219);
             label1.Name = "label1";
             label1.Size = new Size(85, 19);
             label1.TabIndex = 32;
@@ -608,17 +612,6 @@
             // errorT
             // 
             errorT.ContainerControl = this;
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label20.ForeColor = Color.Red;
-            label20.Location = new Point(526, 219);
-            label20.Name = "label20";
-            label20.Size = new Size(23, 30);
-            label20.TabIndex = 69;
-            label20.Text = "*";
             // 
             // AgregarCliente
             // 
@@ -677,7 +670,6 @@
         private Label label18;
         private Label label16;
         private Label label15;
-        private Label label14;
         private Label label13;
         private Button btnCerrar;
         private Button btnMin;
@@ -686,7 +678,8 @@
         private Label label17;
         public TextBox txtEmail2;
         private Label label7;
-        private Label label19;
         private Label label20;
+        private Label label14;
+        private Label label22;
     }
 }

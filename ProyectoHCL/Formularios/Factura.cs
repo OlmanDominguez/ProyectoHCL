@@ -366,15 +366,25 @@ namespace ProyectoHCL.Formularios
 
                             while (i < h)
                             {
-                                string habitacion = "Habit. # " + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString();
-                                decimal precio = Convert.ToDecimal(ht.Rows[i]["PRECIO"]);
-                                decimal tot = Convert.ToDecimal(noches.Days) * precio;
 
-                                dgvDetalleFact.Rows.Add("1", habitacion, precio.ToString(), tot.ToString());
+                                dgvDetalleFact.Rows.Add("1", ("Habit. #" + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString()),
+                                    ht.Rows[i]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])));
 
-                                sth += Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"]);
+                                if (i == (h - 1))
+                                {
+                                    string habitacion = "Habit. # " + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString();
+                                    decimal precio = Convert.ToDecimal(ht.Rows[i]["PRECIO"]);
+                                    decimal tot = Convert.ToDecimal(noches.Days) * precio;
+                                }
+                                else
+                                {
+                                    string habitacion = "Habit. # " + ht.Rows[i]["NUMEROHABITACION"].ToString() + " " + ht.Rows[i]["TIPO"].ToString();
+                                    decimal precio = Convert.ToDecimal(ht.Rows[i]["PRECIO"]);
+                                    decimal tot = Convert.ToDecimal(noches.Days) * precio;
+                                }
+                                sth = sth + Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"]);
 
-                                i++;
+                                i ++;
                             }
                         }
 
@@ -385,15 +395,25 @@ namespace ProyectoHCL.Formularios
                         {
                             while (j < s)
                             {
-                                int cantidad = Convert.ToInt32(st.Rows[j]["CANTIDAD"]);
-                                string descrip = st.Rows[j]["DESCRIPCION"].ToString();
-                                decimal precio1 = Convert.ToDecimal(st.Rows[j]["PRECIO"]);
-                                decimal tot1 = cantidad * precio1;
+                                dgvDetalleFact.Rows.Add(st.Rows[j]["CANTIDAD"].ToString(), st.Rows[j]["DESCRIPCION"].ToString(),
+                                    st.Rows[j]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])));
 
-                                dgvDetalleFact.Rows.Add(cantidad.ToString(), descrip, precio1.ToString(), tot1.ToString());
+                                if (j == (s - 1))
+                                {
+                                    int cantidad = Convert.ToInt32(st.Rows[j]["CANTIDAD"]);
+                                    string descrip = st.Rows[j]["DESCRIPCION"].ToString();
+                                    decimal precio1 = Convert.ToDecimal(st.Rows[j]["PRECIO"]);
+                                    decimal tot1 = cantidad * precio1;
+                                }
+                                else
+                                {
+                                    int cantidad = Convert.ToInt32(st.Rows[j]["CANTIDAD"]);
+                                    string descrip = st.Rows[j]["DESCRIPCION"].ToString();
+                                    decimal precio1 = Convert.ToDecimal(st.Rows[j]["PRECIO"]);
+                                    decimal tot1 = cantidad * precio1;
+                                }
 
-                                StS += cantidad * Convert.ToDecimal(st.Rows[j]["PRECIO"]);
-
+                                StS += Convert.ToInt32(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"]);
                                 j++;
                             }
                         }
@@ -466,7 +486,6 @@ namespace ProyectoHCL.Formularios
                         lblSV.Text = isv.ToString();
                         lblTur.Text = it.ToString();
                         lblTotal.Text = total.ToString();
-
                     }
                 }
                 catch (Exception a)
@@ -535,11 +554,10 @@ namespace ProyectoHCL.Formularios
                         //DetalleHabitaciones
                         int i = 0;
                         int j = 0;
+                        dgvDetalleFact.Rows.Clear();
 
                         if (h > 0)
                         {
-                            //listView1.Items.Clear();
-
                             while (i < h)
                             {
                                 dgvDetalleFact.Rows.Add("1", ht.Rows[i]["DESCRIPCION"].ToString(),
@@ -559,7 +577,7 @@ namespace ProyectoHCL.Formularios
                             while (j < s)
                             {
                                 dgvDetalleFact.Rows.Add(st.Rows[j]["CANTIDAD"].ToString(), st.Rows[j]["DESCRIPCION"].ToString(),
-                                   st.Rows[j]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])));
+                                    st.Rows[j]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])));
 
                                 StS = StS + Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"]);
                                 j = j + 1;
@@ -642,6 +660,69 @@ namespace ProyectoHCL.Formularios
                     MessageBox.Show(a.Message + a.StackTrace);
                 }
 
+            }
+        }
+
+        private void InsertarDatos()
+        {
+            try
+            {
+                MySqlConnection conectar = new MySqlConnection();
+                conectar = BaseDatosHCL.ObtenerConexion();
+
+                using (conectar)
+                {
+                    // Insertar la primera fila en una tabla
+                    DataGridViewRow primeraFila = dgvDetalleFact.Rows[0];
+                    string valorColumna1 = primeraFila.Cells["Cant."].Value.ToString();
+                    string valorColumna2 = primeraFila.Cells["Descripción"].Value.ToString();
+                    string valorColumna3 = primeraFila.Cells["P. Unitario"].Value.ToString();
+                    string valorColumna4 = primeraFila.Cells["Total"].Value.ToString();
+
+                    string query = "INSERT INTO TBL_DETALLEFACTURA (DIAS, DESCRIPCION, PRECIO, TOTAL, ID_SOLICITUDRESERVA) " +
+                                                   "VALUES (@valorColumna1, @valorColumna2, @valorColumna3, @valorColumna4, @IdSolicitudReserva)";
+
+                    using (MySqlCommand comandoPrimeraTabla = new MySqlCommand(query, conectar))
+                    {
+                        comandoPrimeraTabla.Parameters.AddWithValue("@valorColumna1", valorColumna1);
+                        comandoPrimeraTabla.Parameters.AddWithValue("@valorColumna2", valorColumna2);
+                        comandoPrimeraTabla.Parameters.AddWithValue("@valorColumna3", valorColumna3);
+                        comandoPrimeraTabla.Parameters.AddWithValue("@valorColumna4", valorColumna4);
+                        comandoPrimeraTabla.Parameters.AddWithValue("@IdSolicitudReserva", info.reserva);
+
+                        comandoPrimeraTabla.ExecuteNonQuery();
+                    }
+
+                    // Insertar el resto de filas en otra tabla
+                    for (int i = 1; i < dgvDetalleFact.Rows.Count; i++)
+                    {
+                        DataGridViewRow fila = dgvDetalleFact.Rows[i];
+                        string valorCol1 = fila.Cells["Cant."].Value.ToString();
+                        string valorCol2 = fila.Cells["Descripción"].Value.ToString();
+                        string valorCol3 = fila.Cells["P. Unitario"].Value.ToString();
+                        string valorCol4 = fila.Cells["Total"].Value.ToString();
+
+                        string query1 = "INSERT INTO TBL_DETALLEFACTURASERVI (CANTIDAD, DESCRIPCION, PRECIO, TOTAL, ID_SOLICITUDRESERVA) " +
+                                                  "VALUES (@valorCol1, @valorCol2, @valorCol3, @valorCol4, @IdSolicitudReserva)";
+
+                        using (MySqlCommand comandoOtraTabla = new MySqlCommand(query1, conectar))
+                        {
+                            comandoOtraTabla.Parameters.AddWithValue("@valorCol1", valorCol1);
+                            comandoOtraTabla.Parameters.AddWithValue("@valorCol2", valorCol2);
+                            comandoOtraTabla.Parameters.AddWithValue("@valorCol3", valorCol3);
+                            comandoOtraTabla.Parameters.AddWithValue("@valorCol4", valorCol4);
+                            comandoOtraTabla.Parameters.AddWithValue("@IdSolicitudReserva", info.reserva);
+
+                            comandoOtraTabla.ExecuteNonQuery();
+                        }
+                    }
+                    // Cerrar la conexión
+                    conectar.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al insertar datos: " + ex.Message);
             }
         }
 
@@ -795,65 +876,9 @@ namespace ProyectoHCL.Formularios
                         comando.ExecuteNonQuery();
                         comando.Connection.Close();
 
-                        if (!string.IsNullOrEmpty(habitacion) && precio != 0 && tot != 0)
-                        {
-                            // Preparar la consulta con parámetros
-                            string query = "INSERT INTO TBL_DETALLEFACTURA (DIAS, DESCRIPCION, PRECIO, TOTAL, ID_SOLICITUDRESERVA) " +
-                                           "VALUES (@Dias, @Descripcion, @Precio, @Total, @IdSolicitudReserva)";
+                        InsertarDatos();
 
-                            // Crear y configurar el comando con la conexión
-                            using (MySqlConnection conexion = BaseDatosHCL.ObtenerConexion())
-                            using (MySqlCommand comand = new MySqlCommand(query, conexion))
-                            {
-                                // Asignar valores a los parámetros
-                                comand.Parameters.AddWithValue("@Dias", 1); // Reemplazar con el valor real de "Dias"
-                                comand.Parameters.AddWithValue("@Descripcion", habitacion);
-                                comand.Parameters.AddWithValue("@Precio", precio);
-                                comand.Parameters.AddWithValue("@Total", tot);
-                                comand.Parameters.AddWithValue("@IdSolicitudReserva", info.reserva);
-
-                                try
-                                {
-                                    //ejecutar la consulta
-                                    comand.ExecuteNonQuery();
-                                }
-                                catch (Exception ex)
-                                {
-                                    MsgB mb = new MsgB("error", "Error: " + ex.Message);
-                                    DialogResult d = mb.ShowDialog();
-                                }
-                            }
-                        }
-
-                        if (!string.IsNullOrEmpty(descrip) && precio1 != 0 && tot1 != 0 && cantidad != 0)
-                        {
-
-                            string query = "INSERT INTO TBL_DETALLEFACTURASERVI (CANTIDAD, DESCRIPCION, PRECIO, TOTAL, ID_SOLICITUDRESERVA) VALUES (@Cant, @Descripcion, @Precio, @Total, @IdSolicitudReserva)";
-
-                            using (MySqlConnection conexion = BaseDatosHCL.ObtenerConexion())
-                            using (MySqlCommand comand = new MySqlCommand(query, conexion))
-                            {
-                                // Asignar valores a los parámetros
-                                comand.Parameters.AddWithValue("@Cant", cantidad); // Reemplazar con el valor real de "Dias"
-                                comand.Parameters.AddWithValue("@Descripcion", descrip);
-                                comand.Parameters.AddWithValue("@Precio", precio1);
-                                comand.Parameters.AddWithValue("@Total", tot1);
-                                comand.Parameters.AddWithValue("@IdSolicitudReserva", info.reserva);
-
-                                try
-                                {
-                                    //ejecutar la consulta
-                                    comand.ExecuteNonQuery();
-                                }
-                                catch (Exception ex)
-                                {
-                                    MsgB mb = new MsgB("error", "Error: " + ex.Message);
-                                    DialogResult d = mb.ShowDialog();
-                                }
-                            }
-                        }
-
-                        MsgB mbox = new MsgB("informacion", "Registro Agregado");
+                         MsgB mbox = new MsgB("informacion", "Registro Agregado");
                         DialogResult dR = mbox.ShowDialog();
                         this.Close();
 

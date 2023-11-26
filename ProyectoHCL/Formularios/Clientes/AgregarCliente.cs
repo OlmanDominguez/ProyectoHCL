@@ -307,46 +307,8 @@ namespace ProyectoHCL.Formularios
 
         private void txtEmail1_TextChanged(object sender, EventArgs e)
         {
-        }
-
-        private void txtEmail1_Leave(object sender, EventArgs e)
-        {
-
-            if (ValidarTxt.txtVacio(txtEmail1))
-            {
-                errorT.SetError(txtEmail1, "Introduzca un correo");
-
-            }
-            else if (ValidarTxt.CorreoValido(txtEmail1.Text))
-            {
-                errorT.SetError(txtEmail1, "Dirección de correo no válida");
-                txtEmail1.Focus();
-            }
-            else
-            {
-                errorT.Clear();
-
-            }
-        }
-
-        private void txtEmail2_Leave(object sender, EventArgs e)
-        {
-
-            if (ValidarTxt.txtVacio(txtEmail2))
-            {
-                errorT.SetError(txtEmail2, "Introduzca un correo");
-
-            }
-            else if (ValidarTxt.CorreoValido(txtEmail2.Text))
-            {
-                errorT.SetError(txtEmail2, "Dirección de correo no válida");
-                txtEmail2.Focus();
-            }
-            else
-            {
-                errorT.Clear();
-
-            }
+            //panel3.Visible = true;
+            // openpanel3(new panel3());
         }
 
         private void txtID_Leave(object sender, EventArgs e)
@@ -494,15 +456,6 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtEmail1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-        }
-
-        private void label21_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -513,36 +466,14 @@ namespace ProyectoHCL.Formularios
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void label20_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cbTipo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtEmail1_VisibleChanged(object sender, EventArgs e)
-        {
-        }
-
         private void txtEmail1_Click(object sender, EventArgs e)
         {
+            // panel3.Visible = true;
         }
 
-        private void panel3_Paint(object sender, PaintEventArgs e)
+        private void label21_Click(object sender, EventArgs e)
         {
+
         }
     }
 }
