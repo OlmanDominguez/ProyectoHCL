@@ -227,6 +227,11 @@ namespace ProyectoHCL.Formularios
                 MsgB m = new MsgB("advertencia", "El apellido debe contener al menos 5 letras");
                 DialogResult dR = m.ShowDialog();
             }
+            else if (txtApellido.TextLength < 14) //validar que el apellido del cliente no tenga menos de 5 caracteres
+            {
+                MsgB m = new MsgB("advertencia", "El RTN debe contener al menos 14 letras");
+                DialogResult dR = m.ShowDialog();
+            }
             else
             {
                 try
@@ -375,32 +380,6 @@ namespace ProyectoHCL.Formularios
             ValidarTxt.TxtLetras(e);
         }
 
-        private void txtEmail1_Leave(object sender, EventArgs e)
-        {
-            // if (!ValidarTxt.CorreoValido(txtEmail1.Text))
-            //{
-            // errorT.SetError(txtEmail1, "Dirección de correo no válida");
-            // txtEmail1.Focus();
-            // }
-            // else
-            // {
-            //  errorT.Clear();
-            // }
-        }
-
-        private void txtEmail2_Leave(object sender, EventArgs e)
-        {
-            //  if (!ValidarTxt.CorreoValido(txtEmail2.Text))
-            // {
-            // errorT.SetError(txtEmail2, "Dirección de correo no válida");
-            // txtEmail2.Focus();
-            //   }
-            //  else
-            // {
-            //   errorT.Clear();
-            // }
-        }
-
         private void txtID_Leave(object sender, EventArgs e)
         {
             if (ValidarTxt.txtVacio(txtID))
@@ -481,11 +460,6 @@ namespace ProyectoHCL.Formularios
                 errorT.SetError(txtRTN, "Introduzca un RTN");
 
             }
-            else if (txtTele2.TextLength < 14)
-            {
-                errorT.SetError(txtRTN, "El RTN debe contener al menos 14 dígitos");
-                txtRTN.Focus();
-            }
             else
             {
                 errorT.Clear();
@@ -553,11 +527,6 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        private void label20_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -566,6 +535,21 @@ namespace ProyectoHCL.Formularios
         private void btnMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtEmail1_Click(object sender, EventArgs e)
+        {
+            panel3.Visible = true;
         }
     }
 }

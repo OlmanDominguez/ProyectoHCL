@@ -148,6 +148,14 @@ namespace ProyectoHCL.Formularios
                 MsgB m = new MsgB("advertencia", "El apellido debe contener al menos 5 letras");
                 DialogResult dR = m.ShowDialog();
             }
+
+            else if (txtRTN.TextLength < 14) //validar que el RTN del cliente no tenga menos de 14 caracteres
+            {
+                MsgB m = new MsgB("advertencia", " El RTN debe contener al menos 14 dígitos");
+                DialogResult dR = m.ShowDialog();
+            }
+
+
             else
             {
                 try
@@ -305,12 +313,6 @@ namespace ProyectoHCL.Formularios
             ValidarTxt.TxtLetras(e);
         }
 
-        private void txtEmail1_TextChanged(object sender, EventArgs e)
-        {
-            //panel3.Visible = true;
-            // openpanel3(new panel3());
-        }
-
         private void txtID_Leave(object sender, EventArgs e)
         {
             if (ValidarTxt.txtVacio(txtID))
@@ -318,7 +320,7 @@ namespace ProyectoHCL.Formularios
                 errorT.SetError(txtID, "Introduzca la identificación");
 
             }
-            else if (txtID.TextLength <= 13)
+            else if (txtID.TextLength < 13)
             {
                 errorT.SetError(txtID, "La identificación debe contener al menos 13 números");
                 txtID.Focus();
@@ -418,25 +420,6 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void txtRTN_Leave(object sender, EventArgs e)
-        {
-            if (ValidarTxt.txtVacio(txtRTN))
-            {
-                errorT.SetError(txtRTN, "Introduzca un RTN");
-
-            }
-            else if (txtTele2.TextLength < 14)
-            {
-                errorT.SetError(txtRTN, "El RTN debe contener al menos 14 dígitos");
-                txtRTN.Focus();
-            }
-            else
-            {
-                errorT.Clear();
-
-            }
-        }
-
         private void txtEmpresa_Leave(object sender, EventArgs e)
         {
             if (ValidarTxt.txtVacio(txtEmpresa))
@@ -468,10 +451,20 @@ namespace ProyectoHCL.Formularios
 
         private void txtEmail1_Click(object sender, EventArgs e)
         {
-            // panel3.Visible = true;
+            panel3.Visible = true;
         }
 
-        private void label21_Click(object sender, EventArgs e)
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtEmail1_TextChanged(object sender, EventArgs e)
         {
 
         }
