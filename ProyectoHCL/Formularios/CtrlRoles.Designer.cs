@@ -589,7 +589,7 @@
             dgvRoles.DefaultCellStyle = dataGridViewCellStyle3;
             dgvRoles.EnableHeadersVisualStyles = false;
             dgvRoles.GridColor = Color.FromArgb(45, 66, 91);
-            dgvRoles.Location = new Point(40, 227);
+            dgvRoles.Location = new Point(0, 220);
             dgvRoles.Margin = new Padding(1, 2, 1, 2);
             dgvRoles.Name = "dgvRoles";
             dgvRoles.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
@@ -610,10 +610,10 @@
             dataGridViewCellStyle5.SelectionForeColor = Color.Black;
             dgvRoles.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvRoles.RowTemplate.Height = 25;
-            dgvRoles.Size = new Size(1469, 568);
+            dgvRoles.Size = new Size(1548, 589);
             dgvRoles.TabIndex = 1;
             dgvRoles.CellClick += dgvRoles_CellClick;
-            dgvRoles.CellFormatting += dgvRoles_CellFormatting;
+            dgvRoles.CellFormatting += dgvRoles_CellFormatting_1;
             // 
             // CtrlRoles
             // 
@@ -629,7 +629,7 @@
             Name = "CtrlRoles";
             StartPosition = FormStartPosition.CenterParent;
             Text = "CtrlRoles";
-            Load += CtrlRoles_Load;
+            Load += CtrlRoles_Load_1;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel5.ResumeLayout(false);

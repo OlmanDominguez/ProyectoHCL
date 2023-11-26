@@ -44,7 +44,6 @@
             OcultarBox4 = new PictureBox();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
-            btnMax = new PictureBox();
             btnExit = new PictureBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             errorProvider1 = new ErrorProvider(components);
@@ -53,7 +52,6 @@
             ((System.ComponentModel.ISupportInitialize)OcultarBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)btnMax).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             panel1.SuspendLayout();
@@ -233,20 +231,6 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click_1;
             // 
-            // btnMax
-            // 
-            btnMax.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnMax.BackgroundImageLayout = ImageLayout.Center;
-            btnMax.Image = (Image)resources.GetObject("btnMax.Image");
-            btnMax.Location = new Point(595, 7);
-            btnMax.Margin = new Padding(4, 5, 4, 5);
-            btnMax.Name = "btnMax";
-            btnMax.Size = new Size(29, 30);
-            btnMax.SizeMode = PictureBoxSizeMode.StretchImage;
-            btnMax.TabIndex = 1;
-            btnMax.TabStop = false;
-            btnMax.Click += btnMax_Click;
-            // 
             // btnExit
             // 
             btnExit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -268,7 +252,6 @@
             // panel1
             // 
             panel1.BackgroundImageLayout = ImageLayout.Stretch;
-            panel1.Controls.Add(btnMax);
             panel1.Controls.Add(Ingresarbutton1);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(btnExit);
@@ -315,7 +298,6 @@
             ((System.ComponentModel.ISupportInitialize)OcultarBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)btnMax).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnExit).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             panel1.ResumeLayout(false);
@@ -341,7 +323,6 @@
         private PictureBox pictureBox2;
         private PictureBox btnExit;
         private PictureBox pictureBox1;
-        private PictureBox btnMax;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private ErrorProvider errorProvider1;
         private Panel panel1;

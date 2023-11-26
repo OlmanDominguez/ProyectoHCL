@@ -69,6 +69,24 @@ using System.Windows.Forms;//libreria para operaciones unicas que no devuelven n
 using static ProyectoHCL.Formularios.CtrlClientes;//Libreria que nos permite manipular las funciones de ctrlclientes 
 using static ProyectoHCL.RecuContra;//Libreria que nos permite manipular las funciones recucontra 
 using DocumentFormat.OpenXml.Office.Word;//Libreria que nos permite manipular documentos en formato word 
+using iText.Kernel.Pdf;
+using static iText.Kernel.Pdf.Colorspace.PdfDeviceCs;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using DocumentFormat.OpenXml.Office2013.Excel;
+using Microsoft.VisualBasic.ApplicationServices;
+using System.Reflection.Metadata;
+using Document = iText.Layout.Document;
+using iText.Kernel.Geom;
+using iText.Layout.Element;
+using iText.Kernel.Font;
+using iText.IO.Font.Constants;
+using iText.Layout.Properties;
+using Point = System.Drawing.Point;
+using iText.Kernel.Events;
+using iText.Kernel.Pdf.Canvas;
+using Rectangle = iText.Kernel.Geom.Rectangle;
+using Image = System.Drawing.Image;
+
 
 namespace ProyectoHCL.Formularios.Parametros
 {
@@ -115,11 +133,11 @@ namespace ProyectoHCL.Formularios.Parametros
         //creamos la columna con las funciones de editar y eliminar 
         private void CtrlParametro_Load(object sender, EventArgs e)
         {
-            DataGridViewButtonColumn btnUpdate = new DataGridViewButtonColumn();
+            DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn();
             btnUpdate.Name = "EDITAR";
             dgvParametros.Columns.Add(btnUpdate);
 
-            DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+            DataGridViewImageColumn btnDelete = new DataGridViewImageColumn();
             btnDelete.Name = "ELIMINAR";
             dgvParametros.Columns.Add(btnDelete);
 
@@ -189,23 +207,6 @@ namespace ProyectoHCL.Formularios.Parametros
                     parame.valor = dgvParametros.CurrentRow.Cells["VALOR"].Value.ToString();
                     parame.p = 1;
                     Form formulario = new Formularios.R_E_Parametro();
-
-                    //string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");//le decimos que la fecha se la actual 
-
-                    //MySqlConnection conn;
-                    //MySqlCommand cmd;
-
-                    ////Creamos la consulta  para editar                  
-                    //string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
-                    //    "('" + clasecompartida.iduser + "', '7', '" + ahora + "', 'INGRESO', 'INGRESO A EDITAR PARAMETRO " +
-                    //    parame.idparametro + " " + parame.parametro + "');";
-                    //conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                    //conn.Open();
-
-                    //cmd = new MySqlCommand(sql, conn);
-                    //cmd.ExecuteNonQuery();
-                    //conn.Close();
-
                     formulario.ShowDialog();
                     CargarDGP();
                 }
@@ -259,35 +260,7 @@ namespace ProyectoHCL.Formularios.Parametros
             }
         }
 
-        private void dgvParametros_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            if (e.ColumnIndex >= 0 && this.dgvParametros.Columns[e.ColumnIndex].Name == "EDITAR" && e.RowIndex >= 0)//columna editar 
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 
-                DataGridViewButtonCell celBoton = this.dgvParametros.Rows[e.RowIndex].Cells["EDITAR"] as DataGridViewButtonCell;
-                Icon icoEditar = new Icon(Environment.CurrentDirectory + "\\editar.ico"); //Se define la carpeta en la que está guardado el ícono del boton
-                e.Graphics.DrawIcon(icoEditar, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvParametros.Rows[e.RowIndex].Height = icoEditar.Height + 8;
-                this.dgvParametros.Columns[e.ColumnIndex].Width = icoEditar.Width + 58;
-
-                e.Handled = true;
-            }
-            if (e.ColumnIndex >= 0 && this.dgvParametros.Columns[e.ColumnIndex].Name == "ELIMINAR" && e.RowIndex >= 0)//columna editar 
-            {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-
-                DataGridViewButtonCell celBoton = this.dgvParametros.Rows[e.RowIndex].Cells["ELIMINAR"] as DataGridViewButtonCell;
-                Icon icoAtomico = new Icon(Environment.CurrentDirectory + "\\eliminar.ico");//el icono que se utilizara para representar el boton eliminar 
-                e.Graphics.DrawIcon(icoAtomico, e.CellBounds.Left + 29, e.CellBounds.Top + 3);
-
-                this.dgvParametros.Rows[e.RowIndex].Height = icoAtomico.Height + 8;
-                this.dgvParametros.Columns[e.ColumnIndex].Width = icoAtomico.Width + 58;
-
-                e.Handled = true;
-            }
-        }
 
         private void txtBuscarCl_TextChanged(object sender, EventArgs e)//creaxion de combox para buscar parametros creados 
         {
@@ -509,10 +482,132 @@ namespace ProyectoHCL.Formularios.Parametros
             }
         }
 
+        private void dgvParametros_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvParametros.Columns[e.ColumnIndex].Name == "EDITAR")
+            {
+                Image imagen = Properties.Resources.editar;
 
+                dgvParametros.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvParametros.Columns[e.ColumnIndex].Width = imagen.Width + 58;
 
+                e.Value = imagen;
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvParametros.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            {
+                Image imagen = Properties.Resources.eliminar;
 
+                dgvParametros.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvParametros.Columns[e.ColumnIndex].Width = imagen.Width + 58;
 
+                e.Value = imagen;
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            crearPDF();
+            MsgB mbox = new MsgB("informacion", "PDF creado con éxito");
+            DialogResult dR = mbox.ShowDialog();
+        }
+
+        private void crearPDF() //función para crear pdf
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Archivos PDF|*.pdf";
+            saveFileDialog.Title = "Guardar archivo PDF";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+
+                PdfWriter pdfWriter = new PdfWriter(filePath);
+                PdfDocument pdf = new PdfDocument(pdfWriter);
+                PageSize tamanioH = new PageSize(792, 612);
+                Document documento = new Document(pdf, tamanioH);
+                documento.SetMargins(70, 20, 55, 20);
+
+                PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+                PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+
+                var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/DAOdo/Desktop/SEGUNDO PERIODO 2023/Programacion he implementacion de Sistemas/logo.jpeg")).SetWidth(50);
+                var plogo = new Paragraph("").Add(logo);
+
+                var nombre = new Paragraph("Hotel Casa Lomas");
+                nombre.SetFontSize(12);
+
+                var titulo = new Paragraph("Parametros");
+                titulo.SetTextAlignment(TextAlignment.CENTER);
+                titulo.SetFontSize(14).SetBold();
+
+                var dfecha = DateTime.Now.ToString("dd.MM.yyy");
+                var dhora = DateTime.Now.ToString("hh:mm:ss");
+                var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
+                fecha.SetTextAlignment(TextAlignment.RIGHT);
+                fecha.SetFontSize(12);
+
+                documento.ShowTextAligned(plogo, 30, 600, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(nombre, 100, 580, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
+
+                string[] columnas = { "id_parametro", "id_usuario", "usuario", "parametro", "valor","fecha_creacion", "fecha_modificacion" };
+
+                float[] tamanios = { 1, 2, 2, 2, 2, 3, 3 };
+                Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
+                tabla.SetWidth(UnitValue.CreatePercentValue(100));
+
+                foreach (string columna in columnas)
+                {
+                    tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+                }
+
+                string sql = "SELECT p.ID_PARAMETRO, p.ID_USUARIO, u.USUARIO, p.PARAMETRO, p.VALOR, p.FECHACRE, p.FECHAMODIFI FROM TBL_PARAMETRO p inner join TBL_USUARIO u on p.ID_USUARIO = u.ID_USUARIO";
+
+                MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+                // conexionBD.Open();
+
+                MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+                MySqlDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["id_parametro"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["id_usuario"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["usuario"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["parametro"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["valor"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["fechacre"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["fechamodifi"].ToString()).SetFont(fontContenido)));
+                }
+
+                documento.Add(tabla);
+
+                pdf.AddEventHandler(PdfDocumentEvent.END_PAGE, new HeaderFooterEventHandler());
+
+                documento.Close();
+            }
+        }
+
+        private class HeaderFooterEventHandler : IEventHandler
+        {
+            public void HandleEvent(Event currentEvent)
+            {
+                PdfDocumentEvent docEvent = (PdfDocumentEvent)currentEvent;
+                PdfDocument pdfDoc = docEvent.GetDocument();
+                PdfPage page = docEvent.GetPage();
+                int pageNumber = pdfDoc.GetPageNumber(page);
+                PdfCanvas pdfCanvas = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
+
+                Rectangle pageSize = page.GetPageSize();
+                pdfCanvas.BeginText()
+                    .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA), 12)
+                    .MoveText(pageSize.GetLeft() + 396, 20)
+                    .ShowText("Página " + pageNumber)
+                    .EndText();
+                pdfCanvas.Release();
+            }
+        }
 
     }
 }

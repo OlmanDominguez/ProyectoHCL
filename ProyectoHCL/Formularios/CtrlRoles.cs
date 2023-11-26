@@ -159,20 +159,19 @@ namespace ProyectoHCL.Formularios
             HabilitarBotones();
         }
 
-        private void CtrlRoles_Load(object sender, EventArgs e)
+        private void CtrlRoles_Load_1(object sender, EventArgs e)
         {
-            
+            DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn(); //se crea el boton en el dataGrid
+            btnUpdate.Name = "EDITAR"; //Nombre del boton 
+            dgvRoles.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
 
-             DataGridViewImageColumn btnUpdate = new DataGridViewImageColumn(); //se crea el boton en el dataGrid
-             btnUpdate.Name = "EDITAR"; //Nombre del boton 
-             dgvRoles.Columns.Add(btnUpdate); //Se especifica el nombre de dataGrid para agregar boton
+            DataGridViewImageColumn btnEliminar = new DataGridViewImageColumn();
+            btnEliminar.Name = "ELIMINAR";
+            dgvRoles.Columns.Add(btnEliminar);
 
-             DataGridViewImageColumn btnDelete = new DataGridViewImageColumn();
-             btnDelete.Name = "ELIMINAR";
-             dgvRoles.Columns.Add(btnDelete);
-
-             Permisos();
+            Permisos();
         }
+
 
 
         public void BuscarRol(string buscarR) //Recibe string para buscar rol
@@ -267,27 +266,7 @@ namespace ProyectoHCL.Formularios
 
         }
 
-        private void dgvRoles_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvRoles.Columns[e.ColumnIndex].Name == "EDITAR")
-            {
-                Image imagen = Properties.Resources.editar;
 
-                dgvRoles.Rows[e.RowIndex].Height = imagen.Height + 8;
-                dgvRoles.Columns[e.ColumnIndex].Width = imagen.Width + 58;
-
-                e.Value = imagen;
-            }
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvRoles.Columns[e.ColumnIndex].Name == "ELIMINAR")
-            {
-                Image imagen = Properties.Resources.eliminar;
-
-                dgvRoles.Rows[e.RowIndex].Height = imagen.Height + 8;
-                dgvRoles.Columns[e.ColumnIndex].Width = imagen.Width + 58;
-
-                e.Value = imagen;
-            }
-        }
 
 
 
@@ -337,9 +316,9 @@ namespace ProyectoHCL.Formularios
                 documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
                 documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
 
-                string[] columnas = { "id_rol", "rol", "descripcion", "estado_rol",  "fecha_creacion","fecha_actualizacion"  };
+                string[] columnas = { "id_rol", "rol", "descripcion", "estado_rol", "fecha_creacion", "fecha_actualizacion" };
 
-                float[] tamanios = { 1, 2, 2, 3, 3 };
+                float[] tamanios = { 1, 2, 2, 3, 3, 3 };
                 Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
                 tabla.SetWidth(UnitValue.CreatePercentValue(100));
 
@@ -348,7 +327,7 @@ namespace ProyectoHCL.Formularios
                     tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
                 }
 
-                string sql = "SELECT id_rol, rol, descripcion, estado_rol,  fecha_creacion, fecha_actualizacion FROM TBL_ROL";
+                string sql = "SELECT id_rol, rol, descripcion, estado_rol, fecha_creacion, fecha_actualizacion FROM TBL_ROL";
 
                 MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
                 // conexionBD.Open();
@@ -361,6 +340,7 @@ namespace ProyectoHCL.Formularios
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["id_rol"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["rol"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["descripcion"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["estado_rol"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_creacion"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["fecha_actualizacion"].ToString()).SetFont(fontContenido)));
                 }
@@ -577,6 +557,26 @@ namespace ProyectoHCL.Formularios
             btnNuevo.BackColor = Color.DarkGray;
         }
 
-       
+        private void dgvRoles_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvRoles.Columns[e.ColumnIndex].Name == "EDITAR")
+            {
+                Image imagen = Properties.Resources.editar;
+
+                dgvRoles.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvRoles.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvRoles.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            {
+                Image imagen = Properties.Resources.eliminar;
+
+                dgvRoles.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvRoles.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+        }
     }
 }
