@@ -141,12 +141,12 @@ namespace ProyectoHCL
                             dgv_reservaciones.Columns["ELIMINAR"].Visible = false;
                         }
                         break;
-                    case 5:
-                        if (obj.ObjetoN == "RESERVACION" && !obj.Permitido)
-                        {
-                            dgv_reservaciones.Columns["VER"].Visible = false;
-                        }
-                        break;
+                    //case 5:
+                        //if (obj.ObjetoN == "RESERVACION" && !obj.Permitido)
+                        //{
+                        //    dgv_reservaciones.Columns["VER"].Visible = false;
+                        //}
+                        //break;
                 }
             }
         }

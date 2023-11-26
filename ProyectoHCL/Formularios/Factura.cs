@@ -529,7 +529,7 @@ namespace ProyectoHCL.Formularios
                 txtConstEx.Text = dt.Rows[0]["NCONSTANCIAEXONERADO"].ToString();
                 txtSar.Text = dt.Rows[0]["NREGISTROSAR"].ToString();
                 lblDesc.Text = Convert.ToString(dt.Rows[0]["DESCUENTO"]);
-                decimal descuento;
+                decimal descuento = 0;
 
                 try
                 {
