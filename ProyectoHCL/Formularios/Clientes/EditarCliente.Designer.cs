@@ -188,7 +188,7 @@
             panel3.Controls.Add(label15);
             panel3.Location = new Point(412, 222);
             panel3.Name = "panel3";
-            panel3.Size = new Size(332, 65);
+            panel3.Size = new Size(332, 71);
             panel3.TabIndex = 71;
             panel3.Visible = false;
             // 
@@ -198,7 +198,7 @@
             txtEmail2.BackColor = Color.White;
             txtEmail2.BorderStyle = BorderStyle.FixedSingle;
             txtEmail2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtEmail2.Location = new Point(11, 28);
+            txtEmail2.Location = new Point(11, 36);
             txtEmail2.MaxLength = 200;
             txtEmail2.Name = "txtEmail2";
             txtEmail2.ShortcutsEnabled = false;
@@ -212,7 +212,7 @@
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(14, 6);
+            label7.Location = new Point(11, 11);
             label7.Name = "label7";
             label7.Size = new Size(74, 19);
             label7.TabIndex = 42;
@@ -223,7 +223,7 @@
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label15.ForeColor = Color.Red;
-            label15.Location = new Point(91, -3);
+            label15.Location = new Point(91, 3);
             label15.Name = "label15";
             label15.Size = new Size(23, 30);
             label15.TabIndex = 64;

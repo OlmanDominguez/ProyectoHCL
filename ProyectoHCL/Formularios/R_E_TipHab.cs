@@ -198,11 +198,18 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
                 }
+                else if (modelo.existeTipHab(txtTipo.Text))
+                {
+                    MsgB m = new MsgB("advertencia", "El tipo de habitación ya existe"); //validar si ya existe el registro
+                    DialogResult dR = m.ShowDialog();
+                }
                 else if (txtTipo.TextLength < 5) //validar que el campo tipo no tenga menos de 5 caracteres
                 {
                     MsgB m = new MsgB("advertencia", "El campo debe tener al menos 5 letras");
                     DialogResult dR = m.ShowDialog();
                 }
+
+               // existeTipHab
                 else
                 {
                     try

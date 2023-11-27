@@ -303,11 +303,7 @@ namespace ProyectoHCL.Formularios
                     DialogResult dR = mbox.ShowDialog();
                 }
             }
-
-
-
         }
-
 
         private void txtBuscarCl_TextChanged(object sender, EventArgs e)
         {

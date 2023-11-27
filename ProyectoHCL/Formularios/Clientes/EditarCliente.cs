@@ -227,11 +227,11 @@ namespace ProyectoHCL.Formularios
                 MsgB m = new MsgB("advertencia", "El apellido debe contener al menos 5 letras");
                 DialogResult dR = m.ShowDialog();
             }
-            else if (txtApellido.TextLength < 14) //validar que el apellido del cliente no tenga menos de 5 caracteres
-            {
-                MsgB m = new MsgB("advertencia", "El RTN debe contener al menos 14 letras");
-                DialogResult dR = m.ShowDialog();
-            }
+         //   else if (txtApellido.TextLength < 14) //validar que el apellido del cliente no tenga menos de 5 caracteres
+          //  {
+              //  MsgB m = new MsgB("advertencia", "El RTN debe contener al menos 14 letras");
+               // DialogResult dR = m.ShowDialog();
+           // }
             else
             {
                 try
@@ -320,7 +320,12 @@ namespace ProyectoHCL.Formularios
                     ok = false;
                     errorT.SetError(txtRTN, "Indroduzca RTN");
                 }
-                else
+                 else if ((txtRTN.TextLength < 14))
+                {
+                    ok = false;
+                    errorT.SetError(txtRTN, "El RTN debe contener 14 dígitos");
+                }
+               else
                 {
                     errorT.Clear();
                 }
@@ -339,6 +344,8 @@ namespace ProyectoHCL.Formularios
             return ok;
 
         }
+
+       // 
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {

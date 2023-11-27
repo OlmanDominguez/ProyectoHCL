@@ -54,8 +54,6 @@
             btnCancelar = new Button();
             btnGuardar = new Button();
             gb_juridico = new GroupBox();
-            label21 = new Label();
-            label17 = new Label();
             txtEmpresa = new TextBox();
             txtRTN = new TextBox();
             label8 = new Label();
@@ -399,8 +397,6 @@
             // 
             // gb_juridico
             // 
-            gb_juridico.Controls.Add(label21);
-            gb_juridico.Controls.Add(label17);
             gb_juridico.Controls.Add(txtEmpresa);
             gb_juridico.Controls.Add(txtRTN);
             gb_juridico.Controls.Add(label8);
@@ -411,28 +407,6 @@
             gb_juridico.TabIndex = 57;
             gb_juridico.TabStop = false;
             gb_juridico.Visible = false;
-            // 
-            // label21
-            // 
-            label21.AutoSize = true;
-            label21.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label21.ForeColor = Color.Red;
-            label21.Location = new Point(472, -2);
-            label21.Name = "label21";
-            label21.Size = new Size(23, 30);
-            label21.TabIndex = 71;
-            label21.Text = "*";
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label17.ForeColor = Color.Red;
-            label17.Location = new Point(57, -2);
-            label17.Name = "label17";
-            label17.Size = new Size(23, 30);
-            label17.TabIndex = 69;
-            label17.Text = "*";
             // 
             // txtEmpresa
             // 
@@ -689,13 +663,11 @@
         private Button btnCerrar;
         private Button btnMin;
         private Label label12;
-        private Label label21;
         public TextBox txtEmail2;
         private Label label7;
         private Label label20;
         private Label label14;
         private Label label22;
         private Panel panel3;
-        private Label label17;
     }
 }

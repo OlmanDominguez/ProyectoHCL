@@ -149,11 +149,11 @@ namespace ProyectoHCL.Formularios
                 DialogResult dR = m.ShowDialog();
             }
 
-            else if (txtRTN.TextLength < 14) //validar que el RTN del cliente no tenga menos de 14 caracteres
-            {
-                MsgB m = new MsgB("advertencia", " El RTN debe contener al menos 14 dígitos");
-                DialogResult dR = m.ShowDialog();
-            }
+            // else if (txtRTN.TextLength < 14) //validar que el RTN del cliente no tenga menos de 14 caracteres
+            // {
+            //   MsgB m = new MsgB("advertencia", " El RTN debe contener al menos 14 dígitos");
+            //  DialogResult dR = m.ShowDialog();
+            // }
 
 
             else
@@ -251,15 +251,20 @@ namespace ProyectoHCL.Formularios
                     ok = false;
                     errorT.SetError(txtRTN, "Indroduzca RTN");
                 }
-                else
+                else if (txtRTN.Text.Trim() == "")
+                {
+                    ok = false;
+                    errorT.SetError(txtRTN, "Indroduzca el nombre de la empresa");
+                }
                 {
                     errorT.Clear();
                 }
-                if (txtEmpresa.Text.Trim() == "")
+                if (txtRTN.TextLength < 14)
                 {
                     ok = false;
-                    errorT.SetError(txtEmpresa, "Indroduzca el nombre de la empresa");
+                    errorT.SetError(txtEmpresa, "El RTN debe contener 14 dígitos");
                 }
+                
                 else
                 {
                     errorT.Clear();
