@@ -227,11 +227,7 @@ namespace ProyectoHCL.Formularios
                 MsgB m = new MsgB("advertencia", "El apellido debe contener al menos 5 letras");
                 DialogResult dR = m.ShowDialog();
             }
-         //   else if (txtApellido.TextLength < 14) //validar que el apellido del cliente no tenga menos de 5 caracteres
-          //  {
-              //  MsgB m = new MsgB("advertencia", "El RTN debe contener al menos 14 letras");
-               // DialogResult dR = m.ShowDialog();
-           // }
+        
             else
             {
                 try
@@ -345,17 +341,6 @@ namespace ProyectoHCL.Formularios
 
         }
 
-       // 
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void txtID_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
 
         private void txtTele1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -542,16 +527,6 @@ namespace ProyectoHCL.Formularios
         private void btnMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void label13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label15_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void txtEmail1_Click(object sender, EventArgs e)

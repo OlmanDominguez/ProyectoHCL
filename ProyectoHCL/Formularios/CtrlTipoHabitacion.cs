@@ -32,9 +32,6 @@ using Rectangle = iText.Kernel.Geom.Rectangle;
 using System.Reflection;
 using Image = System.Drawing.Image;
 using DocumentFormat.OpenXml.Spreadsheet;
-
-using System.Windows.Controls;
-using iText.IO.Image;
 using Color = System.Drawing.Color;
 using Table = iText.Layout.Element.Table;
 using Cell = iText.Layout.Element.Cell;

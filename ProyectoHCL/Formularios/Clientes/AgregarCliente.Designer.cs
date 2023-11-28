@@ -142,7 +142,7 @@
             panel3.Size = new Size(332, 74);
             panel3.TabIndex = 70;
             panel3.Visible = false;
-            panel3.Paint += panel3_Paint;
+           // panel3.Paint += panel3_Paint;
             // 
             // txtEmail2
             // 
@@ -279,7 +279,7 @@
             txtEmail1.Size = new Size(309, 27);
             txtEmail1.TabIndex = 53;
             txtEmail1.Click += txtEmail1_Click;
-            txtEmail1.TextChanged += txtEmail1_TextChanged;
+            //txtEmail1.TextChanged += txtEmail1_TextChanged;
             // 
             // label16
             // 
@@ -304,7 +304,7 @@
             label5.Size = new Size(74, 19);
             label5.TabIndex = 41;
             label5.Text = "E-Mail 1:";
-            label5.Click += label5_Click;
+           // label5.Click += label5_Click;
             // 
             // label22
             // 
@@ -525,7 +525,7 @@
             txtID.ShortcutsEnabled = false;
             txtID.Size = new Size(309, 27);
             txtID.TabIndex = 50;
-            txtID.KeyPress += txtID_KeyPress;
+          //  txtID.KeyPress += txtID_KeyPress;
             txtID.Leave += txtID_Leave;
             // 
             // txtApellido

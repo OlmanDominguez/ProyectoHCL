@@ -1,5 +1,4 @@
-﻿
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
 using System.Collections.Generic;
@@ -67,13 +66,13 @@ namespace ProyectoHCL.Formularios
 {
     public partial class R_E_TipHab : Form
     {
-        public R_E_TipHab()
+        // bool punto = false; //validación de punto
+
+       public R_E_TipHab()
         {
             InitializeComponent();
-            //  cmbEstado.SelectedIndex = -1;
             txtPrecio.KeyPress += txtPrecio_KeyPress; //llamar evento que valida que solo se ingresen números
-
-        }
+         }
 
         public string idTH = null;
         MsgB msgB = new MsgB();
@@ -165,7 +164,7 @@ namespace ProyectoHCL.Formularios
         {
             if (ValidarTxt.txtVacio(txtCapacidad))
             {
-                errorT.SetError(txtCapacidad, "Introduzca una capacidad");
+                errorT.SetError(txtCapacidad, "Introduzca el número de capacidad");
             }
             else
             {
@@ -185,7 +184,6 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-
         private void btnGuardar_Click(object sender, EventArgs e) //botón para guardar un nuevo registro o una modificación
         {
             if (lblTitulo.Text == "Registrar Tipo de Habitación")
@@ -193,9 +191,9 @@ namespace ProyectoHCL.Formularios
                 Modelo modelo = new Modelo();
 
                 if (txtTipo.Text.Trim() == "" || txtCapacidad.Text.Trim() == "" || txtPrecio.Text.Trim() == ""
-                    || cmbEstado.Text.Trim() == "")  //validar campos vacíos
+                    || cmbEstado.Text.Trim() == "")
                 {
-                    MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
+                    MsgB m = new MsgB("advertencia", "Por favor llene todos los campos"); //validar campos vacíos
                     DialogResult dR = m.ShowDialog();
                 }
                 else if (modelo.existeTipHab(txtTipo.Text))
@@ -208,8 +206,6 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "El campo debe tener al menos 5 letras");
                     DialogResult dR = m.ShowDialog();
                 }
-
-               // existeTipHab
                 else
                 {
                     try
@@ -304,38 +300,45 @@ namespace ProyectoHCL.Formularios
             ValidarTxt.TxtLetras(e);
         }
 
-        // private void cargarEstado() //cargar combobox con los registros de los estados en la base de datos
+        private void txtTipo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        public class Metodos
+        {
+            public static bool validarcampodecimal(TextBox CajaDeTexto)
+            {
+                try
+                {
+                    int d = Convert.ToInt32(CajaDeTexto.Text);
+                    return true;
+
+                }
+                catch (Exception ex)
+                {
+                    CajaDeTexto.Text = "0";
+                    CajaDeTexto.Select(0, CajaDeTexto.Text.Length);
+                    return false;
+
+                }
+            }
+
+        }
+
+        private void txtPrecio_KeyUp(object sender, KeyEventArgs e)
+        {
+            Metodos.validarcampodecimal((TextBox)sender);
+        }
+
+
+
+        // private void txtPrecio_Click(object sender, EventArgs e)
         // {
-        //  MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+        // if (punto == false)
+        // txtPrecio.Text += ".";
 
-        //  cmbEstado.DataSource = null;
-        // cmbEstado.Items.Clear();
-
-        // using (conectar)
-        // {
-        //  string sql = "SELECT ESTADO FROM TBL_TIPOHABITACION";
-        // using (MySqlCommand cmd = new MySqlCommand(sql, conectar))
-        //{
-        // try
-        // {
-        // MySqlDataAdapter data = new MySqlDataAdapter(cmd);
-        // DataTable dt = new DataTable();
-        // data.Fill(dt);
-
-        // cmbEstado.ValueMember = "ESTADO";
-        // cmbEstado.DisplayMember = "DESCRIPCION";
-        // cmbEstado.DataSource = dt;
-        // }
-        // catch (MySqlException e)
-        // {
-        // MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
-        // DialogResult dR = m.ShowDialog();
-        // }
-        // finally { conectar.Close(); }//
-
-        // }
-
+        //  punto = true;
+        //}
     }
 }
-// }
-//}

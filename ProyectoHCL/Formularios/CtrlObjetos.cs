@@ -196,20 +196,6 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void btnCerrarSesion_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
         private void btnNuevo_Click_1(object sender, EventArgs e)
         {
             R_E_obj.lblTitulo.Text = "Registrar Objeto";
@@ -364,94 +350,94 @@ namespace ProyectoHCL.Formularios
             {
                 string filePath = saveFileDialog.FileName;
 
-            PdfWriter pdfWriter = new PdfWriter(filePath);
-            PdfDocument pdf = new PdfDocument(pdfWriter);
-            PageSize tamanioH = new PageSize(792, 612);
-            Document documento = new Document(pdf, tamanioH);
-            documento.SetMargins(70, 20, 55, 20);
+                PdfWriter pdfWriter = new PdfWriter(filePath);
+                PdfDocument pdf = new PdfDocument(pdfWriter);
+                PageSize tamanioH = new PageSize(792, 612);
+                Document documento = new Document(pdf, tamanioH);
+                documento.SetMargins(70, 20, 55, 20);
 
-            PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
-            PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+                PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+                PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
 
-            var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/HP TOUCH/source/repos/OlmanDominguez/ProyectoHCL/Logo HCL.jpeg")).SetWidth(50);
-            var plogo = new Paragraph("").Add(logo);
+                var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/HP TOUCH/source/repos/OlmanDominguez/ProyectoHCL/Logo HCL.jpeg")).SetWidth(50);
+                var plogo = new Paragraph("").Add(logo);
 
-            var nombre = new Paragraph("Hotel Casa Lomas");
-            nombre.SetFontSize(12);
+                var nombre = new Paragraph("Hotel Casa Lomas");
+                nombre.SetFontSize(12);
 
-            var titulo = new Paragraph("Reporte Objetos");
-            titulo.SetTextAlignment(TextAlignment.CENTER);
-            titulo.SetFontSize(14).SetBold();
+                var titulo = new Paragraph("Reporte Objetos");
+                titulo.SetTextAlignment(TextAlignment.CENTER);
+                titulo.SetFontSize(14).SetBold();
 
-            var dfecha = DateTime.Now.ToString("dd.MM.yyy");
-            var dhora = DateTime.Now.ToString("hh:mm:ss");
-            var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
-            fecha.SetTextAlignment(TextAlignment.RIGHT);
-            fecha.SetFontSize(12);
+                var dfecha = DateTime.Now.ToString("dd.MM.yyy");
+                var dhora = DateTime.Now.ToString("hh:mm:ss");
+                var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
+                fecha.SetTextAlignment(TextAlignment.RIGHT);
+                fecha.SetFontSize(12);
 
-            documento.ShowTextAligned(plogo, 30, 600, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
-            documento.ShowTextAligned(nombre, 100, 580, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
-            documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-            documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(plogo, 30, 600, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(nombre, 100, 580, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
 
-            string[] columnas = { "Id", "Nombre", "Descripcion", "Estado", "Creacion", "Actualizacion" };
+                string[] columnas = { "Id", "Nombre", "Descripcion", "Estado", "Creacion", "Actualizacion" };
 
-            float[] tamanios = { 1, 2, 3, 2, 3, 3 };
-            Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
-            tabla.SetWidth(UnitValue.CreatePercentValue(100));
+                float[] tamanios = { 1, 2, 3, 2, 3, 3 };
+                Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
+                tabla.SetWidth(UnitValue.CreatePercentValue(100));
 
-            foreach (string columna in columnas)
-            {
-                tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+                foreach (string columna in columnas)
+                {
+                    tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
+                }
+
+                string sql = "SELECT ID_OBJETO AS ID, OBJETO AS NOMBRE, DESCRIPCION, ESTADO_OBJETO AS ESTADO, FECHA_CREACION AS CREACION," +
+                    " FECHA_ACTUALIZACION AS ACTUALIZACION FROM TBL_OBJETO";
+
+                MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
+                // conexionBD.Open();
+
+                MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+                MySqlDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Id"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Nombre"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Descripcion"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Estado"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Creacion"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Actualizacion"].ToString()).SetFont(fontContenido)));
+                }
+
+                documento.Add(tabla);
+                pdf.AddEventHandler(PdfDocumentEvent.END_PAGE, new HeaderFooterEventHandler());
+                documento.Close();
+
             }
-
-            string sql = "SELECT ID_OBJETO AS ID, OBJETO AS NOMBRE, DESCRIPCION, ESTADO_OBJETO AS ESTADO, FECHA_CREACION AS CREACION," +
-                " FECHA_ACTUALIZACION AS ACTUALIZACION FROM TBL_OBJETO";
-
-            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
-            // conexionBD.Open();
-
-            MySqlCommand comando = new MySqlCommand(sql, conexionBD);
-            MySqlDataReader reader = comando.ExecuteReader();
-
-            while (reader.Read())
-            {
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Id"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Nombre"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Descripcion"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Estado"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Creacion"].ToString()).SetFont(fontContenido)));
-                tabla.AddCell(new Cell().Add(new Paragraph(reader["Actualizacion"].ToString()).SetFont(fontContenido)));
-            }
-
-            documento.Add(tabla);
-            pdf.AddEventHandler(PdfDocumentEvent.END_PAGE, new HeaderFooterEventHandler());
-            documento.Close();
-
         }
-    }
 
-    private class HeaderFooterEventHandler : IEventHandler
-    {
-        public void HandleEvent(Event currentEvent)
+        private class HeaderFooterEventHandler : IEventHandler
         {
-            PdfDocumentEvent docEvent = (PdfDocumentEvent)currentEvent;
-            PdfDocument pdfDoc = docEvent.GetDocument();
-            PdfPage page = docEvent.GetPage();
-            int pageNumber = pdfDoc.GetPageNumber(page);
-            PdfCanvas pdfCanvas = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
+            public void HandleEvent(Event currentEvent)
+            {
+                PdfDocumentEvent docEvent = (PdfDocumentEvent)currentEvent;
+                PdfDocument pdfDoc = docEvent.GetDocument();
+                PdfPage page = docEvent.GetPage();
+                int pageNumber = pdfDoc.GetPageNumber(page);
+                PdfCanvas pdfCanvas = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
 
-            Rectangle pageSize = page.GetPageSize();
-            pdfCanvas.BeginText()
-                .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA), 12)
-                .MoveText(pageSize.GetLeft() + 396, 20)
-                .ShowText("Página " + pageNumber)
-                .EndText();
-            pdfCanvas.Release();
+                Rectangle pageSize = page.GetPageSize();
+                pdfCanvas.BeginText()
+                    .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA), 12)
+                    .MoveText(pageSize.GetLeft() + 396, 20)
+                    .ShowText("Página " + pageNumber)
+                    .EndText();
+                pdfCanvas.Release();
+            }
         }
-    }
 
-    private void button6_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
             crearPDF();
             MsgB mbox = new MsgB("informacion", "PDF creado con éxito");
@@ -577,6 +563,29 @@ namespace ProyectoHCL.Formularios
             }
         }
 
+        private void dgvObjetos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvObjetos.Columns[e.ColumnIndex].Name == "EDITAR")
+            {
+                Image imagen = Properties.Resources.editar;
+
+                dgvObjetos.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvObjetos.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvObjetos.Columns[e.ColumnIndex].Name == "ELIMINAR")
+            {
+                Image imagen = Properties.Resources.eliminar;
+
+                dgvObjetos.Rows[e.RowIndex].Height = imagen.Height + 8;
+                dgvObjetos.Columns[e.ColumnIndex].Width = imagen.Width + 58;
+
+                e.Value = imagen;
+            }
+
+
+        }
     }
 
 }

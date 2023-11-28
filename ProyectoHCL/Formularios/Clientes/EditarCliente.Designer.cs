@@ -178,7 +178,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(775, 407);
             panel1.TabIndex = 21;
-            panel1.Paint += panel1_Paint;
+           // panel1.Paint += panel1_Paint;
             // 
             // panel3
             // 
@@ -228,7 +228,7 @@
             label15.Size = new Size(23, 30);
             label15.TabIndex = 64;
             label15.Text = "*";
-            label15.Click += label15_Click;
+          //  label15.Click += label15_Click;
             // 
             // label19
             // 
@@ -308,7 +308,7 @@
             label13.Size = new Size(23, 30);
             label13.TabIndex = 62;
             label13.Text = "*";
-            label13.Click += label13_Click;
+          //  label13.Click += label13_Click;
             // 
             // label12
             // 
@@ -497,7 +497,7 @@
             txtID.ShortcutsEnabled = false;
             txtID.Size = new Size(309, 27);
             txtID.TabIndex = 50;
-            txtID.KeyPress += txtID_KeyPress;
+           // txtID.KeyPress += txtID_KeyPress;
             txtID.Leave += txtID_Leave;
             // 
             // txtApellido
