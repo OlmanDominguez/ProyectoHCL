@@ -265,7 +265,7 @@ namespace ProyectoHCL.Formularios
                 listView.Items.Remove(item);
 
                 bool elimino = aServ.EliminarServicioHab(idServicio(item.SubItems[0].Text), info.reserva);
-               
+
             }
             else
             {
@@ -474,6 +474,23 @@ namespace ProyectoHCL.Formularios
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txt_cantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verifica si la tecla presionada es un número o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                // Si no es un número o la tecla de retroceso, indica que se maneje el evento
+                e.Handled = true;
+            }
+
+            // También puedes verificar si el valor es negativo al presionar el signo menos (-)
+            if (e.KeyChar == '-' && ((TextBox)sender).Text.IndexOf('-') != -1)
+            {
+                // Si ya hay un signo menos, indica que se maneje el evento
+                e.Handled = true;
+            }
         }
     }
 }

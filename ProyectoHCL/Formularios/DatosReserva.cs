@@ -101,7 +101,7 @@ namespace ProyectoHCL.Formularios
             reservacion.lbl_cliente.Visible = true;
             reservacion.lbl_cliente.Text = clases.CDatos.cliente;
             reservacion.ShowDialog();
-            
+
         }
     }
 }
