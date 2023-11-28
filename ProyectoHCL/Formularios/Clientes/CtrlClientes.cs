@@ -578,8 +578,8 @@ namespace ProyectoHCL.Formularios
 
 
                 var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/HP TOUCH/source/repos/OlmanDominguez/ProyectoHCL/logo.png")).SetWidth(50);
-            
-            var plogo = new Paragraph("").Add(logo);
+
+                var plogo = new Paragraph("").Add(logo);
 
                 var nombre = new Paragraph("Hotel Casa Lomas");
                 nombre.SetFontSize(12);
