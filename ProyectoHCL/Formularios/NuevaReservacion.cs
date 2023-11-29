@@ -35,6 +35,7 @@ descripcion:       Pantalla en la que se registran nuenas reservaciones
  */
 
 using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Presentation;
 using DocumentFormat.OpenXml.Spreadsheet;
 using iText.Layout.Renderer;
 using MySql.Data.MySqlClient;
@@ -270,7 +271,7 @@ namespace ProyectoHCL
         }
 
         private void combo_tipo()
-        {
+        {/*
             try
             {
                 using (BaseDatosHCL.ObtenerConexion())
@@ -295,35 +296,67 @@ namespace ProyectoHCL
                     cb_tipo.AutoCompleteMode = AutoCompleteMode.Suggest;
                     cb_tipo.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-                    /*//combobox tipo habitacion
-                    cb_tipo.DataSource = dt;
-                    cb_tipo.DisplayMember = "TBL_TIPOHABITACION";
-                    cb_tipo.ValueMember = "TIPO";
-                    */
-
-
-
+                  
                 }
 
             }
             catch (Exception a)
             {
                 MessageBox.Show(a.Message);
+            }*/
+
+            try
+            {
+                using (MySqlConnection conexion = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;"))
+                {
+                    
+
+                    MySqlCommand comando = new MySqlCommand();
+                    comando.Connection = conexion;
+                    comando.CommandText = "SELECT ID_TIPOHABITACION, TIPO FROM TBL_TIPOHABITACION WHERE ESTADO='ACTIVO';";
+
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(comando);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    DataRow fila = dt.NewRow();
+                    fila["ID_TIPOHABITACION"] = 0;
+                    fila["TIPO"] = "Seleccione un tipo";
+                    dt.Rows.InsertAt(fila, 0);
+
+                    cb_tipo.ValueMember = "ID_TIPOHABITACION";
+                    cb_tipo.DisplayMember = "TIPO";
+                    cb_tipo.DataSource = dt;
+
+                    cb_tipo.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    cb_tipo.AutoCompleteSource = AutoCompleteSource.ListItems;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar tipos de habitación: {ex.Message}");
+            }
+           
 
         }
 
         private void combo_habitacion(string ID_TIPOHABITACION)
         {
-
+            DateTime fecha1 = dt_fecha_entrada.Value;
+            DateTime fecha2 = dt_fecha_salida.Value;
 
             try
             {
-                using (BaseDatosHCL.ObtenerConexion())
+                //using (BaseDatosHCL.ObtenerConexion())
+                using (MySqlConnection conexion = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;"))
                 {
                     MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("select ID_TIPOHABITACION, NUMEROHABITACION from TBL_HABITACION where ID_TIPOHABITACION=@ID_TIPOHABITACION AND ESTADOHABITACION='ACTIVO';");
+                    comando.Connection = conexion;
+                    //comando.Connection = BaseDatosHCL.ObtenerConexion();
+                    //comando.CommandText = ("select ID_TIPOHABITACION, NUMEROHABITACION from TBL_HABITACION where ID_TIPOHABITACION=@ID_TIPOHABITACION AND ESTADOHABITACION='ACTIVO';");
+                    comando.CommandText = ("SELECT ID_TIPOHABITACION, NUMEROHABITACION FROM TBL_HABITACION WHERE ID_TIPOHABITACION = @ID_TIPOHABITACION AND ESTADOHABITACION = 'ACTIVO' AND NOT EXISTS(SELECT 1 FROM TBL_SOLICITUDRESERVA WHERE TBL_HABITACION.NUMEROHABITACION = TBL_SOLICITUDRESERVA.NUMEROHABITACION AND @fecha1 <= SALIDA AND @fecha2 >= INGRESO);");
+                    comando.Parameters.AddWithValue("@fecha1", fecha1);
+                    comando.Parameters.AddWithValue("@fecha2", fecha2);
                     comando.Parameters.AddWithValue("ID_TIPOHABITACION", ID_TIPOHABITACION);
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
                     adapter.SelectCommand = comando;
@@ -417,7 +450,7 @@ namespace ProyectoHCL
 
             if (txt_id_solicitud.Text != "")
             {
-                nueva_habitacion.Visible = false;
+                //nueva_habitacion.Visible = false;
                 btn_guardar2.Visible = true;
                 string id = txt_id_solicitud.Text;
                 try
@@ -994,106 +1027,7 @@ namespace ProyectoHCL
             nuevo.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            object adb = cb_numero.SelectedItem;
-            object b = cb_numero.GetItemText(adb);
-
-            string fecha1 = dt_fecha_entrada.Text;
-            string fecha2 = dt_fecha_salida.Text;
-
-            try
-            {
-                using (BaseDatosHCL.ObtenerConexion())
-                {
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    //comando.CommandText = ("select * from TBL_SOLICITUDRESERVA where NUMEROHABITACION='" + b + "' and INGRESO and SALIDA between '" + fecha1 + "' and '" + fecha2 + "';");
-                    comando.CommandText = ("CALL Validar_disponibilidad('" + b + "','" + fecha1 + "', '" + fecha2 + "');");
-
-                    MySqlDataReader leer = comando.ExecuteReader();
-                    if (leer.Read() == true)
-                    {
-                        MsgB m = new MsgB("advertencia", "Ya existe una reserva para esta habitacion en el mismo rango de fechas");
-                        DialogResult dR = m.ShowDialog();
-                    }
-                    else
-                    {
-                        if (dt_fecha_coti.Value.Date >= DateTime.Today)
-                        {
-                            if (dt_fecha_entrada.Value.Date >= DateTime.Today & dt_fecha_entrada.Value.Date < dt_fecha_salida.Value.Date)
-                            {
-                                if (dt_fecha_salida.Value.Date >= DateTime.Today & dt_fecha_salida.Value.Date > dt_fecha_entrada.Value.Date)
-                                {
-                                    try
-                                    {
-                                        MySqlConnection conn;
-                                        MySqlCommand cmd;
-                                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                                        conn.Open();
-
-                                        cmd = new MySqlCommand("InsertarReserva", conn);
-                                        cmd.CommandType = CommandType.StoredProcedure;
-                                        cmd.Parameters.AddWithValue("@id_estado", txt_estado.Text);
-                                        cmd.Parameters.AddWithValue("@id_metodo", txt_metodo_reserva.Text);
-                                        cmd.Parameters.AddWithValue("@id_usuaio", txt_codigo.Text);
-                                        cmd.Parameters.AddWithValue("@fecha_coti", Convert.ToDateTime(dt_fecha_coti.Text));
-                                        cmd.Parameters.AddWithValue("@fecha_ingreso", Convert.ToDateTime(dt_fecha_entrada.Text));
-                                        cmd.Parameters.AddWithValue("@fecha_salida", Convert.ToDateTime(dt_fecha_salida.Text));
-                                        cmd.Parameters.AddWithValue("@n_huespedes", txt_huespedes.Text);
-                                        cmd.Parameters.AddWithValue("@vehiculo", txt_vehiculo.Text);
-                                        cmd.Parameters.AddWithValue("@monto", txt_monto.Text);
-                                        cmd.Parameters.AddWithValue("@cod_cliente", txt_cod_cliente.Text);
-                                        cmd.Parameters.AddWithValue("@num_habitacion", cb_numero.Text);
-
-
-                                        cmd.ExecuteNonQuery();
-                                        inserdetalle();
-                                        //updatehabitacion();
-                                        MsgB m = new MsgB("informacion", "Reserva agregada con exito");
-                                        DialogResult dR = m.ShowDialog();
-
-                                        //CargarDG();
-                                        //limpiarCampos();
-                                        conn.Close();
-
-                                        //this.Close();
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        MsgB m = new MsgB("advertencia", "Validar datos ingresados");
-                                        DialogResult dR = m.ShowDialog();
-                                    }
-                                }
-                                else
-                                {
-                                    MsgB m = new MsgB("advertencia", "Fechas de salida no puede ser menor o igual a la de entrada");
-                                    DialogResult dR = m.ShowDialog();
-
-                                }
-                            }
-                            else
-                            {
-                                MsgB m = new MsgB("advertencia", "Fechas de entrada no puede ser mayor o igual a la de salida");
-                                DialogResult dR = m.ShowDialog();
-
-                            }
-                        }//cierre del if 
-                        else
-                        {
-                            MsgB m = new MsgB("advertencia", "Fechas ingresadas invalidas");
-                            DialogResult dR = m.ShowDialog();
-                        }
-
-                    }
-                }
-
-            }
-            catch (Exception a)
-            {
-                MessageBox.Show(a.Message);
-            }
-        }
+       
 
         private void label3_Click(object sender, EventArgs e)
         {

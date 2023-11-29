@@ -62,7 +62,6 @@
             label1 = new Label();
             lbl_noches = new Label();
             label2 = new Label();
-            nueva_habitacion = new Button();
             cb_estado = new ComboBox();
             label11 = new Label();
             btnGuardar = new Button();
@@ -440,7 +439,6 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(lbl_noches);
             groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(nueva_habitacion);
             groupBox1.Controls.Add(cb_estado);
             groupBox1.Controls.Add(label11);
             groupBox1.Controls.Add(txt_huespedes);
@@ -519,23 +517,6 @@
             label2.Size = new Size(124, 17);
             label2.TabIndex = 90;
             label2.Text = "Numero de noches";
-            // 
-            // nueva_habitacion
-            // 
-            nueva_habitacion.Anchor = AnchorStyles.Top;
-            nueva_habitacion.BackColor = Color.SteelBlue;
-            nueva_habitacion.FlatAppearance.BorderSize = 0;
-            nueva_habitacion.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
-            nueva_habitacion.FlatStyle = FlatStyle.Flat;
-            nueva_habitacion.Font = new Font("Century Gothic", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            nueva_habitacion.ForeColor = Color.White;
-            nueva_habitacion.Location = new Point(601, 282);
-            nueva_habitacion.Name = "nueva_habitacion";
-            nueva_habitacion.Size = new Size(65, 23);
-            nueva_habitacion.TabIndex = 89;
-            nueva_habitacion.Text = "Agregar";
-            nueva_habitacion.UseVisualStyleBackColor = false;
-            nueva_habitacion.Click += button2_Click;
             // 
             // cb_estado
             // 
@@ -838,7 +819,6 @@
         public Label lbl_cliente;
         public Label lbl_1c;
         public Button button1;
-        public Button nueva_habitacion;
         private GroupBox groupBox1;
         public Label lbl_noches;
         private Label label2;
