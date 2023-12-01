@@ -84,6 +84,7 @@
             txt_metodo_reserva = new TextBox();
             txt_estado = new TextBox();
             txt_capacidad = new TextBox();
+            lbl_usuario = new Label();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
@@ -246,13 +247,14 @@
             // 
             panel3.BackColor = Color.Gainsboro;
             panel3.Controls.Add(groupBox2);
+            panel3.Controls.Add(lbl_usuario);
             panel3.Controls.Add(btn_guardar2);
             panel3.Controls.Add(dt_fecha_coti);
             panel3.Controls.Add(label14);
-            panel3.Controls.Add(txt_codigo);
             panel3.Controls.Add(label10);
-            panel3.Controls.Add(txt_id_solicitud);
+            panel3.Controls.Add(txt_codigo);
             panel3.Controls.Add(groupBox1);
+            panel3.Controls.Add(txt_id_solicitud);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
@@ -406,7 +408,7 @@
             // 
             // txt_codigo
             // 
-            txt_codigo.Location = new Point(176, 86);
+            txt_codigo.Location = new Point(709, 88);
             txt_codigo.Name = "txt_codigo";
             txt_codigo.ReadOnly = true;
             txt_codigo.Size = new Size(47, 23);
@@ -418,15 +420,15 @@
             label10.AutoSize = true;
             label10.BackColor = Color.Gainsboro;
             label10.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.Location = new Point(53, 92);
+            label10.Location = new Point(60, 86);
             label10.Name = "label10";
-            label10.Size = new Size(117, 17);
+            label10.Size = new Size(63, 17);
             label10.TabIndex = 56;
-            label10.Text = "Codigo empleado";
+            label10.Text = "Usuario: ";
             // 
             // txt_id_solicitud
             // 
-            txt_id_solicitud.Location = new Point(176, 86);
+            txt_id_solicitud.Location = new Point(766, 88);
             txt_id_solicitud.Name = "txt_id_solicitud";
             txt_id_solicitud.ReadOnly = true;
             txt_id_solicitud.Size = new Size(47, 23);
@@ -747,6 +749,17 @@
             txt_capacidad.Size = new Size(47, 25);
             txt_capacidad.TabIndex = 92;
             // 
+            // lbl_usuario
+            // 
+            lbl_usuario.AutoSize = true;
+            lbl_usuario.BackColor = Color.Gainsboro;
+            lbl_usuario.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_usuario.Location = new Point(128, 86);
+            lbl_usuario.Name = "lbl_usuario";
+            lbl_usuario.Size = new Size(13, 17);
+            lbl_usuario.TabIndex = 93;
+            lbl_usuario.Text = "-";
+            // 
             // NuevaReservacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -830,5 +843,6 @@
         public TextBox txt_capacidad;
         public TextBox txt_motivo;
         private Label label1;
+        private Label lbl_usuario;
     }
 }

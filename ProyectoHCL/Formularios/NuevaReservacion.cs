@@ -34,6 +34,7 @@ descripcion:       Pantalla en la que se registran nuenas reservaciones
 
  */
 
+using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Presentation;
 using DocumentFormat.OpenXml.Spreadsheet;
@@ -309,7 +310,7 @@ namespace ProyectoHCL
             {
                 using (MySqlConnection conexion = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;"))
                 {
-                    
+
 
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = conexion;
@@ -336,7 +337,7 @@ namespace ProyectoHCL
             {
                 MessageBox.Show($"Error al cargar tipos de habitación: {ex.Message}");
             }
-           
+
 
         }
 
@@ -445,7 +446,7 @@ namespace ProyectoHCL
         {
             //id_empleado();
 
-
+            lbl_usuario.Text = clasecompartida.user.ToUpper();
             txt_codigo.Text = clasecompartida.iduser.ToString();
 
             if (txt_id_solicitud.Text != "")
@@ -959,45 +960,7 @@ namespace ProyectoHCL
                 MsgB m = new MsgB("advertencia", "Solo se pueden ingresar numeros ");
                 DialogResult dR = m.ShowDialog();
             }
-            /*
-            String nombre = cb_tipo.SelectedValue.ToString();
-            string num =txt_huespedes.Text;
-            try
-            {
-                using (BaseDatosHCL.ObtenerConexion())
-                {
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    // comando.CommandText = ("select CAPACIDAD from TBL_TIPOHABITACION where TIPO='" + nombre + "';");
-                    comando.CommandText = ("call capacidad('" +num + "','" + nombre + "');");
 
-                    MySqlDataReader leer = comando.ExecuteReader();
-                    if (leer.Read() == true)
-                    {
-                        Int32 capacidad = Convert.ToInt32( leer["resultado"].ToString());
-                        
-                        if (capacidad ==1)
-                        {
-
-                        }
-                        else
-                        {
-                            MsgB m = new MsgB("advertencia", "El numero de huespedes exede la capacidad maxima de la habitacion ");
-                            DialogResult dR = m.ShowDialog();
-                            txt_huespedes.Clear();
-                        }
-                    }
-                    else
-                    {
-
-                    }
-                }
-
-            }
-            catch (Exception a)
-            {
-                MessageBox.Show(a.Message);
-            }*/
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -1027,26 +990,52 @@ namespace ProyectoHCL
             nuevo.Show();
         }
 
-       
+
 
         private void label3_Click(object sender, EventArgs e)
         {
 
         }
+        private void ValidarFechas()
+        {
+            DateTime fechaHoy = DateTime.Today;
+            DateTime fechaEntrada = dt_fecha_entrada.Value;
+            DateTime fechaSalida = dt_fecha_salida.Value;
+
+            if (fechaEntrada > fechaSalida || fechaEntrada < fechaHoy)
+            {
+                MsgB m = new MsgB("advertencia", "La fecha de entrada no puede ser mayor que la fecha de salida y tampoco menor a la fecha de hoy ");
+                DialogResult dR = m.ShowDialog();
+                dt_fecha_entrada.Value = fechaHoy;
+                lbl_noches.Text = "-";
+            }
+            else if (fechaSalida < fechaEntrada || fechaSalida < fechaHoy)
+            {
+                MsgB m = new MsgB("advertencia", "La fecha de salida no puede ser menor que la fecha de entrada y tampoco menor a la fecha de hoy ");
+                DialogResult dR = m.ShowDialog();
+                dt_fecha_salida.Value = fechaHoy;
+                lbl_noches.Text = "-";
+            }
+            else
+            {
+                TimeSpan noches = dt_fecha_salida.Value - dt_fecha_entrada.Value;
+                int days = (int)noches.TotalDays;
+                lbl_noches.Text = Convert.ToString(days);
+            }
+
+        }
 
         private void dt_fecha_entrada_ValueChanged(object sender, EventArgs e)
         {
-            TimeSpan noches = dt_fecha_salida.Value - dt_fecha_entrada.Value;
-            int days = (int)noches.TotalDays;
-            lbl_noches.Text = Convert.ToString(days);
+
+            ValidarFechas();
 
         }
 
         private void dt_fecha_salida_ValueChanged(object sender, EventArgs e)
         {
-            TimeSpan noches = dt_fecha_salida.Value - dt_fecha_entrada.Value;
-            int days = (int)noches.TotalDays;
-            lbl_noches.Text = Convert.ToString(days);
+
+            ValidarFechas();
         }
     }
 }
