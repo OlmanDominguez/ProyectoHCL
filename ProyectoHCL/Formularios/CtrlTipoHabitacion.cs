@@ -292,11 +292,13 @@ namespace ProyectoHCL.Formularios
             this.Close();
         }
 
-        private void crearPDF()
+        private void crearPDF() //Función para crear PDF
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Archivos PDF|*.pdf";
             saveFileDialog.Title = "Guardar archivo PDF";
+
+            saveFileDialog.FileName = "Tipo de Habitación.pdf";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -311,9 +313,18 @@ namespace ProyectoHCL.Formularios
                 PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
                 PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
 
+               /* iText.Layout.Element.Image logo;
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    Properties.Resources.logo.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+                    byte[] logoBytes = memoryStream.ToArray();
 
-                var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/HP TOUCH/source/repos/OlmanDominguez/ProyectoHCL/Logo HCL.jpeg")).SetWidth(50);
-                var plogo = new Paragraph("").Add(logo);
+                    logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create(logoBytes)).SetWidth(50);
+                }
+               */
+
+               var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/HP TOUCH/source/repos/OlmanDominguez/ProyectoHCL/Logo HCL.jpeg")).SetWidth(50);
+               var plogo = new Paragraph("").Add(logo);
 
                 var nombre = new Paragraph("Hotel Casa Lomas");
                 nombre.SetFontSize(12);

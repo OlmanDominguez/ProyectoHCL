@@ -563,6 +563,8 @@ namespace ProyectoHCL.Formularios
             saveFileDialog.Filter = "Archivos PDF|*.pdf";
             saveFileDialog.Title = "Guardar archivo PDF";
 
+            saveFileDialog.FileName = "Clientes.pdf";
+
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = saveFileDialog.FileName;
@@ -584,33 +586,33 @@ namespace ProyectoHCL.Formularios
                 var nombre = new Paragraph("Hotel Casa Lomas");
                 nombre.SetFontSize(12);
 
-                var titulo = new Paragraph("Cliente");
+                var titulo = new Paragraph("Clientes");
                 titulo.SetTextAlignment(TextAlignment.CENTER);
-                titulo.SetFontSize(14).SetBold();
+                titulo.SetFontSize(16).SetBold();
 
                 var dfecha = DateTime.Now.ToString("dd.MM.yyy");
                 var dhora = DateTime.Now.ToString("hh:mm:ss");
                 var fecha = new Paragraph("Fecha: " + dfecha + "\nHora: " + dhora);
                 fecha.SetTextAlignment(TextAlignment.RIGHT);
-                fecha.SetFontSize(12);
+                fecha.SetFontSize(13);
 
                 documento.ShowTextAligned(plogo, 30, 600, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
                 documento.ShowTextAligned(nombre, 100, 580, 1, TextAlignment.LEFT, VerticalAlignment.TOP, 0);
                 documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
                 documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
 
-                string[] columnas = { "Codigo", "Nombre", "Apellido", "Dni_pasaporte", "Id_Tipocliente", "Descripcion", "Nombre_Rtn", "Rtn", "Telefono", "Telefono2", "Email", "Email2" };
+                string[] columnas = { "Codigo", "Nombre", "Apellido", "Dni_pasaporte", "Descripcion", "Rtn", "Telefono", "Telefono2", "Email", "Email2" };
 
-                float[] tamanios = { 1, 3, 2, 3, 2, 2, 2, 2 };
+                float[] tamanios = { 1, 1, 1, 1, 1, 1, 1, 1 };
                 Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
-                tabla.SetWidth(UnitValue.CreatePercentValue(100));
+                tabla.SetWidth(UnitValue.CreatePercentValue(20));
 
                 foreach (string columna in columnas)
                 {
                     tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
                 }
 
-                string sql = "SELECT c.CODIGO, c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, c.ID_TIPOCLIENTE, t.DESCRIPCION, c.NOMBRE_RTN, c.RTN, c.TELEFONO, c.TELEFONO2, c.EMAIL, c.EMAIL2 FROM TBL_CLIENTE c INNER JOIN TBL_TIPOCLIENTE t ON c.ID_TIPOCLIENTE = t.ID_TIPOCLIENTE";
+                string sql = "SELECT c.CODIGO, c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, t.DESCRIPCION, c.NOMBRE_RTN, c.RTN, c.TELEFONO, c.TELEFONO2, c.EMAIL, c.EMAIL2 FROM TBL_CLIENTE c INNER JOIN TBL_TIPOCLIENTE t ON c.ID_TIPOCLIENTE = t.ID_TIPOCLIENTE";
 
                 MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
                 // conexionBD.Open();
@@ -624,9 +626,7 @@ namespace ProyectoHCL.Formularios
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["NOMBRE"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["APELLIDO"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["DNI_PASAPORTE"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["ID_TIPOCLIENTE"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["DESCRIPCION"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["NOMBRE_RTN"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["RTN"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["TELEFONO"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["TELEFONO2"].ToString()).SetFont(fontContenido)));

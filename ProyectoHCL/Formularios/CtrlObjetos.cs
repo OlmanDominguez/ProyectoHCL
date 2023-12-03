@@ -346,6 +346,8 @@ namespace ProyectoHCL.Formularios
             saveFileDialog.Filter = "Archivos PDF|*.pdf";
             saveFileDialog.Title = "Guardar archivo PDF";
 
+            saveFileDialog.FileName = "Objetos.pdf";
+
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = saveFileDialog.FileName;
