@@ -661,11 +661,5 @@ namespace ProyectoHCL
             openChildFormInPanel(new PerfilUsuario());
             hideSubMenu2();
         }
-
-        private void btnReportes_Click(object sender, EventArgs e)
-        {
-            Form Dashboard = new Reportes();
-            Dashboard.Show();
-        }
     }
 }
