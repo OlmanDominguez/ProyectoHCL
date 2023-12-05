@@ -197,9 +197,10 @@ namespace ProyectoHCL.Formularios
                     formulario.ShowDialog();
                     CargarDGFact();
                 }
-                catch (Exception)
+                catch (Exception ex )
                 {
-                    MessageBox.Show("Se produjo un error");
+                    MsgB Mbox = new MsgB("error", "Se produjo un error" + ex.Message);
+                    DialogResult DR = Mbox.ShowDialog();
                 }
             }
         }

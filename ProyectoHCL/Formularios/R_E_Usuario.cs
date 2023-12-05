@@ -1,5 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Drawing.Diagrams;
 using DocumentFormat.OpenXml.Office.Word;
+using DocumentFormat.OpenXml.Wordprocessing;
 using MySql.Data.MySqlClient;
 using ProyectoHCL.clases;
 using System;
@@ -360,16 +361,28 @@ namespace ProyectoHCL.Formularios
                         string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                         conn.Close();
-                        //registrar acción (crear) en bitácora
-                        string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
+
+                        if (estBitacora() == "ACTIVO")
+                        {
+                            string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
                             "('" + clasecompartida.iduser + "', '1', '" + ahora + "', 'CREACIÓN', 'CREACIÓN USUARIO " +
                             txtUsuario.Text + "');";
-                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                        conn.Open();
 
-                        cmd = new MySqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        conn.Close();
+                            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                            conn.Open();
+
+                            cmd = new MySqlCommand(sql, conn);
+                            cmd.ExecuteNonQuery();
+                            conn.Close();
+                        }
+                            //registrar acción (crear) en bitácora
+                        //    string sql = "INSERT INTO TBL_BITACORA(ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) " +
+                        //"SELECT '" + clasecompartida.iduser + "', '1', '" + ahora + "', 'CREACIÓN', 'CREACIÓN USUARIO " +
+                        // txtUsuario.Text + "' " +
+                        //"FROM TBL_ESTADOBITACORA " +
+                        //"WHERE ESTADO = 'ACTIVO' " +
+                        //"ORDER BY ID_ESTADOBITACORA DESC " +
+                        //"LIMIT 1;";
 
                         MsgB m = new MsgB("informacion", "Registro creado con éxito");
                         DialogResult dR = m.ShowDialog();
@@ -458,21 +471,6 @@ namespace ProyectoHCL.Formularios
                             control.editarUs(idUs, cmbEstado.Text, cmbRol.Text, txtUsuario.Text, txtNombre.Text,
                             txtContraseña.Text, dtpVencimiento.Text, txtCorreo.Text, clasecompartida.iduser.ToString());
                         }
-                        //string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-                        //MySqlConnection conn;
-                        //MySqlCommand cmd;
-
-                        //registrar acción(editar) en bitacóra
-                        //string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION) VALUES " +
-                        //    "('" + clasecompartida.iduser + "', '4', '" + ahora + "', 'EDICION', 'EDICION USUARIO " +
-                        //    idUs + " " + txtUsuario.Text + "');";
-                        //conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                        //conn.Open();
-
-                        //cmd = new MySqlCommand(sql, conn);
-                        //cmd.ExecuteNonQuery();
-                        //conn.Close();
 
                         MsgB m = new MsgB("informacion", "Registro modificado");
                         DialogResult dR = m.ShowDialog();
@@ -692,6 +690,30 @@ namespace ProyectoHCL.Formularios
                     }
                 }
             }
+        }
+
+        public static string estBitacora()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            string sql = "SELECT ESTADO FROM TBL_ESTADOBITACORA ORDER BY ID_ESTADOBITACORA DESC LIMIT 1";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["ESTADO"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+            conn.Close();
         }
     }
 }

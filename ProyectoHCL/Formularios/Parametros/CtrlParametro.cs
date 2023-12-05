@@ -240,17 +240,30 @@ namespace ProyectoHCL.Formularios.Parametros
                     conn.Close();
 
                     string ahora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");//muestra todo el datagrip ya con el objeto eliminado 
-                    string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION, REGISTRO) VALUES " +
-                        "('" + clasecompartida.iduser + "', '13', '" + ahora + "', 'ELIMINACIÓN', 'ELIMINACIÓN PARÁMETRO " +
-                        dgvParametros.CurrentRow.Cells["PARAMETRO"].Value.ToString() + /*" " + dgvParametros.CurrentRow.Cells["VALOR"].Value.ToString() +*/ "', " +
-                        dgvParametros.CurrentRow.Cells["IDPARAMETRO"].Value.ToString() + ");";
-                    conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                    conn.Open();
 
-                    cmd = new MySqlCommand(sql, conn);
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
+                    if (estBitacora() == "ACTIVO")
+                    {
+                        string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION, REGISTRO) VALUES " +
+                            "('" + clasecompartida.iduser + "', '13', '" + ahora + "', 'ELIMINACIÓN', 'ELIMINACIÓN PARÁMETRO " +
+                            dgvParametros.CurrentRow.Cells["PARAMETRO"].Value.ToString() + /*" " + dgvParametros.CurrentRow.Cells["VALOR"].Value.ToString() +*/ "', " +
+                            dgvParametros.CurrentRow.Cells["IDPARAMETRO"].Value.ToString() + ");";
 
+                        conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+                        conn.Open();
+
+                        cmd = new MySqlCommand(sql, conn);
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+
+                    //string sql = "INSERT INTO TBL_BITACORA (ID_USUARIO, ID_OBJETO, FECHA, ACCION, DESCRIPCION, REGISTRO) " +
+                    //  "SELECT '" + clasecompartida.iduser + "', '13', '" + ahora + "', 'ELIMINACIÓN', " +
+                    //  "CONCAT('ELIMINACIÓN PARÁMETRO ', '" + dgvParametros.CurrentRow.Cells["PARAMETRO"].Value.ToString() + "'), " +
+                    //  dgvParametros.CurrentRow.Cells["IDPARAMETRO"].Value.ToString() +
+                    //  " FROM TBL_ESTADOBITACORA " +
+                    //  "WHERE ESTADO = 'ACTIVO' " +
+                    //  "ORDER BY ID_ESTADOBITACORA DESC " +
+                    //  "LIMIT 1;";
 
                     CargarDGP();
 
@@ -614,5 +627,28 @@ namespace ProyectoHCL.Formularios.Parametros
             }
         }
 
+        public static string estBitacora()
+        {
+            MySqlConnection conn;
+            MySqlCommand cmd;
+
+            string sql = "SELECT ESTADO FROM TBL_ESTADOBITACORA ORDER BY ID_ESTADOBITACORA DESC LIMIT 1";
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
+            conn.Open();
+
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader read = cmd.ExecuteReader();
+
+            if (read.Read())
+            {
+                return read["ESTADO"].ToString();
+            }
+            else
+            {
+                return null;
+
+            }
+            conn.Close();
+        }
     }
 }

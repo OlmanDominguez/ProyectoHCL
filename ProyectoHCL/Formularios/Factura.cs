@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.ExtendedProperties;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,7 +59,7 @@ namespace ProyectoHCL.Formularios
         DateTime today = DateTime.Today;
         Decimal st1, st2, st3, sth = 0;
         Decimal St1, St2, St3, StS = 0;
-        Decimal isv, it, subt, total, desc, subtD;
+        Decimal isv, it, subt, total, desc, subtD, iEx;
 
         ServicioVenta sv = new ServicioVenta();
 
@@ -85,6 +87,7 @@ namespace ProyectoHCL.Formularios
             lblSubtD.Text = "";
             lblSV.Text = "";
             lblTur.Text = "";
+            lblExonerado.Text = "";
             lblTotal.Text = "";
             this.dgvDetalleFact.Rows.Clear();
         }
@@ -319,8 +322,7 @@ namespace ProyectoHCL.Formularios
         decimal tot = 0;
         int cantidad = 0;
         string descrip = "";
-        decimal precio1 = 0;
-        decimal tot1 = 0;
+        decimal precio1 = 0, tot1 = 0, vHab = 0, vServ = 0, descuento = 0;
 
         private void CargarDGV()
         {
@@ -383,8 +385,8 @@ namespace ProyectoHCL.Formularios
                                     decimal tot = Convert.ToDecimal(noches.Days) * precio;
                                 }
                                 sth = sth + Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"]);
-
-                                i ++;
+                                vHab = sth;
+                                i++;
                             }
                         }
 
@@ -414,6 +416,7 @@ namespace ProyectoHCL.Formularios
                                 }
 
                                 StS += Convert.ToInt32(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"]);
+                                vServ = StS;
                                 j++;
                             }
                         }
@@ -426,66 +429,98 @@ namespace ProyectoHCL.Formularios
                         total = 0;
                         desc = 0;
                         subtD = 0;
+                        iEx = 0;
 
                         //Datos de impuestos y totales
-                        if (sth != 0.00m & StS != 0.00m)
-                        {
-                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
-                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+                        //if (sth != 0.00m & StS != 0.00m)
+                        //{
 
-                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
-                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+                        //if (!string.IsNullOrEmpty(txtConstEx.Text))
+                        //{
+                        //    decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                        //    decimal isvHab = Decimal.Round(sth - valorHab15, 2);
 
-                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
-                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+                        //    decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                        //    it = Decimal.Round(valorHab15 - valorHab4, 2);
 
-                            isv = Decimal.Round(isvHab + isvServ, 2);
-                            subt = Decimal.Round(valorHab4 + valorServ, 2);
-                            desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
-                            subtD = Decimal.Round(subt - desc, 2);
-                            total = Decimal.Round(isv + it + subtD, 2);
-                        }
-                        else if (sth != 0.00m & StS == 0)
-                        {
-                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
-                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+                        //    decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                        //    decimal isvServ = Decimal.Round((StS - valorServ), 2);
 
-                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
-                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+                        //    isv = 0;
+                        //    subt = Decimal.Round(valorHab15 + valorServ, 2);
+                        //    desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
+                        //    subtD = Decimal.Round(subt - desc, 2);
+                        //    total = Decimal.Round(isv + it + subtD, 2);
+                        //    iEx = Decimal.Round(isvHab + isvServ);
 
-                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
-                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+                        //    lblSubt.Text = subt.ToString();
+                        //    lblDesc.Text = desc.ToString();
+                        //    lblSubtD.Text = subtD.ToString();
+                        //    lblSV.Text = isv.ToString();
+                        //    lblTur.Text = it.ToString();
+                        //    lblExonerado.Text = iEx.ToString();
+                        //    lblTotal.Text = total.ToString();
+                        //}
+                        //else
+                        //{
+                        ActualizarLabels();
+                        // }
+                        //decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                        //decimal isvHab = Decimal.Round(sth - valorHab15, 2);
 
-                            isv = Decimal.Round(isvHab + isvServ, 2);
-                            subt = Decimal.Round(valorHab4 + valorServ, 2);
-                            desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
-                            subtD = Decimal.Round(subt - desc, 2);
-                            total = Decimal.Round(isv + it + subtD, 2);
-                        }
-                        else if (sth == 0 & StS != 0)
-                        {
-                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
-                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+                        //decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                        //it = Decimal.Round(valorHab15 - valorHab4, 2);
 
-                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
-                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+                        //decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                        //decimal isvServ = Decimal.Round((StS - valorServ), 2);
 
-                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
-                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+                        //isv = Decimal.Round(isvHab + isvServ, 2);
+                        //subt = Decimal.Round(valorHab4 + valorServ, 2);
+                        //desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
+                        //subtD = Decimal.Round(subt - desc, 2);
+                        //total = Decimal.Round(isv + it + subtD, 2);
+                        //}
+                        //else if (sth != 0.00m & StS == 0)
+                        //{
+                        //    decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                        //    decimal isvHab = Decimal.Round(sth - valorHab15, 2);
 
-                            isv = Decimal.Round(isvHab + isvServ, 2);
-                            subt = Decimal.Round(valorHab4 + valorServ, 2);
-                            desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
-                            subtD = Decimal.Round(subt - desc, 2);
-                            total = Decimal.Round(isv + it + subtD, 2);
-                        }
+                        //    decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                        //    it = Decimal.Round(valorHab15 - valorHab4, 2);
 
-                        lblSubt.Text = subt.ToString();
-                        lblDesc.Text = desc.ToString();
-                        lblSubtD.Text = subtD.ToString();
-                        lblSV.Text = isv.ToString();
-                        lblTur.Text = it.ToString();
-                        lblTotal.Text = total.ToString();
+                        //    decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                        //    decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                        //    isv = Decimal.Round(isvHab + isvServ, 2);
+                        //    subt = Decimal.Round(valorHab4 + valorServ, 2);
+                        //    desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
+                        //    subtD = Decimal.Round(subt - desc, 2);
+                        //    total = Decimal.Round(isv + it + subtD, 2);
+                        //}
+                        //else if (sth == 0 & StS != 0)
+                        //{
+                        //    decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                        //    decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                        //    decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                        //    it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                        //    decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                        //    decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                        //    isv = Decimal.Round(isvHab + isvServ, 2);
+                        //    subt = Decimal.Round(valorHab4 + valorServ, 2);
+                        //    desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
+                        //    subtD = Decimal.Round(subt - desc, 2);
+                        //    total = Decimal.Round(isv + it + subtD, 2);
+                        //}
+
+                        //lblSubt.Text = subt.ToString();
+                        //lblDesc.Text = desc.ToString();
+                        //lblSubtD.Text = subtD.ToString();
+                        //lblSV.Text = isv.ToString();
+                        //lblTur.Text = it.ToString();
+                        //lblTotal.Text = total.ToString();
                     }
                 }
                 catch (Exception a)
@@ -529,7 +564,6 @@ namespace ProyectoHCL.Formularios
                 txtConstEx.Text = dt.Rows[0]["NCONSTANCIAEXONERADO"].ToString();
                 txtSar.Text = dt.Rows[0]["NREGISTROSAR"].ToString();
                 lblDesc.Text = Convert.ToString(dt.Rows[0]["DESCUENTO"]);
-                decimal descuento = 0;
 
                 try
                 {
@@ -564,7 +598,7 @@ namespace ProyectoHCL.Formularios
                                     ht.Rows[i]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])));
 
                                 sth = sth + Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"]);
-
+                                vHab = sth;
                                 i = i + 1;
                             }
                         }
@@ -580,79 +614,80 @@ namespace ProyectoHCL.Formularios
                                     st.Rows[j]["PRECIO"].ToString(), Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])));
 
                                 StS = StS + Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"]);
+                                vServ = StS;
                                 j = j + 1;
                             }
                         }
 
                         //Datos de impuestos y totales
+                        ActualizarLabels2();
+                        //if (sth != 0.00m & StS != 0.00m)
+                        //{
+                        //    decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                        //    decimal isvHab = Decimal.Round(sth - valorHab15, 2);
 
-                        if (sth != 0.00m & StS != 0.00m)
-                        {
-                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
-                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+                        //    decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                        //    it = Decimal.Round(valorHab15 - valorHab4, 2);
 
-                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
-                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+                        //    decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                        //    decimal isvServ = Decimal.Round((StS - valorServ), 2);
 
-                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
-                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+                        //    if (decimal.TryParse(lblDesc.Text, out descuento))
+                        //    {
+                        //        isv = Decimal.Round(isvHab + isvServ, 2);
+                        //        subt = Decimal.Round(valorHab4 + valorServ, 2);
+                        //        desc = descuento;
+                        //        subtD = Decimal.Round(subt - desc, 2);
+                        //        total = Decimal.Round(isv + it + subtD, 2);
+                        //    }
+                        //}
+                        //else if (sth != 0.00m & StS == 0)
+                        //{
+                        //    decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                        //    decimal isvHab = Decimal.Round(sth - valorHab15, 2);
 
-                            if (decimal.TryParse(lblDesc.Text, out descuento))
-                            {
-                                isv = Decimal.Round(isvHab + isvServ, 2);
-                                subt = Decimal.Round(valorHab4 + valorServ, 2);
-                                desc = descuento;
-                                subtD = Decimal.Round(subt - desc, 2);
-                                total = Decimal.Round(isv + it + subtD, 2);
-                            }
-                        }
-                        else if (sth != 0.00m & StS == 0)
-                        {
-                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
-                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+                        //    decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                        //    it = Decimal.Round(valorHab15 - valorHab4, 2);
 
-                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
-                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+                        //    decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                        //    decimal isvServ = Decimal.Round((StS - valorServ), 2);
 
-                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
-                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+                        //    if (decimal.TryParse(lblDesc.Text, out descuento))
+                        //    {
+                        //        isv = Decimal.Round(isvHab + isvServ, 2);
+                        //        subt = Decimal.Round(valorHab4 + valorServ, 2);
+                        //        desc = descuento;
+                        //        subtD = Decimal.Round(subt - desc, 2);
+                        //        total = Decimal.Round(isv + it + subtD, 2);
+                        //    }
+                        //}
+                        //else if (sth == 0 & StS != 0)
+                        //{
+                        //    decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                        //    decimal isvHab = Decimal.Round(sth - valorHab15, 2);
 
-                            if (decimal.TryParse(lblDesc.Text, out descuento))
-                            {
-                                isv = Decimal.Round(isvHab + isvServ, 2);
-                                subt = Decimal.Round(valorHab4 + valorServ, 2);
-                                desc = descuento;
-                                subtD = Decimal.Round(subt - desc, 2);
-                                total = Decimal.Round(isv + it + subtD, 2);
-                            }
-                        }
-                        else if (sth == 0 & StS != 0)
-                        {
-                            decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
-                            decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+                        //    decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                        //    it = Decimal.Round(valorHab15 - valorHab4, 2);
 
-                            decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
-                            it = Decimal.Round(valorHab15 - valorHab4, 2);
+                        //    decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                        //    decimal isvServ = Decimal.Round((StS - valorServ), 2);
 
-                            decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
-                            decimal isvServ = Decimal.Round((StS - valorServ), 2);
+                        //    if (decimal.TryParse(lblDesc.Text, out descuento))
+                        //    {
+                        //        isv = Decimal.Round(isvHab + isvServ, 2);
+                        //        subt = Decimal.Round(valorHab4 + valorServ, 2);
+                        //        desc = descuento;
+                        //        subtD = Decimal.Round(subt - desc, 2);
+                        //        total = Decimal.Round(isv + it + subtD, 2);
+                        //    }
+                        //}
 
-                            if (decimal.TryParse(lblDesc.Text, out descuento))
-                            {
-                                isv = Decimal.Round(isvHab + isvServ, 2);
-                                subt = Decimal.Round(valorHab4 + valorServ, 2);
-                                desc = descuento;
-                                subtD = Decimal.Round(subt - desc, 2);
-                                total = Decimal.Round(isv + it + subtD, 2);
-                            }
-                        }
-
-                        lblSubt.Text = subt.ToString();
-                        //lblDesc.Text = desc.ToString();
-                        lblSubtD.Text = subtD.ToString();
-                        lblSV.Text = isv.ToString();
-                        lblTur.Text = it.ToString();
-                        lblTotal.Text = total.ToString();
+                        //lblSubt.Text = subt.ToString();
+                        ////lblDesc.Text = desc.ToString();
+                        //lblSubtD.Text = subtD.ToString();
+                        //lblSV.Text = isv.ToString();
+                        //lblTur.Text = it.ToString();
+                        //lblTotal.Text = total.ToString();
                     }
                 }
                 catch (Exception a)
@@ -722,7 +757,7 @@ namespace ProyectoHCL.Formularios
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al insertar datos: " + ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
@@ -740,6 +775,8 @@ namespace ProyectoHCL.Formularios
             DataGridViewImageColumn btnEliminar = new DataGridViewImageColumn();
             btnEliminar.Name = "Eliminar";
             dgvDetalleFact.Columns.Add(btnEliminar);
+
+            txtConstEx.TextChanged += txtConstEx_TextChanged;
 
             try
             {
@@ -842,9 +879,9 @@ namespace ProyectoHCL.Formularios
                         MySqlCommand comando = new MySqlCommand();
                         comando.Connection = BaseDatosHCL.ObtenerConexion();
 
-                        string txtOCValue = string.IsNullOrEmpty(txtOC.Text) ? "0" : txtOC.Text;
-                        string txtConstExValue = string.IsNullOrEmpty(txtConstEx.Text) ? "0" : txtConstEx.Text;
-                        string txtSarValue = string.IsNullOrEmpty(txtSar.Text) ? "0" : txtSar.Text;
+                        //string txtOCValue = string.IsNullOrEmpty(txtOC.Text) ? "---" : txtOC.Text;
+                        //string txtConstExValue = string.IsNullOrEmpty(txtConstEx.Text) ? "---" : txtConstEx.Text;
+                        //string txtSarValue = string.IsNullOrEmpty(txtSar.Text) ? "---" : txtSar.Text;
 
                         comando.CommandText = (
                             "INSERT INTO TBL_FACTURA(ID_SOLICITUDRESERVA, ID_TIPOPAGO, " +
@@ -855,10 +892,10 @@ namespace ProyectoHCL.Formularios
                             cmbPago.SelectedIndex + ", " +
                             clasecompartida.iduser + ", '" +
                             today.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
-                            txtOCValue + ", " +
-                            txtConstExValue + ", " +
-                            txtSarValue + ", " +
-                            subt + ", 0, 0, " +
+                            "'" + txtOC.Text + "', " +
+                            "'" + txtConstEx.Text + "', " +
+                            "'" + txtSar.Text + "', " +
+                            subt + ", " + iEx + ", 0, " +
                             subt + ", 0, " +
                             sth + ", " +
                             isv + ", 0, " +
@@ -878,7 +915,7 @@ namespace ProyectoHCL.Formularios
 
                         InsertarDatos();
 
-                         MsgB mbox = new MsgB("informacion", "Registro Agregado");
+                        MsgB mbox = new MsgB("informacion", "Registro Agregado");
                         DialogResult dR = mbox.ShowDialog();
                         this.Close();
 
@@ -903,6 +940,8 @@ namespace ProyectoHCL.Formularios
         {
             SaveFileDialog guardar = new SaveFileDialog();
             guardar.FileName = DateTime.Now.ToString("ddMMyyyy") + ".pdf";
+
+            Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
 
             string paginahtml_texto = Properties.Resources.Plantilla.ToString();
             paginahtml_texto = paginahtml_texto.Replace("@DIRECCION", ParametroDireccionH());
@@ -952,6 +991,7 @@ namespace ProyectoHCL.Formularios
             paginahtml_texto = paginahtml_texto.Replace("@SUBTOTAL", Convert.ToString(subt));
             paginahtml_texto = paginahtml_texto.Replace("@DESCUENTO", Convert.ToString(desc));
             paginahtml_texto = paginahtml_texto.Replace("@STMD", Convert.ToString(subtD));
+            paginahtml_texto = paginahtml_texto.Replace("@IMPEX", Convert.ToString(iEx));
             paginahtml_texto = paginahtml_texto.Replace("@ISV", Convert.ToString(isv));
             paginahtml_texto = paginahtml_texto.Replace("@IST", Convert.ToString(it));
             //paginahtml_texto = paginahtml_texto.Replace("@TOIM", Convert.ToString(isv + it));
@@ -959,9 +999,11 @@ namespace ProyectoHCL.Formularios
 
             if (guardar.ShowDialog() == DialogResult.OK)
             {
+                string filePath = guardar.FileName;
+
                 using (FileStream stream = new FileStream(guardar.FileName, FileMode.Create))
                 {
-                    Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
+                    //Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
 
                     PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
                     pdfDoc.Open();
@@ -980,10 +1022,64 @@ namespace ProyectoHCL.Formularios
 
                     pdfDoc.Close();
                     stream.Close();
+
+                    MostrarVistaPrevia(filePath);
                 }
             }
         }
 
+        private void MostrarVistaPrevia(string filePath)
+        {
+            Form previewForm = new Form();
+            previewForm.Text = "Factura";
+            previewForm.Size = new Size(800, 600);
+
+            // Crear un control WebBrowser para mostrar el PDF
+            WebBrowser webBrowser = new WebBrowser();
+            webBrowser.Dock = DockStyle.Fill;
+            previewForm.Controls.Add(webBrowser);
+
+            // Navegar al archivo PDF
+            webBrowser.Navigate(filePath);
+
+            // Mostrar el formulario de vista previa
+            previewForm.ShowDialog();
+        }
+
+        private void ImprimirPDF(string filePath)
+        {
+            // Crear un objeto PrintDocument para imprimir el PDF
+            PrintDocument printDocument = new PrintDocument();
+            printDocument.DocumentName = "Documento PDF";
+
+            // Manejador de evento para la impresión
+            printDocument.PrintPage += (sender, e) =>
+            {
+                // Crear un objeto WebBrowser para imprimir el PDF
+                WebBrowser webBrowser = new WebBrowser();
+                webBrowser.Navigate(filePath);
+
+                // Esperar a que la página se cargue completamente
+                webBrowser.DocumentCompleted += (s, ev) =>
+                {
+                    // Imprimir el contenido del WebBrowser
+                    webBrowser.Print();
+
+                    // Indicar que no hay más páginas para imprimir
+                    e.HasMorePages = false;
+                };
+            };
+
+            // Mostrar el cuadro de diálogo de impresión
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.Document = printDocument;
+
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Imprimir el documento
+                printDocument.Print();
+            }
+        }
         private void cmbPago_Leave(object sender, EventArgs e)
         {
             if (ValidarTxt.cmbVacio(cmbPago))
@@ -1147,6 +1243,151 @@ namespace ProyectoHCL.Formularios
 
             }
             conn.Close();
+        }
+
+        private void txtConstEx_TextChanged(object sender, EventArgs e)
+        {
+            ActualizarLabels();
+        }
+
+        private void ActualizarLabels()
+        {
+            if (!string.IsNullOrEmpty(txtConstEx.Text))
+            {
+                decimal valorHab15 = Decimal.Round((vHab / 1.15m), 2); // Valor antes del impuesto del 15%
+                decimal isvHab = Decimal.Round(vHab - valorHab15, 2);
+
+                decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                decimal valorServ = Decimal.Round((vServ / 1.15m), 2); // Valor antes del impuesto del 15%
+                decimal isvServ = Decimal.Round((vServ - valorServ), 2);
+
+                isv = 0;
+                subt = Decimal.Round(valorHab15 + valorServ, 2);
+                desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
+                subtD = Decimal.Round(subt - desc, 2);
+                total = Decimal.Round(isv + it + subtD, 2);
+                iEx = Decimal.Round(isvHab + isvServ, 2);
+
+                lblSubt.Text = subt.ToString();
+                lblDesc.Text = desc.ToString();
+                lblSubtD.Text = subtD.ToString();
+                lblSV.Text = "0.00";
+                lblTur.Text = it.ToString();
+                lblExonerado.Text = iEx.ToString();
+                lblTotal.Text = total.ToString();
+            }
+            else
+            {
+                decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                isv = Decimal.Round(isvHab + isvServ, 2);
+                subt = Decimal.Round(valorHab4 + valorServ, 2);
+                desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
+                subtD = Decimal.Round(subt - desc, 2);
+                total = Decimal.Round(isv + it + subtD, 2);
+
+                lblSubt.Text = subt.ToString();
+                lblDesc.Text = desc.ToString();
+                lblSubtD.Text = subtD.ToString();
+                lblSV.Text = isv.ToString();
+                lblTur.Text = it.ToString();
+                lblExonerado.Text = "0.00";
+                lblTotal.Text = total.ToString();
+            }
+        }
+
+        private void ActualizarLabels2()
+        {
+
+            if (!string.IsNullOrEmpty(txtConstEx.Text))
+            {
+                decimal valorHab15 = Decimal.Round((vHab / 1.15m), 2); // Valor antes del impuesto del 15%
+                decimal isvHab = Decimal.Round(vHab - valorHab15, 2);
+
+                decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                decimal valorServ = Decimal.Round((vServ / 1.15m), 2); // Valor antes del impuesto del 15%
+                decimal isvServ = Decimal.Round((vServ - valorServ), 2);
+
+                if (decimal.TryParse(lblDesc.Text, out descuento))
+                {
+                    isv = 0;
+                    subt = Decimal.Round(valorHab15 + valorServ, 2);
+                    desc = descuento;
+                    subtD = Decimal.Round(subt - desc, 2);
+                    total = Decimal.Round(isv + it + subtD, 2);
+                    iEx = Decimal.Round(isvHab + isvServ, 2);
+                }
+                lblSubt.Text = subt.ToString();
+                lblDesc.Text = desc.ToString();
+                lblSubtD.Text = subtD.ToString();
+                lblSV.Text = "0.00";
+                lblTur.Text = it.ToString();
+                lblExonerado.Text = iEx.ToString();
+                lblTotal.Text = total.ToString();
+            }
+            else
+            {
+                decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
+                decimal isvHab = Decimal.Round(sth - valorHab15, 2);
+
+                decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
+                it = Decimal.Round(valorHab15 - valorHab4, 2);
+
+                decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
+                decimal isvServ = Decimal.Round((StS - valorServ), 2);
+
+                if (decimal.TryParse(lblDesc.Text, out descuento))
+                {
+                    isv = Decimal.Round(isvHab + isvServ, 2);
+                    subt = Decimal.Round(valorHab4 + valorServ, 2);
+                    desc = descuento;
+                    subtD = Decimal.Round(subt - desc, 2);
+                    total = Decimal.Round(isv + it + subtD, 2);
+                }
+
+                lblSubt.Text = subt.ToString();
+                lblDesc.Text = desc.ToString();
+                lblSubtD.Text = subtD.ToString();
+                lblSV.Text = isv.ToString();
+                lblTur.Text = it.ToString();
+                lblExonerado.Text = "0.00";
+                lblTotal.Text = total.ToString();
+            }
+        }
+
+        private void txtConstEx_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtSar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtOC_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -197,21 +197,40 @@ namespace ProyectoHCL
 
         private void cargarHabitaciones() //Llenar el combobox con las habitaciones
         {
-            string connectionString = "server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;";
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            try
             {
-                conn.Open();
-
-                string query = "SELECT NUMEROHABITACION FROM TBL_HABITACION";
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                string connectionString = "server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;";
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
-                    cmbHabitacion.Items.Add(reader["NUMEROHABITACION"].ToString()); //Cargar combobox con los números de las habitaciones
+                    conn.Open();
+
+                    // Consulta para obtener la lista de habitaciones y tipos de habitación
+                    string consulta = "SELECT h.NUMEROHABITACION, t.TIPO " +
+                                      "FROM TBL_HABITACION h " +
+                                      "INNER JOIN TBL_TIPOHABITACION t ON h.ID_TIPOHABITACION = t.ID_TIPOHABITACION " +
+                                      "ORDER BY h.NUMEROHABITACION ASC";
+
+                    using (MySqlCommand cmd = new MySqlCommand(consulta, conn))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            // Limpia el ComboBox antes de cargar los nuevos datos
+                            cmbHabitacion.Items.Clear();
+
+                            while (reader.Read())
+                            {
+                                // Concatena el número de habitación y el tipo de habitación para mostrar en el ComboBox
+                                string item = $"{reader["NUMEROHABITACION"]} - {reader["TIPO"]}";
+                                cmbHabitacion.Items.Add(item);
+                            }
+                        }
+                    }
                 }
-                reader.Close();
-                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MsgB Mbox = new MsgB("error", "Error: " + ex.Message);
+                DialogResult DR = Mbox.ShowDialog();
             }
         }
 

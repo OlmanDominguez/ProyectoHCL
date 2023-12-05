@@ -232,9 +232,9 @@ namespace ProyectoHCL.Formularios
                     form.ShowDialog();
                     CargarDG();
                 }
-                catch (Exception)    /* detectar errores en ejecucion */
+                catch (Exception ex)    /* detectar errores en ejecucion */
                 {
-                    MsgB Mbox = new MsgB("error", "Se produjo un error");
+                    MsgB Mbox = new MsgB("error", "Se produjo un error" + ex.Message);
                     DialogResult DR = Mbox.ShowDialog();
                 }
 

@@ -30,11 +30,11 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Factura));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
             panel1 = new Panel();
             label11 = new Label();
             btnCerrar = new Button();
@@ -72,6 +72,8 @@
             btnServicio = new Button();
             panel5 = new Panel();
             groupBox2 = new GroupBox();
+            lblExonerado = new Label();
+            label19 = new Label();
             lblTotal = new Label();
             lblTur = new Label();
             label20 = new Label();
@@ -172,10 +174,13 @@
             // txtOC
             // 
             txtOC.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtOC.CharacterCasing = CharacterCasing.Upper;
             txtOC.Location = new Point(116, 97);
+            txtOC.MaxLength = 12;
             txtOC.Name = "txtOC";
             txtOC.Size = new Size(196, 23);
             txtOC.TabIndex = 11;
+            txtOC.KeyPress += txtOC_KeyPress;
             // 
             // label12
             // 
@@ -190,18 +195,24 @@
             // txtConstEx
             // 
             txtConstEx.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtConstEx.CharacterCasing = CharacterCasing.Upper;
             txtConstEx.Location = new Point(116, 30);
+            txtConstEx.MaxLength = 11;
             txtConstEx.Name = "txtConstEx";
             txtConstEx.Size = new Size(196, 23);
             txtConstEx.TabIndex = 9;
+            txtConstEx.TextChanged += txtConstEx_TextChanged;
+            txtConstEx.KeyPress += txtConstEx_KeyPress;
             // 
             // txtSar
             // 
             txtSar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtSar.Location = new Point(116, 65);
+            txtSar.MaxLength = 14;
             txtSar.Name = "txtSar";
             txtSar.Size = new Size(196, 23);
             txtSar.TabIndex = 10;
+            txtSar.KeyPress += txtSar_KeyPress;
             // 
             // label9
             // 
@@ -415,35 +426,35 @@
             dgvDetalleFact.AllowUserToAddRows = false;
             dgvDetalleFact.AllowUserToDeleteRows = false;
             dgvDetalleFact.AllowUserToResizeColumns = false;
-            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            dgvDetalleFact.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle11.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle11.ForeColor = Color.Black;
+            dataGridViewCellStyle11.SelectionBackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle11.SelectionForeColor = Color.Black;
+            dgvDetalleFact.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
             dgvDetalleFact.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvDetalleFact.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvDetalleFact.BackgroundColor = Color.WhiteSmoke;
             dgvDetalleFact.BorderStyle = BorderStyle.None;
             dgvDetalleFact.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.Teal;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvDetalleFact.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle12.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle12.ForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.SelectionBackColor = Color.Teal;
+            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+            dgvDetalleFact.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             dgvDetalleFact.ColumnHeadersHeight = 30;
             dgvDetalleFact.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.MenuHighlight;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgvDetalleFact.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = SystemColors.MenuHighlight;
+            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle13.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
+            dgvDetalleFact.DefaultCellStyle = dataGridViewCellStyle13;
             dgvDetalleFact.EnableHeadersVisualStyles = false;
             dgvDetalleFact.GridColor = Color.FromArgb(45, 66, 91);
             dgvDetalleFact.Location = new Point(26, 18);
@@ -452,22 +463,22 @@
             dgvDetalleFact.Name = "dgvDetalleFact";
             dgvDetalleFact.ReadOnly = true;
             dgvDetalleFact.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = SystemColors.InfoText;
-            dataGridViewCellStyle4.SelectionBackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.InfoText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgvDetalleFact.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle14.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle14.ForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle14.SelectionBackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle14.SelectionForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
+            dgvDetalleFact.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             dgvDetalleFact.RowHeadersVisible = false;
             dgvDetalleFact.RowHeadersWidth = 62;
-            dataGridViewCellStyle5.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle5.SelectionForeColor = Color.Black;
-            dgvDetalleFact.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle15.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle15.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle15.ForeColor = Color.Black;
+            dataGridViewCellStyle15.SelectionBackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle15.SelectionForeColor = Color.Black;
+            dgvDetalleFact.RowsDefaultCellStyle = dataGridViewCellStyle15;
             dgvDetalleFact.RowTemplate.Height = 25;
             dgvDetalleFact.Size = new Size(508, 227);
             dgvDetalleFact.TabIndex = 3;
@@ -561,6 +572,8 @@
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.Controls.Add(lblExonerado);
+            groupBox2.Controls.Add(label19);
             groupBox2.Controls.Add(lblTotal);
             groupBox2.Controls.Add(lblTur);
             groupBox2.Controls.Add(label20);
@@ -579,10 +592,30 @@
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             // 
+            // lblExonerado
+            // 
+            lblExonerado.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblExonerado.Location = new Point(179, 112);
+            lblExonerado.Name = "lblExonerado";
+            lblExonerado.Size = new Size(107, 17);
+            lblExonerado.TabIndex = 24;
+            lblExonerado.Text = "label32";
+            lblExonerado.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label19.Location = new Point(38, 112);
+            label19.Name = "label19";
+            label19.Size = new Size(135, 16);
+            label19.TabIndex = 23;
+            label19.Text = "Importe exonerado:";
+            // 
             // lblTotal
             // 
             lblTotal.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTotal.Location = new Point(175, 181);
+            lblTotal.Location = new Point(179, 198);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(107, 17);
             lblTotal.TabIndex = 22;
@@ -592,7 +625,7 @@
             // lblTur
             // 
             lblTur.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTur.Location = new Point(175, 153);
+            lblTur.Location = new Point(179, 170);
             lblTur.Name = "lblTur";
             lblTur.Size = new Size(107, 17);
             lblTur.TabIndex = 20;
@@ -603,7 +636,7 @@
             // 
             label20.AutoSize = true;
             label20.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label20.Location = new Point(69, 182);
+            label20.Location = new Point(73, 199);
             label20.Name = "label20";
             label20.Size = new Size(100, 16);
             label20.TabIndex = 6;
@@ -612,7 +645,7 @@
             // lblSV
             // 
             lblSV.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblSV.Location = new Point(175, 122);
+            lblSV.Location = new Point(179, 141);
             lblSV.Name = "lblSV";
             lblSV.Size = new Size(107, 17);
             lblSV.TabIndex = 19;
@@ -622,7 +655,7 @@
             // lblSubtD
             // 
             lblSubtD.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblSubtD.Location = new Point(175, 93);
+            lblSubtD.Location = new Point(179, 83);
             lblSubtD.Name = "lblSubtD";
             lblSubtD.Size = new Size(107, 17);
             lblSubtD.TabIndex = 18;
@@ -632,7 +665,7 @@
             // lblDesc
             // 
             lblDesc.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblDesc.Location = new Point(175, 65);
+            lblDesc.Location = new Point(179, 55);
             lblDesc.Name = "lblDesc";
             lblDesc.Size = new Size(107, 17);
             lblDesc.TabIndex = 17;
@@ -642,7 +675,7 @@
             // lblSubt
             // 
             lblSubt.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblSubt.Location = new Point(175, 39);
+            lblSubt.Location = new Point(179, 29);
             lblSubt.Name = "lblSubt";
             lblSubt.Size = new Size(107, 17);
             lblSubt.TabIndex = 16;
@@ -653,7 +686,7 @@
             // 
             label18.AutoSize = true;
             label18.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label18.Location = new Point(46, 154);
+            label18.Location = new Point(50, 170);
             label18.Name = "label18";
             label18.Size = new Size(123, 16);
             label18.TabIndex = 4;
@@ -663,7 +696,7 @@
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label17.Location = new Point(44, 123);
+            label17.Location = new Point(48, 142);
             label17.Name = "label17";
             label17.Size = new Size(125, 16);
             label17.TabIndex = 3;
@@ -673,7 +706,7 @@
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label16.Location = new Point(24, 94);
+            label16.Location = new Point(28, 84);
             label16.Name = "label16";
             label16.Size = new Size(147, 16);
             label16.TabIndex = 2;
@@ -683,7 +716,7 @@
             // 
             label15.AutoSize = true;
             label15.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label15.Location = new Point(91, 67);
+            label15.Location = new Point(95, 56);
             label15.Name = "label15";
             label15.Size = new Size(78, 16);
             label15.TabIndex = 1;
@@ -693,7 +726,7 @@
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label14.Location = new Point(103, 41);
+            label14.Location = new Point(107, 31);
             label14.Name = "label14";
             label14.Size = new Size(66, 16);
             label14.TabIndex = 0;
@@ -838,5 +871,7 @@
         private ErrorProvider errorT;
         private Label lblEstado;
         private Label label3;
+        private Label lblExonerado;
+        private Label label19;
     }
 }
