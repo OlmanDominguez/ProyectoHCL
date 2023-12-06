@@ -424,7 +424,7 @@ namespace ProyectoHCL.Formularios
             SaveFileDialog sf = new SaveFileDialog();
 
             sf.DefaultExt = "*.xlsx";
-            sf.FileName = "ExcelFacturas";
+            sf.FileName = "FacturasRegistradas";
             sf.Filter = " Libro de Excel (*.xlsx) | *.xlsx";
 
             if (sf.ShowDialog() == DialogResult.OK)

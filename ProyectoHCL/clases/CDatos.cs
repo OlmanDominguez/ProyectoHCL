@@ -118,9 +118,6 @@ namespace ProyectoHCL.clases
             {
                 try
                 {
-                    if (conectar.State != ConnectionState.Open)
-                        conectar.Open();
-
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@idRol", permisoR.IdRol);
                     cmd.Parameters.AddWithValue("@idPermiso", permisoR.IdPermiso);
@@ -133,6 +130,13 @@ namespace ProyectoHCL.clases
                 {
                     MsgB m = new MsgB("error", "Error: " + ex.Message);
                     DialogResult dR = m.ShowDialog();
+                }
+                finally
+                {
+                    if (conectar.State == ConnectionState.Open)
+                    {
+                        conectar.Close();
+                    }
                 }
             }
         }

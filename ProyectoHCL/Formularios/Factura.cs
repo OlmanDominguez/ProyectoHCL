@@ -869,6 +869,16 @@ namespace ProyectoHCL.Formularios
                 MsgB Mbox = new MsgB("advertencia", "Seleccione un método de pago");
                 DialogResult DR = Mbox.ShowDialog();
             }
+            if (!string.IsNullOrEmpty(txtConstEx.Text) && string.IsNullOrEmpty(txtOC.Text))
+            {
+                MsgB m = new MsgB("advertencia", "Por favor llene todos los campos requeridos"); //validar campos vacíos
+                DialogResult dR = m.ShowDialog();
+            }
+            if (!string.IsNullOrEmpty(txtConstEx.Text) && string.IsNullOrEmpty(txtSar.Text))
+            {
+                MsgB m = new MsgB("advertencia", "Por favor llene todos los campos requeridos"); //validar campos vacíos
+                DialogResult dR = m.ShowDialog();
+            }
             else if (info.est == 2)
             {
                 try
@@ -1046,40 +1056,6 @@ namespace ProyectoHCL.Formularios
             previewForm.ShowDialog();
         }
 
-        private void ImprimirPDF(string filePath)
-        {
-            // Crear un objeto PrintDocument para imprimir el PDF
-            PrintDocument printDocument = new PrintDocument();
-            printDocument.DocumentName = "Documento PDF";
-
-            // Manejador de evento para la impresión
-            printDocument.PrintPage += (sender, e) =>
-            {
-                // Crear un objeto WebBrowser para imprimir el PDF
-                WebBrowser webBrowser = new WebBrowser();
-                webBrowser.Navigate(filePath);
-
-                // Esperar a que la página se cargue completamente
-                webBrowser.DocumentCompleted += (s, ev) =>
-                {
-                    // Imprimir el contenido del WebBrowser
-                    webBrowser.Print();
-
-                    // Indicar que no hay más páginas para imprimir
-                    e.HasMorePages = false;
-                };
-            };
-
-            // Mostrar el cuadro de diálogo de impresión
-            PrintDialog printDialog = new PrintDialog();
-            printDialog.Document = printDocument;
-
-            if (printDialog.ShowDialog() == DialogResult.OK)
-            {
-                // Imprimir el documento
-                printDocument.Print();
-            }
-        }
         private void cmbPago_Leave(object sender, EventArgs e)
         {
             if (ValidarTxt.cmbVacio(cmbPago))
@@ -1387,6 +1363,30 @@ namespace ProyectoHCL.Formularios
             if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void txtSar_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtConstEx.Text) && ValidarTxt.txtVacio(txtSar))
+            {
+                errorT.SetError(txtSar, "El campo no puede quedar vacío");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+        }
+
+        private void txtOC_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtConstEx.Text) && ValidarTxt.txtVacio(txtOC))
+            {
+                errorT.SetError(txtOC, "El campo no puede quedar vacío");
+            }
+            else
+            {
+                errorT.Clear();
             }
         }
     }

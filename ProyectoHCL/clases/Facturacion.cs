@@ -126,5 +126,23 @@ namespace ProyectoHCL.clases
             return dt;
         }
 
+        public DataSet PaginacionFact()
+        {
+            MySqlConnection conn;  /* declaracion de variable para conectar con BD */
+            MySqlCommand cmd;
+            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;"); /* proceso para conectar con BD */
+            conn.Open();
+
+            cmd = new MySqlCommand("PagFact", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@inicio", Inicio1);
+            cmd.Parameters.AddWithValue("@final", Final1);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataSet dt = new DataSet();
+            da.Fill(dt);
+
+            return dt;
+        }
+
     }
 }

@@ -70,6 +70,7 @@ namespace ProyectoHCL.Formularios
         public NuevaFact()
         {
             InitializeComponent();
+            pagFinal = numFilas;
             CargarDGFact();
         }
 
@@ -78,6 +79,9 @@ namespace ProyectoHCL.Formularios
             this.Close();
         }
 
+        Facturacion user = new Facturacion(); /* declaracion de variables y valores */
+        DataSet ds = new DataSet();
+        int pagInicio = 1, indice = 0, numFilas = 5, pagFinal, cmbIndice = 0;
         int posY = 0;
         int posX = 0;
 
@@ -97,33 +101,25 @@ namespace ProyectoHCL.Formularios
 
         private void CargarDGFact() //Cargar datagridview
         {
-            try
-            {
-                string stri = "select s.ID_SOLICITUDRESERVA AS CODIGO,c.NOMBRE AS NOMBRES, c.APELLIDO AS APELLIDOS, " +
-                    "c.DNI_PASAPORTE AS IDENTIFICACION, s.FECHACOTI AS FECHA, s.INGRESO, " +
-                    "s.SALIDA, er.DESCRIPCION AS ESTADO " +
-                    "FROM TBL_SOLICITUDRESERVA s " +
-                    "INNER JOIN TBL_CLIENTE c ON s.COD_CLIENTE = c.CODIGO " +
-                    "INNER JOIN TBL_ESTADORESERVA er ON s.ID_ESTADORESERVA = er.ID_ESTADORESERVA " +
-                    "WHERE s.ID_ESTADORESERVA = '2' ORDER BY CODIGO ASC;";
+            user.Inicio1 = pagInicio;
+            user.Final1 = pagFinal;
+            ds = user.PaginacionFact();
+            dgvReservas.DataSource = ds.Tables[1];
 
-                MySqlConnection conn;
-                MySqlCommand cmd;
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
+            int cantidad = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) / numFilas;   /* declaracion de variable y conversion de valores  */
 
-                cmd = new MySqlCommand(stri, conn);
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
+            if (Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString()) % numFilas > 0) cantidad++; /* condicional IF */
 
-                dgvReservas.DataSource = dt;
+            txtPaginacion.Text = cantidad.ToString();
 
-            }
-            catch (Exception a)  /* detectar errores en ejecucion */
-            {
-                MessageBox.Show(a.Message + a.StackTrace);
-            }
+            cmbPaginacion.Items.Clear();
+
+            for (int x = 1; x <= cantidad; x++)   /* Ciclo For para verificar las instrucciones correspondientes en valor de variable cantidad */
+                cmbPaginacion.Items.Add(x.ToString());
+
+            cmbPaginacion.SelectedIndex = indice;
+
+            HabilitarBotones();
         }
 
 
@@ -197,7 +193,7 @@ namespace ProyectoHCL.Formularios
                     formulario.ShowDialog();
                     CargarDGFact();
                 }
-                catch (Exception ex )
+                catch (Exception ex)
                 {
                     MsgB Mbox = new MsgB("error", "Se produjo un error" + ex.Message);
                     DialogResult DR = Mbox.ShowDialog();
@@ -222,6 +218,81 @@ namespace ProyectoHCL.Formularios
                 dgvReservas.Columns[e.ColumnIndex].Width = imagen.Width + 58;
 
                 e.Value = imagen;
+            }
+        }
+
+        private void cmbPaginacion_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPaginacion.Text);
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDGFact();
+        }
+
+        private void cmbMostrar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbIndice = cmbMostrar.SelectedIndex;
+            switch (cmbIndice) /* realizar las respectivas validaciones valor por valor */
+            {
+                case 0:
+                    numFilas = 10;
+                    break;
+                case 1:
+                    numFilas = 20;
+                    break;
+                case 2:
+                    numFilas = 30;
+                    break;
+                case 3:
+                    numFilas = 40;
+                    break;
+                case 4:
+                    numFilas = 50;
+                    break;
+            }
+            pagFinal = numFilas;
+            CargarDGFact();
+        }
+
+        private void btnAnt_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPaginacion.Text) - 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDGFact();
+        }
+
+        private void btnSig_Click(object sender, EventArgs e)
+        {
+            int pagina = Convert.ToInt32(cmbPaginacion.Text) + 1;
+            indice = pagina - 1;
+            pagInicio = (pagina - 1) * numFilas + 1;
+            pagFinal = pagina * numFilas;
+            CargarDGFact();
+        }
+
+        private void HabilitarBotones()
+        {
+            if (pagInicio == 1)
+            {
+                btnAnt.Enabled = false;
+                cmbMostrar.Enabled = true;
+            }
+            else
+            {
+                btnAnt.Enabled = true;
+                cmbMostrar.Enabled = false;
+            }
+
+            if (indice == (Convert.ToInt32(txtPaginacion.Text) - 1))
+            {
+                btnSig.Enabled = false;
+            }
+            else
+            {
+                btnSig.Enabled = true;
             }
         }
     }
