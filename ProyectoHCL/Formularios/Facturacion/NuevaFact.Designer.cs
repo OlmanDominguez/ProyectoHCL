@@ -292,7 +292,7 @@
             txtBuscarRe.Name = "txtBuscarRe";
             txtBuscarRe.Size = new Size(247, 23);
             txtBuscarRe.TabIndex = 46;
-            txtBuscarRe.KeyDown += txtBuscarRe_KeyDown;
+            txtBuscarRe.TextChanged += txtBuscarRe_TextChanged;
             // 
             // label1
             // 

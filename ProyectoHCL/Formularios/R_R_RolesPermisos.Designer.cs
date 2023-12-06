@@ -353,7 +353,6 @@
             dgvRolPermiso.RowTemplate.Height = 25;
             dgvRolPermiso.Size = new Size(1027, 388);
             dgvRolPermiso.TabIndex = 5;
-            dgvRolPermiso.CellValueChanged += dgvRolPermiso_CellValueChanged;
             // 
             // label13
             // 

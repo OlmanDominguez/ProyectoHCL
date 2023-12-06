@@ -207,6 +207,7 @@ namespace ProyectoHCL.Formularios
             public static string reserva;
             public static int est = 0;
             public static string estado;
+            public static string estFact;
         }
 
         private void dgvFacturas_CellClick_1(object sender, DataGridViewCellEventArgs e)

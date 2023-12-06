@@ -72,7 +72,7 @@ namespace ProyectoHCL.Formularios
         {
             InitializeComponent();
             //cargarRoles();
-            dgvRolPermiso.CellValueChanged += dgvRolPermiso_CellValueChanged;
+            //dgvRolPermiso.CellValueChanged += dgvRolPermiso_CellValueChanged;
         }
 
         RolUsuario rolUs = new RolUsuario();
@@ -506,19 +506,19 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void dgvRolPermiso_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 3 || e.ColumnIndex == 4 || e.ColumnIndex == 5 && e.RowIndex >= 0)
-            {
-                // Marcar la columna 3 si la columna 4, 5 o 6 también está marcada
-                bool check = (bool)dgvRolPermiso.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+        //private void dgvRolPermiso_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.ColumnIndex == 3 || e.ColumnIndex == 4 || e.ColumnIndex == 5 && e.RowIndex >= 0)
+        //    {
+        //        // Marcar la columna 3 si la columna 4, 5 o 6 también está marcada
+        //        bool check = (bool)dgvRolPermiso.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
 
-                if (check)
-                {
-                    dgvRolPermiso.Rows[e.RowIndex].Cells[2].Value = true;
-                }
-            }
-        }
+        //        if (check)
+        //        {
+        //            dgvRolPermiso.Rows[e.RowIndex].Cells[2].Value = true;
+        //        }
+        //    }
+        //}
 
         private void rbtnHabilitar_CheckedChanged(object sender, EventArgs e)
         {

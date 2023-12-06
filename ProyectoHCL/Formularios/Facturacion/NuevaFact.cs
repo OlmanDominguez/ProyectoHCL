@@ -134,25 +134,28 @@ namespace ProyectoHCL.Formularios
         {
             try
             {
-                MySqlConnection conn;
-                MySqlCommand cmd;
+                using (MySqlConnection conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database=railway; Uid=root; pwd=LpxjPRi2Ckkz7FiKNUHn;"))
+                {
+                    conn.Open();
 
-                conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-                conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("buscarReserva1", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@nombreR", MySqlDbType.VarChar, 50).Value = buscarF;
 
-                cmd = new MySqlCommand("buscarReserva1", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@nombreR", MySqlDbType.VarChar, 50).Value = buscarF;
-
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dgvReservas.DataSource = dt;
-
+                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            dgvReservas.DataSource = dt;
+                        }
+                    }
+                }
             }
-            catch (Exception)  /* detectar errores en ejecucion  */
+            catch (Exception ex)
             {
-                throw;
+                MsgB mbox = new MsgB("error", "Error: " + ex.Message);
+                DialogResult dR = mbox.ShowDialog();
             }
         }
 
@@ -190,6 +193,7 @@ namespace ProyectoHCL.Formularios
                     //this.Hide();
                     Form formulario = new Formularios.Factura();
                     info.est = 2;
+                    info.estFact = dgvReservas.CurrentRow.Cells["ESTADO"].Value.ToString(); ;
                     formulario.ShowDialog();
                     CargarDGFact();
                 }
@@ -293,6 +297,18 @@ namespace ProyectoHCL.Formularios
             else
             {
                 btnSig.Enabled = true;
+            }
+        }
+
+        private void txtBuscarRe_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscarRe.Text != "")
+            {
+                buscarReserva(txtBuscarRe.Text);
+            }
+            else
+            {
+                CargarDGFact();
             }
         }
     }
