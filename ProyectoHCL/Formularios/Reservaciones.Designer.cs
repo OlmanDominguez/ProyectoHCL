@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reservaciones));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            btnExit = new PictureBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reservaciones));
             dgv_reservaciones = new DataGridView();
             panel3 = new Panel();
             btnSiguiente = new Button();
@@ -59,6 +58,7 @@
             txtPag = new TextBox();
             cmbPag = new ComboBox();
             panel2 = new Panel();
+            btnCerrar = new Button();
             button2 = new Button();
             button5 = new Button();
             btnPerfil = new Button();
@@ -75,26 +75,12 @@
             txtBuscar_reservas = new TextBox();
             label4 = new Label();
             panelChildForm = new Panel();
-            ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv_reservaciones).BeginInit();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
             panel5.SuspendLayout();
             panelChildForm.SuspendLayout();
             SuspendLayout();
-            // 
-            // btnExit
-            // 
-            btnExit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnExit.BackgroundImageLayout = ImageLayout.Stretch;
-            btnExit.Image = (Image)resources.GetObject("btnExit.Image");
-            btnExit.Location = new Point(867, -2);
-            btnExit.Name = "btnExit";
-            btnExit.Size = new Size(28, 29);
-            btnExit.SizeMode = PictureBoxSizeMode.StretchImage;
-            btnExit.TabIndex = 1;
-            btnExit.TabStop = false;
-            btnExit.Click += btnExit_Click;
             // 
             // dgv_reservaciones
             // 
@@ -441,6 +427,7 @@
             // panel2
             // 
             panel2.BackColor = Color.WhiteSmoke;
+            panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(button2);
             panel2.Controls.Add(button5);
             panel2.Controls.Add(btnPerfil);
@@ -451,6 +438,22 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(896, 76);
             panel2.TabIndex = 35;
+            // 
+            // btnCerrar
+            // 
+            btnCerrar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCerrar.BackColor = Color.Transparent;
+            btnCerrar.BackgroundImage = (Image)resources.GetObject("btnCerrar.BackgroundImage");
+            btnCerrar.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCerrar.FlatAppearance.BorderSize = 0;
+            btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
+            btnCerrar.FlatStyle = FlatStyle.Flat;
+            btnCerrar.Location = new Point(870, 3);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(14, 17);
+            btnCerrar.TabIndex = 43;
+            btnCerrar.UseVisualStyleBackColor = false;
+            btnCerrar.Click += btnCerrar_Click;
             // 
             // button2
             // 
@@ -700,13 +703,11 @@
             ClientSize = new Size(896, 613);
             Controls.Add(panel3);
             Controls.Add(dgv_reservaciones);
-            Controls.Add(btnExit);
             Controls.Add(panelChildForm);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Reservaciones";
             Text = "Reservaciones";
             Load += Reservaciones_Load;
-            ((System.ComponentModel.ISupportInitialize)btnExit).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv_reservaciones).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
@@ -719,8 +720,6 @@
         }
 
         #endregion
-
-        private PictureBox btnExit;
         private Panel panel3;
         private TextBox txtPagTH;
         private Label label8;
@@ -761,5 +760,6 @@
         public TextBox txtBuscar_reservas;
         private Button btnSiguiente;
         private Button btnAnterior;
+        private Button btnCerrar;
     }
 }

@@ -256,8 +256,8 @@ namespace ProyectoHCL
                     cb_metodo.DisplayMember = "DESCRIPCION";
                     cb_metodo.DataSource = dt;
 
-                    cb_metodo.AutoCompleteMode = AutoCompleteMode.Suggest;
-                    cb_metodo.AutoCompleteSource = AutoCompleteSource.ListItems;
+                    // cb_metodo.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    // cb_metodo.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
 
@@ -329,8 +329,8 @@ namespace ProyectoHCL
                     cb_tipo.DisplayMember = "TIPO";
                     cb_tipo.DataSource = dt;
 
-                    cb_tipo.AutoCompleteMode = AutoCompleteMode.Suggest;
-                    cb_tipo.AutoCompleteSource = AutoCompleteSource.ListItems;
+                    //cb_tipo.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    // cb_tipo.AutoCompleteSource = AutoCompleteSource.ListItems;
                 }
             }
             catch (Exception ex)
@@ -355,7 +355,7 @@ namespace ProyectoHCL
                     comando.Connection = conexion;
                     //comando.Connection = BaseDatosHCL.ObtenerConexion();
                     //comando.CommandText = ("select ID_TIPOHABITACION, NUMEROHABITACION from TBL_HABITACION where ID_TIPOHABITACION=@ID_TIPOHABITACION AND ESTADOHABITACION='ACTIVO';");
-                    comando.CommandText = ("SELECT ID_TIPOHABITACION, NUMEROHABITACION FROM TBL_HABITACION WHERE ID_TIPOHABITACION = @ID_TIPOHABITACION AND ESTADOHABITACION = 'ACTIVO' AND NOT EXISTS(SELECT 1 FROM TBL_SOLICITUDRESERVA WHERE TBL_HABITACION.NUMEROHABITACION = TBL_SOLICITUDRESERVA.NUMEROHABITACION AND @fecha1 <= SALIDA AND @fecha2 >= INGRESO);");
+                    comando.CommandText = ("SELECT ID_TIPOHABITACION, NUMEROHABITACION FROM TBL_HABITACION WHERE ID_TIPOHABITACION = @ID_TIPOHABITACION AND ESTADOHABITACION = 'ACTIVO' AND NOT EXISTS(SELECT 1 FROM TBL_SOLICITUDRESERVA WHERE TBL_HABITACION.NUMEROHABITACION = TBL_SOLICITUDRESERVA.NUMEROHABITACION AND @fecha1 <= SALIDA AND @fecha2 >= INGRESO) ORDER BY NUMEROHABITACION ASC;");
                     comando.Parameters.AddWithValue("@fecha1", fecha1);
                     comando.Parameters.AddWithValue("@fecha2", fecha2);
                     comando.Parameters.AddWithValue("ID_TIPOHABITACION", ID_TIPOHABITACION);
@@ -372,8 +372,8 @@ namespace ProyectoHCL
                     cb_numero.DisplayMember = "NUMEROHABITACION";
                     cb_numero.DataSource = dt;
 
-                    cb_numero.AutoCompleteMode = AutoCompleteMode.Suggest;
-                    cb_numero.AutoCompleteSource = AutoCompleteSource.ListItems;
+                    // cb_numero.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    // cb_numero.AutoCompleteSource = AutoCompleteSource.ListItems;
 
                 }
 
@@ -382,6 +382,7 @@ namespace ProyectoHCL
             {
                 MessageBox.Show(a.Message);
             }
+
 
         }
 
@@ -410,8 +411,8 @@ namespace ProyectoHCL
                     cb_estado.DisplayMember = "TBL_ESTADORESERVA";
                     cb_estado.ValueMember = "DESCRIPCION";
 
-                    cb_estado.AutoCompleteMode = AutoCompleteMode.Suggest;
-                    cb_estado.AutoCompleteSource = AutoCompleteSource.ListItems;
+                    //cb_estado.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    //cb_estado.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
 
@@ -445,6 +446,10 @@ namespace ProyectoHCL
         private void NuevaReservacion_Load(object sender, EventArgs e)
         {
             //id_empleado();
+
+            TimeSpan noches = dt_fecha_salida.Value - dt_fecha_entrada.Value;
+            int days = (int)noches.TotalDays;
+            lbl_noches.Text = Convert.ToString(days);
 
             lbl_usuario.Text = clasecompartida.user.ToUpper();
             txt_codigo.Text = clasecompartida.iduser.ToString();
@@ -617,15 +622,24 @@ namespace ProyectoHCL
                 {
                     MySqlCommand comando = new MySqlCommand();
                     comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("select ID_TIPOHABITACION,CAPACIDAD from TBL_TIPOHABITACION where ID_TIPOHABITACION='" + nombre + "';");
+                    comando.CommandText = ("select ID_TIPOHABITACION,CAPACIDAD,PRECIO from TBL_TIPOHABITACION where ID_TIPOHABITACION='" + nombre + "';");
 
                     MySqlDataReader leer = comando.ExecuteReader();
                     if (leer.Read() == true)
                     {
                         txt_tipo_habitacion.Text = leer["ID_TIPOHABITACION"].ToString();
                         txt_capacidad.Text = leer["CAPACIDAD"].ToString();
-
-
+                        if (leer["PRECIO"] != DBNull.Value)
+                        {
+                            int costo = Convert.ToInt32(leer["PRECIO"]);
+                            int dias = Convert.ToInt32(lbl_noches.Text);
+                            int total = costo * dias;
+                            txt_monto.Text = "L."+total.ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERROR AL CARGAR PRECIO");
+                        }
                     }
                     else
                     {
@@ -761,6 +775,7 @@ namespace ProyectoHCL
                                     {
                                         MsgB m = new MsgB("advertencia", "El numero de huespedes a reservar excede el numero maximo de la habitacion");
                                         DialogResult dR = m.ShowDialog();
+
                                     }
                                 }
                                 else
@@ -1037,6 +1052,14 @@ namespace ProyectoHCL
 
             ValidarFechas();
         }
+
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+
+
     }
 }
 
