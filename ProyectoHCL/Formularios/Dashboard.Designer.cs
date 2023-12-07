@@ -92,7 +92,7 @@
             label10 = new Label();
             ContenedorDias = new FlowLayoutPanel();
             label11 = new Label();
-            btnReportes = new Button();
+         ///   btnReportes = new Button();
             panel1.SuspendLayout();
             panelmanteSubMenu.SuspendLayout();
             paneladminSubMenu.SuspendLayout();
@@ -665,7 +665,7 @@
             // panel2
             // 
             panel2.BackColor = Color.Black;
-            panel2.Controls.Add(btnReportes);
+           // panel2.Controls.Add(btnReportes);
             panel2.Controls.Add(iconPerfil);
             panel2.Controls.Add(lbl_titulo);
             panel2.Dock = DockStyle.Top;
@@ -1164,13 +1164,13 @@
             // 
             // btnReportes
             // 
-            btnReportes.Location = new Point(250, 24);
-            btnReportes.Name = "btnReportes";
-            btnReportes.Size = new Size(112, 34);
-            btnReportes.TabIndex = 50;
-            btnReportes.Text = "Reportes";
-            btnReportes.UseVisualStyleBackColor = true;
-            btnReportes.Click += button1_Click;
+           // btnReportes.Location = new Point(250, 24);
+            //btnReportes.Name = "btnReportes";
+           // btnReportes.Size = new Size(112, 34);
+            //btnReportes.TabIndex = 50;
+            //btnReportes.Text = "Reportes";
+           // btnReportes.UseVisualStyleBackColor = true;
+           // btnReportes.Click += button1_Click;
             // 
             // Dashboard
             // 
