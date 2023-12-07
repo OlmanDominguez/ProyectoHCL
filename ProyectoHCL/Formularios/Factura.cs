@@ -422,105 +422,8 @@ namespace ProyectoHCL.Formularios
                         }
 
                         //Datos de impuestos y totales
-
-                        isv = 0;
-                        it = 0;
-                        subt = 0;
-                        total = 0;
-                        desc = 0;
-                        subtD = 0;
-                        iEx = 0;
-
-                        //Datos de impuestos y totales
-                        //if (sth != 0.00m & StS != 0.00m)
-                        //{
-
-                        //if (!string.IsNullOrEmpty(txtConstEx.Text))
-                        //{
-                        //    decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
-                        //    decimal isvHab = Decimal.Round(sth - valorHab15, 2);
-
-                        //    decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
-                        //    it = Decimal.Round(valorHab15 - valorHab4, 2);
-
-                        //    decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
-                        //    decimal isvServ = Decimal.Round((StS - valorServ), 2);
-
-                        //    isv = 0;
-                        //    subt = Decimal.Round(valorHab15 + valorServ, 2);
-                        //    desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
-                        //    subtD = Decimal.Round(subt - desc, 2);
-                        //    total = Decimal.Round(isv + it + subtD, 2);
-                        //    iEx = Decimal.Round(isvHab + isvServ);
-
-                        //    lblSubt.Text = subt.ToString();
-                        //    lblDesc.Text = desc.ToString();
-                        //    lblSubtD.Text = subtD.ToString();
-                        //    lblSV.Text = isv.ToString();
-                        //    lblTur.Text = it.ToString();
-                        //    lblExonerado.Text = iEx.ToString();
-                        //    lblTotal.Text = total.ToString();
-                        //}
-                        //else
-                        //{
                         ActualizarLabels();
-                        // }
-                        //decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
-                        //decimal isvHab = Decimal.Round(sth - valorHab15, 2);
 
-                        //decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
-                        //it = Decimal.Round(valorHab15 - valorHab4, 2);
-
-                        //decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
-                        //decimal isvServ = Decimal.Round((StS - valorServ), 2);
-
-                        //isv = Decimal.Round(isvHab + isvServ, 2);
-                        //subt = Decimal.Round(valorHab4 + valorServ, 2);
-                        //desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
-                        //subtD = Decimal.Round(subt - desc, 2);
-                        //total = Decimal.Round(isv + it + subtD, 2);
-                        //}
-                        //else if (sth != 0.00m & StS == 0)
-                        //{
-                        //    decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
-                        //    decimal isvHab = Decimal.Round(sth - valorHab15, 2);
-
-                        //    decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
-                        //    it = Decimal.Round(valorHab15 - valorHab4, 2);
-
-                        //    decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
-                        //    decimal isvServ = Decimal.Round((StS - valorServ), 2);
-
-                        //    isv = Decimal.Round(isvHab + isvServ, 2);
-                        //    subt = Decimal.Round(valorHab4 + valorServ, 2);
-                        //    desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
-                        //    subtD = Decimal.Round(subt - desc, 2);
-                        //    total = Decimal.Round(isv + it + subtD, 2);
-                        //}
-                        //else if (sth == 0 & StS != 0)
-                        //{
-                        //    decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
-                        //    decimal isvHab = Decimal.Round(sth - valorHab15, 2);
-
-                        //    decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
-                        //    it = Decimal.Round(valorHab15 - valorHab4, 2);
-
-                        //    decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
-                        //    decimal isvServ = Decimal.Round((StS - valorServ), 2);
-
-                        //    isv = Decimal.Round(isvHab + isvServ, 2);
-                        //    subt = Decimal.Round(valorHab4 + valorServ, 2);
-                        //    desc = Decimal.Round(clases.CDatos.descuento * subt, 2);
-                        //    subtD = Decimal.Round(subt - desc, 2);
-                        //    total = Decimal.Round(isv + it + subtD, 2);
-                        //}
-
-                        //lblSubt.Text = subt.ToString();
-                        //lblDesc.Text = desc.ToString();
-                        //lblSubtD.Text = subtD.ToString();
-                        //lblSV.Text = isv.ToString();
-                        //lblTur.Text = it.ToString();
-                        //lblTotal.Text = total.ToString();
                     }
                 }
                 catch (Exception a)
@@ -621,73 +524,6 @@ namespace ProyectoHCL.Formularios
 
                         //Datos de impuestos y totales
                         ActualizarLabels2();
-                        //if (sth != 0.00m & StS != 0.00m)
-                        //{
-                        //    decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
-                        //    decimal isvHab = Decimal.Round(sth - valorHab15, 2);
-
-                        //    decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
-                        //    it = Decimal.Round(valorHab15 - valorHab4, 2);
-
-                        //    decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
-                        //    decimal isvServ = Decimal.Round((StS - valorServ), 2);
-
-                        //    if (decimal.TryParse(lblDesc.Text, out descuento))
-                        //    {
-                        //        isv = Decimal.Round(isvHab + isvServ, 2);
-                        //        subt = Decimal.Round(valorHab4 + valorServ, 2);
-                        //        desc = descuento;
-                        //        subtD = Decimal.Round(subt - desc, 2);
-                        //        total = Decimal.Round(isv + it + subtD, 2);
-                        //    }
-                        //}
-                        //else if (sth != 0.00m & StS == 0)
-                        //{
-                        //    decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
-                        //    decimal isvHab = Decimal.Round(sth - valorHab15, 2);
-
-                        //    decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
-                        //    it = Decimal.Round(valorHab15 - valorHab4, 2);
-
-                        //    decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
-                        //    decimal isvServ = Decimal.Round((StS - valorServ), 2);
-
-                        //    if (decimal.TryParse(lblDesc.Text, out descuento))
-                        //    {
-                        //        isv = Decimal.Round(isvHab + isvServ, 2);
-                        //        subt = Decimal.Round(valorHab4 + valorServ, 2);
-                        //        desc = descuento;
-                        //        subtD = Decimal.Round(subt - desc, 2);
-                        //        total = Decimal.Round(isv + it + subtD, 2);
-                        //    }
-                        //}
-                        //else if (sth == 0 & StS != 0)
-                        //{
-                        //    decimal valorHab15 = Decimal.Round((sth / 1.15m), 2); // Valor antes del impuesto del 15%
-                        //    decimal isvHab = Decimal.Round(sth - valorHab15, 2);
-
-                        //    decimal valorHab4 = Decimal.Round((valorHab15 / 1.04m), 2); // Valor antes del impuesto del 4%
-                        //    it = Decimal.Round(valorHab15 - valorHab4, 2);
-
-                        //    decimal valorServ = Decimal.Round((StS / 1.15m), 2); // Valor antes del impuesto del 15%
-                        //    decimal isvServ = Decimal.Round((StS - valorServ), 2);
-
-                        //    if (decimal.TryParse(lblDesc.Text, out descuento))
-                        //    {
-                        //        isv = Decimal.Round(isvHab + isvServ, 2);
-                        //        subt = Decimal.Round(valorHab4 + valorServ, 2);
-                        //        desc = descuento;
-                        //        subtD = Decimal.Round(subt - desc, 2);
-                        //        total = Decimal.Round(isv + it + subtD, 2);
-                        //    }
-                        //}
-
-                        //lblSubt.Text = subt.ToString();
-                        ////lblDesc.Text = desc.ToString();
-                        //lblSubtD.Text = subtD.ToString();
-                        //lblSV.Text = isv.ToString();
-                        //lblTur.Text = it.ToString();
-                        //lblTotal.Text = total.ToString();
                     }
                 }
                 catch (Exception a)
@@ -726,6 +562,91 @@ namespace ProyectoHCL.Formularios
                         comandoPrimeraTabla.Parameters.AddWithValue("@IdSolicitudReserva", info.reserva);
 
                         comandoPrimeraTabla.ExecuteNonQuery();
+                    }
+
+                    // Insertar el resto de filas en otra tabla
+                    for (int i = 1; i < dgvDetalleFact.Rows.Count; i++)
+                    {
+                        DataGridViewRow fila = dgvDetalleFact.Rows[i];
+                        string valorCol1 = fila.Cells["Cant."].Value.ToString();
+                        string valorCol2 = fila.Cells["Descripción"].Value.ToString();
+                        string valorCol3 = fila.Cells["P. Unitario"].Value.ToString();
+                        string valorCol4 = fila.Cells["Total"].Value.ToString();
+
+                        string query1 = "INSERT INTO TBL_DETALLEFACTURASERVI (CANTIDAD, DESCRIPCION, PRECIO, TOTAL, ID_SOLICITUDRESERVA) " +
+                                                  "VALUES (@valorCol1, @valorCol2, @valorCol3, @valorCol4, @IdSolicitudReserva)";
+
+                        using (MySqlCommand comandoOtraTabla = new MySqlCommand(query1, conectar))
+                        {
+                            comandoOtraTabla.Parameters.AddWithValue("@valorCol1", valorCol1);
+                            comandoOtraTabla.Parameters.AddWithValue("@valorCol2", valorCol2);
+                            comandoOtraTabla.Parameters.AddWithValue("@valorCol3", valorCol3);
+                            comandoOtraTabla.Parameters.AddWithValue("@valorCol4", valorCol4);
+                            comandoOtraTabla.Parameters.AddWithValue("@IdSolicitudReserva", info.reserva);
+
+                            comandoOtraTabla.ExecuteNonQuery();
+                        }
+                    }
+                    // Cerrar la conexión
+                    conectar.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void ActualizarDatos()
+        {
+            try
+            {
+                MySqlConnection conectar = new MySqlConnection();
+                conectar = BaseDatosHCL.ObtenerConexion();
+
+                using (conectar)
+                {
+                    // Insertar la primera fila en una tabla
+                    DataGridViewRow primeraFila = dgvDetalleFact.Rows[0];
+                    string valorColumna1 = primeraFila.Cells["Cant."].Value.ToString();
+                    string valorColumna2 = primeraFila.Cells["Descripción"].Value.ToString();
+                    string valorColumna3 = primeraFila.Cells["P. Unitario"].Value.ToString();
+                    string valorColumna4 = primeraFila.Cells["Total"].Value.ToString();
+
+                    // Verificar si ya existe un registro con la ID_SOLICITUDRESERVA proporcionada
+                    string selectQuery = "SELECT COUNT(*) FROM TBL_DETALLEFACTURA WHERE ID_SOLICITUDRESERVA = @IdSolicitudReserva";
+
+                    using (MySqlCommand selectComando = new MySqlCommand(selectQuery, conectar))
+                    {
+                        selectComando.Parameters.AddWithValue("@IdSolicitudReserva", info.reserva);
+
+                        int count = Convert.ToInt32(selectComando.ExecuteScalar());
+
+                        if (count > 0)
+                        {
+                            // Ya existe un registro, entonces actualiza
+                            string updateQuery = "UPDATE TBL_DETALLEFACTURA SET DIAS = @valorColumna1, DESCRIPCION = @valorColumna2, " +
+                                                 "PRECIO = @valorColumna3, TOTAL = @valorColumna4 " +
+                                                 "WHERE ID_SOLICITUDRESERVA = @IdSolicitudReserva";
+
+                            using (MySqlCommand updateComando = new MySqlCommand(updateQuery, conectar))
+                            {
+                                updateComando.Parameters.AddWithValue("@valorColumna1", valorColumna1);
+                                updateComando.Parameters.AddWithValue("@valorColumna2", valorColumna2);
+                                updateComando.Parameters.AddWithValue("@valorColumna3", valorColumna3);
+                                updateComando.Parameters.AddWithValue("@valorColumna4", valorColumna4);
+                                updateComando.Parameters.AddWithValue("@IdSolicitudReserva", info.reserva);
+
+                                updateComando.ExecuteNonQuery();
+                            }
+                        }
+                    }
+
+                    string deleteQuery = "DELETE FROM TBL_DETALLEFACTURASERVI WHERE ID_SOLICITUDRESERVA = @IdSolicitudReserva";
+                    using (MySqlCommand deleteComando = new MySqlCommand(deleteQuery, conectar))
+                    {
+                        deleteComando.Parameters.AddWithValue("@IdSolicitudReserva", info.reserva);
+                        deleteComando.ExecuteNonQuery();
                     }
 
                     // Insertar el resto de filas en otra tabla
@@ -869,6 +790,21 @@ namespace ProyectoHCL.Formularios
                 MsgB Mbox = new MsgB("advertencia", "Seleccione un método de pago");
                 DialogResult DR = Mbox.ShowDialog();
             }
+            if (!string.IsNullOrEmpty(txtConstEx.Text) && string.IsNullOrEmpty(txtOC.Text))
+            {
+                MsgB m = new MsgB("advertencia", "Por favor llene todos los campos requeridos"); //validar campos vacíos
+                DialogResult dR = m.ShowDialog();
+            }
+            if (!string.IsNullOrEmpty(txtConstEx.Text) && string.IsNullOrEmpty(txtSar.Text))
+            {
+                MsgB m = new MsgB("advertencia", "Por favor llene todos los campos requeridos"); //validar campos vacíos
+                DialogResult dR = m.ShowDialog();
+            }
+            if (string.IsNullOrEmpty(txtConstEx.Text) && !string.IsNullOrEmpty(txtSar.Text) || !string.IsNullOrEmpty(txtOC.Text))
+            {
+                MsgB m = new MsgB("advertencia", "Por favor llene todos los campos requeridos"); //validar campos vacíos
+                DialogResult dR = m.ShowDialog();
+            }
             else if (info.est == 2)
             {
                 try
@@ -878,10 +814,6 @@ namespace ProyectoHCL.Formularios
                         //Consulta
                         MySqlCommand comando = new MySqlCommand();
                         comando.Connection = BaseDatosHCL.ObtenerConexion();
-
-                        //string txtOCValue = string.IsNullOrEmpty(txtOC.Text) ? "---" : txtOC.Text;
-                        //string txtConstExValue = string.IsNullOrEmpty(txtConstEx.Text) ? "---" : txtConstEx.Text;
-                        //string txtSarValue = string.IsNullOrEmpty(txtSar.Text) ? "---" : txtSar.Text;
 
                         comando.CommandText = (
                             "INSERT INTO TBL_FACTURA(ID_SOLICITUDRESERVA, ID_TIPOPAGO, " +
@@ -913,7 +845,14 @@ namespace ProyectoHCL.Formularios
                         comando.ExecuteNonQuery();
                         comando.Connection.Close();
 
-                        InsertarDatos();
+                        if (info.estFact == "FACTURADA")
+                        {
+                            ActualizarDatos();
+                        }
+                        else
+                        {
+                            InsertarDatos();
+                        }
 
                         MsgB mbox = new MsgB("informacion", "Registro Agregado");
                         DialogResult dR = mbox.ShowDialog();
@@ -939,7 +878,7 @@ namespace ProyectoHCL.Formularios
         private void crearPDF()
         {
             SaveFileDialog guardar = new SaveFileDialog();
-            guardar.FileName = DateTime.Now.ToString("ddMMyyyy") + ".pdf";
+            guardar.FileName = "Factura " + DateTime.Now.ToString("dd_MM_yyyy") + ".pdf";
 
             Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
 
@@ -1046,40 +985,6 @@ namespace ProyectoHCL.Formularios
             previewForm.ShowDialog();
         }
 
-        private void ImprimirPDF(string filePath)
-        {
-            // Crear un objeto PrintDocument para imprimir el PDF
-            PrintDocument printDocument = new PrintDocument();
-            printDocument.DocumentName = "Documento PDF";
-
-            // Manejador de evento para la impresión
-            printDocument.PrintPage += (sender, e) =>
-            {
-                // Crear un objeto WebBrowser para imprimir el PDF
-                WebBrowser webBrowser = new WebBrowser();
-                webBrowser.Navigate(filePath);
-
-                // Esperar a que la página se cargue completamente
-                webBrowser.DocumentCompleted += (s, ev) =>
-                {
-                    // Imprimir el contenido del WebBrowser
-                    webBrowser.Print();
-
-                    // Indicar que no hay más páginas para imprimir
-                    e.HasMorePages = false;
-                };
-            };
-
-            // Mostrar el cuadro de diálogo de impresión
-            PrintDialog printDialog = new PrintDialog();
-            printDialog.Document = printDocument;
-
-            if (printDialog.ShowDialog() == DialogResult.OK)
-            {
-                // Imprimir el documento
-                printDocument.Print();
-            }
-        }
         private void cmbPago_Leave(object sender, EventArgs e)
         {
             if (ValidarTxt.cmbVacio(cmbPago))
@@ -1387,6 +1292,30 @@ namespace ProyectoHCL.Formularios
             if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void txtSar_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtConstEx.Text) && ValidarTxt.txtVacio(txtSar))
+            {
+                errorT.SetError(txtSar, "El campo no puede quedar vacío");
+            }
+            else
+            {
+                errorT.Clear();
+            }
+        }
+
+        private void txtOC_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtConstEx.Text) && ValidarTxt.txtVacio(txtOC))
+            {
+                errorT.SetError(txtOC, "El campo no puede quedar vacío");
+            }
+            else
+            {
+                errorT.Clear();
             }
         }
     }
