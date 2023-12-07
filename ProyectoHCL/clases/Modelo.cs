@@ -626,7 +626,7 @@ namespace ProyectoHCL.clases
 
                 using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_ROL WHERE ROL = @NuevoRol", conectar))
                 {
-                    cmd.Parameters.AddWithValue("@NuevoNombre", nuevoRol);
+                    cmd.Parameters.AddWithValue("@NuevoRol", nuevoRol);
 
 
                     return false;
