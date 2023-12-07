@@ -207,6 +207,7 @@ namespace ProyectoHCL.Formularios
             public static string reserva;
             public static int est = 0;
             public static string estado;
+            public static string estFact;
         }
 
         private void dgvFacturas_CellClick_1(object sender, DataGridViewCellEventArgs e)
@@ -232,9 +233,9 @@ namespace ProyectoHCL.Formularios
                     form.ShowDialog();
                     CargarDG();
                 }
-                catch (Exception)    /* detectar errores en ejecucion */
+                catch (Exception ex)    /* detectar errores en ejecucion */
                 {
-                    MsgB Mbox = new MsgB("error", "Se produjo un error");
+                    MsgB Mbox = new MsgB("error", "Se produjo un error" + ex.Message);
                     DialogResult DR = Mbox.ShowDialog();
                 }
 
@@ -424,7 +425,7 @@ namespace ProyectoHCL.Formularios
             SaveFileDialog sf = new SaveFileDialog();
 
             sf.DefaultExt = "*.xlsx";
-            sf.FileName = "ExcelFacturas";
+            sf.FileName = "FacturasRegistradas";
             sf.Filter = " Libro de Excel (*.xlsx) | *.xlsx";
 
             if (sf.ShowDialog() == DialogResult.OK)

@@ -141,7 +141,6 @@
             // 
             // btnNuevo
             // 
-            btnNuevo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnNuevo.BackColor = Color.RoyalBlue;
             btnNuevo.BackgroundImageLayout = ImageLayout.Stretch;
             btnNuevo.FlatAppearance.BorderSize = 0;
@@ -150,7 +149,7 @@
             btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnNuevo.ForeColor = SystemColors.ButtonFace;
             btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.Location = new Point(657, 14);
+            btnNuevo.Location = new Point(340, 17);
             btnNuevo.Name = "btnNuevo";
             btnNuevo.Size = new Size(50, 35);
             btnNuevo.TabIndex = 36;

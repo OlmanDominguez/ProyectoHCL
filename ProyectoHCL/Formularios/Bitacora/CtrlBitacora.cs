@@ -26,12 +26,56 @@ namespace ProyectoHCL.Formularios
         MsgB msgB = new MsgB();
         CDatos cDatos = new CDatos();
         int pagInicio = 1, indice = 0, numFilas = 10, pagFinal, cmbIndice = 0;
+        private bool cargaForm = true;
 
         public CtrlBitacora()
         {
             InitializeComponent();
+
+            chkActiva.CheckedChanged -= chkActiva_CheckedChanged;
+            chkInactiva.CheckedChanged -= chkInactiva_CheckedChanged;
+
+            chkActiva.CheckedChanged += chkActiva_CheckedChanged;
+            chkInactiva.CheckedChanged += chkInactiva_CheckedChanged;
+
             pagFinal = numFilas;
             CargarDG();
+        }
+
+        private void chkEstBitacora()
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            string consulta = "SELECT ESTADO FROM TBL_ESTADOBITACORA ORDER BY ID_ESTADOBITACORA DESC LIMIT 1";
+
+            using (conectar)
+            {
+                using (MySqlCommand comando = new MySqlCommand(consulta, conectar))
+                {
+                    try
+                    {
+                        string estadoBitacora = (string)comando.ExecuteScalar();
+
+                        // Actualizar el estado del CheckBox basado en el resultado de la consulta
+                        if (estadoBitacora == "ACTIVO")
+                        {
+                            chkActiva.Checked = true;
+                            chkInactiva.Checked = false;
+                        }
+                        else
+                        {
+                            chkActiva.Checked = false;
+                            chkInactiva.Checked = true;
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MsgB Mbox = new MsgB("error", "Error" + ex.Message);
+                        DialogResult DR = Mbox.ShowDialog();
+                    }
+                }
+            }
         }
 
         private void CargarDG()
@@ -350,6 +394,12 @@ namespace ProyectoHCL.Formularios
             dgvBitacora.Columns.Add(btnEliminar);
 
             Permisos();
+
+            cargaForm = true;
+
+            chkEstBitacora();
+
+            cargaForm = false;
         }
 
         private void dgvBitacora_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -371,6 +421,70 @@ namespace ProyectoHCL.Formularios
                 dgvBitacora.Columns[e.ColumnIndex].Width = imagen.Width + 58;
 
                 e.Value = imagen;
+            }
+        }
+
+        public static bool ActualizarEstadoBitacora(string nuevoEstado)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            string query = $"INSERT INTO TBL_ESTADOBITACORA (ESTADO) VALUES ('{nuevoEstado}')";
+
+            using (conectar)
+            {
+                using (MySqlCommand comando = new MySqlCommand(query, conectar))
+                {
+                    try
+                    {
+                        comando.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        MsgB Mbox = new MsgB("error", "Error" + ex.Message);
+                        DialogResult DR = Mbox.ShowDialog();
+                        return false;
+                    }
+                }
+            }
+        }
+
+        private void chkActiva_CheckedChanged(object sender, EventArgs e)
+        {
+            chkInactiva.Checked = false;
+
+            if (!cargaForm && chkActiva.Checked)
+            {
+                // Actualizar el estado en la base de datos
+                if (ActualizarEstadoBitacora("ACTIVO"))
+                {
+                    MsgB Mbox = new MsgB("informacion", "Bitácora habilitada");
+                    DialogResult DR = Mbox.ShowDialog();
+                }
+                else
+                {
+                    MsgB Mbox = new MsgB("error", "Error al habilitar Bitácora");
+                    DialogResult DR = Mbox.ShowDialog();
+                }
+            }
+        }
+
+        private void chkInactiva_CheckedChanged(object sender, EventArgs e)
+        {
+            chkActiva.Checked = false;
+
+            if (!cargaForm && chkInactiva.Checked)
+            {
+                if (ActualizarEstadoBitacora("INACTIVO"))
+                {
+                    MsgB Mbox = new MsgB("informacion", "Bitácora deshabilitada");
+                    DialogResult DR = Mbox.ShowDialog();
+                }
+                else
+                {
+                    MsgB Mbox = new MsgB("error", "Error al deshabilitar Bitácora");
+                    DialogResult DR = Mbox.ShowDialog();
+                }
             }
         }
     }

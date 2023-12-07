@@ -71,8 +71,8 @@ namespace ProyectoHCL.Formularios
         public R_R_RolesPermisos()
         {
             InitializeComponent();
-            cargarRoles();
-            dgvRolPermiso.CellValueChanged += dgvRolPermiso_CellValueChanged;
+            //cargarRoles();
+            //dgvRolPermiso.CellValueChanged += dgvRolPermiso_CellValueChanged;
         }
 
         RolUsuario rolUs = new RolUsuario();
@@ -118,35 +118,34 @@ namespace ProyectoHCL.Formularios
 
         private void cargarRoles() //Llenar el combobox con los roles almacenados en la tabla TBL_ROL
         {
-            MySqlConnection conn;
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
             MySqlCommand cmd;
 
             cmbRol.DataSource = null;
             cmbRol.Items.Clear();
-            string sql = "SELECT ID_ROL, ROL FROM TBL_ROL;";
 
-            conn = new MySqlConnection("server=containers-us-west-29.railway.app;port=6844; database = railway; Uid = root; pwd = LpxjPRi2Ckkz7FiKNUHn;");
-            conn.Open();
-
-            try
+            using (conectar)
             {
-                cmd = new MySqlCommand(sql, conn);
-                MySqlDataAdapter data = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                data.Fill(dt);
-
-                cmbRol.ValueMember = "ID_ROL";
-                cmbRol.DisplayMember = "ROL";
-                cmbRol.DataSource = dt;
-
+                string sql = "SELECT ID_ROL, ROL FROM TBL_ROL;";
+                try
+                {
+                    cmd = new MySqlCommand(sql, conectar);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string nombreRol = reader["ROL"].ToString();
+                            cmbRol.Items.Add(nombreRol);
+                        }
+                    }
+                }
+                catch (MySqlException e)
+                {
+                    MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
+                    DialogResult dR = m.ShowDialog();
+                }
+                finally { conectar.Close(); }
             }
-            catch (MySqlException e)
-            {
-                MsgB m = new MsgB("Error", "Se produjo un error " + e.Message);
-                DialogResult dR = m.ShowDialog();
-            }
-            finally { conn.Close(); }
-
         }
 
         private void CargarDG() //Agregar las columnas checkbox para marcar los permisos de ver, crear, editar o eliminar
@@ -249,14 +248,14 @@ namespace ProyectoHCL.Formularios
         private void RolesPermisos_Load(object sender, EventArgs e)
         {
             ListarObjetos();
-            cmbRol.SelectedIndex = -1;
             CargarDG();
+            cargarRoles();
+            cmbRol.SelectedIndex = -1;
             Permisos();
         }
 
         private void GuardarPermisoRol() //función para guardar los permisos
         {
-
             foreach (DataGridViewRow row in dgvRolPermiso.Rows)
             {
                 permiso.IdRol = cmbRol.Text;
@@ -412,62 +411,50 @@ namespace ProyectoHCL.Formularios
 
         private void ActualizarPermisoRol() //función para actualizar permisos 
         {
-            foreach (DataGridViewRow row in dgvRolPermiso.Rows) //Recorrer el datagridview para obtener los valores de las casillas y asignar los permisos
+            foreach (DataGridViewRow row in dgvRolPermiso.Rows)
             {
                 permiso.IdRol = cmbRol.Text;
-                permiso.IdObjeto = int.Parse(row.Cells["ID"].Value.ToString());
+                permiso.IdObjeto = Convert.ToInt32(row.Cells["ID"].Value);
 
-                if (Convert.ToBoolean(row.Cells["VER"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
-                    permiso.Permitido = true;
-                    cDatos.ActualizarPermiso(permiso);
-                }
-                else if (!Convert.ToBoolean(row.Cells["VER"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
-                    permiso.Permitido = false;
-                    cDatos.ActualizarPermiso(permiso);
-                }
+                //int idPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag);
 
-                if (Convert.ToBoolean(row.Cells["CREAR"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
-                    permiso.Permitido = true;
-                    cDatos.ActualizarPermiso(permiso);
-                }
-                else if (!Convert.ToBoolean(row.Cells["CREAR"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag);
-                    permiso.Permitido = false;
-                    cDatos.ActualizarPermiso(permiso);
-                }
+                bool ver = Convert.ToBoolean(row.Cells["VER"].Value);
+                bool crear = Convert.ToBoolean(row.Cells["CREAR"].Value);
+                bool editar = Convert.ToBoolean(row.Cells["EDITAR"].Value);
+                bool eliminar = Convert.ToBoolean(row.Cells["ELIMINAR"].Value);
 
-                if (Convert.ToBoolean(row.Cells["EDITAR"].Value))
+                // Llamar a la función para guardar permisos 
+                cDatos.ActualizarPermiso(new PermisoRol
                 {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
-                    permiso.Permitido = true;
-                    cDatos.ActualizarPermiso(permiso);
-                }
-                else if (!Convert.ToBoolean(row.Cells["EDITAR"].Value))
-                {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag);
-                    permiso.Permitido = false;
-                    cDatos.ActualizarPermiso(permiso);
-                }
+                    IdRol = permiso.IdRol,
+                    IdObjeto = permiso.IdObjeto,
+                    IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["VER"].Tag),
+                    Permitido = ver
+                });
 
-                if (Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                cDatos.ActualizarPermiso(new PermisoRol
                 {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
-                    permiso.Permitido = true;
-                    cDatos.ActualizarPermiso(permiso);
-                }
-                else if (!Convert.ToBoolean(row.Cells["ELIMINAR"].Value))
+                    IdRol = permiso.IdRol,
+                    IdObjeto = permiso.IdObjeto,
+                    IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["CREAR"].Tag),
+                    Permitido = crear
+                });
+
+                cDatos.ActualizarPermiso(new PermisoRol
                 {
-                    permiso.IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag);
-                    permiso.Permitido = false;
-                    cDatos.ActualizarPermiso(permiso);
-                }
+                    IdRol = permiso.IdRol,
+                    IdObjeto = permiso.IdObjeto,
+                    IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["EDITAR"].Tag),
+                    Permitido = editar
+                });
+
+                cDatos.ActualizarPermiso(new PermisoRol
+                {
+                    IdRol = permiso.IdRol,
+                    IdObjeto = permiso.IdObjeto,
+                    IdPermiso = Convert.ToInt32(dgvRolPermiso.Columns["ELIMINAR"].Tag),
+                    Permitido = eliminar
+                });
             }
         }
 
@@ -519,19 +506,19 @@ namespace ProyectoHCL.Formularios
             }
         }
 
-        private void dgvRolPermiso_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 3 || e.ColumnIndex == 4 || e.ColumnIndex == 5 && e.RowIndex >= 0)
-            {
-                // Marcar la columna 3 si la columna 4, 5 o 6 también está marcada
-                bool check = (bool)dgvRolPermiso.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+        //private void dgvRolPermiso_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.ColumnIndex == 3 || e.ColumnIndex == 4 || e.ColumnIndex == 5 && e.RowIndex >= 0)
+        //    {
+        //        // Marcar la columna 3 si la columna 4, 5 o 6 también está marcada
+        //        bool check = (bool)dgvRolPermiso.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
 
-                if (check)
-                {
-                    dgvRolPermiso.Rows[e.RowIndex].Cells[2].Value = true;
-                }
-            }
-        }
+        //        if (check)
+        //        {
+        //            dgvRolPermiso.Rows[e.RowIndex].Cells[2].Value = true;
+        //        }
+        //    }
+        //}
 
         private void rbtnHabilitar_CheckedChanged(object sender, EventArgs e)
         {

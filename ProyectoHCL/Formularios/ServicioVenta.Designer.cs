@@ -267,6 +267,7 @@
             txt_cantidad.Size = new Size(184, 25);
             txt_cantidad.TabIndex = 87;
             txt_cantidad.TextAlign = HorizontalAlignment.Right;
+            txt_cantidad.KeyPress += txt_cantidad_KeyPress;
             // 
             // btnAgregar
             // 

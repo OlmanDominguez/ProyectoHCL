@@ -59,6 +59,7 @@
             iconPerfil = new FontAwesome.Sharp.IconButton();
             lbl_titulo = new Label();
             panelChildForm = new Panel();
+            label12 = new Label();
             panel4 = new Panel();
             label3 = new Label();
             lbl_reserva = new Label();
@@ -718,6 +719,7 @@
             panelChildForm.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panelChildForm.AutoSize = true;
             panelChildForm.BackColor = Color.Transparent;
+            panelChildForm.Controls.Add(label12);
             panelChildForm.Controls.Add(panel4);
             panelChildForm.Controls.Add(panel3);
             panelChildForm.Controls.Add(panel46);
@@ -730,6 +732,17 @@
             panelChildForm.Size = new Size(1524, 1037);
             panelChildForm.TabIndex = 25;
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label12.ForeColor = Color.White;
+            label12.Location = new Point(485, 591);
+            label12.Name = "label12";
+            label12.Size = new Size(214, 16);
+            label12.TabIndex = 48;
+            label12.Text = "© Derechos Reservados UNAH 2023";
+            // 
             // panel4
             // 
             panel4.BackColor = Color.FromArgb(20, 100, 150);
@@ -738,8 +751,7 @@
             panel4.Controls.Add(lbl_disp);
             panel4.Controls.Add(lbl_activas);
             panel4.Controls.Add(lbl_inactivas);
-            panel4.Location = new Point(1156, 138);
-            panel4.Margin = new Padding(4, 5, 4, 5);
+            panel4.Location = new Point(801, 66);
             panel4.Name = "panel4";
             panel4.Size = new Size(309, 192);
             panel4.TabIndex = 46;
@@ -824,8 +836,7 @@
             panel3.Controls.Add(lbl_confirmadas);
             panel3.Controls.Add(label13);
             panel3.Controls.Add(lbl_facturadas);
-            panel3.Location = new Point(1156, 403);
-            panel3.Margin = new Padding(4, 5, 4, 5);
+            panel3.Location = new Point(801, 225);
             panel3.Name = "panel3";
             panel3.Size = new Size(309, 335);
             panel3.TabIndex = 45;
@@ -962,8 +973,7 @@
             panel46.Controls.Add(label1);
             panel46.Controls.Add(btnAnt);
             panel46.Controls.Add(cmbHabitacion);
-            panel46.Location = new Point(91, 138);
-            panel46.Margin = new Padding(4, 5, 4, 5);
+            panel46.Location = new Point(56, 66);
             panel46.Name = "panel46";
             panel46.Size = new Size(1021, 63);
             panel46.TabIndex = 44;
@@ -975,7 +985,7 @@
             LBLMES.Location = new Point(19, 17);
             LBLMES.Margin = new Padding(4, 0, 4, 0);
             LBLMES.Name = "LBLMES";
-            LBLMES.Size = new Size(474, 35);
+            LBLMES.Size = new Size(305, 21);
             LBLMES.TabIndex = 7;
             LBLMES.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -1001,8 +1011,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI Symbol", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(593, 17);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(362, 10);
             label1.Name = "label1";
             label1.Size = new Size(136, 31);
             label1.TabIndex = 46;
@@ -1027,10 +1036,9 @@
             // 
             cmbHabitacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbHabitacion.FormattingEnabled = true;
-            cmbHabitacion.Location = new Point(729, 13);
-            cmbHabitacion.Margin = new Padding(4, 5, 4, 5);
+            cmbHabitacion.Location = new Point(457, 8);
             cmbHabitacion.Name = "cmbHabitacion";
-            cmbHabitacion.Size = new Size(144, 33);
+            cmbHabitacion.Size = new Size(155, 23);
             cmbHabitacion.TabIndex = 45;
             cmbHabitacion.SelectedIndexChanged += cmbHabitacion_SelectedIndexChanged;
             // 
@@ -1044,8 +1052,7 @@
             panel38.Controls.Add(label2);
             panel38.Controls.Add(label9);
             panel38.Controls.Add(label10);
-            panel38.Location = new Point(91, 203);
-            panel38.Margin = new Padding(4, 5, 4, 5);
+            panel38.Location = new Point(56, 105);
             panel38.Name = "panel38";
             panel38.Size = new Size(1021, 58);
             panel38.TabIndex = 43;
@@ -1137,8 +1144,7 @@
             // ContenedorDias
             // 
             ContenedorDias.BackColor = Color.LightGray;
-            ContenedorDias.Location = new Point(91, 272);
-            ContenedorDias.Margin = new Padding(4, 5, 4, 5);
+            ContenedorDias.Location = new Point(56, 146);
             ContenedorDias.Name = "ContenedorDias";
             ContenedorDias.Size = new Size(1021, 705);
             ContenedorDias.TabIndex = 42;
@@ -1150,8 +1156,7 @@
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             label11.ForeColor = Color.White;
-            label11.Location = new Point(91, 58);
-            label11.Margin = new Padding(4, 0, 4, 0);
+            label11.Location = new Point(56, 18);
             label11.Name = "label11";
             label11.Size = new Size(470, 48);
             label11.TabIndex = 47;
@@ -1271,6 +1276,6 @@
         private Panel panel3;
         private FontAwesome.Sharp.IconButton Ibtn_calendario;
         private FontAwesome.Sharp.IconButton iconPerfil;
-        private Button btnReportes;
+        private Label label12;
     }
 }

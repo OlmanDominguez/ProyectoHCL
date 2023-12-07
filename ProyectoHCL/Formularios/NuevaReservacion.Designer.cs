@@ -38,7 +38,6 @@
             label5 = new Label();
             label6 = new Label();
             panel2 = new Panel();
-            pictureBox5 = new PictureBox();
             lbl_titulo = new Label();
             btnCerrar = new Button();
             btnMin = new Button();
@@ -51,18 +50,17 @@
             lbl_cliente = new Label();
             button1 = new Button();
             lbl_1c = new Label();
+            lbl_usuario = new Label();
             btn_guardar2 = new Button();
             dt_fecha_coti = new DateTimePicker();
             label14 = new Label();
-            txt_codigo = new TextBox();
             label10 = new Label();
-            txt_id_solicitud = new TextBox();
+            txt_codigo = new TextBox();
             groupBox1 = new GroupBox();
             txt_motivo = new TextBox();
             label1 = new Label();
             lbl_noches = new Label();
             label2 = new Label();
-            nueva_habitacion = new Button();
             cb_estado = new ComboBox();
             label11 = new Label();
             btnGuardar = new Button();
@@ -85,9 +83,9 @@
             txt_metodo_reserva = new TextBox();
             txt_estado = new TextBox();
             txt_capacidad = new TextBox();
+            txt_id_solicitud = new TextBox();
             ((System.ComponentModel.ISupportInitialize)btnExit).BeginInit();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -122,11 +120,12 @@
             label3.Name = "label3";
             label3.Size = new Size(150, 17);
             label3.TabIndex = 43;
-            label3.Text = "Metodo de reservacion";
+            label3.Text = "Metodo de reservación";
             label3.Click += label3_Click;
             // 
             // cb_metodo
             // 
+            cb_metodo.DropDownStyle = ComboBoxStyle.DropDownList;
             cb_metodo.FormattingEnabled = true;
             cb_metodo.Items.AddRange(new object[] { "Booking", "Whatsapp", "Airbnb", "Presencial o llamada celular" });
             cb_metodo.Location = new Point(653, 28);
@@ -144,7 +143,7 @@
             label4.Name = "label4";
             label4.Size = new Size(146, 17);
             label4.TabIndex = 45;
-            label4.Text = "Numero de huespedes";
+            label4.Text = "Número de huéspedes";
             // 
             // txt_huespedes
             // 
@@ -180,7 +179,6 @@
             // panel2
             // 
             panel2.BackColor = Color.SteelBlue;
-            panel2.Controls.Add(pictureBox5);
             panel2.Controls.Add(lbl_titulo);
             panel2.Controls.Add(btnCerrar);
             panel2.Controls.Add(btnMin);
@@ -189,17 +187,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(949, 73);
             panel2.TabIndex = 51;
-            // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(12, 12);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(50, 48);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 34;
-            pictureBox5.TabStop = false;
             // 
             // lbl_titulo
             // 
@@ -212,7 +199,7 @@
             lbl_titulo.Name = "lbl_titulo";
             lbl_titulo.Size = new Size(202, 30);
             lbl_titulo.TabIndex = 19;
-            lbl_titulo.Text = "Nueva Reservacion";
+            lbl_titulo.Text = "Nueva Reservación";
             // 
             // btnCerrar
             // 
@@ -242,18 +229,20 @@
             btnMin.Size = new Size(19, 20);
             btnMin.TabIndex = 32;
             btnMin.UseVisualStyleBackColor = false;
+            btnMin.Click += btnMin_Click;
             // 
             // panel3
             // 
             panel3.BackColor = Color.Gainsboro;
             panel3.Controls.Add(groupBox2);
+            panel3.Controls.Add(lbl_usuario);
             panel3.Controls.Add(btn_guardar2);
             panel3.Controls.Add(dt_fecha_coti);
             panel3.Controls.Add(label14);
-            panel3.Controls.Add(txt_codigo);
             panel3.Controls.Add(label10);
-            panel3.Controls.Add(txt_id_solicitud);
+            panel3.Controls.Add(txt_codigo);
             panel3.Controls.Add(groupBox1);
+            panel3.Controls.Add(txt_id_solicitud);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
@@ -366,6 +355,17 @@
             lbl_1c.Text = "Cliente :";
             lbl_1c.Visible = false;
             // 
+            // lbl_usuario
+            // 
+            lbl_usuario.AutoSize = true;
+            lbl_usuario.BackColor = Color.Gainsboro;
+            lbl_usuario.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lbl_usuario.Location = new Point(128, 86);
+            lbl_usuario.Name = "lbl_usuario";
+            lbl_usuario.Size = new Size(13, 17);
+            lbl_usuario.TabIndex = 93;
+            lbl_usuario.Text = "-";
+            // 
             // btn_guardar2
             // 
             btn_guardar2.Anchor = AnchorStyles.Top;
@@ -405,33 +405,25 @@
             label14.TabIndex = 70;
             label14.Text = "Fecha ";
             // 
-            // txt_codigo
-            // 
-            txt_codigo.Location = new Point(176, 86);
-            txt_codigo.Name = "txt_codigo";
-            txt_codigo.ReadOnly = true;
-            txt_codigo.Size = new Size(47, 23);
-            txt_codigo.TabIndex = 57;
-            txt_codigo.TextChanged += txt_codigo_TextChanged;
-            // 
             // label10
             // 
             label10.AutoSize = true;
             label10.BackColor = Color.Gainsboro;
             label10.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.Location = new Point(53, 92);
+            label10.Location = new Point(60, 86);
             label10.Name = "label10";
-            label10.Size = new Size(117, 17);
+            label10.Size = new Size(63, 17);
             label10.TabIndex = 56;
-            label10.Text = "Codigo empleado";
+            label10.Text = "Usuario: ";
             // 
-            // txt_id_solicitud
+            // txt_codigo
             // 
-            txt_id_solicitud.Location = new Point(176, 86);
-            txt_id_solicitud.Name = "txt_id_solicitud";
-            txt_id_solicitud.ReadOnly = true;
-            txt_id_solicitud.Size = new Size(47, 23);
-            txt_id_solicitud.TabIndex = 78;
+            txt_codigo.Location = new Point(709, 88);
+            txt_codigo.Name = "txt_codigo";
+            txt_codigo.ReadOnly = true;
+            txt_codigo.Size = new Size(47, 23);
+            txt_codigo.TabIndex = 57;
+            txt_codigo.TextChanged += txt_codigo_TextChanged;
             // 
             // groupBox1
             // 
@@ -440,7 +432,6 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(lbl_noches);
             groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(nueva_habitacion);
             groupBox1.Controls.Add(cb_estado);
             groupBox1.Controls.Add(label11);
             groupBox1.Controls.Add(txt_huespedes);
@@ -518,27 +509,11 @@
             label2.Name = "label2";
             label2.Size = new Size(124, 17);
             label2.TabIndex = 90;
-            label2.Text = "Numero de noches";
-            // 
-            // nueva_habitacion
-            // 
-            nueva_habitacion.Anchor = AnchorStyles.Top;
-            nueva_habitacion.BackColor = Color.SteelBlue;
-            nueva_habitacion.FlatAppearance.BorderSize = 0;
-            nueva_habitacion.FlatAppearance.MouseOverBackColor = Color.SteelBlue;
-            nueva_habitacion.FlatStyle = FlatStyle.Flat;
-            nueva_habitacion.Font = new Font("Century Gothic", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            nueva_habitacion.ForeColor = Color.White;
-            nueva_habitacion.Location = new Point(601, 282);
-            nueva_habitacion.Name = "nueva_habitacion";
-            nueva_habitacion.Size = new Size(65, 23);
-            nueva_habitacion.TabIndex = 89;
-            nueva_habitacion.Text = "Agregar";
-            nueva_habitacion.UseVisualStyleBackColor = false;
-            nueva_habitacion.Click += button2_Click;
+            label2.Text = "Número de noches";
             // 
             // cb_estado
             // 
+            cb_estado.DropDownStyle = ComboBoxStyle.DropDownList;
             cb_estado.FormattingEnabled = true;
             cb_estado.Items.AddRange(new object[] { "RESERVADO", "CONFIRMADO", "ANULADO", "FACTURADA" });
             cb_estado.Location = new Point(652, 77);
@@ -602,10 +577,11 @@
             label13.Name = "label13";
             label13.Size = new Size(158, 17);
             label13.TabIndex = 62;
-            label13.Text = "Estado de la reservacion";
+            label13.Text = "Estado de la reservación";
             // 
             // txt_monto
             // 
+            txt_monto.Enabled = false;
             txt_monto.Location = new Point(161, 30);
             txt_monto.Name = "txt_monto";
             txt_monto.Size = new Size(121, 25);
@@ -678,10 +654,11 @@
             label8.Name = "label8";
             label8.Size = new Size(124, 17);
             label8.TabIndex = 49;
-            label8.Text = "Tipo de habitacion";
+            label8.Text = "Tipo de habitación";
             // 
             // cb_tipo
             // 
+            cb_tipo.DropDownStyle = ComboBoxStyle.DropDownList;
             cb_tipo.FormattingEnabled = true;
             cb_tipo.Location = new Point(161, 222);
             cb_tipo.Name = "cb_tipo";
@@ -721,10 +698,11 @@
             label12.Name = "label12";
             label12.Size = new Size(146, 17);
             label12.TabIndex = 60;
-            label12.Text = "Numero de habitacion";
+            label12.Text = "Número de habitación";
             // 
             // cb_numero
             // 
+            cb_numero.DropDownStyle = ComboBoxStyle.DropDownList;
             cb_numero.FormattingEnabled = true;
             cb_numero.Location = new Point(161, 268);
             cb_numero.Name = "cb_numero";
@@ -741,7 +719,7 @@
             label9.Name = "label9";
             label9.Size = new Size(61, 17);
             label9.TabIndex = 54;
-            label9.Text = "Vehiculo";
+            label9.Text = "Vehículo";
             // 
             // txt_metodo_reserva
             // 
@@ -766,6 +744,14 @@
             txt_capacidad.Size = new Size(47, 25);
             txt_capacidad.TabIndex = 92;
             // 
+            // txt_id_solicitud
+            // 
+            txt_id_solicitud.Location = new Point(766, 88);
+            txt_id_solicitud.Name = "txt_id_solicitud";
+            txt_id_solicitud.ReadOnly = true;
+            txt_id_solicitud.Size = new Size(47, 23);
+            txt_id_solicitud.TabIndex = 78;
+            // 
             // NuevaReservacion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -782,7 +768,6 @@
             ((System.ComponentModel.ISupportInitialize)btnExit).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -800,7 +785,6 @@
         private Label label5;
         private Label label6;
         private Panel panel2;
-        private PictureBox pictureBox5;
         private Button btnCerrar;
         private Button btnMin;
         public Panel panel3;
@@ -838,7 +822,6 @@
         public Label lbl_cliente;
         public Label lbl_1c;
         public Button button1;
-        public Button nueva_habitacion;
         private GroupBox groupBox1;
         public Label lbl_noches;
         private Label label2;
@@ -850,5 +833,6 @@
         public TextBox txt_capacidad;
         public TextBox txt_motivo;
         private Label label1;
+        private Label lbl_usuario;
     }
 }

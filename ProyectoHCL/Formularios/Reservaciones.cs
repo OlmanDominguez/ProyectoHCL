@@ -141,12 +141,12 @@ namespace ProyectoHCL
                             dgv_reservaciones.Columns["ELIMINAR"].Visible = false;
                         }
                         break;
-                    case 5:
-                        if (obj.ObjetoN == "RESERVACION" && !obj.Permitido)
-                        {
-                            dgv_reservaciones.Columns["VER"].Visible = false;
-                        }
-                        break;
+                        //case 5:
+                        //if (obj.ObjetoN == "RESERVACION" && !obj.Permitido)
+                        //{
+                        //    dgv_reservaciones.Columns["VER"].Visible = false;
+                        //}
+                        //break;
                 }
             }
         }
@@ -221,7 +221,7 @@ namespace ProyectoHCL
         }
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+
 
         }
 
@@ -629,6 +629,8 @@ namespace ProyectoHCL
             saveFileDialog.Filter = "Archivos PDF|*.pdf";
             saveFileDialog.Title = "Guardar archivo PDF";
 
+            saveFileDialog.FileName = "Reservas.pdf";
+
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = saveFileDialog.FileName;
@@ -644,7 +646,16 @@ namespace ProyectoHCL
 
                 //pdf.AddEventHandler(PdfDocumentEvent.START_PAGE, new HeaderEventHandler());
 
-                var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/nelso/source/repos/OlmanDominguez/ProyectoHCL/ProyectoHCL/Resources/logo.png")).SetWidth(50);
+                iText.Layout.Element.Image logo;
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    Properties.Resources.logo.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+                    byte[] logoBytes = memoryStream.ToArray();
+
+                    // Crear la imagen con el MemoryStream
+                    logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create(logoBytes)).SetWidth(50);
+                }
+
                 var plogo = new Paragraph("").Add(logo);
 
                 var nombre = new Paragraph("Hotel Casa Lomas");
@@ -759,6 +770,11 @@ namespace ProyectoHCL
 
                 e.Value = imagen;
             }
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

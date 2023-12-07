@@ -29,16 +29,19 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CtrlBitacora));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             panel2 = new Panel();
             btnCerrar = new Button();
             label11 = new Label();
             btnCerrarSesion = new Button();
             panel5 = new Panel();
+            chkActiva = new CheckBox();
+            label2 = new Label();
+            chkInactiva = new CheckBox();
             button11 = new Button();
             txtBuscar = new TextBox();
             label4 = new Label();
@@ -117,6 +120,9 @@
             // panel5
             // 
             panel5.BackColor = Color.Gainsboro;
+            panel5.Controls.Add(chkActiva);
+            panel5.Controls.Add(label2);
+            panel5.Controls.Add(chkInactiva);
             panel5.Controls.Add(button11);
             panel5.Controls.Add(txtBuscar);
             panel5.Controls.Add(label4);
@@ -125,6 +131,40 @@
             panel5.Name = "panel5";
             panel5.Size = new Size(1084, 67);
             panel5.TabIndex = 38;
+            // 
+            // chkActiva
+            // 
+            chkActiva.AutoSize = true;
+            chkActiva.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            chkActiva.Location = new Point(709, 23);
+            chkActiva.Name = "chkActiva";
+            chkActiva.Size = new Size(86, 21);
+            chkActiva.TabIndex = 59;
+            chkActiva.Text = "Habilitada";
+            chkActiva.UseVisualStyleBackColor = true;
+            chkActiva.CheckedChanged += chkActiva_CheckedChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(652, 24);
+            label2.Name = "label2";
+            label2.Size = new Size(51, 17);
+            label2.TabIndex = 58;
+            label2.Text = "Estado:";
+            // 
+            // chkInactiva
+            // 
+            chkInactiva.AutoSize = true;
+            chkInactiva.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            chkInactiva.Location = new Point(801, 23);
+            chkInactiva.Name = "chkInactiva";
+            chkInactiva.Size = new Size(106, 21);
+            chkInactiva.TabIndex = 57;
+            chkInactiva.Text = "Deshabilitada";
+            chkInactiva.UseVisualStyleBackColor = true;
+            chkInactiva.CheckedChanged += chkInactiva_CheckedChanged;
             // 
             // button11
             // 
@@ -147,7 +187,7 @@
             // 
             txtBuscar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             txtBuscar.BackColor = SystemColors.Info;
-            txtBuscar.Location = new Point(90, 22);
+            txtBuscar.Location = new Point(80, 22);
             txtBuscar.Margin = new Padding(2);
             txtBuscar.Name = "txtBuscar";
             txtBuscar.Size = new Size(252, 23);
@@ -161,7 +201,7 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(32, 24);
+            label4.Location = new Point(22, 24);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(55, 20);
@@ -323,56 +363,56 @@
             dgvBitacora.AllowUserToDeleteRows = false;
             dgvBitacora.AllowUserToResizeColumns = false;
             dgvBitacora.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = Color.SlateGray;
-            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            dgvBitacora.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = Color.SlateGray;
+            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
+            dgvBitacora.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             dgvBitacora.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvBitacora.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBitacora.BackgroundColor = Color.WhiteSmoke;
             dgvBitacora.BorderStyle = BorderStyle.None;
             dgvBitacora.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(45, 66, 91);
-            dataGridViewCellStyle2.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.Teal;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvBitacora.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(45, 66, 91);
+            dataGridViewCellStyle7.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = Color.Teal;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            dgvBitacora.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dgvBitacora.ColumnHeadersHeight = 30;
             dgvBitacora.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.MenuHighlight;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgvBitacora.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = SystemColors.MenuHighlight;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            dgvBitacora.DefaultCellStyle = dataGridViewCellStyle8;
             dgvBitacora.EnableHeadersVisualStyles = false;
             dgvBitacora.GridColor = Color.FromArgb(45, 66, 91);
             dgvBitacora.Location = new Point(27, 6);
             dgvBitacora.Name = "dgvBitacora";
             dgvBitacora.ReadOnly = true;
             dgvBitacora.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.Gainsboro;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = SystemColors.InfoText;
-            dataGridViewCellStyle4.SelectionBackColor = Color.CadetBlue;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.InfoText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgvBitacora.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle9.ForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle9.SelectionBackColor = Color.CadetBlue;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.InfoText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            dgvBitacora.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             dgvBitacora.RowHeadersVisible = false;
-            dataGridViewCellStyle5.BackColor = Color.Gainsboro;
-            dataGridViewCellStyle5.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = Color.LightGray;
-            dataGridViewCellStyle5.SelectionForeColor = Color.Black;
-            dgvBitacora.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.BackColor = Color.Gainsboro;
+            dataGridViewCellStyle10.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle10.ForeColor = Color.Black;
+            dataGridViewCellStyle10.SelectionBackColor = Color.LightGray;
+            dataGridViewCellStyle10.SelectionForeColor = Color.Black;
+            dgvBitacora.RowsDefaultCellStyle = dataGridViewCellStyle10;
             dgvBitacora.RowTemplate.Height = 25;
             dgvBitacora.Size = new Size(1027, 341);
             dgvBitacora.TabIndex = 4;
@@ -425,5 +465,8 @@
         private Panel panel3;
         private DataGridView dgvBitacora;
         private Button btnCerrar;
+        private CheckBox chkInactiva;
+        private CheckBox chkActiva;
+        private Label label2;
     }
 }

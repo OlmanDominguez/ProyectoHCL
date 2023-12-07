@@ -149,13 +149,6 @@ namespace ProyectoHCL.Formularios
                 DialogResult dR = m.ShowDialog();
             }
 
-            else if (txtRTN.TextLength < 14) //validar que el RTN del cliente no tenga menos de 14 caracteres
-            {
-                MsgB m = new MsgB("advertencia", " El RTN debe contener al menos 14 dígitos");
-                DialogResult dR = m.ShowDialog();
-            }
-
-
             else
             {
                 try
@@ -251,15 +244,20 @@ namespace ProyectoHCL.Formularios
                     ok = false;
                     errorT.SetError(txtRTN, "Indroduzca RTN");
                 }
-                else
+                else if (txtRTN.Text.Trim() == "")
+                {
+                    ok = false;
+                    errorT.SetError(txtRTN, "Indroduzca el nombre de la empresa");
+                }
                 {
                     errorT.Clear();
                 }
-                if (txtEmpresa.Text.Trim() == "")
+                if (txtRTN.TextLength < 14)
                 {
                     ok = false;
-                    errorT.SetError(txtEmpresa, "Indroduzca el nombre de la empresa");
+                    errorT.SetError(txtEmpresa, "El RTN debe contener 14 dígitos");
                 }
+                
                 else
                 {
                     errorT.Clear();
@@ -277,10 +275,6 @@ namespace ProyectoHCL.Formularios
             cbTipo.SelectedIndex = 0;
             cbTipo.Items.Add("Juridico");
             cbTipo.Items.Add("Natural");
-        }
-
-        private void txtID_KeyPress(object sender, KeyPressEventArgs e)
-        {
         }
 
         private void txtApellido_KeyPress(object sender, KeyPressEventArgs e)
@@ -438,7 +432,6 @@ namespace ProyectoHCL.Formularios
 
             }
         }
-
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -453,20 +446,6 @@ namespace ProyectoHCL.Formularios
         {
             panel3.Visible = true;
         }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtEmail1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

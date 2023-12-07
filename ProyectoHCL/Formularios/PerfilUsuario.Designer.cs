@@ -37,11 +37,11 @@
             panel1 = new Panel();
             pbBienvenido = new PictureBox();
             panel6 = new Panel();
-            txtcontra = new Button();
-            txtpreguntas = new Button();
             lblemail = new Label();
             lblnom = new Label();
             lblusuario = new Label();
+            txtcontra = new Button();
+            txtpreguntas = new Button();
             label1 = new Label();
             bnCerrar = new Button();
             bnMin = new Button();
@@ -83,7 +83,7 @@
             lblbienvenido.AutoSize = true;
             lblbienvenido.Font = new Font("Ebrima", 18F, FontStyle.Bold, GraphicsUnit.Point);
             lblbienvenido.ForeColor = Color.White;
-            lblbienvenido.Location = new Point(28, 123);
+            lblbienvenido.Location = new Point(93, 123);
             lblbienvenido.Name = "lblbienvenido";
             lblbienvenido.Size = new Size(161, 32);
             lblbienvenido.TabIndex = 52;
@@ -91,14 +91,14 @@
             // 
             // lblnombre
             // 
-            lblnombre.AutoSize = true;
-            lblnombre.Font = new Font("Ebrima", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lblnombre.Font = new Font("Ebrima", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblnombre.ForeColor = Color.White;
-            lblnombre.Location = new Point(195, 123);
+            lblnombre.Location = new Point(15, 155);
             lblnombre.Name = "lblnombre";
-            lblnombre.Size = new Size(100, 32);
+            lblnombre.Size = new Size(314, 32);
             lblnombre.TabIndex = 53;
             lblnombre.Text = "usuario";
+            lblnombre.TextAlign = ContentAlignment.TopCenter;
             // 
             // lblcorreo
             // 
@@ -115,10 +115,11 @@
             // 
             // panel1
             // 
+            panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(pbBienvenido);
             panel1.Controls.Add(lblbienvenido);
             panel1.Controls.Add(lblnombre);
-            panel1.Location = new Point(106, 54);
+            panel1.Location = new Point(112, 57);
             panel1.Name = "panel1";
             panel1.Size = new Size(346, 194);
             panel1.TabIndex = 58;
@@ -126,52 +127,26 @@
             // pbBienvenido
             // 
             pbBienvenido.Image = (Image)resources.GetObject("pbBienvenido.Image");
-            pbBienvenido.Location = new Point(114, 3);
+            pbBienvenido.Location = new Point(121, 20);
             pbBienvenido.Name = "pbBienvenido";
-            pbBienvenido.Size = new Size(123, 117);
+            pbBienvenido.Size = new Size(94, 91);
             pbBienvenido.SizeMode = PictureBoxSizeMode.StretchImage;
             pbBienvenido.TabIndex = 60;
             pbBienvenido.TabStop = false;
             // 
             // panel6
             // 
-            panel6.Controls.Add(txtcontra);
-            panel6.Controls.Add(txtpreguntas);
+            panel6.BorderStyle = BorderStyle.FixedSingle;
             panel6.Controls.Add(lblcorreo);
             panel6.Controls.Add(label4);
             panel6.Controls.Add(lblemail);
             panel6.Controls.Add(lblnom);
             panel6.Controls.Add(label2);
             panel6.Controls.Add(lblusuario);
-            panel6.Location = new Point(101, 254);
+            panel6.Location = new Point(112, 257);
             panel6.Name = "panel6";
-            panel6.Size = new Size(351, 276);
+            panel6.Size = new Size(346, 195);
             panel6.TabIndex = 59;
-            // 
-            // txtcontra
-            // 
-            txtcontra.BackColor = Color.Gainsboro;
-            txtcontra.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtcontra.Location = new Point(3, 221);
-            txtcontra.Name = "txtcontra";
-            txtcontra.Size = new Size(165, 52);
-            txtcontra.TabIndex = 67;
-            txtcontra.Text = "Cambiar Contraseña";
-            txtcontra.UseVisualStyleBackColor = false;
-            txtcontra.Click += txtcontra_Click;
-            // 
-            // txtpreguntas
-            // 
-            txtpreguntas.BackColor = Color.Gainsboro;
-            txtpreguntas.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtpreguntas.ForeColor = Color.Black;
-            txtpreguntas.Location = new Point(183, 221);
-            txtpreguntas.Name = "txtpreguntas";
-            txtpreguntas.Size = new Size(165, 52);
-            txtpreguntas.TabIndex = 68;
-            txtpreguntas.Text = "Editar preguntas de seguridad";
-            txtpreguntas.UseVisualStyleBackColor = false;
-            txtpreguntas.Click += txtpreguntas_Click;
             // 
             // lblemail
             // 
@@ -206,13 +181,44 @@
             lblusuario.TabIndex = 66;
             lblusuario.Text = "label3";
             // 
+            // txtcontra
+            // 
+            txtcontra.BackColor = Color.MediumTurquoise;
+            txtcontra.FlatAppearance.BorderSize = 0;
+            txtcontra.FlatAppearance.MouseOverBackColor = Color.Teal;
+            txtcontra.FlatStyle = FlatStyle.Flat;
+            txtcontra.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            txtcontra.Location = new Point(112, 474);
+            txtcontra.Name = "txtcontra";
+            txtcontra.Size = new Size(155, 52);
+            txtcontra.TabIndex = 67;
+            txtcontra.Text = "Cambiar Contraseña";
+            txtcontra.UseVisualStyleBackColor = false;
+            txtcontra.Click += txtcontra_Click;
+            // 
+            // txtpreguntas
+            // 
+            txtpreguntas.BackColor = Color.MediumTurquoise;
+            txtpreguntas.FlatAppearance.BorderSize = 0;
+            txtpreguntas.FlatAppearance.MouseOverBackColor = Color.Teal;
+            txtpreguntas.FlatStyle = FlatStyle.Flat;
+            txtpreguntas.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            txtpreguntas.ForeColor = Color.Black;
+            txtpreguntas.Location = new Point(303, 474);
+            txtpreguntas.Name = "txtpreguntas";
+            txtpreguntas.Size = new Size(155, 52);
+            txtpreguntas.TabIndex = 68;
+            txtpreguntas.Text = "Editar preguntas de seguridad";
+            txtpreguntas.UseVisualStyleBackColor = false;
+            txtpreguntas.Click += txtpreguntas_Click;
+            // 
             // label1
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Ebrima", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(200, 19);
+            label1.Location = new Point(206, 22);
             label1.Name = "label1";
             label1.Size = new Size(170, 32);
             label1.TabIndex = 58;
@@ -221,13 +227,14 @@
             // 
             // bnCerrar
             // 
+            bnCerrar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bnCerrar.BackColor = Color.Transparent;
             bnCerrar.BackgroundImage = (Image)resources.GetObject("bnCerrar.BackgroundImage");
             bnCerrar.BackgroundImageLayout = ImageLayout.Stretch;
             bnCerrar.FlatAppearance.BorderSize = 0;
             bnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             bnCerrar.FlatStyle = FlatStyle.Flat;
-            bnCerrar.Location = new Point(1068, 3);
+            bnCerrar.Location = new Point(1059, 5);
             bnCerrar.Name = "bnCerrar";
             bnCerrar.Size = new Size(14, 17);
             bnCerrar.TabIndex = 60;
@@ -236,13 +243,14 @@
             // 
             // bnMin
             // 
+            bnMin.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             bnMin.BackColor = Color.Transparent;
             bnMin.BackgroundImage = (Image)resources.GetObject("bnMin.BackgroundImage");
             bnMin.BackgroundImageLayout = ImageLayout.Stretch;
             bnMin.FlatAppearance.BorderSize = 0;
             bnMin.FlatAppearance.MouseOverBackColor = Color.FromArgb(128, 128, 255);
             bnMin.FlatStyle = FlatStyle.Flat;
-            bnMin.Location = new Point(1043, 0);
+            bnMin.Location = new Point(1034, 3);
             bnMin.Name = "bnMin";
             bnMin.Size = new Size(19, 20);
             bnMin.TabIndex = 65;
@@ -251,10 +259,13 @@
             // 
             // groupBox1
             // 
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            groupBox1.Controls.Add(txtpreguntas);
             groupBox1.Controls.Add(panel6);
+            groupBox1.Controls.Add(txtcontra);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(panel1);
-            groupBox1.Location = new Point(286, 3);
+            groupBox1.Location = new Point(262, 3);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(570, 543);
             groupBox1.TabIndex = 66;

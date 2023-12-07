@@ -163,7 +163,7 @@ namespace ProyectoHCL
 
                                 mensaje = mensaje.Replace("@CODIGO", tokenf);
 
-                                sendemail(mensaje, DateTime.Now, "sistemahcasalomas@gmail.com", (string)leer["EMAIL"], out Error);
+                                sendemail(mensaje, DateTime.Now, ParametroCorreo(), (string)leer["EMAIL"], out Error);
 
                                 comando.Connection.Close();
 
@@ -249,9 +249,7 @@ namespace ProyectoHCL
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
 
-                Error = "Se envio un correo de recuperación a tu email registrado";
-
-
+                Error = "Se envió un correo de recuperación a tu email registrado";
             }
             catch (Exception ex)
             {
@@ -268,9 +266,6 @@ namespace ProyectoHCL
             return new string(Enumerable.Repeat(characters, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
-
-
-
 
     }
 }

@@ -175,7 +175,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.Red;
-            label5.Location = new Point(471, 34);
+            label5.Location = new Point(471, 26);
             label5.Name = "label5";
             label5.Size = new Size(23, 30);
             label5.TabIndex = 31;
@@ -216,6 +216,7 @@
             txtPrecio.TabIndex = 28;
             txtPrecio.TextAlign = HorizontalAlignment.Right;
             txtPrecio.KeyPress += txtPrecio_KeyPress;
+            txtPrecio.KeyUp += txtPrecio_KeyUp;
             txtPrecio.Leave += txtPrecio_Leave;
             // 
             // label1
@@ -266,6 +267,7 @@
             txtTipo.Name = "txtTipo";
             txtTipo.Size = new Size(316, 27);
             txtTipo.TabIndex = 24;
+            txtTipo.TextChanged += txtTipo_TextChanged;
             txtTipo.KeyPress += txtTipo_KeyPress;
             txtTipo.Leave += txtTipo_Leave;
             // 

@@ -23,7 +23,8 @@ namespace ProyectoHCL.Formularios
             InitializeComponent();
         }
 
-
+        //int intentosFallidos = 0;
+        //int maxIntentosFallidos = 3;
 
         private void BTN_Cancelar_Click(object sender, EventArgs e)
         {
@@ -35,6 +36,7 @@ namespace ProyectoHCL.Formularios
             if (clasecompartida.estado == 3)
             {
 
+                //label1.Text = "Responde a 2(dos) preguntas de seguridad para restablecer tu contraseña en un futuro.";
                 label1.Text = "Responde al menos 2(dos) preguntas de seguridad para restablecer tu contraseña en un futuro.";
                 try
                 {
@@ -44,9 +46,7 @@ namespace ProyectoHCL.Formularios
                         MySqlCommand comando = new MySqlCommand();
                         comando.Connection = BaseDatosHCL.ObtenerConexion();
                         comando.CommandText = ("select PREGUNTA FROM TBL_PREGUNTA WHERE ID_ESTADO = 1");
-
                         MySqlDataReader leer = comando.ExecuteReader();
-
                         COBPREG.Items.Add("--Seleccione--");
                         COBPREG.SelectedIndex = 0;
                         //Validación de la data obtenida
@@ -56,7 +56,6 @@ namespace ProyectoHCL.Formularios
                         }
                         comando.Connection.Close();
                     }
-
                 }
                 catch (Exception a)
                 {
@@ -74,9 +73,7 @@ namespace ProyectoHCL.Formularios
                         MySqlCommand comando = new MySqlCommand();
                         comando.Connection = BaseDatosHCL.ObtenerConexion();
                         comando.CommandText = ("select TBL_PREGUNTA.PREGUNTA, TBL_PREGUNTAUSUARIO.RESPUESTA, TBL_USUARIO.NOMBRE_USUARIO FROM TBL_PREGUNTA\r\nINNER JOIN TBL_PREGUNTAUSUARIO ON TBL_PREGUNTA.ID_PREGUNTA = TBL_PREGUNTAUSUARIO.ID_PREGUNTA\r\nINNER JOIN TBL_USUARIO ON TBL_PREGUNTAUSUARIO.ID_USUARIO = TBL_USUARIO.ID_USUARIO\r\nWHERE TBL_USUARIO.USUARIO = '" + clasecompartida.user + "'");
-
                         MySqlDataReader leer = comando.ExecuteReader();
-
                         COBPREG.Items.Add("--Seleccione--");
                         COBPREG.SelectedIndex = 0;
                         //Validación de la data obtenida
@@ -86,7 +83,6 @@ namespace ProyectoHCL.Formularios
                         }
                         comando.Connection.Close();
                     }
-
                 }
                 catch (Exception a)
                 {
@@ -122,10 +118,7 @@ namespace ProyectoHCL.Formularios
                 {
                     MessageBox.Show(a.Message + a.StackTrace);
                 }
-
             }
-
-
         }
 
         private void COBPREG_KeyPress(object sender, KeyPressEventArgs e)
@@ -137,20 +130,12 @@ namespace ProyectoHCL.Formularios
         {
             if (TXT_Respuesta.Text != "" & COBPREG.SelectedItem != "0")
             {
-
-                Modelo modelo = new Modelo();
                 errorProvider1.SetError(TXT_Respuesta, "");
                 errorProvider1.SetError(COBPREG, "");
                 string pregunta = COBPREG.SelectedItem.ToString();
                 string respuesta = TXT_Respuesta.Text;
-
                 if (clasecompartida.estado == 3)
                 {
-                    if (modelo.existeContraseña(TXT_Respuesta.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
-                    {
-                        MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
-                        DialogResult d = l.ShowDialog();
-                    }
                     try
                     {
                         using (BaseDatosHCL.ObtenerConexion())
@@ -158,30 +143,22 @@ namespace ProyectoHCL.Formularios
                             MySqlCommand comando = new MySqlCommand();
                             comando.Connection = BaseDatosHCL.ObtenerConexion();
                             comando.CommandText = ("select ID_PREGUNTA FROM TBL_PREGUNTA WHERE PREGUNTA = '" + pregunta + "'");
-
                             MySqlDataReader leer = comando.ExecuteReader();
-
                             if (leer.Read())
                             {
                                 int resp = (int)leer["ID_PREGUNTA"];
                                 comando.Connection.Close();
-
                                 comando.Connection = BaseDatosHCL.ObtenerConexion();
                                 comando.CommandText = ("SELECT * FROM TBL_PREGUNTAUSUARIO WHERE ID_USUARIO = '" +
                                     clasecompartida.iduser + "' AND ID_PREGUNTA = '" + resp + "'");
-
                                 MySqlDataReader leer0 = comando.ExecuteReader();
-
                                 if (leer0.Read())
                                 {
                                     comando.Connection.Close();
-
                                     comando.Connection = BaseDatosHCL.ObtenerConexion();
                                     comando.CommandText = ("UPDATE TBL_PREGUNTAUSUARIO SET RESPUESTA = '" + respuesta + "' " +
                                         "WHERE ID_PREGUNTA = '" + resp + "' AND ID_USUARIO = '" + clasecompartida.iduser + "'");
-
                                     comando.ExecuteNonQuery();
-
                                     comando.Connection.Close();
                                 }
                                 else
@@ -189,55 +166,43 @@ namespace ProyectoHCL.Formularios
                                     comando.Connection = BaseDatosHCL.ObtenerConexion();
                                     comando.CommandText = ("INSERT INTO TBL_PREGUNTAUSUARIO(ID_PREGUNTA, ID_USUARIO, RESPUESTA) VALUES ('" +
                                         resp + "', '" + clasecompartida.iduser + "', '" + respuesta + "')");
-
                                     comando.ExecuteNonQuery();
                                     comando.Connection.Close();
                                 }
-
                                 comando.Connection.Close();
                             }
-
                             comando.Connection.Close();
-
                             comando.Connection = BaseDatosHCL.ObtenerConexion();
                             comando.CommandText = ("SELECT COUNT(*) FROM TBL_PREGUNTAUSUARIO WHERE ID_USUARIO = '" +
                                 clasecompartida.iduser + "'");
-
                             MySqlDataReader leer1 = comando.ExecuteReader();
-
                             if (leer1.Read())
                             {
                                 long cant = Convert.ToInt64(leer1["COUNT(*)"]);
                                 if (cant == 2 || cant > 2)
                                 {
-                                    MsgB l = new MsgB("informacion", "Gracias por responder");
-                                    DialogResult d = l.ShowDialog();
+                                    MsgB mbox = new MsgB("informacion", "Gracias por responder");
+                                    DialogResult dR = mbox.ShowDialog();
                                     comando.Connection.Close();
-
                                     comando.Connection = BaseDatosHCL.ObtenerConexion();
                                     comando.CommandText = ("update TBL_USUARIO SET ID_ESTADO = 1 WHERE ID_USUARIO = '" +
                                         clasecompartida.iduser + "'");
-
                                     comando.ExecuteNonQuery();
                                     comando.Connection.Close();
-
                                     this.Close();
                                 }
                                 else
                                 {
-                                    MsgB l = new MsgB("informacion", "Por favor contesta otra pregunta");
-                                    DialogResult d = l.ShowDialog();
+                                    MsgB mbox = new MsgB("informacion", "Por favor contesta otra pregunta");
+                                    DialogResult dR = mbox.ShowDialog();
                                     TXT_Respuesta.Text = "";
                                 }
-
                             }
                             comando.Connection.Close();
                         }
                     }
-
                     catch (Exception a)
                     {
-
                         MessageBox.Show(a.Message + a.StackTrace);
                     }
                 }
@@ -302,8 +267,8 @@ namespace ProyectoHCL.Formularios
                                 long cant = Convert.ToInt64(leer1["COUNT(*)"]);
                                 if (cant == 2 || cant > 2)
                                 {
-                                    MsgB l = new MsgB("informacion", "Gracias por responder");
-                                    DialogResult d = l.ShowDialog();
+                                    MsgB mbox = new MsgB("informacion", "Gracias por responder");
+                                    DialogResult dR = mbox.ShowDialog();
                                     comando.Connection.Close();
 
                                     comando.Connection = BaseDatosHCL.ObtenerConexion();
@@ -317,10 +282,11 @@ namespace ProyectoHCL.Formularios
                                 }
                                 else
                                 {
-                                    MsgB l = new MsgB("informacion", "Por favor contesta otra pregunta");
-                                    DialogResult d = l.ShowDialog();
+                                    MsgB mbox = new MsgB("informacion", "Por favor contesta otra pregunta");
+                                    DialogResult dR = mbox.ShowDialog();
                                     TXT_Respuesta.Text = "";
                                 }
+
                             }
                             comando.Connection.Close();
                         }
@@ -332,7 +298,7 @@ namespace ProyectoHCL.Formularios
                     }
 
                 }
-
+                else
                 {
                     try
                     {
@@ -341,13 +307,10 @@ namespace ProyectoHCL.Formularios
                             MySqlCommand comando = new MySqlCommand();
                             comando.Connection = BaseDatosHCL.ObtenerConexion();
                             comando.CommandText = ("select TBL_PREGUNTA.PREGUNTA, TBL_PREGUNTAUSUARIO.RESPUESTA, TBL_USUARIO.NOMBRE_USUARIO FROM TBL_PREGUNTA\r\nINNER JOIN TBL_PREGUNTAUSUARIO ON TBL_PREGUNTA.ID_PREGUNTA = TBL_PREGUNTAUSUARIO.ID_PREGUNTA\r\nINNER JOIN TBL_USUARIO ON TBL_PREGUNTAUSUARIO.ID_USUARIO = TBL_USUARIO.ID_USUARIO\r\nWHERE TBL_USUARIO.USUARIO = '" + clasecompartida.user + "' AND TBL_PREGUNTA.PREGUNTA = '" + pregunta + "'");
-
                             MySqlDataReader leer = comando.ExecuteReader();
-
                             if (leer.Read())
                             {
                                 string resp = (string)leer["RESPUESTA"];
-
                                 if (resp == respuesta)
                                 {
                                     comando.Connection.Close();
@@ -357,18 +320,24 @@ namespace ProyectoHCL.Formularios
                                 }
                                 else
                                 {
-                                    MsgB l = new MsgB("advertencia", "Respuesta incorrecta");
-                                    DialogResult d = l.ShowDialog();
+                                    //intentosFallidos++;
+
+                                    MsgB mbox = new MsgB("advertencia", "Respuesta incorrecta");
+                                    DialogResult dR = mbox.ShowDialog();
+
+                                    //if (intentosFallidos >= maxIntentosFallidos)
+                                    //{
+                                    //    MsgB mb = new MsgB("advertencia", "Demasiados intentos fallidos");
+                                    //    DialogResult d = mb.ShowDialog();
+                                    //    TXT_Respuesta.Enabled = false;
+                                    //}
                                 }
-
                             }
-
                             comando.Connection.Close();
                         }
                     }
                     catch (Exception a)
                     {
-
                         MessageBox.Show(a.Message + a.StackTrace);
                     }
                 }

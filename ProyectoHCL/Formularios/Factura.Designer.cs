@@ -72,6 +72,8 @@
             btnServicio = new Button();
             panel5 = new Panel();
             groupBox2 = new GroupBox();
+            lblExonerado = new Label();
+            label19 = new Label();
             lblTotal = new Label();
             lblTur = new Label();
             label20 = new Label();
@@ -172,10 +174,14 @@
             // txtOC
             // 
             txtOC.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtOC.CharacterCasing = CharacterCasing.Upper;
             txtOC.Location = new Point(116, 97);
+            txtOC.MaxLength = 12;
             txtOC.Name = "txtOC";
             txtOC.Size = new Size(196, 23);
             txtOC.TabIndex = 11;
+            txtOC.KeyPress += txtOC_KeyPress;
+            txtOC.Leave += txtOC_Leave;
             // 
             // label12
             // 
@@ -190,18 +196,25 @@
             // txtConstEx
             // 
             txtConstEx.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtConstEx.CharacterCasing = CharacterCasing.Upper;
             txtConstEx.Location = new Point(116, 30);
+            txtConstEx.MaxLength = 11;
             txtConstEx.Name = "txtConstEx";
             txtConstEx.Size = new Size(196, 23);
             txtConstEx.TabIndex = 9;
+            txtConstEx.TextChanged += txtConstEx_TextChanged;
+            txtConstEx.KeyPress += txtConstEx_KeyPress;
             // 
             // txtSar
             // 
             txtSar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtSar.Location = new Point(116, 65);
+            txtSar.MaxLength = 14;
             txtSar.Name = "txtSar";
             txtSar.Size = new Size(196, 23);
             txtSar.TabIndex = 10;
+            txtSar.KeyPress += txtSar_KeyPress;
+            txtSar.Leave += txtSar_Leave;
             // 
             // label9
             // 
@@ -561,6 +574,8 @@
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.Controls.Add(lblExonerado);
+            groupBox2.Controls.Add(label19);
             groupBox2.Controls.Add(lblTotal);
             groupBox2.Controls.Add(lblTur);
             groupBox2.Controls.Add(label20);
@@ -579,10 +594,30 @@
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             // 
+            // lblExonerado
+            // 
+            lblExonerado.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblExonerado.Location = new Point(179, 112);
+            lblExonerado.Name = "lblExonerado";
+            lblExonerado.Size = new Size(107, 17);
+            lblExonerado.TabIndex = 24;
+            lblExonerado.Text = "label32";
+            lblExonerado.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label19.Location = new Point(38, 112);
+            label19.Name = "label19";
+            label19.Size = new Size(135, 16);
+            label19.TabIndex = 23;
+            label19.Text = "Importe exonerado:";
+            // 
             // lblTotal
             // 
             lblTotal.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTotal.Location = new Point(175, 181);
+            lblTotal.Location = new Point(179, 198);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(107, 17);
             lblTotal.TabIndex = 22;
@@ -592,7 +627,7 @@
             // lblTur
             // 
             lblTur.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTur.Location = new Point(175, 153);
+            lblTur.Location = new Point(179, 170);
             lblTur.Name = "lblTur";
             lblTur.Size = new Size(107, 17);
             lblTur.TabIndex = 20;
@@ -603,7 +638,7 @@
             // 
             label20.AutoSize = true;
             label20.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label20.Location = new Point(69, 182);
+            label20.Location = new Point(73, 199);
             label20.Name = "label20";
             label20.Size = new Size(100, 16);
             label20.TabIndex = 6;
@@ -612,7 +647,7 @@
             // lblSV
             // 
             lblSV.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblSV.Location = new Point(175, 122);
+            lblSV.Location = new Point(179, 141);
             lblSV.Name = "lblSV";
             lblSV.Size = new Size(107, 17);
             lblSV.TabIndex = 19;
@@ -622,7 +657,7 @@
             // lblSubtD
             // 
             lblSubtD.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblSubtD.Location = new Point(175, 93);
+            lblSubtD.Location = new Point(179, 83);
             lblSubtD.Name = "lblSubtD";
             lblSubtD.Size = new Size(107, 17);
             lblSubtD.TabIndex = 18;
@@ -632,7 +667,7 @@
             // lblDesc
             // 
             lblDesc.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblDesc.Location = new Point(175, 65);
+            lblDesc.Location = new Point(179, 55);
             lblDesc.Name = "lblDesc";
             lblDesc.Size = new Size(107, 17);
             lblDesc.TabIndex = 17;
@@ -642,7 +677,7 @@
             // lblSubt
             // 
             lblSubt.Font = new Font("Century Gothic", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblSubt.Location = new Point(175, 39);
+            lblSubt.Location = new Point(179, 29);
             lblSubt.Name = "lblSubt";
             lblSubt.Size = new Size(107, 17);
             lblSubt.TabIndex = 16;
@@ -653,7 +688,7 @@
             // 
             label18.AutoSize = true;
             label18.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label18.Location = new Point(46, 154);
+            label18.Location = new Point(50, 170);
             label18.Name = "label18";
             label18.Size = new Size(123, 16);
             label18.TabIndex = 4;
@@ -663,7 +698,7 @@
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label17.Location = new Point(44, 123);
+            label17.Location = new Point(48, 142);
             label17.Name = "label17";
             label17.Size = new Size(125, 16);
             label17.TabIndex = 3;
@@ -673,7 +708,7 @@
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label16.Location = new Point(24, 94);
+            label16.Location = new Point(28, 84);
             label16.Name = "label16";
             label16.Size = new Size(147, 16);
             label16.TabIndex = 2;
@@ -683,7 +718,7 @@
             // 
             label15.AutoSize = true;
             label15.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label15.Location = new Point(91, 67);
+            label15.Location = new Point(95, 56);
             label15.Name = "label15";
             label15.Size = new Size(78, 16);
             label15.TabIndex = 1;
@@ -693,7 +728,7 @@
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label14.Location = new Point(103, 41);
+            label14.Location = new Point(107, 31);
             label14.Name = "label14";
             label14.Size = new Size(66, 16);
             label14.TabIndex = 0;
@@ -838,5 +873,7 @@
         private ErrorProvider errorT;
         private Label lblEstado;
         private Label label3;
+        private Label lblExonerado;
+        private Label label19;
     }
 }

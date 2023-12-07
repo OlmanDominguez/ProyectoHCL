@@ -93,7 +93,7 @@ namespace ProyectoHCL
         {
             CargarClientes();
             DataGridViewImageColumn btnFacturar = new DataGridViewImageColumn(); //se crea el boton en el dataGrid
-            btnFacturar.Name = "SELECCIONAR"; //Nombre del boton 
+            btnFacturar.Name = "VER"; //Nombre del boton 
             dgv_clientes.Columns.Add(btnFacturar); //Se especifica el nombre de dataGrid para agregar boton
         }
 
@@ -119,7 +119,7 @@ namespace ProyectoHCL
 
         private void dgv_clientes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgv_clientes.Columns[e.ColumnIndex].Name == "SELECCIONAR")
+            if (this.dgv_clientes.Columns[e.ColumnIndex].Name == "VER")
             {
                 reservacion.lbl_1c.Visible = true;
                 reservacion.lbl_cliente.Visible = true;
@@ -144,7 +144,7 @@ namespace ProyectoHCL
 
         private void dgv_clientes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgv_clientes.Columns[e.ColumnIndex].Name == "SELECCIONAR")
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgv_clientes.Columns[e.ColumnIndex].Name == "VER")
             {
                 Image imagen = Properties.Resources.caja;
 
