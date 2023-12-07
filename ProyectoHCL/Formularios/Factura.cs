@@ -241,7 +241,7 @@ namespace ProyectoHCL.Formularios
                 {
                     string stri = "SELECT N_OCEXCENTA, NCONSTANCIAEXONERADO, NREGISTROSAR, DESCUENTO " +
                                   "FROM TBL_FACTURA " +
-                                  "where ID_SOLICITUDRESERVA = " + param + ";";
+                                  "where ID_SOLICITUDRESERVA = " + param + " AND NFACTURA = " + info.factura + ";";
 
                     MySqlConnection conn;
                     MySqlCommand cmd;
@@ -444,7 +444,7 @@ namespace ProyectoHCL.Formularios
                         MySqlCommand comando = new MySqlCommand();
                         comando.Connection = BaseDatosHCL.ObtenerConexion();
                         comando.CommandText = ("SELECT ID_TIPOPAGO FROM TBL_FACTURA " +
-                            "WHERE ID_SOLICITUDRESERVA = " + info.reserva + ";");
+                            "WHERE ID_SOLICITUDRESERVA = " + info.reserva + " AND NFACTURA = " + info.factura + ";");
 
                         MySqlDataReader leer = comando.ExecuteReader();
 
