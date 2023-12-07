@@ -393,24 +393,51 @@ namespace ProyectoHCL.Formularios
 
             string sql = "SELECT NFACTURA, s.ID_SOLICITUDRESERVA, c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, f.FECHA, s.INGRESO, s.SALIDA, f.TOTAL FROM TBL_FACTURA f INNER JOIN TBL_SOLICITUDRESERVA s ON f.ID_SOLICITUDRESERVA = s.ID_SOLICITUDRESERVA INNER JOIN TBL_CLIENTE c ON s.COD_CLIENTE = c.CODIGO;"; /* declaracion y llamada de valores de variables en BD */
 
-            MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion(); /* proceso de conexion a BD */
+            // Agregar condiciones de fecha a la consulta SQL
+            sql += " WHERE f.FECHA BETWEEN @FechaInicio AND @FechaFin";
 
-            MySqlCommand comando = new MySqlCommand(sql, conexionBD);
-            MySqlDataReader reader = comando.ExecuteReader();
-
-            while (reader.Read())
+            using (MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion())
+            using (MySqlCommand comando = new MySqlCommand(sql, conexionBD))
             {
-                celdaCabecera++;
-                sl.SetCellValue("B" + celdaCabecera, reader["NFACTURA"].ToString());
-                sl.SetCellValue("C" + celdaCabecera, reader["ID_SOLICITUDRESERVA"].ToString());
-                sl.SetCellValue("D" + celdaCabecera, reader["NOMBRE"].ToString());
-                sl.SetCellValue("E" + celdaCabecera, reader["APELLIDO"].ToString());
-                sl.SetCellValue("F" + celdaCabecera, reader["DNI_PASAPORTE"].ToString());
-                sl.SetCellValue("G" + celdaCabecera, reader["FECHA"].ToString());
-                sl.SetCellValue("H" + celdaCabecera, reader["INGRESO"].ToString());
-                sl.SetCellValue("I" + celdaCabecera, reader["SALIDA"].ToString());
-                sl.SetCellValue("J" + celdaCabecera, reader["TOTAL"].ToString());
+                //comando.Parameters.AddWithValue("@FechaInicio", fechaInicio.Value);
+                //comando.Parameters.AddWithValue("@FechaFin", fechaFin.Value);
+
+                using (MySqlDataReader reader = comando.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        celdaCabecera++;
+                        sl.SetCellValue("B" + celdaCabecera, reader["NFACTURA"].ToString());
+                        sl.SetCellValue("C" + celdaCabecera, reader["ID_SOLICITUDRESERVA"].ToString());
+                        sl.SetCellValue("D" + celdaCabecera, reader["NOMBRE"].ToString());
+                        sl.SetCellValue("E" + celdaCabecera, reader["APELLIDO"].ToString());
+                        sl.SetCellValue("F" + celdaCabecera, reader["DNI_PASAPORTE"].ToString());
+                        sl.SetCellValue("G" + celdaCabecera, reader["FECHA"].ToString());
+                        sl.SetCellValue("H" + celdaCabecera, reader["INGRESO"].ToString());
+                        sl.SetCellValue("I" + celdaCabecera, reader["SALIDA"].ToString());
+                        sl.SetCellValue("J" + celdaCabecera, reader["TOTAL"].ToString());
+                    }
+                }
             }
+
+            //MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion(); /* proceso de conexion a BD */
+
+            //MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+            //MySqlDataReader reader = comando.ExecuteReader();
+
+            //while (reader.Read())
+            //{
+            //    celdaCabecera++;
+            //    sl.SetCellValue("B" + celdaCabecera, reader["NFACTURA"].ToString());
+            //    sl.SetCellValue("C" + celdaCabecera, reader["ID_SOLICITUDRESERVA"].ToString());
+            //    sl.SetCellValue("D" + celdaCabecera, reader["NOMBRE"].ToString());
+            //    sl.SetCellValue("E" + celdaCabecera, reader["APELLIDO"].ToString());
+            //    sl.SetCellValue("F" + celdaCabecera, reader["DNI_PASAPORTE"].ToString());
+            //    sl.SetCellValue("G" + celdaCabecera, reader["FECHA"].ToString());
+            //    sl.SetCellValue("H" + celdaCabecera, reader["INGRESO"].ToString());
+            //    sl.SetCellValue("I" + celdaCabecera, reader["SALIDA"].ToString());
+            //    sl.SetCellValue("J" + celdaCabecera, reader["TOTAL"].ToString());
+            //}
 
             SLStyle EstiloB = sl.CreateStyle();
             EstiloB.Border.LeftBorder.BorderStyle = DocumentFormat.OpenXml.Spreadsheet.BorderStyleValues.Thin;
@@ -438,7 +465,8 @@ namespace ProyectoHCL.Formularios
 
         private void button9_Click(object sender, EventArgs e)
         {
-            crearExcel();
+            Reportes reportes = new Reportes();
+            reportes.ShowDialog();
         }
 
         private void dgvFacturas_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

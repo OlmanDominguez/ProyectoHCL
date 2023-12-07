@@ -954,9 +954,17 @@ namespace ProyectoHCL.Formularios
                     img.SetAbsolutePosition(pdfDoc.LeftMargin, pdfDoc.Top - 60);
                     pdfDoc.Add(img);
 
-                    using (StringReader sr = new StringReader(paginahtml_texto))
+                    try
                     {
-                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                        using (StringReader sr = new StringReader(paginahtml_texto))
+                        {
+                            XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MsgB mbox = new MsgB("error", "Error: " + ex.Message);
+                        DialogResult dR = mbox.ShowDialog();
                     }
 
                     pdfDoc.Close();

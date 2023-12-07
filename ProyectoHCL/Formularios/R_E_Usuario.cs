@@ -610,7 +610,7 @@ namespace ProyectoHCL.Formularios
                 MsgB m = new MsgB("advertencia", "No se permiten espacios");
                 DialogResult dR = m.ShowDialog();
             }
-            else if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            else if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
