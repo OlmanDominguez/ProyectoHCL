@@ -535,6 +535,8 @@ namespace ProyectoHCL.Formularios.Parametros
             saveFileDialog.Filter = "Archivos PDF|*.pdf";
             saveFileDialog.Title = "Guardar archivo PDF";
 
+            saveFileDialog.FileName = "Parametros.pdf";
+
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = saveFileDialog.FileName;
@@ -548,8 +550,15 @@ namespace ProyectoHCL.Formularios.Parametros
                 PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
                 PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
 
-                var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/DAOdo/Desktop/SEGUNDO PERIODO 2023/Programacion he implementacion de Sistemas/logo.jpeg")).SetWidth(50);
-                var plogo = new Paragraph("").Add(logo);
+                iText.Layout.Element.Image logo;
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    Properties.Resources.logo.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+                    byte[] logoBytes = memoryStream.ToArray();
+
+                    logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create(logoBytes)).SetWidth(50);
+                }
+                    var plogo = new Paragraph("").Add(logo);
 
                 var nombre = new Paragraph("Hotel Casa Lomas");
                 nombre.SetFontSize(12);
