@@ -47,7 +47,7 @@
             BTN_Cancelar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             BTN_Cancelar.ForeColor = SystemColors.ActiveCaptionText;
             BTN_Cancelar.Location = new Point(276, 318);
-            BTN_Cancelar.Margin = new Padding(2, 2, 2, 2);
+            BTN_Cancelar.Margin = new Padding(2);
             BTN_Cancelar.Name = "BTN_Cancelar";
             BTN_Cancelar.Size = new Size(185, 33);
             BTN_Cancelar.TabIndex = 11;
@@ -62,7 +62,7 @@
             BTN_Aceptar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             BTN_Aceptar.ForeColor = SystemColors.ActiveCaptionText;
             BTN_Aceptar.Location = new Point(45, 318);
-            BTN_Aceptar.Margin = new Padding(2, 2, 2, 2);
+            BTN_Aceptar.Margin = new Padding(2);
             BTN_Aceptar.Name = "BTN_Aceptar";
             BTN_Aceptar.Size = new Size(185, 33);
             BTN_Aceptar.TabIndex = 10;
@@ -76,7 +76,8 @@
             TXT_Respuesta.BackColor = Color.DeepSkyBlue;
             TXT_Respuesta.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             TXT_Respuesta.Location = new Point(45, 231);
-            TXT_Respuesta.Margin = new Padding(2, 2, 2, 2);
+            TXT_Respuesta.Margin = new Padding(2);
+            TXT_Respuesta.MaxLength = 200;
             TXT_Respuesta.Name = "TXT_Respuesta";
             TXT_Respuesta.Size = new Size(423, 27);
             TXT_Respuesta.TabIndex = 12;

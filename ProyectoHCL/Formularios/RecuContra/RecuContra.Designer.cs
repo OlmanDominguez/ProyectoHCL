@@ -85,7 +85,7 @@
             label3.Name = "label3";
             label3.Size = new Size(67, 21);
             label3.TabIndex = 4;
-            label3.Text = "Metodo:";
+            label3.Text = "Método:";
             // 
             // RBTN_Pregu
             // 
