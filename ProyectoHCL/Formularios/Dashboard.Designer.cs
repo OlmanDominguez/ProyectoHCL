@@ -92,7 +92,6 @@
             label10 = new Label();
             ContenedorDias = new FlowLayoutPanel();
             label11 = new Label();
-         ///   btnReportes = new Button();
             panel1.SuspendLayout();
             panelmanteSubMenu.SuspendLayout();
             paneladminSubMenu.SuspendLayout();
@@ -122,9 +121,8 @@
             panel1.Controls.Add(panel_logo);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(351, 1050);
+            panel1.Size = new Size(246, 693);
             panel1.TabIndex = 1;
             // 
             // iconButton6
@@ -138,11 +136,10 @@
             iconButton6.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton6.IconSize = 25;
             iconButton6.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton6.Location = new Point(0, 1602);
-            iconButton6.Margin = new Padding(4, 5, 4, 5);
+            iconButton6.Location = new Point(0, 961);
             iconButton6.Name = "iconButton6";
-            iconButton6.Padding = new Padding(21, 0, 0, 0);
-            iconButton6.Size = new Size(351, 75);
+            iconButton6.Padding = new Padding(15, 0, 0, 0);
+            iconButton6.Size = new Size(246, 45);
             iconButton6.TabIndex = 36;
             iconButton6.Text = "Cerrar Sesión";
             iconButton6.TextAlign = ContentAlignment.MiddleLeft;
@@ -163,10 +160,9 @@
             panelmanteSubMenu.Controls.Add(Ibtn_objetos);
             panelmanteSubMenu.Controls.Add(Ibtn_roles);
             panelmanteSubMenu.Dock = DockStyle.Top;
-            panelmanteSubMenu.Location = new Point(0, 920);
-            panelmanteSubMenu.Margin = new Padding(4, 5, 4, 5);
+            panelmanteSubMenu.Location = new Point(0, 552);
             panelmanteSubMenu.Name = "panelmanteSubMenu";
-            panelmanteSubMenu.Size = new Size(351, 682);
+            panelmanteSubMenu.Size = new Size(246, 409);
             panelmanteSubMenu.TabIndex = 35;
             // 
             // iconButton5
@@ -180,11 +176,10 @@
             iconButton5.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton5.IconSize = 25;
             iconButton5.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton5.Location = new Point(0, 600);
-            iconButton5.Margin = new Padding(4, 5, 4, 5);
+            iconButton5.Location = new Point(0, 360);
             iconButton5.Name = "iconButton5";
-            iconButton5.Padding = new Padding(50, 0, 0, 0);
-            iconButton5.Size = new Size(351, 75);
+            iconButton5.Padding = new Padding(35, 0, 0, 0);
+            iconButton5.Size = new Size(246, 45);
             iconButton5.TabIndex = 40;
             iconButton5.Text = "Restore";
             iconButton5.TextAlign = ContentAlignment.MiddleLeft;
@@ -203,11 +198,10 @@
             iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton4.IconSize = 25;
             iconButton4.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton4.Location = new Point(0, 525);
-            iconButton4.Margin = new Padding(4, 5, 4, 5);
+            iconButton4.Location = new Point(0, 315);
             iconButton4.Name = "iconButton4";
-            iconButton4.Padding = new Padding(50, 0, 0, 0);
-            iconButton4.Size = new Size(351, 75);
+            iconButton4.Padding = new Padding(35, 0, 0, 0);
+            iconButton4.Size = new Size(246, 45);
             iconButton4.TabIndex = 39;
             iconButton4.Text = "Backup";
             iconButton4.TextAlign = ContentAlignment.MiddleLeft;
@@ -226,11 +220,10 @@
             iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton3.IconSize = 25;
             iconButton3.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton3.Location = new Point(0, 450);
-            iconButton3.Margin = new Padding(4, 5, 4, 5);
+            iconButton3.Location = new Point(0, 270);
             iconButton3.Name = "iconButton3";
-            iconButton3.Padding = new Padding(50, 0, 0, 0);
-            iconButton3.Size = new Size(351, 75);
+            iconButton3.Padding = new Padding(35, 0, 0, 0);
+            iconButton3.Size = new Size(246, 45);
             iconButton3.TabIndex = 38;
             iconButton3.Text = "Bitácora";
             iconButton3.TextAlign = ContentAlignment.MiddleLeft;
@@ -249,11 +242,10 @@
             iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton2.IconSize = 25;
             iconButton2.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton2.Location = new Point(0, 375);
-            iconButton2.Margin = new Padding(4, 5, 4, 5);
+            iconButton2.Location = new Point(0, 225);
             iconButton2.Name = "iconButton2";
-            iconButton2.Padding = new Padding(50, 0, 0, 0);
-            iconButton2.Size = new Size(351, 75);
+            iconButton2.Padding = new Padding(35, 0, 0, 0);
+            iconButton2.Size = new Size(246, 45);
             iconButton2.TabIndex = 37;
             iconButton2.Text = "Preguntas";
             iconButton2.TextAlign = ContentAlignment.MiddleLeft;
@@ -272,11 +264,10 @@
             Ibtn_clientes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_clientes.IconSize = 25;
             Ibtn_clientes.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_clientes.Location = new Point(0, 300);
-            Ibtn_clientes.Margin = new Padding(4, 5, 4, 5);
+            Ibtn_clientes.Location = new Point(0, 180);
             Ibtn_clientes.Name = "Ibtn_clientes";
-            Ibtn_clientes.Padding = new Padding(50, 0, 0, 0);
-            Ibtn_clientes.Size = new Size(351, 75);
+            Ibtn_clientes.Padding = new Padding(35, 0, 0, 0);
+            Ibtn_clientes.Size = new Size(246, 45);
             Ibtn_clientes.TabIndex = 36;
             Ibtn_clientes.Text = "Usuarios";
             Ibtn_clientes.TextAlign = ContentAlignment.MiddleLeft;
@@ -295,11 +286,10 @@
             Ibtn_parametros.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_parametros.IconSize = 25;
             Ibtn_parametros.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_parametros.Location = new Point(0, 225);
-            Ibtn_parametros.Margin = new Padding(4, 5, 4, 5);
+            Ibtn_parametros.Location = new Point(0, 135);
             Ibtn_parametros.Name = "Ibtn_parametros";
-            Ibtn_parametros.Padding = new Padding(50, 0, 0, 0);
-            Ibtn_parametros.Size = new Size(351, 75);
+            Ibtn_parametros.Padding = new Padding(35, 0, 0, 0);
+            Ibtn_parametros.Size = new Size(246, 45);
             Ibtn_parametros.TabIndex = 35;
             Ibtn_parametros.Text = "Parámetros";
             Ibtn_parametros.TextAlign = ContentAlignment.MiddleLeft;
@@ -318,11 +308,10 @@
             Ibtn_permisos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_permisos.IconSize = 25;
             Ibtn_permisos.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_permisos.Location = new Point(0, 150);
-            Ibtn_permisos.Margin = new Padding(4, 5, 4, 5);
+            Ibtn_permisos.Location = new Point(0, 90);
             Ibtn_permisos.Name = "Ibtn_permisos";
-            Ibtn_permisos.Padding = new Padding(50, 0, 0, 0);
-            Ibtn_permisos.Size = new Size(351, 75);
+            Ibtn_permisos.Padding = new Padding(35, 0, 0, 0);
+            Ibtn_permisos.Size = new Size(246, 45);
             Ibtn_permisos.TabIndex = 34;
             Ibtn_permisos.Text = "Permisos ";
             Ibtn_permisos.TextAlign = ContentAlignment.MiddleLeft;
@@ -341,11 +330,10 @@
             Ibtn_objetos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_objetos.IconSize = 25;
             Ibtn_objetos.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_objetos.Location = new Point(0, 75);
-            Ibtn_objetos.Margin = new Padding(4, 5, 4, 5);
+            Ibtn_objetos.Location = new Point(0, 45);
             Ibtn_objetos.Name = "Ibtn_objetos";
-            Ibtn_objetos.Padding = new Padding(50, 0, 0, 0);
-            Ibtn_objetos.Size = new Size(351, 75);
+            Ibtn_objetos.Padding = new Padding(35, 0, 0, 0);
+            Ibtn_objetos.Size = new Size(246, 45);
             Ibtn_objetos.TabIndex = 33;
             Ibtn_objetos.Text = "Objetos";
             Ibtn_objetos.TextAlign = ContentAlignment.MiddleLeft;
@@ -365,10 +353,9 @@
             Ibtn_roles.IconSize = 25;
             Ibtn_roles.ImageAlign = ContentAlignment.MiddleLeft;
             Ibtn_roles.Location = new Point(0, 0);
-            Ibtn_roles.Margin = new Padding(4, 5, 4, 5);
             Ibtn_roles.Name = "Ibtn_roles";
-            Ibtn_roles.Padding = new Padding(50, 0, 0, 0);
-            Ibtn_roles.Size = new Size(351, 75);
+            Ibtn_roles.Padding = new Padding(35, 0, 0, 0);
+            Ibtn_roles.Size = new Size(246, 45);
             Ibtn_roles.TabIndex = 32;
             Ibtn_roles.Text = "Roles";
             Ibtn_roles.TextAlign = ContentAlignment.MiddleLeft;
@@ -387,11 +374,10 @@
             Ibtn_mantenimiento.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_mantenimiento.IconSize = 25;
             Ibtn_mantenimiento.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_mantenimiento.Location = new Point(0, 845);
-            Ibtn_mantenimiento.Margin = new Padding(4, 5, 4, 5);
+            Ibtn_mantenimiento.Location = new Point(0, 507);
             Ibtn_mantenimiento.Name = "Ibtn_mantenimiento";
-            Ibtn_mantenimiento.Padding = new Padding(21, 0, 0, 0);
-            Ibtn_mantenimiento.Size = new Size(351, 75);
+            Ibtn_mantenimiento.Padding = new Padding(15, 0, 0, 0);
+            Ibtn_mantenimiento.Size = new Size(246, 45);
             Ibtn_mantenimiento.TabIndex = 34;
             Ibtn_mantenimiento.Text = "Seguridad";
             Ibtn_mantenimiento.TextAlign = ContentAlignment.MiddleLeft;
@@ -410,11 +396,10 @@
             Ibtn_reservacion.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_reservacion.IconSize = 25;
             Ibtn_reservacion.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_reservacion.Location = new Point(0, 770);
-            Ibtn_reservacion.Margin = new Padding(4, 5, 4, 5);
+            Ibtn_reservacion.Location = new Point(0, 462);
             Ibtn_reservacion.Name = "Ibtn_reservacion";
-            Ibtn_reservacion.Padding = new Padding(21, 0, 0, 0);
-            Ibtn_reservacion.Size = new Size(351, 75);
+            Ibtn_reservacion.Padding = new Padding(15, 0, 0, 0);
+            Ibtn_reservacion.Size = new Size(246, 45);
             Ibtn_reservacion.TabIndex = 33;
             Ibtn_reservacion.Text = "Reservación";
             Ibtn_reservacion.TextAlign = ContentAlignment.MiddleLeft;
@@ -433,11 +418,10 @@
             Ibtn_facturacion.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_facturacion.IconSize = 25;
             Ibtn_facturacion.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_facturacion.Location = new Point(0, 695);
-            Ibtn_facturacion.Margin = new Padding(4, 5, 4, 5);
+            Ibtn_facturacion.Location = new Point(0, 417);
             Ibtn_facturacion.Name = "Ibtn_facturacion";
-            Ibtn_facturacion.Padding = new Padding(21, 0, 0, 0);
-            Ibtn_facturacion.Size = new Size(351, 75);
+            Ibtn_facturacion.Padding = new Padding(15, 0, 0, 0);
+            Ibtn_facturacion.Size = new Size(246, 45);
             Ibtn_facturacion.TabIndex = 32;
             Ibtn_facturacion.Text = "Facturación";
             Ibtn_facturacion.TextAlign = ContentAlignment.MiddleLeft;
@@ -454,10 +438,9 @@
             paneladminSubMenu.Controls.Add(Ibtn_habitaciones);
             paneladminSubMenu.Controls.Add(Ibtn_usuarios);
             paneladminSubMenu.Dock = DockStyle.Top;
-            paneladminSubMenu.Location = new Point(0, 308);
-            paneladminSubMenu.Margin = new Padding(4, 5, 4, 5);
+            paneladminSubMenu.Location = new Point(0, 185);
             paneladminSubMenu.Name = "paneladminSubMenu";
-            paneladminSubMenu.Size = new Size(351, 387);
+            paneladminSubMenu.Size = new Size(246, 232);
             paneladminSubMenu.TabIndex = 29;
             // 
             // lbtn_descuentos
@@ -471,11 +454,10 @@
             lbtn_descuentos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             lbtn_descuentos.IconSize = 25;
             lbtn_descuentos.ImageAlign = ContentAlignment.MiddleLeft;
-            lbtn_descuentos.Location = new Point(0, 300);
-            lbtn_descuentos.Margin = new Padding(4, 5, 4, 5);
+            lbtn_descuentos.Location = new Point(0, 180);
             lbtn_descuentos.Name = "lbtn_descuentos";
-            lbtn_descuentos.Padding = new Padding(50, 0, 0, 0);
-            lbtn_descuentos.Size = new Size(351, 75);
+            lbtn_descuentos.Padding = new Padding(35, 0, 0, 0);
+            lbtn_descuentos.Size = new Size(246, 45);
             lbtn_descuentos.TabIndex = 33;
             lbtn_descuentos.Text = "Descuentos";
             lbtn_descuentos.TextAlign = ContentAlignment.MiddleLeft;
@@ -494,11 +476,10 @@
             Ibtn_servicios.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_servicios.IconSize = 25;
             Ibtn_servicios.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_servicios.Location = new Point(0, 225);
-            Ibtn_servicios.Margin = new Padding(4, 5, 4, 5);
+            Ibtn_servicios.Location = new Point(0, 135);
             Ibtn_servicios.Name = "Ibtn_servicios";
-            Ibtn_servicios.Padding = new Padding(50, 0, 0, 0);
-            Ibtn_servicios.Size = new Size(351, 75);
+            Ibtn_servicios.Padding = new Padding(35, 0, 0, 0);
+            Ibtn_servicios.Size = new Size(246, 45);
             Ibtn_servicios.TabIndex = 32;
             Ibtn_servicios.Text = "Servicios";
             Ibtn_servicios.TextAlign = ContentAlignment.MiddleLeft;
@@ -517,11 +498,10 @@
             iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton1.IconSize = 25;
             iconButton1.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton1.Location = new Point(0, 150);
-            iconButton1.Margin = new Padding(4, 5, 4, 5);
+            iconButton1.Location = new Point(0, 90);
             iconButton1.Name = "iconButton1";
-            iconButton1.Padding = new Padding(50, 0, 0, 0);
-            iconButton1.Size = new Size(351, 75);
+            iconButton1.Padding = new Padding(35, 0, 0, 0);
+            iconButton1.Size = new Size(246, 45);
             iconButton1.TabIndex = 31;
             iconButton1.Text = "Tipos de habitación ";
             iconButton1.TextAlign = ContentAlignment.MiddleLeft;
@@ -540,11 +520,10 @@
             Ibtn_habitaciones.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_habitaciones.IconSize = 25;
             Ibtn_habitaciones.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_habitaciones.Location = new Point(0, 75);
-            Ibtn_habitaciones.Margin = new Padding(4, 5, 4, 5);
+            Ibtn_habitaciones.Location = new Point(0, 45);
             Ibtn_habitaciones.Name = "Ibtn_habitaciones";
-            Ibtn_habitaciones.Padding = new Padding(50, 0, 0, 0);
-            Ibtn_habitaciones.Size = new Size(351, 75);
+            Ibtn_habitaciones.Padding = new Padding(35, 0, 0, 0);
+            Ibtn_habitaciones.Size = new Size(246, 45);
             Ibtn_habitaciones.TabIndex = 30;
             Ibtn_habitaciones.Text = "Habitaciones";
             Ibtn_habitaciones.TextAlign = ContentAlignment.MiddleLeft;
@@ -564,10 +543,9 @@
             Ibtn_usuarios.IconSize = 25;
             Ibtn_usuarios.ImageAlign = ContentAlignment.MiddleLeft;
             Ibtn_usuarios.Location = new Point(0, 0);
-            Ibtn_usuarios.Margin = new Padding(4, 5, 4, 5);
             Ibtn_usuarios.Name = "Ibtn_usuarios";
-            Ibtn_usuarios.Padding = new Padding(50, 0, 0, 0);
-            Ibtn_usuarios.Size = new Size(351, 75);
+            Ibtn_usuarios.Padding = new Padding(35, 0, 0, 0);
+            Ibtn_usuarios.Size = new Size(246, 45);
             Ibtn_usuarios.TabIndex = 29;
             Ibtn_usuarios.Text = "Clientes";
             Ibtn_usuarios.TextAlign = ContentAlignment.MiddleLeft;
@@ -586,11 +564,10 @@
             Ibtn_administracion.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_administracion.IconSize = 25;
             Ibtn_administracion.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_administracion.Location = new Point(0, 233);
-            Ibtn_administracion.Margin = new Padding(4, 5, 4, 5);
+            Ibtn_administracion.Location = new Point(0, 140);
             Ibtn_administracion.Name = "Ibtn_administracion";
-            Ibtn_administracion.Padding = new Padding(21, 0, 0, 0);
-            Ibtn_administracion.Size = new Size(351, 75);
+            Ibtn_administracion.Padding = new Padding(15, 0, 0, 0);
+            Ibtn_administracion.Size = new Size(246, 45);
             Ibtn_administracion.TabIndex = 28;
             Ibtn_administracion.Text = "Administración";
             Ibtn_administracion.TextAlign = ContentAlignment.MiddleLeft;
@@ -609,11 +586,10 @@
             Ibtn_calendario.IconFont = FontAwesome.Sharp.IconFont.Auto;
             Ibtn_calendario.IconSize = 25;
             Ibtn_calendario.ImageAlign = ContentAlignment.MiddleLeft;
-            Ibtn_calendario.Location = new Point(0, 158);
-            Ibtn_calendario.Margin = new Padding(4, 5, 4, 5);
+            Ibtn_calendario.Location = new Point(0, 95);
             Ibtn_calendario.Name = "Ibtn_calendario";
-            Ibtn_calendario.Padding = new Padding(21, 0, 0, 0);
-            Ibtn_calendario.Size = new Size(351, 75);
+            Ibtn_calendario.Padding = new Padding(15, 0, 0, 0);
+            Ibtn_calendario.Size = new Size(246, 45);
             Ibtn_calendario.TabIndex = 27;
             Ibtn_calendario.Text = "Calendario Reservaciones";
             Ibtn_calendario.TextAlign = ContentAlignment.MiddleLeft;
@@ -628,12 +604,11 @@
             btn_perfil.FlatStyle = FlatStyle.Flat;
             btn_perfil.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             btn_perfil.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_perfil.Location = new Point(0, -782);
-            btn_perfil.Margin = new Padding(4, 5, 4, 5);
+            btn_perfil.Location = new Point(0, -469);
             btn_perfil.Name = "btn_perfil";
-            btn_perfil.Padding = new Padding(14, 0, 0, 0);
+            btn_perfil.Padding = new Padding(10, 0, 0, 0);
             btn_perfil.RightToLeft = RightToLeft.No;
-            btn_perfil.Size = new Size(351, 75);
+            btn_perfil.Size = new Size(246, 45);
             btn_perfil.TabIndex = 1;
             btn_perfil.Text = "Perlfil";
             btn_perfil.TextAlign = ContentAlignment.MiddleLeft;
@@ -644,19 +619,17 @@
             panel_logo.Controls.Add(pictureBox5);
             panel_logo.Dock = DockStyle.Top;
             panel_logo.Location = new Point(0, 0);
-            panel_logo.Margin = new Padding(4, 5, 4, 5);
             panel_logo.Name = "panel_logo";
-            panel_logo.Size = new Size(351, 158);
+            panel_logo.Size = new Size(246, 95);
             panel_logo.TabIndex = 0;
             // 
             // pictureBox5
             // 
             pictureBox5.BackColor = Color.Transparent;
             pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(104, 5);
-            pictureBox5.Margin = new Padding(4, 5, 4, 5);
+            pictureBox5.Location = new Point(73, 3);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(109, 130);
+            pictureBox5.Size = new Size(76, 78);
             pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox5.TabIndex = 16;
             pictureBox5.TabStop = false;
@@ -665,14 +638,12 @@
             // panel2
             // 
             panel2.BackColor = Color.Black;
-           // panel2.Controls.Add(btnReportes);
             panel2.Controls.Add(iconPerfil);
             panel2.Controls.Add(lbl_titulo);
             panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(351, 0);
-            panel2.Margin = new Padding(4, 5, 4, 5);
+            panel2.Location = new Point(246, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1525, 107);
+            panel2.Size = new Size(1061, 64);
             panel2.TabIndex = 2;
             // 
             // iconPerfil
@@ -690,10 +661,9 @@
             iconPerfil.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconPerfil.IconSize = 30;
             iconPerfil.ImageAlign = ContentAlignment.MiddleLeft;
-            iconPerfil.Location = new Point(1394, 13);
-            iconPerfil.Margin = new Padding(4, 5, 4, 5);
+            iconPerfil.Location = new Point(963, 8);
             iconPerfil.Name = "iconPerfil";
-            iconPerfil.Size = new Size(114, 80);
+            iconPerfil.Size = new Size(80, 48);
             iconPerfil.TabIndex = 49;
             iconPerfil.Text = "Perfil";
             iconPerfil.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -707,10 +677,9 @@
             lbl_titulo.BackColor = Color.Transparent;
             lbl_titulo.Font = new Font("Lucida Bright", 24F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             lbl_titulo.ForeColor = Color.White;
-            lbl_titulo.Location = new Point(490, 25);
-            lbl_titulo.Margin = new Padding(4, 0, 4, 0);
+            lbl_titulo.Location = new Point(340, 15);
             lbl_titulo.Name = "lbl_titulo";
-            lbl_titulo.Size = new Size(540, 55);
+            lbl_titulo.Size = new Size(362, 36);
             lbl_titulo.TabIndex = 16;
             lbl_titulo.Text = "HOTEL CASA LOMAS";
             // 
@@ -726,10 +695,9 @@
             panelChildForm.Controls.Add(panel38);
             panelChildForm.Controls.Add(ContenedorDias);
             panelChildForm.Controls.Add(label11);
-            panelChildForm.Location = new Point(351, 108);
-            panelChildForm.Margin = new Padding(4, 5, 4, 5);
+            panelChildForm.Location = new Point(246, 65);
             panelChildForm.Name = "panelChildForm";
-            panelChildForm.Size = new Size(1524, 1037);
+            panelChildForm.Size = new Size(1067, 628);
             panelChildForm.TabIndex = 25;
             // 
             // label12
@@ -753,7 +721,7 @@
             panel4.Controls.Add(lbl_inactivas);
             panel4.Location = new Point(801, 66);
             panel4.Name = "panel4";
-            panel4.Size = new Size(309, 192);
+            panel4.Size = new Size(216, 115);
             panel4.TabIndex = 46;
             // 
             // label3
@@ -763,10 +731,9 @@
             label3.BackColor = Color.FromArgb(20, 100, 150);
             label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.ButtonFace;
-            label3.Location = new Point(61, 23);
-            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Location = new Point(43, 14);
             label3.Name = "label3";
-            label3.Size = new Size(195, 40);
+            label3.Size = new Size(127, 25);
             label3.TabIndex = 30;
             label3.Text = "Habitaciones";
             // 
@@ -777,10 +744,9 @@
             lbl_reserva.BackColor = Color.FromArgb(20, 100, 150);
             lbl_reserva.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_reserva.ForeColor = SystemColors.ButtonFace;
-            lbl_reserva.Location = new Point(41, 77);
-            lbl_reserva.Margin = new Padding(4, 0, 4, 0);
+            lbl_reserva.Location = new Point(29, 46);
             lbl_reserva.Name = "lbl_reserva";
-            lbl_reserva.Size = new Size(86, 28);
+            lbl_reserva.Size = new Size(56, 17);
             lbl_reserva.TabIndex = 31;
             lbl_reserva.Text = "Activas:";
             // 
@@ -791,10 +757,9 @@
             lbl_disp.BackColor = Color.FromArgb(20, 100, 150);
             lbl_disp.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_disp.ForeColor = SystemColors.ButtonFace;
-            lbl_disp.Location = new Point(41, 118);
-            lbl_disp.Margin = new Padding(4, 0, 4, 0);
+            lbl_disp.Location = new Point(29, 71);
             lbl_disp.Name = "lbl_disp";
-            lbl_disp.Size = new Size(101, 28);
+            lbl_disp.Size = new Size(66, 17);
             lbl_disp.TabIndex = 32;
             lbl_disp.Text = "Inactivas:";
             // 
@@ -804,10 +769,9 @@
             lbl_activas.BackColor = Color.FromArgb(20, 100, 150);
             lbl_activas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_activas.ForeColor = SystemColors.ButtonFace;
-            lbl_activas.Location = new Point(143, 77);
-            lbl_activas.Margin = new Padding(4, 0, 4, 0);
+            lbl_activas.Location = new Point(100, 46);
             lbl_activas.Name = "lbl_activas";
-            lbl_activas.Size = new Size(20, 28);
+            lbl_activas.Size = new Size(13, 17);
             lbl_activas.TabIndex = 33;
             lbl_activas.Text = "-";
             // 
@@ -817,10 +781,9 @@
             lbl_inactivas.BackColor = Color.FromArgb(20, 100, 150);
             lbl_inactivas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_inactivas.ForeColor = SystemColors.ButtonFace;
-            lbl_inactivas.Location = new Point(143, 118);
-            lbl_inactivas.Margin = new Padding(4, 0, 4, 0);
+            lbl_inactivas.Location = new Point(100, 71);
             lbl_inactivas.Name = "lbl_inactivas";
-            lbl_inactivas.Size = new Size(20, 28);
+            lbl_inactivas.Size = new Size(13, 17);
             lbl_inactivas.TabIndex = 34;
             lbl_inactivas.Text = "-";
             // 
@@ -838,7 +801,7 @@
             panel3.Controls.Add(lbl_facturadas);
             panel3.Location = new Point(801, 225);
             panel3.Name = "panel3";
-            panel3.Size = new Size(309, 335);
+            panel3.Size = new Size(216, 201);
             panel3.TabIndex = 45;
             // 
             // label8
@@ -848,10 +811,9 @@
             label8.BackColor = Color.FromArgb(20, 100, 150);
             label8.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = SystemColors.ButtonFace;
-            label8.Location = new Point(61, 33);
-            label8.Margin = new Padding(4, 0, 4, 0);
+            label8.Location = new Point(43, 20);
             label8.Name = "label8";
-            label8.Size = new Size(212, 40);
+            label8.Size = new Size(137, 25);
             label8.TabIndex = 35;
             label8.Text = "Reservaciones";
             // 
@@ -862,10 +824,9 @@
             lbl_confir.BackColor = Color.FromArgb(20, 100, 150);
             lbl_confir.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_confir.ForeColor = SystemColors.ButtonFace;
-            lbl_confir.Location = new Point(50, 150);
-            lbl_confir.Margin = new Padding(4, 0, 4, 0);
+            lbl_confir.Location = new Point(35, 90);
             lbl_confir.Name = "lbl_confir";
-            lbl_confir.Size = new Size(120, 28);
+            lbl_confir.Size = new Size(80, 17);
             lbl_confir.TabIndex = 36;
             lbl_confir.Text = "Pendientes:";
             // 
@@ -876,10 +837,9 @@
             lbl_confirma.BackColor = Color.FromArgb(20, 100, 150);
             lbl_confirma.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_confirma.ForeColor = SystemColors.ButtonFace;
-            lbl_confirma.Location = new Point(50, 258);
-            lbl_confirma.Margin = new Padding(4, 0, 4, 0);
+            lbl_confirma.Location = new Point(35, 155);
             lbl_confirma.Name = "lbl_confirma";
-            lbl_confirma.Size = new Size(136, 28);
+            lbl_confirma.Size = new Size(90, 17);
             lbl_confirma.TabIndex = 37;
             lbl_confirma.Text = "Confirmadas:";
             // 
@@ -890,10 +850,9 @@
             lbl_pendientes.BackColor = Color.FromArgb(20, 100, 150);
             lbl_pendientes.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_pendientes.ForeColor = SystemColors.ButtonFace;
-            lbl_pendientes.Location = new Point(170, 150);
-            lbl_pendientes.Margin = new Padding(4, 0, 4, 0);
+            lbl_pendientes.Location = new Point(119, 90);
             lbl_pendientes.Name = "lbl_pendientes";
-            lbl_pendientes.Size = new Size(20, 28);
+            lbl_pendientes.Size = new Size(13, 17);
             lbl_pendientes.TabIndex = 38;
             lbl_pendientes.Text = "-";
             // 
@@ -904,10 +863,9 @@
             lbl_anu.BackColor = Color.FromArgb(20, 100, 150);
             lbl_anu.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_anu.ForeColor = SystemColors.ButtonFace;
-            lbl_anu.Location = new Point(50, 205);
-            lbl_anu.Margin = new Padding(4, 0, 4, 0);
+            lbl_anu.Location = new Point(35, 123);
             lbl_anu.Name = "lbl_anu";
-            lbl_anu.Size = new Size(104, 28);
+            lbl_anu.Size = new Size(69, 17);
             lbl_anu.TabIndex = 40;
             lbl_anu.Text = "Anuladas:";
             // 
@@ -918,10 +876,9 @@
             lbl_anuladas.BackColor = Color.FromArgb(20, 100, 150);
             lbl_anuladas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_anuladas.ForeColor = SystemColors.ButtonFace;
-            lbl_anuladas.Location = new Point(157, 205);
-            lbl_anuladas.Margin = new Padding(4, 0, 4, 0);
+            lbl_anuladas.Location = new Point(110, 123);
             lbl_anuladas.Name = "lbl_anuladas";
-            lbl_anuladas.Size = new Size(20, 28);
+            lbl_anuladas.Size = new Size(13, 17);
             lbl_anuladas.TabIndex = 41;
             lbl_anuladas.Text = "-";
             // 
@@ -932,10 +889,9 @@
             lbl_confirmadas.BackColor = Color.FromArgb(20, 100, 150);
             lbl_confirmadas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_confirmadas.ForeColor = SystemColors.ButtonFace;
-            lbl_confirmadas.Location = new Point(187, 258);
-            lbl_confirmadas.Margin = new Padding(4, 0, 4, 0);
+            lbl_confirmadas.Location = new Point(131, 155);
             lbl_confirmadas.Name = "lbl_confirmadas";
-            lbl_confirmadas.Size = new Size(20, 28);
+            lbl_confirmadas.Size = new Size(13, 17);
             lbl_confirmadas.TabIndex = 39;
             lbl_confirmadas.Text = "-";
             // 
@@ -945,10 +901,9 @@
             label13.BackColor = Color.FromArgb(20, 100, 150);
             label13.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             label13.ForeColor = SystemColors.ButtonFace;
-            label13.Location = new Point(50, 97);
-            label13.Margin = new Padding(4, 0, 4, 0);
+            label13.Location = new Point(35, 58);
             label13.Name = "label13";
-            label13.Size = new Size(118, 28);
+            label13.Size = new Size(78, 17);
             label13.TabIndex = 48;
             label13.Text = "Facturadas:";
             // 
@@ -958,10 +913,9 @@
             lbl_facturadas.BackColor = Color.FromArgb(20, 100, 150);
             lbl_facturadas.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lbl_facturadas.ForeColor = SystemColors.ButtonFace;
-            lbl_facturadas.Location = new Point(170, 97);
-            lbl_facturadas.Margin = new Padding(4, 0, 4, 0);
+            lbl_facturadas.Location = new Point(119, 58);
             lbl_facturadas.Name = "lbl_facturadas";
-            lbl_facturadas.Size = new Size(20, 28);
+            lbl_facturadas.Size = new Size(13, 17);
             lbl_facturadas.TabIndex = 49;
             lbl_facturadas.Text = "-";
             // 
@@ -975,15 +929,14 @@
             panel46.Controls.Add(cmbHabitacion);
             panel46.Location = new Point(56, 66);
             panel46.Name = "panel46";
-            panel46.Size = new Size(1021, 63);
+            panel46.Size = new Size(715, 38);
             panel46.TabIndex = 44;
             // 
             // LBLMES
             // 
             LBLMES.Font = new Font("Century Gothic", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             LBLMES.ForeColor = Color.White;
-            LBLMES.Location = new Point(19, 17);
-            LBLMES.Margin = new Padding(4, 0, 4, 0);
+            LBLMES.Location = new Point(13, 10);
             LBLMES.Name = "LBLMES";
             LBLMES.Size = new Size(305, 21);
             LBLMES.TabIndex = 7;
@@ -996,10 +949,9 @@
             btnSig.BackgroundImageLayout = ImageLayout.Zoom;
             btnSig.FlatAppearance.BorderSize = 0;
             btnSig.FlatStyle = FlatStyle.Flat;
-            btnSig.Location = new Point(943, 10);
-            btnSig.Margin = new Padding(4, 5, 4, 5);
+            btnSig.Location = new Point(660, 6);
             btnSig.Name = "btnSig";
-            btnSig.Size = new Size(56, 45);
+            btnSig.Size = new Size(39, 27);
             btnSig.TabIndex = 2;
             btnSig.UseVisualStyleBackColor = false;
             btnSig.Click += btnSig_Click;
@@ -1013,7 +965,7 @@
             label1.ForeColor = Color.White;
             label1.Location = new Point(362, 10);
             label1.Name = "label1";
-            label1.Size = new Size(136, 31);
+            label1.Size = new Size(89, 20);
             label1.TabIndex = 46;
             label1.Text = " Habitación:";
             // 
@@ -1024,10 +976,9 @@
             btnAnt.BackgroundImageLayout = ImageLayout.Zoom;
             btnAnt.FlatAppearance.BorderSize = 0;
             btnAnt.FlatStyle = FlatStyle.Flat;
-            btnAnt.Location = new Point(889, 10);
-            btnAnt.Margin = new Padding(4, 5, 4, 5);
+            btnAnt.Location = new Point(622, 6);
             btnAnt.Name = "btnAnt";
-            btnAnt.Size = new Size(56, 45);
+            btnAnt.Size = new Size(39, 27);
             btnAnt.TabIndex = 1;
             btnAnt.UseVisualStyleBackColor = false;
             btnAnt.Click += btnAnt_Click;
@@ -1054,7 +1005,7 @@
             panel38.Controls.Add(label10);
             panel38.Location = new Point(56, 105);
             panel38.Name = "panel38";
-            panel38.Size = new Size(1021, 58);
+            panel38.Size = new Size(715, 35);
             panel38.TabIndex = 43;
             // 
             // label7
@@ -1062,10 +1013,9 @@
             label7.AutoSize = true;
             label7.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = SystemColors.ControlLightLight;
-            label7.Location = new Point(901, 13);
-            label7.Margin = new Padding(4, 0, 4, 0);
+            label7.Location = new Point(631, 8);
             label7.Name = "label7";
-            label7.Size = new Size(99, 27);
+            label7.Size = new Size(66, 18);
             label7.TabIndex = 6;
             label7.Text = "Sábado";
             // 
@@ -1074,10 +1024,9 @@
             label6.AutoSize = true;
             label6.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = SystemColors.ControlLightLight;
-            label6.Location = new Point(756, 13);
-            label6.Margin = new Padding(4, 0, 4, 0);
+            label6.Location = new Point(529, 8);
             label6.Name = "label6";
-            label6.Size = new Size(95, 27);
+            label6.Size = new Size(63, 18);
             label6.TabIndex = 5;
             label6.Text = "Viernes";
             // 
@@ -1086,10 +1035,9 @@
             label5.AutoSize = true;
             label5.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = SystemColors.ControlLightLight;
-            label5.Location = new Point(613, 13);
-            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Location = new Point(429, 8);
             label5.Name = "label5";
-            label5.Size = new Size(90, 27);
+            label5.Size = new Size(58, 18);
             label5.TabIndex = 4;
             label5.Text = "Jueves";
             // 
@@ -1098,10 +1046,9 @@
             label4.AutoSize = true;
             label4.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ControlLightLight;
-            label4.Location = new Point(456, 13);
-            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Location = new Point(319, 8);
             label4.Name = "label4";
-            label4.Size = new Size(122, 27);
+            label4.Size = new Size(81, 18);
             label4.TabIndex = 3;
             label4.Text = "Miércoles";
             // 
@@ -1110,10 +1057,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = SystemColors.ControlLightLight;
-            label2.Location = new Point(326, 13);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(228, 8);
             label2.Name = "label2";
-            label2.Size = new Size(87, 27);
+            label2.Size = new Size(57, 18);
             label2.TabIndex = 2;
             label2.Text = "Martes";
             // 
@@ -1122,10 +1068,9 @@
             label9.AutoSize = true;
             label9.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label9.ForeColor = SystemColors.ControlLightLight;
-            label9.Location = new Point(186, 13);
-            label9.Margin = new Padding(4, 0, 4, 0);
+            label9.Location = new Point(130, 8);
             label9.Name = "label9";
-            label9.Size = new Size(75, 27);
+            label9.Size = new Size(49, 18);
             label9.TabIndex = 1;
             label9.Text = "Lunes";
             // 
@@ -1134,10 +1079,9 @@
             label10.AutoSize = true;
             label10.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label10.ForeColor = SystemColors.ControlLightLight;
-            label10.Location = new Point(19, 13);
-            label10.Margin = new Padding(4, 0, 4, 0);
+            label10.Location = new Point(13, 8);
             label10.Name = "label10";
-            label10.Size = new Size(115, 27);
+            label10.Size = new Size(76, 18);
             label10.TabIndex = 0;
             label10.Text = "Domingo";
             // 
@@ -1146,7 +1090,7 @@
             ContenedorDias.BackColor = Color.LightGray;
             ContenedorDias.Location = new Point(56, 146);
             ContenedorDias.Name = "ContenedorDias";
-            ContenedorDias.Size = new Size(1021, 705);
+            ContenedorDias.Size = new Size(715, 423);
             ContenedorDias.TabIndex = 42;
             // 
             // label11
@@ -1158,34 +1102,23 @@
             label11.ForeColor = Color.White;
             label11.Location = new Point(56, 18);
             label11.Name = "label11";
-            label11.Size = new Size(470, 48);
+            label11.Size = new Size(318, 32);
             label11.TabIndex = 47;
             label11.Text = "Reservaciones programadas";
             // 
-            // btnReportes
-            // 
-           // btnReportes.Location = new Point(250, 24);
-            //btnReportes.Name = "btnReportes";
-           // btnReportes.Size = new Size(112, 34);
-            //btnReportes.TabIndex = 50;
-            //btnReportes.Text = "Reportes";
-           // btnReportes.UseVisualStyleBackColor = true;
-           // btnReportes.Click += button1_Click;
-            // 
             // Dashboard
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackgroundImage = Properties.Resources.fondo;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1876, 1050);
+            ClientSize = new Size(1307, 693);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(panelChildForm);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 5, 4, 5);
             Name = "Dashboard";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Dashboard";

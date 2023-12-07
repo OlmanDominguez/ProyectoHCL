@@ -149,7 +149,7 @@
             btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnNuevo.ForeColor = SystemColors.ButtonFace;
             btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.Location = new Point(340, 17);
+            btnNuevo.Location = new Point(372, 17);
             btnNuevo.Name = "btnNuevo";
             btnNuevo.Size = new Size(50, 35);
             btnNuevo.TabIndex = 36;
@@ -206,7 +206,6 @@
             // 
             // txtBuscarCl
             // 
-            txtBuscarCl.Anchor = AnchorStyles.Bottom;
             txtBuscarCl.BackColor = SystemColors.Info;
             txtBuscarCl.Location = new Point(70, 21);
             txtBuscarCl.Margin = new Padding(2);
@@ -217,7 +216,6 @@
             // 
             // label1
             // 
-            label1.Anchor = AnchorStyles.Bottom;
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
