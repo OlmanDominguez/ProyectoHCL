@@ -87,44 +87,46 @@ namespace ProyectoHCL.Formularios
             {
                 if (modelo.existeContraseña(TXT_Contra.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
                 {
-                    MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
+                    MsgB l = new MsgB("advertencia", "La Contraseña ya existe");
                     DialogResult d = l.ShowDialog();
                 }
-                if (modelo.existeContraseña(TXT_Confi.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
+                else if (modelo.existeContraseña(TXT_Confi.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
                 {
-                    MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
+                    MsgB l = new MsgB("advertencia", "La Contraseña ya existe");
                     DialogResult d = l.ShowDialog();
                 }
-
-                try
+                else
                 {
-                    using (BaseDatosHCL.ObtenerConexion())
+                    try
                     {
+                        using (BaseDatosHCL.ObtenerConexion())
+                        {
 
-                        //Conexion y comando
-                        MySqlCommand comando = new MySqlCommand();
-                        comando.Connection = BaseDatosHCL.ObtenerConexion();
-                        comando.CommandText = ("UPDATE TBL_USUARIO SET CONTRASENA = '"
-                            + TXT_Confi.Text + "', PASS = '0' where USUARIO = '" + clasecompartida.user + "'");
+                            //Conexion y comando
+                            MySqlCommand comando = new MySqlCommand();
+                            comando.Connection = BaseDatosHCL.ObtenerConexion();
+                            comando.CommandText = ("UPDATE TBL_USUARIO SET CONTRASENA = '"
+                                + TXT_Confi.Text + "', PASS = '0' where USUARIO = '" + clasecompartida.user + "'");
 
-                        comando.ExecuteNonQuery();
-                        comando.Connection.Close();
-                        MsgB m = new MsgB("informacion", "Contraseña actualizada con exito");
-                        DialogResult dR = m.ShowDialog();
-                        comando.Connection.Close();
-                        this.Close();
-                        /*  Modelo modelo = new Modelo();
-                          if (modelo.existeContraseña(TXT_Contra.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
-                          {
-                              MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
-                              DialogResult d = l.ShowDialog();
-                          }*/
+                            comando.ExecuteNonQuery();
+                            comando.Connection.Close();
+                            MsgB m = new MsgB("informacion", "Contraseña actualizada con exito");
+                            DialogResult dR = m.ShowDialog();
+                            comando.Connection.Close();
+                            this.Close();
+                            /*  Modelo modelo = new Modelo();
+                              if (modelo.existeContraseña(TXT_Contra.Text))//condicional if que verificara que el rol no se repita y en caso de ser asi mandara un mensaje con rol ya existe 
+                              {
+                                  MsgB l = new MsgB("advertencia", "La Contraseña  ya existe");
+                                  DialogResult d = l.ShowDialog();
+                              }*/
 
+                        }
                     }
-                }
-                catch (Exception a)
-                {
-                    MessageBox.Show(a.Message + a.StackTrace);
+                    catch (Exception a)
+                    {
+                        MessageBox.Show(a.Message + a.StackTrace);
+                    }
                 }
 
             }

@@ -122,7 +122,7 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(246, 687);
+            panel1.Size = new Size(246, 693);
             panel1.TabIndex = 1;
             // 
             // iconButton6
@@ -643,7 +643,7 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(246, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1067, 64);
+            panel2.Size = new Size(1061, 64);
             panel2.TabIndex = 2;
             // 
             // iconPerfil
@@ -661,7 +661,7 @@
             iconPerfil.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconPerfil.IconSize = 30;
             iconPerfil.ImageAlign = ContentAlignment.MiddleLeft;
-            iconPerfil.Location = new Point(975, 8);
+            iconPerfil.Location = new Point(963, 8);
             iconPerfil.Name = "iconPerfil";
             iconPerfil.Size = new Size(80, 48);
             iconPerfil.TabIndex = 49;
@@ -677,7 +677,7 @@
             lbl_titulo.BackColor = Color.Transparent;
             lbl_titulo.Font = new Font("Lucida Bright", 24F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             lbl_titulo.ForeColor = Color.White;
-            lbl_titulo.Location = new Point(343, 15);
+            lbl_titulo.Location = new Point(340, 15);
             lbl_titulo.Name = "lbl_titulo";
             lbl_titulo.Size = new Size(362, 36);
             lbl_titulo.TabIndex = 16;
@@ -697,7 +697,7 @@
             panelChildForm.Controls.Add(label11);
             panelChildForm.Location = new Point(246, 65);
             panelChildForm.Name = "panelChildForm";
-            panelChildForm.Size = new Size(1067, 622);
+            panelChildForm.Size = new Size(1067, 628);
             panelChildForm.TabIndex = 25;
             // 
             // label12
@@ -1114,7 +1114,7 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackgroundImage = Properties.Resources.fondo;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1313, 687);
+            ClientSize = new Size(1307, 693);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(panelChildForm);

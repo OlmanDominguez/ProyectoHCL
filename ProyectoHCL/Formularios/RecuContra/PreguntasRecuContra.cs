@@ -23,7 +23,8 @@ namespace ProyectoHCL.Formularios
             InitializeComponent();
         }
 
-
+        //int intentosFallidos = 0;
+        //int maxIntentosFallidos = 3;
 
         private void BTN_Cancelar_Click(object sender, EventArgs e)
         {
@@ -319,8 +320,17 @@ namespace ProyectoHCL.Formularios
                                 }
                                 else
                                 {
+                                    //intentosFallidos++;
+
                                     MsgB mbox = new MsgB("advertencia", "Respuesta incorrecta");
                                     DialogResult dR = mbox.ShowDialog();
+
+                                    //if (intentosFallidos >= maxIntentosFallidos)
+                                    //{
+                                    //    MsgB mb = new MsgB("advertencia", "Demasiados intentos fallidos");
+                                    //    DialogResult d = mb.ShowDialog();
+                                    //    TXT_Respuesta.Enabled = false;
+                                    //}
                                 }
                             }
                             comando.Connection.Close();

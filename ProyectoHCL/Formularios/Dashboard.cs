@@ -680,5 +680,11 @@ namespace ProyectoHCL
             openChildFormInPanel(new PerfilUsuario());
             hideSubMenu2();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form Dashboard = new Reportes();
+            Dashboard.Show();
+        }
     }
 }

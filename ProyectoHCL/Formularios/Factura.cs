@@ -790,17 +790,17 @@ namespace ProyectoHCL.Formularios
                 MsgB Mbox = new MsgB("advertencia", "Seleccione un método de pago");
                 DialogResult DR = Mbox.ShowDialog();
             }
-            if (!string.IsNullOrEmpty(txtConstEx.Text) && string.IsNullOrEmpty(txtOC.Text))
+            else if (!string.IsNullOrEmpty(txtConstEx.Text) && string.IsNullOrEmpty(txtOC.Text))
             {
                 MsgB m = new MsgB("advertencia", "Por favor llene todos los campos requeridos"); //validar campos vacíos
                 DialogResult dR = m.ShowDialog();
             }
-            if (!string.IsNullOrEmpty(txtConstEx.Text) && string.IsNullOrEmpty(txtSar.Text))
+            else if (!string.IsNullOrEmpty(txtConstEx.Text) && string.IsNullOrEmpty(txtSar.Text))
             {
                 MsgB m = new MsgB("advertencia", "Por favor llene todos los campos requeridos"); //validar campos vacíos
                 DialogResult dR = m.ShowDialog();
             }
-            if (string.IsNullOrEmpty(txtConstEx.Text) && !string.IsNullOrEmpty(txtSar.Text) || !string.IsNullOrEmpty(txtOC.Text))
+            else if (string.IsNullOrEmpty(txtConstEx.Text) && !string.IsNullOrEmpty(txtSar.Text) || string.IsNullOrEmpty(txtConstEx.Text) && !string.IsNullOrEmpty(txtOC.Text))
             {
                 MsgB m = new MsgB("advertencia", "Por favor llene todos los campos requeridos"); //validar campos vacíos
                 DialogResult dR = m.ShowDialog();

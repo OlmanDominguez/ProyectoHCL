@@ -35,6 +35,8 @@
             cerrar = new Button();
             lbPar = new Label();
             panel3 = new Panel();
+            label3 = new Label();
+            label1 = new Label();
             txtValor = new TextBox();
             texPa = new TextBox();
             btnCancelar = new Button();
@@ -42,8 +44,6 @@
             label6 = new Label();
             label2 = new Label();
             errorp = new ErrorProvider(components);
-            label1 = new Label();
-            label3 = new Label();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorp).BeginInit();
@@ -105,9 +105,9 @@
             lbPar.Location = new Point(264, 50);
             lbPar.Margin = new Padding(4, 0, 4, 0);
             lbPar.Name = "lbPar";
-            lbPar.Size = new Size(320, 45);
+            lbPar.Size = new Size(311, 45);
             lbPar.TabIndex = 19;
-            lbPar.Text = "Registrar  Parametro";
+            lbPar.Text = "Registrar Parametro";
             // 
             // panel3
             // 
@@ -126,6 +126,32 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(824, 543);
             panel3.TabIndex = 25;
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.Red;
+            label3.Location = new Point(242, 192);
+            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(35, 45);
+            label3.TabIndex = 30;
+            label3.Text = "*";
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Red;
+            label1.Location = new Point(295, 25);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(35, 45);
+            label1.TabIndex = 29;
+            label1.Text = "*";
             // 
             // txtValor
             // 
@@ -207,32 +233,6 @@
             // errorp
             // 
             errorp.ContainerControl = this;
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.Red;
-            label1.Location = new Point(295, 25);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(35, 45);
-            label1.TabIndex = 29;
-            label1.Text = "*";
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.ForeColor = Color.Red;
-            label3.Location = new Point(242, 192);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(35, 45);
-            label3.TabIndex = 30;
-            label3.Text = "*";
             // 
             // R_E_Parametro
             // 
