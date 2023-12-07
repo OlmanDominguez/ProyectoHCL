@@ -578,8 +578,15 @@ namespace ProyectoHCL.Formularios
                 PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
                 PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
 
+                iText.Layout.Element.Image logo;
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    Properties.Resources.logo.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+                    byte[] logoBytes = memoryStream.ToArray();
 
-                var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/HP TOUCH/source/repos/OlmanDominguez/ProyectoHCL/logo.png")).SetWidth(50);
+                    // Crear la imagen con el MemoryStream
+                    logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create(logoBytes)).SetWidth(50);
+                }
 
                 var plogo = new Paragraph("").Add(logo);
 
@@ -601,7 +608,7 @@ namespace ProyectoHCL.Formularios
                 documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
                 documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
 
-                string[] columnas = { "Codigo", "Nombre", "Apellido", "Dni_pasaporte", "Descripcion", "Rtn", "Telefono", "Telefono2", "Email", "Email2" };
+                string[] columnas = { "Codigo", "Nombre", "Apellido", "Dni_pasaporte", "Descripcion", "Rtn", "Telefono", "Email"};
 
                 float[] tamanios = { 1, 1, 1, 1, 1, 1, 1, 1 };
                 Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
@@ -612,7 +619,7 @@ namespace ProyectoHCL.Formularios
                     tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
                 }
 
-                string sql = "SELECT c.CODIGO, c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, t.DESCRIPCION, c.NOMBRE_RTN, c.RTN, c.TELEFONO, c.TELEFONO2, c.EMAIL, c.EMAIL2 FROM TBL_CLIENTE c INNER JOIN TBL_TIPOCLIENTE t ON c.ID_TIPOCLIENTE = t.ID_TIPOCLIENTE";
+                string sql = "SELECT c.CODIGO, c.NOMBRE, c.APELLIDO, c.DNI_PASAPORTE, t.DESCRIPCION, c.RTN, c.TELEFONO, c.EMAIL FROM TBL_CLIENTE c INNER JOIN TBL_TIPOCLIENTE t ON c.ID_TIPOCLIENTE = t.ID_TIPOCLIENTE";
 
                 MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
                 // conexionBD.Open();
@@ -629,9 +636,9 @@ namespace ProyectoHCL.Formularios
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["DESCRIPCION"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["RTN"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["TELEFONO"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["TELEFONO2"].ToString()).SetFont(fontContenido)));
+                   // tabla.AddCell(new Cell().Add(new Paragraph(reader["TELEFONO2"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["EMAIL"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["EMAIL2"].ToString()).SetFont(fontContenido)));
+                    //tabla.AddCell(new Cell().Add(new Paragraph(reader["EMAIL2"].ToString()).SetFont(fontContenido)));
                 }
 
                 documento.Add(tabla);

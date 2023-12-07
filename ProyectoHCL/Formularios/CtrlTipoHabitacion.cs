@@ -313,18 +313,17 @@ namespace ProyectoHCL.Formularios
                 PdfFont fontColumnas = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
                 PdfFont fontContenido = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
 
-               /* iText.Layout.Element.Image logo;
+                iText.Layout.Element.Image logo;
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
                     Properties.Resources.logo.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
                     byte[] logoBytes = memoryStream.ToArray();
 
+                    // Crear la imagen con el MemoryStream
                     logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create(logoBytes)).SetWidth(50);
                 }
-               */
 
-               var logo = new iText.Layout.Element.Image(iText.IO.Image.ImageDataFactory.Create("C:/Users/HP TOUCH/source/repos/OlmanDominguez/ProyectoHCL/Logo HCL.jpeg")).SetWidth(50);
-               var plogo = new Paragraph("").Add(logo);
+                var plogo = new Paragraph("").Add(logo);
 
                 var nombre = new Paragraph("Hotel Casa Lomas");
                 nombre.SetFontSize(12);
@@ -344,9 +343,9 @@ namespace ProyectoHCL.Formularios
                 documento.ShowTextAligned(titulo, 396, 580, 1, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
                 documento.ShowTextAligned(fecha, 760, 580, 1, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
 
-                string[] columnas = { "Id", "Tipo", "Capacidad", "Precio" };
+                string[] columnas = { "Id", "Tipo", "Capacidad", "Precio", "Estado"};
 
-                float[] tamanios = { 1, 3, 2, 3, 2, 2, 2, 2 };
+                float[] tamanios = { 1, 3, 2, 3, 2};
                 Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
                 tabla.SetWidth(UnitValue.CreatePercentValue(100));
 
@@ -355,7 +354,7 @@ namespace ProyectoHCL.Formularios
                     tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
                 }
 
-                string sql = "SELECT ID_TIPOHABITACION AS ID, TIPO, CAPACIDAD, PRECIO FROM TBL_TIPOHABITACION";
+                string sql = "SELECT ID_TIPOHABITACION AS ID, TIPO, CAPACIDAD, PRECIO, ESTADO FROM TBL_TIPOHABITACION";
 
                 MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
                 // conexionBD.Open();
@@ -368,7 +367,8 @@ namespace ProyectoHCL.Formularios
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["Id"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["Tipo"].ToString()).SetFont(fontContenido)));
                     tabla.AddCell(new Cell().Add(new Paragraph(reader["Capacidad"].ToString()).SetFont(fontContenido)));
-                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Precio"].ToString()).SetFont(fontContenido))); 
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Precio"].ToString()).SetFont(fontContenido)));
+                    tabla.AddCell(new Cell().Add(new Paragraph(reader["Estado"].ToString()).SetFont(fontContenido)));
                 }
 
                 documento.Add(tabla);
@@ -438,6 +438,7 @@ namespace ProyectoHCL.Formularios
             sl.SetCellValue("C" + celdaCabecera, "Tipo");
             sl.SetCellValue("D" + celdaCabecera, "Capacidad");
             sl.SetCellValue("E" + celdaCabecera, "Precio");
+            sl.SetCellValue("E" + celdaCabecera, "Estado");
 
             SLStyle estiloCa = sl.CreateStyle();
             estiloT.Font.FontName = "Arial";
@@ -447,7 +448,7 @@ namespace ProyectoHCL.Formularios
             estiloCa.Fill.SetPattern(DocumentFormat.OpenXml.Spreadsheet.PatternValues.Solid, System.Drawing.Color.Blue, System.Drawing.Color.Blue);
             sl.SetCellStyle("B" + celdaCabecera, "I" + celdaCabecera, estiloCa);
 
-            string sql = "SELECT ID_TIPOHABITACION AS ID, TIPO, CAPACIDAD, PRECIO FROM TBL_TIPOHABITACION";
+            string sql = "SELECT ID_TIPOHABITACION AS ID, TIPO, CAPACIDAD, PRECIO, ESTADO FROM TBL_TIPOHABITACION";
 
             MySqlConnection conexionBD = BaseDatosHCL.ObtenerConexion();
 
@@ -462,6 +463,7 @@ namespace ProyectoHCL.Formularios
                 sl.SetCellValue("C" + celdaCabecera, reader["tipo"].ToString());
                 sl.SetCellValue("D" + celdaCabecera, reader["capacidad"].ToString());
                 sl.SetCellValue("E" + celdaCabecera, reader["precio"].ToString());
+                sl.SetCellValue("E" + celdaCabecera, reader["estado"].ToString());
             }
 
             SLStyle EstiloB = sl.CreateStyle();

@@ -394,7 +394,7 @@ namespace ProyectoHCL.Formularios
 
             }
         }
-
+        /*
         private void txtTele2_Leave(object sender, EventArgs e)
         {
             if (ValidarTxt.txtVacio(txtTele2))
@@ -413,6 +413,7 @@ namespace ProyectoHCL.Formularios
 
             }
         }
+        */
 
         private void txtEmpresa_Leave(object sender, EventArgs e)
         {

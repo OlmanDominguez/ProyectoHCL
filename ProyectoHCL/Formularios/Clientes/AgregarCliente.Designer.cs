@@ -494,7 +494,7 @@
             txtTele2.Size = new Size(309, 27);
             txtTele2.TabIndex = 52;
             txtTele2.KeyPress += txtTele2_KeyPress;
-            txtTele2.Leave += txtTele2_Leave;
+           // txtTele2.Leave += txtTele2_Leave;
             // 
             // txtTele1
             // 
