@@ -91,7 +91,7 @@
             UsuarioBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             UsuarioBox1.Location = new Point(143, 307);
             UsuarioBox1.Margin = new Padding(2);
-            UsuarioBox1.MaxLength = 8;
+            UsuarioBox1.MaxLength = 15;
             UsuarioBox1.Name = "UsuarioBox1";
             UsuarioBox1.Size = new Size(224, 27);
             UsuarioBox1.TabIndex = 2;

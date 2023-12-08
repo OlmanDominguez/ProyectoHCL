@@ -23,9 +23,6 @@ namespace ProyectoHCL.Formularios
             InitializeComponent();
         }
 
-        //int intentosFallidos = 0;
-        //int maxIntentosFallidos = 3;
-
         private void BTN_Cancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -99,7 +96,7 @@ namespace ProyectoHCL.Formularios
                         //Consulta
                         MySqlCommand comando = new MySqlCommand();
                         comando.Connection = BaseDatosHCL.ObtenerConexion();
-                        comando.CommandText = ("select PREGUNTA FROM TBL_PREGUNTA WHERE ID_ESTADO = 1");
+                        comando.CommandText = ("select TBL_PREGUNTA.PREGUNTA, TBL_PREGUNTAUSUARIO.RESPUESTA, TBL_USUARIO.NOMBRE_USUARIO FROM TBL_PREGUNTA\r\nINNER JOIN TBL_PREGUNTAUSUARIO ON TBL_PREGUNTA.ID_PREGUNTA = TBL_PREGUNTAUSUARIO.ID_PREGUNTA\r\nINNER JOIN TBL_USUARIO ON TBL_PREGUNTAUSUARIO.ID_USUARIO = TBL_USUARIO.ID_USUARIO\r\nWHERE TBL_USUARIO.USUARIO = '" + clasecompartida.user + "'");
 
                         MySqlDataReader leer = comando.ExecuteReader();
 
@@ -179,7 +176,12 @@ namespace ProyectoHCL.Formularios
                             if (leer1.Read())
                             {
                                 long cant = Convert.ToInt64(leer1["COUNT(*)"]);
-                                if (cant == 2 || cant > 2)
+                                if (COBPREG.Text == "--Seleccione--") 
+                                {
+                                    MsgB Mbox = new MsgB("advertencia", "Seleccione una pregunta");
+                                    DialogResult DR = Mbox.ShowDialog();
+                                }
+                                else if (cant == 2 || cant > 2)
                                 {
                                     MsgB mbox = new MsgB("informacion", "Gracias por responder");
                                     DialogResult dR = mbox.ShowDialog();
@@ -196,6 +198,8 @@ namespace ProyectoHCL.Formularios
                                     MsgB mbox = new MsgB("informacion", "Por favor contesta otra pregunta");
                                     DialogResult dR = mbox.ShowDialog();
                                     TXT_Respuesta.Text = "";
+                                    COBPREG.SelectedIndex = -1; // Limpiar ComboBox
+                                    COBPREG.Items.Remove(pregunta);
                                 }
                             }
                             comando.Connection.Close();
@@ -265,7 +269,12 @@ namespace ProyectoHCL.Formularios
                             if (leer1.Read())
                             {
                                 long cant = Convert.ToInt64(leer1["COUNT(*)"]);
-                                if (cant == 2 || cant > 2)
+                                if (COBPREG.Text == "--Seleccione--")
+                                {
+                                    MsgB Mbox = new MsgB("advertencia", "Seleccione una pregunta");
+                                    DialogResult DR = Mbox.ShowDialog();
+                                }
+                                else if (cant == 2 || cant > 2)
                                 {
                                     MsgB mbox = new MsgB("informacion", "Gracias por responder");
                                     DialogResult dR = mbox.ShowDialog();
@@ -285,6 +294,8 @@ namespace ProyectoHCL.Formularios
                                     MsgB mbox = new MsgB("informacion", "Por favor contesta otra pregunta");
                                     DialogResult dR = mbox.ShowDialog();
                                     TXT_Respuesta.Text = "";
+                                    COBPREG.SelectedIndex = -1; // Limpiar ComboBox
+                                    COBPREG.Items.Remove(pregunta);
                                 }
 
                             }
@@ -308,6 +319,7 @@ namespace ProyectoHCL.Formularios
                             comando.Connection = BaseDatosHCL.ObtenerConexion();
                             comando.CommandText = ("select TBL_PREGUNTA.PREGUNTA, TBL_PREGUNTAUSUARIO.RESPUESTA, TBL_USUARIO.NOMBRE_USUARIO FROM TBL_PREGUNTA\r\nINNER JOIN TBL_PREGUNTAUSUARIO ON TBL_PREGUNTA.ID_PREGUNTA = TBL_PREGUNTAUSUARIO.ID_PREGUNTA\r\nINNER JOIN TBL_USUARIO ON TBL_PREGUNTAUSUARIO.ID_USUARIO = TBL_USUARIO.ID_USUARIO\r\nWHERE TBL_USUARIO.USUARIO = '" + clasecompartida.user + "' AND TBL_PREGUNTA.PREGUNTA = '" + pregunta + "'");
                             MySqlDataReader leer = comando.ExecuteReader();
+
                             if (leer.Read())
                             {
                                 string resp = (string)leer["RESPUESTA"];
@@ -320,18 +332,14 @@ namespace ProyectoHCL.Formularios
                                 }
                                 else
                                 {
-                                    //intentosFallidos++;
-
                                     MsgB mbox = new MsgB("advertencia", "Respuesta incorrecta");
                                     DialogResult dR = mbox.ShowDialog();
-
-                                    //if (intentosFallidos >= maxIntentosFallidos)
-                                    //{
-                                    //    MsgB mb = new MsgB("advertencia", "Demasiados intentos fallidos");
-                                    //    DialogResult d = mb.ShowDialog();
-                                    //    TXT_Respuesta.Enabled = false;
-                                    //}
                                 }
+                            }
+                            else if (COBPREG.Text == "--Seleccione--")
+                            {
+                                MsgB Mbox = new MsgB("advertencia", "Seleccione una pregunta");
+                                DialogResult DR = Mbox.ShowDialog();
                             }
                             comando.Connection.Close();
                         }

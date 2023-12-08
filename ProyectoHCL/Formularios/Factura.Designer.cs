@@ -427,7 +427,6 @@
             // 
             dgvDetalleFact.AllowUserToAddRows = false;
             dgvDetalleFact.AllowUserToDeleteRows = false;
-            dgvDetalleFact.AllowUserToResizeColumns = false;
             dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
             dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = Color.Black;
