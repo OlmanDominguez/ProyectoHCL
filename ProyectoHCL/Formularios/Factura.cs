@@ -1,6 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.ExtendedProperties;
+using iText.Kernel.Font;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
@@ -18,7 +19,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static ProyectoHCL.Formularios.CtrlFacturacion;
 using static ProyectoHCL.RecuContra;
+using Font = System.Drawing.Font;
 using Image = System.Drawing.Image;
+using Paragraph = iTextSharp.text.Paragraph;
+using iText.Kernel.Font;
+using iText.Layout.Element;
+using Rectangle = iTextSharp.text.Rectangle;
+using iText.Kernel.Pdf.Canvas;
+using Text = iText.Layout.Element.Text;
+using iText.Kernel.Pdf.Canvas.Draw;
+using iTextSharp.tool.xml.html;
 
 namespace ProyectoHCL.Formularios
 {
@@ -869,7 +879,7 @@ namespace ProyectoHCL.Formularios
             }
             else if (info.est == 1)
             {
-                crearPDF();
+                CrearPDF2();
                 MsgB mbox = new MsgB("informacion", "Archivo PDF creado con éxito");
                 DialogResult dR = mbox.ShowDialog();
             }
@@ -1324,6 +1334,239 @@ namespace ProyectoHCL.Formularios
             else
             {
                 errorT.Clear();
+            }
+        }
+
+        private void CrearPDF2()
+        {
+            SaveFileDialog guardar = new SaveFileDialog();
+            guardar.FileName = "Factura " + DateTime.Now.ToString("dd_MM_yyyy") + ".pdf";
+
+            Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
+            var noches = Convert.ToDateTime(info.salida) - Convert.ToDateTime(info.ingreso);
+
+            if (guardar.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = guardar.FileName;
+
+                using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                {
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                    pdfDoc.Open();
+
+                    // Crear una tabla para colocar la imagen y los datos del hotel
+                    PdfPTable headerTable = new PdfPTable(2);
+                    headerTable.WidthPercentage = 100;
+
+
+                    // Celda para la imagen
+                    PdfPCell imageCell = new PdfPCell();
+                    imageCell.Border = PdfPCell.NO_BORDER;
+
+                    // Añadir la imagen con escala y posición a la celda de la imagen
+                    iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(Properties.Resources.logo, System.Drawing.Imaging.ImageFormat.Png);
+                    img.ScaleToFit(80, 60);
+                    imageCell.AddElement(img);
+
+                    // Celda para los datos del hotel
+                    PdfPCell dataCell = new PdfPCell();
+                    dataCell.Border = PdfPCell.NO_BORDER;
+                    dataCell.PaddingLeft = -150;
+
+                    dataCell.AddElement(new Paragraph("HOTEL CASA LOMAS")
+                    {
+                        Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12f),
+                        
+                    });
+                    dataCell.AddElement(new Paragraph($"RTN: {ParametroRTNH()}"));
+                    dataCell.AddElement(new Paragraph($"Dirección: {ParametroDireccionH()}"));
+                    dataCell.AddElement(new Paragraph($"Teléfono: {ParametroTelefonoH()}"));
+
+                    // Agregar celdas a la tabla del encabezado
+                    headerTable.AddCell(imageCell);
+                    headerTable.AddCell(dataCell);
+
+                    // Agregar la tabla del encabezado al documento
+                    pdfDoc.Add(headerTable);
+
+                    pdfDoc.Add(Chunk.NEWLINE);
+                    pdfDoc.Add(Chunk.NEWLINE);
+                    pdfDoc.Add(Chunk.NEWLINE);
+                    pdfDoc.Add(Chunk.NEWLINE);
+
+                    pdfDoc.Add(new Paragraph($"Factura: {info.factura}"));
+                    pdfDoc.Add(new Paragraph($"Fecha: {today.ToString("yyyy-MM-dd")}"));
+
+                    pdfDoc.Add(Chunk.NEWLINE);
+
+                    pdfDoc.Add(new Paragraph("Identificación: " + lblId.Text));
+                    pdfDoc.Add(new Paragraph("Cliente: " + lblNombre.Text));
+                    pdfDoc.Add(new Paragraph("Ingreso: " + lblIngreso.Text));
+                    pdfDoc.Add(new Paragraph("Salida: " + lblSalida.Text));
+                    pdfDoc.Add(new Paragraph("Noches: " + lblNoches.Text));
+
+                    pdfDoc.Add(Chunk.NEWLINE);
+
+                    // Tabla de detalles
+                    PdfPTable table = new PdfPTable(4);
+                    table.WidthPercentage = 100;
+                    table.DefaultCell.BorderWidth = 1;
+
+                    // Encabezados
+                    table.AddCell(GetCell("Cantidad", BaseColor.CYAN));
+                    table.AddCell(GetCell("Descripción", BaseColor.CYAN));
+                    table.AddCell(GetCell("Precio Unitario", BaseColor.CYAN));
+                    table.AddCell(GetCell("Importe", BaseColor.CYAN));
+
+                    // Filas
+                    for (int i = 0; i < h; i++)
+                    {
+                        PdfPCell cell1 = new PdfPCell(new Phrase("1")) { HorizontalAlignment = Element.ALIGN_RIGHT };
+                        PdfPCell cell2 = new PdfPCell(new Phrase(ht.Rows[i]["DESCRIPCION"].ToString())) { HorizontalAlignment = Element.ALIGN_LEFT };
+                        PdfPCell cell3 = new PdfPCell(new Phrase(ht.Rows[i]["PRECIO"].ToString())) { HorizontalAlignment = Element.ALIGN_RIGHT };
+                        PdfPCell cell4 = new PdfPCell(new Phrase(Convert.ToString(Convert.ToDecimal(noches.Days) * Convert.ToDecimal(ht.Rows[i]["PRECIO"])))) { HorizontalAlignment = Element.ALIGN_RIGHT };
+
+                        table.AddCell(cell1);
+                        table.AddCell(cell2);
+                        table.AddCell(cell3);
+                        table.AddCell(cell4);
+                    }
+
+                    for (int j = 0; j < s; j++)
+                    {
+                        PdfPCell cell1 = new PdfPCell(new Phrase(st.Rows[j]["CANTIDAD"].ToString())) { HorizontalAlignment = Element.ALIGN_RIGHT };
+                        PdfPCell cell2 = new PdfPCell(new Phrase(st.Rows[j]["DESCRIPCION"].ToString())) { HorizontalAlignment = Element.ALIGN_LEFT };
+                        PdfPCell cell3 = new PdfPCell(new Phrase(st.Rows[j]["PRECIO"].ToString())) { HorizontalAlignment = Element.ALIGN_RIGHT };
+                        PdfPCell cell4 = new PdfPCell(new Phrase(Convert.ToString(Convert.ToDecimal(st.Rows[j]["CANTIDAD"]) * Convert.ToDecimal(st.Rows[j]["PRECIO"])))) { HorizontalAlignment = Element.ALIGN_RIGHT };
+
+                        table.AddCell(cell1);
+                        table.AddCell(cell2);
+                        table.AddCell(cell3);
+                        table.AddCell(cell4);
+                    }
+
+                    // Totales
+                    table.AddCell(GetCell("", BaseColor.WHITE));
+                    table.AddCell(GetCell("", BaseColor.WHITE));
+                    var subtotalCell = GetCell("SubTotal:", BaseColor.WHITE);
+                    subtotalCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    table.AddCell(subtotalCell);
+                    var subtCell = GetCell(subt.ToString(), BaseColor.WHITE);
+                    subtCell.HorizontalAlignment = Element.ALIGN_RIGHT; 
+                    table.AddCell(subtCell);
+
+                    table.AddCell(GetCell("", BaseColor.WHITE));
+                    table.AddCell(GetCell("", BaseColor.WHITE));
+                    var subtotalCell1 = GetCell("Descuento:", BaseColor.WHITE);
+                    subtotalCell1.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    table.AddCell(subtotalCell1);
+                    var subtCell1 = GetCell(desc.ToString(), BaseColor.WHITE);
+                    subtCell1.HorizontalAlignment = Element.ALIGN_RIGHT; 
+                    table.AddCell(subtCell1);
+
+                    table.AddCell(GetCell("", BaseColor.CYAN));
+                    table.AddCell(GetCell("", BaseColor.CYAN));
+                    var subtotalCell2 = GetCell("SubTotal menos Descuento:", BaseColor.CYAN);
+                    subtotalCell2.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    table.AddCell(subtotalCell2);
+                    var subtCell2 = GetCell(subtD.ToString(), BaseColor.CYAN);
+                    subtCell2.HorizontalAlignment = Element.ALIGN_RIGHT; 
+                    table.AddCell(subtCell2);
+
+                    table.AddCell(GetCell("", BaseColor.WHITE));
+                    table.AddCell(GetCell("", BaseColor.WHITE));
+                    var subtotalCell3 = GetCell("Importe exonerado:", BaseColor.WHITE);
+                    subtotalCell3.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    table.AddCell(subtotalCell3);
+                    var subtCell3 = GetCell(iEx.ToString(), BaseColor.WHITE);
+                    subtCell3.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    table.AddCell(subtCell3);
+
+                    table.AddCell(GetCell("", BaseColor.WHITE));
+                    table.AddCell(GetCell("", BaseColor.WHITE));
+                    var subtotalCell4 = GetCell("Impuesto S/Venta:", BaseColor.WHITE);
+                    subtotalCell4.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    table.AddCell(subtotalCell4);
+                    var subtCell4 = GetCell(isv.ToString(), BaseColor.WHITE);
+                    subtCell4.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    table.AddCell(subtCell4);
+
+                    table.AddCell(GetCell("", BaseColor.WHITE));
+                    table.AddCell(GetCell("", BaseColor.WHITE));
+                    var subtotalCell5 = GetCell("Impuesto Turismo:", BaseColor.WHITE);
+                    subtotalCell5.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    table.AddCell(subtotalCell5);
+                    var subtCell5 = GetCell(it.ToString(), BaseColor.WHITE);
+                    subtCell5.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    table.AddCell(subtCell5);
+
+                    table.AddCell(GetCell("", BaseColor.CYAN));
+                    table.AddCell(GetCell("", BaseColor.CYAN));
+                    var subtotalCell6 = GetCell("Total:", BaseColor.CYAN);
+                    subtotalCell6.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    table.AddCell(subtotalCell6);
+                    var subtCell6 = GetCell(total.ToString(), BaseColor.CYAN);
+                    subtCell6.HorizontalAlignment = Element.ALIGN_RIGHT;
+                    table.AddCell(subtCell6);
+
+                    pdfDoc.Add(table);
+
+                    pdfDoc.Add(new Paragraph("\n\n\n"));
+
+                    PdfPTable footerTable = new PdfPTable(1);
+                    footerTable.WidthPercentage = 100;
+
+                    // Añadir una línea divisora
+                    PdfPCell dividerCell = new PdfPCell();
+                    dividerCell.CellEvent = new LineDivider();
+                    dividerCell.Colspan = 2;
+                    dividerCell.Border = PdfPCell.NO_BORDER;
+                    footerTable.AddCell(dividerCell);
+
+                    // Añadir espacio antes de las últimas dos líneas
+                    footerTable.AddCell(new PdfPCell(new Paragraph("\n")) { Border = PdfPCell.NO_BORDER });
+
+                    // Añadir las últimas dos líneas centradas
+                    PdfPCell lastLinesCell = new PdfPCell();
+                    lastLinesCell.Border = PdfPCell.NO_BORDER;
+                    lastLinesCell.VerticalAlignment = Element.ALIGN_CENTER;
+                    lastLinesCell.AddElement(new Paragraph(ParametroCtaH()) { Alignment = Element.ALIGN_CENTER });
+                    lastLinesCell.AddElement(new Paragraph(ParametroCorreoF()) { Alignment = Element.ALIGN_CENTER });
+
+                    // Añadir la celda al pie de la tabla
+                    footerTable.AddCell(lastLinesCell);
+
+                    // Agregar la tabla al documento
+                    pdfDoc.Add(footerTable);
+
+                    pdfDoc.Close();
+                    stream.Close();
+
+                    MostrarVistaPrevia(filePath);
+                }
+            }
+        }
+
+        private PdfPCell GetCell(string text, BaseColor backgroundColor)
+        {
+            PdfPCell cell = new PdfPCell(new Phrase(text));
+            cell.BackgroundColor = backgroundColor;
+            return cell;
+        }
+
+        public class LineDivider : IPdfPCellEvent
+        {
+            public void CellLayout(PdfPCell cell, Rectangle position, PdfContentByte[] canvases)
+            {
+                PdfContentByte canvas = canvases[PdfPTable.LINECANVAS];
+                float lineWidth = 1f;
+                float space = 5f; // Ajusta el espacio entre la línea y el texto
+
+                // Dibujar la línea
+                canvas.SetLineWidth(lineWidth);
+                canvas.MoveTo(position.Left, position.Bottom + space);
+                canvas.LineTo(position.Right, position.Bottom + space);
+                canvas.Stroke();
             }
         }
     }
