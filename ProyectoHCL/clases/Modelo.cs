@@ -1243,5 +1243,27 @@ namespace ProyectoHCL.clases
                 }
             }
         }
+
+        public bool ObjetoEditarBD(string nuevoObjeto, string idRegistroActual)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                if (nuevoObjeto == ObtenerObjeto(idRegistroActual))
+                {
+                    return false;
+                }
+
+                using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_OBJETO WHERE OBJETO = @NuevoObjeto", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@NuevoObjeto", nuevoObjeto);
+
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    return count > 0;
+                }
+            }
+        }
     }
 }
