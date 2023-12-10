@@ -634,7 +634,7 @@ namespace ProyectoHCL
                             int costo = Convert.ToInt32(leer["PRECIO"]);
                             int dias = Convert.ToInt32(lbl_noches.Text);
                             int total = costo * dias;
-                           // txt_monto.Text = Convert.ToString(total);
+                            txt_monto.Text = Convert.ToString(total);
                         }
                         else
                         {
