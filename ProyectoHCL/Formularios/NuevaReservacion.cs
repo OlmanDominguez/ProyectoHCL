@@ -608,50 +608,58 @@ namespace ProyectoHCL
 
         private void cb_tipo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cb_tipo.SelectedItem != null)
-            {
-                string ID_TIPOHABITACION = cb_tipo.SelectedValue.ToString();
-                combo_habitacion(ID_TIPOHABITACION);
-            }
-
-
-            String nombre = cb_tipo.SelectedValue.ToString();
-            try
-            {
-                using (BaseDatosHCL.ObtenerConexion())
+           
+                if (cb_tipo.SelectedItem != null)
                 {
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("select ID_TIPOHABITACION,CAPACIDAD,PRECIO from TBL_TIPOHABITACION where ID_TIPOHABITACION='" + nombre + "';");
+                    string ID_TIPOHABITACION = cb_tipo.SelectedValue.ToString();
+                    combo_habitacion(ID_TIPOHABITACION);
+                }
 
-                    MySqlDataReader leer = comando.ExecuteReader();
-                    if (leer.Read() == true)
+
+                String nombre = cb_tipo.SelectedValue.ToString();
+                try
+                {
+                    using (BaseDatosHCL.ObtenerConexion())
                     {
-                        txt_tipo_habitacion.Text = leer["ID_TIPOHABITACION"].ToString();
-                        txt_capacidad.Text = leer["CAPACIDAD"].ToString();
-                        if (leer["PRECIO"] != DBNull.Value)
+                        MySqlCommand comando = new MySqlCommand();
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("select ID_TIPOHABITACION,CAPACIDAD,PRECIO from TBL_TIPOHABITACION where ID_TIPOHABITACION='" + nombre + "';");
+
+                        MySqlDataReader leer = comando.ExecuteReader();
+                        if (leer.Read() == true)
                         {
-                            int costo = Convert.ToInt32(leer["PRECIO"]);
-                            int dias = Convert.ToInt32(lbl_noches.Text);
-                            int total = costo * dias;
-                            txt_monto.Text = Convert.ToString(total);
+                            txt_tipo_habitacion.Text = leer["ID_TIPOHABITACION"].ToString();
+                            txt_capacidad.Text = leer["CAPACIDAD"].ToString();
+                        if (string.IsNullOrWhiteSpace(txt_monto.Text))
+                        {
+                            if (leer["PRECIO"] != DBNull.Value)
+                            {
+                                int costo = Convert.ToInt32(leer["PRECIO"]);
+                                int dias = Convert.ToInt32(lbl_noches.Text);
+                                int total = costo * dias;
+                                txt_monto.Text = Convert.ToString(total);
+                            }
+                            else
+                            {
+                                MessageBox.Show("ERROR AL CARGAR PRECIO");
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("ERROR AL CARGAR PRECIO");
+
                         }
-                    }
-                    else
-                    {
+                       
 
                     }
+                         
+                    }
+
                 }
-
-            }
-            catch (Exception a)
-            {
-                MessageBox.Show(a.Message);
-            }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message);
+                }
+           
         }
 
         private void cb_estado_SelectedIndexChanged(object sender, EventArgs e)
