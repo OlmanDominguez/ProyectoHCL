@@ -237,8 +237,10 @@ namespace ProyectoHCL.Formularios
             else if (lblTitulo.Text == "Editar Objeto")
             {
                 Control control = new Control();
-                string nuevoNombre = txtObj.Text;
-                int idRegistroActual = IdObjeto();
+                string nuevoObjeto = txtObj.Text;
+                string idRegistro = idObj;
+
+                Modelo modelo = new Modelo();
 
                 if (txtObj.Text.Trim() == "" || cmbEstado.Text.Trim() == "" || rTxtDesc.Text.Trim() == "") //validar campos vacíos
                 {
@@ -255,11 +257,13 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "La descripción debe contener al menos 10 letras");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (NombreExiste(nuevoNombre, idRegistroActual))
+
+                else if (modelo.ObjetoEditarBD(nuevoObjeto, idRegistro)) //Validar que el objeto ya existe
                 {
-                    MsgB m = new MsgB("advertencia", "El objeto ya existe, ingrese otro nombre");
-                    DialogResult dR = m.ShowDialog();
+                    MsgB mbox1 = new MsgB("advertencia", "El objeto ya existe");
+                    DialogResult dR1 = mbox1.ShowDialog();
                 }
+                
                 else
                 {
                     try
