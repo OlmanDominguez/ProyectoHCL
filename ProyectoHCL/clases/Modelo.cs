@@ -591,7 +591,7 @@ namespace ProyectoHCL.clases
 
             using (conectar)
             {
-                using (MySqlCommand cmd = new MySqlCommand("SELECT ROl FROM TBL_ROL WHERE ID_ROL = @IDActual", conectar))
+                using (MySqlCommand cmd = new MySqlCommand("SELECT ROL FROM TBL_ROL WHERE ID_ROL = @IDActual", conectar))
                 {
                     cmd.Parameters.AddWithValue("@IDActual", idRegistro);
                     return cmd.ExecuteScalar().ToString();
@@ -628,8 +628,9 @@ namespace ProyectoHCL.clases
                 {
                     cmd.Parameters.AddWithValue("@NuevoRol", nuevoRol);
 
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
 
-                    return false;
+                    return count > 0;
                 }
             }
         }
@@ -809,6 +810,20 @@ namespace ProyectoHCL.clases
             }
         }
 
+        public string ObtenerObjeto(string idRegistro)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                using (MySqlCommand cmd = new MySqlCommand("SELECT DESCRIPCION FROM TBL_OBJETO WHERE ID_OBJETO = @IDActual", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@IDActual", idRegistro);
+                    return cmd.ExecuteScalar().ToString();
+                }
+            }
+        }
+
         public string ObtenerTelefono(string idRegistro)
         {
             MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
@@ -816,6 +831,20 @@ namespace ProyectoHCL.clases
             using (conectar)
             {
                 using (MySqlCommand cmd = new MySqlCommand("SELECT TELEFONO FROM TBL_CLIENTE WHERE CODIGO= @IDActual", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@IDActual", idRegistro);
+                    return cmd.ExecuteScalar().ToString();
+                }
+            }
+        }
+
+        public string ObtenerParametro(string idRegistro)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                using (MySqlCommand cmd = new MySqlCommand("SELECT PARAMETRO FROM TBL_PARAMETRO WHERE ID_PARAMETRO= @IDActual", conectar))
                 {
                     cmd.Parameters.AddWithValue("@IDActual", idRegistro);
                     return cmd.ExecuteScalar().ToString();
@@ -1171,5 +1200,48 @@ namespace ProyectoHCL.clases
             }
         }
 
+        //public bool ObjetoEditarBD(string nuevoNombre, string idRegistroActual)
+        //{
+        //    MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+        //    using (conectar)
+        //    {
+        //        if (nuevoNombre == ObtenerObjeto(idRegistroActual))
+        //        {
+        //            return false;
+        //        }
+
+        //        using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_OBJETO WHERE OBJETO = @NuevoNombre", conectar))
+        //        {
+        //            cmd.Parameters.AddWithValue("@NuevoNombre", nuevoNombre);
+
+        //            int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+        //            return count > 0;
+        //        }
+        //    }
+        //}
+
+        public bool ParametroEditarBD(string nuevoNombre, string idRegistroActual)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                if (nuevoNombre == ObtenerParametro(idRegistroActual))
+                {
+                    return false;
+                }
+
+                using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_PARAMETRO WHERE PARAMETRO = @NuevoNombre", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@NuevoNombre", nuevoNombre);
+
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    return count > 0;
+                }
+            }
+        }
     }
 }

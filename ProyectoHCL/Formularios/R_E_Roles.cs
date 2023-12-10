@@ -237,11 +237,11 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "El rol ya está registrado");
                     DialogResult dR = m.ShowDialog();
                 }
-                else if (modelo.DescripcionEditarBD(nuevoDescripcion, idRegistro))
-                {
-                    MsgB m = new MsgB("advertencia", "El rol ya está registrado");
-                    DialogResult dR = m.ShowDialog();
-                }
+                //else if (modelo.DescripcionEditarBD(nuevoDescripcion, idRegistro))
+                //{
+                //    MsgB m = new MsgB("advertencia", "El rol ya está registrado");
+                //    DialogResult dR = m.ShowDialog();
+                //}
                 else
                 {
                     try

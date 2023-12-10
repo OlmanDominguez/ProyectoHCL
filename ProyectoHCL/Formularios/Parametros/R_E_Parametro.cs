@@ -201,7 +201,7 @@ namespace ProyectoHCL.Formularios
                 string nuevoParametro = texPa.Text;
                 string nuevoValor = txtValor.Text;
                 Control control = new Control();
-                string idRegistro = idpar;
+                string idRegistro = Convert.ToString(parame.idparametro);
                 Modelo modelo = new Modelo();
 
                 if (texPa.Text.Trim() == "" || txtValor.Text.Trim() == "")//|| textPar.Text.Trim() == "")
@@ -209,11 +209,11 @@ namespace ProyectoHCL.Formularios
                     MsgB m = new MsgB("advertencia", "Por favor llene todos los campos");
                     DialogResult dR = m.ShowDialog();
                 }
-                /* else if (modelo.ParametroEditarBD(nuevoParametro, idRegistro))
-                 {
-                     MsgB m = new MsgB("advertencia", "El usuario ya está registrado");
-                     DialogResult dR = m.ShowDialog();
-                 }*/
+                else if (modelo.ParametroEditarBD(nuevoParametro, idRegistro))
+                {
+                    MsgB m = new MsgB("advertencia", "El parámetro ya está registrado");
+                    DialogResult dR = m.ShowDialog();
+                }
                 else
                 {
                     try
