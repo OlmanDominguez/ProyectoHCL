@@ -447,9 +447,9 @@ namespace ProyectoHCL
         {
             //id_empleado();
 
-            TimeSpan noches = dt_fecha_salida.Value - dt_fecha_entrada.Value;
+            /*TimeSpan noches = dt_fecha_salida.Value - dt_fecha_entrada.Value;
             int days = (int)noches.TotalDays;
-            lbl_noches.Text = Convert.ToString(days);
+            lbl_noches.Text = Convert.ToString(days);*/
 
             lbl_usuario.Text = clasecompartida.user.ToUpper();
             txt_codigo.Text = clasecompartida.iduser.ToString();
@@ -508,7 +508,7 @@ namespace ProyectoHCL
                             //txt_tipo_habitacion.Text = leer[""].ToString();
                             cb_tipo.Text = leer["TIPO"].ToString();
                             cb_numero.Text = leer["NUMEROHABITACION"].ToString();
-                            txt_monto.Text = leer["MONTORESERVAR"].ToString();
+                            txt_monto.Text =leer["MONTORESERVAR"].ToString();
                             txt_vehiculo.Text = leer["VEHICULO"].ToString();
                             txt_huespedes.Text = leer["NHUESPEDES"].ToString();
                             txt_habi_vieja.Text = leer["NUMEROHABITACION"].ToString();
@@ -634,7 +634,7 @@ namespace ProyectoHCL
                             int costo = Convert.ToInt32(leer["PRECIO"]);
                             int dias = Convert.ToInt32(lbl_noches.Text);
                             int total = costo * dias;
-                            txt_monto.Text = total.ToString();
+                           // txt_monto.Text = Convert.ToString(total);
                         }
                         else
                         {
@@ -1012,32 +1012,35 @@ namespace ProyectoHCL
 
         }
         private void ValidarFechas()
-        {
+        {/*
             DateTime fechaHoy = DateTime.Today;
             DateTime fechaEntrada = dt_fecha_entrada.Value;
             DateTime fechaSalida = dt_fecha_salida.Value;
 
-            if (fechaEntrada > fechaSalida || fechaEntrada < fechaHoy)
-            {
-                MsgB m = new MsgB("advertencia", "La fecha de entrada no puede ser mayor que la fecha de salida y tampoco menor a la fecha de hoy ");
-                DialogResult dR = m.ShowDialog();
-                dt_fecha_entrada.Value = fechaHoy;
-                lbl_noches.Text = "-";
-            }
-            else if (fechaSalida < fechaEntrada || fechaSalida < fechaHoy)
-            {
-                MsgB m = new MsgB("advertencia", "La fecha de salida no puede ser menor que la fecha de entrada y tampoco menor a la fecha de hoy ");
-                DialogResult dR = m.ShowDialog();
-                dt_fecha_salida.Value = fechaHoy;
-                lbl_noches.Text = "-";
-            }
-            else
-            {
-                TimeSpan noches = dt_fecha_salida.Value - dt_fecha_entrada.Value;
-                int days = (int)noches.TotalDays;
-                lbl_noches.Text = Convert.ToString(days);
-            }
-
+             if (fechaEntrada > fechaSalida )
+             {
+                 MsgB m = new MsgB("advertencia", "La fecha de entrada no puede ser mayor que la fecha de salida ");
+                 DialogResult dR = m.ShowDialog();
+                 dt_fecha_entrada.Value = fechaHoy;
+                 lbl_noches.Text = "-";
+             }
+             else if (fechaSalida < fechaEntrada )
+             {
+                 MsgB m = new MsgB("advertencia", "La fecha de salida no puede ser menor que la fecha de entrada ");
+                 DialogResult dR = m.ShowDialog();
+                 dt_fecha_salida.Value = fechaHoy;
+                 lbl_noches.Text = "-";
+             }
+             else
+             {
+                 TimeSpan noches = dt_fecha_salida.Value - dt_fecha_entrada.Value;
+                 int days = (int)noches.TotalDays;
+                 lbl_noches.Text = Convert.ToString(days);
+             }
+            */
+            TimeSpan noches = dt_fecha_salida.Value - dt_fecha_entrada.Value;
+            int days = (int)noches.TotalDays;
+            lbl_noches.Text = Convert.ToString(days);
         }
 
         private void dt_fecha_entrada_ValueChanged(object sender, EventArgs e)
@@ -1058,8 +1061,10 @@ namespace ProyectoHCL
             this.WindowState = FormWindowState.Minimized;
         }
 
+        private void dt_fecha_coti_ValueChanged(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }
 

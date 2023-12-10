@@ -393,6 +393,7 @@
             dt_fecha_coti.Name = "dt_fecha_coti";
             dt_fecha_coti.Size = new Size(227, 24);
             dt_fecha_coti.TabIndex = 74;
+            dt_fecha_coti.ValueChanged += dt_fecha_coti_ValueChanged;
             // 
             // label14
             // 
