@@ -302,7 +302,15 @@ namespace ProyectoHCL.Formularios
 
         private void txtTipo_TextChanged(object sender, EventArgs e)
         {
+            if (txtTipo.Text.Contains(" "))
+            {
+                // MessageBox.Show("No se permite espacios.");
+                MsgB m = new MsgB("informacion", "No se permite espacios");
+                DialogResult dR = m.ShowDialog();
+                txtTipo.Clear();
+                return;  //Sale
 
+            }
         }
 
         public class Metodos
