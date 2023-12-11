@@ -189,6 +189,18 @@ namespace ProyectoHCL
                             iconButton5.Visible = false;
                         }
                         break;
+                    case "DASHBOARD":
+                        if (obj.IdPermiso == 1 && !obj.Permitido)
+                        {
+                            Ibtn_calendario.Visible = false;
+                            label11.Visible = false;
+                            panel46.Visible = false;
+                            panel38.Visible = false;
+                            ContenedorDias.Visible = false;
+                            panel4.Visible = false;
+                            panel3.Visible = false;
+                        }
+                        break;
                 }
 
             }
