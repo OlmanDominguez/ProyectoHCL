@@ -50,44 +50,64 @@ namespace ProyectoHCL.Formularios
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            Modelo modelo = new Modelo();
+
+            string nuevaPregunta = txtPregunta.Text;
+            string idRegistro = CtrlPreguntas.preg.id.ToString();
 
             if (CtrlPreguntas.preg.op == 1)
             {
-                using (BaseDatosHCL.ObtenerConexion())
+                if (modelo.PreguntaEditarBD(nuevaPregunta, idRegistro))
                 {
-                    //Consulta
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("UPDATE TBL_PREGUNTA SET PREGUNTA = '" + txtPregunta.Text +
-                        "' WHERE ID_PREGUNTA = " + CtrlPreguntas.preg.id + ";");
+                    MsgB m = new MsgB("advertencia", "La pregunta ya está registrada");
+                    DialogResult dR = m.ShowDialog();
+                }
+                else
+                {
+                    using (BaseDatosHCL.ObtenerConexion())
+                    {
+                        //Consulta
+                        MySqlCommand comando = new MySqlCommand();
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("UPDATE TBL_PREGUNTA SET PREGUNTA = '" + txtPregunta.Text +
+                            "' WHERE ID_PREGUNTA = " + CtrlPreguntas.preg.id + ";");
 
-                    comando.ExecuteNonQuery();
-                    comando.Connection.Close();
+                        comando.ExecuteNonQuery();
+                        comando.Connection.Close();
 
-                    MsgB mbox = new MsgB("informacion", "Registro Actualizado");
-                    DialogResult dR = mbox.ShowDialog();
-                    this.Close();
+                        MsgB mbox = new MsgB("informacion", "Registro Actualizado");
+                        DialogResult dR = mbox.ShowDialog();
+                        this.Close();
 
+                    }
                 }
             }
             if (CtrlPreguntas.preg.op == 2)
             {
-                using (BaseDatosHCL.ObtenerConexion())
+                if (modelo.existePregunta(txtPregunta.Text)) //validar si ya existe el registro
                 {
-                    //Consulta
-                    MySqlCommand comando = new MySqlCommand();
-                    comando.Connection = BaseDatosHCL.ObtenerConexion();
-                    comando.CommandText = ("INSERT INTO TBL_PREGUNTA (PREGUNTA, ID_ESTADO) VALUES ('" +
-                        txtPregunta.Text + "', 1);");
-
-                    comando.ExecuteNonQuery();
-                    comando.Connection.Close();
-
-                    MsgB mbox = new MsgB("informacion", "Registro Agregado");
-                    DialogResult dR = mbox.ShowDialog();
-                    this.Close();
-
+                    MsgB m = new MsgB("advertencia", "La pregunta ya existe");
+                    DialogResult dR = m.ShowDialog();
                 }
+                else
+                {
+                    using (BaseDatosHCL.ObtenerConexion())
+                    {
+                        //Consulta
+                        MySqlCommand comando = new MySqlCommand();
+                        comando.Connection = BaseDatosHCL.ObtenerConexion();
+                        comando.CommandText = ("INSERT INTO TBL_PREGUNTA (PREGUNTA, ID_ESTADO) VALUES ('" +
+                            txtPregunta.Text + "', 1);");
+
+                        comando.ExecuteNonQuery();
+                        comando.Connection.Close();
+
+                        MsgB mbox = new MsgB("informacion", "Registro Agregado");
+                        DialogResult dR = mbox.ShowDialog();
+                        this.Close();
+
+                    }
+                }             
             }
         }
 

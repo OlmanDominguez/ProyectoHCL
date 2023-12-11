@@ -311,6 +311,31 @@ namespace ProyectoHCL.clases
             }
         }
 
+        public bool existePregunta(string pregunta) //función para validar si existe la pregunta
+        {
+            MySqlDataReader reader;
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            if (conectar.State == ConnectionState.Closed)
+            {
+                conectar.Open();
+            }
+
+            String sql = "SELECT ID_PREGUNTA FROM TBL_PREGUNTA WHERE PREGUNTA LIKE @PREGUNTA";
+            MySqlCommand comando = new MySqlCommand(sql, conectar);
+            comando.Parameters.AddWithValue("@PREGUNTA", pregunta);
+            reader = comando.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool existeCliente(string identi) //función para validar si existe el cliente
         {
             MySqlDataReader reader;
@@ -609,6 +634,42 @@ namespace ProyectoHCL.clases
                 {
                     cmd.Parameters.AddWithValue("@IDActual", idRegistro);
                     return cmd.ExecuteScalar().ToString();
+                }
+            }
+        }
+
+        public string ObtenerPregunta(string idRegistro)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                using (MySqlCommand cmd = new MySqlCommand("SELECT PREGUNTA FROM TBL_PREGUNTA WHERE ID_PREGUNTA = @IDActual", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@IDActual", idRegistro);
+                    return cmd.ExecuteScalar().ToString();
+                }
+            }
+        }
+
+        public bool PreguntaEditarBD(string nuevaPregunta, string idRegistroActual)
+        {
+            MySqlConnection conectar = BaseDatosHCL.ObtenerConexion();
+
+            using (conectar)
+            {
+                if (nuevaPregunta == ObtenerPregunta(idRegistroActual))
+                {
+                    return false;
+                }
+
+                using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM TBL_PREGUNTA WHERE PREGUNTA = @NuevaPregunta", conectar))
+                {
+                    cmd.Parameters.AddWithValue("@NuevaPregunta", nuevaPregunta);
+
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    return count > 0;
                 }
             }
         }
