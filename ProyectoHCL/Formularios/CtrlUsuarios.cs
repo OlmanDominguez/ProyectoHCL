@@ -263,8 +263,18 @@ namespace ProyectoHCL.Formularios
                 R_E_user.txtCorreo.Text = dgvUsuarios.CurrentRow.Cells["CORREO"].Value.ToString();
                 R_E_user.cmbEstado.Text = dgvUsuarios.CurrentRow.Cells["ESTADO"].Value.ToString();
                 R_E_user.cmbRol.Text = dgvUsuarios.CurrentRow.Cells["ROL"].Value.ToString();
-                R_E_user.txtFechaC.Text = dgvUsuarios.CurrentRow.Cells["CREACION"].Value.ToString();
-                R_E_user.dtpVencimiento.Text = dgvUsuarios.CurrentRow.Cells["VENCIMIENTO"].Value.ToString();
+
+                string fechaC = dgvUsuarios.CurrentRow.Cells["CREACION"].Value.ToString();
+                DateTime fechaDT = DateTime.Parse(fechaC);
+                string fechaC1 = fechaDT.ToString("dd/MM/yyyy");
+
+                //R_E_user.dtpVencimiento.Text = dgvUsuarios.CurrentRow.Cells["VENCIMIENTO"].Value.ToString();
+                string fechaV1 = dgvUsuarios.CurrentRow.Cells["VENCIMIENTO"].Value.ToString();
+                DateTime fechaDT1 = DateTime.Parse(fechaV1);
+                string fechaV = fechaDT1.ToString("yyyy-MM-dd");
+
+                R_E_user.txtFechaC.Text = fechaC1;
+                R_E_user.dtpVencimiento.Text = fechaV;
                 R_E_user.ShowDialog();
                 R_E_user.limpiarCampos();
                 CargarDG(); //Se llama el metodo Mostrar usuarios para actualizar el DataGrid al editar 
